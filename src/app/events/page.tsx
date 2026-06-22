@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Code, Lightbulb, Users, Mic, Trophy, BookOpen, Calendar, ArrowRight, Image as ImgIcon } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
+import PageGeometric from "@/components/ui/PageGeometric";
 
 function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -101,7 +102,8 @@ const heroCards = [
 export default function EventsPage() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   return (
-    <div style={{ background: "#FFFFFF" }}>
+    <div style={{ background: "#FFFFFF", position: "relative" }}>
+      <PageGeometric />
 
       <PageHero
         tag="Events Archive"

@@ -7,6 +7,7 @@ import {
   Coffee, Printer, Handshake, Lightbulb, TrendingUp, Rocket,
 } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
+import PageGeometric from "@/components/ui/PageGeometric";
 
 function FadeIn({
   children,
@@ -97,7 +98,8 @@ const facilities = [
 
 export default function FacilitiesPage() {
   return (
-    <div style={{ background: "#F5F5F5", minHeight: "100vh" }}>
+    <div style={{ background: "#F5F5F5", minHeight: "100vh", position: "relative" }}>
+      <PageGeometric />
       <PageHero
         tag="World-Class Infrastructure"
         line1="TOOLS"

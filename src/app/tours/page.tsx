@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { MapPin, Play, Clock, Users, ArrowRight, Camera, Video } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
+import PageGeometric from "@/components/ui/PageGeometric";
 
 function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -83,7 +84,8 @@ const heroTourCards = [
 
 export default function ToursPage() {
   return (
-    <div style={{ background: "#FFFFFF" }}>
+    <div style={{ background: "#FFFFFF", position: "relative" }}>
+      <PageGeometric />
       <PageHero
         tag="Explore CIE"
         line1="SEE"

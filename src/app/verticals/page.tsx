@@ -9,6 +9,7 @@ import {
   Trophy, Target, Star, Timer, PackageCheck, Camera, Mic,
 } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
+import PageGeometric from "@/components/ui/PageGeometric";
 
 function FadeIn({
   children, delay = 0, className = "",
@@ -188,7 +189,8 @@ const heroBadges = verticals.map((v) => ({ abbr: v.abbr, name: v.name, color: v.
 
 export default function VerticalsPage() {
   return (
-    <div style={{ background: "#FFFFFF" }}>
+    <div style={{ background: "#FFFFFF", position: "relative" }}>
+      <PageGeometric />
 
       <PageHero
         tag="CIE Initiatives"

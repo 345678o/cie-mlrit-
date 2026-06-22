@@ -3,7 +3,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
-import CircularText from "@/components/ui/CircularText";
 import {
   ArrowRight,
   Lightbulb,
@@ -263,42 +262,57 @@ export default function HomePage() {
         className="relative overflow-hidden flex flex-col"
         style={{ background: ORANGE, paddingTop: "var(--nav-height)", minHeight: "100vh" }}
       >
-        {/* Grain texture */}
+        {/* ── Grain texture (matches Image 1 paper grain) ── */}
         <div className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          opacity: 0.04, mixBlendMode: "multiply" as const,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          opacity: 0.13, mixBlendMode: "overlay" as const,
         }} />
 
-        {/* Ghost "CIE" watermark */}
+        {/* ── Large arc — top right (Image 1 reference) ── */}
+        <svg aria-hidden className="absolute pointer-events-none"
+          style={{ top: "-18%", right: "-10%", width: "52vw", height: "52vw", maxWidth: 620, maxHeight: 620 }}
+          viewBox="0 0 620 620" fill="none">
+          <circle cx="310" cy="310" r="290" stroke="rgba(255,255,255,0.18)" strokeWidth="80" fill="none" />
+        </svg>
+
+        {/* ── Medium arc — bottom right ── */}
+        <svg aria-hidden className="absolute pointer-events-none"
+          style={{ bottom: "-14%", right: "-6%", width: "28vw", height: "28vw", maxWidth: 340, maxHeight: 340 }}
+          viewBox="0 0 340 340" fill="none">
+          <circle cx="170" cy="170" r="150" stroke="rgba(255,255,255,0.14)" strokeWidth="50" fill="none" />
+        </svg>
+
+        {/* ── Diagonal cut — bottom left (Image 1 reference) ── */}
+        <svg aria-hidden className="absolute pointer-events-none"
+          style={{ bottom: 0, left: 0, width: "36vw", height: "36vw", maxWidth: 420, maxHeight: 420 }}
+          viewBox="0 0 420 420" fill="none">
+          <path d="M0,420 L280,420 L0,140 Z" fill="rgba(255,255,255,0.10)" />
+          <path d="M0,420 L180,420 L0,260 Z" fill="rgba(255,255,255,0.07)" />
+        </svg>
+
+        {/* ── Small arc — top left ── */}
+        <svg aria-hidden className="absolute pointer-events-none"
+          style={{ top: "-8%", left: "-8%", width: "20vw", height: "20vw", maxWidth: 220, maxHeight: 220 }}
+          viewBox="0 0 220 220" fill="none">
+          <circle cx="110" cy="110" r="95" stroke="rgba(255,255,255,0.11)" strokeWidth="38" fill="none" />
+        </svg>
+
+        {/* ── Dot grid accent ── */}
+        <div className="absolute pointer-events-none" style={{
+          top: "calc(var(--nav-height) + 24px)", left: "28px",
+          width: "80px", height: "80px",
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.35) 1.5px, transparent 1.5px)",
+          backgroundSize: "14px 14px",
+        }} />
+
+        {/* ── Ghost CIE watermark ── */}
         <div className="absolute pointer-events-none select-none" style={{
-          bottom: "40px", right: "-8px",
+          bottom: "30px", right: "-8px",
           fontFamily: "var(--font-heading)", fontWeight: 900,
           fontSize: "clamp(160px, 28vw, 440px)",
-          color: "rgba(0,0,0,0.07)", lineHeight: 1, letterSpacing: "-0.06em",
+          color: "rgba(0,0,0,0.06)", lineHeight: 1, letterSpacing: "-0.06em",
           userSelect: "none" as const,
         }}>CIE</div>
-
-        {/* Dot grid — top left */}
-        <div className="absolute pointer-events-none" style={{
-          top: "calc(var(--nav-height) + 18px)", left: "18px",
-          width: "70px", height: "70px",
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.30) 1.5px, transparent 1.5px)",
-          backgroundSize: "12px 12px",
-        }} />
-
-        {/* Checkered block — top right */}
-        <div className="absolute pointer-events-none hidden lg:block" style={{
-          top: "calc(var(--nav-height) + 22px)", right: "clamp(60px, 9vw, 140px)",
-          width: "54px", height: "54px",
-          backgroundImage: "repeating-conic-gradient(rgba(255,255,255,0.26) 0% 25%, transparent 0% 50%)",
-          backgroundSize: "13.5px 13.5px", borderRadius: "4px",
-        }} />
-
-        {/* Wavy dark blob — bottom left accent */}
-        <svg className="absolute pointer-events-none hidden lg:block" style={{ bottom: "80px", left: "-80px", opacity: 0.06 }}
-          width="360" height="360" viewBox="0 0 360 360" aria-hidden="true">
-          <path d="M180,24 C252,24 324,84 324,162 C324,264 252,330 168,330 C84,330 28,252 28,178 C28,94 108,24 180,24 Z" fill="rgba(0,0,0,1)" />
-        </svg>
 
         {/* ── Main content ── */}
         <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
@@ -407,7 +421,7 @@ export default function HomePage() {
 
               </div>
 
-              {/* ── RIGHT: Polaroid collage ── */}
+              {/* ── RIGHT: Polaroid collage + CIE brand badge ── */}
               <div className="hidden lg:block" style={{ position: "relative", height: "560px" }}>
 
                 {/* Polaroid 1 — large, tilted left */}

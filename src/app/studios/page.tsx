@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Palette, Camera, Mic, Monitor, Lightbulb, Building2, Calendar, CheckCircle } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
+import PageGeometric from "@/components/ui/PageGeometric";
 
 function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -88,7 +89,8 @@ const heroCards = [
 
 export default function StudiosPage() {
   return (
-    <div style={{ background: "#FFFFFF" }}>
+    <div style={{ background: "#FFFFFF", position: "relative" }}>
+      <PageGeometric />
       <PageHero
         tag="Innovation Spaces"
         line1="SIX"

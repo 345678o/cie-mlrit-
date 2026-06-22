@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Mail, Phone, MapPin, Clock, Send, Camera, Link2, X, Video, CheckCircle } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
+import PageGeometric from "@/components/ui/PageGeometric";
 
 function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -70,7 +71,8 @@ export default function ContactPage() {
   };
 
   return (
-    <div style={{ background: "#FFFFFF" }}>
+    <div style={{ background: "#FFFFFF", position: "relative" }}>
+      <PageGeometric />
       <PageHero
         tag="Get in Touch"
         line1="LET'S"

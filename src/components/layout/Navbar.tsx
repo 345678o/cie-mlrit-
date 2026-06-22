@@ -286,7 +286,7 @@ export default function Navbar() {
             aria-label="Navigation menu"
             style={{
               position: "fixed", inset: 0, zIndex: 99,
-              background: "#120D09",
+              background: "#FFFFFF",
               display: "flex", flexDirection: "column", overflow: "hidden",
             }}
           >
@@ -298,17 +298,17 @@ export default function Navbar() {
               opacity: 0.042, pointerEvents: "none",
             }} />
 
-            {/* Warm orange corner glows */}
+            {/* Warm orange corner glows — light theme */}
             <div aria-hidden style={{
               position: "absolute", bottom: 0, left: 0,
               width: "55vw", height: "55vw", borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(255,94,44,0.09) 0%, transparent 68%)",
+              background: "radial-gradient(circle, rgba(255,94,44,0.07) 0%, transparent 68%)",
               transform: "translate(-30%, 30%)", pointerEvents: "none",
             }} />
             <div aria-hidden style={{
               position: "absolute", top: 0, right: 0,
               width: "40vw", height: "40vw", borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(255,94,44,0.06) 0%, transparent 68%)",
+              background: "radial-gradient(circle, rgba(255,94,44,0.05) 0%, transparent 68%)",
               transform: "translate(30%, -30%)", pointerEvents: "none",
             }} />
 
@@ -324,7 +324,7 @@ export default function Navbar() {
             {/* Mouse glow */}
             <motion.div aria-hidden style={{
               position: "fixed", width: "700px", height: "700px", borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(255,94,44,0.11) 0%, transparent 62%)",
+              background: "radial-gradient(circle, rgba(255,94,44,0.08) 0%, transparent 62%)",
               pointerEvents: "none", x: glowX, y: glowY, translateX: "-50%", translateY: "-50%", zIndex: 0,
             }} />
 
@@ -392,7 +392,7 @@ export default function Navbar() {
               transition={{ delay: 0.5, duration: 0.45 }}
               style={{
                 position: "relative", zIndex: 1,
-                borderTop: "1px solid rgba(255,94,44,0.12)",
+                borderTop: "1px solid rgba(0,0,0,0.08)",
                 padding: "16px clamp(20px,4vw,56px)",
               }}
             >
@@ -406,14 +406,14 @@ export default function Navbar() {
                   {SOCIALS.map(s => (
                     <motion.a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
                       whileHover={{ color: "rgba(255,255,255,0.7)" }}
-                      style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,200,170,0.4)", textDecoration: "none" }}>
+                      style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(0,0,0,0.35)", textDecoration: "none" }}>
                       {s.label}
                     </motion.a>
                   ))}
                 </div>
 
                 {/* Branding */}
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,200,170,0.3)" }}>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(0,0,0,0.3)" }}>
                   Centre for Innovation &amp; Entrepreneurship · MLRIT
                 </p>
 
@@ -421,7 +421,7 @@ export default function Navbar() {
                 <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
                   <motion.a href="mailto:cie@mlrit.ac.in"
                     whileHover={{ color: "#FF5E2C" }}
-                    style={{ fontFamily: "var(--font-body)", fontSize: "10px", color: "rgba(255,200,170,0.45)", textDecoration: "none" }}>
+                    style={{ fontFamily: "var(--font-body)", fontSize: "10px", color: "rgba(0,0,0,0.4)", textDecoration: "none" }}>
                     cie@mlrit.ac.in
                   </motion.a>
                   <Link href="/contact" onClick={() => setOpen(false)} className="hidden md:flex"
@@ -533,8 +533,8 @@ function GridCard({
         borderRadius: "10px",
         overflow: "hidden",
         position: "relative",
-        border: "1px solid rgba(255,94,44,0.14)",
-        background: "#1a1008",
+        border: "1px solid rgba(0,0,0,0.08)",
+        background: "#F5F5F5",
       }}
     >
       {/* Photo layer — oversized so parallax never reveals edges */}
@@ -561,7 +561,7 @@ function GridCard({
         aria-hidden
         style={{
           position: "absolute", inset: 0,
-          background: "rgba(18,8,4,0.38)",
+          background: "rgba(0,0,0,0.22)",
           mixBlendMode: "multiply",
         }}
       />
@@ -644,8 +644,8 @@ function NavItem({
                 color: hov
                   ? "#FF5E2C"
                   : isActive
-                    ? "rgba(255,94,44,0.45)"
-                    : "rgba(255,244,236,0.92)",
+                    ? "rgba(0,0,0,0.28)"
+                    : "rgba(0,0,0,0.85)",
                 transition: "color 0.25s ease",
               }}
             >
@@ -660,7 +660,7 @@ function NavItem({
           initial={{ scaleX: 0 }}
           animate={{
             scaleX: isActive ? 1 : hov ? 0.5 : 0,
-            backgroundColor: isActive ? "rgba(255,255,255,0.55)" : "#FF5E2C",
+            backgroundColor: isActive ? "rgba(0,0,0,0.35)" : "#FF5E2C",
           }}
           transition={{
             scaleX: { delay: isActive ? delay + 0.3 : 0, duration: 0.45, ease: [0.16, 1, 0.3, 1] },
@@ -698,12 +698,12 @@ function GeometricBackground() {
         pointerEvents: "none",
       }}
     >
-      {/* ── Orange dot matrix ──────────────────────────────── */}
+      {/* ── Dot matrix ─────────────────────────────────────── */}
       <div style={{
         position: "absolute", inset: 0,
-        backgroundImage: "radial-gradient(circle, rgba(255,94,44,0.7) 1.5px, transparent 1.5px)",
+        backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.18) 1.5px, transparent 1.5px)",
         backgroundSize: "44px 44px",
-        opacity: 0.55,
+        opacity: 0.7,
       }} />
 
       {/* ── Large concentric arcs — top-right ──────────────── */}
@@ -712,10 +712,10 @@ function GeometricBackground() {
         viewBox="0 0 780 780"
         fill="none"
       >
-        <circle cx="390" cy="390" r="360" stroke="#FF5E2C" strokeWidth="1.5" opacity="0.45" />
-        <circle cx="390" cy="390" r="280" stroke="#FF5E2C" strokeWidth="1.2" opacity="0.35" />
-        <circle cx="390" cy="390" r="200" stroke="#FF5E2C" strokeWidth="1"   opacity="0.28" />
-        <circle cx="390" cy="390" r="120" stroke="#FF5E2C" strokeWidth="0.8" opacity="0.2"  />
+        <circle cx="390" cy="390" r="360" stroke="#FF5E2C" strokeWidth="1.5" opacity="0.22" />
+        <circle cx="390" cy="390" r="280" stroke="#FF5E2C" strokeWidth="1.2" opacity="0.16" />
+        <circle cx="390" cy="390" r="200" stroke="#FF5E2C" strokeWidth="1"   opacity="0.12" />
+        <circle cx="390" cy="390" r="120" stroke="#FF5E2C" strokeWidth="0.8" opacity="0.09"  />
       </svg>
 
       {/* ── White arcs — bottom-left ────────────────────────── */}
@@ -724,9 +724,9 @@ function GeometricBackground() {
         viewBox="0 0 600 600"
         fill="none"
       >
-        <circle cx="300" cy="300" r="270" stroke="#FFFFFF" strokeWidth="1.2" opacity="0.22" />
-        <circle cx="300" cy="300" r="195" stroke="#FFFFFF" strokeWidth="1"   opacity="0.16" />
-        <circle cx="300" cy="300" r="120" stroke="#FFFFFF" strokeWidth="0.8" opacity="0.12" />
+        <circle cx="300" cy="300" r="270" stroke="#000000" strokeWidth="1.2" opacity="0.07" />
+        <circle cx="300" cy="300" r="195" stroke="#000000" strokeWidth="1"   opacity="0.05" />
+        <circle cx="300" cy="300" r="120" stroke="#000000" strokeWidth="0.8" opacity="0.04" />
       </svg>
 
       {/* ── Diagonal hairline — full-width ─────────────────── */}
@@ -736,40 +736,40 @@ function GeometricBackground() {
         viewBox="0 0 1440 900"
         fill="none"
       >
-        <line x1="0" y1="900" x2="1440" y2="0" stroke="#FF5E2C" strokeWidth="1"   opacity="0.35" />
-        <line x1="0" y1="780" x2="1200" y2="0" stroke="#FFFFFF" strokeWidth="0.8" opacity="0.18" />
+        <line x1="0" y1="900" x2="1440" y2="0" stroke="#FF5E2C" strokeWidth="1"   opacity="0.18" />
+        <line x1="0" y1="780" x2="1200" y2="0" stroke="#000000" strokeWidth="0.8" opacity="0.07" />
       </svg>
 
       {/* ── Scattered plus / cross marks ───────────────────── */}
-      <PlusMark x="18%" y="22%" size={16} color="#FF5E2C" opacity={0.7}  />
-      <PlusMark x="28%" y="62%" size={11} color="#FFFFFF"  opacity={0.45} />
-      <PlusMark x="48%" y="18%" size={14} color="#FF5E2C" opacity={0.6}  />
-      <PlusMark x="52%" y="75%" size={10} color="#FFFFFF"  opacity={0.4}  />
-      <PlusMark x="72%" y="35%" size={13} color="#FF5E2C" opacity={0.55} />
-      <PlusMark x="84%" y="68%" size={15} color="#FFFFFF"  opacity={0.38} />
+      <PlusMark x="18%" y="22%" size={16} color="#FF5E2C" opacity={0.45} />
+      <PlusMark x="28%" y="62%" size={11} color="#000000"  opacity={0.18} />
+      <PlusMark x="48%" y="18%" size={14} color="#FF5E2C" opacity={0.38} />
+      <PlusMark x="52%" y="75%" size={10} color="#000000"  opacity={0.15} />
+      <PlusMark x="72%" y="35%" size={13} color="#FF5E2C" opacity={0.35} />
+      <PlusMark x="84%" y="68%" size={15} color="#000000"  opacity={0.14} />
 
       {/* ── Small rotated squares (diamond shape) ──────────── */}
-      <DiamondMark x="38%" y="82%" size={10} color="#FF5E2C" opacity={0.55} />
-      <DiamondMark x="62%" y="14%" size={12} color="#FFFFFF"  opacity={0.38} />
-      <DiamondMark x="80%" y="52%" size={9}  color="#FF5E2C" opacity={0.5}  />
+      <DiamondMark x="38%" y="82%" size={10} color="#FF5E2C" opacity={0.35} />
+      <DiamondMark x="62%" y="14%" size={12} color="#000000"  opacity={0.14} />
+      <DiamondMark x="80%" y="52%" size={9}  color="#FF5E2C" opacity={0.3}  />
 
       {/* ── Vertical accent lines ──────────────────────────── */}
       <div style={{
         position: "absolute", top: "15%", left: "47%",
         width: "1px", height: "120px",
-        background: "linear-gradient(to bottom, transparent, rgba(255,94,44,0.7), transparent)",
+        background: "linear-gradient(to bottom, transparent, rgba(255,94,44,0.45), transparent)",
       }} />
       <div style={{
         position: "absolute", top: "40%", right: "22%",
         width: "1px", height: "90px",
-        background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.45), transparent)",
+        background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.18), transparent)",
       }} />
 
       {/* ── Horizontal accent lines ────────────────────────── */}
       <div style={{
         position: "absolute", top: "55%", left: "44%",
         height: "1px", width: "100px",
-        background: "linear-gradient(to right, transparent, rgba(255,94,44,0.6), transparent)",
+        background: "linear-gradient(to right, transparent, rgba(255,94,44,0.35), transparent)",
       }} />
     </div>
   );

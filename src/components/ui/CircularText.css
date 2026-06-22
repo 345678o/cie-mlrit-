@@ -1,13 +1,8 @@
 .circular-text {
-  margin: 0 auto;
   border-radius: 50%;
   width: 200px;
-  position: relative;
   height: 200px;
-  font-weight: bold;
-  color: #fff;
-  font-weight: 900;
-  text-align: center;
+  position: relative;
   cursor: pointer;
   transform-origin: 50% 50%;
   -webkit-transform-origin: 50% 50%;
@@ -16,10 +11,23 @@
 .circular-text span {
   position: absolute;
   display: inline-block;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  font-size: 24px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
   transition: all 0.5s cubic-bezier(0, 0, 0, 1);
+}
+
+/* Hero logo badge variant */
+.cie-ring {
+  width: 268px;
+  height: 268px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.cie-ring span {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
 }
