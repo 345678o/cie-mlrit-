@@ -1,0 +1,257 @@
+/* ── Grid container ───────────────────────────────────────────── */
+.chroma-grid {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), 280px);
+  grid-auto-rows: auto;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+
+  --x: 50%;
+  --y: 50%;
+  --r: 280px;
+}
+
+@media (max-width: 1024px) {
+  .chroma-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 280px));
+    gap: 0.75rem;
+    padding: 1rem 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .chroma-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.625rem;
+    padding: 0.75rem;
+    max-width: 100%;
+  }
+  .chroma-card {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .chroma-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Card ─────────────────────────────────────────────────────── */
+.chroma-card {
+  position: relative;
+  width: 280px;
+  height: 320px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--card-gradient);
+  transition: border-color 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  cursor: default;
+
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --spotlight-color: rgba(255, 255, 255, 0.22);
+}
+
+.chroma-card:hover {
+  border-color: var(--card-border);
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 20px 56px rgba(0, 0, 0, 0.50), 0 0 0 1px var(--card-border);
+}
+
+/* Spotlight shimmer on hover */
+.chroma-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle 120px at var(--mouse-x) var(--mouse-y),
+    var(--spotlight-color),
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 6;
+}
+
+.chroma-card:hover::before {
+  opacity: 1;
+}
+
+/* Colored accent bar slides up on hover */
+.chroma-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--card-border);
+  border-radius: 0 0 20px 20px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 7;
+}
+
+.chroma-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Image — fills the whole card ────────────────────────────── */
+.chroma-img-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 0;
+  background: transparent;
+}
+
+.chroma-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  display: block;
+}
+
+/* Gradient fade from bottom over the image */
+.chroma-img-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.90) 0%,
+    rgba(0, 0, 0, 0.60) 28%,
+    rgba(0, 0, 0, 0.20) 55%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Info — overlays bottom of card ─────────────────────────── */
+.chroma-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 0 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.chroma-info .name {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-family: var(--font-heading, system-ui, sans-serif);
+}
+
+.chroma-info .role {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.62);
+  margin: 0;
+  font-family: var(--font-body, system-ui, sans-serif);
+  line-height: 1.4;
+}
+
+.chroma-info .handle {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 2px 8px;
+  width: fit-content;
+  font-family: var(--font-body, system-ui, sans-serif);
+}
+
+/* ── Cursor spotlight overlay ─────────────────────────────────── */
+.chroma-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  backdrop-filter: grayscale(1) brightness(0.72);
+  -webkit-backdrop-filter: grayscale(1) brightness(0.72);
+  background: rgba(0, 0, 0, 0.001);
+
+  mask-image: radial-gradient(
+    circle var(--r) at var(--x) var(--y),
+    transparent 0%,
+    transparent 18%,
+    rgba(0, 0, 0, 0.08) 32%,
+    rgba(0, 0, 0, 0.20) 46%,
+    rgba(0, 0, 0, 0.35) 60%,
+    rgba(0, 0, 0, 0.52) 74%,
+    rgba(0, 0, 0, 0.70) 88%,
+    black 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle var(--r) at var(--x) var(--y),
+    transparent 0%,
+    transparent 18%,
+    rgba(0, 0, 0, 0.08) 32%,
+    rgba(0, 0, 0, 0.20) 46%,
+    rgba(0, 0, 0, 0.35) 60%,
+    rgba(0, 0, 0, 0.52) 74%,
+    rgba(0, 0, 0, 0.70) 88%,
+    black 100%
+  );
+}
+
+.chroma-fade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  backdrop-filter: grayscale(1) brightness(0.72);
+  -webkit-backdrop-filter: grayscale(1) brightness(0.72);
+  background: rgba(0, 0, 0, 0.001);
+
+  mask-image: radial-gradient(
+    circle var(--r) at var(--x) var(--y),
+    white 0%,
+    white 18%,
+    rgba(255, 255, 255, 0.88) 32%,
+    rgba(255, 255, 255, 0.75) 46%,
+    rgba(255, 255, 255, 0.60) 60%,
+    rgba(255, 255, 255, 0.44) 74%,
+    rgba(255, 255, 255, 0.28) 88%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle var(--r) at var(--x) var(--y),
+    white 0%,
+    white 18%,
+    rgba(255, 255, 255, 0.88) 32%,
+    rgba(255, 255, 255, 0.75) 46%,
+    rgba(255, 255, 255, 0.60) 60%,
+    rgba(255, 255, 255, 0.44) 74%,
+    rgba(255, 255, 255, 0.28) 88%,
+    transparent 100%
+  );
+
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
