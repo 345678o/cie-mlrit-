@@ -109,37 +109,75 @@ export default function ToursPage() {
             <span className="section-tag">Tour Options</span>
             <h2 className="text-4xl font-black mt-2" style={{ color: "#000000" }}>Choose Your Tour</h2>
           </FadeIn>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {tourTypes.map((tour, i) => (
               <FadeIn key={tour.title} delay={i * 0.1}>
-                <div className="p-8 rounded-2xl h-full card-light flex flex-col">
-                  <div className="flex items-start justify-between mb-5">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center"
-                      style={{ background: "rgba(255,94,44,0.08)" }}>
+                {/* Internal CSS Grid — 5 fixed rows guarantee pixel-perfect vertical rhythm */}
+                <div
+                  className="rounded-2xl overflow-hidden card-light"
+                  style={{
+                    display: "grid",
+                    gridTemplateRows: "60px 70px 110px 60px auto",
+                    padding: "2rem",
+                  }}
+                >
+                  {/* Row 1: Header — 60px — icon + badge, vertically centred */}
+                  <div className="flex items-center justify-between">
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                      style={{ background: "rgba(255,94,44,0.08)" }}
+                    >
                       <tour.icon size={22} style={{ color: "#FF5E2C" }} />
                     </div>
-                    <span className="text-xs font-semibold px-2 py-1 rounded-full capitalize"
+                    <span
+                      className="flex items-center justify-center h-7 px-3 rounded-full text-xs font-semibold whitespace-nowrap capitalize"
                       style={{
                         background: tour.type === "virtual" ? "rgba(255,94,44,0.10)" : "rgba(0,0,0,0.05)",
                         color: tour.type === "virtual" ? "#FF5E2C" : "#374151",
                         border: `1px solid ${tour.type === "virtual" ? "rgba(255,94,44,0.22)" : "rgba(0,0,0,0.08)"}`,
-                      }}>
+                      }}
+                    >
                       {tour.type}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold mb-3" style={{ color: "#000000" }}>{tour.title}</h3>
-                  <p className="text-sm leading-relaxed mb-6 flex-1" style={{ color: "#374151" }}>{tour.desc}</p>
-                  <div className="flex items-center gap-4 mb-6 text-xs" style={{ color: "#6B7280" }}>
-                    <span className="flex items-center gap-1">
-                      <Clock size={12} style={{ color: "#FF5E2C" }} /> {tour.duration}
+
+                  {/* Row 2: Title — 70px — clipped, top-aligned */}
+                  <h3
+                    className="text-xl font-bold leading-tight flex items-start overflow-hidden pt-4"
+                    style={{ color: "#000000" }}
+                  >
+                    {tour.title}
+                  </h3>
+
+                  {/* Row 3: Description — 110px — clipped */}
+                  <p
+                    className="text-sm leading-7 overflow-hidden"
+                    style={{ color: "#374151" }}
+                  >
+                    {tour.desc}
+                  </p>
+
+                  {/* Row 4: Metadata — 60px — column, vertically centred */}
+                  <div
+                    className="flex flex-col justify-center gap-2 text-xs"
+                    style={{ color: "#6B7280" }}
+                  >
+                    <span className="flex items-center gap-2">
+                      <Clock size={12} style={{ color: "#FF5E2C" }} />
+                      {tour.duration}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Users size={12} style={{ color: "#FF5E2C" }} /> {tour.format}
+                    <span className="flex items-center gap-2">
+                      <Users size={12} style={{ color: "#FF5E2C" }} />
+                      {tour.format}
                     </span>
                   </div>
-                  <button className="btn-primary w-full justify-center text-sm py-2.5">
-                    Book This Tour <ArrowRight size={15} />
-                  </button>
+
+                  {/* Row 5: Footer — auto — button always at same vertical baseline */}
+                  <div className="flex items-end pt-2">
+                    <button className="btn-primary w-full justify-center text-sm py-2.5">
+                      Book This Tour <ArrowRight size={15} />
+                    </button>
+                  </div>
                 </div>
               </FadeIn>
             ))}
