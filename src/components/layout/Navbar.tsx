@@ -286,7 +286,7 @@ export default function Navbar() {
             aria-label="Navigation menu"
             style={{
               position: "fixed", inset: 0, zIndex: 99,
-              background: "#000000",
+              background: "#120D09",
               display: "flex", flexDirection: "column", overflow: "hidden",
             }}
           >
@@ -298,10 +298,24 @@ export default function Navbar() {
               opacity: 0.042, pointerEvents: "none",
             }} />
 
+            {/* Warm orange corner glows */}
+            <div aria-hidden style={{
+              position: "absolute", bottom: 0, left: 0,
+              width: "55vw", height: "55vw", borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(255,94,44,0.09) 0%, transparent 68%)",
+              transform: "translate(-30%, 30%)", pointerEvents: "none",
+            }} />
+            <div aria-hidden style={{
+              position: "absolute", top: 0, right: 0,
+              width: "40vw", height: "40vw", borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(255,94,44,0.06) 0%, transparent 68%)",
+              transform: "translate(30%, -30%)", pointerEvents: "none",
+            }} />
+
             {/* Top accent */}
             <div aria-hidden style={{
               position: "absolute", top: 0, left: 0, right: 0, height: "1px",
-              background: "linear-gradient(90deg, transparent, rgba(255,94,44,0.65), transparent)",
+              background: "linear-gradient(90deg, transparent, rgba(255,94,44,0.8), transparent)",
             }} />
 
             {/* Geometric background */}
@@ -310,7 +324,7 @@ export default function Navbar() {
             {/* Mouse glow */}
             <motion.div aria-hidden style={{
               position: "fixed", width: "700px", height: "700px", borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(255,94,44,0.055) 0%, transparent 62%)",
+              background: "radial-gradient(circle, rgba(255,94,44,0.11) 0%, transparent 62%)",
               pointerEvents: "none", x: glowX, y: glowY, translateX: "-50%", translateY: "-50%", zIndex: 0,
             }} />
 
@@ -378,7 +392,7 @@ export default function Navbar() {
               transition={{ delay: 0.5, duration: 0.45 }}
               style={{
                 position: "relative", zIndex: 1,
-                borderTop: "1px solid rgba(255,255,255,0.05)",
+                borderTop: "1px solid rgba(255,94,44,0.12)",
                 padding: "16px clamp(20px,4vw,56px)",
               }}
             >
@@ -392,14 +406,14 @@ export default function Navbar() {
                   {SOCIALS.map(s => (
                     <motion.a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
                       whileHover={{ color: "rgba(255,255,255,0.7)" }}
-                      style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.27)", textDecoration: "none" }}>
+                      style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,200,170,0.4)", textDecoration: "none" }}>
                       {s.label}
                     </motion.a>
                   ))}
                 </div>
 
                 {/* Branding */}
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.12)" }}>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,200,170,0.3)" }}>
                   Centre for Innovation &amp; Entrepreneurship · MLRIT
                 </p>
 
@@ -407,7 +421,7 @@ export default function Navbar() {
                 <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
                   <motion.a href="mailto:cie@mlrit.ac.in"
                     whileHover={{ color: "#FF5E2C" }}
-                    style={{ fontFamily: "var(--font-body)", fontSize: "10px", color: "rgba(255,255,255,0.27)", textDecoration: "none" }}>
+                    style={{ fontFamily: "var(--font-body)", fontSize: "10px", color: "rgba(255,200,170,0.45)", textDecoration: "none" }}>
                     cie@mlrit.ac.in
                   </motion.a>
                   <Link href="/contact" onClick={() => setOpen(false)} className="hidden md:flex"
@@ -519,8 +533,8 @@ function GridCard({
         borderRadius: "10px",
         overflow: "hidden",
         position: "relative",
-        border: "1px solid rgba(255,255,255,0.06)",
-        background: "#111",
+        border: "1px solid rgba(255,94,44,0.14)",
+        background: "#1a1008",
       }}
     >
       {/* Photo layer — oversized so parallax never reveals edges */}
@@ -547,7 +561,7 @@ function GridCard({
         aria-hidden
         style={{
           position: "absolute", inset: 0,
-          background: "rgba(0,0,0,0.50)",
+          background: "rgba(18,8,4,0.38)",
           mixBlendMode: "multiply",
         }}
       />
@@ -630,8 +644,8 @@ function NavItem({
                 color: hov
                   ? "#FF5E2C"
                   : isActive
-                    ? "rgba(255,255,255,0.35)"
-                    : "rgba(255,255,255,0.88)",
+                    ? "rgba(255,94,44,0.45)"
+                    : "rgba(255,244,236,0.92)",
                 transition: "color 0.25s ease",
               }}
             >
