@@ -103,7 +103,7 @@ export default function ToursPage() {
       />
 
       {/* Tour Types */}
-      <section className="py-20" style={{ background: "#FFFFFF" }}>
+      <section className="py-24" style={{ background: "#FFFFFF" }}>
         <div className="page-container">
           <FadeIn className="mb-16">
             <span className="section-tag">Tour Options</span>
@@ -215,26 +215,56 @@ export default function ToursPage() {
             <span className="section-tag">What to Expect</span>
             <h2 className="text-4xl font-black mt-2" style={{ color: "#000000" }}>Guided Tour Timeline</h2>
           </FadeIn>
-          <div className="relative">
-            <div className="hidden sm:block absolute top-0 bottom-0 w-px"
-              style={{ left: "calc(6rem + 1.5rem + 0.375rem)", background: "linear-gradient(to bottom, #FF5E2C, transparent)" }} />
-            <div className="space-y-6">
-              {tourTimeline.map((item, i) => (
-                <FadeIn key={item.time} delay={i * 0.1}>
-                  <div className="flex gap-6">
-                    <div className="flex-shrink-0 w-16 sm:w-24 text-right">
-                      <span className="text-sm font-bold" style={{ color: "#FF5E2C" }}>{item.time}</span>
-                    </div>
-                    <div className="w-3 h-3 rounded-full flex-shrink-0 mt-1 relative z-10"
-                      style={{ background: "#FF5E2C", boxShadow: "0 0 0 4px #FFFFFF, 0 0 0 5px rgba(255,94,44,0.3)" }} />
-                    <div className="pb-6">
-                      <h3 className="font-bold mb-1" style={{ color: "#000000" }}>{item.activity}</h3>
-                      <p className="text-sm" style={{ color: "#6B7280" }}>{item.desc}</p>
-                    </div>
+          <div>
+            {tourTimeline.map((item, i) => (
+              <FadeIn key={item.time} delay={i * 0.1}>
+                {/* CSS Grid: time-col | marker-col | content-col */}
+                <div
+                  className="grid"
+                  style={{
+                    gridTemplateColumns: "clamp(56px, 10vw, 120px) 40px 1fr",
+                    minHeight: "90px",
+                  }}
+                >
+                  {/* Time */}
+                  <div className="flex items-start justify-end pr-5 pt-1">
+                    <span className="text-sm font-bold tabular-nums" style={{ color: "#FF5E2C" }}>
+                      {item.time}
+                    </span>
                   </div>
-                </FadeIn>
-              ))}
-            </div>
+
+                  {/* Marker + connector line */}
+                  <div className="flex flex-col items-center">
+                    <div
+                      className="w-3 h-3 rounded-full flex-shrink-0 relative z-10 mt-1"
+                      style={{
+                        background: "#FF5E2C",
+                        boxShadow: "0 0 0 4px #FFFFFF, 0 0 0 5px rgba(255,94,44,0.25)",
+                      }}
+                    />
+                    {i < tourTimeline.length - 1 && (
+                      <div
+                        className="w-px flex-1 mt-2"
+                        style={{ background: "linear-gradient(to bottom, rgba(255,94,44,0.30), rgba(255,94,44,0.04))" }}
+                      />
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="pb-8 pl-3">
+                    <h3
+                      className="font-bold mb-1.5"
+                      style={{ color: "#000000", fontSize: "18px", lineHeight: 1.3 }}
+                    >
+                      {item.activity}
+                    </h3>
+                    <p style={{ color: "#6B7280", fontSize: "15px", lineHeight: 1.7 }}>
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
           </div>
         </div>
       </section>

@@ -198,7 +198,7 @@ function TeamAccordion({ section }: { section: TeamSection }) {
             : <ChevronDown size={18} style={{ color: "#9CA3AF" }} />}
         </button>
         {expanded && (
-          <div id={accordionId} className="px-6 pb-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-3 items-start">
+          <div id={accordionId} className="px-6 pb-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
             {section.members.map((member) => (
               <MemberCard key={member.name} member={member} color={section.color} />
             ))}
@@ -253,9 +253,9 @@ export default function CouncilPage() {
         <div className="page-container">
           <FadeIn className="mb-10">
             <span className="section-tag">Faculty</span>
-            <h2 className="text-3xl font-black mt-2" style={{ color: "#000000" }}>Faculty Coordinators</h2>
+            <h2 className="text-4xl font-black mt-2" style={{ color: "#000000" }}>Faculty Coordinators</h2>
           </FadeIn>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
             {facultyCoordinators.map((member) => (
               <div key={member.name} className="p-6 rounded-2xl card-light group">
                 <div className="flex items-center gap-4 mb-4">
@@ -293,13 +293,13 @@ export default function CouncilPage() {
         <div className="page-container">
           <FadeIn className="mb-10">
             <span className="section-tag">Leadership</span>
-            <h2 className="text-3xl font-black mt-2" style={{ color: "#000000" }}>Student Leadership 2024–25</h2>
+            <h2 className="text-4xl font-black mt-2" style={{ color: "#000000" }}>Student Leadership 2024–25</h2>
           </FadeIn>
           <div className="grid sm:grid-cols-2 gap-6 items-stretch">
             {studentLeadership.map((member) => (
-              <FadeIn key={member.name}>
+              <FadeIn key={member.name} className="flex flex-col">
                 <div className="p-8 rounded-2xl card-light relative overflow-hidden"
-                  style={{ borderColor: "rgba(255,94,44,0.20)" }}>
+                  style={{ flex: 1, borderColor: "rgba(255,94,44,0.20)" }}>
                   <div className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-10"
                     style={{ background: "#FF5E2C", transform: "translate(30%, -30%)" }} />
                   <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-black mb-4"
