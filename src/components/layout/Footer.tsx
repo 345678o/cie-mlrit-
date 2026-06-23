@@ -19,10 +19,10 @@ const footerLinks = {
 };
 
 const socials = [
-  { icon: Camera, href: "https://instagram.com", label: "Instagram" },
-  { icon: Link2, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: X, href: "https://twitter.com", label: "Twitter / X" },
-  { icon: Video, href: "https://youtube.com", label: "YouTube" },
+  { icon: Camera, href: "https://www.instagram.com/mlritcie/", label: "Instagram" },
+  { icon: Link2, href: "https://www.linkedin.com/in/cie-center-for-innovation-and-entrepreneurship-mlrit-935971291/", label: "LinkedIn" },
+  { icon: X, href: "https://x.com/ciemlrit?s=20", label: "Twitter / X" },
+  { icon: Video, href: "https://www.youtube.com/@mlritcie", label: "YouTube" },
 ];
 
 export default function Footer() {

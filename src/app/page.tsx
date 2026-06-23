@@ -12,10 +12,8 @@ import {
   Zap,
   Code,
   Palette,
-  Camera,
   Mic,
   ChevronRight,
-  Star,
   TrendingUp,
   Boxes,
   FlaskConical,
@@ -25,7 +23,7 @@ import {
   Layers,
   Printer,
   Handshake,
-  Wifi,
+  BookOpen,
 } from "lucide-react";
 
 /* ── Animated counter ─────────────────────────────────────────────── */
@@ -102,36 +100,36 @@ const stats = [
 
 const programs = [
   {
-    icon: Lightbulb,
-    title: "Ideation Workshops",
-    desc: "Structured sessions to transform raw ideas into viable concepts using design thinking and lean startup methodologies.",
-    tag: "Foundational",
+    icon: BookOpen,
+    title: "Workshop Carnivals",
+    desc: "Multi-day, multi-domain skill workshops covering UI/UX, IoT, WordPress, and more — hands-on learning that goes far beyond the classroom.",
+    tag: "Workshops",
   },
   {
-    icon: Code,
-    title: "Innovation Lab",
-    desc: "Hands-on technical incubation with mentorship from industry experts, faculty advisors, and successful alumni.",
-    tag: "Technical",
-  },
-  {
-    icon: Rocket,
-    title: "Startup Launchpad",
-    desc: "End-to-end support for student startups — from business model validation to investor pitch preparation.",
-    tag: "Advanced",
+    icon: Trophy,
+    title: "Innovation Challenges",
+    desc: "Events like B2B — Business to Brand and Hustle Mania push students to ideate, pitch, and execute under real-world constraints.",
+    tag: "Challenges",
   },
   {
     icon: Zap,
-    title: "Hackathons & Challenges",
-    desc: "24-48 hour intensive innovation sprints that tackle real-world problems with creative, tech-driven solutions.",
-    tag: "Competitive",
+    title: "Hackathons",
+    desc: "Intensive 24–36 hour sprints like MetaLoop — tackling cutting-edge themes with industry mentors and prize pools up to ₹75,000.",
+    tag: "Hackathons",
+  },
+  {
+    icon: Mic,
+    title: "E-Summits",
+    desc: "The Equinox E-Summit brings together student innovators, startup founders, and investors for 3 days of talks, pitches, and networking.",
+    tag: "Summits",
   },
 ];
 
 const studios = [
-  { icon: Palette, name: "Design Studio",       desc: "Creative workspace with professional design tools" },
-  { icon: Camera,  name: "Photography Studio",   desc: "Full-equipped studio with lighting and equipment" },
-  { icon: Mic,     name: "Media Studio",         desc: "Podcast & video production ready environment" },
-  { icon: Code,    name: "Innovation Lab",       desc: "High-tech workspace for R&D and prototyping" },
+  { icon: Lightbulb, name: "Skill Workshops",        desc: "Domain-specific, hands-on workshops in tech, design, and business — run by industry experts and CIE teams across six active verticals." },
+  { icon: Trophy,    name: "Competitive Events",      desc: "Brand challenges, business competitions, and hackathons that reward real problem-solving, creativity, and execution under pressure." },
+  { icon: Mic,       name: "Summits & Networking",    desc: "Multi-day entrepreneurship summits with guest speakers, investor panels, and startup showcases — open to all MLRIT students." },
+  { icon: Handshake, name: "Mentorship & Incubation", desc: "One-on-one guidance from alumni, industry experts, and faculty — from idea-stage to launch-ready, backed by IIC and CIE." },
 ];
 
 const timeline = [
@@ -207,30 +205,30 @@ const homeFacilities = [
   { icon: CalendarDays, title: "Event Auditorium",desc: "300-seat venue with full AV, live-streaming setup, and breakout rooms for every event format." },
 ];
 
-const testimonials = [
+const recentEvents = [
   {
-    quote: "CIE gave me the resources, mentorship, and confidence to turn my college project into a real startup. The support here is unmatched.",
-    name: "Rahul Sharma",
-    role: "Founder, TechFlow Solutions",
-    batch: "CSE 2023",
-    initials: "RS",
-    rating: 5,
+    category: "Workshop",
+    title: "Workshop Carnival 2.0",
+    date: "Apr 10–11, 2026",
+    desc: "Where learning goes beyond classrooms — into real skills, real challenges, and real innovation. Multiple domains, hands-on experiences, and expert guidance.",
+    tags: ["Hands-on Workshops", "Expert Guidance", "Domain Challenges"],
+    accent: "#2563EB",
   },
   {
-    quote: "The Design Studio and Innovation Lab are world-class. Working here felt like being part of a real startup ecosystem, not just college.",
-    name: "Priya Reddy",
-    role: "UX Designer, Zomato",
-    batch: "ECE 2022",
-    initials: "PR",
-    rating: 5,
+    category: "Innovation Challenge",
+    title: "B2B — Business to Brand",
+    date: "Apr 3–4, 2025",
+    desc: "A Brand Revival Hackathon — teams of 3–5 develop strategies to transform brands through Logo Redesign and Ad-Film Making, backed by industry masterclasses.",
+    tags: ["Brand Revival", "Logo Design", "Ad-Film Making"],
+    accent: "#E8521A",
   },
   {
-    quote: "From Hackathon wins to incubation support, CIE has been the single biggest accelerator of my entrepreneurship journey.",
-    name: "Arjun Mehta",
-    role: "Co-Founder, AgriTech Startup",
-    batch: "MBA 2024",
-    initials: "AM",
-    rating: 5,
+    category: "E-Summit",
+    title: "The Equinox E-Summit 2K24",
+    date: "Nov 28–30, 2024",
+    desc: "#WherePassionMeetsPerseverance — a 3-day entrepreneurship summit by MLRIT CIE × IIC bringing together student innovators, industry leaders, and investors.",
+    tags: ["E-Summit", "Entrepreneurship", "CIE × IIC"],
+    accent: "#059669",
   },
 ];
 
@@ -241,7 +239,7 @@ const T_PRIMARY   = "#000000";
 const T_SECONDARY = "#000000";
 const T_MED       = "#374151";
 const T_MUTED     = "#6B7280";
-const ORANGE      = "#FF5E2C";
+const ORANGE      = "#E8521A";
 
 /* Exact brand palette */
 const BG_WHITE   = "#FFFFFF";
@@ -388,9 +386,9 @@ export default function HomePage() {
                     maxWidth: "400px", marginBottom: "36px",
                   }}
                 >
-                  MLRIT&apos;s official hub for student innovators. Build across six active
-                  verticals with expert mentorship, world-class facilities, and a thriving
-                  startup community.
+                  MLRIT&apos;s Centre for Innovation &amp; Entrepreneurship — where students
+                  turn ideas into real ventures through workshops, hackathons, summits,
+                  and hands-on incubation across six active verticals.
                 </motion.p>
 
                 {/* CTAs */}
@@ -688,12 +686,12 @@ export default function HomePage() {
               {
                 title: "Our Vision",
                 content:
-                  "To be the premier innovation ecosystem in South India, nurturing the next generation of entrepreneurs who solve real-world problems through technology and creativity.",
+                  "To be a leading hub for innovation and entrepreneurship at MLRIT — fostering a culture where every student can ideate, build, and launch solutions that create real-world impact.",
               },
               {
                 title: "Our Mission",
                 content:
-                  "Provide students with the tools, mentorship, networks, and experiential learning opportunities needed to transform innovative ideas into sustainable ventures and impactful solutions.",
+                  "Empowering MLRIT students through workshops, hackathons, summits, and incubation — providing the tools, mentorship, and networks needed to transform ideas into ventures that matter.",
               },
             ].map((item, i) => (
               <FadeIn key={item.title} delay={i * 0.12}>
@@ -1098,95 +1096,62 @@ export default function HomePage() {
       `}</style>
 
       {/* ────────────────────────────────────────────────────────────
-          TESTIMONIALS  —  #FFFFFF (Warm Neutral)
+          RECENT EVENTS  —  #FFFFFF
       ──────────────────────────────────────────────────────────── */}
       <section style={{ background: BG_WARM, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
-          <FadeIn className="text-center mb-14">
-            <span className="section-tag">Testimonials</span>
-            <h2
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontWeight: 800,
-                fontSize: "clamp(34px, 4vw, 50px)",
-                letterSpacing: "-0.03em",
-                color: T_PRIMARY,
-                marginTop: "4px",
-              }}
-            >
-              What Our Alumni Say
-            </h2>
+          <FadeIn>
+            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6" style={{ marginBottom: "52px" }}>
+              <div>
+                <span className="section-tag">Recent Events</span>
+                <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(34px,4vw,50px)", letterSpacing: "-0.03em", color: T_PRIMARY, marginTop: "4px" }}>
+                  What We&apos;ve Been Up To
+                </h2>
+              </div>
+              <Link href="/events" className="btn-secondary-light whitespace-nowrap flex-shrink-0">
+                All Events <ArrowRight size={16} />
+              </Link>
+            </div>
           </FadeIn>
 
-          <div className="grid md:grid-cols-3 gap-6 items-start">
-            {testimonials.map((t, i) => (
-              <FadeIn key={t.name} delay={i * 0.10}>
-                <div className="card-light flex flex-col h-full" style={{ padding: "36px" }}>
-                  {/* Stars */}
-                  <div className="flex gap-1 mb-5">
-                    {Array.from({ length: t.rating }).map((_, j) => (
-                      <Star key={j} size={14} fill={ORANGE} style={{ color: ORANGE }} />
-                    ))}
-                  </div>
-
-                  {/* Quote */}
-                  <p
-                    className="flex-1"
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "14.5px",
-                      lineHeight: 1.82,
-                      color: T_MED,
-                      fontStyle: "italic",
-                      marginBottom: "26px",
-                    }}
-                  >
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-
-                  {/* Author */}
-                  <div
-                    className="flex items-center gap-3"
-                    style={{ paddingTop: "20px", borderTop: "1px solid rgba(0,0,0,0.06)" }}
-                  >
-                    <div
-                      className="flex-shrink-0 flex items-center justify-center rounded-full"
-                      style={{
-                        width: "44px",
-                        height: "44px",
-                        background: `linear-gradient(135deg, ${ORANGE}, #D94E1F)`,
-                        fontFamily: "var(--font-heading)",
-                        fontWeight: 800,
-                        fontSize: "13px",
-                        color: "#FFFFFF",
-                        letterSpacing: "0.02em",
-                      }}
-                    >
-                      {t.initials}
+          <div className="grid md:grid-cols-3 gap-6 items-stretch">
+            {recentEvents.map((ev, i) => (
+              <FadeIn key={ev.title} delay={i * 0.10}>
+                <div className="card-light flex flex-col h-full" style={{ padding: "0", overflow: "hidden" }}>
+                  {/* Colour header strip */}
+                  <div style={{ height: "6px", background: ev.accent }} />
+                  <div style={{ padding: "28px 28px 24px", flex: 1, display: "flex", flexDirection: "column" }}>
+                    {/* Category + date */}
+                    <div className="flex items-center justify-between gap-2" style={{ marginBottom: "14px" }}>
+                      <span style={{
+                        fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700,
+                        letterSpacing: "0.1em", textTransform: "uppercase" as const,
+                        color: ev.accent, background: `${ev.accent}14`,
+                        border: `1px solid ${ev.accent}28`,
+                        padding: "3px 10px", borderRadius: "999px",
+                      }}>{ev.category}</span>
+                      <span style={{ fontFamily: "var(--font-body)", fontSize: "11px", color: T_MUTED, display: "flex", alignItems: "center", gap: "4px" }}>
+                        <CalendarDays size={11} /> {ev.date}
+                      </span>
                     </div>
-                    <div>
-                      <p
-                        style={{
-                          fontFamily: "var(--font-body)",
-                          fontSize: "14px",
-                          fontWeight: 600,
-                          color: T_SECONDARY,
-                          lineHeight: 1.3,
-                        }}
-                      >
-                        {t.name}
-                      </p>
-                      <p
-                        style={{
-                          fontFamily: "var(--font-body)",
-                          fontSize: "12px",
-                          color: T_MUTED,
-                          lineHeight: 1.4,
-                          marginTop: "2px",
-                        }}
-                      >
-                        {t.role} · {t.batch}
-                      </p>
+                    {/* Title */}
+                    <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "19px", letterSpacing: "-0.02em", color: T_PRIMARY, marginBottom: "10px", lineHeight: 1.2 }}>
+                      {ev.title}
+                    </h3>
+                    {/* Desc */}
+                    <p style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", lineHeight: 1.72, color: T_MED, flex: 1, marginBottom: "18px" }}>
+                      {ev.desc}
+                    </p>
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-1.5">
+                      {ev.tags.map(tag => (
+                        <span key={tag} style={{
+                          fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 600,
+                          padding: "3px 9px", borderRadius: "999px",
+                          background: "rgba(0,0,0,0.04)", color: T_MUTED,
+                          border: "1px solid rgba(0,0,0,0.08)",
+                        }}>{tag}</span>
+                      ))}
                     </div>
                   </div>
                 </div>

@@ -13,37 +13,37 @@ import {
   type MotionValue,
 } from "framer-motion";
 import CurvedLoop from "@/components/ui/CurvedLoop";
+import FlowingMenu from "@/components/ui/FlowingMenu";
 
 /* ─── Data ─────────────────────────────────────────────────────── */
 
-/* Overlay — only the hero pages */
+/* All pages — rendered equally in the overlay */
 const NAV_ITEMS = [
-  { label: "Home",     href: "/"        },
-  { label: "About",    href: "/about"   },
-  { label: "Events",   href: "/events"  },
-  { label: "Startups", href: "/studios" },
-  { label: "Contact",  href: "/contact" },
+  { label: "Home",        href: "/",          desc: "Start here",               image: "https://picsum.photos/600/400?random=10" },
+  { label: "About",       href: "/about",     desc: "Our story & mission",      image: "https://picsum.photos/600/400?random=11" },
+  { label: "Events",      href: "/events",    desc: "100+ events & counting",   image: "https://picsum.photos/600/400?random=12" },
+  { label: "Startups",    href: "/studios",   desc: "Studios & ventures",       image: "https://picsum.photos/600/400?random=13" },
+  { label: "Departments", href: "/verticals", desc: "Our six verticals",        image: "https://picsum.photos/600/400?random=14" },
+  { label: "Facilities",  href: "/facilities",desc: "Labs & workspaces",        image: "https://picsum.photos/600/400?random=15" },
+  { label: "Gallery",     href: "/tours",     desc: "Behind the scenes",        image: "https://picsum.photos/600/400?random=16" },
+  { label: "Team",        href: "/council",   desc: "The people behind CIE",    image: "https://picsum.photos/600/400?random=17" },
+  { label: "Contact",     href: "/contact",   desc: "Get in touch",             image: "https://picsum.photos/600/400?random=18" },
 ];
 
-/* Persistent top bar — secondary links */
-const TOP_LINKS = [
-  { label: "Departments", href: "/verticals"  },
-  { label: "Facilities",  href: "/facilities" },
-  { label: "Gallery",     href: "/tours"      },
-  { label: "Team",        href: "/council"    },
-];
+/* Keep for any other references */
+const TOP_LINKS = NAV_ITEMS;
 
 /* Each grid card has its own gradient + an accent that shifts with hovered nav item */
 const GRID_ACCENTS = [
-  "#FF5E2C", "#FF7A50", "#F97316", "#FB923C",
-  "#FF6B35", "#FF8C42", "#FFA55A", "#FF5E2C",
+  "#E8521A", "#F26B38", "#E8521A", "#FB923C",
+  "#FF6B35", "#FF8C42", "#FFA55A", "#E8521A",
 ];
 
 const SOCIALS = [
-  { label: "Instagram", href: "#" },
-  { label: "LinkedIn",  href: "#" },
-  { label: "Twitter",   href: "#" },
-  { label: "YouTube",   href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/mlritcie/" },
+  { label: "LinkedIn",  href: "https://www.linkedin.com/in/cie-center-for-innovation-and-entrepreneurship-mlrit-935971291/" },
+  { label: "YouTube",   href: "https://www.youtube.com/@mlritcie" },
+  { label: "Twitter",   href: "https://x.com/ciemlrit?s=20" },
 ];
 
 /* ─── Overlay animation ─────────────────────────────────────────── */
@@ -68,9 +68,10 @@ const GRAIN_URL =
 ═══════════════════════════════════════════════════════════════ */
 
 export default function Navbar() {
-  const [open, setOpen]         = useState(false);
-  const [hovered, setHovered]   = useState<number | null>(null);
-  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen]             = useState(false);
+  const [hovered, setHovered]       = useState<number | null>(null);
+  const [scrolled, setScrolled]     = useState(false);
+  const [menuImage, setMenuImage]   = useState<string | null>(null);
   const pathname                = usePathname();
 
   const rawX   = useMotionValue(0);
@@ -139,12 +140,12 @@ export default function Navbar() {
           height: "var(--nav-height)",
           background: open
             ? "transparent"
-            : scrolled ? "rgba(6,6,6,0.96)" : "rgba(0,0,0,0.68)",
-          backdropFilter:       open ? "none" : "blur(24px) saturate(160%)",
-          WebkitBackdropFilter: open ? "none" : "blur(24px) saturate(160%)",
+            : scrolled ? "rgba(8,8,8,0.96)" : "transparent",
+          backdropFilter:       open ? "none" : scrolled ? "blur(24px) saturate(160%)" : "none",
+          WebkitBackdropFilter: open ? "none" : scrolled ? "blur(24px) saturate(160%)" : "none",
           borderBottom: open
             ? "1px solid transparent"
-            : `1px solid rgba(255,255,255,${scrolled ? "0.07" : "0.04"})`,
+            : scrolled ? "1px solid rgba(255,255,255,0.07)" : "1px solid transparent",
           transition: "background 0.4s ease, border-color 0.4s ease",
         }}
       >
@@ -157,41 +158,14 @@ export default function Navbar() {
           <Link href="/" onClick={() => setOpen(false)}
             style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none", flexShrink: 0 }}>
             <div style={{ display: "flex", alignItems: "baseline" }}>
-              <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "22px", letterSpacing: "-0.04em", color: "#FFFFFF", lineHeight: 1 }}>CIE</span>
-              <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "24px", color: "#FF5E2C", lineHeight: 1 }}>.</span>
+              <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "22px", letterSpacing: "-0.04em", color: scrolled ? "#FFFFFF" : "#000000", lineHeight: 1, transition: "color 0.4s ease" }}>CIE</span>
+              <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "24px", color: "#E8521A", lineHeight: 1 }}>.</span>
             </div>
             <div className="hidden sm:flex flex-col" style={{ gap: "2px" }}>
-              <span style={{ fontFamily: "var(--font-body)", fontSize: "8.5px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.38)", lineHeight: 1 }}>MLRIT</span>
-              <span style={{ fontFamily: "var(--font-body)", fontSize: "8.5px", color: "rgba(255,255,255,0.22)", lineHeight: 1 }}>Innovation Hub</span>
+              <span style={{ fontFamily: "var(--font-body)", fontSize: "8.5px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: scrolled ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.45)", lineHeight: 1, transition: "color 0.4s ease" }}>MLRIT</span>
+              <span style={{ fontFamily: "var(--font-body)", fontSize: "8px", color: scrolled ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.30)", lineHeight: 1, transition: "color 0.4s ease" }}>Centre for Innovation &amp; Entrepreneurship</span>
             </div>
           </Link>
-
-          {/* Centre nav links (hidden when overlay open) */}
-          <AnimatePresence>
-            {!open && (
-              <motion.nav
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="hidden lg:flex"
-                style={{ display: "flex", alignItems: "center", gap: "32px" }}
-              >
-                {TOP_LINKS.map((link) => (
-                  <Link key={link.href} href={link.href}
-                    style={{
-                      fontFamily: "var(--font-body)", fontSize: "12px", fontWeight: 600,
-                      letterSpacing: "0.06em", textTransform: "uppercase",
-                      color: pathname === link.href ? "#FF5E2C" : "rgba(255,255,255,0.55)",
-                      textDecoration: "none", transition: "color 0.2s ease",
-                    }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = "#FF5E2C"; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = pathname === link.href ? "#FF5E2C" : "rgba(255,255,255,0.55)"; }}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </motion.nav>
-            )}
-          </AnimatePresence>
 
           {/* Right controls */}
           <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
@@ -201,10 +175,11 @@ export default function Navbar() {
                   <Link href="/contact" className="hidden md:flex" style={{
                     fontFamily: "var(--font-body)", fontSize: "11px", fontWeight: 600,
                     letterSpacing: "0.1em", textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.5)", textDecoration: "none", transition: "color 0.2s ease",
+                    color: scrolled ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)",
+                    textDecoration: "none", transition: "color 0.2s ease",
                   }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = "#FF5E2C"; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.5)"; }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = "#E8521A"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = scrolled ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)"; }}
                   >
                     Join CIE
                   </Link>
@@ -212,7 +187,7 @@ export default function Navbar() {
               )}
             </AnimatePresence>
 
-            {/* Premium pill button */}
+            {/* Hamburger pill button */}
             <motion.button
               onClick={() => setOpen(v => !v)}
               aria-label={open ? "Close menu" : "Open menu"}
@@ -222,8 +197,8 @@ export default function Navbar() {
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 display: "flex", alignItems: "center",
-                background: open ? "rgba(255,94,44,0.07)" : "rgba(255,255,255,0.05)",
-                border: open ? "1px solid rgba(255,94,44,0.28)" : "1px solid rgba(255,255,255,0.11)",
+                background: open ? "rgba(232,82,26,0.07)" : scrolled ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.04)",
+                border: open ? "1px solid rgba(232,82,26,0.28)" : scrolled ? "1px solid rgba(255,255,255,0.12)" : "1px solid rgba(0,0,0,0.10)",
                 borderRadius: "999px", cursor: "pointer",
                 padding: "0 18px 0 20px", height: "40px",
                 transition: "background 0.3s ease, border-color 0.3s ease", overflow: "hidden",
@@ -236,14 +211,14 @@ export default function Navbar() {
                     <motion.span key="close"
                       initial={{ y: 14, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -14, opacity: 0 }}
                       transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
-                      style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, letterSpacing: "0.13em", textTransform: "uppercase", color: "#FF5E2C", whiteSpace: "nowrap" }}>
+                      style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, letterSpacing: "0.13em", textTransform: "uppercase", color: "#E8521A", whiteSpace: "nowrap" }}>
                       CLOSE
                     </motion.span>
                   ) : (
                     <motion.span key="menu"
                       initial={{ y: 14, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -14, opacity: 0 }}
                       transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
-                      style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, letterSpacing: "0.13em", textTransform: "uppercase", color: "rgba(255,255,255,0.7)", whiteSpace: "nowrap" }}>
+                      style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, letterSpacing: "0.13em", textTransform: "uppercase", color: scrolled ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.65)", whiteSpace: "nowrap" }}>
                       MENU
                     </motion.span>
                   )}
@@ -251,17 +226,17 @@ export default function Navbar() {
               </div>
 
               {/* Separator */}
-              <div aria-hidden style={{ width: "1px", height: "16px", background: open ? "rgba(255,94,44,0.22)" : "rgba(255,255,255,0.1)", margin: "0 14px", flexShrink: 0, transition: "background 0.3s ease" }} />
+              <div aria-hidden style={{ width: "1px", height: "16px", background: open ? "rgba(232,82,26,0.22)" : scrolled ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)", margin: "0 14px", flexShrink: 0, transition: "background 0.3s ease" }} />
 
               {/* Bars → X */}
               <div style={{ display: "flex", flexDirection: "column", gap: "5px", flexShrink: 0 }}>
                 <motion.span
-                  animate={{ rotate: open ? 45 : 0, y: open ? 3 : 0, backgroundColor: open ? "#FF5E2C" : "#FFFFFF" }}
+                  animate={{ rotate: open ? 45 : 0, y: open ? 3 : 0, backgroundColor: open ? "#E8521A" : scrolled ? "#FFFFFF" : "#000000" }}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                   style={{ display: "block", width: "18px", height: "1.5px", borderRadius: "2px", transformOrigin: "center" }}
                 />
                 <motion.span
-                  animate={{ rotate: open ? -45 : 0, y: open ? -3 : 0, backgroundColor: open ? "#FF5E2C" : "rgba(255,255,255,0.45)", width: open ? "18px" : "12px" }}
+                  animate={{ rotate: open ? -45 : 0, y: open ? -3 : 0, backgroundColor: open ? "#E8521A" : scrolled ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.45)", width: open ? "18px" : "12px" }}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                   style={{ display: "block", height: "1.5px", borderRadius: "2px", transformOrigin: "center" }}
                 />
@@ -346,16 +321,14 @@ export default function Navbar() {
             {/* ── Content ──────────────────────────────────────── */}
             <div style={{
               position: "relative", zIndex: 1, flex: 1,
-              display: "flex",
-              maxWidth: "1400px", margin: "0 auto", width: "100%",
-              padding: "clamp(12px,2.5vh,24px) clamp(20px,4vw,56px) clamp(12px,2.5vh,24px)",
-              gap: "clamp(24px, 5vw, 64px)",
-              minHeight: 0,
-              overflow: "hidden",
+              display: "flex", minHeight: 0,
             }}>
 
-              {/* ── LEFT: photo grid (desktop) ─────────────────── */}
-              <div className="hidden lg:flex" style={{ width: "44%", flexShrink: 0, minHeight: 0, overflow: "hidden" }}>
+              {/* LEFT: 4-photo grid */}
+              <div className="hidden lg:flex" style={{
+                width: "38%", flexShrink: 0, minHeight: 0, overflow: "hidden",
+                padding: "clamp(10px,1.5vh,16px)",
+              }}>
                 <motion.div
                   initial={{ opacity: 0, x: -32 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -366,23 +339,18 @@ export default function Navbar() {
                 </motion.div>
               </div>
 
-              {/* ── RIGHT: nav links ────────────────────────────── */}
-              <nav
-                aria-label="Main navigation"
-                style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}
-              >
-                {NAV_ITEMS.map((item, i) => (
-                  <NavItem
-                    key={item.href}
-                    item={item}
-                    index={i}
-                    isActive={pathname === item.href}
-                    onHoverStart={() => setHovered(i)}
-                    onHoverEnd={() => setHovered(null)}
-                    onClick={() => setOpen(false)}
-                  />
-                ))}
-              </nav>
+              {/* RIGHT: FlowingMenu */}
+              <div style={{ flex: 1, minHeight: 0 }}>
+                <FlowingMenu
+                  items={NAV_ITEMS.map(item => ({ link: item.href, text: item.label, image: item.image }))}
+                  textColor="#000000"
+                  bgColor="transparent"
+                  hoverColor="#E8521A"
+                  borderColor="rgba(0,0,0,0.08)"
+                  onItemClick={() => setOpen(false)}
+                  onItemHover={(img) => setMenuImage(img)}
+                />
+              </div>
             </div>
 
             {/* ── Bottom bar ──────────────────────────────────── */}
@@ -420,18 +388,18 @@ export default function Navbar() {
                 {/* Contact + CTA */}
                 <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
                   <motion.a href="mailto:cie@mlrit.ac.in"
-                    whileHover={{ color: "#FF5E2C" }}
+                    whileHover={{ color: "#E8521A" }}
                     style={{ fontFamily: "var(--font-body)", fontSize: "10px", color: "rgba(0,0,0,0.4)", textDecoration: "none" }}>
                     cie@mlrit.ac.in
                   </motion.a>
                   <Link href="/contact" onClick={() => setOpen(false)} className="hidden md:flex"
                     style={{
                       fontFamily: "var(--font-body)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em",
-                      textTransform: "uppercase", color: "#FF5E2C", textDecoration: "none",
+                      textTransform: "uppercase", color: "#E8521A", textDecoration: "none",
                       border: "1px solid rgba(255,94,44,0.28)", borderRadius: "6px", padding: "6px 16px",
                       transition: "background 0.2s ease, border-color 0.2s ease",
                     }}
-                    onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = "rgba(255,94,44,0.1)"; el.style.borderColor = "#FF5E2C"; }}
+                    onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = "rgba(255,94,44,0.1)"; el.style.borderColor = "#E8521A"; }}
                     onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = "transparent"; el.style.borderColor = "rgba(255,94,44,0.28)"; }}
                   >
                     Join CIE →
@@ -457,15 +425,12 @@ export default function Navbar() {
  */
 /* 6 images across 3 columns — replace src with real /public paths when available */
 const CARDS = [
-  /* col A – tall then short */
-  { src: "https://picsum.photos/seed/cie-collab/800/1100",   alt: "Students collaborating at CIE", grow: 3, depth: 0.55 },
-  { src: "https://picsum.photos/seed/cie-build/800/700",     alt: "Innovation workspace at CIE",   grow: 2, depth: 0.35 },
-  /* col B – short then tall */
-  { src: "https://picsum.photos/seed/cie-pitch/800/700",     alt: "Startup pitch at CIE",          grow: 2, depth: 0.65 },
-  { src: "https://picsum.photos/seed/cie-makers/800/1100",   alt: "Makers and founders at CIE",    grow: 3, depth: 0.45 },
-  /* col C – medium then tall */
-  { src: "https://picsum.photos/seed/cie-hackathon/800/800", alt: "Hackathon at CIE",              grow: 2, depth: 0.58 },
-  { src: "https://picsum.photos/seed/cie-demo/800/1000",     alt: "Demo day at CIE",               grow: 3, depth: 0.40 },
+  /* col A */
+  { src: "https://picsum.photos/seed/cie-collab/800/1100", alt: "Students collaborating at CIE", grow: 3, depth: 0.55 },
+  { src: "https://picsum.photos/seed/cie-build/800/700",   alt: "Innovation workspace at CIE",   grow: 2, depth: 0.35 },
+  /* col B */
+  { src: "https://picsum.photos/seed/cie-pitch/800/700",   alt: "Startup pitch at CIE",          grow: 2, depth: 0.65 },
+  { src: "https://picsum.photos/seed/cie-makers/800/1100", alt: "Makers and founders at CIE",    grow: 3, depth: 0.45 },
 ];
 
 function PhotoGrid({
@@ -486,20 +451,15 @@ function PhotoGrid({
 
   return (
     <div style={{ display: "flex", gap: "8px", height: "100%", width: "100%", minHeight: 0 }}>
-      {/* Column A — moves up on scroll down */}
+      {/* Column A */}
       <motion.div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px", minHeight: 0, y: colAY }}>
         <GridCard card={CARDS[0]} accent={accent} delay={0.20} isLit={lit} mouseX={mouseX} mouseY={mouseY} />
         <GridCard card={CARDS[1]} accent={accent} delay={0.30} isLit={lit} mouseX={mouseX} mouseY={mouseY} />
       </motion.div>
-      {/* Column B — moves DOWN on scroll down (opposite) */}
+      {/* Column B */}
       <motion.div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px", minHeight: 0, y: colBY }}>
         <GridCard card={CARDS[2]} accent={accent} delay={0.24} isLit={lit} mouseX={mouseX} mouseY={mouseY} />
         <GridCard card={CARDS[3]} accent={accent} delay={0.34} isLit={lit} mouseX={mouseX} mouseY={mouseY} />
-      </motion.div>
-      {/* Column C — moves up on scroll down, medium speed */}
-      <motion.div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px", minHeight: 0, y: colCY }}>
-        <GridCard card={CARDS[4]} accent={accent} delay={0.28} isLit={lit} mouseX={mouseX} mouseY={mouseY} />
-        <GridCard card={CARDS[5]} accent={accent} delay={0.38} isLit={lit} mouseX={mouseX} mouseY={mouseY} />
       </motion.div>
     </div>
   );
@@ -591,13 +551,13 @@ function GridCard({
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   NavItem — LandoNorris-style: giant text, strikethrough on active
+   NavItem — editorial: number + rule + label + description
 ═══════════════════════════════════════════════════════════════ */
 
 function NavItem({
   item, index, isActive, onHoverStart, onHoverEnd, onClick,
 }: {
-  item: { label: string; href: string };
+  item: { label: string; href: string; desc?: string };
   index: number;
   isActive: boolean;
   onHoverStart: () => void;
@@ -605,78 +565,92 @@ function NavItem({
   onClick: () => void;
 }) {
   const [hov, setHov] = useState(false);
-  const delay = 0.38 + index * 0.07;
+  const delay = 0.26 + index * 0.055;
 
   return (
-    <div>
+    <div style={{
+      borderBottom: "1px solid rgba(0,0,0,0.06)",
+      padding: "clamp(5px, 0.9vh, 12px) 0",
+    }}>
       <Link
         href={item.href}
         onClick={onClick}
         onMouseEnter={() => { setHov(true);  onHoverStart(); }}
         onMouseLeave={() => { setHov(false); onHoverEnd();   }}
-        style={{
-          display: "inline-block",
-          textDecoration: "none",
-          padding: "clamp(2px, 0.55vh, 7px) 0",
-          position: "relative",
-          lineHeight: 1,
-        }}
+        style={{ display: "block", textDecoration: "none" }}
       >
-        {/* Clip container — hides text below the baseline until revealed */}
-        <div style={{ overflow: "hidden", paddingBottom: "0.06em" }}>
-          {/* Entrance: slides up from 104%; hover: shifts right */}
+        {/* Row: number · rule · label · arrow */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+
+          {/* Index */}
+          <span style={{
+            fontFamily: "var(--font-body)",
+            fontSize: "9px", fontWeight: 700, letterSpacing: "0.2em",
+            color: hov ? "#E8521A" : "rgba(0,0,0,0.2)",
+            transition: "color 0.2s ease", flexShrink: 0,
+          }}>
+            {String(index + 1).padStart(2, "0")}
+          </span>
+
+          {/* Thin rule — stretches on hover */}
           <motion.div
-            initial={{ y: "104%" }}
-            animate={{ y: "0%" }}
-            transition={{ delay, duration: 0.82, ease: [0.16, 1, 0.3, 1] }}
-          >
+            animate={{ width: hov ? 22 : 10, backgroundColor: hov ? "#E8521A" : "rgba(0,0,0,0.12)" }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            style={{ height: "1px", flexShrink: 0 }}
+          />
+
+          {/* Label */}
+          <div style={{ flex: 1, overflow: "hidden", paddingBottom: "0.04em" }}>
             <motion.span
-              animate={{ x: hov && !isActive ? 8 : 0 }}
-              transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ y: "110%" }}
+              animate={{ y: "0%" }}
+              transition={{ delay, duration: 0.76, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 display: "block",
                 fontFamily: "var(--font-heading)",
-                fontSize: "clamp(36px, 6.2vw, 96px)",
-                fontWeight: 800,
-                letterSpacing: "-0.04em",
+                fontSize: "clamp(14px, 2vw, 28px)",
+                fontWeight: 900,
+                letterSpacing: "-0.035em",
                 textTransform: "uppercase",
                 lineHeight: 1,
-                color: hov
-                  ? "#FF5E2C"
-                  : isActive
-                    ? "rgba(0,0,0,0.28)"
-                    : "rgba(0,0,0,0.85)",
-                transition: "color 0.25s ease",
+                color: hov ? "#E8521A" : isActive ? "rgba(0,0,0,0.2)" : "rgba(0,0,0,0.9)",
+                transition: "color 0.2s ease",
               }}
             >
               {item.label}
             </motion.span>
-          </motion.div>
+          </div>
+
+          {/* Arrow */}
+          <motion.span
+            animate={{ x: hov ? 0 : -10, opacity: hov ? 1 : 0 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            style={{ fontSize: "15px", color: "#E8521A", flexShrink: 0, lineHeight: 1 }}
+          >
+            →
+          </motion.span>
         </div>
 
-        {/* Strikethrough — scales in after text lands */}
-        <motion.span
-          aria-hidden
-          initial={{ scaleX: 0 }}
-          animate={{
-            scaleX: isActive ? 1 : hov ? 0.5 : 0,
-            backgroundColor: isActive ? "rgba(0,0,0,0.35)" : "#FF5E2C",
-          }}
-          transition={{
-            scaleX: { delay: isActive ? delay + 0.3 : 0, duration: 0.45, ease: [0.16, 1, 0.3, 1] },
-            backgroundColor: { duration: 0.25 },
-          }}
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "-2%",
-            right: "-2%",
-            height: "2px",
-            borderRadius: "2px",
-            transformOrigin: "left",
-            pointerEvents: "none",
-          }}
-        />
+        {/* Description */}
+        {item.desc && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: delay + 0.28, duration: 0.38 }}
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "10.5px",
+              fontStyle: "italic",
+              letterSpacing: "0.01em",
+              color: hov ? "rgba(232,82,26,0.55)" : "rgba(0,0,0,0.28)",
+              marginTop: "4px",
+              paddingLeft: "44px",
+              transition: "color 0.2s ease",
+            }}
+          >
+            {item.desc}
+          </motion.p>
+        )}
       </Link>
     </div>
   );
@@ -712,10 +686,10 @@ function GeometricBackground() {
         viewBox="0 0 780 780"
         fill="none"
       >
-        <circle cx="390" cy="390" r="360" stroke="#FF5E2C" strokeWidth="1.5" opacity="0.22" />
-        <circle cx="390" cy="390" r="280" stroke="#FF5E2C" strokeWidth="1.2" opacity="0.16" />
-        <circle cx="390" cy="390" r="200" stroke="#FF5E2C" strokeWidth="1"   opacity="0.12" />
-        <circle cx="390" cy="390" r="120" stroke="#FF5E2C" strokeWidth="0.8" opacity="0.09"  />
+        <circle cx="390" cy="390" r="360" stroke="#E8521A" strokeWidth="1.5" opacity="0.22" />
+        <circle cx="390" cy="390" r="280" stroke="#E8521A" strokeWidth="1.2" opacity="0.16" />
+        <circle cx="390" cy="390" r="200" stroke="#E8521A" strokeWidth="1"   opacity="0.12" />
+        <circle cx="390" cy="390" r="120" stroke="#E8521A" strokeWidth="0.8" opacity="0.09"  />
       </svg>
 
       {/* ── White arcs — bottom-left ────────────────────────── */}
@@ -736,22 +710,22 @@ function GeometricBackground() {
         viewBox="0 0 1440 900"
         fill="none"
       >
-        <line x1="0" y1="900" x2="1440" y2="0" stroke="#FF5E2C" strokeWidth="1"   opacity="0.18" />
+        <line x1="0" y1="900" x2="1440" y2="0" stroke="#E8521A" strokeWidth="1"   opacity="0.18" />
         <line x1="0" y1="780" x2="1200" y2="0" stroke="#000000" strokeWidth="0.8" opacity="0.07" />
       </svg>
 
       {/* ── Scattered plus / cross marks ───────────────────── */}
-      <PlusMark x="18%" y="22%" size={16} color="#FF5E2C" opacity={0.45} />
+      <PlusMark x="18%" y="22%" size={16} color="#E8521A" opacity={0.45} />
       <PlusMark x="28%" y="62%" size={11} color="#000000"  opacity={0.18} />
-      <PlusMark x="48%" y="18%" size={14} color="#FF5E2C" opacity={0.38} />
+      <PlusMark x="48%" y="18%" size={14} color="#E8521A" opacity={0.38} />
       <PlusMark x="52%" y="75%" size={10} color="#000000"  opacity={0.15} />
-      <PlusMark x="72%" y="35%" size={13} color="#FF5E2C" opacity={0.35} />
+      <PlusMark x="72%" y="35%" size={13} color="#E8521A" opacity={0.35} />
       <PlusMark x="84%" y="68%" size={15} color="#000000"  opacity={0.14} />
 
       {/* ── Small rotated squares (diamond shape) ──────────── */}
-      <DiamondMark x="38%" y="82%" size={10} color="#FF5E2C" opacity={0.35} />
+      <DiamondMark x="38%" y="82%" size={10} color="#E8521A" opacity={0.35} />
       <DiamondMark x="62%" y="14%" size={12} color="#000000"  opacity={0.14} />
-      <DiamondMark x="80%" y="52%" size={9}  color="#FF5E2C" opacity={0.3}  />
+      <DiamondMark x="80%" y="52%" size={9}  color="#E8521A" opacity={0.3}  />
 
       {/* ── Vertical accent lines ──────────────────────────── */}
       <div style={{
