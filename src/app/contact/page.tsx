@@ -39,10 +39,10 @@ function SvgX() {
 }
 
 const socials = [
-  { Svg: SvgInstagram, label: "Instagram",  handle: "@mlritcie",  href: "https://www.instagram.com/mlritcie/",  hoverColor: "#E1306C", hoverBg: "rgba(225,48,108,0.08)" },
-  { Svg: SvgLinkedIn,  label: "LinkedIn",   handle: "MLRIT CIE", href: "https://www.linkedin.com/in/cie-center-for-innovation-and-entrepreneurship-mlrit-935971291/", hoverColor: "#0A66C2", hoverBg: "rgba(10,102,194,0.08)" },
-  { Svg: SvgX,         label: "Twitter / X",handle: "@ciemlrit",  href: "https://x.com/ciemlrit?s=20",          hoverColor: "#000000", hoverBg: "rgba(0,0,0,0.05)" },
-  { Svg: SvgYouTube,   label: "YouTube",    handle: "MLRIT CIE", href: "https://www.youtube.com/@mlritcie",     hoverColor: "#FF0000", hoverBg: "rgba(255,0,0,0.08)" },
+  { Svg: SvgInstagram, label: "Instagram",  handle: "@mlritcie",  href: "https://www.instagram.com/mlritcie/",  color: "#E1306C", bg: "rgba(225,48,108,0.10)", hoverBg: "rgba(225,48,108,0.18)" },
+  { Svg: SvgLinkedIn,  label: "LinkedIn",   handle: "MLRIT CIE", href: "https://www.linkedin.com/in/cie-center-for-innovation-and-entrepreneurship-mlrit-935971291/", color: "#0A66C2", bg: "rgba(10,102,194,0.10)", hoverBg: "rgba(10,102,194,0.18)" },
+  { Svg: SvgX,         label: "Twitter / X",handle: "@ciemlrit",  href: "https://x.com/ciemlrit?s=20",          color: "#111111", bg: "rgba(0,0,0,0.08)", hoverBg: "rgba(0,0,0,0.14)" },
+  { Svg: SvgYouTube,   label: "YouTube",    handle: "MLRIT CIE", href: "https://www.youtube.com/@mlritcie",     color: "#FF0000", bg: "rgba(255,0,0,0.10)", hoverBg: "rgba(255,0,0,0.18)" },
 ];
 
 const heroCards = [
@@ -93,21 +93,22 @@ export default function ContactPage() {
         line2="TALK"
         scriptText="— we'd love to hear from you"
         description="Have a question, an idea, or want to collaborate? We'd love to hear from you. The CIE team typically responds within 24 hours."
-        stats={[
-          { value: "24 hrs", label: "Avg. Reply Time" },
-          { value: "Mon–Sat", label: "Office Hours" },
-          { value: "4+", label: "Ways to Reach" },
-        ]}
         cta={{ label: "Send a Message", href: "#contact-form" }}
         watermark="HELLO"
       />
 
-      {/* Form + Sidebar */}
-      <section className="py-20" style={{ background: "#FFFFFF" }}>
+      {/* Form — centered */}
+      <section id="contact-form" style={{ paddingTop: "clamp(48px,8vw,72px)", paddingBottom: "clamp(40px,6vw,56px)", background: "#FFFFFF", position: "relative", zIndex: 1 }}>
         <div className="page-container">
-          <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-start">
-            <FadeIn className="lg:col-span-3">
-              <div className="p-8 rounded-2xl card-light">
+          <div style={{ maxWidth: "960px", margin: "0 auto" }}>
+            <FadeIn>
+              <div style={{
+                background: "#FFFFFF",
+                border: "1px solid rgba(0,0,0,0.08)",
+                borderRadius: "20px",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+                padding: "clamp(28px,4vw,40px)",
+              }}>
                 <h2 className="text-2xl font-black mb-2" style={{ color: "#000000" }}>Send a Message</h2>
                 <p className="text-sm mb-8" style={{ color: "#6B7280" }}>
                   Fill in the form below and we&apos;ll get back to you as soon as possible.
@@ -124,7 +125,7 @@ export default function ContactPage() {
                       className="btn-secondary-light mt-6">Send Another</button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                  <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                     <div className="grid sm:grid-cols-2 gap-5 items-start">
                       <div>
                         <label htmlFor="contact-name" className="block text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "#374151" }}>Your Name *</label>
@@ -212,88 +213,212 @@ export default function ContactPage() {
                         )}
                       </AnimatePresence>
                     </div>
-                    <button type="submit" disabled={loading} className="btn-primary w-full justify-center py-3.5">
-                      {loading ? (
-                        <span className="flex items-center gap-2">
-                          <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Sending...
-                        </span>
-                      ) : (
-                        <span className="flex items-center gap-2"><Send size={16} /> Send Message</span>
-                      )}
-                    </button>
+                    <div style={{ marginTop: "32px" }}>
+                      <motion.button
+                        type="submit"
+                        disabled={loading}
+                        whileHover={!loading ? { scale: 1.02, y: -1 } : {}}
+                        whileTap={!loading ? { scale: 0.97 } : {}}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: "8px",
+                          width: "100%",
+                          padding: "14px 32px",
+                          borderRadius: "12px",
+                          background: loading ? "rgba(232,82,26,0.6)" : "var(--orange)",
+                          color: "#FFFFFF",
+                          fontSize: "14px",
+                          fontWeight: 700,
+                          letterSpacing: "0.01em",
+                          border: "none",
+                          cursor: loading ? "not-allowed" : "pointer",
+                          boxShadow: "0 4px 16px rgba(232,82,26,0.28)",
+                          transition: "background 0.2s ease, box-shadow 0.2s ease",
+                        }}
+                        onMouseEnter={(e) => { if (!loading) (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 20px rgba(232,82,26,0.42)"; }}
+                        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(232,82,26,0.28)"; }}
+                      >
+                        {loading ? (
+                          <>
+                            <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <Send size={15} />
+                            Send Message
+                          </>
+                        )}
+                      </motion.button>
+                    </div>
                   </form>
                 )}
               </div>
             </FadeIn>
+          </div>
+        </div>
+      </section>
 
-            <FadeIn delay={0.2} className="lg:col-span-2 space-y-6">
-              <div className="p-6 rounded-2xl card-light">
-                <h3 className="font-black mb-5" style={{ color: "#000000" }}>Contact Information</h3>
-                <div className="space-y-4">
-                  {contactInfo.map((item) => (
-                    <div key={item.label} className="flex gap-3">
-                      <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                        style={{ background: "rgba(255,94,44,0.08)" }}>
-                        <item.icon size={16} style={{ color: "#FF5E2C" }} />
-                      </div>
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-widest mb-0.5" style={{ color: "#9CA3AF" }}>{item.label}</p>
-                        {item.href ? (
-                          <a href={item.href} className="text-sm transition-colors" style={{ color: "#374151", textDecoration: "none" }}
-                            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FF5E2C"; }}
-                            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#374151"; }}>{item.value}</a>
-                        ) : (
-                          <p className="text-sm" style={{ color: "#374151" }}>{item.value}</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
+      {/* Contact Info + Map — two column */}
+      <section style={{ paddingBottom: "clamp(48px,8vw,72px)", background: "#FFFFFF", position: "relative", zIndex: 1 }}>
+        <div className="page-container">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+
+            {/* Left: Contact Details */}
+            <FadeIn>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#FF5E2C" }}>Get in Touch</p>
+              <h2 className="font-black mb-3" style={{ fontSize: "clamp(28px,4vw,40px)", color: "#000000", lineHeight: 1.1 }}>Contact Us</h2>
+              <p className="text-sm mb-8" style={{ color: "#6B7280", lineHeight: 1.75 }}>
+                Have questions, ideas, or collaboration in mind? We&apos;d love to hear from you. Reach out to us anytime.
+              </p>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "24px", marginBottom: "36px" }}>
+                {/* Email */}
+                <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(255,94,44,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <Mail size={18} style={{ color: "#FF5E2C" }} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#9CA3AF" }}>Email</p>
+                    <a href="mailto:ciemlrit@mlrit.ac.in" style={{ display: "block", fontSize: "14px", color: "#111111", textDecoration: "none", lineHeight: 1.6 }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FF5E2C"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#111111"; }}>ciemlrit@mlrit.ac.in</a>
+                    <a href="mailto:cie@mlrinstitutions.ac.in" style={{ display: "block", fontSize: "14px", color: "#111111", textDecoration: "none", lineHeight: 1.6 }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FF5E2C"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#111111"; }}>cie@mlrinstitutions.ac.in</a>
+                  </div>
+                </div>
+
+                {/* Phone */}
+                <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(255,94,44,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <Phone size={18} style={{ color: "#FF5E2C" }} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#9CA3AF" }}>Phone</p>
+                    <a href="tel:+914023043333" style={{ fontSize: "14px", color: "#111111", textDecoration: "none" }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FF5E2C"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#111111"; }}>+91 40 2304 3333</a>
+                  </div>
+                </div>
+
+                {/* Address */}
+                <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(255,94,44,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <MapPin size={18} style={{ color: "#FF5E2C" }} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#9CA3AF" }}>Address</p>
+                    <p style={{ fontSize: "14px", color: "#111111", lineHeight: 1.65 }}>
+                      MLR Institute of Technology<br />
+                      Dundigal Police Station Road,<br />
+                      Hyderabad 500043, Telangana, India
+                    </p>
+                  </div>
+                </div>
+
+                {/* Office Hours */}
+                <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(255,94,44,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <Clock size={18} style={{ color: "#FF5E2C" }} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#9CA3AF" }}>Office Hours</p>
+                    <p style={{ fontSize: "14px", color: "#111111" }}>Mon–Sat: 9:00 AM – 6:00 PM</p>
+                  </div>
                 </div>
               </div>
 
-              <div className="p-6 rounded-2xl card-light">
-                <h3 className="font-black mb-5" style={{ color: "#000000" }}>Follow Us</h3>
-                <div className="space-y-3">
-                  {socials.map((s) => (
-                    <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-lg"
-                      style={{ background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.06)", textDecoration: "none", transition: "background 0.2s ease" }}
-                      onMouseEnter={(e) => {
-                        const el = e.currentTarget as HTMLElement;
-                        el.style.background = s.hoverBg;
-                        const icon = el.querySelector(".s-icon") as HTMLElement | null;
-                        if (icon) { icon.style.color = s.hoverColor; icon.style.background = s.hoverBg; }
-                      }}
-                      onMouseLeave={(e) => {
-                        const el = e.currentTarget as HTMLElement;
-                        el.style.background = "#FFFFFF";
-                        const icon = el.querySelector(".s-icon") as HTMLElement | null;
-                        if (icon) { icon.style.color = "#6B7280"; icon.style.background = "rgba(0,0,0,0.05)"; }
-                      }}>
-                      <div className="s-icon w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                        style={{ background: "rgba(0,0,0,0.05)", color: "#6B7280", transition: "color 0.2s ease, background 0.2s ease" }}>
-                        <s.Svg />
-                      </div>
-                      <div>
-                        <p className="text-xs font-semibold" style={{ color: "#000000" }}>{s.label}</p>
-                        <p className="text-xs" style={{ color: "#6B7280" }}>{s.handle}</p>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
+              {/* Open in Maps button */}
+              <motion.a
+                href="https://www.google.com/maps/place/MLR+Institute+of+Technology,+Dundigal+Police+Station+Road,+Hyderabad,+Telangana+500043,+India"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                  width: "100%",
+                  padding: "15px 24px",
+                  borderRadius: "12px",
+                  background: "var(--orange)",
+                  color: "#FFFFFF",
+                  textDecoration: "none",
+                  fontSize: "15px",
+                  fontWeight: 700,
+                  letterSpacing: "0.01em",
+                  boxShadow: "0 4px 16px rgba(232,82,26,0.28)",
+                  transition: "box-shadow 0.2s ease",
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 22px rgba(232,82,26,0.44)"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(232,82,26,0.28)"; }}
+              >
+                <MapPin size={16} />
+                Open in Maps
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </motion.a>
+            </FadeIn>
 
-              <div className="rounded-2xl overflow-hidden aspect-video flex items-center justify-center card-light">
-                <div className="text-center">
-                  <MapPin size={28} className="mx-auto mb-2" style={{ color: "#FF5E2C" }} />
-                  <p className="text-sm font-semibold" style={{ color: "#000000" }}>MLRIT Campus</p>
-                  <p className="text-xs mt-1" style={{ color: "#6B7280" }}>Dundigal, Hyderabad</p>
-                  <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer"
-                    className="inline-block mt-3 text-xs btn-secondary-light py-1.5 px-3">Open in Maps</a>
-                </div>
+            {/* Right: Find Us + Map */}
+            <FadeIn delay={0.15}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "#FF5E2C" }}>Find Us</p>
+              <h3 className="font-black mb-1" style={{ fontSize: "clamp(20px,3vw,28px)", color: "#000000", lineHeight: 1.1 }}>MLR Institute of Technology</h3>
+              <p className="text-sm mb-5" style={{ color: "#6B7280" }}>Dundigal Police Station Road, Hyderabad 500043, Telangana, India</p>
+              <div style={{ borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 4px 20px rgba(0,0,0,0.06)", position: "relative", paddingBottom: "68%", height: 0 }}>
+                <iframe
+                  src="https://maps.google.com/maps?q=MLR+Institute+of+Technology,+Dundigal+Police+Station+Road,+Hyderabad,+Telangana+500043,+India&output=embed&z=15"
+                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0, display: "block" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="MLRIT CIE Location Map"
+                />
               </div>
             </FadeIn>
+
           </div>
+        </div>
+      </section>
+
+      {/* Follow Us */}
+      <section style={{ paddingBottom: "clamp(56px,8vw,88px)", background: "#FFFFFF", position: "relative", zIndex: 1 }}>
+        <div className="page-container">
+          <FadeIn>
+            <h3 className="font-black mb-6" style={{ fontSize: "clamp(18px,2.5vw,24px)", color: "#000000" }}>Follow Us</h3>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
+              {socials.map((s) => (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
+                  style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 16px", borderRadius: "12px", border: "1px solid rgba(0,0,0,0.08)", textDecoration: "none", background: "#FFFFFF", transition: "background 0.2s ease, border-color 0.2s ease" }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.background = s.hoverBg;
+                    el.style.borderColor = s.color;
+                    const icon = el.querySelector(".s-icon") as HTMLElement | null;
+                    if (icon) icon.style.background = s.hoverBg;
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.background = "#FFFFFF";
+                    el.style.borderColor = "rgba(0,0,0,0.08)";
+                    const icon = el.querySelector(".s-icon") as HTMLElement | null;
+                    if (icon) icon.style.background = s.bg;
+                  }}>
+                  <div className="s-icon" style={{ width: 32, height: 32, borderRadius: 8, background: s.bg, color: s.color, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "background 0.2s ease" }}>
+                    <s.Svg />
+                  </div>
+                  <div>
+                    <p style={{ fontSize: "13px", fontWeight: 600, color: "#000000", margin: 0 }}>{s.label}</p>
+                    <p style={{ fontSize: "12px", color: "#6B7280", margin: 0 }}>{s.handle}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </FadeIn>
         </div>
       </section>
 

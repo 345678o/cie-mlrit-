@@ -104,7 +104,10 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--nav-height) + 16px);
   overflow-x: hidden;
+  scrollbar-width: none;       /* Firefox */
 }
+
+html::-webkit-scrollbar { display: none; }  /* Chrome / Safari / Edge */
 
 body {
   background: var(--bg-white);
@@ -115,7 +118,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  scrollbar-width: none;       /* Firefox */
 }
+
+body::-webkit-scrollbar { display: none; }  /* Chrome / Safari / Edge */
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
@@ -545,3 +551,63 @@ button:focus-visible {
 .grid-item-start  { align-self: start; }
 .grid-item-end    { align-self: end; }
 .grid-item-center { align-self: center; }
+
+/* ── Navbar responsive guards (bulletproof against inline-style specificity) ── */
+@media (min-width: 768px) {
+  .nav-hamburger    { display: none !important; }
+  .nav-mobile-space { display: none !important; }
+}
+@media (max-width: 767px) {
+  .nav-desktop-links { display: none !important; }
+  .nav-desktop-sep   { display: none !important; }
+  .nav-desktop-cta   { display: none !important; }
+}
+
+/* ── Mobile: feature panels (events + tours) ────────────────────────────────
+   On phones the absolutely-positioned image column overlaps the text.
+   Below 768 px: hide the decorative image, let text fill full width,
+   and shrink the panel min-height so it doesn't waste phone screen.        */
+@media (max-width: 767px) {
+  /* Events featured panels */
+  .ep-img-reveal   { display: none !important; }
+  /* Tours feature panels */
+  .reveal-img      { display: none !important; }
+  /* Both: smaller panel height on phones */
+  .ep-img-reveal ~ .page-container,
+  .reveal-img ~ .page-container { justify-content: flex-start !important; }
+}
+
+/* ── Mobile: gallery horizontal scroll ─────────────────────────────────── */
+@media (max-width: 767px) {
+  .h-scroll-track {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .h-scroll-track::-webkit-scrollbar { display: none; }
+}
+
+/* ── Mobile: verticals page gap ─────────────────────────────────────────── */
+@media (max-width: 639px) {
+  .verticals-grid { gap: 20px !important; }
+}
+
+/* ── Mobile: events/tours panels — text padding ─────────────────────────── */
+@media (max-width: 767px) {
+  .ep-text-block   { padding-top: 40px !important; padding-bottom: 40px !important; max-width: 100% !important; }
+}
+
+/* ── Mobile: home stats strip — 2-col grid, remove right border on even cells */
+@media (max-width: 1023px) {
+  .stats-strip-cell:nth-child(2n) { border-right: none !important; }
+}
+
+/* ── Mobile: shrink full-height panels so phones don't scroll forever ─────── */
+@media (max-width: 767px) {
+  section[style*="min-height: 90vh"],
+  section[style*="min-height: 100vh"] {
+    min-height: 60vh !important;
+  }
+  /* About page section gaps */
+  .lg\:py-24 { padding-top: 3rem; padding-bottom: 3rem; }
+}

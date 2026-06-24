@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Link2, Mail, Users, ChevronDown, ChevronUp, Code, Palette, Camera, PenLine, Mic, BarChart2 } from "lucide-react";
+import { Link2, Mail, Users, ChevronDown, ChevronUp, Code, Palette, Camera, PenLine, Mic, BarChart2, FileText } from "lucide-react";
 import ChromaGrid from "@/components/ui/ChromaGrid";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
@@ -32,6 +32,7 @@ type Member = {
 type TeamSection = {
   team: string;
   color: string;
+  description: string;
   members: Member[];
 };
 
@@ -50,6 +51,7 @@ const teams: TeamSection[] = [
   {
     team: "Tech",
     color: "#FF5E2C",
+    description: "Builds and maintains CIE's digital infrastructure — from the website and internal tools to AI experiments and mobile apps. The Tech team turns every idea into a working product.",
     members: [
       { name: "Rohit Sharma", role: "Tech Lead", dept: "CSE — 3rd Year", linkedin: "#" },
       { name: "Divya Krishnan", role: "Frontend Developer", dept: "CSE — 2nd Year", linkedin: "#" },
@@ -59,10 +61,11 @@ const teams: TeamSection[] = [
     ],
   },
   {
-    team: "Creative",
-    color: "#3B82F6",
+    team: "Content",
+    color: "#0EA5E9",
+    description: "Produces all written and editorial output for CIE — blog posts, event write-ups, newsletters, captions, and long-form content that tell our story across every channel.",
     members: [
-      { name: "Meera Iyer", role: "Creative Lead", dept: "MBA — 2nd Year", linkedin: "#" },
+      { name: "Meera Iyer", role: "Content Lead", dept: "MBA — 2nd Year", linkedin: "#" },
       { name: "Aditya Kumar", role: "Content Writer", dept: "CSE — 3rd Year", linkedin: "#" },
       { name: "Kavya Sharma", role: "Social Media Manager", dept: "ECE — 2nd Year", linkedin: "#" },
       { name: "Nikhil Bhat", role: "Copywriter", dept: "IT — 3rd Year", linkedin: "#" },
@@ -70,8 +73,19 @@ const teams: TeamSection[] = [
     ],
   },
   {
+    team: "Creative",
+    color: "#3B82F6",
+    description: "Drives CIE's creative direction and campaigns — ideating themes, managing brand consistency, and building the visual + conceptual identity behind every initiative.",
+    members: [
+      { name: "Pooja Reddy", role: "Creative Lead", dept: "CSE — 3rd Year", linkedin: "#" },
+      { name: "Shreya Nambiar", role: "Campaign Strategist", dept: "MBA — 2nd Year", linkedin: "#" },
+      { name: "Ayush Patel", role: "Brand Conceptor", dept: "CSE — 3rd Year", linkedin: "#" },
+    ],
+  },
+  {
     team: "GD — Graphic Design",
     color: "#FF7A50",
+    description: "Shapes the visual identity of CIE — designing posters, decks, social assets, UI mockups, and motion content that make every event and campaign look world-class.",
     members: [
       { name: "Priya Nair", role: "Design Lead", dept: "ECE — 3rd Year", linkedin: "#" },
       { name: "Rahul Singh", role: "UI / UX Designer", dept: "CSE — 2nd Year", linkedin: "#" },
@@ -83,6 +97,7 @@ const teams: TeamSection[] = [
   {
     team: "Photography",
     color: "#D94E1F",
+    description: "Captures every moment of the CIE journey — from hackathon late nights to summit keynotes — through photography, videography, and professional post-production.",
     members: [
       { name: "Arjun Mehta", role: "Photography Lead", dept: "ECE — 2nd Year", linkedin: "#" },
       { name: "Pooja Reddy", role: "Videographer", dept: "CSE — 3rd Year", linkedin: "#" },
@@ -93,6 +108,7 @@ const teams: TeamSection[] = [
   {
     team: "P&S — Public Speaking",
     color: "#7C3AED",
+    description: "Represents CIE in every room — anchoring events, running communication workshops, handling PR, and making sure CIE's message lands clearly with every audience.",
     members: [
       { name: "Tanvi Patil", role: "P&S Lead", dept: "ECE — 3rd Year", linkedin: "#" },
       { name: "Harsh Gupta", role: "Event Anchor", dept: "CSE — 2nd Year", linkedin: "#" },
@@ -104,6 +120,7 @@ const teams: TeamSection[] = [
   {
     team: "Ops — Operations & Finance",
     color: "#16A34A",
+    description: "Keeps everything running — coordinating logistics for every event, managing budgets, vendor relations, and making sure no detail falls through the cracks.",
     members: [
       { name: "Vivek Nair", role: "Operations Lead", dept: "MBA — 2nd Year", linkedin: "#" },
       { name: "Shruti Joshi", role: "Finance Manager", dept: "CSE — 3rd Year", linkedin: "#" },
@@ -116,6 +133,7 @@ const teams: TeamSection[] = [
 
 const deptShort: Record<string, string> = {
   "Tech": "Technical",
+  "Content": "Content",
   "Creative": "Creative",
   "GD — Graphic Design": "Graphic Design",
   "Photography": "Photography",
@@ -139,7 +157,7 @@ function MemberCard({ member, showContact = false, color = "#FF5E2C" }: { member
           <p className="text-xs mt-0.5 truncate" style={{ color: "#6B7280" }}>{member.dept}</p>
         </div>
         {showContact && (
-          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="flex gap-2">
             {member.linkedin && (
               <a href={member.linkedin} target="_blank" rel="noopener noreferrer"
                 className="w-7 h-7 rounded-full flex items-center justify-center"
@@ -163,6 +181,7 @@ function MemberCard({ member, showContact = false, color = "#FF5E2C" }: { member
 
 const deptIcon: Record<string, React.ComponentType<{ size?: number; style?: React.CSSProperties }>> = {
   "Tech": Code,
+  "Content": FileText,
   "Creative": PenLine,
   "GD — Graphic Design": Palette,
   "Photography": Camera,
@@ -182,26 +201,40 @@ function TeamAccordion({ section }: { section: TeamSection }) {
           aria-expanded={expanded}
           aria-controls={accordionId}
           className="w-full flex items-center justify-between p-6 text-left">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-1 min-w-0">
             <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
               style={{ background: bg }}>
               <Icon size={18} style={{ color: section.color }} />
             </div>
-            <h3 className="text-lg font-black" style={{ color: "#000000" }}>{section.team}</h3>
-            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full"
-              style={{ background: bg, color: section.color }}>
-              {section.members.length} members
-            </span>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h3 className="text-base font-black" style={{ color: "#000000" }}>{section.team}</h3>
+                <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full flex-shrink-0"
+                  style={{ background: bg, color: section.color }}>
+                  {section.members.length} members
+                </span>
+              </div>
+              {!expanded && (
+                <p className="text-xs mt-0.5 truncate" style={{ color: "#6B7280", maxWidth: "480px" }}>
+                  {section.description}
+                </p>
+              )}
+            </div>
           </div>
           {expanded
-            ? <ChevronUp size={18} style={{ color: "#9CA3AF" }} />
-            : <ChevronDown size={18} style={{ color: "#9CA3AF" }} />}
+            ? <ChevronUp size={18} className="flex-shrink-0 ml-2" style={{ color: "#9CA3AF" }} />
+            : <ChevronDown size={18} className="flex-shrink-0 ml-2" style={{ color: "#9CA3AF" }} />}
         </button>
         {expanded && (
-          <div id={accordionId} className="px-6 pb-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
-            {section.members.map((member) => (
-              <MemberCard key={member.name} member={member} color={section.color} />
-            ))}
+          <div id={accordionId}>
+            <p className="px-6 pb-4 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+              {section.description}
+            </p>
+            <div className="px-6 pb-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
+              {section.members.map((member) => (
+                <MemberCard key={member.name} member={member} color={section.color} />
+              ))}
+            </div>
           </div>
         )}
       </div>
@@ -269,7 +302,7 @@ export default function CouncilPage() {
                     <p style={{ color: "#6B7280", fontSize: "13px", marginTop: "8px" }}>{member.dept}</p>
                   </div>
                 </div>
-                <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="flex gap-2">
                   {member.linkedin && (
                     <a href={member.linkedin} target="_blank" rel="noopener noreferrer"
                       className="btn-secondary-light text-xs py-1.5 px-3 gap-1">
@@ -325,6 +358,26 @@ export default function CouncilPage() {
                   </div>
                 </div>
               </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Teams — Accordion breakdown */}
+      <section style={{ background: "#F5F5F5", paddingTop: "64px", paddingBottom: "72px" }}>
+        <div className="page-container">
+          <FadeIn className="mb-10">
+            <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Departments</span>
+            <h2 className="font-black mt-4" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1 }}>
+              Team Structure
+            </h2>
+            <p className="mt-3 text-base" style={{ color: "#6B7280", maxWidth: "520px", lineHeight: 1.7 }}>
+              CIE runs across six specialized departments — each with its own focus, team, and contribution to the ecosystem.
+            </p>
+          </FadeIn>
+          <div className="flex flex-col gap-4">
+            {teams.map((section) => (
+              <TeamAccordion key={section.team} section={section} />
             ))}
           </div>
         </div>

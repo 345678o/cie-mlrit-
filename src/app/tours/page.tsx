@@ -299,7 +299,7 @@ export default function GalleryPage() {
               style={{
                 fontFamily: "var(--font-heading)",
                 fontWeight: 900,
-                fontSize: "clamp(68px, 13vw, 188px)",
+                fontSize: "clamp(44px, 13vw, 188px)",
                 lineHeight: 0.86,
                 letterSpacing: "-0.045em",
                 textTransform: "uppercase",
@@ -315,7 +315,7 @@ export default function GalleryPage() {
               style={{
                 fontFamily: "var(--font-heading)",
                 fontWeight: 900,
-                fontSize: "clamp(68px, 13vw, 188px)",
+                fontSize: "clamp(44px, 13vw, 188px)",
                 lineHeight: 0.86,
                 letterSpacing: "-0.045em",
                 textTransform: "uppercase",
@@ -413,6 +413,7 @@ export default function GalleryPage() {
         {/* Track */}
         <div
           ref={trackRef}
+          className="h-scroll-track"
           style={{
             display: "flex",
             alignItems: "center",

@@ -45,7 +45,7 @@ function NavLink({
         fontWeight: isActive ? 600 : 400,
         fontSize: "13px",
         letterSpacing: "0.01em",
-        color: isActive ? "#111111" : hov ? "#111111" : "#888888",
+        color: isActive ? "#FFFFFF" : hov ? "#FFFFFF" : "rgba(255,255,255,0.50)",
         textDecoration: "none",
         paddingBottom: "6px",
         display: "inline-block",
@@ -83,7 +83,7 @@ function NavLink({
           left: 0,
           right: 0,
           height: "1px",
-          background: "#444444",
+          background: "rgba(255,255,255,0.60)",
           display: "block",
           transformOrigin: "left",
           pointerEvents: "none",
@@ -157,15 +157,15 @@ export default function Navbar() {
             alignItems: "center",
             width: "100%",
             background: scrolled
-              ? "rgba(250,249,247,0.80)"
-              : "rgba(251,250,248,0.95)",
+              ? "rgba(10,10,10,0.92)"
+              : "rgba(14,14,14,0.96)",
             backdropFilter: "blur(20px) saturate(180%)",
             WebkitBackdropFilter: "blur(20px) saturate(180%)",
-            border: "1px solid rgba(0,0,0,0.07)",
+            border: "1px solid rgba(255,255,255,0.09)",
             borderRadius: "9999px",
             boxShadow: scrolled
-              ? "0 8px 40px rgba(0,0,0,0.11), 0 2px 8px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.65)"
-              : "0 4px 24px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.75)",
+              ? "0 8px 40px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.07)"
+              : "0 4px 24px rgba(0,0,0,0.30), 0 1px 4px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.06)",
             /* Compact padding when scrolled */
             padding: scrolled ? "5px 5px 5px 18px" : "7px 7px 7px 22px",
             gap: 0,
@@ -190,7 +190,7 @@ export default function Navbar() {
                 fontWeight: 800,
                 fontSize: scrolled ? "17px" : "19px",
                 letterSpacing: "-0.04em",
-                color: "#111111",
+                color: "#FFFFFF",
                 lineHeight: 1,
                 transition: "font-size 0.4s ease",
               }}
@@ -214,13 +214,13 @@ export default function Navbar() {
           {/* ── Nav links — desktop (lg+) ─────────────────────── */}
           <nav
             aria-label="Main navigation"
-            className="hidden lg:flex"
+            className="nav-desktop-links"
             style={{
               flex: 1,
+              display: "flex",
               alignItems: "center",
               justifyContent: "center",
               gap: "clamp(18px, 2.6vw, 36px)",
-              display: "flex",
             }}
           >
             {NAV_LINKS.map((item) => (
@@ -228,13 +228,16 @@ export default function Navbar() {
             ))}
           </nav>
 
+          {/* ── Mobile spacer — pushes hamburger to right on <md ── */}
+          <div className="nav-mobile-space" style={{ flex: 1 }} />
+
           {/* ── Separator — desktop ───────────────────────────── */}
           <div
-            className="hidden lg:block"
+            className="nav-desktop-sep"
             style={{
               width: "1px",
               height: "16px",
-              background: "rgba(0,0,0,0.10)",
+              background: "rgba(255,255,255,0.14)",
               flexShrink: 0,
               margin: "0 clamp(12px, 1.6vw, 20px)",
             }}
@@ -243,8 +246,9 @@ export default function Navbar() {
           {/* ── CTA — desktop ────────────────────────────────── */}
           <Link
             href="/contact"
-            className="hidden lg:inline-flex"
+            className="nav-desktop-cta"
             style={{
+              display: "inline-flex",
               alignItems: "center",
               fontFamily: "var(--font-body)",
               fontWeight: 600,
@@ -257,7 +261,6 @@ export default function Navbar() {
               textDecoration: "none",
               whiteSpace: "nowrap",
               flexShrink: 0,
-              display: "flex",
               transition: "background 0.2s ease, padding 0.4s cubic-bezier(0.16,1,0.3,1)",
             }}
             onMouseEnter={(e) => {
@@ -270,62 +273,75 @@ export default function Navbar() {
             Join Now
           </Link>
 
-          {/* ── Hamburger — mobile / tablet ───────────────────── */}
-          <button
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            className="lg:hidden"
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "6px 2px",
-              marginLeft: "clamp(10px, 2vw, 18px)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              gap: "5px",
-              width: "28px",
-              flexShrink: 0,
-            }}
-          >
-            <motion.span
-              animate={{ rotate: open ? 45 : 0, y: open ? 6.5 : 0 }}
-              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+          {/* ── Hamburger — phones only (< 768px) ─────────────── */}
+          <div className="nav-hamburger" style={{ display: "flex", flexShrink: 0 }}>
+            <motion.button
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              whileTap={{ scale: 0.9 }}
               style={{
-                display: "block",
-                height: "1.5px",
-                width: "20px",
-                background: "#222222",
-                borderRadius: "2px",
-                transformOrigin: "center",
+                width: "42px",
+                height: "42px",
+                borderRadius: "12px",
+                border: open
+                  ? "1.5px solid #E8521A"
+                  : "1.5px solid rgba(255,255,255,0.14)",
+                background: open ? "#E8521A" : "rgba(255,255,255,0.08)",
+                cursor: "pointer",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "5px",
+                boxShadow: open
+                  ? "0 0 16px rgba(232,82,26,0.40)"
+                  : "none",
+                transition: "background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease",
               }}
-            />
-            <motion.span
-              animate={{ opacity: open ? 0 : 1 }}
-              transition={{ duration: 0.18 }}
-              style={{
-                display: "block",
-                height: "1.5px",
-                width: "13px",
-                background: "#222222",
-                borderRadius: "2px",
-              }}
-            />
-            <motion.span
-              animate={{ rotate: open ? -45 : 0, y: open ? -6.5 : 0 }}
-              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                display: "block",
-                height: "1.5px",
-                width: "20px",
-                background: "#222222",
-                borderRadius: "2px",
-                transformOrigin: "center",
-              }}
-            />
-          </button>
+            >
+              <motion.span
+                animate={{ rotate: open ? 45 : 0, y: open ? 6.5 : 0 }}
+                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                style={{
+                  display: "block",
+                  height: "2px",
+                  width: "18px",
+                  background: "#FFFFFF",
+                  borderRadius: "2px",
+                  transformOrigin: "center",
+                  transition: "background 0.22s ease",
+                }}
+              />
+              <motion.span
+                animate={{ opacity: open ? 0 : 1, scaleX: open ? 0 : 1 }}
+                transition={{ duration: 0.18 }}
+                style={{
+                  display: "block",
+                  height: "2px",
+                  width: "12px",
+                  background: "#FFFFFF",
+                  borderRadius: "2px",
+                  alignSelf: "flex-end",
+                  marginRight: "12px",
+                  transition: "background 0.22s ease",
+                }}
+              />
+              <motion.span
+                animate={{ rotate: open ? -45 : 0, y: open ? -6.5 : 0 }}
+                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                style={{
+                  display: "block",
+                  height: "2px",
+                  width: "18px",
+                  background: "#FFFFFF",
+                  borderRadius: "2px",
+                  transformOrigin: "center",
+                  transition: "background 0.22s ease",
+                }}
+              />
+            </motion.button>
+          </div>
         </div>
       </motion.div>
       </div>{/* end centering shell */}
@@ -348,24 +364,35 @@ export default function Navbar() {
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"
-            className="lg:hidden"
+            className="flex flex-col"
             style={{
               position: "fixed",
               inset: 0,
               zIndex: 99,
               background: "#FAFAF9",
-              display: "flex",
-              flexDirection: "column",
+              overflow: "hidden",
             }}
           >
+            {/* CSS overrides for landscape phones and very small screens */}
+            <style>{`
+              @media (max-height: 480px) {
+                .ov-link { font-size: 16px !important; padding: 5px 0 !important; }
+              }
+              @media (max-width: 360px) {
+                .ov-link { font-size: 19px !important; }
+                .ov-join { padding: 7px 13px !important; font-size: 11px !important; }
+              }
+            `}</style>
+
             {/* Top strip in overlay */}
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                padding: "20px clamp(24px, 6vw, 48px)",
+                padding: "16px clamp(20px, 5vw, 48px)",
                 borderBottom: "1px solid rgba(0,0,0,0.06)",
+                flexShrink: 0,
               }}
             >
               <Link
@@ -373,38 +400,29 @@ export default function Navbar() {
                 onClick={() => setOpen(false)}
                 style={{ display: "inline-flex", alignItems: "baseline", textDecoration: "none" }}
               >
-                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "20px", letterSpacing: "-0.04em", color: "#111111" }}>
+                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "19px", letterSpacing: "-0.04em", color: "#111111" }}>
                   CIE
                 </span>
-                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "22px", color: "#E8521A" }}>.</span>
+                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "21px", color: "#E8521A" }}>.</span>
               </Link>
-              <Link
-                href="/contact"
-                onClick={() => setOpen(false)}
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontWeight: 600,
-                  fontSize: "12px",
-                  color: "#FFFFFF",
-                  background: "#E8521A",
-                  borderRadius: "999px",
-                  padding: "8px 18px",
-                  textDecoration: "none",
-                  letterSpacing: "0.01em",
-                }}
-              >
-                Join Now
-              </Link>
+              <span style={{
+                fontFamily: "var(--font-body)", fontSize: "11px",
+                fontWeight: 600, letterSpacing: "0.08em",
+                textTransform: "uppercase", color: "rgba(0,0,0,0.28)",
+              }}>
+                CIE · MLRIT
+              </span>
             </div>
 
-            {/* Nav items */}
+            {/* Nav items — scrollable so landscape phones never clip */}
             <div
               style={{
                 flex: 1,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                padding: "clamp(12px, 3vh, 24px) clamp(24px, 6vw, 56px)",
+                padding: "clamp(8px, 2vh, 20px) clamp(20px, 5vw, 56px)",
+                overflowY: "auto",
               }}
             >
               {NAV_LINKS.map((item, i) => (
@@ -422,17 +440,18 @@ export default function Navbar() {
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
+                    className="ov-link"
                     style={{
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
                       fontFamily: "var(--font-heading)",
                       fontWeight: 800,
-                      fontSize: "clamp(22px, 5vw, 42px)",
+                      fontSize: "clamp(20px, 5vw, 42px)",
                       letterSpacing: "-0.03em",
                       color: pathname === item.href ? "rgba(0,0,0,0.22)" : "#0A0A0A",
                       textDecoration: "none",
-                      padding: "clamp(9px, 1.5vh, 15px) 0",
+                      padding: "clamp(8px, 1.4vh, 15px) 0",
                       transition: "color 0.15s ease",
                     }}
                     onMouseEnter={(e) => {
@@ -461,22 +480,61 @@ export default function Navbar() {
               ))}
             </div>
 
+            {/* Join Now CTA — full width, prominent */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.40, duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                padding: "0 clamp(20px, 5vw, 56px) 16px",
+                flexShrink: 0,
+              }}
+            >
+              <Link
+                href="/contact"
+                onClick={() => setOpen(false)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                  width: "100%",
+                  padding: "15px 24px",
+                  borderRadius: "14px",
+                  background: "#E8521A",
+                  color: "#FFFFFF",
+                  fontFamily: "var(--font-body)",
+                  fontWeight: 700,
+                  fontSize: "15px",
+                  letterSpacing: "0.01em",
+                  textDecoration: "none",
+                  boxShadow: "0 4px 20px rgba(232,82,26,0.35)",
+                }}
+              >
+                Join Now
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </Link>
+            </motion.div>
+
             {/* Bottom — socials */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.44, duration: 0.3 }}
               style={{
-                padding: "18px clamp(24px, 6vw, 56px)",
+                padding: "14px clamp(20px, 5vw, 56px)",
                 borderTop: "1px solid rgba(0,0,0,0.06)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
                 flexWrap: "wrap",
-                gap: "10px",
+                gap: "8px",
+                flexShrink: 0,
               }}
             >
-              <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+              <div style={{ display: "flex", gap: "clamp(12px,3vw,20px)", flexWrap: "wrap" }}>
                 {SOCIALS.map((s) => (
                   <a
                     key={s.label}

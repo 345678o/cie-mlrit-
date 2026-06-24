@@ -114,7 +114,7 @@ export default function PageHero({
                 transition={{ duration: 0.95, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
                 style={{
                   fontFamily: "var(--font-heading)", fontWeight: 900,
-                  fontSize: hasLine3 ? "clamp(58px, 10vw, 130px)" : "clamp(66px, 12vw, 148px)",
+                  fontSize: hasLine3 ? "clamp(38px, 10vw, 130px)" : "clamp(42px, 12vw, 148px)",
                   lineHeight: 0.88, letterSpacing: "-0.04em",
                   textTransform: "uppercase" as const, marginBottom: 0,
                 }}
@@ -151,7 +151,7 @@ export default function PageHero({
                 style={{
                   fontFamily: "var(--font-body)", fontSize: "clamp(14px, 1.4vw, 16px)",
                   lineHeight: 1.78, color: "rgba(255,255,255,0.88)",
-                  maxWidth: "420px", marginTop: scriptText ? 0 : "18px", marginBottom: cta ? "32px" : 0,
+                  maxWidth: "min(420px,100%)", marginTop: scriptText ? 0 : "18px", marginBottom: cta ? "32px" : 0,
                 }}
               >{description}</motion.p>
 
@@ -290,29 +290,34 @@ export default function PageHero({
           style={{ background: CREAM, position: "relative", zIndex: 10 }}
         >
           <div className="page-container">
-            <div style={{
+            <div className="pghero-stats" style={{
               display: "grid",
               gridTemplateColumns: `repeat(${Math.min(stats.length, 4)}, 1fr)`,
-              borderTop: "none",
             }}>
               {stats.slice(0, 4).map((s, i) => (
                 <div key={s.label} style={{
-                  padding: "18px 20px",
+                  padding: "clamp(12px,2vw,18px) clamp(12px,2vw,20px)",
                   borderRight: i < Math.min(stats.length, 4) - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
                   textAlign: "center" as const,
                 }}>
                   <div style={{
                     fontFamily: "var(--font-heading)", fontWeight: 900,
-                    fontSize: "22px", color: "#111111", lineHeight: 1,
+                    fontSize: "clamp(18px,3vw,22px)", color: "#111111", lineHeight: 1,
                   }}>{s.value}</div>
                   <div style={{
-                    fontFamily: "var(--font-body)", fontSize: "11px",
+                    fontFamily: "var(--font-body)", fontSize: "clamp(9px,1.5vw,11px)",
                     color: "#6B7280", marginTop: "3px",
                   }}>{s.label}</div>
                 </div>
               ))}
             </div>
           </div>
+          <style>{`
+            @media (max-width: 639px) {
+              .pghero-stats { grid-template-columns: repeat(2, 1fr) !important; }
+              .pghero-stats > *:nth-child(2) { border-right: none !important; }
+            }
+          `}</style>
         </motion.div>
       )}
     </section>

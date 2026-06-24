@@ -330,17 +330,17 @@ export default function EventsPage() {
 
           {/* Headline */}
           <div style={{ overflow: "hidden" }}>
-            <div className="eh-line" style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(72px, 13.5vw, 200px)", lineHeight: 0.86, letterSpacing: "-0.045em", textTransform: "uppercase", color: "#FFFFFF" }}>
+            <div className="eh-line" style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(44px, 13.5vw, 200px)", lineHeight: 0.86, letterSpacing: "-0.045em", textTransform: "uppercase", color: "#FFFFFF" }}>
               MAKE
             </div>
           </div>
           <div style={{ overflow: "hidden" }}>
-            <div className="eh-line" style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(72px, 13.5vw, 200px)", lineHeight: 0.86, letterSpacing: "-0.045em", textTransform: "uppercase", color: "transparent", WebkitTextStroke: "2px rgba(255,255,255,0.20)" }}>
+            <div className="eh-line" style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(44px, 13.5vw, 200px)", lineHeight: 0.86, letterSpacing: "-0.045em", textTransform: "uppercase", color: "transparent", WebkitTextStroke: "2px rgba(255,255,255,0.20)" }}>
               IT
             </div>
           </div>
           <div style={{ overflow: "hidden", marginBottom: "clamp(28px, 5vw, 52px)" }}>
-            <div className="eh-line" style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(72px, 13.5vw, 200px)", lineHeight: 0.86, letterSpacing: "-0.045em", textTransform: "uppercase", color: "#FFFFFF" }}>
+            <div className="eh-line" style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(44px, 13.5vw, 200px)", lineHeight: 0.86, letterSpacing: "-0.045em", textTransform: "uppercase", color: "#FFFFFF" }}>
               HAPPEN
             </div>
           </div>
@@ -453,7 +453,7 @@ export default function EventsPage() {
               justifyContent: ev.side === "right" ? "flex-start" : "flex-end",
             }}
           >
-            <div style={{ maxWidth: "480px", padding: "clamp(60px, 12vh, 120px) 0" }}>
+            <div className="ep-text-block" style={{ maxWidth: "480px", padding: "clamp(60px, 12vh, 120px) 0" }}>
               {/* Event number + category */}
               <div className="ep-reveal" style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "22px" }}>
                 <span style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#E8521A" }}>

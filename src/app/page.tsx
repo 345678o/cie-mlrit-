@@ -173,7 +173,7 @@ const recentEvents = [
 
 /* ── Design tokens ────────────────────────────────────────────────── */
 const CONTAINER  = "page-container";
-const SECTION_PY = "clamp(64px, 10vw, 120px)";
+const SECTION_PY = "clamp(40px, 8vw, 120px)";
 const T_PRIMARY   = "#000000";
 const T_SECONDARY = "#000000";
 const T_MED       = "#374151";
@@ -253,7 +253,7 @@ export default function HomePage() {
 
         {/* ── Main content ── */}
         <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
-          <div className={`${CONTAINER} w-full`} style={{ paddingTop: "52px", paddingBottom: "60px" }}>
+          <div className={`${CONTAINER} w-full`} style={{ paddingTop: "clamp(32px,5vw,52px)", paddingBottom: "clamp(40px,6vw,60px)" }}>
             <div className="w-full grid lg:grid-cols-2 gap-10 items-center">
 
               {/* ── LEFT: Text ── */}
@@ -287,7 +287,7 @@ export default function HomePage() {
                   transition={{ duration: 0.95, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
                   style={{
                     fontFamily: "var(--font-heading)", fontWeight: 900,
-                    fontSize: "clamp(76px, 13vw, 164px)",
+                    fontSize: "clamp(48px, 13vw, 164px)",
                     lineHeight: 0.86, letterSpacing: "-0.045em",
                     textTransform: "uppercase" as const, marginBottom: 0,
                   }}
@@ -322,7 +322,7 @@ export default function HomePage() {
                   style={{
                     fontFamily: "var(--font-body)", fontSize: "clamp(14px, 1.5vw, 16px)",
                     lineHeight: 1.78, color: "rgba(255,255,255,0.68)",
-                    maxWidth: "400px", marginBottom: "36px",
+                    maxWidth: "min(400px, 100%)", marginBottom: "36px",
                   }}
                 >
                   MLRIT&apos;s Centre for Innovation &amp; Entrepreneurship — where students
@@ -519,20 +519,20 @@ export default function HomePage() {
           <div className={CONTAINER}>
             <div className="grid grid-cols-2 lg:grid-cols-4 items-center">
               {stats.map((s, i) => (
-                <div key={s.label} style={{
-                  padding: "20px 24px",
+                <div key={s.label} className="stats-strip-cell" style={{
+                  padding: "clamp(14px,2vw,20px) clamp(12px,2vw,24px)",
                   borderRight: i < stats.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
-                  display: "flex", alignItems: "center", gap: "12px",
+                  display: "flex", alignItems: "center", gap: "clamp(8px,1.5vw,12px)",
                 }}>
-                  <div style={{
+                  <div className="hidden sm:flex" style={{
                     width: "38px", height: "38px", borderRadius: "10px",
                     background: "rgba(0,0,0,0.05)", border: "1px solid rgba(0,0,0,0.09)",
-                    display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+                    alignItems: "center", justifyContent: "center", flexShrink: 0,
                   }}>
                     <s.icon size={17} style={{ color: "#555555" }} />
                   </div>
                   <div>
-                    <div style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "21px", color: "#111111", lineHeight: 1 }}>
+                    <div style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(17px,2.5vw,21px)", color: "#111111", lineHeight: 1 }}>
                       <AnimatedCounter end={s.value} suffix={s.suffix} />
                     </div>
                     <div style={{ fontFamily: "var(--font-body)", fontSize: "11.5px", color: T_MUTED, marginTop: "3px" }}>
@@ -554,7 +554,7 @@ export default function HomePage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 items-stretch justify-items-stretch">
             {stats.map((stat, i) => (
               <FadeIn key={stat.label} delay={i * 0.08}>
-                <div className="card-light flex flex-col items-center text-center p-8" style={{ gap: "14px" }}>
+                <div className="card-light flex flex-col items-center text-center" style={{ gap: "14px", padding: "clamp(16px,4vw,32px)" }}>
                   <div
                     className="icon-box"
                     style={{ width: "48px", height: "48px", borderRadius: "12px" }}
@@ -605,7 +605,7 @@ export default function HomePage() {
                 letterSpacing: "-0.03em",
                 color: T_PRIMARY,
                 maxWidth: "460px",
-                marginBottom: "52px",
+                marginBottom: "clamp(28px,5vw,52px)",
               }}
             >
               Built on Vision, Driven by Mission
@@ -626,7 +626,7 @@ export default function HomePage() {
               },
             ].map((item, i) => (
               <FadeIn key={item.title} delay={i * 0.12}>
-                <div className="card-light h-full" style={{ padding: "40px 44px" }}>
+                <div className="card-light h-full" style={{ padding: "clamp(24px,4vw,40px) clamp(20px,4vw,44px)" }}>
                   <div
                     style={{
                       width: "36px",
@@ -670,7 +670,7 @@ export default function HomePage() {
       ──────────────────────────────────────────────────────────── */}
       <section style={{ background: BG_WARM, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
-          <FadeIn className="text-center mb-16">
+          <FadeIn className="text-center mb-8 lg:mb-16">
             <span className="section-tag">What We Do</span>
             <h2
               style={{
@@ -727,7 +727,7 @@ export default function HomePage() {
       ──────────────────────────────────────────────────────────── */}
       <section style={{ background: BG_WHITE, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
-          <FadeIn className="text-center mb-16">
+          <FadeIn className="text-center mb-8 lg:mb-16">
             <span className="section-tag">Your Journey</span>
             <h2
               style={{
@@ -807,7 +807,7 @@ export default function HomePage() {
           <FadeIn>
             <div
               className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
-              style={{ marginBottom: "52px" }}
+              style={{ marginBottom: "clamp(28px,5vw,52px)" }}
             >
               <div>
                 <span className="section-tag">Programs</span>
@@ -833,7 +833,7 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-2 gap-6 items-stretch">
             {programs.map((prog, i) => (
               <FadeIn key={prog.title} delay={i * 0.08}>
-                <div className="card-light h-full" style={{ padding: "40px" }}>
+                <div className="card-light h-full" style={{ padding: "clamp(20px,4vw,40px)" }}>
                   <div className="flex items-start justify-between mb-6">
                     <div className="icon-box" style={{ width: "54px", height: "54px", borderRadius: "15px" }}>
                       <prog.icon size={23} style={{ color: "#333333" }} />
@@ -890,7 +890,7 @@ export default function HomePage() {
       <section style={{ background: "#F5F5F5", paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
           <FadeIn>
-            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6" style={{ marginBottom: "52px" }}>
+            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6" style={{ marginBottom: "clamp(28px,5vw,52px)" }}>
               <div>
                 <span className="section-tag">Infrastructure</span>
                 <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(34px, 4vw, 50px)", letterSpacing: "-0.03em", color: T_PRIMARY, marginTop: "4px" }}>
@@ -940,7 +940,7 @@ export default function HomePage() {
                   <h3 style={{ fontSize: "17px", fontWeight: 700, color: "#111111", marginBottom: "12px", letterSpacing: "-0.01em" }}>
                     {f.title}
                   </h3>
-                  <p style={{ fontSize: "13.5px", lineHeight: 1.72, color: "#555555", maxWidth: "240px" }}>
+                  <p style={{ fontSize: "13.5px", lineHeight: 1.72, color: "#555555" }}>
                     {f.desc}
                   </p>
                 </div>
@@ -960,7 +960,7 @@ export default function HomePage() {
       <section style={{ background: BG_WARM, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
           <FadeIn>
-            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6" style={{ marginBottom: "52px" }}>
+            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6" style={{ marginBottom: "clamp(28px,5vw,52px)" }}>
               <div>
                 <span className="section-tag">Recent Events</span>
                 <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(34px,4vw,50px)", letterSpacing: "-0.03em", color: T_PRIMARY, marginTop: "4px" }}>
@@ -979,7 +979,7 @@ export default function HomePage() {
                 <div className="card-light flex flex-col h-full" style={{ padding: "0", overflow: "hidden" }}>
                   {/* Colour header strip */}
                   <div style={{ height: "6px", background: ev.accent }} />
-                  <div style={{ padding: "28px 28px 24px", flex: 1, display: "flex", flexDirection: "column" }}>
+                  <div style={{ padding: "clamp(18px,3vw,28px) clamp(18px,3vw,28px) clamp(14px,2vw,24px)", flex: 1, display: "flex", flexDirection: "column" }}>
                     {/* Category + date */}
                     <div className="flex items-center justify-between gap-2" style={{ marginBottom: "14px" }}>
                       <span style={{

@@ -87,33 +87,45 @@ const socials = [
     Icon: IconInstagram,
     href: "https://www.instagram.com/mlritcie/",
     label: "Instagram",
+    color: "#E1306C",
+    bg: "rgba(225,48,108,0.12)",
+    border: "rgba(225,48,108,0.22)",
     hoverColor: "#E1306C",
-    hoverBg: "rgba(225,48,108,0.10)",
-    hoverBorder: "rgba(225,48,108,0.28)",
+    hoverBg: "rgba(225,48,108,0.20)",
+    hoverBorder: "rgba(225,48,108,0.40)",
   },
   {
     Icon: IconLinkedIn,
     href: "https://www.linkedin.com/in/cie-center-for-innovation-and-entrepreneurship-mlrit-935971291/",
     label: "LinkedIn",
+    color: "#0A66C2",
+    bg: "rgba(10,102,194,0.12)",
+    border: "rgba(10,102,194,0.22)",
     hoverColor: "#0A66C2",
-    hoverBg: "rgba(10,102,194,0.10)",
-    hoverBorder: "rgba(10,102,194,0.28)",
+    hoverBg: "rgba(10,102,194,0.20)",
+    hoverBorder: "rgba(10,102,194,0.40)",
   },
   {
     Icon: IconYouTube,
     href: "https://www.youtube.com/@mlritcie",
     label: "YouTube",
+    color: "#FF0000",
+    bg: "rgba(255,0,0,0.12)",
+    border: "rgba(255,0,0,0.20)",
     hoverColor: "#FF0000",
-    hoverBg: "rgba(255,0,0,0.10)",
-    hoverBorder: "rgba(255,0,0,0.24)",
+    hoverBg: "rgba(255,0,0,0.20)",
+    hoverBorder: "rgba(255,0,0,0.36)",
   },
   {
     Icon: IconX,
     href: "https://x.com/ciemlrit?s=20",
     label: "X (Twitter)",
+    color: "#CCCCCC",
+    bg: "rgba(255,255,255,0.07)",
+    border: "rgba(255,255,255,0.14)",
     hoverColor: "#FFFFFF",
-    hoverBg: "rgba(255,255,255,0.09)",
-    hoverBorder: "rgba(255,255,255,0.22)",
+    hoverBg: "rgba(255,255,255,0.12)",
+    hoverBorder: "rgba(255,255,255,0.26)",
   },
 ];
 
@@ -152,114 +164,127 @@ export default function Footer() {
     <footer style={{ background: "#000000", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
       <div
         className="page-container"
-        style={{ paddingTop: "clamp(48px,8vw,80px)", paddingBottom: "clamp(32px,5vw,48px)" }}
+        style={{ paddingTop: "clamp(40px,8vw,80px)", paddingBottom: "clamp(28px,5vw,48px)" }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 items-start">
 
-          {/* ── Brand + socials ─────────────────────────────────── */}
-          <div className="lg:col-span-1">
+        {/* ── Brand row — centered on mobile ──────────────────────── */}
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "center",
+          paddingBottom: "clamp(28px,5vw,40px)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          marginBottom: "clamp(28px,5vw,40px)",
+        }}
+        className="lg:hidden"
+        >
+          <Link href="/" style={{ display: "inline-flex", alignItems: "baseline", gap: "1px", textDecoration: "none", marginBottom: "12px" }}>
+            <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "32px", color: "#FFFFFF", letterSpacing: "-0.03em" }}>CIE</span>
+            <span style={{ color: "var(--orange)", fontWeight: 800, fontSize: "34px" }}>.</span>
+          </Link>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.7, color: "#6B7280", maxWidth: "280px", marginBottom: "20px" }}>
+            Centre for Innovation &amp; Entrepreneurship, MLRIT — empowering the next generation of innovators.
+          </p>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            {socials.map(({ Icon, href, label, color, bg, border, hoverColor, hoverBg, hoverBorder }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                style={{ width: "40px", height: "40px", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", background: bg, border: `1px solid ${border}`, color, textDecoration: "none", transition: "background 0.22s, border-color 0.22s, color 0.22s" }}
+                onMouseEnter={(e) => { const el = e.currentTarget; el.style.background = hoverBg; el.style.borderColor = hoverBorder; el.style.color = hoverColor; }}
+                onMouseLeave={(e) => { const el = e.currentTarget; el.style.background = bg; el.style.borderColor = border; el.style.color = color; }}
+              ><Icon size={17} /></a>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Mobile: Explore + Programs side by side ─────────────── */}
+        <div className="grid grid-cols-2 gap-8 lg:hidden" style={{ marginBottom: "clamp(28px,5vw,40px)" }}>
+          {/* Explore */}
+          <div>
+            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "16px" }}>Explore</h3>
+            <ul style={{ display: "flex", flexDirection: "column", gap: "14px", listStyle: "none", padding: 0, margin: 0 }}>
+              {footerLinks.explore.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "#5C6370", textDecoration: "none", display: "block", lineHeight: 1.4 }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FFFFFF"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#5C6370"; }}
+                  >{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* Programs */}
+          <div>
+            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "16px" }}>Programs</h3>
+            <ul style={{ display: "flex", flexDirection: "column", gap: "14px", listStyle: "none", padding: 0, margin: 0 }}>
+              {footerLinks.programs.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "#5C6370", textDecoration: "none", display: "block", lineHeight: 1.4 }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FFFFFF"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#5C6370"; }}
+                  >{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* ── Mobile: Contact ──────────────────────────────────────── */}
+        <div className="lg:hidden" style={{ paddingBottom: "clamp(28px,5vw,40px)", borderBottom: "1px solid rgba(255,255,255,0.06)", marginBottom: "clamp(28px,5vw,40px)" }}>
+          <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "16px" }}>Contact</h3>
+          <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0, margin: 0 }}>
+            {contactItems.map((item, i) => (
+              <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
+                <div style={{ width: "30px", height: "30px", borderRadius: "7px", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.09)", color: "rgba(255,255,255,0.40)", marginTop: "1px" }}>
+                  <item.Icon size={14} />
+                </div>
+                {item.type === "text" ? (
+                  <span style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "#5C6370", whiteSpace: "pre-line", paddingTop: "5px" }}>{item.value}</span>
+                ) : (
+                  <a href={item.href} style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "#5C6370", textDecoration: "none", paddingTop: "5px", lineHeight: 1.4, display: "block" }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = "#FFFFFF"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = "#5C6370"; }}
+                  >{item.value}</a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* ── Desktop: original 4-col grid ─────────────────────────── */}
+        <div className="hidden lg:grid lg:grid-cols-4 gap-12 items-start" style={{ marginBottom: "clamp(36px,5vw,56px)" }}>
+          {/* Brand */}
+          <div>
             <Link href="/" style={{ display: "inline-flex", alignItems: "baseline", gap: "1px", textDecoration: "none", marginBottom: "18px" }}>
-              <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "28px", color: "#FFFFFF", letterSpacing: "-0.02em" }}>
-                CIE
-              </span>
+              <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "28px", color: "#FFFFFF", letterSpacing: "-0.02em" }}>CIE</span>
               <span style={{ color: "var(--orange)", fontWeight: 800, fontSize: "30px" }}>.</span>
             </Link>
-
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.72, color: "#6B7280", marginBottom: "26px", maxWidth: "210px" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.72, color: "#6B7280", marginBottom: "26px" }}>
               Centre for Innovation &amp; Entrepreneurship, MLRIT — empowering the next generation of innovators.
             </p>
-
-            {/* Social icon row */}
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              {socials.map(({ Icon, href, label, hoverColor, hoverBg, hoverBorder }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  title={label}
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    borderRadius: "8px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    color: "#555555",
-                    textDecoration: "none",
-                    transition: "background 0.22s ease, border-color 0.22s ease, color 0.22s ease, transform 0.22s ease",
-                    flexShrink: 0,
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget;
-                    el.style.background = hoverBg;
-                    el.style.borderColor = hoverBorder;
-                    el.style.color = hoverColor;
-                    el.style.transform = "translateY(-2px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget;
-                    el.style.background = "rgba(255,255,255,0.04)";
-                    el.style.borderColor = "rgba(255,255,255,0.08)";
-                    el.style.color = "#555555";
-                    el.style.transform = "none";
-                  }}
-                >
-                  <Icon size={15} />
-                </a>
+              {socials.map(({ Icon, href, label, color, bg, border, hoverColor, hoverBg, hoverBorder }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} title={label}
+                  style={{ width: "36px", height: "36px", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", background: bg, border: `1px solid ${border}`, color, textDecoration: "none", transition: "background 0.22s ease, border-color 0.22s ease, color 0.22s ease, transform 0.22s ease", flexShrink: 0 }}
+                  onMouseEnter={(e) => { const el = e.currentTarget; el.style.background = hoverBg; el.style.borderColor = hoverBorder; el.style.color = hoverColor; el.style.transform = "translateY(-2px)"; }}
+                  onMouseLeave={(e) => { const el = e.currentTarget; el.style.background = bg; el.style.borderColor = border; el.style.color = color; el.style.transform = "none"; }}
+                ><Icon size={15} /></a>
               ))}
             </div>
           </div>
 
-          {/* ── Explore ─────────────────────────────────────────── */}
+          {/* Explore */}
           <div>
-            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "20px" }}>
-              Explore
-            </h3>
+            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "20px" }}>Explore</h3>
             <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0, margin: 0 }}>
               {footerLinks.explore.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "13.5px",
-                      color: "#5C6370",
-                      textDecoration: "none",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "7px",
-                      transition: "color 0.2s ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.color = "#FFFFFF";
-                      const bar = el.querySelector(".footer-bar") as HTMLElement | null;
-                      if (bar) { bar.style.width = "12px"; bar.style.opacity = "1"; }
-                    }}
-                    onMouseLeave={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.color = "#5C6370";
-                      const bar = el.querySelector(".footer-bar") as HTMLElement | null;
-                      if (bar) { bar.style.width = "0px"; bar.style.opacity = "0"; }
-                    }}
+                  <Link href={link.href}
+                    style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#5C6370", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "7px", transition: "color 0.2s ease" }}
+                    onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = "#FFFFFF"; const bar = el.querySelector(".footer-bar") as HTMLElement | null; if (bar) { bar.style.width = "12px"; bar.style.opacity = "1"; } }}
+                    onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = "#5C6370"; const bar = el.querySelector(".footer-bar") as HTMLElement | null; if (bar) { bar.style.width = "0px"; bar.style.opacity = "0"; } }}
                   >
-                    <span
-                      className="footer-bar"
-                      style={{
-                        display: "inline-block",
-                        height: "1px",
-                        width: "0px",
-                        opacity: "0",
-                        background: "var(--orange)",
-                        borderRadius: "1px",
-                        flexShrink: 0,
-                        transition: "width 0.22s ease, opacity 0.22s ease",
-                      }}
-                    />
+                    <span className="footer-bar" style={{ display: "inline-block", height: "1px", width: "0px", opacity: "0", background: "var(--orange)", borderRadius: "1px", flexShrink: 0, transition: "width 0.22s ease, opacity 0.22s ease" }} />
                     {link.label}
                   </Link>
                 </li>
@@ -267,52 +292,18 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ── Programs ────────────────────────────────────────── */}
+          {/* Programs */}
           <div>
-            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "20px" }}>
-              Programs
-            </h3>
+            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "20px" }}>Programs</h3>
             <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0, margin: 0 }}>
               {footerLinks.programs.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "13.5px",
-                      color: "#5C6370",
-                      textDecoration: "none",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "7px",
-                      transition: "color 0.2s ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.color = "#FFFFFF";
-                      const bar = el.querySelector(".footer-bar") as HTMLElement | null;
-                      if (bar) { bar.style.width = "12px"; bar.style.opacity = "1"; }
-                    }}
-                    onMouseLeave={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.color = "#5C6370";
-                      const bar = el.querySelector(".footer-bar") as HTMLElement | null;
-                      if (bar) { bar.style.width = "0px"; bar.style.opacity = "0"; }
-                    }}
+                  <Link href={link.href}
+                    style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#5C6370", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "7px", transition: "color 0.2s ease" }}
+                    onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = "#FFFFFF"; const bar = el.querySelector(".footer-bar") as HTMLElement | null; if (bar) { bar.style.width = "12px"; bar.style.opacity = "1"; } }}
+                    onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = "#5C6370"; const bar = el.querySelector(".footer-bar") as HTMLElement | null; if (bar) { bar.style.width = "0px"; bar.style.opacity = "0"; } }}
                   >
-                    <span
-                      className="footer-bar"
-                      style={{
-                        display: "inline-block",
-                        height: "1px",
-                        width: "0px",
-                        opacity: "0",
-                        background: "var(--orange)",
-                        borderRadius: "1px",
-                        flexShrink: 0,
-                        transition: "width 0.22s ease, opacity 0.22s ease",
-                      }}
-                    />
+                    <span className="footer-bar" style={{ display: "inline-block", height: "1px", width: "0px", opacity: "0", background: "var(--orange)", borderRadius: "1px", flexShrink: 0, transition: "width 0.22s ease, opacity 0.22s ease" }} />
                     {link.label}
                   </Link>
                 </li>
@@ -320,68 +311,22 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ── Contact ─────────────────────────────────────────── */}
+          {/* Contact */}
           <div>
-            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "20px" }}>
-              Contact
-            </h3>
+            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "20px" }}>Contact</h3>
             <ul style={{ display: "flex", flexDirection: "column", gap: "14px", listStyle: "none", padding: 0, margin: 0 }}>
               {contactItems.map((item, i) => (
-                <li
-                  key={i}
-                  style={{ display: "flex", alignItems: "flex-start", gap: "11px" }}
-                >
-                  {/* Icon box */}
-                  <div
-                    style={{
-                      width: "28px",
-                      height: "28px",
-                      borderRadius: "6px",
-                      flexShrink: 0,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      background: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(255,255,255,0.08)",
-                      color: "rgba(255,255,255,0.38)",
-                      marginTop: "1px",
-                    }}
-                  >
+                <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "11px" }}>
+                  <div style={{ width: "28px", height: "28px", borderRadius: "6px", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.38)", marginTop: "1px" }}>
                     <item.Icon size={13} />
                   </div>
-
-                  {/* Value */}
                   {item.type === "text" ? (
-                    <span
-                      style={{
-                        fontFamily: "var(--font-body)",
-                        fontSize: "13px",
-                        lineHeight: 1.65,
-                        color: "#5C6370",
-                        whiteSpace: "pre-line",
-                        paddingTop: "5px",
-                      }}
-                    >
-                      {item.value}
-                    </span>
+                    <span style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "#5C6370", whiteSpace: "pre-line", paddingTop: "5px" }}>{item.value}</span>
                   ) : (
-                    <a
-                      href={item.href}
-                      style={{
-                        fontFamily: "var(--font-body)",
-                        fontSize: "13px",
-                        color: "#5C6370",
-                        textDecoration: "none",
-                        paddingTop: "5px",
-                        lineHeight: 1.4,
-                        transition: "color 0.2s ease",
-                        display: "block",
-                      }}
+                    <a href={item.href} style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "#5C6370", textDecoration: "none", paddingTop: "5px", lineHeight: 1.4, transition: "color 0.2s ease", display: "block" }}
                       onMouseEnter={(e) => { e.currentTarget.style.color = "#FFFFFF"; }}
                       onMouseLeave={(e) => { e.currentTarget.style.color = "#5C6370"; }}
-                    >
-                      {item.value}
-                    </a>
+                    >{item.value}</a>
                   )}
                 </li>
               ))}
@@ -392,15 +337,14 @@ export default function Footer() {
         {/* ── Bottom bar ──────────────────────────────────────────── */}
         <div
           style={{
-            marginTop: "clamp(36px, 5vw, 56px)",
-            paddingTop: "clamp(20px, 3vw, 28px)",
+            paddingTop: "clamp(16px, 3vw, 24px)",
             borderTop: "1px solid rgba(255,255,255,0.06)",
             display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
             alignItems: "center",
-            justifyContent: "space-between",
-            gap: "12px",
+            justifyContent: "center",
+            gap: "8px 16px",
           }}
         >
           <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#3D4148" }}>

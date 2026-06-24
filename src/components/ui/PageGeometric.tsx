@@ -57,12 +57,6 @@ export default function PageGeometric() {
         backgroundSize: "12px 12px",
       }} />
 
-      {/* Diagonal hairline */}
-      <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-        preserveAspectRatio="none" viewBox="0 0 1440 900" fill="none">
-        <line x1="0" y1="900" x2="1440" y2="0" stroke="#E8521A" strokeWidth="1" opacity="0.14" />
-      </svg>
-
     </div>
   );
 }
