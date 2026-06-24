@@ -214,7 +214,7 @@ export default function VerticalsPage() {
       ──────────────────────────────────────────────────────────────────── */}
       <section className="py-20" style={{ background: "#FFFFFF" }}>
         <div className="page-container">
-          <FadeIn className="mb-16">
+          <FadeIn>
             <span className="section-tag">At a Glance</span>
             <h2 style={{
               color: "#000000",
@@ -228,7 +228,7 @@ export default function VerticalsPage() {
             </h2>
           </FadeIn>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" style={{ marginTop: "40px" }}>
             {verticals.map((v, i) => (
               <FadeIn key={v.id} delay={i * 0.07} className="flex flex-col">
                 <a href={`#${v.id}`} style={{ textDecoration: "none", display: "flex", flexDirection: "column", flex: 1 }}>
@@ -509,13 +509,13 @@ export default function VerticalsPage() {
         );
       })}
 
-      {/* ── Join CTA — 120px top, 96px bottom ─────────────────────────── */}
+      {/* ── Join CTA — 80px top, 128px bottom ─────────────────────────── */}
       <section style={{
         background: "linear-gradient(160deg, #000000 0%, #000000 100%)",
         position: "relative",
         overflow: "hidden",
         paddingTop: "80px",
-        paddingBottom: "72px",
+        paddingBottom: "128px",
       }}>
         <div className="absolute inset-0 grid-pattern opacity-15" />
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255,94,44,0.10) 0%, transparent 65%)" }} />
@@ -535,7 +535,7 @@ export default function VerticalsPage() {
             Each vertical is open to all MLRIT students. Apply, collaborate, build — and leave a mark on CIE&apos;s growing legacy.
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
-            <a href="/contact" className="btn-primary" style={{ fontSize: "15px", padding: "12px 28px" }}>
+            <a href="#" className="btn-primary" style={{ fontSize: "15px", padding: "12px 28px" }}>
               Apply to a Vertical <ArrowRight size={16} />
             </a>
             <a href="/about" className="btn-secondary" style={{ fontSize: "15px", padding: "12px 28px" }}>

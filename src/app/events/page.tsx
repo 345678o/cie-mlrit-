@@ -282,14 +282,14 @@ export default function EventsPage() {
             <h2 style={{
               fontFamily: "var(--font-heading)", fontWeight: 900,
               fontSize: "clamp(26px,5vw,40px)", color: "#000000",
-              marginTop: "12px", marginBottom: "16px",
+              marginTop: "12px", marginBottom: "32px",
             }}>
               Don&apos;t Miss the Next Event
             </h2>
             <p style={{
               fontFamily: "var(--font-body)", fontSize: "clamp(15px,2vw,18px)",
               lineHeight: 1.72, color: "#374151",
-              maxWidth: "520px", margin: "0 auto 32px",
+              maxWidth: "520px", margin: "0 auto 40px",
             }}>
               Stay updated with all upcoming hackathons, workshops, and events at MLRIT CIE.
               Follow us on Instagram or sign up for our newsletter.

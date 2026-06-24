@@ -211,11 +211,11 @@ export default function ToursPage() {
       {/* Tour Timeline */}
       <section className="py-24" style={{ background: "#FFFFFF" }}>
         <div className="page-container">
-          <FadeIn className="mb-16">
+          <FadeIn>
             <span className="section-tag">What to Expect</span>
             <h2 className="text-4xl font-black mt-2" style={{ color: "#000000" }}>Guided Tour Timeline</h2>
           </FadeIn>
-          <div>
+          <div style={{ marginTop: "40px" }}>
             {tourTimeline.map((item, i) => (
               <FadeIn key={item.time} delay={i * 0.1}>
                 {/* CSS Grid: time-col | marker-col | content-col */}
@@ -270,11 +270,11 @@ export default function ToursPage() {
       </section>
 
       {/* Booking CTA */}
-      <section className="py-24" style={{ background: "linear-gradient(160deg, #FFFFFF 0%, #FFFFFF 50%, #FFFFFF 100%)" }}>
+      <section style={{ background: "linear-gradient(160deg, #FFFFFF 0%, #FFFFFF 50%, #FFFFFF 100%)", paddingTop: "96px", paddingBottom: "96px" }}>
         <FadeIn className="page-container text-center">
-          <span className="section-tag">Book Now</span>
-          <h2 className="text-4xl font-black mt-4 mb-6" style={{ color: "#000000" }}>Ready to Visit?</h2>
-          <p className="mb-8 text-lg" style={{ color: "#374151" }}>
+          <span className="section-tag" style={{ marginBottom: "32px" }}>Book Now</span>
+          <h2 className="text-4xl font-black" style={{ color: "#000000", marginBottom: "32px" }}>Ready to Visit?</h2>
+          <p className="text-lg" style={{ color: "#374151", marginBottom: "40px" }}>
             Tours run Monday–Saturday, 10AM–4PM. Groups of up to 20 welcome.
             Individual slots also available. Book 48 hours in advance.
           </p>

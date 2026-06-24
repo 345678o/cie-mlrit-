@@ -22,7 +22,6 @@ const NAV_ITEMS = [
   { label: "About",    href: "/about"   },
   { label: "Events",   href: "/events"  },
   { label: "Startups", href: "/studios" },
-  { label: "Contact",  href: "/contact" },
 ];
 
 /* Persistent top bar — secondary links */
@@ -195,22 +194,6 @@ export default function Navbar() {
 
           {/* Right controls */}
           <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
-            <AnimatePresence>
-              {!open && (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.18 }}>
-                  <Link href="/contact" className="hidden md:flex" style={{
-                    fontFamily: "var(--font-body)", fontSize: "11px", fontWeight: 600,
-                    letterSpacing: "0.1em", textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.5)", textDecoration: "none", transition: "color 0.2s ease",
-                  }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = "#FF5E2C"; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.5)"; }}
-                  >
-                    Join CIE
-                  </Link>
-                </motion.div>
-              )}
-            </AnimatePresence>
 
             {/* Premium pill button */}
             <motion.button
@@ -417,25 +400,13 @@ export default function Navbar() {
                   Centre for Innovation &amp; Entrepreneurship · MLRIT
                 </p>
 
-                {/* Contact + CTA */}
+                {/* Contact email */}
                 <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
                   <motion.a href="mailto:cie@mlrit.ac.in"
                     whileHover={{ color: "#FF5E2C" }}
                     style={{ fontFamily: "var(--font-body)", fontSize: "10px", color: "rgba(0,0,0,0.4)", textDecoration: "none" }}>
                     cie@mlrit.ac.in
                   </motion.a>
-                  <Link href="/contact" onClick={() => setOpen(false)} className="hidden md:flex"
-                    style={{
-                      fontFamily: "var(--font-body)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em",
-                      textTransform: "uppercase", color: "#FF5E2C", textDecoration: "none",
-                      border: "1px solid rgba(255,94,44,0.28)", borderRadius: "6px", padding: "6px 16px",
-                      transition: "background 0.2s ease, border-color 0.2s ease",
-                    }}
-                    onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = "rgba(255,94,44,0.1)"; el.style.borderColor = "#FF5E2C"; }}
-                    onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = "transparent"; el.style.borderColor = "rgba(255,94,44,0.28)"; }}
-                  >
-                    Join CIE →
-                  </Link>
                 </div>
               </div>
             </motion.div>

@@ -14,7 +14,6 @@ const footerLinks = {
   programs: [
     { href: "/events", label: "Past Events" },
     { href: "/council", label: "Council Members" },
-    { href: "/contact", label: "Contact Us" },
   ],
 };
 

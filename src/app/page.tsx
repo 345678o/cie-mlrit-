@@ -399,7 +399,7 @@ export default function HomePage() {
                   transition={{ duration: 0.55, delay: 0.78 }}
                   style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}
                 >
-                  <Link href="/contact" style={{
+                  <Link href="#" style={{
                     display: "inline-flex", alignItems: "center", gap: "8px",
                     background: "#FFFFFF", color: ORANGE,
                     fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "14.5px",
@@ -527,7 +527,7 @@ export default function HomePage() {
                     </div>
                   ))}
                   <div style={{ height: "1px", background: "rgba(0,0,0,0.08)", margin: "10px 0" }} />
-                  <Link href="/contact" style={{
+                  <Link href="#" style={{
                     fontFamily: "var(--font-body)", fontSize: "11px", fontWeight: 700,
                     color: ORANGE, textDecoration: "none",
                     display: "flex", alignItems: "center", gap: "3px",
@@ -620,7 +620,7 @@ export default function HomePage() {
       {/* ────────────────────────────────────────────────────────────
           STATS  —  #FFFFFF (Light Orange Background)
       ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: BG_CREAM, paddingTop: "88px", paddingBottom: "88px" }}>
+      <section style={{ background: BG_CREAM, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 items-stretch justify-items-stretch">
             {stats.map((stat, i) => (
@@ -1204,8 +1204,8 @@ export default function HomePage() {
         className="relative overflow-hidden"
         style={{
           background: `linear-gradient(160deg, ${BG_CREAM} 0%, ${BG_SURFACE} 50%, ${BG_WARM} 100%)`,
-          paddingTop: "160px",
-          paddingBottom: "160px",
+          paddingTop: SECTION_PY,
+          paddingBottom: SECTION_PY,
         }}
       >
         {/* Decorative SVG layer — warm orange, very subtle */}
@@ -1285,7 +1285,7 @@ export default function HomePage() {
           <div className={`${CONTAINER} text-center`}>
             {/* Label pill */}
             <span
-              className="inline-flex items-center gap-2 mb-6"
+              className="inline-flex items-center gap-2 mb-8"
               style={{
                 background: "rgba(255,94,44,0.10)",
                 border: "1px solid rgba(255,94,44,0.22)",
@@ -1315,7 +1315,7 @@ export default function HomePage() {
                 letterSpacing: "-0.03em",
                 color: T_PRIMARY,
                 lineHeight: 1.08,
-                marginBottom: "22px",
+                marginBottom: "32px",
               }}
             >
               Ready to Build{" "}
@@ -1324,7 +1324,7 @@ export default function HomePage() {
 
             {/* Subtext */}
             <p
-              className="max-w-xl mx-auto mb-12"
+              className="max-w-xl mx-auto mb-10"
               style={{
                 fontFamily: "var(--font-body)",
                 fontSize: "18px",
@@ -1340,7 +1340,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               {/* Primary — orange */}
               <Link
-                href="/contact"
+                href="#"
                 className="btn-primary"
                 style={{ fontSize: "1rem", padding: "0.9rem 2.25rem" }}
               >

@@ -249,24 +249,24 @@ export default function CouncilPage() {
       />
 
       {/* Faculty */}
-      <section className="py-20" style={{ background: "#FFFFFF" }}>
+      <section style={{ background: "#FFFFFF", paddingTop: "64px", paddingBottom: "48px" }}>
         <div className="page-container">
-          <FadeIn className="mb-10">
-            <span className="section-tag">Faculty</span>
-            <h2 className="text-4xl font-black mt-2" style={{ color: "#000000" }}>Faculty Coordinators</h2>
+          <FadeIn className="mb-8">
+            <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Faculty</span>
+            <h2 className="font-black mt-4" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1 }}>Faculty Coordinators</h2>
           </FadeIn>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
             {facultyCoordinators.map((member) => (
-              <div key={member.name} className="p-6 rounded-2xl card-light group">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center text-xl font-black"
+              <div key={member.name} className="rounded-2xl card-light group" style={{ padding: "28px 32px" }}>
+                <div className="flex items-center gap-5 mb-5">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center text-xl font-black flex-shrink-0"
                     style={{ background: "rgba(255,94,44,0.10)", color: "#FF5E2C" }}>
                     {member.name.split(" ").map((n) => n[0]).join("").substring(0, 2)}
                   </div>
                   <div>
-                    <p className="font-black" style={{ color: "#000000" }}>{member.name}</p>
-                    <p className="text-sm font-semibold" style={{ color: "#FF5E2C" }}>{member.role}</p>
-                    <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{member.dept}</p>
+                    <p style={{ color: "#000000", fontSize: "17px", fontWeight: 800, lineHeight: 1.3 }}>{member.name}</p>
+                    <p style={{ color: "#FF5E2C", fontSize: "14px", fontWeight: 700, marginTop: "8px" }}>{member.role}</p>
+                    <p style={{ color: "#6B7280", fontSize: "13px", marginTop: "8px" }}>{member.dept}</p>
                   </div>
                 </div>
                 <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -289,27 +289,27 @@ export default function CouncilPage() {
       </section>
 
       {/* Student Leadership */}
-      <section className="py-20" style={{ background: "#FFFFFF" }}>
+      <section style={{ background: "#FFFFFF", paddingTop: "48px", paddingBottom: "64px" }}>
         <div className="page-container">
           <FadeIn className="mb-10">
-            <span className="section-tag">Leadership</span>
-            <h2 className="text-4xl font-black mt-2" style={{ color: "#000000" }}>Student Leadership 2024–25</h2>
+            <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Leadership</span>
+            <h2 className="font-black mt-4" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1 }}>Student Leadership 2024–25</h2>
           </FadeIn>
           <div className="grid sm:grid-cols-2 gap-6 items-stretch">
             {studentLeadership.map((member) => (
               <FadeIn key={member.name} className="flex flex-col">
-                <div className="p-8 rounded-2xl card-light relative overflow-hidden"
-                  style={{ flex: 1, borderColor: "rgba(255,94,44,0.20)" }}>
+                <div className="rounded-2xl card-light relative overflow-hidden"
+                  style={{ flex: 1, borderColor: "rgba(255,94,44,0.20)", minHeight: "280px", padding: "32px" }}>
                   <div className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-10"
                     style={{ background: "#FF5E2C", transform: "translate(30%, -30%)" }} />
-                  <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-black mb-4"
+                  <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-black mb-6"
                     style={{ background: "rgba(255,94,44,0.10)", color: "#FF5E2C" }}>
                     {member.name.split(" ").map((n) => n[0]).join("").substring(0, 2)}
                   </div>
-                  <h3 className="text-xl font-black mb-1" style={{ color: "#000000" }}>{member.name}</h3>
-                  <p className="font-bold mb-1" style={{ color: "#FF5E2C" }}>{member.role}</p>
-                  <p className="text-sm mb-1" style={{ color: "#6B7280" }}>{member.dept}</p>
-                  <p className="text-xs mb-5" style={{ color: "#9CA3AF" }}>Batch {member.year}</p>
+                  <h3 style={{ color: "#000000", fontSize: "20px", fontWeight: 800, marginBottom: "12px", lineHeight: 1.2 }}>{member.name}</h3>
+                  <p style={{ color: "#FF5E2C", fontSize: "16px", fontWeight: 700, marginBottom: "12px" }}>{member.role}</p>
+                  <p style={{ color: "#6B7280", fontSize: "15px", lineHeight: 1.6, marginBottom: "8px" }}>{member.dept}</p>
+                  <p style={{ color: "#9CA3AF", fontSize: "13px", marginBottom: "24px" }}>Batch {member.year}</p>
                   <div className="flex gap-2">
                     {member.linkedin && (
                       <a href={member.linkedin} target="_blank" rel="noopener noreferrer"
@@ -331,16 +331,16 @@ export default function CouncilPage() {
       </section>
 
       {/* Teams — ChromaGrid */}
-      <section className="py-20" style={{ background: "#000000" }}>
+      <section className="pb-16" style={{ background: "#000000", paddingTop: "88px" }}>
         <div className="page-container">
           <FadeIn className="mb-10">
-            <span className="section-tag" style={{ background: "rgba(255,94,44,0.12)", borderColor: "rgba(255,94,44,0.25)", color: "#FF5E2C" }}>
+            <span className="section-tag" style={{ background: "rgba(255,94,44,0.12)", borderColor: "rgba(255,94,44,0.25)", color: "#FF5E2C", fontSize: "14px", letterSpacing: "1.5px" }}>
               Departments
             </span>
-            <h2 className="text-4xl font-black mt-2 mb-8" style={{ color: "#FFFFFF" }}>Department Members</h2>
+            <h2 className="font-black" style={{ color: "#FFFFFF", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "20px", marginBottom: "56px" }}>Department Members</h2>
 
             {/* Filter tabs */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-3">
               {[
                 { label: "All", key: "All" },
                 ...teams.map((t) => ({ label: deptShort[t.team] ?? t.team, key: t.team, color: t.color })),
@@ -348,7 +348,7 @@ export default function CouncilPage() {
                 <button
                   key={tab.key}
                   onClick={() => setActiveTeam(tab.key)}
-                  className="px-4 py-2 rounded-full text-sm font-semibold transition-all"
+                  className="px-7 py-3 rounded-full text-base font-semibold transition-all"
                   style={{
                     background: activeTeam === tab.key
                       ? ((tab as { color?: string }).color ?? "#FF5E2C")
@@ -403,11 +403,11 @@ export default function CouncilPage() {
       </section>
 
       {/* Join CTA */}
-      <section className="py-24" style={{ background: "linear-gradient(160deg, #FFFFFF 0%, #FFFFFF 50%, #FFFFFF 100%)" }}>
+      <section style={{ background: "linear-gradient(160deg, #FFFFFF 0%, #FFFFFF 50%, #FFFFFF 100%)", paddingTop: "96px", paddingBottom: "96px" }}>
         <FadeIn className="page-container text-center">
-          <span className="section-tag">Join the Team</span>
-          <h2 className="text-4xl font-black mt-4 mb-6" style={{ color: "#000000" }}>Want to Be Part of CIE Council?</h2>
-          <p className="mb-8 text-lg" style={{ color: "#374151" }}>
+          <span className="section-tag" style={{ marginBottom: "32px" }}>Join the Team</span>
+          <h2 className="text-4xl font-black" style={{ color: "#000000", marginBottom: "32px" }}>Want to Be Part of CIE Council?</h2>
+          <p className="text-lg" style={{ color: "#374151", marginBottom: "40px" }}>
             Recruitment for the 2025–26 council opens in July. Apply to join any
             of our teams and help shape the future of innovation at MLRIT.
           </p>
