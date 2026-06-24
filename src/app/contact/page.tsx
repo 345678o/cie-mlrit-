@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Mail, Phone, MapPin, Clock, Send, Camera, Link2, X, Video, CheckCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
 
@@ -25,11 +25,24 @@ const contactInfo = [
   { icon: Clock, label: "Office Hours", value: "Mon–Sat: 9:00 AM – 6:00 PM", href: null },
 ];
 
+function SvgInstagram() {
+  return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" strokeWidth="2.5"/></svg>;
+}
+function SvgLinkedIn() {
+  return <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>;
+}
+function SvgYouTube() {
+  return <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21.593 7.203a2.506 2.506 0 0 0-1.762-1.766C18.265 5.007 12 5 12 5s-6.264-.007-7.831.404a2.56 2.56 0 0 0-1.766 1.778c-.413 1.566-.417 4.814-.417 4.814s-.004 3.264.406 4.814c.23.857.905 1.534 1.763 1.765 1.582.43 7.83.437 7.83.437s6.265.007 7.831-.403a2.515 2.515 0 0 0 1.767-1.763c.414-1.565.417-4.812.417-4.812s.02-3.265-.407-4.831zM9.996 15.005l.005-6 5.207 3.005-5.212 2.995z"/></svg>;
+}
+function SvgX() {
+  return <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>;
+}
+
 const socials = [
-  { icon: Camera, label: "Instagram", handle: "@mlrit_cie", href: "#" },
-  { icon: Link2, label: "LinkedIn", handle: "MLRIT CIE", href: "#" },
-  { icon: X, label: "Twitter / X", handle: "@mlrit_cie", href: "#" },
-  { icon: Video, label: "YouTube", handle: "MLRIT CIE", href: "#" },
+  { Svg: SvgInstagram, label: "Instagram",  handle: "@mlritcie",  href: "https://www.instagram.com/mlritcie/",  hoverColor: "#E1306C", hoverBg: "rgba(225,48,108,0.08)" },
+  { Svg: SvgLinkedIn,  label: "LinkedIn",   handle: "MLRIT CIE", href: "https://www.linkedin.com/in/cie-center-for-innovation-and-entrepreneurship-mlrit-935971291/", hoverColor: "#0A66C2", hoverBg: "rgba(10,102,194,0.08)" },
+  { Svg: SvgX,         label: "Twitter / X",handle: "@ciemlrit",  href: "https://x.com/ciemlrit?s=20",          hoverColor: "#000000", hoverBg: "rgba(0,0,0,0.05)" },
+  { Svg: SvgYouTube,   label: "YouTube",    handle: "MLRIT CIE", href: "https://www.youtube.com/@mlritcie",     hoverColor: "#FF0000", hoverBg: "rgba(255,0,0,0.08)" },
 ];
 
 const heroCards = [
@@ -243,12 +256,23 @@ export default function ContactPage() {
                 <div className="space-y-3">
                   {socials.map((s) => (
                     <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-lg transition-all"
-                      style={{ background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.06)" }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "rgba(255,94,44,0.05)"; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#FFFFFF"; }}>
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "rgba(255,94,44,0.08)" }}>
-                        <s.icon size={15} style={{ color: "#FF5E2C" }} />
+                      className="flex items-center gap-3 p-3 rounded-lg"
+                      style={{ background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.06)", textDecoration: "none", transition: "background 0.2s ease" }}
+                      onMouseEnter={(e) => {
+                        const el = e.currentTarget as HTMLElement;
+                        el.style.background = s.hoverBg;
+                        const icon = el.querySelector(".s-icon") as HTMLElement | null;
+                        if (icon) { icon.style.color = s.hoverColor; icon.style.background = s.hoverBg; }
+                      }}
+                      onMouseLeave={(e) => {
+                        const el = e.currentTarget as HTMLElement;
+                        el.style.background = "#FFFFFF";
+                        const icon = el.querySelector(".s-icon") as HTMLElement | null;
+                        if (icon) { icon.style.color = "#6B7280"; icon.style.background = "rgba(0,0,0,0.05)"; }
+                      }}>
+                      <div className="s-icon w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                        style={{ background: "rgba(0,0,0,0.05)", color: "#6B7280", transition: "color 0.2s ease, background 0.2s ease" }}>
+                        <s.Svg />
                       </div>
                       <div>
                         <p className="text-xs font-semibold" style={{ color: "#000000" }}>{s.label}</p>
