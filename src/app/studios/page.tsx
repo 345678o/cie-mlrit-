@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { Palette, Camera, Mic, Monitor, Lightbulb, Building2, Calendar, CheckCircle } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
+import ScrollStack, { ScrollStackItem } from "@/components/ui/ScrollStack";
 
 function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -108,68 +109,78 @@ export default function StudiosPage() {
       />
 
       {/* Studios List */}
-      <section className="py-20" style={{ background: "#F8F9FA" }}>
-        <div className="page-container space-y-16">
+      <section style={{ background: "#F8F9FA", paddingTop: "56px", paddingBottom: "56px" }}>
+        <ScrollStack
+          stackTop={0.1}
+          fan={40}
+          vhPerCard={1.1}
+          itemScale={0.035}
+          baseScale={0.86}
+        >
           {studios.map((studio) => (
-            <FadeIn key={studio.name} delay={0.1}>
-              <div className="card-light rounded-2xl overflow-hidden" style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)" }}>
-                <div className="grid lg:grid-cols-5 divide-y lg:divide-y-0 lg:divide-x divide-black/5 items-start">
-                  <div className="lg:col-span-2 p-8 lg:p-10" style={{ background: "linear-gradient(135deg, rgba(255,94,44,0.04) 0%, transparent 100%)" }}>
-                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
-                      style={{ background: "rgba(255,94,44,0.1)" }}>
-                      <studio.icon size={32} style={{ color: "#FF5E2C" }} />
-                    </div>
-                    <h2 className="text-2xl font-black mb-4" style={{ color: "#000000" }}>{studio.name}</h2>
-                    <p className="leading-relaxed mb-8" style={{ color: "#374151" }}>{studio.desc}</p>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3 text-sm">
-                        <Calendar size={16} style={{ color: "#FF5E2C" }} />
-                        <span style={{ color: "#374151" }}>{studio.hours}</span>
+            <ScrollStackItem key={studio.name}>
+              <div style={{ maxWidth: "1340px", width: "100%", margin: "0 auto", paddingLeft: "20px", paddingRight: "20px" }}>
+                <div className="card-light rounded-3xl overflow-hidden" style={{ boxShadow: "0 18px 60px rgba(0,0,0,0.12), 0 4px 14px rgba(0,0,0,0.06)" }}>
+                  <div className="grid lg:grid-cols-[2fr_3fr] divide-y lg:divide-y-0 lg:divide-x divide-black/5 items-stretch" style={{ minHeight: "560px" }}>
+                    <div className="p-6 md:p-10 lg:p-14 flex flex-col" style={{ background: "linear-gradient(135deg, rgba(255,94,44,0.05) 0%, transparent 100%)" }}>
+                      <div className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                        style={{ background: "rgba(255,94,44,0.1)", marginBottom: "28px" }}>
+                        <studio.icon size={32} style={{ color: "#FF5E2C" }} />
                       </div>
-                      <div className="flex items-center gap-3 text-sm">
-                        <Building2 size={16} style={{ color: "#FF5E2C" }} />
-                        <span style={{ color: "#374151" }}>Capacity: {studio.capacity}</span>
-                      </div>
-                    </div>
-                    <button className="btn-primary mt-8 w-full justify-center">Book This Studio</button>
-                  </div>
-                  <div className="lg:col-span-3 p-8 lg:p-10">
-                    <h3 className="text-sm font-semibold uppercase tracking-widest mb-6" style={{ color: "#FF5E2C" }}>
-                      Equipment & Resources
-                    </h3>
-                    <div className="grid sm:grid-cols-2 gap-3 items-start">
-                      {studio.equipment.map((item) => (
-                        <div key={item} className="flex items-center gap-3">
-                          <CheckCircle size={16} style={{ color: "#FF5E2C", flexShrink: 0 }} />
-                          <span className="text-sm" style={{ color: "#374151" }}>{item}</span>
+                      <h2 className="text-3xl font-black" style={{ color: "#000000", marginBottom: "24px" }}>{studio.name}</h2>
+                      <p style={{ color: "#374151", fontSize: "16px", lineHeight: 1.8, marginBottom: "32px" }}>{studio.desc}</p>
+                      <div className="flex flex-col" style={{ gap: "16px" }}>
+                        <div className="flex items-center gap-3" style={{ fontSize: "15px" }}>
+                          <Calendar size={18} style={{ color: "#FF5E2C", flexShrink: 0 }} />
+                          <span style={{ color: "#374151" }}>{studio.hours}</span>
                         </div>
-                      ))}
+                        <div className="flex items-center gap-3" style={{ fontSize: "15px" }}>
+                          <Building2 size={18} style={{ color: "#FF5E2C", flexShrink: 0 }} />
+                          <span style={{ color: "#374151" }}>Capacity: {studio.capacity}</span>
+                        </div>
+                      </div>
+                      <div style={{ marginTop: "40px" }}>
+                        <button className="btn-primary w-full justify-center">Book This Studio</button>
+                      </div>
                     </div>
-                    <div className="mt-8">
-                      <h3 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "#6B7280" }}>Gallery</h3>
-                      <div className="grid grid-cols-3 gap-2 items-stretch">
-                        {[1, 2, 3].map((j) => (
-                          <div key={j} className="aspect-video rounded-lg flex items-center justify-center"
-                            style={{ background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.06)" }}>
-                            <Camera size={20} style={{ color: "#D1D5DB" }} />
+                    <div className="p-6 md:p-10 lg:p-14 flex flex-col">
+                      <h3 className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#FF5E2C", marginTop: "0px", marginBottom: "32px" }}>
+                        Equipment & Resources
+                      </h3>
+                      <div className="grid sm:grid-cols-2" style={{ columnGap: "32px", rowGap: "16px", alignItems: "start" }}>
+                        {studio.equipment.map((item) => (
+                          <div key={item} className="flex items-start gap-3">
+                            <CheckCircle size={18} style={{ color: "#FF5E2C", flexShrink: 0, marginTop: "3px" }} />
+                            <span style={{ color: "#374151", fontSize: "15px", lineHeight: 1.7 }}>{item}</span>
                           </div>
                         ))}
+                      </div>
+                      <div style={{ marginTop: "40px" }}>
+                        <h3 className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#6B7280", marginBottom: "16px" }}>Gallery</h3>
+                        <div className="grid grid-cols-3 gap-3 items-stretch">
+                          {[1, 2, 3].map((j) => (
+                            <div key={j} className="aspect-video rounded-lg flex items-center justify-center"
+                              style={{ background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.06)" }}>
+                              <Camera size={22} style={{ color: "#D1D5DB" }} />
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </FadeIn>
+            </ScrollStackItem>
           ))}
-        </div>
+        </ScrollStack>
       </section>
 
       {/* Booking CTA */}
-      <section className="py-24 relative" style={{ background: "linear-gradient(160deg, #FFFFFF 0%, #FFFFFF 50%, #FFFFFF 100%)" }}>
+      <section className="relative" style={{ background: "linear-gradient(160deg, #FFFFFF 0%, #FFFFFF 50%, #FFFFFF 100%)", paddingTop: "96px", paddingBottom: "96px" }}>
         <FadeIn className="relative z-10 page-container text-center">
-          <span className="section-tag">Book a Space</span>
-          <h2 className="text-4xl font-black mt-4 mb-6" style={{ color: "#000000" }}>Ready to Create?</h2>
-          <p className="mb-8" style={{ color: "#374151" }}>
+          <span className="section-tag" style={{ marginBottom: "32px" }}>Book a Space</span>
+          <h2 className="text-4xl font-black" style={{ color: "#000000", marginBottom: "32px" }}>Ready to Create?</h2>
+          <p style={{ color: "#374151", marginBottom: "40px" }}>
             All studios are available to MLRIT students and CIE members. Book your slot online
             or visit the CIE office to reserve your preferred space.
           </p>

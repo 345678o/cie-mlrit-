@@ -549,7 +549,7 @@ export default function HomePage() {
       {/* ────────────────────────────────────────────────────────────
           STATS  —  #FFFFFF (Light Orange Background)
       ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: BG_CREAM, paddingTop: "88px", paddingBottom: "88px" }}>
+      <section style={{ background: BG_CREAM, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 items-stretch justify-items-stretch">
             {stats.map((stat, i) => (
@@ -1028,8 +1028,8 @@ export default function HomePage() {
         className="relative overflow-hidden"
         style={{
           background: `linear-gradient(160deg, ${BG_CREAM} 0%, ${BG_SURFACE} 50%, ${BG_WARM} 100%)`,
-          paddingTop: "160px",
-          paddingBottom: "160px",
+          paddingTop: SECTION_PY,
+          paddingBottom: SECTION_PY,
         }}
       >
         {/* Decorative SVG layer — warm orange, very subtle */}
@@ -1109,7 +1109,7 @@ export default function HomePage() {
           <div className={`${CONTAINER} text-center`}>
             {/* Label pill */}
             <span
-              className="inline-flex items-center gap-2 mb-6"
+              className="inline-flex items-center gap-2 mb-8"
               style={{
                 background: "rgba(255,94,44,0.10)",
                 border: "1px solid rgba(255,94,44,0.22)",
@@ -1139,7 +1139,7 @@ export default function HomePage() {
                 letterSpacing: "-0.03em",
                 color: T_PRIMARY,
                 lineHeight: 1.08,
-                marginBottom: "22px",
+                marginBottom: "32px",
               }}
             >
               Ready to Build{" "}
@@ -1148,7 +1148,7 @@ export default function HomePage() {
 
             {/* Subtext */}
             <p
-              className="max-w-xl mx-auto mb-12"
+              className="max-w-xl mx-auto mb-10"
               style={{
                 fontFamily: "var(--font-body)",
                 fontSize: "18px",

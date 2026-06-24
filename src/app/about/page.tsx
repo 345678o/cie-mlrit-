@@ -98,7 +98,7 @@ export default function AboutPage() {
       />
 
       {/* Introduction */}
-      <section className="py-20" style={{ background: "#FFFFFF" }}>
+      <section className="py-24" style={{ background: "#FFFFFF" }}>
         <div className="page-container">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <FadeIn>

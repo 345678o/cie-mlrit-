@@ -121,7 +121,7 @@ export default function FacilitiesPage() {
         <div className="page-container">
 
           {/* Heading */}
-          <FadeIn className="text-center mb-14">
+          <FadeIn className="text-center">
             <h2
               style={{
                 fontSize: "clamp(28px, 4vw, 44px)",
@@ -141,6 +141,7 @@ export default function FacilitiesPage() {
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
               gap: "20px",
+              marginTop: "40px",
             }}
             className="facilities-grid"
           >
