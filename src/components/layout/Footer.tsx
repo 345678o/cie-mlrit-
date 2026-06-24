@@ -167,36 +167,6 @@ export default function Footer() {
         style={{ paddingTop: "clamp(40px,8vw,80px)", paddingBottom: "clamp(28px,5vw,48px)" }}
       >
 
-        {/* ── Brand row — centered on mobile ──────────────────────── */}
-        <div style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          textAlign: "center",
-          paddingBottom: "clamp(28px,5vw,40px)",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
-          marginBottom: "clamp(28px,5vw,40px)",
-        }}
-        className="lg:hidden"
-        >
-          <Link href="/" style={{ display: "inline-flex", alignItems: "baseline", gap: "1px", textDecoration: "none", marginBottom: "12px" }}>
-            <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "32px", color: "#FFFFFF", letterSpacing: "-0.03em" }}>CIE</span>
-            <span style={{ color: "var(--orange)", fontWeight: 800, fontSize: "34px" }}>.</span>
-          </Link>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.7, color: "#6B7280", maxWidth: "280px", marginBottom: "20px" }}>
-            Centre for Innovation &amp; Entrepreneurship, MLRIT — empowering the next generation of innovators.
-          </p>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            {socials.map(({ Icon, href, label, color, bg, border, hoverColor, hoverBg, hoverBorder }) => (
-              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
-                style={{ width: "40px", height: "40px", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", background: bg, border: `1px solid ${border}`, color, textDecoration: "none", transition: "background 0.22s, border-color 0.22s, color 0.22s" }}
-                onMouseEnter={(e) => { const el = e.currentTarget; el.style.background = hoverBg; el.style.borderColor = hoverBorder; el.style.color = hoverColor; }}
-                onMouseLeave={(e) => { const el = e.currentTarget; el.style.background = bg; el.style.borderColor = border; el.style.color = color; }}
-              ><Icon size={17} /></a>
-            ))}
-          </div>
-        </div>
-
         {/* ── Mobile: Explore + Programs side by side ─────────────── */}
         <div className="grid grid-cols-2 gap-8 lg:hidden" style={{ marginBottom: "clamp(28px,5vw,40px)" }}>
           {/* Explore */}
@@ -259,9 +229,6 @@ export default function Footer() {
               <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "28px", color: "#FFFFFF", letterSpacing: "-0.02em" }}>CIE</span>
               <span style={{ color: "var(--orange)", fontWeight: 800, fontSize: "30px" }}>.</span>
             </Link>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.72, color: "#6B7280", marginBottom: "26px" }}>
-              Centre for Innovation &amp; Entrepreneurship, MLRIT — empowering the next generation of innovators.
-            </p>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               {socials.map(({ Icon, href, label, color, bg, border, hoverColor, hoverBg, hoverBorder }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} title={label}

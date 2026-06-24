@@ -291,6 +291,7 @@ export default function EventsPage() {
       ══════════════════════════════════════════════════════ */}
       <section
         ref={heroRef}
+        className="page-hero"
         style={{
           position: "relative",
           height: "100vh",

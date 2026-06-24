@@ -62,7 +62,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       <PageGeometric />
 
       {/* ── Hero ──────────────────────────────────────────────────── */}
-      <section style={{ background: v.gradient, position: "relative", overflow: "hidden", paddingTop: "140px", paddingBottom: "80px" }}>
+      <section className="page-hero" style={{ background: v.gradient, position: "relative", overflow: "hidden", paddingTop: "calc(var(--nav-height) + 48px)", paddingBottom: "80px" }}>
         {/* Dot grid */}
         <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
         {/* Watermark abbr */}

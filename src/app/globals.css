@@ -85,12 +85,33 @@
   --space-2xl: 64px;
 
   /* ── Nav ───────────────────────────────────────────────────── */
-  --nav-height: 72px;
+  --nav-height: 80px;
 
   /* ── Typography ─────────────────────────────────────────────── */
   --font-heading: var(--font-manrope), 'Manrope', sans-serif;
   --font-body:    var(--font-inter),   'Inter',   sans-serif;
   --font-script:  var(--font-caveat),  'Caveat',  cursive;
+}
+
+/* ── Navbar offset helpers ──────────────────────────────────────── */
+
+/* Safety-net: main wrapper always starts below the floating pill.
+   Hero sections use .page-hero to pull their background behind the pill
+   while keeping content below it (see padding-top on each section).     */
+#main-content {
+  padding-top: var(--nav-height);
+}
+
+/* Full-bleed hero sections: pull back into the main padding so the
+   section background extends behind the floating pill, but content
+   (which relies on the section's own padding-top) stays below it.       */
+.page-hero {
+  margin-top: calc(-1 * var(--nav-height));
+}
+
+/* Anchor scroll: every section heading gets breathing room below pill.  */
+[id] {
+  scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
 /* ── Reset ─────────────────────────────────────────────────────── */
