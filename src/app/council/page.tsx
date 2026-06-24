@@ -251,9 +251,9 @@ export default function CouncilPage() {
       {/* Faculty */}
       <section style={{ background: "#FFFFFF", paddingTop: "64px", paddingBottom: "48px" }}>
         <div className="page-container">
-          <FadeIn className="mb-10">
-            <span className="section-tag">Faculty</span>
-            <h2 className="text-4xl font-black mt-2" style={{ color: "#000000" }}>Faculty Coordinators</h2>
+          <FadeIn className="mb-8">
+            <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Faculty</span>
+            <h2 className="font-black mt-4" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1 }}>Faculty Coordinators</h2>
           </FadeIn>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
             {facultyCoordinators.map((member) => (
@@ -291,15 +291,15 @@ export default function CouncilPage() {
       {/* Student Leadership */}
       <section style={{ background: "#FFFFFF", paddingTop: "48px", paddingBottom: "64px" }}>
         <div className="page-container">
-          <FadeIn className="mb-10">
-            <span className="section-tag">Leadership</span>
-            <h2 className="text-4xl font-black mt-2" style={{ color: "#000000" }}>Student Leadership 2024–25</h2>
+          <FadeIn className="mb-8">
+            <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Leadership</span>
+            <h2 className="font-black mt-4" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1 }}>Student Leadership 2024–25</h2>
           </FadeIn>
           <div className="grid sm:grid-cols-2 gap-6 items-stretch">
             {studentLeadership.map((member) => (
               <FadeIn key={member.name} className="flex flex-col">
-                <div className="p-8 rounded-2xl card-light relative overflow-hidden"
-                  style={{ flex: 1, borderColor: "rgba(255,94,44,0.20)" }}>
+                <div className="rounded-2xl card-light relative overflow-hidden"
+                  style={{ flex: 1, borderColor: "rgba(255,94,44,0.20)", minHeight: "280px", padding: "32px" }}>
                   <div className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-10"
                     style={{ background: "#FF5E2C", transform: "translate(30%, -30%)" }} />
                   <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-black mb-6"
