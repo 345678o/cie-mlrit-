@@ -19,7 +19,8 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
 
 const contactInfo = [
   { icon: MapPin, label: "Address", value: "CIE Block, MLRIT Campus, Dundigal, Hyderabad, Telangana 500043", href: null },
-  { icon: Mail, label: "Email", value: "cie@mlrit.ac.in", href: "mailto:cie@mlrit.ac.in" },
+  { icon: Mail, label: "Email", value: "ciemlrit@mlrit.ac.in", href: "mailto:ciemlrit@mlrit.ac.in" },
+  { icon: Mail, label: "Email (Alt)", value: "cie@mlrinstitutions.ac.in", href: "mailto:cie@mlrinstitutions.ac.in" },
   { icon: Phone, label: "Phone", value: "+91 40 2304 3333", href: "tel:+914023043333" },
   { icon: Clock, label: "Office Hours", value: "Mon–Sat: 9:00 AM – 6:00 PM", href: null },
 ];
@@ -32,7 +33,7 @@ const socials = [
 ];
 
 const heroCards = [
-  { icon: Mail, label: "Email us", value: "cie@mlrit.ac.in", sub: "We reply within 24 hours", accent: "rgba(255,94,44,0.15)", color: "#FF5E2C" },
+  { icon: Mail, label: "Email us", value: "ciemlrit@mlrit.ac.in", sub: "cie@mlrinstitutions.ac.in", accent: "rgba(255,94,44,0.15)", color: "#FF5E2C" },
   { icon: MapPin, label: "Visit us", value: "MLRIT Campus, Dundigal", sub: "CIE Block, Hyderabad 500043", accent: "rgba(22,163,74,0.15)", color: "#16A34A" },
   { icon: Clock, label: "Office hours", value: "Mon–Sat, 9AM–6PM", sub: "Drop in anytime during hours", accent: "rgba(59,130,246,0.15)", color: "#3B82F6" },
 ];
@@ -272,18 +273,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Join CTA */}
-      <section className="py-20" style={{ background: "linear-gradient(160deg, #FFFFFF 0%, #FFFFFF 50%, #FFFFFF 100%)" }}>
-        <FadeIn className="page-container text-center">
-          <span className="section-tag">Ready to Join?</span>
-          <h2 className="text-4xl font-black mt-4 mb-4" style={{ color: "#000000" }}>Join CIE Today</h2>
-          <p className="mb-8" style={{ color: "#374151" }}>
-            Membership is free for all MLRIT students. Fill out a quick form and gain
-            immediate access to all studios, facilities, and programs.
-          </p>
-          <button className="btn-primary">Apply for CIE Membership</button>
-        </FadeIn>
-      </section>
     </div>
   );
 }

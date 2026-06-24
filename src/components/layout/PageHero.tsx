@@ -219,7 +219,7 @@ export default function PageHero({
                 >
                   <p style={{
                     fontFamily: "var(--font-heading)", fontWeight: 900,
-                    fontSize: "clamp(28px, 4vw, 40px)", color: ORANGE, lineHeight: 1,
+                    fontSize: "clamp(28px, 4vw, 40px)", color: "#111111", lineHeight: 1,
                     marginBottom: "4px",
                   }}>{stats[0].value}</p>
                   <p style={{
@@ -303,7 +303,7 @@ export default function PageHero({
                 }}>
                   <div style={{
                     fontFamily: "var(--font-heading)", fontWeight: 900,
-                    fontSize: "22px", color: ORANGE, lineHeight: 1,
+                    fontSize: "22px", color: "#111111", lineHeight: 1,
                   }}>{s.value}</div>
                   <div style={{
                     fontFamily: "var(--font-body)", fontSize: "11px",

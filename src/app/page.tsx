@@ -11,15 +11,10 @@ import {
   Trophy,
   Zap,
   Code,
-  Palette,
   Mic,
   ChevronRight,
   TrendingUp,
-  Boxes,
-  FlaskConical,
-  Cpu,
   CalendarDays,
-  Compass,
   Layers,
   Printer,
   Handshake,
@@ -126,7 +121,7 @@ const programs = [
 ];
 
 const studios = [
-  { icon: Lightbulb, name: "Skill Workshops",        desc: "Domain-specific, hands-on workshops in tech, design, and business — run by industry experts and CIE teams across six active verticals." },
+  { icon: Lightbulb, name: "Skill Workshops",        desc: "Domain-specific, hands-on workshops in tech, design, and business — run by industry experts and CIE teams across five active verticals." },
   { icon: Trophy,    name: "Competitive Events",      desc: "Brand challenges, business competitions, and hackathons that reward real problem-solving, creativity, and execution under pressure." },
   { icon: Mic,       name: "Summits & Networking",    desc: "Multi-day entrepreneurship summits with guest speakers, investor panels, and startup showcases — open to all MLRIT students." },
   { icon: Handshake, name: "Mentorship & Incubation", desc: "One-on-one guidance from alumni, industry experts, and faculty — from idea-stage to launch-ready, backed by IIC and CIE." },
@@ -139,62 +134,6 @@ const timeline = [
   { step: "04", title: "Launch", desc: "Go to market with full support" },
 ];
 
-const homeVerticals = [
-  {
-    id: "mp",           abbr: "MP", name: "Microprojects",
-    desc: "Focused 2–4 week sprint builds that sharpen skills, grow portfolios, and seed bigger ideas.",
-    icon: Boxes,
-    color: "#0891B2",
-    gradient: "linear-gradient(145deg, #0c4a6e 0%, #0369a1 55%, #0891B2 100%)",
-    lightBg: "rgba(8,145,178,0.08)",
-    border: "rgba(8,145,178,0.22)",
-  },
-  {
-    id: "studios",      abbr: "ST", name: "Studios",
-    desc: "Six purpose-built creative workspaces for design, film, audio and more.",
-    icon: Palette,
-    color: "#7C3AED",
-    gradient: "linear-gradient(145deg, #3b0764 0%, #6d28d9 55%, #7c3aed 100%)",
-    lightBg: "rgba(124,58,237,0.08)",
-    border: "rgba(124,58,237,0.22)",
-  },
-  {
-    id: "research",     abbr: "RX", name: "Research",
-    desc: "Applied R&D, publications, and industry partnerships driving real innovation.",
-    icon: FlaskConical,
-    color: "#2563EB",
-    gradient: "linear-gradient(145deg, #1e3a5f 0%, #1d4ed8 55%, #2563eb 100%)",
-    lightBg: "rgba(37,99,235,0.08)",
-    border: "rgba(37,99,235,0.22)",
-  },
-  {
-    id: "product-dev",  abbr: "PD", name: "Product Dev",
-    desc: "From napkin sketch to deployed product — MVPs, hardware, and launches.",
-    icon: Cpu,
-    color: "#059669",
-    gradient: "linear-gradient(145deg, #064e3b 0%, #047857 55%, #059669 100%)",
-    lightBg: "rgba(5,150,105,0.08)",
-    border: "rgba(5,150,105,0.22)",
-  },
-  {
-    id: "event",        abbr: "EV", name: "Event",
-    desc: "Hackathons, Demo Days, speaker series and workshops that move communities.",
-    icon: CalendarDays,
-    color: "#D97706",
-    gradient: "linear-gradient(145deg, #78350f 0%, #b45309 55%, #d97706 100%)",
-    lightBg: "rgba(217,119,6,0.08)",
-    border: "rgba(217,119,6,0.22)",
-  },
-  {
-    id: "core",         abbr: "CR", name: "Core",
-    desc: "Operations, partnerships and strategy — the backbone that keeps CIE running.",
-    icon: Compass,
-    color: "#FF5E2C",
-    gradient: "linear-gradient(145deg, #7c2d12 0%, #c2410c 55%, #FF5E2C 100%)",
-    lightBg: "rgba(255,94,44,0.08)",
-    border: "rgba(255,94,44,0.22)",
-  },
-];
 
 const homeFacilities = [
   { icon: Lightbulb, title: "Innovation Labs",    desc: "High-performance workstations with NVIDIA GPUs for development, design, and rapid prototyping." },
@@ -388,7 +327,7 @@ export default function HomePage() {
                 >
                   MLRIT&apos;s Centre for Innovation &amp; Entrepreneurship — where students
                   turn ideas into real ventures through workshops, hackathons, summits,
-                  and hands-on incubation across six active verticals.
+                  and hands-on incubation across five active verticals.
                 </motion.p>
 
                 {/* CTAs */}
@@ -397,15 +336,6 @@ export default function HomePage() {
                   transition={{ duration: 0.55, delay: 0.78 }}
                   style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}
                 >
-                  <Link href="/contact" style={{
-                    display: "inline-flex", alignItems: "center", gap: "8px",
-                    background: "#FFFFFF", color: ORANGE,
-                    fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "14.5px",
-                    padding: "13px 26px", borderRadius: "999px", textDecoration: "none",
-                    boxShadow: "0 10px 32px rgba(0,0,0,0.22)", letterSpacing: "-0.01em",
-                  }}>
-                    Join CIE <ArrowRight size={16} />
-                  </Link>
                   <Link href="/verticals" style={{
                     display: "inline-flex", alignItems: "center", gap: "6px",
                     background: "transparent", color: "#FFFFFF",
@@ -414,6 +344,14 @@ export default function HomePage() {
                     border: "1.5px solid rgba(255,255,255,0.38)",
                   }}>
                     Our Verticals <ChevronRight size={15} />
+                  </Link>
+                  <Link href="/about" style={{
+                    display: "inline-flex", alignItems: "center", gap: "6px",
+                    background: "transparent", color: "rgba(255,255,255,0.55)",
+                    fontFamily: "var(--font-body)", fontWeight: 500, fontSize: "14.5px",
+                    padding: "13px 22px", borderRadius: "999px", textDecoration: "none",
+                  }}>
+                    Our Story <ChevronRight size={15} />
                   </Link>
                 </motion.div>
 
@@ -525,13 +463,6 @@ export default function HomePage() {
                     </div>
                   ))}
                   <div style={{ height: "1px", background: "rgba(0,0,0,0.08)", margin: "10px 0" }} />
-                  <Link href="/contact" style={{
-                    fontFamily: "var(--font-body)", fontSize: "11px", fontWeight: 700,
-                    color: ORANGE, textDecoration: "none",
-                    display: "flex", alignItems: "center", gap: "3px",
-                  }}>
-                    Join now <ChevronRight size={11} />
-                  </Link>
                 </motion.div>
 
                 {/* Star ✦ decorations */}
@@ -595,13 +526,13 @@ export default function HomePage() {
                 }}>
                   <div style={{
                     width: "38px", height: "38px", borderRadius: "10px",
-                    background: "rgba(255,94,44,0.09)", border: "1px solid rgba(255,94,44,0.18)",
+                    background: "rgba(0,0,0,0.05)", border: "1px solid rgba(0,0,0,0.09)",
                     display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
                   }}>
-                    <s.icon size={17} style={{ color: ORANGE }} />
+                    <s.icon size={17} style={{ color: "#555555" }} />
                   </div>
                   <div>
-                    <div style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "21px", color: ORANGE, lineHeight: 1 }}>
+                    <div style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "21px", color: "#111111", lineHeight: 1 }}>
                       <AnimatedCounter end={s.value} suffix={s.suffix} />
                     </div>
                     <div style={{ fontFamily: "var(--font-body)", fontSize: "11.5px", color: T_MUTED, marginTop: "3px" }}>
@@ -628,7 +559,7 @@ export default function HomePage() {
                     className="icon-box"
                     style={{ width: "48px", height: "48px", borderRadius: "12px" }}
                   >
-                    <stat.icon size={21} style={{ color: ORANGE }} />
+                    <stat.icon size={21} style={{ color: "#333333" }} />
                   </div>
                   <div
                     style={{
@@ -636,7 +567,7 @@ export default function HomePage() {
                       fontWeight: 800,
                       fontSize: "clamp(30px, 4vw, 42px)",
                       lineHeight: 1,
-                      color: ORANGE,
+                      color: "#111111",
                       letterSpacing: "-0.03em",
                     }}
                   >
@@ -760,7 +691,7 @@ export default function HomePage() {
               <FadeIn key={studio.name} delay={i * 0.08}>
                 <div className="card-light h-full" style={{ padding: "32px 28px" }}>
                   <div className="icon-box mb-5">
-                    <studio.icon size={21} style={{ color: ORANGE }} />
+                    <studio.icon size={21} style={{ color: "#333333" }} />
                   </div>
                   <h3
                     style={{
@@ -817,7 +748,7 @@ export default function HomePage() {
               className="absolute top-8 left-0 right-0 h-px hidden lg:block"
               style={{
                 background:
-                  "linear-gradient(to right, transparent, rgba(255,94,44,0.20), rgba(255,94,44,0.20), transparent)",
+                  "linear-gradient(to right, transparent, rgba(0,0,0,0.12), rgba(0,0,0,0.12), transparent)",
               }}
             />
 
@@ -828,8 +759,8 @@ export default function HomePage() {
                     <div
                       className="w-16 h-16 rounded-full flex items-center justify-center mx-auto lg:mx-0 mb-6 relative z-10"
                       style={{
-                        background: ORANGE,
-                        boxShadow: `0 0 0 8px ${BG_WHITE}, 0 0 0 10px rgba(255,94,44,0.14), 0 10px 28px rgba(255,94,44,0.28)`,
+                        background: "#111111",
+                        boxShadow: `0 0 0 8px ${BG_WHITE}, 0 0 0 10px rgba(0,0,0,0.08), 0 10px 28px rgba(0,0,0,0.14)`,
                         fontFamily: "var(--font-heading)",
                         fontWeight: 800,
                         fontSize: "17px",
@@ -905,7 +836,7 @@ export default function HomePage() {
                 <div className="card-light h-full" style={{ padding: "40px" }}>
                   <div className="flex items-start justify-between mb-6">
                     <div className="icon-box" style={{ width: "54px", height: "54px", borderRadius: "15px" }}>
-                      <prog.icon size={23} style={{ color: ORANGE }} />
+                      <prog.icon size={23} style={{ color: "#333333" }} />
                     </div>
                     <span
                       style={{
@@ -914,9 +845,9 @@ export default function HomePage() {
                         fontWeight: 700,
                         letterSpacing: "0.08em",
                         textTransform: "uppercase" as const,
-                        color: ORANGE,
-                        background: "rgba(255,94,44,0.07)",
-                        border: "1px solid rgba(255,94,44,0.18)",
+                        color: "#555555",
+                        background: "rgba(0,0,0,0.05)",
+                        border: "1px solid rgba(0,0,0,0.10)",
                         padding: "4px 12px",
                         borderRadius: "999px",
                       }}
@@ -947,78 +878,6 @@ export default function HomePage() {
                     {prog.desc}
                   </p>
                 </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ────────────────────────────────────────────────────────────
-          VERTICALS  —  #FFFFFF (White)
-      ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: BG_WHITE, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
-        <div className={CONTAINER}>
-          <FadeIn>
-            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6" style={{ marginBottom: "52px" }}>
-              <div>
-                <span className="section-tag">New Initiatives</span>
-                <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(34px, 4vw, 50px)", letterSpacing: "-0.03em", color: T_PRIMARY, marginTop: "4px" }}>
-                  Our Six Verticals
-                </h2>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "16px", color: T_MUTED, marginTop: "10px", maxWidth: "480px", lineHeight: 1.7 }}>
-                  Specialized wings of CIE — each focused on a distinct domain of innovation, open to every MLRIT student.
-                </p>
-              </div>
-              <Link href="/verticals" className="btn-secondary-light whitespace-nowrap flex-shrink-0">
-                Explore Verticals <ArrowRight size={16} />
-              </Link>
-            </div>
-          </FadeIn>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch justify-items-stretch">
-            {homeVerticals.map((v, i) => (
-              <FadeIn key={v.id} delay={i * 0.07}>
-                <Link href={`/verticals#${v.id}`} style={{ textDecoration: "none", display: "block", height: "100%" }}>
-                  <div className="h-full rounded-2xl overflow-hidden flex flex-col"
-                    style={{ border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 4px rgba(0,0,0,0.04)", background: "#FFFFFF", transition: "all 0.35s cubic-bezier(0.16,1,0.3,1)" }}
-                    onMouseEnter={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.transform = "translateY(-6px)";
-                      el.style.boxShadow = `0 16px 40px rgba(0,0,0,0.09)`;
-                      el.style.borderColor = v.border;
-                    }}
-                    onMouseLeave={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.transform = "translateY(0)";
-                      el.style.boxShadow = "0 1px 4px rgba(0,0,0,0.04)";
-                      el.style.borderColor = "rgba(0,0,0,0.07)";
-                    }}>
-                    {/* Gradient header strip */}
-                    <div style={{ height: "72px", background: v.gradient, position: "relative", overflow: "hidden", flexShrink: 0 }}>
-                      <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
-                      {/* Big abbr watermark */}
-                      <div style={{ position: "absolute", right: "-4px", bottom: "-18px", fontSize: "72px", fontFamily: "var(--font-heading)", fontWeight: 900, color: "rgba(255,255,255,0.07)", lineHeight: 1, userSelect: "none" as const }}>
-                        {v.abbr}
-                      </div>
-                      <div style={{ position: "absolute", left: "18px", top: "50%", transform: "translateY(-50%)", display: "flex", alignItems: "center", gap: "10px" }}>
-                        <div style={{ width: "32px", height: "32px", borderRadius: "9px", background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.22)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                          <v.icon size={16} style={{ color: "rgba(255,255,255,0.90)" }} />
-                        </div>
-                        <span style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "11px", color: "rgba(255,255,255,0.55)", letterSpacing: "0.14em", textTransform: "uppercase" as const }}>
-                          {v.abbr}
-                        </span>
-                      </div>
-                    </div>
-                    {/* Body */}
-                    <div style={{ padding: "20px 22px", flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
-                      <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "17px", color: T_PRIMARY, letterSpacing: "-0.01em" }}>{v.name}</h3>
-                      <p style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", lineHeight: 1.65, color: T_MUTED, flex: 1 }}>{v.desc}</p>
-                      <div style={{ display: "flex", alignItems: "center", gap: "5px", color: v.color, fontSize: "12px", fontWeight: 700, marginTop: "6px" }}>
-                        Learn more <ChevronRight size={13} />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
               </FadeIn>
             ))}
           </div>
@@ -1268,7 +1127,7 @@ export default function HomePage() {
                 className="w-1.5 h-1.5 rounded-full animate-pulse"
                 style={{ background: ORANGE }}
               />
-              Get Started
+              CIE · MLRIT
             </span>
 
             {/* Headline */}
@@ -1297,50 +1156,39 @@ export default function HomePage() {
                 color: T_MED,
               }}
             >
-              Join hundreds of MLRIT students who are turning their ideas into reality.
-              Your innovation journey starts here.
+              500+ MLRIT students building products, running startups, and driving innovation
+              across five active verticals.
             </p>
 
-            {/* Buttons */}
+            {/* Ghost links */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              {/* Primary — orange */}
+              <Link
+                href="/verticals"
+                className="inline-flex items-center gap-2 rounded-[10px] transition-all duration-200"
+                style={{
+                  fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "1rem",
+                  padding: "0.9rem 2.25rem", background: "transparent",
+                  color: NAVY, border: `1.5px solid ${NAVY}30`,
+                  letterSpacing: "-0.01em", textDecoration: "none",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = ORANGE; e.currentTarget.style.color = ORANGE; e.currentTarget.style.background = "rgba(255,94,44,0.04)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${NAVY}30`; e.currentTarget.style.color = NAVY; e.currentTarget.style.background = "transparent"; }}
+              >
+                Explore Verticals <ChevronRight size={18} />
+              </Link>
               <Link
                 href="/contact"
-                className="btn-primary"
-                style={{ fontSize: "1rem", padding: "0.9rem 2.25rem" }}
-              >
-                Join CIE Today <ArrowRight size={18} />
-              </Link>
-
-              {/* Secondary — navy outline */}
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 font-semibold rounded-[10px] transition-all duration-200"
+                className="inline-flex items-center gap-2 rounded-[10px] transition-all duration-200"
                 style={{
-                  fontFamily: "var(--font-body)",
-                  fontWeight: 600,
-                  fontSize: "1rem",
-                  padding: "0.9rem 2.25rem",
-                  background: "transparent",
-                  color: NAVY,
-                  border: `1.5px solid ${NAVY}30`,
-                  letterSpacing: "-0.01em",
-                  textDecoration: "none",
+                  fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "1rem",
+                  padding: "0.9rem 2.25rem", background: "transparent",
+                  color: NAVY, border: `1.5px solid ${NAVY}30`,
+                  letterSpacing: "-0.01em", textDecoration: "none",
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = ORANGE;
-                  e.currentTarget.style.color = ORANGE;
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.background = "rgba(255,94,44,0.04)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = `${NAVY}30`;
-                  e.currentTarget.style.color = NAVY;
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.background = "transparent";
-                }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = ORANGE; e.currentTarget.style.color = ORANGE; e.currentTarget.style.background = "rgba(255,94,44,0.04)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${NAVY}30`; e.currentTarget.style.color = NAVY; e.currentTarget.style.background = "transparent"; }}
               >
-                Learn More <ChevronRight size={18} />
+                Get in Touch <ChevronRight size={18} />
               </Link>
             </div>
           </div>

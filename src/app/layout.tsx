@@ -32,6 +32,19 @@ export const metadata: Metadata = {
   description:
     "The official innovation and entrepreneurship hub of MLRIT, empowering students to ideate, build, and launch impactful solutions.",
   keywords: ["MLRIT", "CIE", "innovation", "entrepreneurship", "startups", "Hyderabad"],
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png" }],
+    other: [
+      { rel: "android-chrome-192x192", url: "/android-chrome-192x192.png" },
+      { rel: "android-chrome-512x512", url: "/android-chrome-512x512.png" },
+    ],
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     title: "MLRIT CIE — Centre for Innovation & Entrepreneurship",
     description: "Transforming Ideas into Innovation. Innovation into Impact.",
