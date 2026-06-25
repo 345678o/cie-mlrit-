@@ -133,8 +133,6 @@ const CATS = [
 export default function EventsPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const heroRef      = useRef<HTMLDivElement>(null);
-  const timelineRef  = useRef<HTMLDivElement>(null);
-  const lineRef      = useRef<SVGLineElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -230,53 +228,6 @@ export default function EventsPage() {
       });
 
       /* ── 7. Archive card stagger ────────────────────────────── */
-      gsap.fromTo(".archive-card",
-        { opacity: 0, y: 28 },
-        {
-          opacity: 1, y: 0,
-          duration: 0.7,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".archive-grid",
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-
-      /* ── 8. Timeline SVG line scaleY draw ──────────────────── */
-      const line = lineRef.current;
-      if (line && timelineRef.current) {
-        const total = line.getTotalLength ? line.getTotalLength() : 600;
-        gsap.set(line, { strokeDasharray: total, strokeDashoffset: total });
-        gsap.to(line, {
-          strokeDashoffset: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: timelineRef.current,
-            start: "top 70%",
-            end: "bottom 55%",
-            scrub: 1,
-          },
-        });
-      }
-
-      /* ── 9. Timeline node entrance ──────────────────────────── */
-      gsap.fromTo(".tl-node",
-        { opacity: 0, scale: 0 },
-        {
-          opacity: 1, scale: 1,
-          duration: 0.5,
-          stagger: 0.15,
-          ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: timelineRef.current,
-            start: "top 72%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
 
     }, containerRef);
 
@@ -284,7 +235,7 @@ export default function EventsPage() {
   }, []);
 
   return (
-    <div ref={containerRef} style={{ background: "#0A0A0A", overflowX: "hidden", color: "#FFFFFF" }}>
+    <div ref={containerRef} style={{ background: "#E8521A" }}>
 
       {/* ══════════════════════════════════════════════════════
           HERO — dark cinematic, no orange background
@@ -294,13 +245,11 @@ export default function EventsPage() {
         className="page-hero"
         style={{
           position: "relative",
-          height: "100vh",
-          minHeight: "620px",
+          minHeight: "72vh",
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-end",
-          paddingBottom: "8vh",
+          justifyContent: "center",
           paddingTop: "var(--nav-height)",
         }}
       >
@@ -310,55 +259,142 @@ export default function EventsPage() {
           style={{
             position: "absolute",
             inset: "-14%",
-            background:
-              "radial-gradient(ellipse 70% 70% at 15% 30%, rgba(232,82,26,0.05) 0%, transparent 55%), radial-gradient(ellipse 55% 55% at 80% 70%, rgba(124,58,237,0.07) 0%, transparent 55%), #0A0A0A",
+            background: "#E8521A",
             willChange: "transform",
           }}
         >
           <div style={{ position: "absolute", inset: 0, backgroundImage: GRAIN, opacity: 0.06 }} />
         </div>
 
-        <div className="page-container" style={{ position: "relative", zIndex: 1, width: "100%" }}>
-          {/* Badge */}
-          <div className="eh-meta" style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
-            <Calendar size={12} style={{ color: "#E8521A" }} />
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.32)" }}>
-              Events Archive
-            </span>
-            <div style={{ width: "28px", height: "1px", background: "rgba(255,255,255,0.10)" }} />
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", color: "#E8521A", letterSpacing: "0.1em" }}>2019 — 2026</span>
-          </div>
+        {/* ── Geometric decorations ── */}
 
-          {/* Headline */}
+        {/* Large arc — top right */}
+        <svg aria-hidden className="absolute pointer-events-none"
+          style={{ top: "-18%", right: "-10%", width: "52vw", height: "52vw", maxWidth: 580, maxHeight: 580, opacity: 0.10 }}
+          viewBox="0 0 580 580" fill="none">
+          <circle cx="290" cy="290" r="265" stroke="rgba(255,255,255,1)" strokeWidth="80" fill="none" />
+        </svg>
+
+        {/* Medium arc — bottom left */}
+        <svg aria-hidden className="absolute pointer-events-none"
+          style={{ bottom: "-12%", left: "-8%", width: "30vw", height: "30vw", maxWidth: 340, maxHeight: 340, opacity: 0.08 }}
+          viewBox="0 0 340 340" fill="none">
+          <circle cx="170" cy="170" r="150" stroke="rgba(255,255,255,1)" strokeWidth="50" fill="none" />
+        </svg>
+
+        {/* Concentric rings — mid right */}
+        <svg aria-hidden className="absolute pointer-events-none"
+          style={{ top: "28%", right: "5%", width: "18vw", height: "18vw", maxWidth: 200, maxHeight: 200, opacity: 0.10 }}
+          viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="88" stroke="rgba(255,255,255,1)" strokeWidth="1.2" fill="none" />
+          <circle cx="100" cy="100" r="62" stroke="rgba(255,255,255,1)" strokeWidth="0.9" fill="none" />
+          <circle cx="100" cy="100" r="36" stroke="rgba(255,255,255,1)" strokeWidth="0.7" fill="none" />
+        </svg>
+
+        {/* Diagonal slash lines — top left */}
+        <svg aria-hidden className="absolute pointer-events-none"
+          style={{ top: "calc(var(--nav-height) + 12px)", left: "0", width: "180px", height: "180px", opacity: 0.07 }}
+          viewBox="0 0 180 180" fill="none">
+          <line x1="0" y1="60"  x2="60"  y2="0"   stroke="white" strokeWidth="1"/>
+          <line x1="0" y1="100" x2="100" y2="0"   stroke="white" strokeWidth="1"/>
+          <line x1="0" y1="140" x2="140" y2="0"   stroke="white" strokeWidth="1"/>
+          <line x1="0" y1="180" x2="180" y2="0"   stroke="white" strokeWidth="1"/>
+          <line x1="40" y1="180" x2="180" y2="40" stroke="white" strokeWidth="1"/>
+          <line x1="80" y1="180" x2="180" y2="80" stroke="white" strokeWidth="1"/>
+        </svg>
+
+        {/* Dot grid — top left */}
+        <div aria-hidden className="absolute pointer-events-none" style={{
+          top: "calc(var(--nav-height) + 18px)", left: "18px",
+          width: "72px", height: "72px",
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.25) 1.5px, transparent 1.5px)",
+          backgroundSize: "12px 12px",
+        }} />
+
+        {/* Dot grid — bottom right */}
+        <div aria-hidden className="absolute pointer-events-none" style={{
+          bottom: "80px", right: "20px",
+          width: "88px", height: "88px",
+          backgroundImage: "radial-gradient(circle, rgba(232,82,26,0.50) 1.5px, transparent 1.5px)",
+          backgroundSize: "14px 14px",
+        }} />
+
+        {/* Orange dot accents */}
+        <div aria-hidden className="absolute pointer-events-none" style={{
+          top: "28%", left: "48%",
+          width: "6px", height: "6px", borderRadius: "50%",
+          background: "#E8521A", opacity: 0.60,
+        }} />
+        <div aria-hidden className="absolute pointer-events-none" style={{
+          top: "18%", right: "28%",
+          width: "4px", height: "4px", borderRadius: "50%",
+          background: "#E8521A", opacity: 0.45,
+        }} />
+
+        {/* Ghost watermark */}
+        <div aria-hidden className="absolute pointer-events-none select-none" style={{
+          bottom: "20px", right: "-14px",
+          fontFamily: "var(--font-heading)", fontWeight: 900,
+          fontSize: "clamp(100px, 20vw, 340px)",
+          color: "rgba(0,0,0,0.06)", lineHeight: 1, letterSpacing: "-0.06em",
+          userSelect: "none" as const,
+        }}>EVENTS</div>
+
+        <div className="page-container w-full" style={{ position: "relative", zIndex: 1, paddingTop: "clamp(36px,5vw,56px)", paddingBottom: "clamp(48px,6vw,72px)" }}>
+
+          {/* Headline — MAKE IT / HAPPEN */}
           <div style={{ overflow: "hidden" }}>
-            <div className="eh-line" style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(44px, 13.5vw, 200px)", lineHeight: 0.86, letterSpacing: "-0.045em", textTransform: "uppercase", color: "#FFFFFF" }}>
-              MAKE
+            <div className="eh-line" style={{
+              fontFamily: "var(--font-heading)", fontWeight: 900,
+              fontSize: "clamp(48px, 11vw, 152px)",
+              lineHeight: 0.90, letterSpacing: "-0.045em",
+              textTransform: "uppercase",
+              display: "flex", alignItems: "baseline", gap: "0.22em",
+            }}>
+              <span style={{ color: "#FFFFFF" }}>MAKE</span>
+              <span style={{
+                color: "transparent",
+                WebkitTextStroke: "2.5px rgba(255,255,255,0.80)",
+                fontSize: "0.82em",
+              }}>IT</span>
             </div>
           </div>
           <div style={{ overflow: "hidden" }}>
-            <div className="eh-line" style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(44px, 13.5vw, 200px)", lineHeight: 0.86, letterSpacing: "-0.045em", textTransform: "uppercase", color: "transparent", WebkitTextStroke: "2px rgba(255,255,255,0.20)" }}>
-              IT
-            </div>
-          </div>
-          <div style={{ overflow: "hidden", marginBottom: "clamp(28px, 5vw, 52px)" }}>
-            <div className="eh-line" style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(44px, 13.5vw, 200px)", lineHeight: 0.86, letterSpacing: "-0.045em", textTransform: "uppercase", color: "#FFFFFF" }}>
+            <div className="eh-line" style={{
+              fontFamily: "var(--font-heading)", fontWeight: 900,
+              fontSize: "clamp(48px, 11vw, 152px)",
+              lineHeight: 0.90, letterSpacing: "-0.045em",
+              textTransform: "uppercase", color: "#FFFFFF",
+              marginTop: "0.04em",
+            }}>
               HAPPEN
             </div>
           </div>
 
-          {/* Sub row */}
-          <div className="eh-meta" style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(13px, 1.4vw, 15px)", lineHeight: 1.7, color: "rgba(255,255,255,0.36)", maxWidth: "380px" }}>
-              Over 100 events, workshops, hackathons, and summits — each one shaping the next generation of innovators and entrepreneurs.
-            </p>
-            <div style={{ display: "flex", gap: "clamp(24px, 3vw, 48px)" }}>
-              {[["100+", "Events"], ["3000+", "Participants"], ["5 yrs", "Running"]].map(([n, l]) => (
-                <div key={l} style={{ textAlign: "right" }}>
-                  <div style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(18px, 2.5vw, 28px)", letterSpacing: "-0.04em", color: "#FFFFFF", lineHeight: 1 }}>{n}</div>
-                  <div style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", color: "rgba(255,255,255,0.28)", letterSpacing: "0.09em", marginTop: "2px" }}>{l}</div>
-                </div>
-              ))}
-            </div>
+          {/* Script accent — same font as other heroes */}
+          <div className="eh-meta" style={{
+            fontFamily: "var(--font-script)",
+            fontSize: "clamp(18px, 2.4vw, 30px)",
+            color: "rgba(255,255,255,0.90)", lineHeight: 1.2,
+            marginTop: "18px", marginBottom: "20px",
+            display: "inline-block", transform: "rotate(-1.5deg)",
+          }}>
+            — where every event shapes a future
+          </div>
+
+          {/* Description */}
+          <p className="eh-meta" style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px, 1.4vw, 16px)", lineHeight: 1.78, color: "rgba(255,255,255,0.72)", maxWidth: "min(440px,100%)", marginBottom: 0, display: "block" }}>
+            Over 100 events, workshops, hackathons, and summits — each one shaping the next generation of innovators and entrepreneurs.
+          </p>
+
+          {/* Stats row — same layout as Verticals/Gallery */}
+          <div className="eh-meta" style={{ display: "flex", flexWrap: "wrap", gap: "clamp(18px,3vw,32px)", marginTop: "clamp(28px,4vw,44px)" }}>
+            {[["100+", "Events"], ["3000+", "Participants"], ["5 yrs", "Running"], ["6", "Categories"]].map(([n, l]) => (
+              <div key={l}>
+                <div style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(20px,2.8vw,28px)", color: "#FFFFFF", lineHeight: 1 }}>{n}</div>
+                <div style={{ fontFamily: "var(--font-body)", fontSize: "11px", color: "rgba(255,255,255,0.55)", marginTop: "3px", fontWeight: 600, letterSpacing: "0.04em" }}>{l}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -529,175 +565,6 @@ export default function EventsPage() {
           </div>
         </section>
       ))}
-
-      {/* ══════════════════════════════════════════════════════
-          ARCHIVE — light section, compact cards
-      ══════════════════════════════════════════════════════ */}
-      <section style={{ background: "#F9F8F6", padding: "clamp(72px, 10vw, 110px) 0" }}>
-        <div className="page-container">
-          {/* Header */}
-          <div className="ep-reveal" style={{ marginBottom: "clamp(36px, 5vw, 54px)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
-              <div style={{ width: "26px", height: "1px", background: "#E8521A" }} />
-              <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#E8521A" }}>
-                Archive
-              </span>
-            </div>
-            <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(26px, 4vw, 40px)", letterSpacing: "-0.03em", color: "#111111", lineHeight: 1.1 }}>
-              More from the archive
-            </h2>
-          </div>
-
-          {/* Archive grid */}
-          <div
-            className="archive-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-              gap: "16px",
-            }}
-          >
-            {ARCHIVE.map((ev) => (
-              <div
-                key={ev.title}
-                className="archive-card"
-                style={{
-                  background: "#FFFFFF",
-                  borderRadius: "14px",
-                  padding: "clamp(20px, 3vw, 28px)",
-                  border: "1px solid rgba(0,0,0,0.07)",
-                  willChange: "transform, opacity",
-                  transition: "transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s cubic-bezier(0.16,1,0.3,1)",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLDivElement;
-                  el.style.transform = "translateY(-4px)";
-                  el.style.boxShadow = "0 12px 40px rgba(0,0,0,0.08)";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLDivElement;
-                  el.style.transform = "none";
-                  el.style.boxShadow = "none";
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px" }}>
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, padding: "3px 10px", borderRadius: "999px", background: ev.catBg, color: ev.catColor, letterSpacing: "0.04em" }}>
-                    {ev.category}
-                  </span>
-                  <div style={{ display: "flex", alignItems: "center", gap: "5px", color: "#9CA3AF" }}>
-                    <Calendar size={10} />
-                    <time dateTime={ev.dateTime} style={{ fontFamily: "var(--font-body)", fontSize: "10.5px" }}>{ev.date}</time>
-                  </div>
-                </div>
-                <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(15px, 2vw, 20px)", letterSpacing: "-0.025em", color: "#111111", lineHeight: 1.2, marginBottom: "10px" }}>
-                  {ev.title}
-                </h3>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.7, color: "#666666", marginBottom: "16px" }}>
-                  {ev.desc}
-                </p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-                  {ev.tags.map((t) => (
-                    <span
-                      key={t}
-                      style={{
-                        fontFamily: "var(--font-body)",
-                        fontSize: "9.5px",
-                        fontWeight: 600,
-                        padding: "3px 9px",
-                        borderRadius: "999px",
-                        background: "rgba(0,0,0,0.04)",
-                        border: "1px solid rgba(0,0,0,0.08)",
-                        color: "#555555",
-                      }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
-          TIMELINE — dark, SVG line draw via GSAP scrub
-      ══════════════════════════════════════════════════════ */}
-      <section style={{ background: "#111111", padding: "clamp(72px, 11vw, 120px) 0" }}>
-        <div className="page-container">
-          <div className="ep-reveal" style={{ marginBottom: "clamp(44px, 6vw, 64px)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
-              <div style={{ width: "26px", height: "1px", background: "#E8521A" }} />
-              <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#E8521A" }}>
-                Timeline
-              </span>
-            </div>
-            <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(26px, 4vw, 42px)", letterSpacing: "-0.03em", color: "#FFFFFF", lineHeight: 1.1 }}>
-              Five years in the making
-            </h2>
-          </div>
-
-          {/* Timeline body */}
-          <div ref={timelineRef} style={{ position: "relative" }}>
-            {/* SVG vertical line */}
-            <svg
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                left: "clamp(16px, 3vw, 28px)",
-                top: 0, bottom: 0,
-                width: "2px",
-                height: "100%",
-                pointerEvents: "none",
-              }}
-              preserveAspectRatio="none"
-            >
-              <line
-                ref={lineRef}
-                x1="1" y1="0"
-                x2="1" y2="100%"
-                stroke="rgba(232,82,26,0.35)"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-
-            {/* Timeline nodes */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "clamp(32px, 5vw, 52px)", paddingLeft: "clamp(44px, 7vw, 72px)" }}>
-              {(([...FEATURED, ...ARCHIVE] as Array<{ title: string; category: string; date: string; dateTime: string }>).sort((a, b) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime())).map((ev, i) => (
-                <div key={ev.title + i} style={{ position: "relative" }}>
-                  {/* Node dot */}
-                  <div
-                    className="tl-node"
-                    style={{
-                      position: "absolute",
-                      left: "clamp(-38px, -5.5vw, -52px)",
-                      top: "6px",
-                      width: "10px",
-                      height: "10px",
-                      borderRadius: "50%",
-                      background: "#E8521A",
-                      boxShadow: "0 0 0 3px rgba(232,82,26,0.18)",
-                      willChange: "transform, opacity",
-                    }}
-                  />
-                  <div style={{ display: "flex", alignItems: "baseline", gap: "12px", marginBottom: "4px", flexWrap: "wrap" }}>
-                    <span style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(14px, 2vw, 18px)", letterSpacing: "-0.02em", color: "#FFFFFF" }}>
-                      {ev.title}
-                    </span>
-                    <span style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", color: "rgba(255,255,255,0.28)", letterSpacing: "0.05em", flexShrink: 0 }}>
-                      {ev.date}
-                    </span>
-                  </div>
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 600, padding: "2px 9px", borderRadius: "999px", background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.30)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                    {ev.category}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════════════════════
           CTA — dark closing section

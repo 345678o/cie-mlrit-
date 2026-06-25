@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Camera } from "lucide-react";
@@ -240,117 +241,153 @@ export default function GalleryPage() {
   }, []);
 
   return (
-    <div ref={containerRef} style={{ background: "#0C0B09", overflowX: "hidden", color: "#FFFFFF" }}>
+    <div ref={containerRef} style={{ background: "#E8521A" }}>
 
       {/* ══════════════════════════════════════════════════════
-          HERO — cinematic dark opening
+          HERO — matches Verticals visual language
       ══════════════════════════════════════════════════════ */}
       <section
         ref={heroRef}
-        className="page-hero"
+        className="page-hero relative overflow-hidden flex flex-col"
         style={{
-          position: "relative",
-          height: "100vh",
-          minHeight: "600px",
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          paddingBottom: "8vh",
+          background: "#E8521A",
           paddingTop: "var(--nav-height)",
+          minHeight: "68vh",
         }}
       >
-        {/* Animated background */}
-        <div
-          className="gh-bg"
-          style={{
-            position: "absolute",
-            inset: "-12%",
-            background:
-              "radial-gradient(ellipse 80% 80% at 20% 25%, rgba(232,82,26,0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 80% 75%, rgba(30,64,175,0.10) 0%, transparent 60%), #0C0B09",
-            willChange: "transform",
-          }}
-        >
-          <div style={{ position: "absolute", inset: 0, backgroundImage: GRAIN, opacity: 0.065 }} />
-        </div>
+        {/* Grain */}
+        <div aria-hidden className="absolute inset-0 pointer-events-none" style={{
+          backgroundImage: GRAIN,
+          opacity: 0.035, mixBlendMode: "multiply" as const,
+        }} />
 
-        <div className="page-container" style={{ position: "relative", zIndex: 1, width: "100%" }}>
-          {/* Archive badge */}
-          <div
-            className="gh-meta"
-            style={{
-              marginBottom: "20px",
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
-            <Camera size={13} style={{ color: "#E8521A", flexShrink: 0 }} />
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.36)" }}>
-              CIE Visual Archive
-            </span>
-            <div style={{ width: "32px", height: "1px", background: "rgba(255,255,255,0.12)" }} />
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", color: "#E8521A", letterSpacing: "0.1em" }}>2019 — 2026</span>
-          </div>
+        {/* Arc — top right (parallax float) */}
+        <svg aria-hidden className="absolute pointer-events-none gh-arc-tr"
+          style={{ top: "-14%", right: "-8%", width: "46vw", height: "46vw", maxWidth: 540, maxHeight: 540, opacity: 0.18 }}
+          viewBox="0 0 540 540" fill="none">
+          <circle cx="270" cy="270" r="250" stroke="rgba(255,255,255,1)" strokeWidth="70" fill="none" />
+        </svg>
 
-          {/* Headline lines */}
-          <div style={{ overflow: "hidden" }}>
-            <div
-              className="gh-line"
+        {/* Arc — bottom left (parallax float) */}
+        <svg aria-hidden className="absolute pointer-events-none gh-arc-bl"
+          style={{ bottom: "-10%", left: "-6%", width: "26vw", height: "26vw", maxWidth: 300, maxHeight: 300, opacity: 0.13 }}
+          viewBox="0 0 300 300" fill="none">
+          <circle cx="150" cy="150" r="130" stroke="rgba(255,255,255,1)" strokeWidth="46" fill="none" />
+        </svg>
+
+        {/* Dot grid — top left */}
+        <div aria-hidden className="absolute pointer-events-none" style={{
+          top: "calc(var(--nav-height) + 16px)", left: "16px",
+          width: "72px", height: "72px",
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.30) 1.5px, transparent 1.5px)",
+          backgroundSize: "12px 12px",
+        }} />
+
+        {/* Ghost watermark */}
+        <div aria-hidden className="absolute pointer-events-none select-none" style={{
+          bottom: "20px", right: "-12px",
+          fontFamily: "var(--font-heading)", fontWeight: 900,
+          fontSize: "clamp(120px,22vw,380px)",
+          color: "rgba(0,0,0,0.06)", lineHeight: 1, letterSpacing: "-0.06em",
+          userSelect: "none" as const,
+        }}>GALLERY</div>
+
+        {/* Content */}
+        <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
+          <div className="page-container w-full" style={{ paddingTop: "clamp(36px,5vw,56px)", paddingBottom: "clamp(48px,6vw,72px)" }}>
+
+
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 56 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.95, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                fontFamily: "var(--font-heading)",
-                fontWeight: 900,
-                fontSize: "clamp(44px, 13vw, 188px)",
-                lineHeight: 0.86,
-                letterSpacing: "-0.045em",
-                textTransform: "uppercase",
-                color: "#FFFFFF",
+                fontFamily: "var(--font-heading)", fontWeight: 900,
+                fontSize: "clamp(48px, 11vw, 152px)",
+                lineHeight: 0.90, letterSpacing: "-0.045em",
+                textTransform: "uppercase" as const,
+                marginBottom: 0,
               }}
             >
-              CAPTURED
-            </div>
-          </div>
-          <div style={{ overflow: "hidden", marginBottom: "clamp(28px, 4vw, 48px)" }}>
-            <div
-              className="gh-line"
+              <span style={{ display: "block", color: "#FFFFFF" }}>CAPTURED</span>
+              <span style={{
+                display: "block", color: "transparent",
+                WebkitTextStroke: "2.5px rgba(255,255,255,0.80)",
+                fontSize: "0.82em",
+                marginTop: "0.04em",
+              }}>MOMENTS</span>
+            </motion.h1>
+
+            {/* Script accent */}
+            <motion.p
+              initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.50 }}
               style={{
-                fontFamily: "var(--font-heading)",
-                fontWeight: 900,
-                fontSize: "clamp(44px, 13vw, 188px)",
-                lineHeight: 0.86,
-                letterSpacing: "-0.045em",
-                textTransform: "uppercase",
-                color: "transparent",
-                WebkitTextStroke: "2px rgba(255,255,255,0.22)",
+                fontFamily: "var(--font-script)",
+                fontSize: "clamp(18px, 2.4vw, 30px)",
+                color: "rgba(255,255,255,0.90)", lineHeight: 1.2,
+                marginTop: "18px", marginBottom: "20px",
+                display: "inline-block", transform: "rotate(-1.5deg)",
               }}
             >
-              MOMENTS
-            </div>
-          </div>
+              — every innovation has a story
+            </motion.p>
 
-          {/* Sub row */}
-          <div
-            className="gh-meta"
-            style={{
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              gap: "16px",
-            }}
-          >
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(13px, 1.4vw, 15px)", lineHeight: 1.7, color: "rgba(255,255,255,0.38)", maxWidth: "380px" }}>
-              A visual record of innovation, collaboration, and ambition — from the labs, stages, and workshops of MLRIT CIE.
-            </p>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <div style={{ width: "32px", height: "1px", background: "rgba(255,255,255,0.16)" }} />
-              <span style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.18)" }}>
-                Scroll to explore
-              </span>
-            </div>
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.62 }}
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "clamp(14px,1.4vw,16px)", lineHeight: 1.78,
+                color: "rgba(255,255,255,0.72)",
+                maxWidth: "min(480px,100%)",
+                marginBottom: 0,
+              }}
+            >
+              Explore the journey of CIE through photographs capturing hackathons, workshops, startup events, guest lectures, celebrations, competitions, and behind-the-scenes moments. Every image reflects creativity, collaboration, and innovation.
+            </motion.p>
+
+            {/* Stats row */}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.76 }}
+              style={{
+                display: "flex", flexWrap: "wrap", gap: "clamp(18px,3vw,32px)",
+                marginTop: "clamp(28px,4vw,44px)",
+              }}
+            >
+              {[
+                { v: "500+",   l: "Photos" },
+                { v: "50+",   l: "Events Covered" },
+                { v: "5 yrs", l: "of Memories" },
+                { v: "1000+", l: "Participants" },
+              ].map(({ v, l }) => (
+                <div key={l}>
+                  <div style={{
+                    fontFamily: "var(--font-heading)", fontWeight: 900,
+                    fontSize: "clamp(20px,2.8vw,28px)", color: "#FFFFFF", lineHeight: 1,
+                  }}>{v}</div>
+                  <div style={{
+                    fontFamily: "var(--font-body)", fontSize: "11px",
+                    color: "rgba(255,255,255,0.55)", marginTop: "3px", fontWeight: 600,
+                    letterSpacing: "0.04em",
+                  }}>{l}</div>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>
+
+      <style>{`
+        @keyframes floatArc {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50%       { transform: translateY(-10px) rotate(1deg); }
+        }
+        .gh-arc-tr { animation: floatArc 8s ease-in-out infinite; }
+        .gh-arc-bl { animation: floatArc 10s ease-in-out infinite reverse; }
+      `}</style>
 
       {/* ══════════════════════════════════════════════════════
           INTRO TEXT — light section

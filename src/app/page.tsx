@@ -19,6 +19,8 @@ import {
   Printer,
   Handshake,
   BookOpen,
+  PenLine,
+  MessageSquare,
 } from "lucide-react";
 
 /* ── Animated counter ─────────────────────────────────────────────── */
@@ -128,10 +130,10 @@ const studios = [
 ];
 
 const timeline = [
-  { step: "01", title: "Ideate", desc: "Brainstorm and validate your idea" },
-  { step: "02", title: "Build",  desc: "Prototype with expert guidance" },
-  { step: "03", title: "Test",   desc: "Iterate through user feedback" },
-  { step: "04", title: "Launch", desc: "Go to market with full support" },
+  { step: "01", title: "Ideate",  desc: "Brainstorm and validate your idea",    icon: Lightbulb },
+  { step: "02", title: "Build",   desc: "Prototype with expert guidance",        icon: PenLine },
+  { step: "03", title: "Test",    desc: "Iterate through user feedback",         icon: MessageSquare },
+  { step: "04", title: "Launch",  desc: "Go to market with full support",        icon: Rocket },
 ];
 
 
@@ -259,27 +261,6 @@ export default function HomePage() {
               {/* ── LEFT: Text ── */}
               <div style={{ position: "relative" }}>
 
-                {/* Dashed pill badge */}
-                <motion.div
-                  initial={{ opacity: 0, x: -28 }} animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.55, delay: 0.10 }}
-                  style={{
-                    display: "inline-flex", alignItems: "center", gap: "8px",
-                    background: "rgba(0,0,0,0.18)", border: "1.5px dashed rgba(255,255,255,0.35)",
-                    borderRadius: "999px", padding: "5px 16px 5px 5px", marginBottom: "28px",
-                  }}
-                >
-                  <div style={{
-                    width: "28px", height: "28px", borderRadius: "50%",
-                    background: "#FFFFFF", display: "flex", alignItems: "center",
-                    justifyContent: "center", fontSize: "13px", flexShrink: 0,
-                  }}>⚡</div>
-                  <span style={{
-                    fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700,
-                    letterSpacing: "0.15em", textTransform: "uppercase" as const,
-                    color: "rgba(255,255,255,0.92)",
-                  }}>MLRIT Centre for Innovation</span>
-                </motion.div>
 
                 {/* HUGE stacked display headline */}
                 <motion.h1
@@ -668,7 +649,7 @@ export default function HomePage() {
       {/* ────────────────────────────────────────────────────────────
           WHAT WE DO  —  #FFFFFF (Warm Neutral)
       ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: BG_WARM, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
+      <section style={{ background: BG_WARM, paddingTop: SECTION_PY, paddingBottom: "40px" }}>
         <div className={CONTAINER}>
           <FadeIn className="text-center mb-8 lg:mb-16">
             <span className="section-tag">What We Do</span>
@@ -686,33 +667,48 @@ export default function HomePage() {
             </h2>
           </FadeIn>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
+          <div className="grid sm:grid-cols-2 gap-6 items-stretch">
             {studios.map((studio, i) => (
               <FadeIn key={studio.name} delay={i * 0.08}>
-                <div className="card-light h-full" style={{ padding: "32px 28px" }}>
-                  <div className="icon-box mb-5">
-                    <studio.icon size={21} style={{ color: "#333333" }} />
+                <div
+                  className="card-light h-full"
+                  style={{
+                    padding: "32px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    minHeight: "360px",
+                  }}
+                >
+                  {/* Icon */}
+                  <div style={{
+                    width: "64px", height: "64px", borderRadius: "18px",
+                    background: "rgba(0,0,0,0.04)", border: "1px solid rgba(0,0,0,0.09)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    flexShrink: 0, marginBottom: "24px",
+                  }}>
+                    <studio.icon size={24} style={{ color: "#333333" }} />
                   </div>
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      fontWeight: 700,
-                      fontSize: "17px",
-                      letterSpacing: "-0.02em",
-                      color: T_SECONDARY,
-                      marginBottom: "8px",
-                    }}
-                  >
+                  {/* Title */}
+                  <h3 style={{
+                    fontFamily: "var(--font-heading)",
+                    fontWeight: 700,
+                    fontSize: "28px",
+                    lineHeight: 1.25,
+                    letterSpacing: "-0.02em",
+                    color: T_SECONDARY,
+                    marginBottom: "20px",
+                  }}>
                     {studio.name}
                   </h3>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "14px",
-                      lineHeight: 1.7,
-                      color: T_MUTED,
-                    }}
-                  >
+                  {/* Description */}
+                  <p style={{
+                    fontFamily: "var(--font-body)",
+                    fontSize: "17px",
+                    lineHeight: 1.8,
+                    color: T_MUTED,
+                    flex: 1,
+                  }}>
                     {studio.desc}
                   </p>
                 </div>
@@ -723,74 +719,102 @@ export default function HomePage() {
       </section>
 
       {/* ────────────────────────────────────────────────────────────
-          TIMELINE  —  #FFFFFF (White)
+          TIMELINE  —  Soft Peach Background
       ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: BG_WHITE, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
-        <div className={CONTAINER}>
-          <FadeIn className="text-center mb-8 lg:mb-16">
-            <span className="section-tag">Your Journey</span>
-            <h2
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontWeight: 800,
-                fontSize: "clamp(34px, 4vw, 50px)",
-                letterSpacing: "-0.03em",
-                color: T_PRIMARY,
-                marginTop: "4px",
-              }}
-            >
+      <section style={{ background: "#FFF5F0", paddingTop: "72px", paddingBottom: "72px", position: "relative", overflow: "hidden" }}>
+        {/* Blob left */}
+        <div style={{ position: "absolute", left: "-140px", top: "50%", transform: "translateY(-50%)", width: "340px", height: "420px", borderRadius: "50%", background: "rgba(251,146,100,0.18)", filter: "blur(72px)", pointerEvents: "none" }} />
+        {/* Blob right */}
+        <div style={{ position: "absolute", right: "-140px", top: "50%", transform: "translateY(-50%)", width: "340px", height: "420px", borderRadius: "50%", background: "rgba(251,146,100,0.18)", filter: "blur(72px)", pointerEvents: "none" }} />
+        {/* Dot grid top-left */}
+        <div style={{ position: "absolute", top: 0, left: 0, width: "180px", height: "180px", backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.12) 1px, transparent 1px)", backgroundSize: "18px 18px", pointerEvents: "none" }} />
+        {/* Dot grid top-right */}
+        <div style={{ position: "absolute", top: 0, right: 0, width: "180px", height: "180px", backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.12) 1px, transparent 1px)", backgroundSize: "18px 18px", pointerEvents: "none" }} />
+
+        <div className={CONTAINER} style={{ position: "relative", zIndex: 1 }}>
+          <FadeIn className="text-center mb-14">
+            <span style={{
+              display: "inline-flex", alignItems: "center",
+              background: "rgba(234,88,12,0.10)", border: "none",
+              color: "#EA580C", padding: "0.32rem 0.9rem", borderRadius: "999px",
+              fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.07em",
+              textTransform: "uppercase", marginBottom: "1.25rem",
+              fontFamily: "var(--font-body)",
+            }}>Your Journey</span>
+            <h2 style={{
+              fontFamily: "var(--font-heading)", fontWeight: 800,
+              fontSize: "clamp(34px, 4vw, 50px)", letterSpacing: "-0.03em",
+              color: T_PRIMARY, marginTop: "0",
+            }}>
               Startup Journey Timeline
             </h2>
+            <p style={{
+              fontFamily: "var(--font-body)", fontSize: "16px",
+              color: T_MUTED, marginTop: "16px", lineHeight: 1.7,
+              maxWidth: "520px", marginLeft: "auto", marginRight: "auto",
+            }}>
+              A proven 4-step pathway that helps ideas turn into impactful ventures.<br />
+              From ideation to launch, we&apos;re with you at every step.
+            </p>
           </FadeIn>
 
           <div className="relative">
-            <div
-              className="absolute top-8 left-0 right-0 h-px hidden lg:block"
-              style={{
-                background:
-                  "linear-gradient(to right, transparent, rgba(0,0,0,0.12), rgba(0,0,0,0.12), transparent)",
-              }}
-            />
+            {/* Horizontal connector line */}
+            <div className="absolute hidden lg:block" style={{
+              top: "32px", left: "12.5%", right: "12.5%", height: "1px",
+              background: "rgba(0,0,0,0.15)", zIndex: 0,
+            }} />
+            {/* Orange midpoint dots */}
+            {[25, 50, 75].map((pct) => (
+              <div key={pct} className="absolute hidden lg:block" style={{
+                top: "28px", left: `${pct}%`, transform: "translateX(-50%)",
+                width: "8px", height: "8px", borderRadius: "50%",
+                background: "#EA580C", zIndex: 2,
+              }} />
+            ))}
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 justify-items-center lg:justify-items-start items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
               {timeline.map((item, i) => (
                 <FadeIn key={item.step} delay={i * 0.12}>
-                  <div className="relative text-center lg:text-left">
-                    <div
-                      className="w-16 h-16 rounded-full flex items-center justify-center mx-auto lg:mx-0 mb-6 relative z-10"
-                      style={{
-                        background: "#111111",
-                        boxShadow: `0 0 0 8px ${BG_WHITE}, 0 0 0 10px rgba(0,0,0,0.08), 0 10px 28px rgba(0,0,0,0.14)`,
-                        fontFamily: "var(--font-heading)",
-                        fontWeight: 800,
-                        fontSize: "17px",
-                        color: "#FFFFFF",
-                      }}
-                    >
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "32px" }}>
+                    {/* Circle */}
+                    <div style={{
+                      width: "64px", height: "64px", borderRadius: "50%",
+                      background: "#111111", flexShrink: 0,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      position: "relative", zIndex: 10,
+                      fontFamily: "var(--font-heading)", fontWeight: 800,
+                      fontSize: "17px", color: "#FFFFFF",
+                    }}>
                       {item.step}
                     </div>
-                    <h3
-                      style={{
-                        fontFamily: "var(--font-heading)",
-                        fontWeight: 800,
-                        fontSize: "19px",
-                        letterSpacing: "-0.02em",
-                        color: T_SECONDARY,
-                        marginBottom: "8px",
-                      }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p
-                      style={{
-                        fontFamily: "var(--font-body)",
-                        fontSize: "14.5px",
-                        lineHeight: 1.68,
-                        color: T_MUTED,
-                      }}
-                    >
-                      {item.desc}
-                    </p>
+                    {/* Content */}
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                      {/* Icon */}
+                      <div style={{
+                        width: "64px", height: "64px", borderRadius: "18px",
+                        background: "rgba(234,88,12,0.08)",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                      }}>
+                        <item.icon size={28} style={{ color: "#EA580C" }} />
+                      </div>
+                      {/* Title */}
+                      <h3 style={{
+                        fontFamily: "var(--font-heading)", fontWeight: 700,
+                        fontSize: "26px", letterSpacing: "-0.02em",
+                        color: T_SECONDARY, marginTop: "24px",
+                      }}>
+                        {item.title}
+                      </h3>
+                      {/* Description */}
+                      <p style={{
+                        fontFamily: "var(--font-body)", fontSize: "16px",
+                        lineHeight: 1.7, color: T_MUTED,
+                        marginTop: "16px", maxWidth: "220px",
+                      }}>
+                        {item.desc}
+                      </p>
+                    </div>
                   </div>
                 </FadeIn>
               ))}
@@ -802,7 +826,7 @@ export default function HomePage() {
       {/* ────────────────────────────────────────────────────────────
           FEATURED PROGRAMS  —  #FFFFFF (Light Orange Background)
       ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: BG_CREAM, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
+      <section style={{ background: BG_CREAM, paddingTop: "40px", paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
           <FadeIn>
             <div
@@ -810,7 +834,14 @@ export default function HomePage() {
               style={{ marginBottom: "clamp(28px,5vw,52px)" }}
             >
               <div>
-                <span className="section-tag">Programs</span>
+                <span style={{
+                  display: "inline-flex", alignItems: "center",
+                  background: "rgba(234,88,12,0.08)", border: "1px solid rgba(234,88,12,0.20)",
+                  color: "#EA580C", padding: "0.32rem 0.9rem", borderRadius: "999px",
+                  fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.07em",
+                  textTransform: "uppercase", marginBottom: "1rem",
+                  fontFamily: "var(--font-body)",
+                }}>Programs</span>
                 <h2
                   style={{
                     fontFamily: "var(--font-heading)",
@@ -833,50 +864,56 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-2 gap-6 items-stretch">
             {programs.map((prog, i) => (
               <FadeIn key={prog.title} delay={i * 0.08}>
-                <div className="card-light h-full" style={{ padding: "clamp(20px,4vw,40px)" }}>
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="icon-box" style={{ width: "54px", height: "54px", borderRadius: "15px" }}>
-                      <prog.icon size={23} style={{ color: "#333333" }} />
+                <div className="card-light h-full" style={{ padding: "clamp(20px,3vw,32px)" }}>
+                  <div className="flex items-start gap-4">
+                    {/* Icon — left */}
+                    <div style={{
+                      width: "68px", height: "68px", borderRadius: "16px",
+                      background: "rgba(234,88,12,0.08)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      flexShrink: 0,
+                    }}>
+                      <prog.icon size={28} style={{ color: "#EA580C" }} />
                     </div>
-                    <span
-                      style={{
+                    {/* Text — right */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-3" style={{ marginBottom: "10px" }}>
+                        <h3 style={{
+                          fontFamily: "var(--font-heading)",
+                          fontWeight: 800,
+                          fontSize: "18px",
+                          letterSpacing: "-0.02em",
+                          color: T_SECONDARY,
+                        }}>
+                          {prog.title}
+                        </h3>
+                        <span style={{
+                          fontFamily: "var(--font-body)",
+                          fontSize: "10px",
+                          fontWeight: 700,
+                          letterSpacing: "0.08em",
+                          textTransform: "uppercase" as const,
+                          color: "#EA580C",
+                          background: "rgba(234,88,12,0.08)",
+                          border: "1px solid rgba(234,88,12,0.18)",
+                          padding: "3px 10px",
+                          borderRadius: "999px",
+                          whiteSpace: "nowrap" as const,
+                          flexShrink: 0,
+                        }}>
+                          {prog.tag}
+                        </span>
+                      </div>
+                      <p style={{
                         fontFamily: "var(--font-body)",
-                        fontSize: "10.5px",
-                        fontWeight: 700,
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase" as const,
-                        color: "#555555",
-                        background: "rgba(0,0,0,0.05)",
-                        border: "1px solid rgba(0,0,0,0.10)",
-                        padding: "4px 12px",
-                        borderRadius: "999px",
-                      }}
-                    >
-                      {prog.tag}
-                    </span>
+                        fontSize: "14.5px",
+                        lineHeight: 1.72,
+                        color: T_MED,
+                      }}>
+                        {prog.desc}
+                      </p>
+                    </div>
                   </div>
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      fontWeight: 800,
-                      fontSize: "21px",
-                      letterSpacing: "-0.02em",
-                      color: T_SECONDARY,
-                      marginBottom: "12px",
-                    }}
-                  >
-                    {prog.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "15px",
-                      lineHeight: 1.76,
-                      color: T_MED,
-                    }}
-                  >
-                    {prog.desc}
-                  </p>
                 </div>
               </FadeIn>
             ))}
@@ -955,72 +992,6 @@ export default function HomePage() {
       `}</style>
 
       {/* ────────────────────────────────────────────────────────────
-          RECENT EVENTS  —  #FFFFFF
-      ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: BG_WARM, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
-        <div className={CONTAINER}>
-          <FadeIn>
-            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6" style={{ marginBottom: "clamp(28px,5vw,52px)" }}>
-              <div>
-                <span className="section-tag">Recent Events</span>
-                <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(34px,4vw,50px)", letterSpacing: "-0.03em", color: T_PRIMARY, marginTop: "4px" }}>
-                  What We&apos;ve Been Up To
-                </h2>
-              </div>
-              <Link href="/events" className="btn-secondary-light whitespace-nowrap flex-shrink-0">
-                All Events <ArrowRight size={16} />
-              </Link>
-            </div>
-          </FadeIn>
-
-          <div className="grid md:grid-cols-3 gap-6 items-stretch">
-            {recentEvents.map((ev, i) => (
-              <FadeIn key={ev.title} delay={i * 0.10}>
-                <div className="card-light flex flex-col h-full" style={{ padding: "0", overflow: "hidden" }}>
-                  {/* Colour header strip */}
-                  <div style={{ height: "6px", background: ev.accent }} />
-                  <div style={{ padding: "clamp(18px,3vw,28px) clamp(18px,3vw,28px) clamp(14px,2vw,24px)", flex: 1, display: "flex", flexDirection: "column" }}>
-                    {/* Category + date */}
-                    <div className="flex items-center justify-between gap-2" style={{ marginBottom: "14px" }}>
-                      <span style={{
-                        fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700,
-                        letterSpacing: "0.1em", textTransform: "uppercase" as const,
-                        color: ev.accent, background: `${ev.accent}14`,
-                        border: `1px solid ${ev.accent}28`,
-                        padding: "3px 10px", borderRadius: "999px",
-                      }}>{ev.category}</span>
-                      <span style={{ fontFamily: "var(--font-body)", fontSize: "11px", color: T_MUTED, display: "flex", alignItems: "center", gap: "4px" }}>
-                        <CalendarDays size={11} /> {ev.date}
-                      </span>
-                    </div>
-                    {/* Title */}
-                    <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "19px", letterSpacing: "-0.02em", color: T_PRIMARY, marginBottom: "10px", lineHeight: 1.2 }}>
-                      {ev.title}
-                    </h3>
-                    {/* Desc */}
-                    <p style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", lineHeight: 1.72, color: T_MED, flex: 1, marginBottom: "18px" }}>
-                      {ev.desc}
-                    </p>
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-1.5">
-                      {ev.tags.map(tag => (
-                        <span key={tag} style={{
-                          fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 600,
-                          padding: "3px 9px", borderRadius: "999px",
-                          background: "rgba(0,0,0,0.04)", color: T_MUTED,
-                          border: "1px solid rgba(0,0,0,0.08)",
-                        }}>{tag}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ────────────────────────────────────────────────────────────
           CTA  —  warm light gradient (#FFFFFF → #FFFFFF)
           Orange used only on heading accent + primary button
       ──────────────────────────────────────────────────────────── */}
@@ -1030,86 +1001,66 @@ export default function HomePage() {
           background: `linear-gradient(160deg, ${BG_CREAM} 0%, ${BG_SURFACE} 50%, ${BG_WARM} 100%)`,
           paddingTop: SECTION_PY,
           paddingBottom: SECTION_PY,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        {/* Decorative SVG layer — warm orange, very subtle */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Large concentric rings — bottom right */}
-          <svg
-            className="absolute -bottom-20 -right-20 opacity-[0.12]"
-            width="520" height="520" viewBox="0 0 520 520"
-          >
-            <circle cx="260" cy="260" r="240" fill="none" stroke={ORANGE} strokeWidth="1.2" />
-            <circle cx="260" cy="260" r="175" fill="none" stroke={ORANGE} strokeWidth="0.8" />
-            <circle cx="260" cy="260" r="110" fill="none" stroke={ORANGE} strokeWidth="0.7" />
-            <circle cx="260" cy="260" r="55"  fill="none" stroke={ORANGE} strokeWidth="0.6" />
-            <circle cx="260" cy="260" r="8"   fill={ORANGE} opacity="0.3" />
+        {/* Decorative layer — symmetrical left + right, z-0 */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+          {/* Concentric rings — bottom-right */}
+          <svg className="absolute -bottom-20 -right-20 opacity-[0.25]" width="480" height="480" viewBox="0 0 480 480">
+            <circle cx="240" cy="240" r="220" fill="none" stroke={ORANGE} strokeWidth="1.2" />
+            <circle cx="240" cy="240" r="160" fill="none" stroke={ORANGE} strokeWidth="0.8" />
+            <circle cx="240" cy="240" r="100" fill="none" stroke={ORANGE} strokeWidth="0.7" />
+            <circle cx="240" cy="240" r="50"  fill="none" stroke={ORANGE} strokeWidth="0.6" />
           </svg>
-
-          {/* Node graph — top left */}
-          <svg
-            className="absolute -top-10 -left-10 opacity-[0.09]"
-            width="380" height="380" viewBox="0 0 380 380"
-          >
-            <circle cx="75"  cy="75"  r="9"  fill={ORANGE} />
-            <circle cx="190" cy="55"  r="7"  fill={ORANGE} />
-            <circle cx="305" cy="95"  r="11" fill={ORANGE} />
-            <circle cx="55"  cy="190" r="7"  fill={ORANGE} />
-            <circle cx="190" cy="190" r="13" fill={ORANGE} />
-            <circle cx="320" cy="190" r="8"  fill={ORANGE} />
-            <circle cx="95"  cy="305" r="10" fill={ORANGE} />
-            <circle cx="250" cy="320" r="7"  fill={ORANGE} />
-            <line x1="75"  y1="75"  x2="190" y2="55"  stroke={ORANGE} strokeWidth="0.8" />
-            <line x1="190" y1="55"  x2="305" y2="95"  stroke={ORANGE} strokeWidth="0.8" />
-            <line x1="75"  y1="75"  x2="55"  y2="190" stroke={ORANGE} strokeWidth="0.8" />
-            <line x1="75"  y1="75"  x2="190" y2="190" stroke={ORANGE} strokeWidth="0.8" />
-            <line x1="190" y1="55"  x2="190" y2="190" stroke={ORANGE} strokeWidth="0.8" />
-            <line x1="305" y1="95"  x2="320" y2="190" stroke={ORANGE} strokeWidth="0.8" />
-            <line x1="55"  y1="190" x2="190" y2="190" stroke={ORANGE} strokeWidth="0.8" />
-            <line x1="190" y1="190" x2="320" y2="190" stroke={ORANGE} strokeWidth="0.8" />
-            <line x1="55"  y1="190" x2="95"  y2="305" stroke={ORANGE} strokeWidth="0.8" />
-            <line x1="190" y1="190" x2="250" y2="320" stroke={ORANGE} strokeWidth="0.8" />
-            <line x1="320" y1="190" x2="250" y2="320" stroke={ORANGE} strokeWidth="0.8" />
+          {/* Concentric rings — top-left (mirror) */}
+          <svg className="absolute -top-20 -left-20 opacity-[0.25]" width="480" height="480" viewBox="0 0 480 480">
+            <circle cx="240" cy="240" r="220" fill="none" stroke={ORANGE} strokeWidth="1.2" />
+            <circle cx="240" cy="240" r="160" fill="none" stroke={ORANGE} strokeWidth="0.8" />
+            <circle cx="240" cy="240" r="100" fill="none" stroke={ORANGE} strokeWidth="0.7" />
+            <circle cx="240" cy="240" r="50"  fill="none" stroke={ORANGE} strokeWidth="0.6" />
           </svg>
-
           {/* Centre hexagon */}
-          <svg
-            className="absolute opacity-[0.05]"
-            style={{ top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}
-            width="640" height="640" viewBox="0 0 640 640"
-          >
-            <polygon points="320,30 595,180 595,460 320,610 45,460 45,180"   fill="none" stroke={ORANGE} strokeWidth="1.2" />
-            <polygon points="320,120 520,240 520,400 320,520 120,400 120,240" fill="none" stroke={ORANGE} strokeWidth="0.8" />
+          <svg className="absolute opacity-[0.10]" style={{ top: "50%", left: "50%", transform: "translate(-50%,-50%)" }} width="600" height="600" viewBox="0 0 600 600">
+            <polygon points="300,20 565,165 565,435 300,580 35,435 35,165" fill="none" stroke={ORANGE} strokeWidth="1.2" />
+            <polygon points="300,110 490,220 490,380 300,490 110,380 110,220" fill="none" stroke={ORANGE} strokeWidth="0.8" />
           </svg>
-
-          {/* Floating dots */}
+          {/* Symmetrical floating dots */}
           {[
-            { s: 6,  t: "22%", l: "28%", o: 0.22 },
-            { s: 4,  t: "68%", l: "16%", o: 0.16 },
-            { s: 8,  t: "38%", r: "22%", o: 0.14 },
-            { s: 5,  t: "58%", r: "38%", o: 0.18 },
+            { s: 6, t: "22%", l: "8%",  o: 0.20 },
+            { s: 4, t: "65%", l: "12%", o: 0.15 },
+            { s: 6, t: "22%", r: "8%",  o: 0.20 },
+            { s: 4, t: "65%", r: "12%", o: 0.15 },
+            { s: 5, t: "45%", l: "5%",  o: 0.12 },
+            { s: 5, t: "45%", r: "5%",  o: 0.12 },
           ].map((dot, k) => (
-            <div
-              key={k}
-              className="absolute rounded-full"
-              style={{
-                width: dot.s, height: dot.s,
-                background: ORANGE,
-                opacity: dot.o,
-                top: dot.t,
-                left: (dot as any).l,
-                right: (dot as any).r,
-              }}
-            />
+            <div key={k} className="absolute rounded-full" style={{
+              width: dot.s, height: dot.s,
+              background: ORANGE, opacity: dot.o, top: dot.t,
+              left: (dot as any).l, right: (dot as any).r,
+            }} />
           ))}
         </div>
 
-        {/* CTA content */}
-        <FadeIn className="relative z-10">
-          <div className={`${CONTAINER} text-center`}>
+        {/* CTA content — true center */}
+        <div style={{ position: "relative", zIndex: 10, width: "100%" }}>
+        <FadeIn>
+          <div style={{
+            maxWidth: "900px",
+            width: "100%",
+            margin: "0 auto",
+            padding: "0 1.25rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+          }}>
             {/* Label pill */}
             <span
-              className="inline-flex items-center gap-2 mb-8"
+              className="inline-flex items-center gap-2"
               style={{
                 background: "rgba(255,94,44,0.10)",
                 border: "1px solid rgba(255,94,44,0.22)",
@@ -1121,12 +1072,10 @@ export default function HomePage() {
                 fontWeight: 700,
                 letterSpacing: "0.07em",
                 textTransform: "uppercase",
+                marginBottom: "32px",
               }}
             >
-              <span
-                className="w-1.5 h-1.5 rounded-full animate-pulse"
-                style={{ background: ORANGE }}
-              />
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: ORANGE }} />
               CIE · MLRIT
             </span>
 
@@ -1148,20 +1097,20 @@ export default function HomePage() {
 
             {/* Subtext */}
             <p
-              className="max-w-xl mx-auto mb-10"
               style={{
                 fontFamily: "var(--font-body)",
                 fontSize: "18px",
                 lineHeight: 1.72,
                 color: T_MED,
+                maxWidth: "560px",
+                marginBottom: "40px",
               }}
             >
-              500+ MLRIT students building products, running startups, and driving innovation
-              across five active verticals.
+              500+ MLRIT students building products, running startups, and driving innovation across five active verticals.
             </p>
 
-            {/* Ghost links */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            {/* Buttons */}
+            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", gap: "20px", flexWrap: "wrap" }}>
               <Link
                 href="/verticals"
                 className="inline-flex items-center gap-2 rounded-[10px] transition-all duration-200"
@@ -1193,6 +1142,7 @@ export default function HomePage() {
             </div>
           </div>
         </FadeIn>
+        </div>
       </section>
     </div>
   );

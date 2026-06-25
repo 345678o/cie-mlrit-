@@ -245,7 +245,7 @@ export default function Navbar() {
 
           {/* ── CTA — desktop ────────────────────────────────── */}
           <Link
-            href="/contact"
+            href="/join"
             className="nav-desktop-cta"
             style={{
               display: "inline-flex",
@@ -491,7 +491,7 @@ export default function Navbar() {
               }}
             >
               <Link
-                href="/contact"
+                href="/join"
                 onClick={() => setOpen(false)}
                 style={{
                   display: "flex",

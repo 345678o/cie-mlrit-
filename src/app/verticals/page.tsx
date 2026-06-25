@@ -260,30 +260,6 @@ export default function VerticalsPage() {
         <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
           <div className="page-container w-full" style={{ paddingTop: "clamp(36px,5vw,56px)", paddingBottom: "clamp(48px,6vw,72px)" }}>
 
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.08 }}
-              style={{
-                display: "inline-flex", alignItems: "center", gap: "8px",
-                background: "rgba(0,0,0,0.18)", border: "1.5px dashed rgba(255,255,255,0.32)",
-                borderRadius: "999px", padding: "5px 16px 5px 6px", marginBottom: "28px",
-              }}
-            >
-              <div style={{
-                width: "26px", height: "26px", borderRadius: "50%",
-                background: "#FFFFFF", display: "flex", alignItems: "center",
-                justifyContent: "center", fontSize: "12px", flexShrink: 0,
-              }}>⚡</div>
-              <span style={{
-                fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700,
-                letterSpacing: "0.15em", textTransform: "uppercase" as const,
-                color: "rgba(255,255,255,0.92)",
-              }}>
-                {VERTICALS.length} Specialized Domains
-              </span>
-            </motion.div>
-
             {/* Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 56 }} animate={{ opacity: 1, y: 0 }}

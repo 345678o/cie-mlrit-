@@ -363,26 +363,6 @@ export default function CouncilPage() {
         </div>
       </section>
 
-      {/* Teams — Accordion breakdown */}
-      <section style={{ background: "#F5F5F5", paddingTop: "64px", paddingBottom: "72px" }}>
-        <div className="page-container">
-          <FadeIn className="mb-10">
-            <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Departments</span>
-            <h2 className="font-black mt-4" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1 }}>
-              Team Structure
-            </h2>
-            <p className="mt-3 text-base" style={{ color: "#6B7280", maxWidth: "520px", lineHeight: 1.7 }}>
-              CIE runs across six specialized departments — each with its own focus, team, and contribution to the ecosystem.
-            </p>
-          </FadeIn>
-          <div className="flex flex-col gap-4">
-            {teams.map((section) => (
-              <TeamAccordion key={section.team} section={section} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Teams — ChromaGrid */}
       <section className="pb-16" style={{ background: "#000000", paddingTop: "88px" }}>
         <div className="page-container">

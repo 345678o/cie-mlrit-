@@ -86,27 +86,6 @@ export default function PageHero({
                 <span>{tag}</span>
               </div>
 
-              {/* Tag badge */}
-              <motion.div
-                initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.08 }}
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: "8px",
-                  background: "rgba(0,0,0,0.18)", border: "1.5px dashed rgba(255,255,255,0.32)",
-                  borderRadius: "999px", padding: "4px 14px 4px 5px", marginBottom: "26px",
-                }}
-              >
-                <div style={{
-                  width: "26px", height: "26px", borderRadius: "50%",
-                  background: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "12px", flexShrink: 0,
-                }}>✦</div>
-                <span style={{
-                  fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700,
-                  letterSpacing: "0.15em", textTransform: "uppercase" as const,
-                  color: "rgba(255,255,255,0.90)",
-                }}>{tag}</span>
-              </motion.div>
 
               {/* HUGE stacked display text */}
               <motion.h1
