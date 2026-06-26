@@ -51,8 +51,10 @@ const facultyCoordinators: Member[] = [
 ];
 
 const studentLeadership: Member[] = [
-  { name: "Karan Gupta", role: "President", dept: "CSE Final Year", year: "2024-25", linkedin: "#", email: "president@ciemlrit.in" },
-  { name: "Sneha Patel", role: "Vice President", dept: "ECE Final Year", year: "2024-25", linkedin: "#", email: "vp@ciemlrit.in" },
+  { name: "Ghanashyam Kodekandla", role: "President",                dept: "Technical Team",          year: "2026-27", linkedin: "#", email: "president@ciemlrit.in" },
+  { name: "Mahima Tatineni",       role: "Vice President",           dept: "Operations & Finance",    year: "2026-27", linkedin: "#", email: "vp@ciemlrit.in" },
+  { name: "Aarthi",                role: "Secretary",                dept: "Operations & Finance",    year: "2026-27", linkedin: "#", email: "secretary@ciemlrit.in" },
+  { name: "Keertan Kuppili",       role: "Chief Technical Officer",  dept: "Technical Team",          year: "2026-27", linkedin: "#", email: "cto@ciemlrit.in" },
 ];
 
 const teamExpertise: Record<string, string> = {
@@ -431,7 +433,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                     style={{
                       objectFit: "cover",
                       objectPosition: "top center",
-                      transform: isActive ? "scale(1.06)" : "scale(0.80)",
+                      transform: isActive ? "scale(1.06)" : "scale(1)",
                       filter: "none",
                       transition: "transform .55s cubic-bezier(.16,1,.3,1), filter .5s ease",
                     }}
@@ -488,7 +490,7 @@ export default function CouncilPage() {
 
       {/* Faculty */}
       <section style={{ background: "#FFFFFF", paddingTop: "96px", paddingBottom: "48px" }}>
-        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "48px" }}>
+        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "clamp(20px, 5vw, 48px)" }}>
           <FadeIn>
             <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Faculty</span>
             <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>Faculty Coordinators</h2>
@@ -524,10 +526,10 @@ export default function CouncilPage() {
 
       {/* Student Leadership */}
       <section style={{ background: "#FFFFFF", paddingTop: "96px", paddingBottom: "96px" }}>
-        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "48px" }}>
+        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "clamp(20px, 5vw, 48px)" }}>
           <FadeIn>
             <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Leadership</span>
-            <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>Student Leadership 2024–25</h2>
+            <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>Student Leadership 2026–27</h2>
           </FadeIn>
           <div className="grid sm:grid-cols-2 gap-8 items-stretch" style={{ marginTop: "40px" }}>
             {studentLeadership.map((member) => (
@@ -565,7 +567,7 @@ export default function CouncilPage() {
 
       {/* Teams — ChromaGrid */}
       <section style={{ background: "#000000", paddingTop: "96px", paddingBottom: "72px" }}>
-        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "48px" }}>
+        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "clamp(20px, 5vw, 48px)" }}>
 
           {/* Badge */}
           <FadeIn>
@@ -666,7 +668,7 @@ export default function CouncilPage() {
 
       {/* Join CTA */}
       <section style={{ background: "#FFFFFF", paddingTop: "96px", paddingBottom: "96px" }}>
-        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "48px" }}>
+        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "clamp(20px, 5vw, 48px)" }}>
         <FadeIn className="text-center">
           <span className="section-tag" style={{ marginBottom: "32px" }}>Join the Team</span>
           <h2 className="text-4xl font-black" style={{ color: "#000000", marginBottom: "32px" }}>Want to Be Part of CIE Council?</h2>
