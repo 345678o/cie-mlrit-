@@ -495,40 +495,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ── Bottom stats strip ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.95 }}
-          style={{ background: BG_CREAM, position: "relative", zIndex: 10 }}
-        >
-          <div className={CONTAINER}>
-            <div className="grid grid-cols-2 lg:grid-cols-4 items-center">
-              {stats.map((s, i) => (
-                <div key={s.label} className="stats-strip-cell" style={{
-                  padding: "clamp(14px,2vw,20px) clamp(12px,2vw,24px)",
-                  borderRight: i < stats.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
-                  display: "flex", alignItems: "center", gap: "clamp(8px,1.5vw,12px)",
-                }}>
-                  <div className="hidden sm:flex" style={{
-                    width: "38px", height: "38px", borderRadius: "10px",
-                    background: "rgba(0,0,0,0.05)", border: "1px solid rgba(0,0,0,0.09)",
-                    alignItems: "center", justifyContent: "center", flexShrink: 0,
-                  }}>
-                    <s.icon size={17} style={{ color: "#555555" }} />
-                  </div>
-                  <div>
-                    <div style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(17px,2.5vw,21px)", color: "#111111", lineHeight: 1 }}>
-                      <AnimatedCounter end={s.value} suffix={s.suffix} />
-                    </div>
-                    <div style={{ fontFamily: "var(--font-body)", fontSize: "11.5px", color: T_MUTED, marginTop: "3px" }}>
-                      {s.label}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
       </section>
 
       {/* ────────────────────────────────────────────────────────────

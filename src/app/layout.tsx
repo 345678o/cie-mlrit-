@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import BackToTop from "@/components/ui/BackToTop";
 import LoadingScreen from "@/components/ui/LoadingScreen";
+import { NavbarProvider } from "@/context/NavbarContext";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -63,11 +64,13 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        <LoadingScreen />
-        <Navbar />
-        <main id="main-content" className="flex-1">{children}</main>
-        <Footer />
-        <BackToTop />
+        <NavbarProvider>
+          <LoadingScreen />
+          <Navbar />
+          <main id="main-content" className="flex-1">{children}</main>
+          <Footer />
+          <BackToTop />
+        </NavbarProvider>
       </body>
     </html>
   );

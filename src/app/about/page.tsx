@@ -572,6 +572,63 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── DPIIT Registered Startups ────────────────────────────── */}
+      <section style={{ background: BG_WHITE, ...SECTION_PY }}>
+        <div className="page-container">
+          <FadeIn>
+            <SectionHeader
+              tag="Startups from CIE"
+              heading="DPIIT Registered Ventures"
+              sub="Startups founded by MLRIT students and alumni, officially recognised by the Department for Promotion of Industry and Internal Trade."
+            />
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            <div style={{ overflowX: "auto", borderRadius: "16px", border: "1px solid #E5E7EB", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "var(--font-body)", fontSize: "14px" }}>
+                <thead>
+                  <tr style={{ background: "#F9FAFB", borderBottom: "1px solid #E5E7EB" }}>
+                    {["S.No", "Startup / Venture", "Founder(s)", "DPIIT Certificate No."].map((h) => (
+                      <th key={h} style={{ padding: "14px 20px", textAlign: "left", fontWeight: 700, fontSize: "12px", letterSpacing: "0.06em", textTransform: "uppercase", color: T_MUTED, whiteSpace: "nowrap" }}>
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { no: 1,  name: "Synergem Consultancy Private Limited",  founders: "Goddati Vijay Kumar, G Kishanlal Sachdev",         cert: "DIPP194600" },
+                    { no: 2,  name: "Aczen Technologies Private Limited",     founders: "Umasurya Srinivas",                               cert: "DIPP165419" },
+                    { no: 3,  name: "Vish & Vin Travels Private Limited",     founders: "Sai Vindhya",                                     cert: "DIPP184129" },
+                    { no: 4,  name: "Marktech Creations Private Limited",     founders: "Yuvraj K, Manish Sagar Ramarapu",                 cert: "DIPP145691" },
+                    { no: 5,  name: "Digileaf Technologies Private Limited",  founders: "M David Raju",                                    cert: "DIPP145512" },
+                    { no: 6,  name: "Nearpik Technologies Private Limited",   founders: "K V Saketh",                                      cert: "DIPP140592" },
+                    { no: 7,  name: "Techaro Innov Private Limited",          founders: "G Rugvedh",                                       cert: "DIPP140747" },
+                    { no: 8,  name: "Urbane Vehicles India Private Limited",  founders: "Shreya Katlakunta",                               cert: "DIPP136161" },
+                    { no: 9,  name: "Amalyle LLP",                            founders: "Kavirayuni Viswanath Saketh, Kavirayuni Ramadevi", cert: "DIPP109394" },
+                    { no: 10, name: "Drones Origin Private Limited",          founders: "Abrar Ahmed",                                     cert: "DIPP104449" },
+                  ].map((row, i) => (
+                    <tr key={row.no}
+                      style={{ borderBottom: i < 9 ? "1px solid #F3F4F6" : "none", transition: "background 0.15s ease" }}
+                      onMouseEnter={e => (e.currentTarget.style.background = "#FFF7F5")}
+                      onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
+                      <td style={{ padding: "16px 20px", color: T_MUTED, fontWeight: 600, fontSize: "13px", width: "60px" }}>{row.no}</td>
+                      <td style={{ padding: "16px 20px", color: T_HEAD, fontWeight: 600, lineHeight: 1.4 }}>{row.name}</td>
+                      <td style={{ padding: "16px 20px", color: T_BODY, lineHeight: 1.5 }}>{row.founders}</td>
+                      <td style={{ padding: "16px 20px", whiteSpace: "nowrap" }}>
+                        <span style={{ display: "inline-block", background: `${ORANGE}12`, color: ORANGE, border: `1px solid ${ORANGE}30`, borderRadius: "8px", padding: "3px 10px", fontSize: "12px", fontWeight: 700, letterSpacing: "0.04em" }}>
+                          {row.cert}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
       {/* ── Faculty & Mentors ─────────────────────────────────────── */}
       <section style={{ background: BG_GRAY, ...SECTION_PY }}>
         <div className="page-container">

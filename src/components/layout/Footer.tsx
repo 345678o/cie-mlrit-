@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useNavbarVisibility } from "@/context/NavbarContext";
 
 /* ─── Branded social SVGs ───────────────────────────────────── */
 
@@ -160,6 +161,8 @@ const contactItems = [
    Footer
 ═══════════════════════════════════════════════════════════════ */
 export default function Footer() {
+  const { hidden } = useNavbarVisibility();
+  if (hidden) return null;
   return (
     <footer style={{ background: "#000000", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
       <div

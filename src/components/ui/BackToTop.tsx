@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
+import { useNavbarVisibility } from "@/context/NavbarContext";
 
 export default function BackToTop() {
+  const { hidden } = useNavbarVisibility();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -13,6 +15,7 @@ export default function BackToTop() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  if (hidden) return null;
   return (
     <AnimatePresence>
       {visible && (

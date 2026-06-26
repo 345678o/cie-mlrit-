@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link2, Mail, Users, ChevronDown, ChevronUp, Code, Palette, Camera, PenLine, Mic, BarChart2, FileText } from "lucide-react";
+import Link from "next/link";
 import ChromaGrid from "@/components/ui/ChromaGrid";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
@@ -36,20 +37,6 @@ type TeamSection = {
   members: Member[];
 };
 
-const facultyCoordinators: Member[] = [
-  { name: "Dr. Ganesh Miriyala",  role: "Head – CIE, Asst. Professor", dept: "Electronics & Communication Engineering" },
-  { name: "Dr. A. Vivek Anand",   role: "Professor",                   dept: "Aerospace Engineering" },
-  { name: "Dr. Amritha Saha",     role: "Asst. Professor",             dept: "Humanities & Sciences" },
-  { name: "Dr. Sumana Das",       role: "Associate Professor",         dept: "Electrical & Electronics Engineering" },
-  { name: "Mr. J. Laxmi Prasad",  role: "Asst. Professor",             dept: "Mechanical Engineering" },
-  { name: "Mrs. I. Sapthami",     role: "Asst. Professor",             dept: "Computer Science & Engineering" },
-  { name: "Mrs. Lakshmi Saritha", role: "Asst. Professor",             dept: "Computer Science & Machine Learning" },
-  { name: "Mrs. A. Sravanthi",    role: "Asst. Professor",             dept: "Computer Science & Design" },
-  { name: "Mrs. A. Nirisha",      role: "Asst. Professor",             dept: "Computer Science & IT" },
-  { name: "Mr. D. Sandeep",       role: "Asst. Professor",             dept: "Information Technology" },
-  { name: "Mr. M. Raju Naik",     role: "Asst. Professor",             dept: "Electronics & Communication Engineering" },
-  { name: "Mr. K. Pithamber",     role: "Asst. Professor",             dept: "Electronics & Communication Engineering" },
-];
 
 const studentLeadership: Member[] = [
   { name: "Karan Gupta", role: "President", dept: "CSE Final Year", year: "2024-25", linkedin: "#", email: "president@ciemlrit.in" },
@@ -170,7 +157,7 @@ const teams: TeamSection[] = [
   },
   {
     team: "Ops — Operations & Finance",
-    color: "#14E31D",
+    color: "#22C55E",
     description: "Keeps everything running — coordinating logistics for every event, managing budgets, vendor relations, and making sure no detail falls through the cracks.",
     members: [
        { name: "Dheeraj Kumar",     role: "Member", dept: "Ops", photo: "/council/OPS/Dheeraj Kumar.png" },
@@ -357,9 +344,8 @@ function TeamAccordion({ section }: { section: TeamSection }) {
 }
 
 const heroStats = [
-  { value: `${teams.reduce((s, t) => s + t.members.length, 0) + facultyCoordinators.length + studentLeadership.length}+`, label: "Total Members" },
+  { value: `${teams.reduce((s, t) => s + t.members.length, 0) + studentLeadership.length}+`, label: "Total Members" },
   { value: `${teams.length}`, label: "Active Teams" },
-  { value: `${facultyCoordinators.length}`, label: "Faculty Advisors" },
   { value: "2024–25", label: "Current Batch" },
 ];
 
@@ -389,7 +375,6 @@ export default function CouncilPage() {
         stats={[
           { value: "30+", label: "Council Members" },
           { value: "6", label: "Active Teams" },
-          { value: `${facultyCoordinators.length}`, label: "Faculty Advisors" },
           { value: "2024–25", label: "Current Batch" },
         ]}
         watermark="TEAM"
@@ -397,45 +382,9 @@ export default function CouncilPage() {
 
       {/* ── Shared container constant ── max-width 1400px, 32px inline padding */}
 
-      {/* Faculty */}
-      <section style={{ background: "#FFFFFF", paddingTop: "96px", paddingBottom: "48px" }}>
-        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "48px" }}>
-          <FadeIn>
-            <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Faculty</span>
-            <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>Faculty Coordinators</h2>
-          </FadeIn>
-          <div style={{ marginTop: "40px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "16px" }}>
-            {facultyCoordinators.map((member, i) => {
-              const initials = member.name.split(" ").map((n) => n[0]).join("").substring(0, 2).toUpperCase();
-              return (
-                <motion.div
-                  key={member.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                  className="rounded-2xl card-light flex flex-col items-center text-center"
-                  style={{ padding: "24px 16px 20px" }}
-                >
-                  <div className="w-14 h-14 rounded-full flex items-center justify-center text-lg font-black mb-4 flex-shrink-0"
-                    style={{ background: "rgba(255,94,44,0.10)", color: "#FF5E2C" }}>
-                    {initials}
-                  </div>
-                  <p style={{ color: "#000000", fontSize: "13px", fontWeight: 800, lineHeight: 1.3, marginBottom: "6px" }}>{member.name}</p>
-                  <p style={{ color: "#FF5E2C", fontSize: "11px", fontWeight: 600, marginBottom: "6px", lineHeight: 1.4 }}>{member.role}</p>
-                  <span style={{ display: "inline-block", marginTop: "auto", fontSize: "10px", fontWeight: 600, padding: "4px 10px", borderRadius: "999px", background: "rgba(255,94,44,0.08)", color: "#FF5E2C", lineHeight: 1.4, letterSpacing: "0.02em" }}>
-                    {member.dept}
-                  </span>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* Student Leadership */}
-      <section style={{ background: "#FFFFFF", paddingTop: "96px", paddingBottom: "96px" }}>
-        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "48px" }}>
+      <section style={{ background: "#FFFFFF", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(48px,8vw,96px)" }}>
+        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "clamp(16px,4vw,48px)" }}>
           <FadeIn>
             <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Leadership</span>
             <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>Student Leadership 2024–25</h2>
@@ -444,7 +393,7 @@ export default function CouncilPage() {
             {studentLeadership.map((member) => (
               <FadeIn key={member.name} className="flex flex-col">
                 <div className="rounded-2xl card-light relative overflow-hidden"
-                  style={{ flex: 1, borderColor: "rgba(255,94,44,0.20)", minHeight: "280px", padding: "40px" }}>
+                  style={{ flex: 1, borderColor: "rgba(255,94,44,0.20)", minHeight: "280px", padding: "clamp(24px,4vw,40px)" }}>
                   <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10"
                     style={{ background: "#FF5E2C", transform: "translate(30%, -30%)" }} />
                   <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-black mb-6"
@@ -475,8 +424,8 @@ export default function CouncilPage() {
       </section>
 
       {/* Teams — ChromaGrid */}
-      <section style={{ background: "#000000", paddingTop: "96px", paddingBottom: "72px" }}>
-        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "48px" }}>
+      <section style={{ background: "#000000", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(40px,6vw,72px)" }}>
+        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "clamp(16px,4vw,48px)" }}>
 
           {/* Badge */}
           <FadeIn>
@@ -498,7 +447,7 @@ export default function CouncilPage() {
             {/* Filter bar — 40px below heading */}
             <FadeIn delay={0.1}>
               {/* flex-wrap on mobile, nowrap on desktop — chips fill full width via flex:1 */}
-              <div className="flex flex-wrap lg:flex-nowrap items-center gap-3" style={{ marginTop: "40px", width: "100%" }}>
+              <div className="flex flex-wrap lg:flex-nowrap items-center gap-2" style={{ marginTop: "clamp(24px,3vw,40px)", width: "100%" }}>
                 {[
                   { label: "All", key: "All" },
                   ...teams.map((t) => ({ label: deptShort[t.team] ?? t.team, key: t.team, color: t.color })),
@@ -510,14 +459,14 @@ export default function CouncilPage() {
                       key={tab.key}
                       onClick={() => setActiveTeam(tab.key)}
                       style={{
-                        flex: "1 1 110px",
+                        flex: "1 1 clamp(80px,12vw,110px)",
                         display: "inline-flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        height: "44px",
-                        padding: "0 22px",
+                        height: "clamp(36px,5vw,44px)",
+                        padding: "0 clamp(12px,2vw,22px)",
                         borderRadius: "9999px",
-                        fontSize: "15px",
+                        fontSize: "clamp(12px,1.5vw,15px)",
                         fontWeight: 500,
                         letterSpacing: "0.15px",
                         whiteSpace: "nowrap",
@@ -596,8 +545,8 @@ export default function CouncilPage() {
       </section>
 
       {/* Join CTA */}
-      <section style={{ background: "#FFFFFF", paddingTop: "96px", paddingBottom: "96px" }}>
-        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "48px" }}>
+      <section style={{ background: "#FFFFFF", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(48px,8vw,96px)" }}>
+        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "clamp(16px,4vw,48px)" }}>
         <FadeIn className="text-center">
           <span className="section-tag" style={{ marginBottom: "32px" }}>Join the Team</span>
           <h2 className="text-4xl font-black" style={{ color: "#000000", marginBottom: "32px" }}>Want to Be Part of CIE Council?</h2>
@@ -606,7 +555,7 @@ export default function CouncilPage() {
             of our teams and help shape the future of innovation at MLRIT.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="btn-primary">Apply for Council</button>
+            <Link href="/join" className="btn-primary">Apply for Council</Link>
             <button className="btn-secondary-light">Learn More</button>
           </div>
         </FadeIn>

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useNavbarVisibility } from "@/context/NavbarContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ─── Data ─────────────────────────────────────────────────── */
@@ -97,6 +98,7 @@ function NavLink({
    Main Navbar — floating pill
 ═══════════════════════════════════════════════════════════════ */
 export default function Navbar() {
+  const { hidden }              = useNavbarVisibility();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen]         = useState(false);
   const pathname                = usePathname();
@@ -120,6 +122,8 @@ export default function Navbar() {
     document.addEventListener("keydown", fn);
     return () => document.removeEventListener("keydown", fn);
   }, []);
+
+  if (hidden) return null;
 
   return (
     <>

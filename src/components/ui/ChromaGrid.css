@@ -34,6 +34,7 @@
   }
   .chroma-card {
     width: 100% !important;
+    height: 260px;
   }
 }
 

@@ -109,7 +109,7 @@ export default function StudiosPage() {
       />
 
       {/* Studios List */}
-      <section style={{ background: "#F8F9FA", paddingTop: "56px", paddingBottom: "56px" }}>
+      <section style={{ background: "#F8F9FA", paddingTop: "clamp(32px,5vw,56px)", paddingBottom: "clamp(32px,5vw,56px)" }}>
         <ScrollStack
           stackTop={0.1}
           fan={40}
@@ -176,7 +176,7 @@ export default function StudiosPage() {
       </section>
 
       {/* Booking CTA */}
-      <section className="relative" style={{ background: "linear-gradient(160deg, #FFFFFF 0%, #FFFFFF 50%, #FFFFFF 100%)", paddingTop: "96px", paddingBottom: "96px" }}>
+      <section className="relative" style={{ background: "linear-gradient(160deg, #FFFFFF 0%, #FFFFFF 50%, #FFFFFF 100%)", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(48px,8vw,96px)" }}>
         <FadeIn className="relative z-10 page-container text-center">
           <span className="section-tag" style={{ marginBottom: "32px" }}>Book a Space</span>
           <h2 className="text-4xl font-black" style={{ color: "#000000", marginBottom: "32px" }}>Ready to Create?</h2>
