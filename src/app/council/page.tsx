@@ -4,7 +4,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link2, Mail, Users, ChevronDown, ChevronUp, Code, Palette, Camera, PenLine, Mic, BarChart2, FileText } from "lucide-react";
 import Link from "next/link";
-import ChromaGrid from "@/components/ui/ChromaGrid";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
 
@@ -355,6 +354,84 @@ const heroCards = [
   { icon: Mic, label: "P&S — Public Speaking", count: `${teams[4].members.length} members`, detail: "Anchoring · PR · Workshops · Events", accent: "rgba(124,58,237,0.15)", color: "#7C3AED" },
 ];
 
+// ── Council Showcase — notched triangle cards ─────────────────────
+const CS_NOTCH = "polygon(0 0, 100% 0, 100% calc(100% - 32px), calc(100% - 32px) 100%, 0 100%)";
+type ShowcaseMember = Member & { department: string; deptColor: string };
+
+function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
+  const [active, setActive] = useState<number | null>(null);
+  return (
+    <>
+      <div className="cs-grid">
+        {members.map((m, i) => {
+          const encoded = m.photo
+            ? m.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")
+            : null;
+          const flat = encoded
+            ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=0a0a0a&color=9aa&size=400&bold=true&format=png`;
+          const hero = encoded
+            ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=${m.deptColor.replace("#", "")}&color=fff&size=400&bold=true&format=png`;
+          const isActive = active === i;
+          const scatter = i % 2 === 0 ? -26 : 26;
+          return (
+            <button
+              key={`${m.department}-${m.name}-${i}`}
+              type="button"
+              onClick={() => setActive(isActive ? null : i)}
+              aria-pressed={isActive}
+              className="cs-card"
+              style={{
+                background: "transparent", border: "none", padding: 0, cursor: "pointer", textAlign: "left",
+                transform: `translateY(${isActive ? 0 : scatter}px)`,
+                transition: "transform .55s cubic-bezier(.16,1,.3,1)",
+              }}
+            >
+              <div style={{
+                position: "relative", aspectRatio: "4 / 5",
+                filter: isActive ? `drop-shadow(0 22px 50px ${m.deptColor}66)` : "none",
+                transition: "filter .45s ease",
+              }}>
+                <div style={{
+                  position: "absolute", inset: 0, clipPath: CS_NOTCH,
+                  background: isActive ? m.deptColor : "rgba(255,255,255,0.16)",
+                  transition: "background .4s ease",
+                }} />
+                <div style={{
+                  position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden",
+                  background: isActive ? `linear-gradient(155deg, ${m.deptColor}26 0%, #0a0a0a 100%)` : "#0a0a0a",
+                  transition: "background .4s ease",
+                }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={isActive ? hero : flat}
+                    alt={m.name}
+                    className="absolute inset-0 w-full h-full"
+                    style={{
+                      objectFit: "cover", objectPosition: "top center",
+                      transform: isActive ? "scale(1.06)" : "scale(1)",
+                      transition: "transform .55s cubic-bezier(.16,1,.3,1)",
+                    }}
+                  />
+                </div>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "3px", paddingTop: "12px", paddingInline: "4px" }}>
+                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: isActive ? "15px" : "13px", lineHeight: 1.2, color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.82)", transition: "all .3s ease", overflowWrap: "anywhere" }}>{m.name}</span>
+                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "11px", letterSpacing: "0.3px", color: isActive ? m.deptColor : "rgba(255,255,255,0.45)", transition: "all .3s ease" }}>{deptShort[m.department] ?? m.department}</span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+      <style>{`
+        .cs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(18px,2.5vw,32px) clamp(16px,2vw,28px); padding-top: 30px; padding-bottom: 30px; align-items: start; }
+        @media (max-width: 639px)  { .cs-card { transform: none !important; } }
+        @media (min-width: 640px)  { .cs-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 1024px) { .cs-grid { grid-template-columns: repeat(4, 1fr); } }
+      `}</style>
+    </>
+  );
+}
+
 export default function CouncilPage() {
   const [activeTeam, setActiveTeam] = useState("All");
   const allMembers = teams.flatMap((t) =>
@@ -503,7 +580,7 @@ export default function CouncilPage() {
               </div>
             </FadeIn>
 
-            {/* ChromaGrid — 40px below filter bar */}
+            {/* CouncilShowcase — 40px below filter bar */}
             <motion.div
               key={activeTeam}
               initial={{ opacity: 0, y: 16 }}
@@ -511,28 +588,8 @@ export default function CouncilPage() {
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               style={{ marginTop: "40px" }}
             >
-            <ChromaGrid
-              items={visibleMembers.map((member) => {
-                const hex = member.deptColor.replace("#", "");
-                const avatar = member.photo
-                  ? member.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")
-                  : `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=${hex}&color=fff&size=300&bold=true&format=png`;
-                return {
-                  image: avatar,
-                  title: member.name,
-                  subtitle: member.role,
-                  handle: deptShort[member.department] ?? member.department,
-                  borderColor: member.deptColor,
-                  gradient: `linear-gradient(155deg, ${member.deptColor}22 0%, #0a0a0a 100%)`,
-                  url: member.linkedin,
-                };
-              })}
-              radius={800}
-              columns={6}
-              damping={2}
-              fadeOut={0.6}
-            />
-          </motion.div>
+              <CouncilShowcase members={visibleMembers} />
+            </motion.div>
 
             {/* Count */}
             <div className="mt-8 flex items-center gap-2 justify-center" style={{ color: "rgba(255,255,255,0.25)" }}>
