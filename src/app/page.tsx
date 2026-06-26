@@ -89,10 +89,10 @@ function FadeIn({
 
 /* ── Data ─────────────────────────────────────────────────────────── */
 const stats = [
-  { value: 1000, suffix: "+", label: "Students Engaged", icon: Users },
-  { value: 100,  suffix: "+", label: "Events Hosted",    icon: Trophy },
-  { value: 50,   suffix: "+", label: "Projects Launched",icon: Rocket },
-  { value: 20,   suffix: "+", label: "Startup Initiatives", icon: TrendingUp },
+  { value: 1000, suffix: "+", label: "Students Engaged",    icon: Users,      color: "#2563EB" },
+  { value: 100,  suffix: "+", label: "Events Hosted",       icon: Trophy,     color: "#EA580C" },
+  { value: 50,   suffix: "+", label: "Projects Launched",   icon: Rocket,     color: "#9333EA" },
+  { value: 20,   suffix: "+", label: "Startup Initiatives", icon: TrendingUp, color: "#16A34A" },
 ];
 
 const programs = [
@@ -101,39 +101,43 @@ const programs = [
     title: "Workshop Carnivals",
     desc: "Multi-day, multi-domain skill workshops covering UI/UX, IoT, WordPress, and more — hands-on learning that goes far beyond the classroom.",
     tag: "Workshops",
+    color: "#CA8A04",
   },
   {
     icon: Trophy,
     title: "Innovation Challenges",
     desc: "Events like B2B — Business to Brand and Hustle Mania push students to ideate, pitch, and execute under real-world constraints.",
     tag: "Challenges",
+    color: "#DC2626",
   },
   {
     icon: Zap,
     title: "Hackathons",
     desc: "Intensive 24–36 hour sprints like MetaLoop — tackling cutting-edge themes with industry mentors and prize pools up to ₹75,000.",
     tag: "Hackathons",
+    color: "#2563EB",
   },
   {
     icon: Mic,
     title: "E-Summits",
     desc: "The Equinox E-Summit brings together student innovators, startup founders, and investors for 3 days of talks, pitches, and networking.",
     tag: "Summits",
+    color: "#0891B2",
   },
 ];
 
 const studios = [
-  { icon: Lightbulb, name: "Skill Workshops",        desc: "Domain-specific, hands-on workshops in tech, design, and business — run by industry experts and CIE teams across five active verticals." },
-  { icon: Trophy,    name: "Competitive Events",      desc: "Brand challenges, business competitions, and hackathons that reward real problem-solving, creativity, and execution under pressure." },
-  { icon: Mic,       name: "Summits & Networking",    desc: "Multi-day entrepreneurship summits with guest speakers, investor panels, and startup showcases — open to all MLRIT students." },
-  { icon: Handshake, name: "Mentorship & Incubation", desc: "One-on-one guidance from alumni, industry experts, and faculty — from idea-stage to launch-ready, backed by IIC and CIE." },
+  { icon: Lightbulb, name: "Skill Workshops",        color: "#CA8A04", desc: "Domain-specific, hands-on workshops in tech, design, and business — run by industry experts and CIE teams across five active verticals." },
+  { icon: Trophy,    name: "Competitive Events",      color: "#DC2626", desc: "Brand challenges, business competitions, and hackathons that reward real problem-solving, creativity, and execution under pressure." },
+  { icon: Mic,       name: "Summits & Networking",    color: "#0891B2", desc: "Multi-day entrepreneurship summits with guest speakers, investor panels, and startup showcases — open to all MLRIT students." },
+  { icon: Handshake, name: "Mentorship & Incubation", color: "#9333EA", desc: "One-on-one guidance from alumni, industry experts, and faculty — from idea-stage to launch-ready, backed by IIC and CIE." },
 ];
 
 const timeline = [
-  { step: "01", title: "Ideate",  desc: "Brainstorm and validate your idea",    icon: Lightbulb },
-  { step: "02", title: "Build",   desc: "Prototype with expert guidance",        icon: PenLine },
-  { step: "03", title: "Test",    desc: "Iterate through user feedback",         icon: MessageSquare },
-  { step: "04", title: "Launch",  desc: "Go to market with full support",        icon: Rocket },
+  { step: "01", title: "Ideate",  desc: "Brainstorm and validate your idea",    icon: Lightbulb,     color: "#CA8A04" },
+  { step: "02", title: "Build",   desc: "Prototype with expert guidance",        icon: PenLine,       color: "#2563EB" },
+  { step: "03", title: "Test",    desc: "Iterate through user feedback",         icon: MessageSquare, color: "#9333EA" },
+  { step: "04", title: "Launch",  desc: "Go to market with full support",        icon: Rocket,        color: "#EA580C" },
 ];
 
 
@@ -537,10 +541,14 @@ export default function HomePage() {
               <FadeIn key={stat.label} delay={i * 0.08}>
                 <div className="card-light flex flex-col items-center text-center" style={{ gap: "14px", padding: "clamp(16px,4vw,32px)" }}>
                   <div
-                    className="icon-box"
-                    style={{ width: "48px", height: "48px", borderRadius: "12px" }}
+                    style={{
+                      width: "48px", height: "48px", borderRadius: "12px",
+                      background: `${stat.color}14`,
+                      border: `1px solid ${stat.color}28`,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                    }}
                   >
-                    <stat.icon size={21} style={{ color: "#333333" }} />
+                    <stat.icon size={21} style={{ color: stat.color }} />
                   </div>
                   <div
                     style={{
@@ -548,7 +556,7 @@ export default function HomePage() {
                       fontWeight: 800,
                       fontSize: "clamp(30px, 4vw, 42px)",
                       lineHeight: 1,
-                      color: "#111111",
+                      color: stat.color,
                       letterSpacing: "-0.03em",
                     }}
                   >
@@ -683,11 +691,12 @@ export default function HomePage() {
                   {/* Icon */}
                   <div style={{
                     width: "64px", height: "64px", borderRadius: "18px",
-                    background: "rgba(0,0,0,0.04)", border: "1px solid rgba(0,0,0,0.09)",
+                    background: `${studio.color}12`,
+                    border: `1px solid ${studio.color}28`,
                     display: "flex", alignItems: "center", justifyContent: "center",
                     flexShrink: 0, marginBottom: "24px",
                   }}>
-                    <studio.icon size={24} style={{ color: "#333333" }} />
+                    <studio.icon size={24} style={{ color: studio.color }} />
                   </div>
                   {/* Title */}
                   <h3 style={{
@@ -780,7 +789,7 @@ export default function HomePage() {
                     {/* Circle */}
                     <div style={{
                       width: "64px", height: "64px", borderRadius: "50%",
-                      background: "#111111", flexShrink: 0,
+                      background: item.color, flexShrink: 0,
                       display: "flex", alignItems: "center", justifyContent: "center",
                       position: "relative", zIndex: 10,
                       fontFamily: "var(--font-heading)", fontWeight: 800,
@@ -793,10 +802,11 @@ export default function HomePage() {
                       {/* Icon */}
                       <div style={{
                         width: "64px", height: "64px", borderRadius: "18px",
-                        background: "rgba(234,88,12,0.08)",
+                        background: `${item.color}12`,
+                        border: `1px solid ${item.color}28`,
                         display: "flex", alignItems: "center", justifyContent: "center",
                       }}>
-                        <item.icon size={28} style={{ color: "#EA580C" }} />
+                        <item.icon size={28} style={{ color: item.color }} />
                       </div>
                       {/* Title */}
                       <h3 style={{
@@ -869,11 +879,12 @@ export default function HomePage() {
                     {/* Icon — left */}
                     <div style={{
                       width: "68px", height: "68px", borderRadius: "16px",
-                      background: "rgba(234,88,12,0.08)",
+                      background: `${prog.color}12`,
+                      border: `1px solid ${prog.color}28`,
                       display: "flex", alignItems: "center", justifyContent: "center",
                       flexShrink: 0,
                     }}>
-                      <prog.icon size={28} style={{ color: "#EA580C" }} />
+                      <prog.icon size={28} style={{ color: prog.color }} />
                     </div>
                     {/* Text — right */}
                     <div className="flex-1 min-w-0">
@@ -893,9 +904,9 @@ export default function HomePage() {
                           fontWeight: 700,
                           letterSpacing: "0.08em",
                           textTransform: "uppercase" as const,
-                          color: "#EA580C",
-                          background: "rgba(234,88,12,0.08)",
-                          border: "1px solid rgba(234,88,12,0.18)",
+                          color: prog.color,
+                          background: `${prog.color}10`,
+                          border: `1px solid ${prog.color}28`,
                           padding: "3px 10px",
                           borderRadius: "999px",
                           whiteSpace: "nowrap" as const,

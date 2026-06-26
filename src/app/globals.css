@@ -11,6 +11,15 @@
   --orange-dark:  #C04218;   /* Deep, earthy dark shade          */
   --orange-glow:  rgba(232, 82, 26, 0.10);
 
+  /* ── Team palette ─────────────────────────────────────────── */
+  --color-blue:   #2563EB;   /* Tech                              */
+  --color-yellow: #CA8A04;   /* Content                           */
+  --color-purple: #9333EA;   /* Creatives                         */
+  --color-cyan:   #0891B2;   /* GD — Graphic Design               */
+  --color-green:  #16A34A;   /* Ops — Operations & Finance        */
+  --color-red:    #DC2626;   /* P&S — Promotions & Sponsorship    */
+  /* --color-orange uses --orange above  (#EA580C Photography)    */
+
   /* ── Premium dark accent (replaces pure black) ─────────────── */
   --navy:        #000000;
   --navy-mid:    #111111;

@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Target, Eye, Heart, Award, Users, BookOpen, Link2, Mail, ImageOff } from "lucide-react";
+import { Target, Eye, Heart, Award, Users, BookOpen } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
 
@@ -145,44 +145,116 @@ type FacultyMember = {
 
 const faculty: FacultyMember[] = [
   {
-    name: "Dr. Rajesh Kumar",
-    designation: "Director, CIE",
-    dept: "Computer Science & Engineering",
-    expertise: "AI & Machine Learning",
-    bio: "Leading CIE's vision and strategic direction, guiding students from ideation to impactful ventures.",
-    linkedin: "#",
-    email: "rajesh@mlrit.ac.in",
-    confirmed: false,
+    name: "Dr. Ganesh Miriyala",
+    designation: "Head – CIE, Asst. Professor",
+    dept: "Electronics & Communication Engineering",
+    expertise: "Wireless Communication",
+    bio: "Leads the Centre for Innovation and Entrepreneurship at MLRIT, guiding students from early-stage ideas to impactful ventures through research and mentorship.",
+    confirmed: true,
   },
   {
-    name: "Prof. Anitha Reddy",
-    designation: "Faculty Coordinator",
-    dept: "Electronics & Communication",
-    expertise: "IoT & Embedded Systems",
-    bio: "Bridging hardware and software, mentoring students building connected devices and embedded products.",
-    linkedin: "#",
-    email: "anitha@mlrit.ac.in",
-    confirmed: false,
+    name: "Dr. A. Vivek Anand",
+    designation: "Professor",
+    dept: "Aerospace Engineering",
+    expertise: "Aerospace Engineering",
+    bio: "Brings deep aerospace expertise to CIE, mentoring student innovators working on propulsion, UAVs, and cutting-edge flight technologies.",
+    confirmed: true,
   },
   {
-    name: "Dr. Suresh Babu",
-    designation: "Faculty Advisor",
+    name: "Dr. Amritha Saha",
+    designation: "Asst. Professor",
+    dept: "Humanities & Sciences",
+    expertise: "Synthetic Organic Chemistry & Material Science",
+    bio: "Guides research at the intersection of chemistry and materials, helping students develop novel compounds and sustainable material solutions.",
+    confirmed: true,
+  },
+  {
+    name: "Dr. Sumana Das",
+    designation: "Associate Professor",
+    dept: "Electrical & Electronics Engineering",
+    expertise: "Power Systems",
+    bio: "Mentors students in energy innovation and smart grid technologies, bridging classroom power systems theory with real-world applications.",
+    confirmed: true,
+  },
+  {
+    name: "Mr. J. Laxmi Prasad",
+    designation: "Asst. Professor",
     dept: "Mechanical Engineering",
-    expertise: "Product Design & Manufacturing",
-    bio: "Guiding product-first startups through design thinking, prototyping, and manufacturing readiness.",
-    linkedin: "#",
-    email: "suresh@mlrit.ac.in",
-    confirmed: false,
+    expertise: "Mechatronics",
+    bio: "Champions mechatronics innovation, supporting student teams building autonomous systems, robotics, and integrated electromechanical products.",
+    confirmed: true,
   },
   {
-    name: "Prof. Kavitha Sharma",
-    designation: "Faculty Coordinator",
+    name: "Mrs. I. Sapthami",
+    designation: "Asst. Professor",
+    dept: "Computer Science & Engineering",
+    expertise: "Cloud Computing, ML & IoT",
+    bio: "Advises students at the convergence of cloud, machine learning, and IoT — helping build scalable, intelligent connected systems.",
+    confirmed: true,
+  },
+  {
+    name: "Mrs. Lakshmi Saritha",
+    designation: "Asst. Professor",
+    dept: "Computer Science & Machine Learning",
+    expertise: "Computer Science & Engineering",
+    bio: "Guides student innovators in software development and systems design, fostering problem-solving skills that translate ideas into products.",
+    confirmed: true,
+  },
+  {
+    name: "Mrs. A. Sravanthi",
+    designation: "Asst. Professor",
+    dept: "Computer Science & Design",
+    expertise: "Computer Science & Engineering",
+    bio: "Supports student projects at the intersection of design and engineering, encouraging creative, user-centered technology solutions.",
+    confirmed: true,
+  },
+  {
+    name: "Mrs. A. Nirisha",
+    designation: "Asst. Professor",
+    dept: "Computer Science & IT",
+    expertise: "Machine Learning",
+    bio: "Mentors students in applied machine learning, helping teams build data-driven products and research-backed AI solutions.",
+    confirmed: true,
+  },
+  {
+    name: "Mr. D. Sandeep",
+    designation: "Asst. Professor",
+    dept: "Information Technology",
+    expertise: "Cloud Computing & ML",
+    bio: "Guides student ventures in cloud architecture and machine learning deployment, bridging development and scalable infrastructure.",
+    confirmed: true,
+  },
+  {
+    name: "Mr. M. Raju Naik",
+    designation: "Asst. Professor",
+    dept: "Electronics & Communication Engineering",
+    expertise: "Embedded Systems",
+    bio: "Champions hardware innovation, mentoring students building embedded products from prototypes to production-ready devices.",
+    confirmed: true,
+  },
+  {
+    name: "Mr. K. Pithamber",
+    designation: "Asst. Professor",
+    dept: "Electronics & Communication Engineering",
+    expertise: "VLSI System Design",
+    bio: "Guides students in chip design and VLSI methodologies, supporting innovation in semiconductor and hardware product development.",
+    confirmed: true,
+  },
+  {
+    name: "Mr. Md. Sirajuddin",
+    designation: "Asst. Professor",
     dept: "MBA",
-    expertise: "Business Strategy & Finance",
-    bio: "Helping student founders build sustainable business models, navigate finance, and pitch to investors.",
-    linkedin: "#",
-    email: "kavitha@mlrit.ac.in",
-    confirmed: false,
+    expertise: "HR & Marketing",
+    bio: "Helps student founders build go-to-market strategies, develop leadership skills, and navigate the business side of innovation.",
+    confirmed: true,
+  },
+  {
+    name: "Mr. K. Arun Kumar",
+    designation: "Asst. Professor",
+    dept: "Aerospace Engineering",
+    expertise: "Propulsion",
+    bio: "Mentors students in propulsion technologies and aerospace systems, supporting innovation in next-generation flight and space ventures.",
+    confirmed: true,
   },
 ];
 
@@ -190,6 +262,7 @@ const faculty: FacultyMember[] = [
 function FacultyCard({ member }: { member: FacultyMember }) {
   const initials = member.name
     .split(" ")
+    .filter((n) => /^[A-Za-z]/.test(n))
     .map((n) => n[0])
     .join("")
     .substring(0, 2)
@@ -197,116 +270,86 @@ function FacultyCard({ member }: { member: FacultyMember }) {
 
   return (
     <div
-      className="card-light flex flex-col"
-      style={{ borderRadius: "16px", overflow: "hidden" }}
+      className="card-light"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        padding: "32px 20px 24px",
+        position: "relative",
+        height: "100%",
+      }}
     >
-      {/* Photo / placeholder */}
+      {/* Orange top accent */}
       <div
         style={{
-          position: "relative",
-          height: "200px",
-          background: "linear-gradient(145deg, rgba(232,82,26,0.06) 0%, rgba(232,82,26,0.02) 100%)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          borderBottom: "1px solid rgba(0,0,0,0.06)",
+          position: "absolute", top: 0, left: 0, right: 0, height: "3px",
+          background: `linear-gradient(90deg, ${ORANGE}, ${ORANGE}60)`,
+          borderRadius: "16px 16px 0 0",
+        }}
+      />
+
+      {/* Avatar */}
+      <div
+        style={{
+          width: "68px", height: "68px", borderRadius: "50%",
+          background: `${ORANGE}10`,
+          border: `2px solid ${ORANGE}28`,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontFamily: "var(--font-heading)", fontWeight: 900,
+          fontSize: "22px", color: ORANGE,
+          marginBottom: "18px", flexShrink: 0,
         }}
       >
-        {member.photo ? (
-          <img
-            src={member.photo}
-            alt={member.name}
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
-          />
-        ) : (
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-            <div
-              style={{
-                width: "72px", height: "72px", borderRadius: "50%",
-                background: `${ORANGE}14`,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontFamily: "var(--font-heading)", fontWeight: 900,
-                fontSize: "24px", color: ORANGE,
-              }}
-            >
-              {initials}
-            </div>
-            {!member.confirmed && (
-              <span
-                style={{
-                  display: "flex", alignItems: "center", gap: "5px",
-                  fontSize: "10px", fontWeight: 600, letterSpacing: "0.06em",
-                  color: T_MUTED,
-                  background: "rgba(0,0,0,0.04)",
-                  border: "1px solid rgba(0,0,0,0.08)",
-                  padding: "3px 10px", borderRadius: "999px",
-                }}
-              >
-                <ImageOff size={10} /> Photo Coming Soon
-              </span>
-            )}
-          </div>
-        )}
+        {initials}
       </div>
 
-      {/* Info */}
-      <div style={{ padding: "clamp(18px,3vw,26px)", flex: 1, display: "flex", flexDirection: "column" }}>
-        <h3
-          style={{
-            fontFamily: "var(--font-heading)", fontWeight: 800,
-            fontSize: "17px", color: T_HEAD, letterSpacing: "-0.01em",
-            marginBottom: "4px",
-          }}
-        >
-          {member.name}
-        </h3>
-        <p style={{ fontSize: "13px", fontWeight: 700, color: ORANGE, marginBottom: "2px" }}>
-          {member.designation}
-        </p>
-        <p style={{ fontSize: "12px", color: T_MUTED, marginBottom: "12px" }}>
-          {member.dept}
-        </p>
-        <p
-          style={{
-            fontSize: "13.5px", lineHeight: 1.68, color: T_BODY,
-            flex: 1, marginBottom: "14px",
-          }}
-        >
-          {member.bio}
-        </p>
-        <span
-          style={{
-            display: "inline-block", fontSize: "10.5px", fontWeight: 700,
-            letterSpacing: "0.05em", padding: "3px 10px", borderRadius: "999px",
-            background: `${ORANGE}0d`, color: ORANGE,
-            border: `1px solid ${ORANGE}22`, marginBottom: "16px",
-          }}
-        >
-          {member.expertise}
-        </span>
-        <div style={{ display: "flex", gap: "8px" }}>
-          {member.linkedin && (
-            <a
-              href={member.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary-light"
-              style={{ fontSize: "12px", padding: "6px 12px", gap: "5px" }}
-            >
-              <Link2 size={11} /> LinkedIn
-            </a>
-          )}
-          {member.email && (
-            <a
-              href={`mailto:${member.email}`}
-              className="btn-secondary-light"
-              style={{ fontSize: "12px", padding: "6px 12px", gap: "5px" }}
-            >
-              <Mail size={11} /> Email
-            </a>
-          )}
-        </div>
-      </div>
+      {/* Name */}
+      <h3
+        style={{
+          fontFamily: "var(--font-heading)", fontWeight: 800,
+          fontSize: "clamp(15px, 1.4vw, 18px)", color: T_HEAD,
+          letterSpacing: "-0.02em", lineHeight: 1.2,
+          marginBottom: "6px",
+        }}
+      >
+        {member.name}
+      </h3>
+
+      {/* Designation */}
+      <p
+        style={{
+          fontSize: "clamp(12px, 1.1vw, 14px)", fontWeight: 600,
+          color: ORANGE, lineHeight: 1.3, marginBottom: "6px",
+        }}
+      >
+        {member.designation}
+      </p>
+
+      {/* Department */}
+      <p
+        style={{
+          fontSize: "13px", color: T_MUTED,
+          lineHeight: 1.4, marginBottom: "auto", paddingBottom: "20px",
+        }}
+      >
+        {member.dept}
+      </p>
+
+      {/* Expertise badge */}
+      <span
+        style={{
+          display: "inline-block",
+          fontSize: "11.5px", fontWeight: 700, letterSpacing: "0.03em",
+          padding: "5px 13px", borderRadius: "999px",
+          background: `${ORANGE}0e`, color: ORANGE,
+          border: `1px solid ${ORANGE}28`,
+          lineHeight: 1.4,
+        }}
+      >
+        {member.expertise}
+      </span>
     </div>
   );
 }
@@ -530,48 +573,22 @@ export default function AboutPage() {
       </section>
 
       {/* ── Faculty & Mentors ─────────────────────────────────────── */}
-      <section style={{ background: BG_WHITE, ...SECTION_PY }}>
+      <section style={{ background: BG_GRAY, ...SECTION_PY }}>
         <div className="page-container">
           <FadeIn>
             <SectionHeader
               tag="Faculty & Mentors"
               heading="Our Leadership Board"
-              sub="Meet the faculty who guide CIE — details and photographs will be updated after college confirmation."
+              sub="The faculty who guide CIE — bringing expertise from across departments to mentor, advise, and drive innovation at MLRIT."
             />
           </FadeIn>
 
-          {/* Placeholder notice */}
-          <FadeIn delay={0.05}>
-            <div
-              style={{
-                display: "flex", alignItems: "center", gap: "12px",
-                padding: "14px 20px", borderRadius: "10px",
-                background: `${ORANGE}08`,
-                border: `1px solid ${ORANGE}20`,
-                marginBottom: "clamp(28px,4vw,44px)",
-              }}
-            >
-              <div
-                style={{
-                  width: "8px", height: "8px", borderRadius: "50%",
-                  background: ORANGE, flexShrink: 0,
-                }}
-              />
-              <p style={{ fontSize: "13.5px", color: T_BODY, lineHeight: 1.6 }}>
-                <strong style={{ color: T_HEAD }}>Placeholder section.</strong>{" "}
-                Faculty photographs and final details will be added once confirmed by the college.
-                Profile cards below show the layout structure — replace data in{" "}
-                <code style={{ fontSize: "12px", background: "rgba(0,0,0,0.06)", padding: "1px 6px", borderRadius: "4px" }}>
-                  about/page.tsx → faculty[]
-                </code>{" "}
-                to update.
-              </p>
-            </div>
-          </FadeIn>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+          <div
+            className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
+            style={{ alignItems: "stretch" }}
+          >
             {faculty.map((member, i) => (
-              <FadeIn key={member.name} delay={i * 0.08}>
+              <FadeIn key={member.name} delay={Math.min(i * 0.05, 0.4)} className="flex flex-col">
                 <FacultyCard member={member} />
               </FadeIn>
             ))}

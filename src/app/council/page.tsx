@@ -37,9 +37,20 @@ type TeamSection = {
 };
 
 const facultyCoordinators: Member[] = [
-  { name: "Dr. Rajesh Kumar", role: "Director, CIE", dept: "Computer Science & Engineering", linkedin: "#", email: "rajesh@mlrit.ac.in" },
-  { name: "Prof. Anitha Reddy", role: "Faculty Coordinator", dept: "Electronics & Communication", linkedin: "#", email: "anitha@mlrit.ac.in" },
-  { name: "Dr. Suresh Babu", role: "Faculty Advisor", dept: "Mechanical Engineering", linkedin: "#", email: "suresh@mlrit.ac.in" },
+  { name: "Dr. Ganesh Miriyala", role: "Head – CIE, Asst. Professor", dept: "Electronics & Communication Engineering" },
+  { name: "Dr. A. Vivek Anand", role: "Professor", dept: "Aerospace Engineering" },
+  { name: "Dr. Amritha Saha", role: "Asst. Professor", dept: "Humanities & Sciences" },
+  { name: "Dr. Sumana Das", role: "Associate Professor", dept: "Electrical & Electronics Engineering" },
+  { name: "Mr. J. Laxmi Prasad", role: "Asst. Professor", dept: "Mechanical Engineering" },
+  { name: "Mrs. I. Sapthami", role: "Asst. Professor", dept: "Computer Science & Engineering" },
+  { name: "Mrs. Lakshmi Saritha", role: "Asst. Professor", dept: "Computer Science & Machine Learning" },
+  { name: "Mrs. A. Sravanthi", role: "Asst. Professor", dept: "Computer Science & Design" },
+  { name: "Mrs. A. Nirisha", role: "Asst. Professor", dept: "Computer Science & IT" },
+  { name: "Mr. D. Sandeep", role: "Asst. Professor", dept: "Information Technology" },
+  { name: "Mr. M. Raju Naik", role: "Asst. Professor", dept: "Electronics & Communication Engineering" },
+  { name: "Mr. K. Pithamber", role: "Asst. Professor", dept: "Electronics & Communication Engineering" },
+  { name: "Mr. Md. Sirajuddin", role: "Asst. Professor", dept: "MBA" },
+  { name: "Mr. K. Arun Kumar", role: "Asst. Professor", dept: "Aerospace Engineering" },
 ];
 
 const studentLeadership: Member[] = [
@@ -47,86 +58,132 @@ const studentLeadership: Member[] = [
   { name: "Sneha Patel", role: "Vice President", dept: "ECE Final Year", year: "2024-25", linkedin: "#", email: "vp@ciemlrit.in" },
 ];
 
+const teamExpertise: Record<string, string> = {
+  "Tech": "Software Development",
+  "Content": "Writing & Editing",
+  "Creative": "Brand Strategy",
+  "GD — Graphic Design": "Visual Design",
+  "Photography": "Visual Media",
+  "P&S — Public Speaking": "Public Speaking",
+  "Ops — Operations & Finance": "Event Operations",
+};
+
 const teams: TeamSection[] = [
   {
     team: "Tech",
-    color: "#FF5E2C",
+    color: "#4A7CDB",
     description: "Builds and maintains CIE's digital infrastructure — from the website and internal tools to AI experiments and mobile apps. The Tech team turns every idea into a working product.",
     members: [
-      { name: "Rohit Sharma", role: "Tech Lead", dept: "CSE — 3rd Year", linkedin: "#" },
-      { name: "Divya Krishnan", role: "Frontend Developer", dept: "CSE — 2nd Year", linkedin: "#" },
-      { name: "Amit Sinha", role: "Backend Developer", dept: "CSE — 3rd Year", linkedin: "#" },
-      { name: "Nisha Rao", role: "AI / ML Engineer", dept: "IT — 2nd Year", linkedin: "#" },
-      { name: "Karthik Menon", role: "App Developer", dept: "CSE — 3rd Year", linkedin: "#" },
+      { name: "Ghanashyam Kodekandla", role: "Member", dept: "Tech", photo: "/council/tech/Ghanashyam Kodekandla.png" },
+      { name: "Keertan Kuppili",       role: "Member", dept: "Tech", photo: "/council/tech/Keertan Kuppili .png" },
+      { name: "T.S Siddarth",          role: "Member", dept: "Tech", photo: "/council/tech/T.S Siddarth.png" },
+      { name: "Teja Jagathi",          role: "Member", dept: "Tech", photo: "/council/tech/Teja Jagathi.png" },
+      { name: "Abhiram Ganji",         role: "Member", dept: "Tech", photo: "/council/tech/Abhiram Ganji.png" },
+      { name: "Anuj Lomte",            role: "Member", dept: "Tech", photo: "/council/tech/Anuj Lomte.png" },
+      { name: "Anamika",               role: "Member", dept: "Tech", photo: "/council/tech/Anamika.jpeg" },
+      { name: "Guna Sai Marni",        role: "Member", dept: "Tech", photo: "/council/tech/Guna Sai Marni.png" },
+      { name: "Jaikar Midithuri",      role: "Member", dept: "Tech", photo: "/council/tech/Jaikar Midithuri.png" },
+      { name: "Athava Sri Pavan",      role: "Member", dept: "Tech", photo: "/council/tech/Athava Sri Pavan.png" },
+      { name: "Katepally Tribhuvan",   role: "Member", dept: "Tech", photo: "/council/tech/Katepally Tribhuvan.png" },
+      { name: "Yashwanth Abhishek",    role: "Member", dept: "Tech", photo: "/council/tech/yashwanth abhishek.png" },
+      { name: "Abhinav Sai",           role: "Member", dept: "Tech", photo: "/council/tech/Abhinav Sai.png" },
+      { name: "Guguloth Adithya Jadhav", role: "Member", dept: "Tech", photo: "/council/tech/Guguloth Adithya Jadhav.png" },
+      { name: "Gannoji Vedik",         role: "Member", dept: "Tech", photo: "/council/tech/Gannoji Vedik.png" },
+      
     ],
   },
   {
     team: "Content",
-    color: "#0EA5E9",
+    color: "#CCBA11",
     description: "Produces all written and editorial output for CIE — blog posts, event write-ups, newsletters, captions, and long-form content that tell our story across every channel.",
     members: [
-      { name: "Meera Iyer", role: "Content Lead", dept: "MBA — 2nd Year", linkedin: "#" },
-      { name: "Aditya Kumar", role: "Content Writer", dept: "CSE — 3rd Year", linkedin: "#" },
-      { name: "Kavya Sharma", role: "Social Media Manager", dept: "ECE — 2nd Year", linkedin: "#" },
-      { name: "Nikhil Bhat", role: "Copywriter", dept: "IT — 3rd Year", linkedin: "#" },
-      { name: "Riya Kapoor", role: "Brand Strategist", dept: "MBA — 1st Year", linkedin: "#" },
+      { name: "Jayadeep",        role: "Member", dept: "Content", photo: "/council/content/Jayadeep.png" },
+      { name: "Prashansa",       role: "Member", dept: "Content", photo: "/council/content/Prashansa .png" },
+      { name: "Haritha",         role: "Member", dept: "Content", photo: "/council/content/Haritha.png" },
+      { name: "Harshitha",       role: "Member", dept: "Content", photo: "/council/content/Harshitha.png" },
+      { name: "Ennawar Rithvik", role: "Member", dept: "Content", photo: "/council/content/Ennawar Rithvik .png" },
+      { name: "Shiva",           role: "Member", dept: "Content", photo: "/council/content/Shiva.png" },
+      { name: "K S Sreesanth",   role: "Member", dept: "Content", photo: "/council/content/K S Sreesanth.png" },
     ],
   },
   {
     team: "Creative",
-    color: "#3B82F6",
+    color: "#BE5BFA",
     description: "Drives CIE's creative direction and campaigns — ideating themes, managing brand consistency, and building the visual + conceptual identity behind every initiative.",
     members: [
-      { name: "Pooja Reddy", role: "Creative Lead", dept: "CSE — 3rd Year", linkedin: "#" },
-      { name: "Shreya Nambiar", role: "Campaign Strategist", dept: "MBA — 2nd Year", linkedin: "#" },
-      { name: "Ayush Patel", role: "Brand Conceptor", dept: "CSE — 3rd Year", linkedin: "#" },
+         { name: "Harika Y",          role: "Member", dept: "Creative", photo: "/council/creatives/Harika Y.png" },
+         { name: "Sai Krishna",       role: "Member", dept: "Creative", photo: "/council/creatives/Sai Krishna.png" },
+         { name: "Sushaanth",         role: "Member", dept: "Creative", photo: "/council/creatives/sushaanth.png" },
+         { name: "Durga Mahesh",      role: "Member", dept: "Creative", photo: "/council/creatives/Durga Mahesh.png" },
+         { name: "Cheeda Shamilini",  role: "Member", dept: "Creative", photo: "/council/creatives/Cheeda Shamilini.png" },
+         { name: "D Pearl Angelina",  role: "Member", dept: "Creative", photo: "/council/creatives/D Pearl Angelina.png" },
+         { name: "Sadwika Chedimala", role: "Member", dept: "Creative", photo: "/council/creatives/Sadwika Chedimala.png" },
+         { name: "Hansika Jella",     role: "Member", dept: "Creative", photo: "/council/creatives/Hansika Jella.png" },
     ],
   },
   {
     team: "GD — Graphic Design",
-    color: "#FF7A50",
+    color: "#68DEF8",
     description: "Shapes the visual identity of CIE — designing posters, decks, social assets, UI mockups, and motion content that make every event and campaign look world-class.",
     members: [
-      { name: "Priya Nair", role: "Design Lead", dept: "ECE — 3rd Year", linkedin: "#" },
-      { name: "Rahul Singh", role: "UI / UX Designer", dept: "CSE — 2nd Year", linkedin: "#" },
-      { name: "Anjali Verma", role: "Graphic Designer", dept: "MBA — 1st Year", linkedin: "#" },
-      { name: "Rohan Verma", role: "Motion Designer", dept: "CSE — 3rd Year", linkedin: "#" },
-      { name: "Preethi Kumar", role: "Illustrator", dept: "IT — 2nd Year", linkedin: "#" },
+      { name: "Vivek Vardhan",           role: "Member", dept: "GD", photo: "/council/GD/Veivek vardhan.png" },
+      { name: "Avinash",                  role: "Member", dept: "GD", photo: "/council/GD/Avinash.png" },
+      { name: "Chanikya",                 role: "Member", dept: "GD", photo: "/council/GD/chanikya.png" },
+       { name: "Sri Thejitha",             role: "Member", dept: "GD", photo: "/council/GD/Sri Thejitha .png" },
+      { name: "Yeruva Indu Reddy",        role: "Member", dept: "GD", photo: "/council/GD/Yeruva Indu Reddy.png" },
+      { name: "A Farhana Sultana",        role: "Member", dept: "GD", photo: "/council/GD/A Farhana Sultana.png" },
+      { name: "Mounith Varma Akkala",     role: "Member", dept: "GD", photo: "/council/GD/Mounith Varma Akkala .png" },
+      { name: "Bangari Nikitha",          role: "Member", dept: "GD", photo: "/council/GD/Bangari Nikitha.png" },
+      { name: "Poloju RajaVivek",         role: "Member", dept: "GD", photo: "/council/GD/Poloju RajaVivek.png" },
+      { name: "Tannidi Durga Karthikeya", role: "Member", dept: "GD", photo: "/council/GD/Tannidi Durga Karthikeya .png" },
+      { name: "Kodali Pranav Chandra",    role: "Member", dept: "GD", photo: "/council/GD/Kodali Pranav Chandra.png" },
+     
     ],
   },
   {
     team: "Photography",
-    color: "#D94E1F",
+    color: "#FA7712",
     description: "Captures every moment of the CIE journey — from hackathon late nights to summit keynotes — through photography, videography, and professional post-production.",
     members: [
-      { name: "Arjun Mehta", role: "Photography Lead", dept: "ECE — 2nd Year", linkedin: "#" },
-      { name: "Pooja Reddy", role: "Videographer", dept: "CSE — 3rd Year", linkedin: "#" },
-      { name: "Siddharth Rao", role: "Photo Editor", dept: "MBA — 2nd Year", linkedin: "#" },
-      { name: "Ananya Singh", role: "Event Photographer", dept: "ECE — 3rd Year", linkedin: "#" },
+      { name: "Priyanshu Roy",     role: "Member", dept: "Photography", photo: "/council/photography/Priyanshu Roy.png" },
+      { name: "Anguluri Shiva",    role: "Member", dept: "Photography", photo: "/council/photography/Anguluri Shiva.png" },
+      { name: "Mattam Shivani",    role: "Member", dept: "Photography", photo: "/council/photography/Mattam Shivani.png" },
+      { name: "Vavilala Sai Ganesh", role: "Member", dept: "Photography", photo: "/council/photography/Vavilala Sai Ganesh.png" },
+      { name: "K.SAI VARSHITH",    role: "Member", dept: "Photography", photo: "/council/photography/K.SAI VARSHITH.png" },
+      { name: "Gorli Mahesh",      role: "Member", dept: "Photography", photo: "/council/photography/Gorli Mahesh.png" },
+      { name: "Anam Mounika",      role: "Member", dept: "Photography", photo: "/council/photography/Anam Mounika .png" },
+      { name: "Gothuri Rishith",   role: "Member", dept: "Photography", photo: "/council/photography/Gothuri Rishith.png" },
+      { name: "Sai Vashist",       role: "Member", dept: "Photography", photo: "/council/photography/Sai Vashist.png" },
+      { name: "Konthum Bhruhathi", role: "Member", dept: "Photography", photo: "/council/photography/Konthum Bhruhathi .png" },
     ],
   },
   {
     team: "P&S — Public Speaking",
-    color: "#7C3AED",
+    color: "#D01010",
     description: "Represents CIE in every room — anchoring events, running communication workshops, handling PR, and making sure CIE's message lands clearly with every audience.",
     members: [
-      { name: "Tanvi Patil", role: "P&S Lead", dept: "ECE — 3rd Year", linkedin: "#" },
-      { name: "Harsh Gupta", role: "Event Anchor", dept: "CSE — 2nd Year", linkedin: "#" },
-      { name: "Shreya Nambiar", role: "Workshop Facilitator", dept: "MBA — 2nd Year", linkedin: "#" },
-      { name: "Vikram Desai", role: "PR Executive", dept: "IT — 3rd Year", linkedin: "#" },
-      { name: "Ayush Patel", role: "Communication Manager", dept: "CSE — 3rd Year", linkedin: "#" },
+      { name: "Sai Mihir Ramaraju",    role: "Member", dept: "P&S", photo: "/council/p&s/Sai Mihir Ramaraju.png" },
+      { name: "Yashashri Penikalapti", role: "Member", dept: "P&S", photo: "/council/p&s/Yashashri Penikalapti.png" },
+      { name: "Bandaru Mahith Naidu",  role: "Member", dept: "P&S", photo: "/council/p&s/Bandaru Mahith Naidu.png" },
+      { name: "Sanjana Kovuru",        role: "Member", dept: "P&S", photo: "/council/p&s/Sanjana Kovuru.png" },
+      { name: "Adithya Ganesh",        role: "Member", dept: "P&S", photo: "/council/p&s/Adithya Ganesh.png" },
+      { name: "Rithish Kumar",         role: "Member", dept: "P&S", photo: "/council/p&s/Rithish Kumar.png" },
     ],
   },
   {
     team: "Ops — Operations & Finance",
-    color: "#16A34A",
+    color: "#14E31D",
     description: "Keeps everything running — coordinating logistics for every event, managing budgets, vendor relations, and making sure no detail falls through the cracks.",
     members: [
-      { name: "Vivek Nair", role: "Operations Lead", dept: "MBA — 2nd Year", linkedin: "#" },
-      { name: "Shruti Joshi", role: "Finance Manager", dept: "CSE — 3rd Year", linkedin: "#" },
-      { name: "Manish Kumar", role: "Event Coordinator", dept: "MBA — 1st Year", linkedin: "#" },
-      { name: "Deepa Pillai", role: "Logistics Head", dept: "ECE — 3rd Year", linkedin: "#" },
-      { name: "Surya Teja", role: "Accounts Manager", dept: "MBA — 2nd Year", linkedin: "#" },
+       { name: "Dheeraj Kumar",     role: "Member", dept: "Ops", photo: "/council/OPS/Dheeraj Kumar.png" },
+      { name: "Mahima Tatineni",   role: "Member", dept: "Ops", photo: "/council/OPS/Mahima Tatineni.png" },
+      { name: "Aarthi",            role: "Member", dept: "Ops", photo: "/council/OPS/Aarthi.png" },
+      { name: "Vinay",             role: "Member", dept: "Ops", photo: "/council/OPS/Vinay.png" },
+      { name: "Bhavana",           role: "Member", dept: "Ops", photo: "/council/OPS/Bhavana .png" },
+      { name: "A Sai Ganesh",      role: "Member", dept: "Ops", photo: "/council/OPS/ASaiGanesh.png" },
+      { name: "Manukonda Tarun",   role: "Member", dept: "Ops", photo: "/council/OPS/Manukonda Tarun.png" },
+      { name: "Tharun",            role: "Member", dept: "Ops", photo: "/council/OPS/Tharun.png" },
+      { name: "M Vasanth Vardhan", role: "Member", dept: "Ops", photo: "/council/OPS/M Vasanth vardhan.png" },
     ],
   },
 ];
@@ -141,41 +198,97 @@ const deptShort: Record<string, string> = {
   "Ops — Operations & Finance": "Ops & Finance",
 };
 
-function MemberCard({ member, showContact = false, color = "#FF5E2C" }: { member: Member; showContact?: boolean; color?: string }) {
-  const initials = member.name.split(" ").map((n) => n[0]).join("").substring(0, 2);
-  const bg = `${color}14`;
+function MemberCard({ member, color = "#FF5E2C", expertise = "", index = 0 }: { member: Member; color?: string; expertise?: string; index?: number }) {
+  const initials = member.name.split(" ").map((n) => n[0]).join("").substring(0, 2).toUpperCase();
+  const photoSrc = member.photo
+    ? member.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")
+    : null;
+
   return (
-    <div className="p-5 rounded-xl card-light group">
-      <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0"
-          style={{ background: bg, color }}>
-          {initials}
-        </div>
-        <div className="flex-1 min-w-0">
-          <p className="font-bold text-sm truncate" style={{ color: "#000000" }}>{member.name}</p>
-          <p className="text-xs font-semibold mt-0.5" style={{ color }}>{member.role}</p>
-          <p className="text-xs mt-0.5 truncate" style={{ color: "#6B7280" }}>{member.dept}</p>
-        </div>
-        {showContact && (
-          <div className="flex gap-2">
-            {member.linkedin && (
-              <a href={member.linkedin} target="_blank" rel="noopener noreferrer"
-                className="w-7 h-7 rounded-full flex items-center justify-center"
-                style={{ background: bg, color }}>
-                <Link2 size={12} />
-              </a>
-            )}
-            {member.email && (
-              <a href={`mailto:${member.email}`}
-                className="w-7 h-7 rounded-full flex items-center justify-center"
-                style={{ background: bg, color }}>
-                <Mail size={12} />
-              </a>
-            )}
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+      className="group"
+      style={{
+        position: "relative",
+        borderRadius: "28px",
+        overflow: "hidden",
+        background: "#111111",
+        border: "1px solid rgba(255,255,255,0.08)",
+        boxShadow: "0 4px 24px rgba(0,0,0,0.35)",
+        transition: "transform 300ms cubic-bezier(0.16,1,0.3,1), box-shadow 300ms ease",
+        cursor: "default",
+        display: "flex",
+        flexDirection: "column",
+        borderTop: `6px solid ${color}`,
+        aspectRatio: "3 / 4",
+      }}
+      whileHover={{
+        y: -10,
+        scale: 1.02,
+        boxShadow: `0 20px 48px rgba(0,0,0,0.55), 0 0 0 1px ${color}55`,
+        transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+      }}
+    >
+      {/* Image — 80% of card */}
+      <div style={{ flex: "1 1 80%", overflow: "hidden", position: "relative", background: `${color}18` }}>
+        {photoSrc ? (
+          <img
+            src={photoSrc}
+            alt={member.name}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "top center",
+              display: "block",
+              transition: "transform 300ms cubic-bezier(0.16,1,0.3,1)",
+            }}
+            className="group-hover:[transform:scale(1.05)]"
+          />
+        ) : (
+          <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "48px", fontWeight: 900, color }}>
+            {initials}
           </div>
         )}
       </div>
-    </div>
+
+      {/* Bottom info panel — translucent dark + blur */}
+      <div style={{
+        flex: "0 0 auto",
+        padding: "20px 20px 20px",
+        background: "rgba(10,10,10,0.88)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        borderTop: "1px solid rgba(255,255,255,0.06)",
+      }}>
+        <p style={{ color: "#FFFFFF", fontSize: "17px", fontWeight: 700, lineHeight: 1.25, marginBottom: "4px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+          {member.name}
+        </p>
+        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", fontWeight: 500, marginBottom: "12px" }}>
+          {member.role}
+        </p>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+          <span style={{
+            fontSize: "11px", fontWeight: 600, padding: "5px 12px", borderRadius: "999px",
+            background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.65)",
+            letterSpacing: "0.02em", whiteSpace: "nowrap",
+          }}>
+            {member.dept}
+          </span>
+          {expertise && (
+            <span style={{
+              fontSize: "11px", fontWeight: 600, padding: "5px 12px", borderRadius: "999px",
+              background: `${color}25`, color,
+              letterSpacing: "0.02em", whiteSpace: "nowrap",
+            }}>
+              {expertise}
+            </span>
+          )}
+        </div>
+      </div>
+    </motion.div>
   );
 }
 
@@ -227,12 +340,16 @@ function TeamAccordion({ section }: { section: TeamSection }) {
         </button>
         {expanded && (
           <div id={accordionId}>
-            <p className="px-6 pb-4 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
-              {section.description}
-            </p>
-            <div className="px-6 pb-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
-              {section.members.map((member) => (
-                <MemberCard key={member.name} member={member} color={section.color} />
+            <div style={{ padding: "8px 24px 28px", display: "grid", gap: "32px", gridTemplateColumns: "repeat(1, 1fr)" }}
+              className="sm:[grid-template-columns:repeat(2,1fr)] lg:[grid-template-columns:repeat(3,1fr)] xl:[grid-template-columns:repeat(4,1fr)]">
+              {section.members.map((member, i) => (
+                <MemberCard
+                  key={member.name}
+                  member={member}
+                  color={section.color}
+                  expertise={teamExpertise[section.team] ?? ""}
+                  index={i}
+                />
               ))}
             </div>
           </div>
@@ -275,7 +392,7 @@ export default function CouncilPage() {
         stats={[
           { value: "30+", label: "Council Members" },
           { value: "6", label: "Active Teams" },
-          { value: "3", label: "Faculty Advisors" },
+          { value: `${facultyCoordinators.length}`, label: "Faculty Advisors" },
           { value: "2024–25", label: "Current Batch" },
         ]}
         watermark="TEAM"
@@ -372,27 +489,60 @@ export default function CouncilPage() {
             </span>
             <h2 className="font-black" style={{ color: "#FFFFFF", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "20px", marginBottom: "56px" }}>Department Members</h2>
 
-            {/* Filter tabs */}
-            <div className="flex flex-wrap gap-3">
+            {/* Filter chips */}
+            <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
               {[
                 { label: "All", key: "All" },
                 ...teams.map((t) => ({ label: deptShort[t.team] ?? t.team, key: t.team, color: t.color })),
-              ].map((tab) => (
-                <button
-                  key={tab.key}
-                  onClick={() => setActiveTeam(tab.key)}
-                  className="px-7 py-3 rounded-full text-base font-semibold transition-all"
-                  style={{
-                    background: activeTeam === tab.key
-                      ? ((tab as { color?: string }).color ?? "#FF5E2C")
-                      : "rgba(255,255,255,0.06)",
-                    color: activeTeam === tab.key ? "#FFFFFF" : "rgba(255,255,255,0.60)",
-                    border: `1.5px solid ${activeTeam === tab.key ? ((tab as { color?: string }).color ?? "#FF5E2C") : "rgba(255,255,255,0.12)"}`,
-                  }}
-                >
-                  {tab.label}
-                </button>
-              ))}
+              ].map((tab) => {
+                const isActive = activeTeam === tab.key;
+                const chipColor = (tab as { color?: string }).color ?? "#F97316";
+                return (
+                  <button
+                    key={tab.key}
+                    onClick={() => setActiveTeam(tab.key)}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      minWidth: "90px",
+                      height: "44px",
+                      padding: "0 20px",
+                      borderRadius: "9999px",
+                      fontSize: "15px",
+                      fontWeight: 500,
+                      letterSpacing: "0.2px",
+                      whiteSpace: "nowrap",
+                      cursor: "pointer",
+                      border: isActive ? `1.5px solid ${chipColor}` : "1.5px solid #3A3A3A",
+                      background: isActive ? chipColor : "rgba(255,255,255,0.05)",
+                      color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.55)",
+                      boxShadow: isActive ? `0 0 18px ${chipColor}55, 0 2px 8px rgba(0,0,0,0.3)` : "none",
+                      transition: "all 0.25s ease",
+                      outline: "none",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) {
+                        (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.11)";
+                        (e.currentTarget as HTMLButtonElement).style.color = "#FFFFFF";
+                        (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.25)";
+                      } else {
+                        (e.currentTarget as HTMLButtonElement).style.transform = "scale(1.03)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) {
+                        (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.05)";
+                        (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.55)";
+                        (e.currentTarget as HTMLButtonElement).style.borderColor = "#3A3A3A";
+                      }
+                      (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
+                    }}
+                  >
+                    {tab.label}
+                  </button>
+                );
+              })}
             </div>
           </FadeIn>
 
@@ -409,7 +559,8 @@ export default function CouncilPage() {
                 // Falls back to a name-initials avatar in the member's team color.
                 // Replace member.photo with a real path ("/council/name.jpg") to use actual photos.
                 const avatar = member.photo
-                  ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=${hex}&color=fff&size=300&bold=true&format=png`;
+                  ? member.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")
+                  : `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=${hex}&color=fff&size=300&bold=true&format=png`;
                 return {
                   image: avatar,
                   title: member.name,
@@ -420,9 +571,9 @@ export default function CouncilPage() {
                   url: member.linkedin,
                 };
               })}
-              radius={300}
-              columns={3}
-              damping={0.45}
+              radius={800}
+              columns={6}
+              damping={2}
               fadeOut={0.6}
             />
           </motion.div>
