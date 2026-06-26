@@ -377,7 +377,13 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
             <button
               key={`${m.department}-${m.name}-${i}`}
               type="button"
-              onClick={() => setActive(isActive ? null : i)}
+              onClick={() => {
+                if (isActive && m.linkedin && m.linkedin !== "#") {
+                  window.open(m.linkedin, "_blank", "noopener,noreferrer");
+                } else {
+                  setActive(isActive ? null : i);
+                }
+              }}
               aria-pressed={isActive}
               className="cs-card"
               style={{
@@ -412,6 +418,17 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                       transition: "transform .55s cubic-bezier(.16,1,.3,1)",
                     }}
                   />
+                  {/* LinkedIn hover overlay */}
+                  {m.linkedin && m.linkedin !== "#" && (
+                    <div className="cs-li-overlay">
+                      <div className="cs-li-badge">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFFFFF">
+                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        <span>LinkedIn</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
               <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "3px", paddingTop: "12px", paddingInline: "4px" }}>
@@ -427,6 +444,11 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
         @media (max-width: 639px)  { .cs-card { transform: none !important; } }
         @media (min-width: 640px)  { .cs-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (min-width: 1024px) { .cs-grid { grid-template-columns: repeat(4, 1fr); } }
+        .cs-li-overlay { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 16px; background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%); opacity: 0; transition: opacity 0.25s ease; pointer-events: none; }
+        .cs-card:hover .cs-li-overlay { opacity: 1; }
+        .cs-li-badge { display: inline-flex; align-items: center; gap: 6px; background: #0A66C2; color: #fff; font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 999px; letter-spacing: 0.02em; }
+        .cs-card:hover .cs-li-badge { transform: translateY(0); }
+        .cs-li-badge { transform: translateY(6px); transition: transform 0.25s ease; }
       `}</style>
     </>
   );
@@ -591,11 +613,6 @@ export default function CouncilPage() {
               <CouncilShowcase members={visibleMembers} />
             </motion.div>
 
-            {/* Count */}
-            <div className="mt-8 flex items-center gap-2 justify-center" style={{ color: "rgba(255,255,255,0.25)" }}>
-              <Users size={14} />
-              <span className="text-sm">{visibleMembers.length} member{visibleMembers.length !== 1 ? "s" : ""}</span>
-            </div>
 
           </div>
         </div>
