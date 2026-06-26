@@ -37,20 +37,18 @@ type TeamSection = {
 };
 
 const facultyCoordinators: Member[] = [
-  { name: "Dr. Ganesh Miriyala", role: "Head – CIE, Asst. Professor", dept: "Electronics & Communication Engineering" },
-  { name: "Dr. A. Vivek Anand", role: "Professor", dept: "Aerospace Engineering" },
-  { name: "Dr. Amritha Saha", role: "Asst. Professor", dept: "Humanities & Sciences" },
-  { name: "Dr. Sumana Das", role: "Associate Professor", dept: "Electrical & Electronics Engineering" },
-  { name: "Mr. J. Laxmi Prasad", role: "Asst. Professor", dept: "Mechanical Engineering" },
-  { name: "Mrs. I. Sapthami", role: "Asst. Professor", dept: "Computer Science & Engineering" },
-  { name: "Mrs. Lakshmi Saritha", role: "Asst. Professor", dept: "Computer Science & Machine Learning" },
-  { name: "Mrs. A. Sravanthi", role: "Asst. Professor", dept: "Computer Science & Design" },
-  { name: "Mrs. A. Nirisha", role: "Asst. Professor", dept: "Computer Science & IT" },
-  { name: "Mr. D. Sandeep", role: "Asst. Professor", dept: "Information Technology" },
-  { name: "Mr. M. Raju Naik", role: "Asst. Professor", dept: "Electronics & Communication Engineering" },
-  { name: "Mr. K. Pithamber", role: "Asst. Professor", dept: "Electronics & Communication Engineering" },
-  { name: "Mr. Md. Sirajuddin", role: "Asst. Professor", dept: "MBA" },
-  { name: "Mr. K. Arun Kumar", role: "Asst. Professor", dept: "Aerospace Engineering" },
+  { name: "Dr. Ganesh Miriyala",  role: "Head – CIE, Asst. Professor", dept: "Electronics & Communication Engineering" },
+  { name: "Dr. A. Vivek Anand",   role: "Professor",                   dept: "Aerospace Engineering" },
+  { name: "Dr. Amritha Saha",     role: "Asst. Professor",             dept: "Humanities & Sciences" },
+  { name: "Dr. Sumana Das",       role: "Associate Professor",         dept: "Electrical & Electronics Engineering" },
+  { name: "Mr. J. Laxmi Prasad",  role: "Asst. Professor",             dept: "Mechanical Engineering" },
+  { name: "Mrs. I. Sapthami",     role: "Asst. Professor",             dept: "Computer Science & Engineering" },
+  { name: "Mrs. Lakshmi Saritha", role: "Asst. Professor",             dept: "Computer Science & Machine Learning" },
+  { name: "Mrs. A. Sravanthi",    role: "Asst. Professor",             dept: "Computer Science & Design" },
+  { name: "Mrs. A. Nirisha",      role: "Asst. Professor",             dept: "Computer Science & IT" },
+  { name: "Mr. D. Sandeep",       role: "Asst. Professor",             dept: "Information Technology" },
+  { name: "Mr. M. Raju Naik",     role: "Asst. Professor",             dept: "Electronics & Communication Engineering" },
+  { name: "Mr. K. Pithamber",     role: "Asst. Professor",             dept: "Electronics & Communication Engineering" },
 ];
 
 const studentLeadership: Member[] = [
@@ -340,8 +338,7 @@ function TeamAccordion({ section }: { section: TeamSection }) {
         </button>
         {expanded && (
           <div id={accordionId}>
-            <div style={{ padding: "8px 24px 28px", display: "grid", gap: "32px", gridTemplateColumns: "repeat(1, 1fr)" }}
-              className="sm:[grid-template-columns:repeat(2,1fr)] lg:[grid-template-columns:repeat(3,1fr)] xl:[grid-template-columns:repeat(4,1fr)]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 px-6 pb-7 pt-2">
               {section.members.map((member, i) => (
                 <MemberCard
                   key={member.name}
@@ -398,72 +395,69 @@ export default function CouncilPage() {
         watermark="TEAM"
       />
 
+      {/* ── Shared container constant ── max-width 1400px, 32px inline padding */}
+
       {/* Faculty */}
-      <section style={{ background: "#FFFFFF", paddingTop: "64px", paddingBottom: "48px" }}>
-        <div className="page-container">
-          <FadeIn className="mb-8">
+      <section style={{ background: "#FFFFFF", paddingTop: "96px", paddingBottom: "48px" }}>
+        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "48px" }}>
+          <FadeIn>
             <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Faculty</span>
-            <h2 className="font-black mt-4" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1 }}>Faculty Coordinators</h2>
+            <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>Faculty Coordinators</h2>
           </FadeIn>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
-            {facultyCoordinators.map((member) => (
-              <div key={member.name} className="rounded-2xl card-light group" style={{ padding: "28px 32px" }}>
-                <div className="flex items-center gap-5 mb-5">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center text-xl font-black flex-shrink-0"
+          <div style={{ marginTop: "40px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "16px" }}>
+            {facultyCoordinators.map((member, i) => {
+              const initials = member.name.split(" ").map((n) => n[0]).join("").substring(0, 2).toUpperCase();
+              return (
+                <motion.div
+                  key={member.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                  className="rounded-2xl card-light flex flex-col items-center text-center"
+                  style={{ padding: "24px 16px 20px" }}
+                >
+                  <div className="w-14 h-14 rounded-full flex items-center justify-center text-lg font-black mb-4 flex-shrink-0"
                     style={{ background: "rgba(255,94,44,0.10)", color: "#FF5E2C" }}>
-                    {member.name.split(" ").map((n) => n[0]).join("").substring(0, 2)}
+                    {initials}
                   </div>
-                  <div>
-                    <p style={{ color: "#000000", fontSize: "17px", fontWeight: 800, lineHeight: 1.3 }}>{member.name}</p>
-                    <p style={{ color: "#FF5E2C", fontSize: "14px", fontWeight: 700, marginTop: "8px" }}>{member.role}</p>
-                    <p style={{ color: "#6B7280", fontSize: "13px", marginTop: "8px" }}>{member.dept}</p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  {member.linkedin && (
-                    <a href={member.linkedin} target="_blank" rel="noopener noreferrer"
-                      className="btn-secondary-light text-xs py-1.5 px-3 gap-1">
-                      <Link2 size={12} /> LinkedIn
-                    </a>
-                  )}
-                  {member.email && (
-                    <a href={`mailto:${member.email}`} className="btn-secondary-light text-xs py-1.5 px-3 gap-1">
-                      <Mail size={12} /> Email
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
+                  <p style={{ color: "#000000", fontSize: "13px", fontWeight: 800, lineHeight: 1.3, marginBottom: "6px" }}>{member.name}</p>
+                  <p style={{ color: "#FF5E2C", fontSize: "11px", fontWeight: 600, marginBottom: "6px", lineHeight: 1.4 }}>{member.role}</p>
+                  <span style={{ display: "inline-block", marginTop: "auto", fontSize: "10px", fontWeight: 600, padding: "4px 10px", borderRadius: "999px", background: "rgba(255,94,44,0.08)", color: "#FF5E2C", lineHeight: 1.4, letterSpacing: "0.02em" }}>
+                    {member.dept}
+                  </span>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Student Leadership */}
-      <section style={{ background: "#FFFFFF", paddingTop: "48px", paddingBottom: "64px" }}>
-        <div className="page-container">
-          <FadeIn className="mb-8">
+      <section style={{ background: "#FFFFFF", paddingTop: "96px", paddingBottom: "96px" }}>
+        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "48px" }}>
+          <FadeIn>
             <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Leadership</span>
-            <h2 className="font-black mt-4" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1 }}>Student Leadership 2024–25</h2>
+            <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>Student Leadership 2024–25</h2>
           </FadeIn>
-          <div className="grid sm:grid-cols-2 gap-6 items-stretch">
+          <div className="grid sm:grid-cols-2 gap-8 items-stretch" style={{ marginTop: "40px" }}>
             {studentLeadership.map((member) => (
               <FadeIn key={member.name} className="flex flex-col">
                 <div className="rounded-2xl card-light relative overflow-hidden"
-                  style={{ flex: 1, borderColor: "rgba(255,94,44,0.20)", minHeight: "280px", padding: "32px" }}>
-                  <div className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-10"
+                  style={{ flex: 1, borderColor: "rgba(255,94,44,0.20)", minHeight: "280px", padding: "40px" }}>
+                  <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10"
                     style={{ background: "#FF5E2C", transform: "translate(30%, -30%)" }} />
                   <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-black mb-6"
                     style={{ background: "rgba(255,94,44,0.10)", color: "#FF5E2C" }}>
                     {member.name.split(" ").map((n) => n[0]).join("").substring(0, 2)}
                   </div>
-                  <h3 style={{ color: "#000000", fontSize: "20px", fontWeight: 800, marginBottom: "12px", lineHeight: 1.2 }}>{member.name}</h3>
-                  <p style={{ color: "#FF5E2C", fontSize: "16px", fontWeight: 700, marginBottom: "12px" }}>{member.role}</p>
-                  <p style={{ color: "#6B7280", fontSize: "15px", lineHeight: 1.6, marginBottom: "8px" }}>{member.dept}</p>
-                  <p style={{ color: "#9CA3AF", fontSize: "13px", marginBottom: "24px" }}>Batch {member.year}</p>
+                  <h3 style={{ color: "#000000", fontSize: "22px", fontWeight: 800, marginBottom: "10px", lineHeight: 1.2 }}>{member.name}</h3>
+                  <p style={{ color: "#FF5E2C", fontSize: "16px", fontWeight: 700, marginBottom: "10px" }}>{member.role}</p>
+                  <p style={{ color: "#6B7280", fontSize: "15px", lineHeight: 1.6, marginBottom: "6px" }}>{member.dept}</p>
+                  <p style={{ color: "#9CA3AF", fontSize: "13px", marginBottom: "28px" }}>Batch {member.year}</p>
                   <div className="flex gap-2">
                     {member.linkedin && (
-                      <a href={member.linkedin} target="_blank" rel="noopener noreferrer"
-                        className="btn-secondary-light text-xs py-1.5 px-3 gap-1">
+                      <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="btn-secondary-light text-xs py-1.5 px-3 gap-1">
                         <Link2 size={12} /> LinkedIn
                       </a>
                     )}
@@ -481,83 +475,96 @@ export default function CouncilPage() {
       </section>
 
       {/* Teams — ChromaGrid */}
-      <section className="pb-16" style={{ background: "#000000", paddingTop: "88px" }}>
-        <div className="page-container">
-          <FadeIn className="mb-10">
+      <section style={{ background: "#000000", paddingTop: "96px", paddingBottom: "72px" }}>
+        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "48px" }}>
+
+          {/* Badge */}
+          <FadeIn>
             <span className="section-tag" style={{ background: "rgba(255,94,44,0.12)", borderColor: "rgba(255,94,44,0.25)", color: "#FF5E2C", fontSize: "14px", letterSpacing: "1.5px" }}>
               Departments
             </span>
-            <h2 className="font-black" style={{ color: "#FFFFFF", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "20px", marginBottom: "56px" }}>Department Members</h2>
-
-            {/* Filter chips */}
-            <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
-              {[
-                { label: "All", key: "All" },
-                ...teams.map((t) => ({ label: deptShort[t.team] ?? t.team, key: t.team, color: t.color })),
-              ].map((tab) => {
-                const isActive = activeTeam === tab.key;
-                const chipColor = (tab as { color?: string }).color ?? "#F97316";
-                return (
-                  <button
-                    key={tab.key}
-                    onClick={() => setActiveTeam(tab.key)}
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      minWidth: "90px",
-                      height: "44px",
-                      padding: "0 20px",
-                      borderRadius: "9999px",
-                      fontSize: "15px",
-                      fontWeight: 500,
-                      letterSpacing: "0.2px",
-                      whiteSpace: "nowrap",
-                      cursor: "pointer",
-                      border: isActive ? `1.5px solid ${chipColor}` : "1.5px solid #3A3A3A",
-                      background: isActive ? chipColor : "rgba(255,255,255,0.05)",
-                      color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.55)",
-                      boxShadow: isActive ? `0 0 18px ${chipColor}55, 0 2px 8px rgba(0,0,0,0.3)` : "none",
-                      transition: "all 0.25s ease",
-                      outline: "none",
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!isActive) {
-                        (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.11)";
-                        (e.currentTarget as HTMLButtonElement).style.color = "#FFFFFF";
-                        (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.25)";
-                      } else {
-                        (e.currentTarget as HTMLButtonElement).style.transform = "scale(1.03)";
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isActive) {
-                        (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.05)";
-                        (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.55)";
-                        (e.currentTarget as HTMLButtonElement).style.borderColor = "#3A3A3A";
-                      }
-                      (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
-                    }}
-                  >
-                    {tab.label}
-                  </button>
-                );
-              })}
-            </div>
           </FadeIn>
 
-          {/* ChromaGrid */}
-          <motion.div
-            key={activeTeam}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          >
+          {/* Heading — 24px below badge */}
+          <FadeIn delay={0.05}>
+            <h2 className="font-black" style={{ color: "#FFFFFF", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>
+              Department Members
+            </h2>
+          </FadeIn>
+
+          {/* Filter + ChromaGrid — no extra inner wrapper, inherit 1400px container */}
+          <div>
+
+            {/* Filter bar — 40px below heading */}
+            <FadeIn delay={0.1}>
+              {/* flex-wrap on mobile, nowrap on desktop — chips fill full width via flex:1 */}
+              <div className="flex flex-wrap lg:flex-nowrap items-center gap-3" style={{ marginTop: "40px", width: "100%" }}>
+                {[
+                  { label: "All", key: "All" },
+                  ...teams.map((t) => ({ label: deptShort[t.team] ?? t.team, key: t.team, color: t.color })),
+                ].map((tab) => {
+                  const isActive = activeTeam === tab.key;
+                  const chipColor = (tab as { color?: string }).color ?? "#FF5E2C";
+                  return (
+                    <button
+                      key={tab.key}
+                      onClick={() => setActiveTeam(tab.key)}
+                      style={{
+                        flex: "1 1 110px",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: "44px",
+                        padding: "0 22px",
+                        borderRadius: "9999px",
+                        fontSize: "15px",
+                        fontWeight: 500,
+                        letterSpacing: "0.15px",
+                        whiteSpace: "nowrap",
+                        cursor: "pointer",
+                        border: isActive ? `1px solid ${chipColor}` : "1px solid rgba(255,255,255,0.12)",
+                        background: isActive ? chipColor : "rgba(255,255,255,0.04)",
+                        color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.5)",
+                        boxShadow: isActive ? `0 2px 16px ${chipColor}55` : "none",
+                        transition: "background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease",
+                        outline: "none",
+                        textAlign: "center",
+                      }}
+                      onMouseEnter={(e) => {
+                        const btn = e.currentTarget as HTMLButtonElement;
+                        if (!isActive) {
+                          btn.style.background = "rgba(255,255,255,0.09)";
+                          btn.style.color = "#FFFFFF";
+                          btn.style.borderColor = "rgba(255,255,255,0.22)";
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        const btn = e.currentTarget as HTMLButtonElement;
+                        if (!isActive) {
+                          btn.style.background = "rgba(255,255,255,0.04)";
+                          btn.style.color = "rgba(255,255,255,0.5)";
+                          btn.style.borderColor = "rgba(255,255,255,0.12)";
+                        }
+                      }}
+                    >
+                      {tab.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </FadeIn>
+
+            {/* ChromaGrid — 40px below filter bar */}
+            <motion.div
+              key={activeTeam}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              style={{ marginTop: "40px" }}
+            >
             <ChromaGrid
               items={visibleMembers.map((member) => {
                 const hex = member.deptColor.replace("#", "");
-                // Falls back to a name-initials avatar in the member's team color.
-                // Replace member.photo with a real path ("/council/name.jpg") to use actual photos.
                 const avatar = member.photo
                   ? member.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")
                   : `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=${hex}&color=fff&size=300&bold=true&format=png`;
@@ -578,17 +585,20 @@ export default function CouncilPage() {
             />
           </motion.div>
 
-          {/* Count */}
-          <div className="mt-6 flex items-center gap-2 justify-center" style={{ color: "rgba(255,255,255,0.30)" }}>
-            <Users size={14} />
-            <span className="text-sm">{visibleMembers.length} member{visibleMembers.length !== 1 ? "s" : ""}</span>
+            {/* Count */}
+            <div className="mt-8 flex items-center gap-2 justify-center" style={{ color: "rgba(255,255,255,0.25)" }}>
+              <Users size={14} />
+              <span className="text-sm">{visibleMembers.length} member{visibleMembers.length !== 1 ? "s" : ""}</span>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* Join CTA */}
-      <section style={{ background: "linear-gradient(160deg, #FFFFFF 0%, #FFFFFF 50%, #FFFFFF 100%)", paddingTop: "96px", paddingBottom: "96px" }}>
-        <FadeIn className="page-container text-center">
+      <section style={{ background: "#FFFFFF", paddingTop: "96px", paddingBottom: "96px" }}>
+        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "48px" }}>
+        <FadeIn className="text-center">
           <span className="section-tag" style={{ marginBottom: "32px" }}>Join the Team</span>
           <h2 className="text-4xl font-black" style={{ color: "#000000", marginBottom: "32px" }}>Want to Be Part of CIE Council?</h2>
           <p className="text-lg" style={{ color: "#374151", marginBottom: "40px" }}>
@@ -600,6 +610,7 @@ export default function CouncilPage() {
             <button className="btn-secondary-light">Learn More</button>
           </div>
         </FadeIn>
+        </div>
       </section>
     </div>
   );

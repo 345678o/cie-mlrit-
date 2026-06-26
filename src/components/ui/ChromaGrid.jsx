@@ -18,6 +18,7 @@ export const ChromaGrid = ({
   const rafRef = useRef(null);
   const mouse = useRef({ x: -9999, y: -9999 });
   const isHovering = useRef(false);
+  const isTouchDevice = useRef(false);
 
   const applyFilters = useCallback(() => {
     const el = rootRef.current;
@@ -32,11 +33,8 @@ export const ChromaGrid = ({
       const cx = rect.left + rect.width / 2 - gridRect.left;
       const cy = rect.top + rect.height / 2 - gridRect.top;
       const dist = Math.sqrt((mx - cx) ** 2 + (my - cy) ** 2);
-      // 0 = fully colored, 1 = fully grayscale
       const t = Math.min(1, Math.max(0, (dist - radius * 0.15) / (radius * 0.85)));
-      const gray = t;
-      const bright = 1 - t * 0.30;
-      card.style.filter = `grayscale(${gray}) brightness(${bright})`;
+      card.style.filter = `grayscale(${t}) brightness(${1 - t * 0.30})`;
     });
   }, [radius]);
 
@@ -48,7 +46,6 @@ export const ChromaGrid = ({
     });
   }, [applyFilters]);
 
-  // Animate all cards to grayscale on leave
   const animateToGray = useCallback(() => {
     cardsRef.current.forEach((card) => {
       if (!card) return;
@@ -61,23 +58,40 @@ export const ChromaGrid = ({
     });
   }, [fadeOut]);
 
-  // Instantly clear grayscale when mouse enters
+  const showAllColor = useCallback(() => {
+    cardsRef.current.forEach((card) => {
+      if (!card) return;
+      gsap.killTweensOf(card);
+      card.style.filter = 'grayscale(0) brightness(1)';
+    });
+  }, []);
+
   const handleMove = useCallback((e) => {
+    if (isTouchDevice.current) return;
     const r = rootRef.current.getBoundingClientRect();
     mouse.current = { x: e.clientX - r.left, y: e.clientY - r.top };
     if (!isHovering.current) {
       isHovering.current = true;
-      // kill any ongoing gsap tweens on cards
       cardsRef.current.forEach((card) => { if (card) gsap.killTweensOf(card); });
     }
     scheduleFrame();
   }, [scheduleFrame]);
 
   const handleLeave = useCallback(() => {
+    if (isTouchDevice.current) return;
     isHovering.current = false;
     mouse.current = { x: -9999, y: -9999 };
     animateToGray();
   }, [animateToGray]);
+
+  // Touch: highlight tapped card, gray others
+  const handleTouchStart = useCallback((e, index) => {
+    const gridRect = rootRef.current.getBoundingClientRect();
+    const touch = e.touches[0];
+    mouse.current = { x: touch.clientX - gridRect.left, y: touch.clientY - gridRect.top };
+    cardsRef.current.forEach((card) => { if (card) gsap.killTweensOf(card); });
+    applyFilters();
+  }, [applyFilters]);
 
   const handleCardMove = useCallback((e) => {
     const card = e.currentTarget;
@@ -90,13 +104,21 @@ export const ChromaGrid = ({
     if (url && url !== '#') window.open(url, '_blank', 'noopener,noreferrer');
   }, []);
 
-  // Set initial gray state
   useEffect(() => {
-    cardsRef.current.forEach((card) => {
-      if (card) card.style.filter = 'grayscale(1) brightness(0.70)';
-    });
+    // Detect touch-only device (no fine pointer / no hover)
+    isTouchDevice.current = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+    if (isTouchDevice.current) {
+      // Show all cards in color on touch devices
+      showAllColor();
+    } else {
+      cardsRef.current.forEach((card) => {
+        if (card) card.style.filter = 'grayscale(1) brightness(0.70)';
+      });
+    }
+
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
-  }, [items]);
+  }, [items, showAllColor]);
 
   return (
     <div
@@ -112,6 +134,7 @@ export const ChromaGrid = ({
           ref={(el) => { cardsRef.current[i] = el; }}
           className="chroma-card"
           onMouseMove={handleCardMove}
+          onTouchStart={(e) => handleTouchStart(e, i)}
           onClick={() => handleCardClick(c.url)}
           style={{
             '--card-border': c.borderColor || 'transparent',
