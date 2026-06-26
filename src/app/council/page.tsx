@@ -3,7 +3,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link2, Mail, Users, ChevronDown, ChevronUp, Code, Palette, Camera, PenLine, Mic, BarChart2, FileText } from "lucide-react";
-import ChromaGrid from "@/components/ui/ChromaGrid";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
 
@@ -69,7 +68,7 @@ const teamExpertise: Record<string, string> = {
 const teams: TeamSection[] = [
   {
     team: "Tech",
-    color: "#4A7CDB",
+    color: "#4A7DFF",
     description: "Builds and maintains CIE's digital infrastructure — from the website and internal tools to AI experiments and mobile apps. The Tech team turns every idea into a working product.",
     members: [
       { name: "Ghanashyam Kodekandla", role: "Member", dept: "Tech", photo: "/council/tech/Ghanashyam Kodekandla.png" },
@@ -92,7 +91,7 @@ const teams: TeamSection[] = [
   },
   {
     team: "Content",
-    color: "#CCBA11",
+    color: "#D9C500",
     description: "Produces all written and editorial output for CIE — blog posts, event write-ups, newsletters, captions, and long-form content that tell our story across every channel.",
     members: [
       { name: "Jayadeep",        role: "Member", dept: "Content", photo: "/council/content/Jayadeep.png" },
@@ -106,7 +105,7 @@ const teams: TeamSection[] = [
   },
   {
     team: "Creative",
-    color: "#BE5BFA",
+    color: "#B65CFF",
     description: "Drives CIE's creative direction and campaigns — ideating themes, managing brand consistency, and building the visual + conceptual identity behind every initiative.",
     members: [
          { name: "Harika Y",          role: "Member", dept: "Creative", photo: "/council/creatives/Harika Y.png" },
@@ -121,7 +120,7 @@ const teams: TeamSection[] = [
   },
   {
     team: "GD — Graphic Design",
-    color: "#68DEF8",
+    color: "#61D4F4",
     description: "Shapes the visual identity of CIE — designing posters, decks, social assets, UI mockups, and motion content that make every event and campaign look world-class.",
     members: [
       { name: "Vivek Vardhan",           role: "Member", dept: "GD", photo: "/council/GD/Veivek vardhan.png" },
@@ -140,7 +139,7 @@ const teams: TeamSection[] = [
   },
   {
     team: "Photography",
-    color: "#FA7712",
+    color: "#FF7A1A",
     description: "Captures every moment of the CIE journey — from hackathon late nights to summit keynotes — through photography, videography, and professional post-production.",
     members: [
       { name: "Priyanshu Roy",     role: "Member", dept: "Photography", photo: "/council/photography/Priyanshu Roy.png" },
@@ -157,7 +156,7 @@ const teams: TeamSection[] = [
   },
   {
     team: "P&S — Public Speaking",
-    color: "#D01010",
+    color: "#E53935",
     description: "Represents CIE in every room — anchoring events, running communication workshops, handling PR, and making sure CIE's message lands clearly with every audience.",
     members: [
       { name: "Sai Mihir Ramaraju",    role: "Member", dept: "P&S", photo: "/council/p&s/Sai Mihir Ramaraju.png" },
@@ -170,7 +169,7 @@ const teams: TeamSection[] = [
   },
   {
     team: "Ops — Operations & Finance",
-    color: "#14E31D",
+    color: "#22C55E",
     description: "Keeps everything running — coordinating logistics for every event, managing budgets, vendor relations, and making sure no detail falls through the cracks.",
     members: [
        { name: "Dheeraj Kumar",     role: "Member", dept: "Ops", photo: "/council/OPS/Dheeraj Kumar.png" },
@@ -369,6 +368,96 @@ const heroCards = [
   { icon: Mic, label: "P&S — Public Speaking", count: `${teams[4].members.length} members`, detail: "Anchoring · PR · Workshops · Events", accent: "rgba(124,58,237,0.15)", color: "#7C3AED" },
 ];
 
+// ── Council Showcase — Lando Norris helmet treatment ─────────────
+// Notched frame (isosceles-right-triangle corner cut), staggered scatter, lime accent.
+// Static: side-view, grayscale, shrunk, grey frame. Click → front zoom, color, lime glow.
+// Isosceles-right-triangle notch cut from the bottom-right corner.
+const CS_NOTCH = "polygon(0 0, 100% 0, 100% calc(100% - 32px), calc(100% - 32px) 100%, 0 100%)";
+type ShowcaseMember = Member & { department: string; deptColor: string };
+function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
+  const [active, setActive] = useState<number | null>(null);
+  return (
+    <>
+      <div className="cs-grid">
+        {members.map((m, i) => {
+          // Filenames contain spaces / special chars — encode each path segment.
+          const encoded = m.photo
+            ? m.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")
+            : null;
+          // Two states like Lando: a "side" (flat) image and a "front" (hero) image.
+          const flat = encoded
+            ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=0a0a0a&color=9aa&size=400&bold=true&format=png`;
+          const hero = encoded
+            ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=${m.deptColor.replace("#", "")}&color=fff&size=400&bold=true&format=png`;
+          const isActive = active === i;
+          // Staggered scatter: even columns sit high, odd columns sit low.
+          const scatter = i % 2 === 0 ? -26 : 26;
+          return (
+            <button
+              key={`${m.department}-${m.name}-${i}`}
+              type="button"
+              onClick={() => setActive(isActive ? null : i)}
+              aria-pressed={isActive}
+              className="cs-card"
+              style={{
+                background: "transparent", border: "none", padding: 0, cursor: "pointer", textAlign: "left",
+                transform: `translateY(${isActive ? 0 : scatter}px)`,
+                transition: "transform .55s cubic-bezier(.16,1,.3,1)",
+              }}
+            >
+              {/* Frame — drop-shadow follows the clipped silhouette (box-shadow would not) */}
+              <div style={{
+                position: "relative", aspectRatio: "4 / 5",
+                filter: isActive ? `drop-shadow(0 22px 50px ${m.deptColor}66)` : "none",
+                transition: "filter .45s ease",
+              }}>
+                {/* Border layer (notched) */}
+                <div style={{
+                  position: "absolute", inset: 0, clipPath: CS_NOTCH,
+                  background: isActive ? m.deptColor : "rgba(255,255,255,0.16)",
+                  transition: "background .4s ease",
+                }} />
+                {/* Content layer (notched, inset = border thickness) */}
+                <div style={{
+                  position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden",
+                  background: isActive ? `linear-gradient(155deg, ${m.deptColor}26 0%, #0a0a0a 100%)` : "#0a0a0a",
+                  transition: "background .4s ease",
+                }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={isActive ? hero : flat}
+                    alt={m.name}
+                    className="absolute inset-0 w-full h-full"
+                    style={{
+                      objectFit: "cover",
+                      objectPosition: "top center",
+                      transform: isActive ? "scale(1.06)" : "scale(0.80)",
+                      filter: "none",
+                      transition: "transform .55s cubic-bezier(.16,1,.3,1), filter .5s ease",
+                    }}
+                  />
+                </div>
+              </div>
+              {/* Label — name stacks above dept, left-aligned, name wraps full-width */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "3px", paddingTop: "12px", paddingInline: "4px" }}>
+                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: isActive ? "15px" : "13px", lineHeight: 1.2, color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.82)", transition: "all .3s ease", overflowWrap: "anywhere" }}>{m.name}</span>
+                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "11px", letterSpacing: "0.3px", color: isActive ? m.deptColor : "rgba(255,255,255,0.45)", transition: "all .3s ease" }}>{deptShort[m.department] ?? m.department}</span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+      <style>{`
+        .cs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(18px, 2.5vw, 32px) clamp(16px, 2vw, 28px); padding-top: 30px; padding-bottom: 30px; align-items: start; }
+        /* Mobile: kill the staggered scatter so the 2-col grid sits flush. */
+        @media (max-width: 639px)  { .cs-card { transform: none !important; } }
+        @media (min-width: 640px)  { .cs-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 1024px) { .cs-grid { grid-template-columns: repeat(4, 1fr); } }
+      `}</style>
+    </>
+  );
+}
+
 export default function CouncilPage() {
   const [activeTeam, setActiveTeam] = useState("All");
   const allMembers = teams.flatMap((t) =>
@@ -562,27 +651,7 @@ export default function CouncilPage() {
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               style={{ marginTop: "40px" }}
             >
-            <ChromaGrid
-              items={visibleMembers.map((member) => {
-                const hex = member.deptColor.replace("#", "");
-                const avatar = member.photo
-                  ? member.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")
-                  : `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=${hex}&color=fff&size=300&bold=true&format=png`;
-                return {
-                  image: avatar,
-                  title: member.name,
-                  subtitle: member.role,
-                  handle: deptShort[member.department] ?? member.department,
-                  borderColor: member.deptColor,
-                  gradient: `linear-gradient(155deg, ${member.deptColor}22 0%, #0a0a0a 100%)`,
-                  url: member.linkedin,
-                };
-              })}
-              radius={800}
-              columns={6}
-              damping={2}
-              fadeOut={0.6}
-            />
+              <CouncilShowcase members={visibleMembers} />
           </motion.div>
 
             {/* Count */}
