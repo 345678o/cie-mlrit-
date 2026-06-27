@@ -22,50 +22,50 @@ const DEPARTMENTS: Record<string, {
     name: "Tech", color: "#4A7CDB", icon: Code,
     tagline: "Build products that thousands of students use.",
     desc: "We design and build web applications, AI solutions, automation systems, internal tools, and digital experiences for CIE.",
-    skills: ["React", "Next.js", "AI / ML", "Node.js", "Supabase"],
-    stats: [{ label: "Members", value: "14" }, { label: "Open Spots", value: "4" }, { label: "Projects", value: "45+" }],
+    skills: [],
+    stats: [],
   },
   content: {
     name: "Content", color: "#CCBA11", icon: FileText,
     tagline: "Tell stories that make people care.",
     desc: "We produce all written and editorial output for CIE — blog posts, event write-ups, newsletters, captions, and long-form content.",
-    skills: ["Writing", "Editing", "Storytelling", "Research", "SEO"],
-    stats: [{ label: "Members", value: "7" }, { label: "Open Spots", value: "3" }, { label: "Articles", value: "120+" }],
+    skills: [],
+    stats: [],
   },
   creative: {
     name: "Creative", color: "#BE5BFA", icon: PenLine,
     tagline: "Shape the ideas that define CIE.",
     desc: "We drive CIE's creative direction — ideating themes, managing brand consistency, and building the visual identity.",
-    skills: ["Concept Design", "Brand Strategy", "Campaign Planning", "Art Direction"],
-    stats: [{ label: "Members", value: "8" }, { label: "Open Spots", value: "3" }, { label: "Campaigns", value: "30+" }],
+    skills: [],
+    stats: [],
   },
   gd: {
     name: "GD — Graphic Design", color: "#68DEF8", icon: Palette,
     tagline: "Make people stop scrolling.",
     desc: "We shape the visual identity of CIE — designing posters, decks, social assets, UI mockups, and motion content.",
-    skills: ["Figma", "Adobe Suite", "Motion Graphics", "Typography", "Social Media"],
-    stats: [{ label: "Members", value: "11" }, { label: "Open Spots", value: "4" }, { label: "Designs", value: "200+" }],
+    skills: [],
+    stats: [],
   },
   photography: {
     name: "Photography", color: "#FA7712", icon: Camera,
     tagline: "Capture every moment of the CIE journey.",
     desc: "We capture every moment — from hackathon late nights to summit keynotes — through photography, videography, and post-production.",
-    skills: ["Photography", "Videography", "Lightroom", "Premiere Pro", "Color Grading"],
-    stats: [{ label: "Members", value: "6" }, { label: "Open Spots", value: "2" }, { label: "Events Shot", value: "80+" }],
+    skills: [],
+    stats: [],
   },
   ps: {
     name: "P&S — Public Speaking", color: "#D01010", icon: Mic,
     tagline: "Own the room. Represent CIE everywhere.",
     desc: "We represent CIE in every room — anchoring events, running communication workshops, and handling PR & outreach.",
-    skills: ["Public Speaking", "Anchoring", "Communication", "PR & Outreach", "Event MC"],
-    stats: [{ label: "Members", value: "6" }, { label: "Open Spots", value: "2" }, { label: "Events", value: "60+" }],
+    skills: [],
+    stats: [],
   },
   ops: {
     name: "Ops & Finance", color: "#22C55E", icon: BarChart2,
     tagline: "Keep everything running, flawlessly.",
     desc: "We keep CIE running — managing event logistics, budgets, vendor relations, and ensuring flawless execution every time.",
-    skills: ["Event Logistics", "Budget Management", "Vendor Coordination", "Planning", "Excel"],
-    stats: [{ label: "Members", value: "8" }, { label: "Open Spots", value: "3" }, { label: "Events Run", value: "50+" }],
+    skills: [],
+    stats: [],
   },
 };
 
@@ -85,13 +85,13 @@ function inputStyle(focused: boolean, color: string): React.CSSProperties {
     width: "100%", boxSizing: "border-box" as const,
     fontFamily: "var(--font-body)", fontSize: "16px",
     padding: "0 18px", height: "56px",
-    borderRadius: "14px",
-    border: focused ? `2px solid ${color}` : "1.5px solid #E5E7EB",
+    borderRadius: "13px",
+    border: focused ? `1.5px solid ${color}` : "1px solid #E5E7EB",
     outline: "none",
-    background: focused ? "#FFFFFF" : "#F9FAFB",
+    background: "#FFFFFF",
     color: "#111111",
-    transition: "border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease",
-    boxShadow: focused ? `0 0 0 4px ${color}20, 0 1px 4px rgba(0,0,0,0.04)` : "0 1px 2px rgba(0,0,0,0.04)",
+    transition: "border-color 0.18s ease, box-shadow 0.18s ease",
+    boxShadow: focused ? `0 0 0 3px ${color}18` : "none",
   };
 }
 
@@ -110,6 +110,18 @@ function FieldErr({ msg }: { msg: string }) {
       style={{ fontFamily:"var(--font-body)", fontSize:"12px", color:"#EF4444", marginTop:"6px", fontWeight:500 }}>
       {msg}
     </motion.p>
+  );
+}
+
+function SectionDivider({ label }: { label: string }) {
+  return (
+    <div style={{ display:"flex", alignItems:"center", gap:"16px", marginBottom:"24px" }}>
+      <span style={{
+        fontFamily:"var(--font-body)", fontWeight:700, fontSize:"12px",
+        color:"#0A0A0A", letterSpacing:"-0.01em", whiteSpace:"nowrap" as const,
+      }}>{label}</span>
+      <div style={{ flex:1, height:"1px", background:"#E5E7EB" }}/>
+    </div>
   );
 }
 
@@ -376,7 +388,7 @@ function ApplyForm() {
         <SuccessScreen key="success" dept={dept.name} color={color} firstName={form.name.trim().split(" ")[0]} appId={appId}/>
       ) : (
         <motion.div key="form" initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}
-          style={{ minHeight:"100vh", background:"#F2F2F0", marginTop:"calc(-1 * var(--nav-height))" }}>
+          style={{ minHeight:"100vh", background:"#F2F2F0", marginTop:"calc(-1 * var(--nav-height))", display:"flex", flexDirection:"column" }}>
 
           {/* ── Department Hero Card ── */}
           <section style={{
@@ -491,47 +503,55 @@ function ApplyForm() {
             </div>
           </section>
 
-          {/* ── Application Form ── */}
-          <div style={{
-            paddingTop: "clamp(40px, 4vw, 56px)",
-            paddingBottom: "80px",
-            paddingLeft: "clamp(16px, 4vw, 24px)",
-            paddingRight: "clamp(16px, 4vw, 24px)",
-          }}>
-            <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }}
-              transition={{ duration:0.6, delay:0.15, ease:[0.16,1,0.3,1] }}
-              style={{
-                background:"#FFFFFF",
-                borderRadius:"24px",
-                padding:"clamp(24px,3.5vw,48px)",
-                boxShadow:"0 2px 4px rgba(0,0,0,0.03), 0 8px 32px rgba(0,0,0,0.07), 0 1px 0 rgba(255,255,255,0.8) inset",
-                width:"100%",
-                maxWidth:"600px",
-                margin:"0 auto",
-                border:"1px solid rgba(0,0,0,0.06)",
-              }}>
+          {/* ── Application Section ── */}
+          <section style={{ background:"#FAFAFA", flex:1 }}>
+            <div style={{
+              maxWidth:"1040px", margin:"0 auto",
+              paddingTop:"clamp(40px,5vw,64px)",
+              paddingBottom:"clamp(64px,8vw,96px)",
+              paddingLeft:"clamp(20px,4vw,40px)",
+              paddingRight:"clamp(20px,4vw,40px)",
+            }}>
 
-              <ProgressBar color={color}/>
-
-              {/* Heading */}
-              <div style={{ marginBottom:"32px" }}>
-                <h2 style={{
-                  fontFamily:"var(--font-heading)", fontWeight:900,
-                  fontSize:"clamp(24px,3vw,38px)", color:"#0A0A0A",
-                  letterSpacing:"-0.035em", lineHeight:1.05, marginBottom:"10px",
-                }}>
-                  Fill in your application.
-                </h2>
-                <p style={{ fontFamily:"var(--font-body)", fontSize:"15px", color:"#6B7280", lineHeight:1.7 }}>
-                  All fields are required. We read every application carefully.
-                </p>
+              {/* Progress */}
+              <div style={{ maxWidth:"400px", marginBottom:"clamp(32px,4vw,48px)" }}>
+                <ProgressBar color={color}/>
               </div>
 
-              <form onSubmit={handleSubmit} noValidate>
-                <div style={{ display:"grid", gap:"20px" }}>
+              {/* Section intro — left-aligned, compact */}
+              <motion.div initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }}
+                transition={{ duration:0.6, delay:0.1, ease:[0.16,1,0.3,1] }}
+                style={{ marginBottom:"clamp(40px,5vw,56px)" }}>
+                <span style={{
+                  fontFamily:"var(--font-body)", fontWeight:700, fontSize:"11px",
+                  letterSpacing:"0.14em", textTransform:"uppercase" as const,
+                  color:color, display:"block", marginBottom:"12px",
+                }}>Application</span>
+                <h2 style={{
+                  fontFamily:"var(--font-heading)", fontWeight:900,
+                  fontSize:"clamp(28px,4vw,48px)", color:"#0A0A0A",
+                  letterSpacing:"-0.04em", lineHeight:1.05, marginBottom:"12px",
+                }}>
+                  Complete Your Application
+                </h2>
+                <p style={{
+                  fontFamily:"var(--font-body)", fontSize:"15px", color:"#6B7280",
+                  lineHeight:1.75, maxWidth:"560px",
+                }}>
+                  Fill in the details below to apply for the <strong style={{ color:"#374151" }}>{dept.name}</strong> department. Every application is reviewed carefully by our team.
+                </p>
+              </motion.div>
 
-                  {/* Name + Roll */}
-                  <div className="form-row" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"14px" }}>
+              {/* Form */}
+              <motion.form initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }}
+                transition={{ duration:0.6, delay:0.2, ease:[0.16,1,0.3,1] }}
+                onSubmit={handleSubmit} noValidate>
+
+                {/* ── Personal Information ── */}
+                <SectionDivider label="Personal Information"/>
+                <div style={{ display:"grid", gap:"20px", marginBottom:"48px" }}>
+
+                  <div className="form-row" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px" }}>
                     <div>
                       <Label>Full Name</Label>
                       <input type="text" placeholder="Anamika Kumari" value={form.name}
@@ -550,8 +570,7 @@ function ApplyForm() {
                     </div>
                   </div>
 
-                  {/* Phone + Email */}
-                  <div className="form-row" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"14px" }}>
+                  <div className="form-row" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px" }}>
                     <div>
                       <Label>Phone Number</Label>
                       <input type="tel" placeholder="9XXXXXXXXX" value={form.phone}
@@ -570,43 +589,53 @@ function ApplyForm() {
                     </div>
                   </div>
 
-                  {/* Branch */}
-                  <div>
-                    <Label>Branch</Label>
-                    <select value={form.branch}
-                      onChange={e => set("branch", e.target.value)}
-                      onFocus={() => setFocused("branch")} onBlur={() => setFocused("")}
-                      style={{ ...inputStyle(focused==="branch", color), appearance:"auto" as any }}>
-                      <option value="">Select your branch…</option>
-                      {BRANCHES.map(b => <option key={b} value={b}>{b}</option>)}
-                    </select>
-                    {errors.branch && <FieldErr msg={errors.branch}/>}
-                  </div>
+                </div>
 
-                  {/* Year */}
-                  <div>
-                    <Label>Year of Study</Label>
-                    <div style={{ display:"flex", gap:"8px", flexWrap:"wrap" }}>
-                      {YEARS.map(y => (
-                        <motion.button key={y} type="button" onClick={() => set("year", y)}
-                          whileHover={{ y:-1 }} whileTap={{ scale:0.97 }}
-                          style={{
-                            fontFamily:"var(--font-body)", fontWeight:600, fontSize:"14px",
-                            padding:"0 20px", height:"48px", borderRadius:"12px", cursor:"pointer",
-                            border:form.year===y ? `2px solid ${color}` : "1.5px solid #E5E7EB",
-                            background:form.year===y ? `${color}12` : "#F9FAFB",
-                            color:form.year===y ? color : "#374151",
-                            transition:"all 0.18s ease",
-                            boxShadow:form.year===y ? `0 0 0 3px ${color}15` : "0 1px 2px rgba(0,0,0,0.04)",
-                          }}>{y}</motion.button>
-                      ))}
+                {/* ── Academic Details ── */}
+                <SectionDivider label="Academic Details"/>
+                <div style={{ display:"grid", gap:"20px", marginBottom:"48px" }}>
+
+                  <div className="form-row" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px", alignItems:"start" }}>
+                    <div>
+                      <Label>Branch</Label>
+                      <select value={form.branch}
+                        onChange={e => set("branch", e.target.value)}
+                        onFocus={() => setFocused("branch")} onBlur={() => setFocused("")}
+                        style={{ ...inputStyle(focused==="branch", color), appearance:"auto" as any }}>
+                        <option value="">Select your branch…</option>
+                        {BRANCHES.map(b => <option key={b} value={b}>{b}</option>)}
+                      </select>
+                      {errors.branch && <FieldErr msg={errors.branch}/>}
                     </div>
-                    {errors.year && <FieldErr msg={errors.year}/>}
+                    <div>
+                      <Label>Year of Study</Label>
+                      <div style={{ display:"flex", gap:"10px", flexWrap:"wrap" }}>
+                        {YEARS.map(y => (
+                          <motion.button key={y} type="button" onClick={() => set("year", y)}
+                            whileHover={{ y:-1 }} whileTap={{ scale:0.97 }}
+                            style={{
+                              fontFamily:"var(--font-body)", fontWeight:600, fontSize:"14px",
+                              padding:"0 24px", height:"56px", borderRadius:"13px", cursor:"pointer",
+                              border:form.year===y ? `1.5px solid ${color}` : "1px solid #E5E7EB",
+                              background:form.year===y ? `${color}10` : "#FFFFFF",
+                              color:form.year===y ? color : "#374151",
+                              transition:"all 0.18s ease",
+                              boxShadow:form.year===y ? `0 0 0 3px ${color}15` : "none",
+                            }}>{y}</motion.button>
+                        ))}
+                      </div>
+                      {errors.year && <FieldErr msg={errors.year}/>}
+                    </div>
                   </div>
 
-                  {/* Why */}
+                </div>
+
+                {/* ── Application ── */}
+                <SectionDivider label="Application"/>
+                <div style={{ display:"grid", gap:"20px", marginBottom:"48px" }}>
+
                   <div>
-                    <Label>Why {dept.name}?</Label>
+                    <Label>Why do you want to join {dept.name}?</Label>
                     <textarea
                       placeholder={`Tell us why you want to join ${dept.name} — your passion, experience, and what you'll bring to the team.`}
                       value={form.why} rows={6}
@@ -614,7 +643,7 @@ function ApplyForm() {
                       onFocus={() => setFocused("why")} onBlur={() => setFocused("")}
                       style={{
                         ...inputStyle(focused==="why", color),
-                        height:"auto", minHeight:"148px",
+                        height:"auto", minHeight:"160px",
                         padding:"16px 18px", lineHeight:"1.65",
                         resize:"vertical" as const,
                       }}/>
@@ -626,9 +655,10 @@ function ApplyForm() {
                     </div>
                   </div>
 
-                  <div style={{ height:"1px", background:"#F3F4F6" }}/>
+                </div>
 
-                  {/* Submit */}
+                {/* Submit */}
+                <div style={{ display:"flex", alignItems:"center", gap:"24px", flexWrap:"wrap" }}>
                   <motion.button
                     type="submit" disabled={loading}
                     onMouseEnter={() => setHoverBtn(true)}
@@ -636,26 +666,24 @@ function ApplyForm() {
                     whileHover={!loading ? { y:-2 } : {}}
                     whileTap={!loading ? { scale:0.99 } : {}}
                     style={{
-                      width:"100%", height:"56px",
-                      borderRadius:"14px", border:"none",
-                      background:color,
-                      color:"#FFFFFF",
+                      height:"56px", padding:"0 40px",
+                      borderRadius:"13px", border:"none",
+                      background:color, color:"#FFFFFF",
                       fontFamily:"var(--font-body)", fontWeight:700, fontSize:"16px",
                       cursor:loading ? "not-allowed" : "pointer",
-                      display:"flex", alignItems:"center", justifyContent:"center", gap:"10px",
+                      display:"inline-flex", alignItems:"center", justifyContent:"center", gap:"10px",
                       transition:"box-shadow 0.2s ease",
-                      boxShadow: loading ? "none" : `0 4px 20px ${color}35`,
+                      boxShadow: loading ? "none" : `0 4px 24px ${color}35`,
                       letterSpacing:"-0.01em",
                       position:"relative", overflow:"hidden",
+                      minWidth:"220px",
                     }}>
-                    {/* Progress fill strip */}
                     {loading && (
                       <div style={{
-                        position:"absolute", bottom:0, left:0, height:"4px",
+                        position:"absolute", bottom:0, left:0, height:"3px",
                         background:"rgba(255,255,255,0.55)",
                         width:`${submitProgress}%`,
                         transition:"width 0.05s linear",
-                        borderRadius:"0 2px 0 0",
                       }}/>
                     )}
                     {loading ? (
@@ -673,15 +701,15 @@ function ApplyForm() {
                     )}
                   </motion.button>
 
-                  <p style={{ fontFamily:"var(--font-body)", fontSize:"12px", color:"#9CA3AF", textAlign:"center" as const, lineHeight:1.6 }}>
+                  <p style={{ fontFamily:"var(--font-body)", fontSize:"13px", color:"#9CA3AF", lineHeight:1.6 }}>
                     Applications reviewed within 5–7 days · Results via college email
                   </p>
-
                 </div>
-              </form>
 
-            </motion.div>
-          </div>
+              </motion.form>
+
+            </div>
+          </section>
 
           <style>{`
             @keyframes spin { to { transform: rotate(360deg); } }
