@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { label: "Verticals", href: "/verticals" },
   { label: "Team",      href: "/council" },
   { label: "Events",    href: "/events" },
+  { label: "Alumni",    href: "/alumni" },
   { label: "Gallery",   href: "/tours" },
   { label: "Contact",   href: "/contact" },
 ];

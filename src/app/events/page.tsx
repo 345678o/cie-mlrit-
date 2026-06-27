@@ -10,7 +10,7 @@ import { ArrowRight, Calendar } from "lucide-react";
 
 const GRAIN = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 
-/* 5 featured story panels */
+/* 7 featured story panels — ordered as requested */
 const FEATURED = [
   {
     idx: "01",
@@ -21,6 +21,7 @@ const FEATURED = [
     body: "Where learning goes beyond classrooms — into real skills, real challenges, and real innovation. Explore multiple domains, collaborate with like-minded creators, and push your limits through hands-on experiences that actually matter.",
     tags: ["Hands-on Workshops", "Expert Guidance", "Domain Challenges", "Practical Skills"],
     imgGrad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)",
+    img: "/events/workshop-carnival-2.jpg",
     bg: "#07090f",
     side: "right" as const,
     catColor: "#2563EB",
@@ -28,6 +29,34 @@ const FEATURED = [
   },
   {
     idx: "02",
+    category: "Innovation Challenge",
+    title: "B2B — Business to Brand",
+    date: "Apr 3–4, 2025",
+    dateTime: "2025-04-03",
+    body: "A Brand Revival Hackathon — teams of 3–5 develop strategies to transform brands through Concept & Logo Redesign and Ad-Film Making, backed by exclusive masterclasses from industry experts.",
+    tags: ["Brand Revival", "Logo Design", "Ad-Film Making", "Masterclasses"],
+    imgGrad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)",
+    bg: "#070a05",
+    side: "left" as const,
+    catColor: "#DC2626",
+    catBg: "rgba(220,38,38,0.12)",
+  },
+  {
+    idx: "03",
+    category: "Innovation Challenge",
+    title: "Hustle Mania",
+    date: "Apr 24, 2023",
+    dateTime: "2023-04-24",
+    body: "A high-energy entrepreneurship challenge where teams pushed their limits across negotiation, sales, advertising, and business strategy — all under real-world time pressure.",
+    tags: ["Business", "Negotiation", "Sales", "Strategy"],
+    imgGrad: "linear-gradient(145deg,#0d0803 0%,#3b1a06 55%,#c2410c 100%)",
+    bg: "#0c0804",
+    side: "right" as const,
+    catColor: "#EA580C",
+    catBg: "rgba(234,88,12,0.12)",
+  },
+  {
+    idx: "04",
     category: "Startup Meetup",
     title: "The Equinox E-Summit 2K24",
     date: "Nov 28–30, 2024",
@@ -41,7 +70,21 @@ const FEATURED = [
     catBg: "rgba(22,163,74,0.12)",
   },
   {
-    idx: "03",
+    idx: "05",
+    category: "Workshop",
+    title: "Workshop Carnival",
+    date: "Mar 11–16, 2024",
+    dateTime: "2024-03-11",
+    body: "Six days of innovation — participants explored UI/UX design, IoT, and WordPress development through hands-on activities, expert sessions, and domain-specific contests.",
+    tags: ["IoT", "UI/UX", "WordPress", "6-Day Sprint"],
+    imgGrad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)",
+    bg: "#060810",
+    side: "right" as const,
+    catColor: "#2563EB",
+    catBg: "rgba(59,130,246,0.12)",
+  },
+  {
+    idx: "06",
     category: "Innovation Challenge",
     title: "GI Mahotsav 2024",
     date: "Mar 26–28, 2024",
@@ -50,12 +93,12 @@ const FEATURED = [
     tags: ["GI Products", "Cultural Heritage", "IPFC × MLRIT", "MSME"],
     imgGrad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)",
     bg: "#060b08",
-    side: "right" as const,
+    side: "left" as const,
     catColor: "#DC2626",
     catBg: "rgba(220,38,38,0.12)",
   },
   {
-    idx: "04",
+    idx: "07",
     category: "Hackathon",
     title: "MetaLoop",
     date: "Oct 6–7, 2023",
@@ -64,48 +107,14 @@ const FEATURED = [
     tags: ["Metaverse", "36-Hour Hackathon", "₹75K Prize", "CIE × Deeploop"],
     imgGrad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)",
     bg: "#0b0606",
-    side: "left" as const,
+    side: "right" as const,
     catColor: "#C04218",
     catBg: "rgba(255,94,44,0.12)",
   },
-  {
-    idx: "05",
-    category: "Innovation Challenge",
-    title: "B2B — Business to Brand",
-    date: "Apr 3–4, 2025",
-    dateTime: "2025-04-03",
-    body: "A Brand Revival Hackathon — teams of 3–5 develop strategies to transform brands through Concept & Logo Redesign and Ad-Film Making, backed by exclusive masterclasses from industry experts.",
-    tags: ["Brand Revival", "Logo Design", "Ad-Film Making", "Masterclasses"],
-    imgGrad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)",
-    bg: "#070a05",
-    side: "right" as const,
-    catColor: "#DC2626",
-    catBg: "rgba(220,38,38,0.12)",
-  },
 ];
 
-/* 3 archive events (compact) */
+/* Archive — older events */
 const ARCHIVE = [
-  {
-    category: "Workshop",
-    title: "Workshop Carnival",
-    date: "Mar 11–16, 2024",
-    dateTime: "2024-03-11",
-    desc: "Six days of innovation — participants explored UI/UX, IoT, and WordPress themes through hands-on activities and contests.",
-    tags: ["IoT", "UI-UX", "WordPress"],
-    catColor: "#2563EB",
-    catBg: "rgba(59,130,246,0.10)",
-  },
-  {
-    category: "Innovation Challenge",
-    title: "Hustle Mania 2",
-    date: "Apr 24, 2023",
-    dateTime: "2023-04-24",
-    desc: "A high-energy entrepreneurship challenge covering negotiation, sales, advertising, and business strategy.",
-    tags: ["Business", "Negotiation", "Sales"],
-    catColor: "#DC2626",
-    catBg: "rgba(220,38,38,0.10)",
-  },
   {
     category: "Innovation Challenge",
     title: "Inventron 2022",
@@ -465,11 +474,19 @@ export default function EventsPage() {
                 height: "136%",
                 position: "absolute",
                 top: "-18%",
-                background: ev.imgGrad,
+                background: (ev as typeof ev & { img?: string }).img ? "none" : ev.imgGrad,
                 willChange: "transform",
               }}
             >
-              <div style={{ position: "absolute", inset: 0, backgroundImage: GRAIN, opacity: 0.10 }} />
+              {(ev as typeof ev & { img?: string }).img ? (
+                <img
+                  src={(ev as typeof ev & { img?: string }).img}
+                  alt={ev.title}
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain" }}
+                />
+              ) : (
+                <div style={{ position: "absolute", inset: 0, backgroundImage: GRAIN, opacity: 0.10 }} />
+              )}
               {/* Index watermark */}
               <div style={{ position: "absolute", bottom: "20px", right: ev.side === "right" ? "20px" : "auto", left: ev.side === "left" ? "20px" : "auto" }}>
                 <span style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(48px, 10vw, 110px)", letterSpacing: "-0.06em", color: "rgba(255,255,255,0.06)", lineHeight: 1 }}>

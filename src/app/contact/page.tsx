@@ -21,7 +21,7 @@ const contactInfo = [
   { icon: MapPin, label: "Address", value: "CIE Block, MLRIT Campus, Dundigal, Hyderabad, Telangana 500043", href: null },
   { icon: Mail, label: "Email", value: "ciemlrit@mlrit.ac.in", href: "mailto:ciemlrit@mlrit.ac.in" },
   { icon: Mail, label: "Email (Alt)", value: "cie@mlrinstitutions.ac.in", href: "mailto:cie@mlrinstitutions.ac.in" },
-  { icon: Phone, label: "Phone", value: "+91 40 2304 3333", href: "tel:+914023043333" },
+  { icon: Phone, label: "Phone", value: "XXXXXXXXX", href: null },
   { icon: Clock, label: "Office Hours", value: "Mon–Sat: 9:00 AM – 6:00 PM", href: null },
 ];
 
@@ -84,6 +84,24 @@ export default function ContactPage() {
     transition: "border-color 0.2s ease",
   };
 
+  const CARD = {
+    background: "#FFFFFF",
+    borderRadius: "22px",
+    border: "1px solid rgba(0,0,0,0.08)",
+    boxShadow: "0 2px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)",
+  } as const;
+
+  const labelStyle = {
+    fontFamily: "var(--font-body)",
+    fontSize: "10px",
+    fontWeight: 700,
+    textTransform: "uppercase" as const,
+    letterSpacing: "0.12em",
+    color: "#9CA3AF",
+    marginBottom: "5px",
+    display: "block",
+  };
+
   return (
     <div style={{ background: "#FFFFFF", position: "relative" }}>
       <PageGeometric />
@@ -97,82 +115,170 @@ export default function ContactPage() {
         watermark="HELLO"
       />
 
-      {/* Form — centered */}
-      <section id="contact-form" style={{ paddingTop: "clamp(48px,8vw,72px)", paddingBottom: "clamp(40px,6vw,56px)", background: "#FFFFFF", position: "relative", zIndex: 1 }}>
+      {/* ── Section heading ──────────────────────────────────────── */}
+      <section style={{ background: "#FFFFFF", paddingTop: "clamp(64px,9vw,100px)", paddingBottom: "clamp(40px,5vw,56px)" }}>
         <div className="page-container">
-          <div style={{ maxWidth: "960px", margin: "0 auto" }}>
+          <FadeIn>
+            <span className="section-tag">Contact</span>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(28px,4.5vw,48px)", color: "#000000", lineHeight: 1.08, letterSpacing: "-0.03em", marginTop: "14px", marginBottom: "14px" }}>
+              Get in Touch
+            </h2>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.4vw,17px)", color: "#6B7280", lineHeight: 1.72, maxWidth: "520px" }}>
+              Whether you have a question, collaboration idea, or partnership inquiry, our team is here to help.
+            </p>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ── Cards: Info + Form ───────────────────────────────────── */}
+      <section id="contact-form" style={{ background: "#FFFFFF", paddingBottom: "clamp(72px,10vw,100px)" }}>
+        <div className="page-container">
+          <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "33% 1fr", gap: "clamp(18px,2.5vw,28px)", alignItems: "start" }}>
+
+            {/* ── LEFT: Info card ── */}
             <FadeIn>
-              <div style={{
-                background: "#FFFFFF",
-                border: "1px solid rgba(0,0,0,0.08)",
-                borderRadius: "20px",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
-                padding: "clamp(28px,4vw,40px)",
-              }}>
-                <h2 className="text-2xl font-black mb-2" style={{ color: "#000000" }}>Send a Message</h2>
-                <p className="text-sm mb-8" style={{ color: "#6B7280" }}>
+              <div style={{ ...CARD, padding: "clamp(24px,3vw,36px)", position: "sticky", top: "calc(var(--nav-height) + 20px)" }}>
+                {/* Orange top accent bar */}
+                <div style={{ height: "3px", background: "#E8521A", borderRadius: "2px", marginBottom: "24px" }} />
+
+                <span style={{ ...labelStyle, color: "#E8521A", letterSpacing: "0.14em" }}>Contact Information</span>
+                <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(17px,2vw,21px)", color: "#000000", lineHeight: 1.2, marginTop: "6px", marginBottom: "20px" }}>
+                  We&apos;re here to help
+                </h3>
+
+                {/* Info rows */}
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  {[
+                    {
+                      icon: Mail, label: "Email",
+                      content: (
+                        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                          <a href="mailto:ciemlrit@mlrit.ac.in" style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#111111", textDecoration: "none", lineHeight: 1.55, transition: "color 0.15s" }}
+                            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#E8521A"; }}
+                            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#111111"; }}>ciemlrit@mlrit.ac.in</a>
+                          <a href="mailto:cie@mlrinstitutions.ac.in" style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#111111", textDecoration: "none", lineHeight: 1.55, transition: "color 0.15s" }}
+                            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#E8521A"; }}
+                            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#111111"; }}>cie@mlrinstitutions.ac.in</a>
+                        </div>
+                      ),
+                    },
+                    {
+                      icon: Phone, label: "Phone",
+                      content: (
+                        <span style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#111111" }}>XXXXXXXXX</span>
+                      ),
+                    },
+                    {
+                      icon: MapPin, label: "Office Location",
+                      content: (
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#374151", lineHeight: 1.6, margin: 0 }}>
+                          CIE Block, MLR Institute of Technology<br />Dundigal, Hyderabad 500043<br />Telangana, India
+                        </p>
+                      ),
+                    },
+                    {
+                      icon: Clock, label: "Office Hours",
+                      content: (
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#374151", margin: 0 }}>Mon–Sat: 9:00 AM – 6:00 PM</p>
+                      ),
+                    },
+                  ].map(({ icon: Icon, label, content }, i, arr) => (
+                    <div key={label}>
+                      <div style={{ display: "flex", gap: "13px", alignItems: "flex-start", padding: "14px 0" }}>
+                        <div style={{ width: 34, height: 34, borderRadius: "10px", background: "rgba(232,82,26,0.08)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "1px" }}>
+                          <Icon size={15} style={{ color: "#E8521A" }} />
+                        </div>
+                        <div style={{ flex: 1 }}>
+                          <span style={labelStyle}>{label}</span>
+                          {content}
+                        </div>
+                      </div>
+                      {i < arr.length - 1 && <div style={{ height: "1px", background: "rgba(0,0,0,0.06)", marginLeft: "47px" }} />}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Divider */}
+                <div style={{ height: "1px", background: "rgba(0,0,0,0.07)", margin: "18px 0" }} />
+
+                {/* Social links */}
+                <span style={labelStyle}>Follow Us</span>
+                <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "10px" }}>
+                  {socials.map((s) => (
+                    <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={`${s.label} · ${s.handle}`}
+                      style={{ width: 34, height: 34, borderRadius: "9px", background: s.bg, color: s.color, display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", transition: "background 0.2s ease, transform 0.15s ease", border: "1px solid rgba(0,0,0,0.05)" }}
+                      onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = s.hoverBg; el.style.transform = "translateY(-2px)"; }}
+                      onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = s.bg; el.style.transform = "translateY(0)"; }}>
+                      <s.Svg />
+                    </a>
+                  ))}
+                </div>
+
+              </div>
+            </FadeIn>
+
+            {/* ── RIGHT: Form ── */}
+            <FadeIn delay={0.1}>
+              <div style={{ ...CARD, padding: "clamp(32px,4vw,48px)" }}>
+                <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(22px,3vw,32px)", color: "#000000", lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: "8px" }}>
+                  Send a Message
+                </h2>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "#6B7280", lineHeight: 1.68, marginBottom: "36px" }}>
                   Fill in the form below and we&apos;ll get back to you as soon as possible.
                 </p>
+
                 {submitted ? (
-                  <div className="text-center py-12">
-                    <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-                      style={{ background: "rgba(22,163,74,0.10)" }}>
-                      <CheckCircle size={32} style={{ color: "#16A34A" }} />
+                  <div style={{ textAlign: "center", padding: "60px 0" }}>
+                    <div style={{ width: 68, height: 68, borderRadius: "50%", background: "rgba(22,163,74,0.10)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 18px" }}>
+                      <CheckCircle size={34} style={{ color: "#16A34A" }} />
                     </div>
-                    <h3 className="text-xl font-black mb-2" style={{ color: "#000000" }}>Message Sent!</h3>
-                    <p style={{ color: "#6B7280" }}>Thank you for reaching out. We&apos;ll respond within 24 hours.</p>
+                    <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "22px", color: "#000000", marginBottom: "10px" }}>Message Sent!</h3>
+                    <p style={{ fontFamily: "var(--font-body)", color: "#6B7280", fontSize: "15px" }}>Thank you for reaching out. We&apos;ll respond within 24 hours.</p>
                     <button onClick={() => { setSubmitted(false); setFormState({ name: "", email: "", subject: "", message: "" }); }}
-                      className="btn-secondary-light mt-6">Send Another</button>
+                      className="btn-secondary-light" style={{ marginTop: "28px" }}>Send Another</button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-                    <div className="grid sm:grid-cols-2 gap-5 items-start">
+                  <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "24px" }} noValidate>
+                    <div className="grid sm:grid-cols-2 gap-6 items-start">
                       <div>
-                        <label htmlFor="contact-name" className="block text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "#374151" }}>Your Name *</label>
+                        <label htmlFor="contact-name" style={labelStyle}>Your Name *</label>
                         <input id="contact-name" type="text" aria-required="true"
                           aria-invalid={!!errors.name} aria-describedby={errors.name ? "contact-name-error" : undefined}
                           value={formState.name} onChange={(e) => { setFormState({ ...formState, name: e.target.value }); setErrors({ ...errors, name: "" }); }}
-                          placeholder="Rahul Sharma" style={inputStyle}
-                          onFocus={(e) => e.target.style.borderColor = "#FF5E2C"}
+                          placeholder="Rahul Sharma" style={{ ...inputStyle, padding: "13px 16px" }}
+                          onFocus={(e) => e.target.style.borderColor = "#E8521A"}
                           onBlur={(e) => e.target.style.borderColor = errors.name ? "#DC2626" : "rgba(0,0,0,0.10)"} />
                         <AnimatePresence>
                           {errors.name && (
-                            <motion.p id="contact-name-error" role="alert"
-                              initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                              transition={{ duration: 0.2 }}
-                              style={{ color: "#DC2626", fontSize: "12px", marginTop: "4px", fontFamily: "var(--font-body)" }}>
-                              {errors.name}
-                            </motion.p>
+                            <motion.p id="contact-name-error" role="alert" initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+                              style={{ color: "#DC2626", fontSize: "12px", marginTop: "5px", fontFamily: "var(--font-body)" }}>{errors.name}</motion.p>
                           )}
                         </AnimatePresence>
                       </div>
                       <div>
-                        <label htmlFor="contact-email" className="block text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "#374151" }}>Email Address *</label>
+                        <label htmlFor="contact-email" style={labelStyle}>Email Address *</label>
                         <input id="contact-email" type="email" aria-required="true"
                           aria-invalid={!!errors.email} aria-describedby={errors.email ? "contact-email-error" : undefined}
                           value={formState.email} onChange={(e) => { setFormState({ ...formState, email: e.target.value }); setErrors({ ...errors, email: "" }); }}
-                          placeholder="rahul@mlrit.ac.in" style={inputStyle}
-                          onFocus={(e) => e.target.style.borderColor = "#FF5E2C"}
+                          placeholder="rahul@mlrit.ac.in" style={{ ...inputStyle, padding: "13px 16px" }}
+                          onFocus={(e) => e.target.style.borderColor = "#E8521A"}
                           onBlur={(e) => e.target.style.borderColor = errors.email ? "#DC2626" : "rgba(0,0,0,0.10)"} />
                         <AnimatePresence>
                           {errors.email && (
-                            <motion.p id="contact-email-error" role="alert"
-                              initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                              transition={{ duration: 0.2 }}
-                              style={{ color: "#DC2626", fontSize: "12px", marginTop: "4px", fontFamily: "var(--font-body)" }}>
-                              {errors.email}
-                            </motion.p>
+                            <motion.p id="contact-email-error" role="alert" initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+                              style={{ color: "#DC2626", fontSize: "12px", marginTop: "5px", fontFamily: "var(--font-body)" }}>{errors.email}</motion.p>
                           )}
                         </AnimatePresence>
                       </div>
                     </div>
+
                     <div>
-                      <label htmlFor="contact-subject" className="block text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "#374151" }}>Subject *</label>
+                      <label htmlFor="contact-subject" style={labelStyle}>Subject *</label>
                       <select id="contact-subject" aria-required="true"
                         aria-invalid={!!errors.subject} aria-describedby={errors.subject ? "contact-subject-error" : undefined}
                         value={formState.subject} onChange={(e) => { setFormState({ ...formState, subject: e.target.value }); setErrors({ ...errors, subject: "" }); }}
-                        style={{ ...inputStyle, appearance: "none" as const }}
-                        onFocus={(e) => e.target.style.borderColor = "#FF5E2C"}
+                        style={{ ...inputStyle, padding: "13px 16px", appearance: "none" as const }}
+                        onFocus={(e) => e.target.style.borderColor = "#E8521A"}
                         onBlur={(e) => e.target.style.borderColor = errors.subject ? "#DC2626" : "rgba(0,0,0,0.10)"}>
                         <option value="" disabled>Select a topic...</option>
                         <option value="join-cie">Joining CIE</option>
@@ -184,239 +290,92 @@ export default function ContactPage() {
                       </select>
                       <AnimatePresence>
                         {errors.subject && (
-                          <motion.p id="contact-subject-error" role="alert"
-                            initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            style={{ color: "#DC2626", fontSize: "12px", marginTop: "4px", fontFamily: "var(--font-body)" }}>
-                            {errors.subject}
-                          </motion.p>
+                          <motion.p id="contact-subject-error" role="alert" initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+                            style={{ color: "#DC2626", fontSize: "12px", marginTop: "5px", fontFamily: "var(--font-body)" }}>{errors.subject}</motion.p>
                         )}
                       </AnimatePresence>
                     </div>
+
                     <div>
-                      <label htmlFor="contact-message" className="block text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "#374151" }}>Message *</label>
-                      <textarea id="contact-message" rows={5} aria-required="true"
+                      <label htmlFor="contact-message" style={labelStyle}>Message *</label>
+                      <textarea id="contact-message" rows={7} aria-required="true"
                         aria-invalid={!!errors.message} aria-describedby={errors.message ? "contact-message-error" : undefined}
                         value={formState.message} onChange={(e) => { setFormState({ ...formState, message: e.target.value }); setErrors({ ...errors, message: "" }); }}
                         placeholder="Tell us about your idea, question, or how we can help..."
-                        style={{ ...inputStyle, resize: "none" as const }}
-                        onFocus={(e) => e.target.style.borderColor = "#FF5E2C"}
+                        style={{ ...inputStyle, padding: "13px 16px", resize: "none" as const }}
+                        onFocus={(e) => e.target.style.borderColor = "#E8521A"}
                         onBlur={(e) => e.target.style.borderColor = errors.message ? "#DC2626" : "rgba(0,0,0,0.10)"} />
                       <AnimatePresence>
                         {errors.message && (
-                          <motion.p id="contact-message-error" role="alert"
-                            initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            style={{ color: "#DC2626", fontSize: "12px", marginTop: "4px", fontFamily: "var(--font-body)" }}>
-                            {errors.message}
-                          </motion.p>
+                          <motion.p id="contact-message-error" role="alert" initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+                            style={{ color: "#DC2626", fontSize: "12px", marginTop: "5px", fontFamily: "var(--font-body)" }}>{errors.message}</motion.p>
                         )}
                       </AnimatePresence>
                     </div>
-                    <div style={{ marginTop: "32px" }}>
-                      <motion.button
-                        type="submit"
-                        disabled={loading}
-                        whileHover={!loading ? { scale: 1.02, y: -1 } : {}}
-                        whileTap={!loading ? { scale: 0.97 } : {}}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          gap: "8px",
-                          width: "100%",
-                          padding: "14px 32px",
-                          borderRadius: "12px",
-                          background: loading ? "rgba(232,82,26,0.6)" : "var(--orange)",
-                          color: "#FFFFFF",
-                          fontSize: "14px",
-                          fontWeight: 700,
-                          letterSpacing: "0.01em",
-                          border: "none",
-                          cursor: loading ? "not-allowed" : "pointer",
-                          boxShadow: "0 4px 16px rgba(232,82,26,0.28)",
-                          transition: "background 0.2s ease, box-shadow 0.2s ease",
-                        }}
-                        onMouseEnter={(e) => { if (!loading) (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 20px rgba(232,82,26,0.42)"; }}
-                        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(232,82,26,0.28)"; }}
-                      >
-                        {loading ? (
-                          <>
-                            <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            Sending...
-                          </>
-                        ) : (
-                          <>
-                            <Send size={15} />
-                            Send Message
-                          </>
-                        )}
-                      </motion.button>
-                    </div>
+
+                    <motion.button
+                      type="submit" disabled={loading}
+                      whileHover={!loading ? { y: -2 } : {}} whileTap={!loading ? { scale: 0.98 } : {}}
+                      style={{
+                        display: "flex", alignItems: "center", justifyContent: "center", gap: "9px",
+                        width: "100%", padding: "16px 32px", borderRadius: "12px",
+                        background: loading ? "rgba(232,82,26,0.55)" : "#E8521A",
+                        color: "#FFFFFF", fontSize: "15px", fontWeight: 700, letterSpacing: "0.01em",
+                        border: "none", cursor: loading ? "not-allowed" : "pointer",
+                        boxShadow: loading ? "none" : "0 4px 20px rgba(232,82,26,0.32)",
+                        transition: "background 0.2s ease, box-shadow 0.2s ease",
+                        fontFamily: "var(--font-body)",
+                      }}
+                      onMouseEnter={(e) => { if (!loading) (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 28px rgba(232,82,26,0.44)"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = loading ? "none" : "0 4px 20px rgba(232,82,26,0.32)"; }}
+                    >
+                      {loading
+                        ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Sending...</>
+                        : <><Send size={16} />Send Message</>}
+                    </motion.button>
                   </form>
                 )}
               </div>
             </FadeIn>
           </div>
         </div>
+
+        <style>{`
+          @media (max-width: 1023px) { .contact-grid { grid-template-columns: 1fr !important; } }
+        `}</style>
       </section>
 
-      {/* Contact Info + Map — two column */}
-      <section style={{ paddingBottom: "clamp(48px,8vw,72px)", background: "#FFFFFF", position: "relative", zIndex: 1 }}>
-        <div className="page-container">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-
-            {/* Left: Contact Details */}
-            <FadeIn>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#FF5E2C" }}>Get in Touch</p>
-              <h2 className="font-black mb-3" style={{ fontSize: "clamp(28px,4vw,40px)", color: "#000000", lineHeight: 1.1 }}>Contact Us</h2>
-              <p className="text-sm mb-8" style={{ color: "#6B7280", lineHeight: 1.75 }}>
-                Have questions, ideas, or collaboration in mind? We&apos;d love to hear from you. Reach out to us anytime.
-              </p>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: "24px", marginBottom: "36px" }}>
-                {/* Email */}
-                <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
-                  <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(255,94,44,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <Mail size={18} style={{ color: "#FF5E2C" }} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#9CA3AF" }}>Email</p>
-                    <a href="mailto:ciemlrit@mlrit.ac.in" style={{ display: "block", fontSize: "14px", color: "#111111", textDecoration: "none", lineHeight: 1.6 }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FF5E2C"; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#111111"; }}>ciemlrit@mlrit.ac.in</a>
-                    <a href="mailto:cie@mlrinstitutions.ac.in" style={{ display: "block", fontSize: "14px", color: "#111111", textDecoration: "none", lineHeight: 1.6 }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FF5E2C"; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#111111"; }}>cie@mlrinstitutions.ac.in</a>
-                  </div>
-                </div>
-
-                {/* Phone */}
-                <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
-                  <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(255,94,44,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <Phone size={18} style={{ color: "#FF5E2C" }} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#9CA3AF" }}>Phone</p>
-                    <a href="tel:+914023043333" style={{ fontSize: "14px", color: "#111111", textDecoration: "none" }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FF5E2C"; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#111111"; }}>+91 40 2304 3333</a>
-                  </div>
-                </div>
-
-                {/* Address */}
-                <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
-                  <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(255,94,44,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <MapPin size={18} style={{ color: "#FF5E2C" }} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#9CA3AF" }}>Address</p>
-                    <p style={{ fontSize: "14px", color: "#111111", lineHeight: 1.65 }}>
-                      MLR Institute of Technology<br />
-                      Dundigal Police Station Road,<br />
-                      Hyderabad 500043, Telangana, India
-                    </p>
-                  </div>
-                </div>
-
-                {/* Office Hours */}
-                <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
-                  <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(255,94,44,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <Clock size={18} style={{ color: "#FF5E2C" }} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#9CA3AF" }}>Office Hours</p>
-                    <p style={{ fontSize: "14px", color: "#111111" }}>Mon–Sat: 9:00 AM – 6:00 PM</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Open in Maps button */}
-              <motion.a
-                href="https://www.google.com/maps/place/MLR+Institute+of+Technology,+Dundigal+Police+Station+Road,+Hyderabad,+Telangana+500043,+India"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.02, y: -1 }}
-                whileTap={{ scale: 0.97 }}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "10px",
-                  width: "100%",
-                  padding: "15px 24px",
-                  borderRadius: "12px",
-                  background: "var(--orange)",
-                  color: "#FFFFFF",
-                  textDecoration: "none",
-                  fontSize: "15px",
-                  fontWeight: 700,
-                  letterSpacing: "0.01em",
-                  boxShadow: "0 4px 16px rgba(232,82,26,0.28)",
-                  transition: "box-shadow 0.2s ease",
-                }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 22px rgba(232,82,26,0.44)"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(232,82,26,0.28)"; }}
-              >
-                <MapPin size={16} />
-                Open in Maps
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-              </motion.a>
-            </FadeIn>
-
-            {/* Right: Find Us + Map */}
-            <FadeIn delay={0.15}>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "#FF5E2C" }}>Find Us</p>
-              <h3 className="font-black mb-1" style={{ fontSize: "clamp(20px,3vw,28px)", color: "#000000", lineHeight: 1.1 }}>MLR Institute of Technology</h3>
-              <p className="text-sm mb-5" style={{ color: "#6B7280" }}>Dundigal Police Station Road, Hyderabad 500043, Telangana, India</p>
-              <div style={{ borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 4px 20px rgba(0,0,0,0.06)", position: "relative", paddingBottom: "68%", height: 0 }}>
-                <iframe
-                  src="https://maps.google.com/maps?q=MLR+Institute+of+Technology,+Dundigal+Police+Station+Road,+Hyderabad,+Telangana+500043,+India&output=embed&z=15"
-                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0, display: "block" }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="MLRIT CIE Location Map"
-                />
-              </div>
-            </FadeIn>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Follow Us */}
-      <section style={{ paddingBottom: "clamp(56px,8vw,88px)", background: "#FFFFFF", position: "relative", zIndex: 1 }}>
+      {/* ── Visit Us / Map ───────────────────────────────────────── */}
+      <section style={{ background: "#F8F8F8", paddingTop: "clamp(64px,9vw,100px)", paddingBottom: "clamp(64px,9vw,100px)", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
         <div className="page-container">
           <FadeIn>
-            <h3 className="font-black mb-6" style={{ fontSize: "clamp(18px,2.5vw,24px)", color: "#000000" }}>Follow Us</h3>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
-              {socials.map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
-                  style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 16px", borderRadius: "12px", border: "1px solid rgba(0,0,0,0.08)", textDecoration: "none", background: "#FFFFFF", transition: "background 0.2s ease, border-color 0.2s ease" }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.background = s.hoverBg;
-                    el.style.borderColor = s.color;
-                    const icon = el.querySelector(".s-icon") as HTMLElement | null;
-                    if (icon) icon.style.background = s.hoverBg;
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.background = "#FFFFFF";
-                    el.style.borderColor = "rgba(0,0,0,0.08)";
-                    const icon = el.querySelector(".s-icon") as HTMLElement | null;
-                    if (icon) icon.style.background = s.bg;
-                  }}>
-                  <div className="s-icon" style={{ width: 32, height: 32, borderRadius: 8, background: s.bg, color: s.color, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "background 0.2s ease" }}>
-                    <s.Svg />
-                  </div>
-                  <div>
-                    <p style={{ fontSize: "13px", fontWeight: 600, color: "#000000", margin: 0 }}>{s.label}</p>
-                    <p style={{ fontSize: "12px", color: "#6B7280", margin: 0 }}>{s.handle}</p>
-                  </div>
-                </a>
-              ))}
+            <span className="section-tag">Location</span>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(24px,3.5vw,38px)", color: "#000000", lineHeight: 1.1, letterSpacing: "-0.025em", marginTop: "14px", marginBottom: "10px" }}>
+              Visit Us
+            </h2>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.3vw,16px)", color: "#6B7280", lineHeight: 1.7, maxWidth: "480px", marginBottom: "36px" }}>
+              Find the Centre for Innovation &amp; Entrepreneurship at MLR Institute of Technology.
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.08}>
+            <div style={{ borderRadius: "20px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 4px 24px rgba(0,0,0,0.07)", height: "450px" }}>
+              <iframe
+                src="https://maps.google.com/maps?q=MLRIT+CIE&ll=17.5943093,78.4413481&output=embed&z=19"
+                style={{ width: "100%", height: "100%", border: 0, display: "block" }}
+                allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+                title="MLRIT CIE — Location Map"
+              />
+            </div>
+            <div style={{ marginTop: "16px", display: "flex", justifyContent: "flex-end" }}>
+              <motion.a
+                href="https://maps.app.goo.gl/Ls9rSe1kdWnjahzz6"
+                target="_blank" rel="noopener noreferrer"
+                whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}
+                style={{ display: "inline-flex", alignItems: "center", gap: "7px", padding: "10px 20px", borderRadius: "10px", background: "#E8521A", color: "#FFFFFF", textDecoration: "none", fontSize: "13px", fontWeight: 700, fontFamily: "var(--font-body)", boxShadow: "0 3px 14px rgba(232,82,26,0.26)" }}>
+                <MapPin size={13} />
+                Open in Google Maps
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </motion.a>
             </div>
           </FadeIn>
         </div>

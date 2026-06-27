@@ -69,7 +69,7 @@ const DEPARTMENTS: Record<string, {
   },
 };
 
-const BRANCHES = ["CSE","CSE (AI & ML)","CSE (Data Science)","ECE","EEE","Mech","Civil","IT","Chemical","Other"];
+const BRANCHES = ["CSE","CSM","CSD","CSIT","IT","EEE","ECE","MECH","AERO"];
 const YEARS    = ["1st Year","2nd Year","3rd Year","4th Year"];
 
 type FormState = { name: string; rollNo: string; phone: string; email: string; branch: string; year: string; why: string };

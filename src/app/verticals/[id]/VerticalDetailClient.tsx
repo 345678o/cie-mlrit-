@@ -46,7 +46,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SectionHeading({ children, color }: { children: React.ReactNode; color: string }) {
+function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(22px,3.5vw,36px)", color: "#000000", lineHeight: 1.1, marginBottom: "32px" }}>
       {children}
@@ -118,12 +118,12 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       </section>
 
       {/* ── Overview ──────────────────────────────────────────────── */}
-      <section className="py-20" style={{ background: "#FFFFFF" }}>
+      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF" }}>
         <div className="page-container">
           <div className="grid lg:grid-cols-2 gap-14 items-start">
             <FadeIn>
               <SectionLabel>Overview</SectionLabel>
-              <SectionHeading color={v.color}>About {v.name}</SectionHeading>
+              <SectionHeading>About {v.name}</SectionHeading>
               <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                 {v.overview.map((para, i) => (
                   <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: "16px", lineHeight: 1.78, color: "#374151" }}>{para}</p>
@@ -155,16 +155,16 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       </section>
 
       {/* ── Roles ─────────────────────────────────────────────────── */}
-      <section className="py-20" style={{ background: "#F9FAFB" }}>
+      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB" }}>
         <div className="page-container">
-          <FadeIn className="mb-12">
+          <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
             <SectionLabel>Team Structure</SectionLabel>
-            <SectionHeading color={v.color}>Roles &amp; Responsibilities</SectionHeading>
-          </FadeIn>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <SectionHeading>Roles &amp; Responsibilities</SectionHeading>
+          </div></FadeIn>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" style={{ alignItems: "stretch" }}>
             {v.roles.map((role, i) => (
-              <FadeIn key={role.title} delay={i * 0.06}>
-                <div style={{ padding: "22px", borderRadius: "14px", background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 4px rgba(0,0,0,0.04)", height: "100%" }}>
+              <FadeIn key={role.title} delay={i * 0.06} className="flex flex-col">
+                <div style={{ padding: "22px", borderRadius: "14px", background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 4px rgba(0,0,0,0.04)", flex: 1 }}>
                   <div style={{ width: "34px", height: "34px", borderRadius: "9px", background: v.lightBg, border: `1px solid ${v.border}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "14px" }}>
                     <Users size={15} style={{ color: v.color }} />
                   </div>
@@ -178,12 +178,12 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       </section>
 
       {/* ── Projects ──────────────────────────────────────────────── */}
-      <section className="py-20" style={{ background: "#FFFFFF" }}>
+      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF" }}>
         <div className="page-container">
-          <FadeIn className="mb-12">
+          <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
             <SectionLabel>Work</SectionLabel>
-            <SectionHeading color={v.color}>Projects &amp; Initiatives</SectionHeading>
-          </FadeIn>
+            <SectionHeading>Projects &amp; Initiatives</SectionHeading>
+          </div></FadeIn>
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {v.projects.map((proj, i) => {
               const sc = STATUS_COLOR[proj.status] ?? STATUS_COLOR["Active"];
@@ -211,12 +211,12 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       </section>
 
       {/* ── Events ────────────────────────────────────────────────── */}
-      <section className="py-20" style={{ background: "#F9FAFB" }}>
+      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB" }}>
         <div className="page-container">
-          <FadeIn className="mb-12">
+          <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
             <SectionLabel>Programming</SectionLabel>
-            <SectionHeading color={v.color}>Events &amp; Gatherings</SectionHeading>
-          </FadeIn>
+            <SectionHeading>Events &amp; Gatherings</SectionHeading>
+          </div></FadeIn>
           <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-5">
             {v.events.map((ev, i) => (
               <FadeIn key={ev.name} delay={i * 0.07}>
@@ -240,7 +240,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
 
       {/* ── Apply ─────────────────────────────────────────────────── */}
       {v.applyInfo && (
-        <section className="py-20" style={{ background: "#FFFFFF" }}>
+        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF" }}>
           <div className="page-container">
             <FadeIn>
               <div style={{ maxWidth: "720px", padding: "36px 40px", borderRadius: "20px", background: v.lightBg, border: `1px solid ${v.border}` }}>
@@ -265,7 +265,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       )}
 
       {/* ── Footer nav ────────────────────────────────────────────── */}
-      <section className="py-14" style={{ background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
+      <section style={{ paddingTop: "40px", paddingBottom: "40px", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
         <div className="page-container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
           <Link href="/verticals" style={{ display: "inline-flex", alignItems: "center", gap: "7px", fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "13px", color: "#6B7280", textDecoration: "none" }}>
             <ArrowLeft size={14} /> Back to Verticals

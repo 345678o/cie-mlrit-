@@ -323,7 +323,7 @@ export default function VerticalsPage() {
                 { v: String(VERTICALS.length), l: "Verticals" },
                 { v: "500+", l: "Active Members" },
                 { v: "80+",  l: "Projects Done" },
-                { v: "2024–25", l: "Current Cohort" },
+                { v: "2026–27", l: "Current Cohort" },
               ].map(({ v, l }) => (
                 <div key={l}>
                   <div style={{
