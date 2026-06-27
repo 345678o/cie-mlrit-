@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState } from "react";
 import { Link2, Mail, Users, ChevronDown, ChevronUp, Code, Palette, Camera, PenLine, Mic, BarChart2, FileText } from "lucide-react";
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
@@ -363,81 +363,26 @@ type ShowcaseMember = Member & { department: string; deptColor: string };
 
 function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
   const [active, setActive] = useState<number | null>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const rafRef = useRef<number | null>(null);
-  const mouse = useRef({ x: -9999, y: -9999 });
-  const isTouch = useRef(false);
-  const RADIUS = 800;
-
-  const applyChroma = useCallback(() => {
-    const grid = gridRef.current;
-    if (!grid || isTouch.current) return;
-    const gridRect = grid.getBoundingClientRect();
-    cardRefs.current.forEach((card) => {
-      if (!card) return;
-      const r = card.getBoundingClientRect();
-      const cx = r.left + r.width / 2 - gridRect.left;
-      const cy = r.top + r.height / 2 - gridRect.top;
-      const dist = Math.sqrt((mouse.current.x - cx) ** 2 + (mouse.current.y - cy) ** 2);
-      const t = Math.min(1, Math.max(0, (dist - RADIUS * 0.15) / (RADIUS * 0.85)));
-      card.style.setProperty("--cs-gray", String(t));
-      card.style.setProperty("--cs-bright", String(1 - t * 0.32));
-    });
-  }, []);
-
-  const schedule = useCallback(() => {
-    if (rafRef.current) return;
-    rafRef.current = requestAnimationFrame(() => { rafRef.current = null; applyChroma(); });
-  }, [applyChroma]);
-
-  const handleMove = useCallback((e: React.PointerEvent) => {
-    if (isTouch.current) return;
-    const r = gridRef.current!.getBoundingClientRect();
-    mouse.current = { x: e.clientX - r.left, y: e.clientY - r.top };
-    schedule();
-  }, [schedule]);
-
-  const handleLeave = useCallback(() => {
-    if (isTouch.current) return;
-    mouse.current = { x: -9999, y: -9999 };
-    cardRefs.current.forEach((c) => { if (c) { c.style.setProperty("--cs-gray", "1"); c.style.setProperty("--cs-bright", "0.70"); } });
-  }, []);
-
-  useEffect(() => {
-    isTouch.current = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
-    cardRefs.current.forEach((c) => {
-      if (!c) return;
-      if (isTouch.current) { c.style.setProperty("--cs-gray", "0"); c.style.setProperty("--cs-bright", "1"); }
-      else { c.style.setProperty("--cs-gray", "1"); c.style.setProperty("--cs-bright", "0.70"); }
-    });
-    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
-  }, [members]);
 
   return (
     <>
-      <div ref={gridRef} className="cs-grid" onPointerMove={handleMove} onPointerLeave={handleLeave}>
+      <div className="cs-grid">
         {members.map((m, i) => {
           const encoded = m.photo
             ? m.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")
             : null;
           const flat = encoded
             ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=0a0a0a&color=9aa&size=400&bold=true&format=png`;
-          const hero = encoded
-            ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=${m.deptColor.replace("#", "")}&color=fff&size=400&bold=true&format=png`;
           const isActive = active === i;
           const scatter = i % 2 === 0 ? -26 : 26;
           return (
-            <button
+            <div
               key={`${m.department}-${m.name}-${i}`}
-              ref={(el) => { cardRefs.current[i] = el; }}
-              type="button"
-              onClick={() => {
-                if (isActive && m.linkedin && m.linkedin !== "#") {
-                  window.open(m.linkedin, "_blank", "noopener,noreferrer");
-                } else {
-                  setActive(isActive ? null : i);
-                }
+              role="button"
+              tabIndex={0}
+              onClick={() => setActive(isActive ? null : i)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActive(isActive ? null : i); }
               }}
               aria-pressed={isActive}
               className="cs-card"
@@ -448,42 +393,63 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
               }}
             >
               <div style={{
-                position: "relative", aspectRatio: "4 / 5",
+                position: "relative", aspectRatio: "4 / 5", perspective: "1200px",
                 filter: isActive ? `drop-shadow(0 22px 50px ${m.deptColor}66)` : "none",
                 transition: "filter .45s ease",
               }}>
-                <div className="cs-chroma-wrap" style={{ position: "absolute", inset: 0 }}>
-                  <div style={{
-                    position: "absolute", inset: 0, clipPath: CS_NOTCH,
-                    background: isActive ? m.deptColor : "rgba(255,255,255,0.16)",
-                    transition: "background .4s ease",
-                  }} />
-                  <div style={{
-                    position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden",
-                    background: isActive ? `linear-gradient(155deg, ${m.deptColor}26 0%, #0a0a0a 100%)` : "#0a0a0a",
-                    transition: "background .4s ease",
-                  }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={isActive ? hero : flat}
-                      alt={m.name}
-                      className="absolute inset-0 w-full h-full"
-                      style={{
-                        objectFit: "cover", objectPosition: "top center",
-                        transform: isActive ? "scale(1.06)" : "scale(1)",
-                        transition: "transform .55s cubic-bezier(.16,1,.3,1)",
-                      }}
-                    />
-                    {m.linkedin && m.linkedin !== "#" && (
-                      <div className="cs-li-overlay">
-                        <div className="cs-li-badge">
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFFFFF">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                          </svg>
-                          <span>LinkedIn</span>
-                        </div>
+                <div style={{
+                  position: "absolute", inset: 0, transformStyle: "preserve-3d",
+                  transform: isActive ? "rotateY(180deg)" : "rotateY(0deg)",
+                  transition: "transform .7s cubic-bezier(.16,1,.3,1)",
+                }}>
+                  {/* FRONT — photo */}
+                  <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
+                    <div style={{ position: "absolute", inset: 0, clipPath: CS_NOTCH, background: "rgba(255,255,255,0.16)" }} />
+                    <div style={{ position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden", background: "#0a0a0a" }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={flat}
+                        alt={m.name}
+                        className="absolute inset-0 w-full h-full"
+                        style={{ objectFit: "cover", objectPosition: "top center" }}
+                      />
+                      <div className="cs-tap-hint">Tap for details</div>
+                    </div>
+                  </div>
+                  {/* BACK — details */}
+                  <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
+                    <div style={{ position: "absolute", inset: 0, clipPath: CS_NOTCH, background: m.deptColor }} />
+                    <div style={{
+                      position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden",
+                      background: `radial-gradient(120% 80% at 50% 0%, ${m.deptColor}3a 0%, #0a0a0a 60%)`,
+                      display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "clamp(14px,6%,20px)",
+                    }}>
+                      <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "8px", width: "100%" }}>
+                        <span style={{
+                          fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(18px,1.9vw,24px)", lineHeight: 1.12,
+                          color: "#ffffff", overflowWrap: "anywhere",
+                          background: `${m.deptColor}33`, boxShadow: `0 0 0 1px ${m.deptColor}55, 0 6px 22px ${m.deptColor}55`,
+                          padding: "5px 12px", borderRadius: "8px",
+                        }}>{m.name}</span>
+                        <span style={{ width: "34px", height: "2px", borderRadius: "2px", background: m.deptColor }} />
+                        <span style={{ fontFamily: "var(--font-script)", fontWeight: 700, fontSize: "clamp(20px,2vw,26px)", lineHeight: 1, color: m.deptColor }}>{deptShort[m.department] ?? m.department}</span>
+                        <span style={{ fontFamily: "var(--font-script)", fontWeight: 600, fontSize: "clamp(16px,1.5vw,20px)", lineHeight: 1.05, color: "rgba(255,255,255,0.85)" }}>{m.role}{m.year ? ` · ${m.year}` : ""}</span>
                       </div>
-                    )}
+                      <div style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%", alignItems: "center" }}>
+                        {m.linkedin && m.linkedin !== "#" && (
+                          <a href={m.linkedin} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="cs-link" style={{ background: "#0A66C2" }}>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            <span>LinkedIn</span>
+                          </a>
+                        )}
+                        {m.email ? (
+                          <a href={`mailto:${m.email}`} onClick={(e) => e.stopPropagation()} className="cs-link" style={{ background: "rgba(255,255,255,0.14)" }}>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+                            <span>Email</span>
+                          </a>
+                        ) : null}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -491,21 +457,20 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                 <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: isActive ? "15px" : "13px", lineHeight: 1.2, color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.82)", transition: "all .3s ease", overflowWrap: "anywhere" }}>{m.name}</span>
                 <span style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "11px", letterSpacing: "0.3px", color: isActive ? m.deptColor : "rgba(255,255,255,0.45)", transition: "all .3s ease" }}>{deptShort[m.department] ?? m.department}</span>
               </div>
-            </button>
+            </div>
           );
         })}
       </div>
       <style>{`
-        .cs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(18px,2.5vw,32px) clamp(16px,2vw,28px); padding-top: 30px; padding-bottom: 30px; align-items: start; }
-        @media (max-width: 639px)  { .cs-card { transform: none !important; } }
+        .cs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px,2.5vw,32px) clamp(14px,2vw,28px); padding-top: 30px; padding-bottom: 30px; align-items: start; width: 100%; }
+        @media (max-width: 639px)  { .cs-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } .cs-card { transform: none !important; } }
+        @media (max-width: 380px)  { .cs-grid { grid-template-columns: 1fr; } }
         @media (min-width: 640px)  { .cs-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (min-width: 1024px) { .cs-grid { grid-template-columns: repeat(4, 1fr); } }
-        .cs-chroma-wrap { filter: grayscale(var(--cs-gray, 0)) brightness(var(--cs-bright, 1)); transition: filter 0.55s cubic-bezier(.16,1,.3,1); }
-        .cs-card[aria-pressed="true"] .cs-chroma-wrap { filter: none !important; }
-        .cs-li-overlay { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 16px; background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%); opacity: 0; transition: opacity 0.25s ease; pointer-events: none; }
-        .cs-card:hover .cs-li-overlay { opacity: 1; }
-        .cs-li-badge { display: inline-flex; align-items: center; gap: 6px; background: #0A66C2; color: #fff; font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 999px; letter-spacing: 0.02em; transform: translateY(6px); transition: transform 0.25s ease; }
-        .cs-card:hover .cs-li-badge { transform: translateY(0); }
+        .cs-tap-hint { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; padding: 14px 0 10px; font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: #fff; background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%); opacity: 0; transition: opacity 0.25s ease; pointer-events: none; }
+        .cs-card:hover .cs-tap-hint { opacity: 1; }
+        .cs-link { display: inline-flex; align-items: center; gap: 7px; color: #fff; font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 7px 11px; border-radius: 8px; text-decoration: none; transition: filter 0.2s ease, transform 0.2s ease; }
+        .cs-link:hover { filter: brightness(1.15); transform: translateX(2px); }
       `}</style>
     </>
   );
