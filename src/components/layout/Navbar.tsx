@@ -12,7 +12,7 @@ const NAV_LINKS = [
   { label: "Home",      href: "/" },
   { label: "About",     href: "/about" },
   { label: "Verticals", href: "/verticals" },
-  { label: "Team",      href: "/council" },
+  { label: "Council",   href: "/council" },
   { label: "Events",    href: "/events" },
   { label: "Alumni",    href: "/alumni" },
   { label: "Gallery",   href: "/tours" },
@@ -162,15 +162,15 @@ export default function Navbar() {
             alignItems: "center",
             width: "100%",
             background: scrolled
-              ? "rgba(10,10,10,0.92)"
-              : "rgba(14,14,14,0.96)",
-            backdropFilter: "blur(20px) saturate(180%)",
-            WebkitBackdropFilter: "blur(20px) saturate(180%)",
-            border: "1px solid rgba(255,255,255,0.09)",
+              ? "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 45%, rgba(255,255,255,0.07) 100%), rgba(12,12,14,0.62)"
+              : "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.08) 100%), rgba(14,14,16,0.55)",
+            backdropFilter: "blur(26px) saturate(190%)",
+            WebkitBackdropFilter: "blur(26px) saturate(190%)",
+            border: "1px solid rgba(255,255,255,0.14)",
             borderRadius: "9999px",
             boxShadow: scrolled
-              ? "0 8px 40px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.07)"
-              : "0 4px 24px rgba(0,0,0,0.30), 0 1px 4px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.06)",
+              ? "0 10px 44px rgba(0,0,0,0.42), 0 2px 8px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.22), inset 0 -1px 0 rgba(0,0,0,0.30)"
+              : "0 6px 30px rgba(0,0,0,0.28), 0 1px 4px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.24), inset 0 -1px 0 rgba(0,0,0,0.26)",
             /* Compact padding when scrolled */
             padding: scrolled ? "5px 5px 5px 18px" : "7px 7px 7px 22px",
             gap: 0,

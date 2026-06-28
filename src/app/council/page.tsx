@@ -421,21 +421,34 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                     <div style={{ position: "absolute", inset: 0, clipPath: CS_NOTCH, background: m.deptColor }} />
                     <div style={{
                       position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden",
-                      background: `radial-gradient(120% 80% at 50% 0%, ${m.deptColor}3a 0%, #0a0a0a 60%)`,
+                      background: "#0a0a0a",
                       display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "clamp(14px,6%,20px)",
                     }}>
-                      <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "8px", width: "100%" }}>
+                      {/* blurred photo backdrop */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={flat} alt="" aria-hidden="true" style={{
+                        position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center",
+                        filter: "blur(9px) saturate(1.35) brightness(1.05)", transform: "scale(1.16)", zIndex: 0,
+                      }} />
+                      {/* gradient overlay — deptColor tint, fades to deep black at base for legibility */}
+                      <div style={{
+                        position: "absolute", inset: 0, zIndex: 0,
+                        background: `linear-gradient(180deg, rgba(10,10,10,0.15) 0%, ${m.deptColor}40 30%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0.92) 100%)`,
+                      }} />
+                      <div style={{ position: "relative", zIndex: 1, flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "8px", width: "100%" }}>
                         <span style={{
-                          fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(18px,1.9vw,24px)", lineHeight: 1.12,
+                          fontFamily: "var(--font-rockstar), var(--font-heading)", fontWeight: 800,
+                          fontSize: "clamp(22px,2.6vw,32px)", lineHeight: 1.0,
+                          textTransform: "uppercase", letterSpacing: "0.01em",
                           color: "#ffffff", overflowWrap: "anywhere",
                           background: `${m.deptColor}33`, boxShadow: `0 0 0 1px ${m.deptColor}55, 0 6px 22px ${m.deptColor}55`,
-                          padding: "5px 12px", borderRadius: "8px",
+                          padding: "6px 14px", borderRadius: "8px",
                         }}>{m.name}</span>
                         <span style={{ width: "34px", height: "2px", borderRadius: "2px", background: m.deptColor }} />
-                        <span style={{ fontFamily: "var(--font-script)", fontWeight: 700, fontSize: "clamp(20px,2vw,26px)", lineHeight: 1, color: m.deptColor }}>{deptShort[m.department] ?? m.department}</span>
+                        <span style={{ fontFamily: "var(--font-rockstar), var(--font-heading)", fontWeight: 800, fontSize: "clamp(18px,2vw,24px)", lineHeight: 1.1, textTransform: "uppercase", letterSpacing: "0.02em", color: m.deptColor }}>{deptShort[m.department] ?? m.department}</span>
                         <span style={{ fontFamily: "var(--font-script)", fontWeight: 600, fontSize: "clamp(16px,1.5vw,20px)", lineHeight: 1.05, color: "rgba(255,255,255,0.85)" }}>{m.role}{m.year ? ` · ${m.year}` : ""}</span>
                       </div>
-                      <div style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%", alignItems: "center" }}>
+                      <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: "7px", width: "100%", alignItems: "center" }}>
                         {m.linkedin && m.linkedin !== "#" && (
                           <a href={m.linkedin} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="cs-link" style={{ background: "#0A66C2" }}>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>

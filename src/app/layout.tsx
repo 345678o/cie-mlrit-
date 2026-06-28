@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Inter, Caveat } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -25,6 +26,14 @@ const caveat = Caveat({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
   variable: "--font-caveat",
+  display: "swap",
+});
+
+// Rockstar Display — condensed bold uppercase display face (free personal-use).
+// Used for council member names on card flip. Self-hosted from /public/fonts.
+const rockstar = localFont({
+  src: "../../public/fonts/Rockstar-ExtraBold.otf",
+  variable: "--font-rockstar",
   display: "swap",
 });
 
@@ -59,7 +68,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${inter.variable} ${caveat.variable} scroll-smooth`} data-scroll-behavior="smooth">
+    <html lang="en" className={`${manrope.variable} ${inter.variable} ${caveat.variable} ${rockstar.variable} scroll-smooth`} data-scroll-behavior="smooth">
       <body className="min-h-screen flex flex-col antialiased">
         <a href="#main-content" className="skip-link">
           Skip to main content
