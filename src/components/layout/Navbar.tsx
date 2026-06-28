@@ -107,10 +107,17 @@ export default function Navbar() {
   useEffect(() => { setOpen(false); }, [pathname]);
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40);
-    fn();
+    let raf = 0;
+    const fn = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        setScrolled(window.scrollY > 40);
+      });
+    };
+    setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
+    return () => { window.removeEventListener("scroll", fn); if (raf) cancelAnimationFrame(raf); };
   }, []);
 
   useEffect(() => {
@@ -164,8 +171,8 @@ export default function Navbar() {
             background: scrolled
               ? "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 45%, rgba(255,255,255,0.07) 100%), rgba(12,12,14,0.62)"
               : "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.08) 100%), rgba(14,14,16,0.55)",
-            backdropFilter: "blur(26px) saturate(190%)",
-            WebkitBackdropFilter: "blur(26px) saturate(190%)",
+            backdropFilter: "blur(14px) saturate(150%)",
+            WebkitBackdropFilter: "blur(14px) saturate(150%)",
             border: "1px solid rgba(255,255,255,0.14)",
             borderRadius: "9999px",
             boxShadow: scrolled

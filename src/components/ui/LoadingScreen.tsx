@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const LETTERS = ["C", "I", "E"];
@@ -26,27 +25,21 @@ function Ring({ delay, size }: { delay: number; size: number }) {
 }
 
 export default function LoadingScreen() {
-  const pathname              = usePathname();
   const [visible, setVisible] = useState(true);
   const [burst,   setBurst]   = useState(false);
-  const [key,     setKey]     = useState(0);
 
-  const run = () => {
-    setBurst(false);
-    setVisible(true);
+  // Intro animation runs once per full page load only — NOT on client-side
+  // route changes (was firing a 1.5s blocking overlay on every nav = lag).
+  useEffect(() => {
     const t1 = setTimeout(() => setBurst(true),  860);
     const t2 = setTimeout(() => setVisible(false), 1500);
     return () => { clearTimeout(t1); clearTimeout(t2); };
-  };
-
-  useEffect(run, []);
-  useEffect(() => { setKey(k => k + 1); return run(); }, [pathname]);
+  }, []);
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
-          key={key}
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.22, ease: "easeIn" } }}
           style={{
