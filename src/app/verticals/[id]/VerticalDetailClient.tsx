@@ -5,8 +5,8 @@ import { useRef } from "react";
 import Link from "next/link";
 import {
   Boxes, Palette, Cpu, CalendarDays, Rocket,
-  ArrowLeft, ArrowRight, Users, CheckCircle2,
-  Zap, Trophy, Star,
+  ArrowLeft, Users, CheckCircle2,
+  Zap, Trophy,
 } from "lucide-react";
 import type { Vertical } from "../verticals-data";
 import PageGeometric from "@/components/ui/PageGeometric";
@@ -237,32 +237,6 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
           </div>
         </div>
       </section>
-
-      {/* ── Apply ─────────────────────────────────────────────────── */}
-      {v.applyInfo && (
-        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF" }}>
-          <div className="page-container">
-            <FadeIn>
-              <div style={{ maxWidth: "720px", padding: "36px 40px", borderRadius: "20px", background: v.lightBg, border: `1px solid ${v.border}` }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-                  <Star size={18} style={{ color: v.color }} />
-                  <SectionLabel>Get Involved</SectionLabel>
-                </div>
-                <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(20px,3vw,28px)", color: "#000000", marginBottom: "14px", lineHeight: 1.15 }}>
-                  How to Join {v.name}
-                </h3>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.78, color: "#374151", marginBottom: "24px" }}>{v.applyInfo}</p>
-                <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: "7px", fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "13px", letterSpacing: "0.06em", textTransform: "uppercase", color: v.color, textDecoration: "none", border: `1.5px solid ${v.border}`, borderRadius: "999px", padding: "10px 22px", transition: "background 0.2s ease" }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = `rgba(0,0,0,0.04)`; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; }}
-                >
-                  Get in Touch <ArrowRight size={13} />
-                </Link>
-              </div>
-            </FadeIn>
-          </div>
-        </section>
-      )}
 
       {/* ── Footer nav ────────────────────────────────────────────── */}
       <section style={{ paddingTop: "40px", paddingBottom: "40px", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
