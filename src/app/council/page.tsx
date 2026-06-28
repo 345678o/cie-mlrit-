@@ -27,7 +27,20 @@ type Member = {
   email?: string;
   // Add real photo path here, e.g. "/council/rohit-sharma.jpg"
   photo?: string;
+  // "contain" fits whole photo in card (no crop, letterboxed); default "cover" (crop to fill).
+  fit?: "cover" | "contain";
+  // Photo scale in card. <1 zooms out (even margin), >1 zooms in. Default 1.
+  zoom?: number;
 };
+
+// Ordering priority within a selected dept: leads first.
+// Technical Lead ahead of Product Development Lead; then any other "Lead"; then the rest.
+function leadRank(role: string): number {
+  if (role === "Technical Lead") return 0;
+  if (role === "Product Development Lead") return 1;
+  if (role.includes("Lead")) return 2;
+  return 3;
+}
 
 type TeamSection = {
   team: string;
@@ -90,7 +103,7 @@ const teams: TeamSection[] = [
       { name: "Prashansa",       role: "Member", dept: "Content", photo: "/council/content/Prashansa .png",linkedin:"https://www.linkedin.com/in/prashansa-b-92218b2b6" },
       { name: "Haritha",         role: "Member", dept: "Content", photo: "/council/content/Haritha.png",linkedin:"#" },
       { name: "Harshitha",       role: "Member", dept: "Content", photo: "/council/content/Harshitha.png",linkedin:"https://www.linkedin.com/in/harshitha-bollepalli-a5b198345" },
-      { name: "Ennawar Rithvik", role: "Content Lead", dept: "Content", photo: "/council/content/Ennawar Rithvik .png",linkedin:"https://www.linkedin.com/in/rithvik-e-4a4936341/" },
+      { name: "Ennawar Rithvik", role: "Content Lead", dept: "Content", photo: "/council/content/Ennawar Rithvik .png", zoom: 1.15,linkedin:"https://www.linkedin.com/in/rithvik-e-4a4936341/" },
       { name: "Shiva",           role: "Member", dept: "Content", photo: "/council/content/Shiva.png",linkedin:"https://www.linkedin.com/in/jatavath-shiva-14099338a" },
       { name: "K S Sreesanth",   role: "Member", dept: "Content", photo: "/council/content/K S Sreesanth.png",linkedin:"https://www.linkedin.com/in/sreesanth-ks-29ab92344" },
     ],
@@ -134,7 +147,7 @@ const teams: TeamSection[] = [
     color: "#FF7A1A",
     description: "Captures every moment of the CIE journey — from hackathon late nights to summit keynotes — through photography, videography, and professional post-production.",
     members: [
-      { name: "Priyanshu Roy",     role: "Member", dept: "Photography and Media", photo: "/council/photography/Priyanshu Roy.png",linkedin:"https://www.linkedin.com/in/priyanshu-roy-154a39246" },
+      { name: "Priyanshu Roy",     role: "Member", dept: "Photography and Media", photo: "/council/photography/Priyanshu Roy.png", zoom: 1.25,linkedin:"https://www.linkedin.com/in/priyanshu-roy-154a39246" },
       { name: "Anguluri Shiva",    role: "Member", dept: "Photography and Media", photo: "/council/photography/Anguluri Shiva.png",linkedin:"#" },
       { name: "Mattam Shivani",    role: "Member", dept: "Photography and Media", photo: "/council/photography/Mattam Shivani.png",linkedin:"https://www.linkedin.com/in/shivani-mattam-91602b2a5/" },
       { name: "Vavilala Sai Ganesh", role: "Member", dept: "Photography and Media", photo: "/council/photography/Vavilala Sai Ganesh.png",linkedin:"https://www.linkedin.com/in/vavilala-sai-ganesh-25028b3b5/" },
@@ -415,7 +428,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                         alt={m.name}
                         draggable={false}
                         className="absolute inset-0 w-full h-full"
-                        style={{ objectFit: "cover", objectPosition: "top center" }}
+                        style={{ objectFit: m.fit ?? "cover", objectPosition: "top center", transform: m.zoom ? `scale(${m.zoom})` : undefined, transformOrigin: m.zoom && m.zoom > 1 ? "top center" : "center" }}
                       />
                       <div className="cs-tap-hint">Tap for details</div>
                     </div>
@@ -536,7 +549,12 @@ export default function CouncilPage() {
   }, []);
 
   const allShuffled = order ? order.map((i) => allMembers[i]).filter(Boolean) : allMembers;
-  const visibleMembers = activeTeam === "All" ? allShuffled : allMembers.filter((m) => m.department === activeTeam);
+  const visibleMembers = activeTeam === "All"
+    ? allShuffled
+    : allMembers
+        .filter((m) => m.department === activeTeam)
+        // dept lead(s) first; Technical Lead ahead of Product Development Lead; stable for the rest
+        .sort((a, b) => leadRank(a.role) - leadRank(b.role));
 
   // Horizontal-scroll affordance for the department filter row
   const tabsRef = useRef<HTMLDivElement>(null);
