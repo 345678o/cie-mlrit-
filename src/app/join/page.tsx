@@ -8,13 +8,13 @@ import { Code, FileText, PenLine, Palette, Camera, Mic, BarChart2, ArrowRight } 
 const ORANGE = "rgb(238, 209, 200)";
 
 const DEPARTMENTS = [
-  { key: "tech",        name: "Tech",                       color: "#4A7CDB", icon: Code,      desc: "Build CIE's digital products — websites, tools, AI experiments.", lookingFor: "Problem-solvers who love building things." },
-  { key: "content",     name: "Content",                    color: "#CCBA11", icon: FileText,  desc: "Write blog posts, event recaps, newsletters, and long-form stories.", lookingFor: "Storytellers who make ideas land." },
-  { key: "creative",    name: "Creative",                   color: "#BE5BFA", icon: PenLine,   desc: "Drive CIE's brand direction — campaigns, themes, visual identity.", lookingFor: "Big-picture thinkers with an eye for detail." },
-  { key: "gd",          name: "GD — Graphic Design",        color: "#68DEF8", icon: Palette,   desc: "Design posters, decks, social assets, and motion content.", lookingFor: "Designers who make people stop scrolling." },
-  { key: "photography", name: "Photography",                color: "#FA7712", icon: Camera,    desc: "Capture every CIE moment — photography, video, post-production.", lookingFor: "Visual storytellers with a sharp eye." },
-  { key: "ps",          name: "P&S — Public Speaking",      color: "#D01010", icon: Mic,       desc: "Anchor events, run workshops, and handle PR & outreach.", lookingFor: "Confident communicators who own the room." },
-  { key: "ops",         name: "Ops — Operations & Finance", color: "#22C55E", icon: BarChart2, desc: "Manage event logistics, budgets, vendors, and flawless execution.", lookingFor: "Executors who thrive on making things happen." },
+  { key: "tech",        name: "Technical & Product Development", color: "#4A7CDB", icon: Code,      desc: "Build CIE's digital products — websites, tools, AI experiments.", lookingFor: "Problem-solvers who love building things." },
+  { key: "content",     name: "Content Writing",                 color: "#CCBA11", icon: FileText,  desc: "Write blog posts, event recaps, newsletters, and long-form stories.", lookingFor: "Storytellers who make ideas land." },
+  { key: "creative",    name: "Creative",                        color: "#BE5BFA", icon: PenLine,   desc: "Drive CIE's brand direction — campaigns, themes, visual identity.", lookingFor: "Big-picture thinkers with an eye for detail." },
+  { key: "gd",          name: "Graphic Design",                  color: "#68DEF8", icon: Palette,   desc: "Design posters, decks, social assets, and motion content.", lookingFor: "Designers who make people stop scrolling." },
+  { key: "photography", name: "Photography and Media",           color: "#FA7712", icon: Camera,    desc: "Capture every CIE moment — photography, video, post-production.", lookingFor: "Visual storytellers with a sharp eye." },
+  { key: "ps",          name: "Promotions & Sponsorship",        color: "#D01010", icon: Mic,       desc: "Anchor events, run workshops, and handle PR & outreach.", lookingFor: "Confident communicators who own the room." },
+  { key: "ops",         name: "Operations & Finance",            color: "#22C55E", icon: BarChart2, desc: "Manage event logistics, budgets, vendors, and flawless execution.", lookingFor: "Executors who thrive on making things happen." },
 ];
 
 export default function JoinPage() {

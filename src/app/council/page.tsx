@@ -38,10 +38,12 @@ type TeamSection = {
 
 
 const studentLeadership: Member[] = [
-  { name: "Name Placeholder",  role: "President",      dept: "Technical",            year: "2026-27", linkedin: "#", email: "", photo: "" },
-  { name: "Name Placeholder",  role: "Vice President", dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "" },
-  { name: "Name Placeholder",  role: "Secretary",      dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "" },
-  { name: "Name Placeholder",  role: "Treasurer",      dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "" },
+  { name: "Name Placeholder",  role: "President",                  dept: "Technical",            year: "2026-27", linkedin: "#", email: "", photo: "" },
+  { name: "Name Placeholder",  role: "Vice President",             dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "" },
+  { name: "Name Placeholder",  role: "Secretary",                  dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "" },
+  { name: "Name Placeholder",  role: "Chief Technical Executive",  dept: "Technical",            year: "2026-27", linkedin: "#", email: "", photo: "" },
+  { name: "Jaikar Midithuri",  role: "Joint Secretary",            dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/jaikar-midithuri-136614369/", email: "", photo: "/council/tech/Jaikar Midithuri.png" },
+  { name: "Bhavana Inakollu",  role: "Internal Relations",         dept: "Operations & Finance", year: "2026-27", linkedin: "https://www.linkedin.com/in/bhavana-inakollu-8698a2395", email: "", photo: "/council/OPS/Bhavana .png" },
 ];
 
 
@@ -50,7 +52,7 @@ const teamExpertise: Record<string, string> = {
   "Content": "Writing & Editing",
   "Creative": "Brand Strategy",
   "GD — Graphic Design": "Visual Design",
-  "Photography": "Visual Media",
+  "Photography and Media": "Visual Media",
   "P&S — Public Speaking": "Public Speaking",
   "Ops — Operations & Finance": "Event Operations",
 };
@@ -128,20 +130,20 @@ const teams: TeamSection[] = [
     ],
   },
   {
-    team: "Photography",
+    team: "Photography and Media",
     color: "#FF7A1A",
     description: "Captures every moment of the CIE journey — from hackathon late nights to summit keynotes — through photography, videography, and professional post-production.",
     members: [
-      { name: "Priyanshu Roy",     role: "Member", dept: "Photography", photo: "/council/photography/Priyanshu Roy.png",linkedin:"https://www.linkedin.com/in/priyanshu-roy-154a39246" },
-      { name: "Anguluri Shiva",    role: "Member", dept: "Photography", photo: "/council/photography/Anguluri Shiva.png",linkedin:"#" },
-      { name: "Mattam Shivani",    role: "Member", dept: "Photography", photo: "/council/photography/Mattam Shivani.png",linkedin:"https://www.linkedin.com/in/shivani-mattam-91602b2a5/" },
-      { name: "Vavilala Sai Ganesh", role: "Member", dept: "Photography", photo: "/council/photography/Vavilala Sai Ganesh.png",linkedin:"https://www.linkedin.com/in/vavilala-sai-ganesh-25028b3b5/" },
-      { name: "K.SAI VARSHITH",    role: "Member", dept: "Photography", photo: "/council/photography/K.SAI VARSHITH.png",linkedin:"https://www.linkedin.com/in/k-sai-varshith-123462345/" },
-      { name: "Gorli Mahesh",      role: "Member", dept: "Photography", photo: "/council/photography/Gorli Mahesh.png",linkedin:"https://www.linkedin.com/in/mahesh-gorli-314b89344" },
-      { name: "Anam Mounika",      role: "Member", dept: "Photography", photo: "/council/photography/Anam Mounika .png",linkedin:"https://www.linkedin.com/in/mounika-r-20a621316/" },
-      { name: "Gothuri Rishith",   role: "Member", dept: "Photography", photo: "/council/photography/Gothuri Rishith.png",linkedin:"https://in.linkedin.com/in/gothuri-rishith-kumar-51390a3bb" },
-      { name: "Sai Vashist",       role: "Member", dept: "Photography", photo: "/council/photography/Sai Vashist.png",linkedin:"https://www.linkedin.com/in/vashist23021409" },
-      { name: "Konthum Bhruhathi", role: "Member", dept: "Photography", photo: "/council/photography/Konthum Bhruhathi .png",linkedin:"https://www.linkedin.com/in/bhruhathi-konthum-a50755387" },
+      { name: "Priyanshu Roy",     role: "Member", dept: "Photography and Media", photo: "/council/photography/Priyanshu Roy.png",linkedin:"https://www.linkedin.com/in/priyanshu-roy-154a39246" },
+      { name: "Anguluri Shiva",    role: "Member", dept: "Photography and Media", photo: "/council/photography/Anguluri Shiva.png",linkedin:"#" },
+      { name: "Mattam Shivani",    role: "Member", dept: "Photography and Media", photo: "/council/photography/Mattam Shivani.png",linkedin:"https://www.linkedin.com/in/shivani-mattam-91602b2a5/" },
+      { name: "Vavilala Sai Ganesh", role: "Member", dept: "Photography and Media", photo: "/council/photography/Vavilala Sai Ganesh.png",linkedin:"https://www.linkedin.com/in/vavilala-sai-ganesh-25028b3b5/" },
+      { name: "K.SAI VARSHITH",    role: "Member", dept: "Photography and Media", photo: "/council/photography/K.SAI VARSHITH.png",linkedin:"https://www.linkedin.com/in/k-sai-varshith-123462345/" },
+      { name: "Gorli Mahesh",      role: "Member", dept: "Photography and Media", photo: "/council/photography/Gorli Mahesh.png",linkedin:"https://www.linkedin.com/in/mahesh-gorli-314b89344" },
+      { name: "Anam Mounika",      role: "Member", dept: "Photography and Media", photo: "/council/photography/Anam Mounika .png",linkedin:"https://www.linkedin.com/in/mounika-r-20a621316/" },
+      { name: "Gothuri Rishith",   role: "Member", dept: "Photography and Media", photo: "/council/photography/Gothuri Rishith.png",linkedin:"https://in.linkedin.com/in/gothuri-rishith-kumar-51390a3bb" },
+      { name: "Sai Vashist",       role: "Member", dept: "Photography and Media", photo: "/council/photography/Sai Vashist.png",linkedin:"https://www.linkedin.com/in/vashist23021409" },
+      { name: "Konthum Bhruhathi", role: "Member", dept: "Photography and Media", photo: "/council/photography/Konthum Bhruhathi .png",linkedin:"https://www.linkedin.com/in/bhruhathi-konthum-a50755387" },
     ],
   },
   {
@@ -180,7 +182,7 @@ const deptShort: Record<string, string> = {
   "Content": "Content Writing",
   "Creative": "Creative",
   "GD — Graphic Design": "Graphic Design",
-  "Photography": "Photography",
+  "Photography and Media": "Photography and Media",
   "P&S — Public Speaking": "Promotions & Sponsorship",
   "Ops — Operations & Finance": "Operations & Finance",
 };
@@ -284,7 +286,7 @@ const deptIcon: Record<string, React.ComponentType<{ size?: number; style?: Reac
   "Content": FileText,
   "Creative": PenLine,
   "GD — Graphic Design": Palette,
-  "Photography": Camera,
+  "Photography and Media": Camera,
   "P&S — Public Speaking": Mic,
   "Ops — Operations & Finance": BarChart2,
 };
@@ -545,15 +547,16 @@ export default function CouncilPage() {
             <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Leadership</span>
             <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>Student Leadership 2026–27</h2>
           </FadeIn>
-          <div className="grid sm:grid-cols-2 gap-8 items-stretch" style={{ marginTop: "40px" }}>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch" style={{ marginTop: "40px" }}>
             {studentLeadership.map((member, i) => (
               <FadeIn key={`${member.role}-${i}`} className="flex flex-col">
-                <div className="rounded-2xl card-light relative overflow-hidden"
-                  style={{ flex: 1, borderColor: "rgba(255,94,44,0.20)", minHeight: "280px", padding: "clamp(24px,4vw,40px)" }}>
+                <div className="rounded-2xl card-light relative overflow-hidden flex flex-col items-center"
+                  style={{ flex: 1, borderColor: "rgba(255,94,44,0.20)", padding: "clamp(28px,4vw,44px) clamp(20px,3vw,36px)", textAlign: "center" }}>
                   <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10"
                     style={{ background: "#FF5E2C", transform: "translate(30%, -30%)" }} />
                   {member.photo ? (
-                    <div className="w-20 h-20 rounded-full mb-6 overflow-hidden flex-shrink-0">
+                    <div className="w-40 h-40 rounded-full mb-8 overflow-hidden flex-shrink-0"
+                      style={{ border: "3px solid rgba(255,94,44,0.25)" }}>
                       <img
                         src={member.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")}
                         alt={member.name}
@@ -561,16 +564,16 @@ export default function CouncilPage() {
                       />
                     </div>
                   ) : (
-                    <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-black mb-6"
-                      style={{ background: "rgba(255,94,44,0.10)", color: "#FF5E2C" }}>
+                    <div className="w-40 h-40 rounded-full flex items-center justify-center text-4xl font-black mb-8 flex-shrink-0"
+                      style={{ background: "rgba(255,94,44,0.10)", color: "#FF5E2C", border: "3px solid rgba(255,94,44,0.20)" }}>
                       {member.name.split(" ").map((n) => n[0]).join("").substring(0, 2)}
                     </div>
                   )}
-                  <h3 style={{ color: "#000000", fontSize: "22px", fontWeight: 800, marginBottom: "10px", lineHeight: 1.2 }}>{member.name}</h3>
-                  <p style={{ color: "#FF5E2C", fontSize: "16px", fontWeight: 700, marginBottom: "10px" }}>{member.role}</p>
-                  <p style={{ color: "#6B7280", fontSize: "15px", lineHeight: 1.6, marginBottom: "6px" }}>{member.dept}</p>
-                  <p style={{ color: "#9CA3AF", fontSize: "13px", marginBottom: "28px" }}>Batch {member.year}</p>
-                  <div className="flex gap-2">
+                  <h3 style={{ color: "#000000", fontSize: "20px", fontWeight: 800, marginBottom: "8px", lineHeight: 1.2 }}>{member.name}</h3>
+                  <p style={{ color: "#FF5E2C", fontSize: "15px", fontWeight: 700, marginBottom: "8px" }}>{member.role}</p>
+                  <p style={{ color: "#6B7280", fontSize: "14px", lineHeight: 1.6, marginBottom: "4px" }}>{member.dept}</p>
+                  <p style={{ color: "#9CA3AF", fontSize: "12px", marginBottom: "24px" }}>Batch {member.year}</p>
+                  <div className="flex gap-2 justify-center mt-auto">
                     {member.linkedin && (
                       <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="btn-secondary-light text-xs py-1.5 px-3 gap-1">
                         <Link2 size={12} /> LinkedIn

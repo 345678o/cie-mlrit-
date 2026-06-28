@@ -47,7 +47,7 @@ const DEPARTMENTS: Record<string, {
     stats: [],
   },
   photography: {
-    name: "Photography", color: "#FA7712", icon: Camera,
+    name: "Photography and Media", color: "#FA7712", icon: Camera,
     tagline: "Capture every moment of the CIE journey.",
     desc: "We capture every moment — from hackathon late nights to summit keynotes — through photography, videography, and post-production.",
     skills: [],

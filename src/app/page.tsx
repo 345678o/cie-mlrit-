@@ -260,7 +260,7 @@ export default function HomePage() {
         {/* ── Main content ── */}
         <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
           <div className={`${CONTAINER} w-full`} style={{ paddingTop: "clamp(32px,5vw,52px)", paddingBottom: "clamp(40px,6vw,60px)" }}>
-            <div className="w-full grid lg:grid-cols-2 gap-10 items-center">
+            <div className="w-full grid lg:grid-cols-2 items-center" style={{ gap: "clamp(40px, 8vw, 120px)" }}>
 
               {/* ── LEFT: Text ── */}
               <div style={{ position: "relative" }}>
