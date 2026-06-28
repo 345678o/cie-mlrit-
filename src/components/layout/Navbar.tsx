@@ -259,6 +259,7 @@ export default function Navbar() {
           <Link
             href="/join"
             className="nav-desktop-cta"
+            onClick={() => window.dispatchEvent(new Event("cie:intro"))}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -504,7 +505,7 @@ export default function Navbar() {
             >
               <Link
                 href="/join"
-                onClick={() => setOpen(false)}
+                onClick={() => { setOpen(false); window.dispatchEvent(new Event("cie:intro")); }}
                 style={{
                   display: "flex",
                   alignItems: "center",

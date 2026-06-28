@@ -641,3 +641,48 @@ button:focus-visible {
   /* About page section gaps */
   .lg\:py-24 { padding-top: 3rem; padding-bottom: 3rem; }
 }
+
+/* ── Join Now CTA — black light traveling around the button border ─ */
+@property --cta-a {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.nav-desktop-cta { position: relative; }
+.nav-desktop-cta::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  padding: 2.5px;            /* border thickness */
+  pointer-events: none;
+  background: conic-gradient(from var(--cta-a),
+    rgba(0, 0, 0, 0)    0deg,
+    rgba(0, 0, 0, 0.95) 20deg,
+    rgba(0, 0, 0, 0)    55deg,
+    rgba(0, 0, 0, 0)   360deg);
+  /* show only the border ring, punch out the center */
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  animation: ctaRevolve 4s linear infinite;
+}
+.nav-desktop-cta:hover::after { animation-play-state: paused; }
+@keyframes ctaRevolve {
+  to { --cta-a: 360deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-desktop-cta::after { animation: none; }
+}
+
+/* ── Privacy: block dragging / saving images (esp. people photos) ── */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}

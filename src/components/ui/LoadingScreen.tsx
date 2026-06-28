@@ -27,19 +27,36 @@ function Ring({ delay, size }: { delay: number; size: number }) {
 export default function LoadingScreen() {
   const [visible, setVisible] = useState(true);
   const [burst,   setBurst]   = useState(false);
+  const [runId,   setRunId]   = useState(0);
 
-  // Intro animation runs once per full page load only — NOT on client-side
-  // route changes (was firing a 1.5s blocking overlay on every nav = lag).
+  // Plays once per full page load, and on demand when something dispatches the
+  // "cie:intro" window event (e.g. the "Join Now" CTA) — NOT on every route nav.
   useEffect(() => {
-    const t1 = setTimeout(() => setBurst(true),  860);
-    const t2 = setTimeout(() => setVisible(false), 1500);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    let t1: ReturnType<typeof setTimeout>;
+    let t2: ReturnType<typeof setTimeout>;
+
+    const run = () => {
+      setBurst(false);
+      setVisible(true);
+      setRunId((k) => k + 1);
+      clearTimeout(t1); clearTimeout(t2);
+      t1 = setTimeout(() => setBurst(true),  860);
+      t2 = setTimeout(() => setVisible(false), 1500);
+    };
+
+    run();
+    window.addEventListener("cie:intro", run);
+    return () => {
+      window.removeEventListener("cie:intro", run);
+      clearTimeout(t1); clearTimeout(t2);
+    };
   }, []);
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
+          key={runId}
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.22, ease: "easeIn" } }}
           style={{
