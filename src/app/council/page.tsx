@@ -538,6 +538,23 @@ export default function CouncilPage() {
   const allShuffled = order ? order.map((i) => allMembers[i]).filter(Boolean) : allMembers;
   const visibleMembers = activeTeam === "All" ? allShuffled : allMembers.filter((m) => m.department === activeTeam);
 
+  // Horizontal-scroll affordance for the department filter row
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const [tabEdges, setTabEdges] = useState({ left: false, right: false });
+  useEffect(() => {
+    const el = tabsRef.current;
+    if (!el) return;
+    const update = () => setTabEdges({
+      left: el.scrollLeft > 4,
+      right: el.scrollLeft + el.clientWidth < el.scrollWidth - 4,
+    });
+    update();
+    el.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => { el.removeEventListener("scroll", update); window.removeEventListener("resize", update); };
+  }, []);
+  const scrollTabs = (dir: number) => tabsRef.current?.scrollBy({ left: dir * 260, behavior: "smooth" });
+
   return (
     <div style={{ background: "#FFFFFF", position: "relative" }}>
       <PageGeometric />
@@ -632,10 +649,10 @@ export default function CouncilPage() {
           {/* Filter + ChromaGrid — no extra inner wrapper, inherit 1400px container */}
           <div>
 
-            {/* Filter bar — 40px below heading */}
+            {/* Filter bar — 40px below heading, horizontally scrollable */}
             <FadeIn delay={0.1}>
-              {/* flex-wrap on mobile, nowrap on desktop — chips fill full width via flex:1 */}
-              <div className="flex flex-wrap lg:flex-nowrap items-center gap-2" style={{ marginTop: "clamp(24px,3vw,40px)", width: "100%" }}>
+              <div style={{ position: "relative", marginTop: "clamp(24px,3vw,40px)", width: "100%" }}>
+              <div ref={tabsRef} className="council-tabs flex items-center gap-2" style={{ width: "100%", overflowX: "auto", scrollBehavior: "smooth", paddingBottom: "2px" }}>
                 {[
                   { label: "All", key: "All" },
                   ...teams.map((t) => ({ label: deptShort[t.team] ?? t.team, key: t.team, color: t.color })),
@@ -647,7 +664,7 @@ export default function CouncilPage() {
                       key={tab.key}
                       onClick={() => setActiveTeam(tab.key)}
                       style={{
-                        flex: "1 1 clamp(80px,12vw,110px)",
+                        flex: "0 0 auto",
                         display: "inline-flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -688,6 +705,36 @@ export default function CouncilPage() {
                     </button>
                   );
                 })}
+              </div>
+
+              {tabEdges.left && (
+                <>
+                  <div aria-hidden style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "52px", pointerEvents: "none", background: "linear-gradient(90deg, #000 25%, transparent)" }} />
+                  <button onClick={() => scrollTabs(-1)} aria-label="Scroll departments left" className="council-tab-arrow" style={{ left: "4px" }}>‹</button>
+                </>
+              )}
+              {tabEdges.right && (
+                <>
+                  <div aria-hidden style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "52px", pointerEvents: "none", background: "linear-gradient(270deg, #000 25%, transparent)" }} />
+                  <button onClick={() => scrollTabs(1)} aria-label="Scroll departments right" className="council-tab-arrow" style={{ right: "4px" }}>›</button>
+                </>
+              )}
+
+              <style>{`
+                .council-tabs { scrollbar-width: none; -ms-overflow-style: none; }
+                .council-tabs::-webkit-scrollbar { display: none; }
+                .council-tab-arrow {
+                  position: absolute; top: 50%; transform: translateY(-50%);
+                  width: 32px; height: 32px; border-radius: 9999px;
+                  display: inline-flex; align-items: center; justify-content: center;
+                  background: rgba(255,255,255,0.12); color: #fff;
+                  border: 1px solid rgba(255,255,255,0.22); cursor: pointer;
+                  font-size: 20px; line-height: 1; padding-bottom: 2px;
+                  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+                  transition: background 0.2s ease; z-index: 2;
+                }
+                .council-tab-arrow:hover { background: rgba(255,255,255,0.22); }
+              `}</style>
               </div>
             </FadeIn>
 
