@@ -227,11 +227,7 @@ export default function AlumniPage() {
         line3="FIELD"
         scriptText="— stories that inspire"
         description="Hear from CIE alumni who've gone on to build products, lead teams, and launch startups — and how their time at MLRIT CIE shaped their journey."
-        stats={[
-          { value: "100+", label: "Alumni" },
-          { value: "40+", label: "Companies" },
-          { value: "5+", label: "Startups Founded" },
-        ]}
+        stats={[]}
         watermark="ALUMNI"
       />
 

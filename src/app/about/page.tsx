@@ -187,7 +187,7 @@ const faculty: FacultyMember[] = [
   {
     name: "Mrs. A. Sravanthi",
     designation: "Asst. Professor",
-    dept: "Computer Science & Design",
+    dept: "Computer Science and Data Science Engineering",
     expertise: "Computer Science & Engineering",
     bio: "Supports student projects at the intersection of design and engineering, encouraging creative, user-centered technology solutions.",
     confirmed: true,

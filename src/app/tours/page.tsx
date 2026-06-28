@@ -759,6 +759,37 @@ export default function GalleryPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
+          VIRTUAL TOUR — Street View embed
+      ══════════════════════════════════════════════════════ */}
+      <section id="virtual-tour" style={{ background: "#0C0B09", padding: "clamp(72px, 10vw, 110px) 0" }}>
+        <div className="page-container">
+          <div className="reveal-text" style={{ marginBottom: "clamp(28px,4vw,44px)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+              <div style={{ width: "26px", height: "1px", background: "#E8521A" }} />
+              <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#E8521A" }}>
+                Virtual Tour
+              </span>
+            </div>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(26px,4vw,42px)", letterSpacing: "-0.03em", color: "#FFFFFF", lineHeight: 1.1, marginBottom: "10px" }}>
+              Explore CIE from anywhere
+            </h2>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.4vw,16px)", color: "rgba(255,255,255,0.40)", lineHeight: 1.72, maxWidth: "480px" }}>
+              Take a 360° Street View walk through the CIE campus — no visit required.
+            </p>
+          </div>
+          <div className="reveal-text" style={{ borderRadius: "20px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", boxShadow: "0 8px 40px rgba(0,0,0,0.40)" }}>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!4v1782646334823!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJQzR3djNQQ1E.!2m2!1d17.59430034244545!2d78.44136861286925!3f294.61298!4f0!5f0.7820865974627469"
+              width="100%" height="500"
+              style={{ border: 0, display: "block" }}
+              allowFullScreen loading="lazy" referrerPolicy="strict-origin-when-cross-origin"
+              title="MLRIT CIE — Virtual Street View Tour"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
           CLOSING CTA
       ══════════════════════════════════════════════════════ */}
       <section style={{ background: "#0C0B09", padding: "clamp(88px, 14vw, 160px) 0", textAlign: "center" }}>
@@ -805,7 +836,7 @@ export default function GalleryPage() {
             style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}
           >
             <Link
-              href="/contact"
+              href="#virtual-tour"
               style={{
                 display: "inline-flex", alignItems: "center", gap: "8px",
                 fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "14px",
@@ -814,7 +845,7 @@ export default function GalleryPage() {
                 textDecoration: "none", letterSpacing: "-0.01em",
               }}
             >
-              Book a Tour <ArrowRight size={14} />
+              Virtual Tour <ArrowRight size={14} />
             </Link>
             <Link
               href="/contact"
