@@ -74,7 +74,7 @@ const footerLinks = {
     { href: "/verticals",  label: "Verticals" },
     { href: "/studios",    label: "Studios" },
     { href: "/facilities", label: "Facilities" },
-    { href: "/tours",      label: "Gallery" },
+    { href: "/gallery",      label: "Gallery" },
   ],
   programs: [
     { href: "/events",   label: "Past Events" },
