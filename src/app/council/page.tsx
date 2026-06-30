@@ -441,16 +441,16 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                       background: "#0a0a0a",
                       display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "clamp(14px,6%,20px)",
                     }}>
-                      {/* comic pop-art backdrop */}
+                      {/* blurred photo backdrop */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src="/council/comic-bg.jpg" draggable={false} alt="" aria-hidden="true" style={{
-                        position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center",
-                        zIndex: 0,
+                      <img src={flat} alt="" aria-hidden="true" style={{
+                        position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center",
+                        filter: "blur(9px) saturate(1.35) brightness(1.05)", transform: "scale(1.16)", zIndex: 0,
                       }} />
-                      {/* gradient overlay — light at top so comic shows, dark at base for text legibility */}
+                      {/* gradient overlay — deptColor tint, fades to deep black at base for legibility */}
                       <div style={{
                         position: "absolute", inset: 0, zIndex: 0,
-                        background: "linear-gradient(180deg, rgba(10,10,10,0.10) 0%, rgba(10,10,10,0.20) 42%, rgba(10,10,10,0.66) 74%, rgba(10,10,10,0.90) 100%)",
+                        background: `linear-gradient(180deg, rgba(10,10,10,0.15) 0%, ${m.deptColor}40 30%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0.92) 100%)`,
                       }} />
                       <div style={{ position: "relative", zIndex: 1, flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "8px", width: "100%" }}>
                         <span style={{
