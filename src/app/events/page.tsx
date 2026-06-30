@@ -37,7 +37,7 @@ const FEATURED: EventData[] = [
     tags: ["Hands-on", "Expert Guidance", "Domain Challenges", "Practical Skills"],
     bg: "#07090f",
     slides: [
-      { img: "/events/poster/wc%202.0.png", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "Workshop Carnival 2.0", body: "Where learning goes beyond classrooms — into real skills, real challenges, and real innovation. Explore multiple domains in one immersive sprint." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/DSCF1090.JPG", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "Workshop Carnival 2.0", body: "Where learning goes beyond classrooms — into real skills, real challenges, and real innovation. Explore multiple domains in one immersive sprint." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/DSCF1109.JPG", grad: "linear-gradient(160deg,#040a18 0%,#0a1836 50%,#1a3380 100%)", heading: "Expert-Led Tracks", body: "Learn directly from practitioners. Each workshop track delivers hands-on expertise in UI/UX, IoT, content creation, and product design." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM.jpeg", grad: "linear-gradient(130deg,#050c22 0%,#0f2650 50%,#1e40af 100%)", heading: "Build, Don't Browse", body: "Every session ends with something tangible. Teams prototype, test, and iterate — no passive learning, no slides-only talks." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM%20(1).jpeg", grad: "linear-gradient(150deg,#060d20 0%,#0d1f40 50%,#2563eb 100%)", heading: "Cross-Domain Collide", body: "Designers collaborate with developers. Strategists work alongside engineers. That friction is where the best ideas are born." },
@@ -86,7 +86,7 @@ const FEATURED: EventData[] = [
     tags: ["Business", "Negotiation", "Sales", "Strategy"],
     bg: "#0c0804",
     slides: [
-      { img: "/events/poster/hustle%20mania.png", grad: "linear-gradient(145deg,#0d0803 0%,#3b1a06 55%,#c2410c 100%)", heading: "Hustle Mania", body: "A high-energy entrepreneurship challenge where teams push limits across negotiation, sales, advertising, and business strategy." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DJI_20230424_093154_102.jpg", grad: "linear-gradient(145deg,#0d0803 0%,#3b1a06 55%,#c2410c 100%)", heading: "Hustle Mania", body: "A high-energy entrepreneurship challenge where teams push limits across negotiation, sales, advertising, and business strategy." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0541.JPG", grad: "linear-gradient(160deg,#0b0703 0%,#2e1604 50%,#b03a0a 100%)", heading: "The Sales Sprint", body: "Teams hit the floor with a product and a pitch. Real customers, real pressure — close the deal or go home." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0545.JPG", grad: "linear-gradient(130deg,#0e0904 0%,#3f1c07 50%,#c74c10 100%)", heading: "Negotiation Duel", body: "Head-to-head rounds of business negotiation. Whoever walks away with the better deal — and the logic to prove it — advances." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0548.JPG", grad: "linear-gradient(150deg,#0c0804 0%,#351806 50%,#ba3f0b 100%)", heading: "Ad Blitz", body: "30 minutes to conceptualize and present a full advertising campaign for a surprise brand brief. Speed and clarity win." },
@@ -101,7 +101,7 @@ const FEATURED: EventData[] = [
     tags: ["E-Summit", "Entrepreneurship", "CIE × IIC"],
     bg: "#090709",
     slides: [
-      { img: "/events/poster/equniox.png", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "Equinox E-Summit 2K24", body: "#WherePassionMeetsPerseverance — a 3-day summit bringing student innovators, industry leaders, and investors together at MLRIT." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7592.JPG", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "Equinox E-Summit 2K24", body: "#WherePassionMeetsPerseverance — a 3-day summit bringing student innovators, industry leaders, and investors together at MLRIT." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7602.JPG", grad: "linear-gradient(160deg,#0b0516 0%,#250d48 50%,#5e22c4 100%)", heading: "Startup Pitches", body: "Founders take the stage. Investors in the front row. The most promising student ventures compete for funding and mentorship." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7628.JPG", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "Investor Connect", body: "Structured one-on-one sessions between student entrepreneurs and angel investors — real conversations, real opportunities." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7638.JPG", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "Speaker Series", body: "Industry veterans share unfiltered lessons from building companies. No scripts, no PR spin — just the truth about entrepreneurship." },
@@ -131,7 +131,7 @@ const FEATURED: EventData[] = [
     tags: ["IoT", "UI/UX", "WordPress", "6-Day Sprint"],
     bg: "#060810",
     slides: [
-      { img: "/events/poster/wc.png", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "Workshop Carnival", body: "Six days of hands-on exploration. Participants tackled UI/UX design, IoT, and WordPress through structured challenges and expert guidance." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/WC/DSCF0788.JPG", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "Workshop Carnival", body: "Six days of hands-on exploration. Participants tackled UI/UX design, IoT, and WordPress through structured challenges and expert guidance." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC/IMG-20250920-WA0010.jpg", grad: "linear-gradient(160deg,#040a18 0%,#0a1930 50%,#1a45c8 100%)", heading: "UI/UX Track", body: "Design thinking meets real products. Teams redesign existing apps and pitch their improvements to practicing UX designers." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC/IMG-20250920-WA0050.jpg", grad: "linear-gradient(130deg,#060c20 0%,#0e2040 50%,#2155d8 100%)", heading: "IoT Lab", body: "Sensors, circuits, and code. Participants build working IoT prototypes from scratch with expert guidance on hardware and firmware." },
       { grad: "linear-gradient(150deg,#050a1a 0%,#0c1d38 50%,#1c4ad0 100%)", heading: "WordPress Build", body: "From blank canvas to live website. Participants design, develop, and deploy a fully functional site — in a single session." },
@@ -146,7 +146,7 @@ const FEATURED: EventData[] = [
     tags: ["GI Products", "Cultural Heritage", "IPFC × MLRIT", "MSME"],
     bg: "#060b08",
     slides: [
-      { img: "/events/poster/gi.png", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", heading: "GI Mahotsav 2024", body: "Geographical Indications Products Mela — a unique journey through India's rich cultural heritage and its most protected regional crafts." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/Copy%20of%20DSC00055.JPG", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", heading: "GI Mahotsav 2024", body: "Geographical Indications Products Mela — a unique journey through India's rich cultural heritage and its most protected regional crafts." },
       { img: "/events/drive-download-20260628T203409Z-3-001/GI/Copy%20of%20DSC00424.JPG", grad: "linear-gradient(160deg,#040c07 0%,#104428 50%,#128c40 100%)", heading: "Heritage in Focus", body: "Over 50 GI-tagged products on display — from Banarasi silk to Darjeeling tea. Each tells a story of place, craft, and community." },
       { img: "/events/drive-download-20260628T203409Z-3-001/GI/Copy%20of%20DSC00427.JPG", grad: "linear-gradient(130deg,#060e0b 0%,#155830 50%,#18b050 100%)", heading: "Artisan Stories", body: "Meet the makers behind the products. Live demonstrations of traditional crafts that have been perfected over generations." },
       { img: "/events/drive-download-20260628T203409Z-3-001/GI/Copy%20of%20DSC00552.JPG", grad: "linear-gradient(150deg,#050d08 0%,#124c2a 50%,#14943e 100%)", heading: "Policy & Protection", body: "Panel discussions on how GI tags protect India's cultural exports and what more needs to be done for artisan welfare." },
@@ -164,7 +164,7 @@ const FEATURED: EventData[] = [
     tags: ["Metaverse", "36-Hour Hackathon", "₹75K Prize", "CIE × Deeploop"],
     bg: "#0b0606",
     slides: [
-      { img: "/events/poster/metaloop.png", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "MetaLoop", body: "Ideate. Immerse. Innovate. A 36-hour metaverse-themed hackathon with ₹75,000 in prizes and Deeploop as technology partner." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0094.JPG", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "MetaLoop", body: "Ideate. Immerse. Innovate. A 36-hour metaverse-themed hackathon with ₹75,000 in prizes and Deeploop as technology partner." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0102.JPG", grad: "linear-gradient(160deg,#0a0505 0%,#260f0f 50%,#871618 100%)", heading: "AR/VR Track", body: "Build immersive augmented and virtual reality experiences. Teams push the boundaries of spatial computing in 36 hours." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0168.JPG", grad: "linear-gradient(130deg,#0d0707 0%,#301414 50%,#a61e1e 100%)", heading: "Blockchain Track", body: "Smart contracts, NFTs, and decentralized apps. Teams explore the infrastructure layer of the open metaverse." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0378.JPG", grad: "linear-gradient(150deg,#0b0606 0%,#2a1010 50%,#901818 100%)", heading: "Virtual Worlds", body: "Design and build navigable 3D environments — social spaces, games, and interactive experiences for the next internet." },
@@ -191,7 +191,7 @@ const CATS = [
    ─ Shows all images from that event. Click → lightbox.
 ═══════════════════════════════════════════════════════════════ */
 function EventFilmStrip({ ev }: { ev: EventData }) {
-  const imgs = ev.slides.slice(1).filter(s => s.img).map(s => s.img as string);
+  const imgs = ev.slides.filter(s => s.img).map(s => s.img as string);
   const stripRef = useRef<HTMLDivElement>(null);
   const [lightbox, setLightbox] = useState<string | null>(null);
 
@@ -434,14 +434,14 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
       style={{
         display: "flex",
         flexDirection: flipped ? "row-reverse" : "row",
-        height: "clamp(560px, 85vh, 1000px)",
+        height: "clamp(480px, 72vh, 860px)",
         background: ev.bg,
         overflow: "hidden",
       }}
     >
       {/* ══ Left — poster column ══ */}
       <div style={{
-        width: "clamp(360px, 42%, 760px)",
+        width: "clamp(300px, 55%, 860px)",
         flexShrink: 0,
         position: "relative",
         overflow: "hidden",
@@ -465,17 +465,6 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
           backgroundImage: GRAIN, opacity: 0.07,
           pointerEvents: "none",
         }} />
-        <div style={{
-          position: "absolute", bottom: "20px", left: "20px",
-          display: "flex", flexDirection: "column", gap: "4px",
-          background: "rgba(0,0,0,0.55)", backdropFilter: "blur(6px)",
-          borderLeft: `3px solid ${ev.catColor}`,
-          padding: "10px 14px",
-          borderRadius: "0 6px 6px 0",
-        }}>
-          <span style={{ color: "#fff", fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(13px,1.2vw,17px)", lineHeight: 1.2, letterSpacing: "-0.02em" }}>{ev.slides[0].heading}</span>
-          <span style={{ color: "rgba(255,255,255,0.55)", fontFamily: "var(--font-inter)", fontSize: "clamp(11px,0.9vw,13px)", letterSpacing: "0.04em" }}>{ev.date}</span>
-        </div>
       </div>
 
       {/* ══ Right — text panels ══ */}
@@ -487,30 +476,12 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
             ref={el => { panelRefs.current[i] = el; }}
             style={{
               position: "absolute", inset: 0,
-              display: "flex", flexDirection: "column", justifyContent: "flex-start",
-              padding: "clamp(32px, 4vw, 60px) clamp(24px, 4vw, 64px)",
+              display: "flex", flexDirection: "column", justifyContent: "center",
+              padding: "clamp(28px, 5vw, 80px) clamp(24px, 4vw, 64px)",
               visibility: i === 0 ? "visible" : "hidden",
               zIndex: i === 0 ? 2 : 1,
             }}
           >
-            {/* ⓪ event name + date header */}
-            <div style={{ marginBottom: "28px", paddingBottom: "20px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-              <h3 style={{
-                fontFamily: "var(--font-heading)", fontWeight: 900,
-                fontSize: "clamp(18px, 2vw, 28px)",
-                letterSpacing: "-0.03em", lineHeight: 1.1,
-                color: "#fff", margin: "0 0 6px 0",
-              }}>
-                {ev.slides[0].heading}
-              </h3>
-              <span style={{
-                fontFamily: "var(--font-body)", fontSize: "11px",
-                color: ev.catColor, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 600,
-              }}>
-                {ev.date}
-              </span>
-            </div>
-
             {/* ① event number */}
             <span data-s style={{
               display: "block",
