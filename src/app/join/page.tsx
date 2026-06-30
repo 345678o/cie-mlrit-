@@ -29,7 +29,7 @@ export default function JoinPage() {
   return (
     <div style={{ minHeight: "100vh", background: "#ff6f00", paddingTop: "calc(var(--nav-height) + 32px)", paddingBottom: "80px", marginTop: "calc(-1 * var(--nav-height))", position: "relative", overflow: "hidden" }}>
 
-      {/* Circle pattern */}
+{/* Circle pattern */}
       <svg aria-hidden style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0 }} preserveAspectRatio="xMidYMid slice" viewBox="0 0 1440 900">
         {/* Large rings — top right */}
         <circle cx="1200" cy="-80"  r="340" fill="none" stroke="rgba(255,255,255,0.50)" strokeWidth="1.5"/>
@@ -57,7 +57,7 @@ export default function JoinPage() {
 
       {/* Header */}
       <div style={{ maxWidth: "720px", margin: "0 auto", padding: "0 clamp(16px,4vw,24px) clamp(32px,5vw,56px)", textAlign: "center", position: "relative", zIndex: 1 }}>
-        <span style={{
+<span style={{
           display: "inline-block", fontFamily: "var(--font-body)", fontWeight: 700,
           fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase",
           color: "rgba(255,255,255,0.95)", background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.35)",
