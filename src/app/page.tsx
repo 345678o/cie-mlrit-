@@ -572,12 +572,12 @@ export default function HomePage() {
               {
                 title: "Our Vision",
                 content:
-                  "To be a leading hub for innovation and entrepreneurship at MLRIT — fostering a culture where every student can ideate, build, and launch solutions that create real-world impact.",
+                  "To be a leading hub for innovation and entrepreneurship, inspiring every student to transform ideas into impactful solutions that create lasting value for society.",
               },
               {
                 title: "Our Mission",
                 content:
-                  "Empowering MLRIT students through workshops, hackathons, summits, and incubation — providing the tools, mentorship, and networks needed to transform ideas into ventures that matter.",
+                  "To empower students through innovation programs, workshops, hackathons, mentorship, and incubation by providing the skills, resources, guidance, and industry connections needed to develop ideas, solve real-world challenges, and build successful ventures.",
               },
             ].map((item, i) => (
               <FadeIn key={item.title} delay={i * 0.12}>
