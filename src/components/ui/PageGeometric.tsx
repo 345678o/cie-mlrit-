@@ -7,13 +7,13 @@ import React from "react";
  */
 export default function PageGeometric() {
   return (
-    <div aria-hidden style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden", zIndex: 0 }}>
+    <div aria-hidden style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden", zIndex: 0, transform: "translateZ(0)", backfaceVisibility: "hidden", contain: "paint" }}>
 
       {/* Grain texture */}
       <div style={{
         position: "absolute", inset: 0,
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-        opacity: 0.055, mixBlendMode: "multiply",
+        opacity: 0.05,
       }} />
 
       {/* Large arc — top right */}
