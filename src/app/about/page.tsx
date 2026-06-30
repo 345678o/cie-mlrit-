@@ -98,14 +98,14 @@ const visionMission = [
     title: "Our Vision",
     accent: `${ORANGE}10`,
     content:
-      "To be the premier innovation ecosystem in South India — a place where bold ideas meet real-world impact, and where every student has the tools and support to become an entrepreneur.",
+      "To be a leading hub for innovation and entrepreneurship, inspiring every student to transform ideas into impactful solutions that create lasting value for society.",
   },
   {
     icon: Target,
     title: "Our Mission",
     accent: `${ORANGE}10`,
     content:
-      "To cultivate an entrepreneurial mindset across MLRIT by providing students with mentorship, funding access, world-class infrastructure, and experiential programs that bridge education with industry.",
+      "To empower students through innovation programs, workshops, hackathons, mentorship, and incubation by providing the skills, resources, guidance, and industry connections needed to develop ideas, solve real-world challenges, and build successful ventures.",
   },
 ];
 
