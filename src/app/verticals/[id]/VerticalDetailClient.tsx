@@ -162,7 +162,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
               <SectionLabel>Studio Reel</SectionLabel>
               <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
                 <div
-                  style={{ borderRadius: "18px", overflow: "hidden", position: "relative", background: "#000", aspectRatio: "9/16", width: "clamp(280px, 36vw, 480px)", cursor: "pointer" }}
+                  style={{ borderRadius: "18px", overflow: "hidden", position: "relative", background: "#000", aspectRatio: "9/16", width: "clamp(360px, 55vw, 700px)", cursor: "pointer" }}
                   onMouseEnter={(e) => {
                     const vid = (e.currentTarget as HTMLElement).querySelector<HTMLVideoElement>("video");
                     if (vid) vid.muted = false;
