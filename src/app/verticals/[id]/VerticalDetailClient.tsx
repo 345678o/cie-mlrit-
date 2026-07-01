@@ -194,7 +194,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
                     Follow our Instagram channel for more updates, event highlights, and behind-the-scenes moments from CIE Studios.
                   </p>
                   <a
-                    href="https://www.instagram.com/cie.mlrit/"
+                    href="https://www.instagram.com/theciestudio/"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
