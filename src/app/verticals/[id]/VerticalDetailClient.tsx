@@ -218,7 +218,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       )}
 
       {/* ── Roles ─────────────────────────────────────────────────── */}
-      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB" }}>
+      {v.id !== "cie-studios" && <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB" }}>
         <div className="page-container">
           <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
             <SectionLabel>Team Structure</SectionLabel>
@@ -238,7 +238,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* ── Projects ──────────────────────────────────────────────── */}
       <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF" }}>
