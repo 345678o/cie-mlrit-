@@ -154,6 +154,38 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
         </div>
       </section>
 
+      {/* ── CIE Studios Reel (only for cie-studios) ───────────────── */}
+      {v.id === "cie-studios" && (
+        <section style={{ background: "#FFFFFF", padding: "clamp(32px,5vw,56px) 0" }}>
+          <div className="page-container">
+            <FadeIn>
+              <SectionLabel>Studio Reel</SectionLabel>
+              <div
+                style={{ borderRadius: "18px", overflow: "hidden", position: "relative", background: "#000", aspectRatio: "16/9", cursor: "pointer", marginTop: "20px" }}
+                onMouseEnter={(e) => {
+                  const vid = (e.currentTarget as HTMLElement).querySelector<HTMLVideoElement>("video");
+                  if (vid) vid.muted = false;
+                }}
+                onMouseLeave={(e) => {
+                  const vid = (e.currentTarget as HTMLElement).querySelector<HTMLVideoElement>("video");
+                  if (vid) vid.muted = true;
+                }}
+              >
+                <video
+                  src="/reels/cie%20studio%20intro.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+      )}
+
       {/* ── Roles ─────────────────────────────────────────────────── */}
       <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB" }}>
         <div className="page-container">
