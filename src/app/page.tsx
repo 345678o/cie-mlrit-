@@ -87,6 +87,27 @@ function FadeIn({
   );
 }
 
+/* ── Section divider ──────────────────────────────────────────────── */
+function SectionDivider({ topBg = "#FFFFFF", btmBg = "#FFFFFF" }: { topBg?: string; btmBg?: string }) {
+  return (
+    <div style={{ background: `linear-gradient(to bottom, ${topBg} 50%, ${btmBg} 50%)` }}>
+      <div style={{
+        display: "flex", alignItems: "center",
+        maxWidth: "1200px", margin: "0 auto",
+        padding: "0 clamp(16px, 5vw, 48px)",
+      }}>
+        <div style={{ flex: 1, height: "1px", background: "rgba(0,0,0,0.08)" }} />
+        <div style={{ display: "flex", gap: "6px", padding: "0 14px", alignItems: "center" }}>
+          <div style={{ width: "3px", height: "3px", borderRadius: "50%", background: "rgba(0,0,0,0.18)" }} />
+          <div style={{ width: "5px", height: "5px", transform: "rotate(45deg)", background: "#E8521A", opacity: 0.45 }} />
+          <div style={{ width: "3px", height: "3px", borderRadius: "50%", background: "rgba(0,0,0,0.18)" }} />
+        </div>
+        <div style={{ flex: 1, height: "1px", background: "rgba(0,0,0,0.08)" }} />
+      </div>
+    </div>
+  );
+}
+
 /* ── Data ─────────────────────────────────────────────────────────── */
 const stats = [
   { value: 1000, suffix: "+", label: "Students Engaged",    icon: Users,      color: "#2563EB" },
@@ -179,7 +200,7 @@ const recentEvents = [
 
 /* ── Design tokens ────────────────────────────────────────────────── */
 const CONTAINER  = "page-container";
-const SECTION_PY = "clamp(40px, 8vw, 120px)";
+const SECTION_PY = "clamp(48px, 5vw, 80px)";
 const T_PRIMARY   = "#000000";
 const T_SECONDARY = "#000000";
 const T_MED       = "#374151";
@@ -545,6 +566,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <SectionDivider topBg="#FFFFFF" btmBg="#FFFFFF" />
+
       {/* ────────────────────────────────────────────────────────────
           VISION & MISSION  —  #FFFFFF (White)
       ──────────────────────────────────────────────────────────── */}
@@ -620,10 +643,12 @@ export default function HomePage() {
         </div>
       </section>
 
+      <SectionDivider topBg="#FFFFFF" btmBg="#FFFFFF" />
+
       {/* ────────────────────────────────────────────────────────────
           WHAT WE DO  —  #FFFFFF (Warm Neutral)
       ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: BG_WARM, paddingTop: SECTION_PY, paddingBottom: "40px" }}>
+      <section style={{ background: BG_WARM, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
           <FadeIn className="text-center mb-8 lg:mb-16">
             <span className="section-tag">What We Do</span>
@@ -693,10 +718,12 @@ export default function HomePage() {
         </div>
       </section>
 
+      <SectionDivider topBg="#FFFFFF" btmBg="#FFF5F0" />
+
       {/* ────────────────────────────────────────────────────────────
           TIMELINE  —  Soft Peach Background
       ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: "#FFF5F0", paddingTop: "clamp(40px,8vw,72px)", paddingBottom: "clamp(40px,8vw,72px)", position: "relative", overflow: "hidden" }}>
+      <section style={{ background: "#FFF5F0", paddingTop: SECTION_PY, paddingBottom: SECTION_PY, position: "relative", overflow: "hidden" }}>
         {/* Blob left */}
         <div style={{ position: "absolute", left: "-140px", top: "50%", transform: "translateY(-50%)", width: "340px", height: "420px", borderRadius: "50%", background: "rgba(251,146,100,0.18)", filter: "blur(72px)", pointerEvents: "none" }} />
         {/* Blob right */}
@@ -799,10 +826,12 @@ export default function HomePage() {
         </div>
       </section>
 
+      <SectionDivider topBg="#FFF5F0" btmBg="#FFFFFF" />
+
       {/* ────────────────────────────────────────────────────────────
           FEATURED PROGRAMS  —  #FFFFFF (Light Orange Background)
       ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: BG_CREAM, paddingTop: "40px", paddingBottom: SECTION_PY }}>
+      <section style={{ background: BG_CREAM, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
           <FadeIn>
             <div
@@ -898,6 +927,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <SectionDivider topBg="#FFFFFF" btmBg="#F5F5F5" />
+
       {/* ────────────────────────────────────────────────────────────
           FACILITIES  —  #F5F5F5
       ──────────────────────────────────────────────────────────── */}
@@ -967,6 +998,8 @@ export default function HomePage() {
         @media (max-width: 900px) { .home-facilities-grid { grid-template-columns: repeat(2,1fr) !important; } }
         @media (max-width: 560px) { .home-facilities-grid { grid-template-columns: 1fr !important; } }
       `}</style>
+
+      <SectionDivider topBg="#F5F5F5" btmBg="#FFFFFF" />
 
       {/* ────────────────────────────────────────────────────────────
           CTA  —  warm light gradient (#FFFFFF → #FFFFFF)

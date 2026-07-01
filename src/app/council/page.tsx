@@ -441,17 +441,20 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                       background: "#0a0a0a",
                       display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "clamp(14px,6%,20px)",
                     }}>
-                      {/* blurred photo backdrop */}
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={flat} alt="" aria-hidden="true" style={{
-                        position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center",
-                        filter: "blur(9px) saturate(1.35) brightness(1.05)", transform: "scale(1.16)", zIndex: 0,
-                      }} />
-                      {/* gradient overlay — deptColor tint, fades to deep black at base for legibility */}
+                      {/* subtle dept color top glow */}
                       <div style={{
                         position: "absolute", inset: 0, zIndex: 0,
-                        background: `linear-gradient(180deg, rgba(10,10,10,0.15) 0%, ${m.deptColor}40 30%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0.92) 100%)`,
+                        background: `linear-gradient(180deg, ${m.deptColor}22 0%, transparent 40%)`,
                       }} />
+                      {/* faded CIE logo watermark */}
+                      {/* faded CIE brand watermark */}
+                      <span aria-hidden="true" style={{
+                        position: "absolute", top: "8px", left: "50%", transform: "translateX(-50%)",
+                        fontFamily: "var(--font-heading)", fontWeight: 900,
+                        fontSize: "clamp(22px,4vw,32px)", letterSpacing: "-0.04em",
+                        color: "rgba(255,255,255,0.03)", whiteSpace: "nowrap",
+                        userSelect: "none", pointerEvents: "none", zIndex: 1,
+                      }}>CIE<span style={{ color: "rgba(232,82,26,0.25)" }}>.</span></span>
                       <div style={{ position: "relative", zIndex: 1, flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "8px", width: "100%" }}>
                         <span style={{
                           fontFamily: "var(--font-rockstar), var(--font-heading)", fontWeight: 800,

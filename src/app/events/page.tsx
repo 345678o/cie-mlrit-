@@ -153,7 +153,7 @@ const FEATURED: EventData[] = [
     tags: ["Metaverse", "36-Hour Hackathon", "₹75K Prize", "CIE × Deeploop"],
     bg: "#0b0606",
     slides: [
-      { img: "/events/poster/metaloop.png", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "MetaLoop", body: "Ideate. Immerse. Innovate. A 36-hour metaverse-themed hackathon with ₹75,000 in prizes and Deeploop as technology partner." },
+      { img: "/events/poster/metaloop.png", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "MetaLoop", body: "Ideate. Immerse. Innovate. A 36-hour metaverse-themed hackathon with ₹75,000 in prizes and Deeploop as technology partner.", posterFit: "contain" },
       { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0094.JPG", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "", body: "" },
       { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0102.JPG", grad: "linear-gradient(160deg,#0a0505 0%,#260f0f 50%,#871618 100%)", heading: "AR/VR Track", body: "Build immersive augmented and virtual reality experiences. Teams push the boundaries of spatial computing in 36 hours." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0168.JPG", grad: "linear-gradient(130deg,#0d0707 0%,#301414 50%,#a61e1e 100%)", heading: "Blockchain Track", body: "Smart contracts, NFTs, and decentralized apps. Teams explore the infrastructure layer of the open metaverse." },

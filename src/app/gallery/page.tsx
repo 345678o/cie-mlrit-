@@ -13,14 +13,14 @@ import { ArrowRight, Camera } from "lucide-react";
 const GRAIN = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 
 const H_SLIDES = [
-  { label: "Workshop Carnival 2.0",   year: "APR 2026", cat: "Workshop",    n: "042", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", img: "/events/poster/wc%202.0.png",      eventIdx: "01" },
-  { label: "Equinox E-Summit 2K24",   year: "NOV 2024", cat: "E-Summit",    n: "087", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", img: "/events/poster/equniox.png",       eventIdx: "04" },
-  { label: "GI Mahotsav 2024",         year: "MAR 2024", cat: "Cultural",    n: "031", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", img: "/events/poster/gi.png",            eventIdx: "06" },
-  { label: "MetaLoop Hackathon",        year: "OCT 2023", cat: "Hackathon",  n: "118", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", img: "/events/poster/metaloop.png",      eventIdx: "07" },
-  { label: "B2B — Business to Brand",  year: "APR 2025", cat: "Innovation", n: "063", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", img: "/events/poster/B2B.png",           eventIdx: "02" },
-  { label: "Hustle Mania",              year: "APR 2023", cat: "Challenge",  n: "055", grad: "linear-gradient(145deg,#0d0803 0%,#3b1a06 55%,#c2410c 100%)", img: "/events/poster/hustle%20mania.png", eventIdx: "03" },
-  { label: "Workshop Carnival",         year: "MAR 2024", cat: "Workshop",   n: "092", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", img: "/events/poster/wc.png",            eventIdx: "05" },
-  { label: "Campus Moments",            year: "2024",     cat: "Archive",    n: "076", grad: "linear-gradient(145deg,#080808 0%,#1c1c1c 55%,#374151 100%)" },
+  { label: "Workshop Carnival 2.0",   year: "APR 2026", cat: "Workshop",    n: "042", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", eventIdx: "01", video: "/reels/WC%202.0.mp4",        poster: "/events/poster/wc%202.0.png" },
+  { label: "Equinox E-Summit 2K24",   year: "NOV 2024", cat: "E-Summit",    n: "087", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", eventIdx: "04", video: "/reels/EQUNIOX.mp4",          poster: "/events/poster/equniox.png" },
+  { label: "GI Mahotsav 2024",        year: "MAR 2024", cat: "Cultural",    n: "031", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", eventIdx: "06", video: "/reels/GI.mp4",               poster: "/events/poster/gi.png" },
+  { label: "MetaLoop Hackathon",       year: "OCT 2023", cat: "Hackathon",  n: "118", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", eventIdx: "07", video: "/reels/METaloop.mp4",         poster: "/events/poster/metaloop.png" },
+  { label: "B2B — Business to Brand", year: "APR 2025", cat: "Innovation",  n: "063", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", eventIdx: "02", video: "/reels/B2B.mp4",              poster: "/events/poster/B2B.png" },
+  { label: "Hustle Mania",             year: "APR 2023", cat: "Challenge",  n: "055", grad: "linear-gradient(145deg,#0d0803 0%,#3b1a06 55%,#c2410c 100%)", eventIdx: "03", video: "/reels/HUSTLE%20MANIA.mp4",  poster: "/events/poster/hustle%20mania.png" },
+  { label: "Workshop Carnival",        year: "MAR 2024", cat: "Workshop",   n: "092", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", eventIdx: "05", video: "/reels/WC.mp4",               poster: "/events/poster/wc.png" },
+  { label: "Campus Moments",           year: "2024",     cat: "Archive",    n: "076", grad: "linear-gradient(145deg,#080808 0%,#1c1c1c 55%,#374151 100%)", video: "/reels/cie.mp4", poster: "/image 1983.png" },
 ];
 
 const FEATURES = [
@@ -238,7 +238,10 @@ export default function GalleryPage() {
 
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -483,20 +486,21 @@ export default function GalleryPage() {
               Explore<br />the moments
             </h3>
             <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", lineHeight: 1.65, color: "rgba(255,255,255,0.3)" }}>
-              {H_SLIDES.length} collections · Scroll horizontally to navigate
+              {H_SLIDES.length} collections · 7 reels · Scroll to explore
             </p>
           </div>
 
-          {/* Image slides */}
+          {/* Image slides + paired reels */}
           {H_SLIDES.map((slide, i) => (
+            <div key={i} style={{ display: "contents" }}>
             <Link
-              key={i}
               href={slide.eventIdx ? `/events#event-${slide.eventIdx}` : "#"}
               className="h-slide"
               style={{
                 flexShrink: 0,
-                width: "clamp(220px, 24vw, 360px)",
-                height: "clamp(300px, 56vh, 500px)",
+                width: "clamp(360px, 42vw, 600px)",
+                height: "auto",
+                aspectRatio: "9/16",
                 borderRadius: "10px",
                 overflow: "hidden",
                 position: "relative",
@@ -505,8 +509,17 @@ export default function GalleryPage() {
                 textDecoration: "none",
                 cursor: slide.eventIdx ? "pointer" : "default",
               }}
+              onMouseEnter={(e) => {
+                document.querySelectorAll<HTMLVideoElement>(".slide-video").forEach(v => { v.muted = true; });
+                const v = (e.currentTarget as HTMLElement).querySelector<HTMLVideoElement>(".slide-video");
+                if (v) v.muted = false;
+              }}
+              onMouseLeave={(e) => {
+                const v = (e.currentTarget as HTMLElement).querySelector<HTMLVideoElement>(".slide-video");
+                if (v) v.muted = true;
+              }}
             >
-              {/* Photo */}
+              {/* Gradient bg */}
               <div
                 className="h-slide-img"
                 style={{
@@ -516,9 +529,39 @@ export default function GalleryPage() {
                   willChange: "transform",
                 }}
               >
-                {slide.img && <Image src={slide.img} alt={slide.label} fill sizes="clamp(220px, 24vw, 360px)" style={{ objectFit: "cover" }} />}
                 <div style={{ position: "absolute", inset: 0, backgroundImage: GRAIN, opacity: 0.09 }} />
               </div>
+
+              {/* Poster cover — always visible when video hidden */}
+              {slide.poster && (
+                <img
+                  src={slide.poster}
+                  alt=""
+                  aria-hidden
+                  style={{
+                    position: "absolute", inset: 0, width: "100%", height: "100%",
+                    objectFit: "contain", background: "#000", zIndex: 1,
+                  }}
+                />
+              )}
+
+              {/* Video — autoplays muted, unmutes on hover */}
+              {slide.video && (
+                <video
+                  src={slide.video}
+                  muted
+                  autoPlay
+                  loop
+                  playsInline
+                  preload="auto"
+                  className="slide-video"
+                  style={{
+                    position: "absolute", inset: 0, width: "100%", height: "100%",
+                    objectFit: "contain", background: "#000", zIndex: 2,
+                    opacity: 0, transition: "opacity 0.35s ease",
+                  }}
+                />
+              )}
 
               {/* Caption */}
               <div style={{
@@ -547,6 +590,8 @@ export default function GalleryPage() {
                 {String(i + 1).padStart(2, "0")}
               </div>
             </Link>
+
+            </div>
           ))}
 
           {/* End spacer */}
@@ -882,6 +927,9 @@ export default function GalleryPage() {
       </section>
 
       <style>{`
+        /* ── Video hover reveal ───────────────────────────────── */
+        .h-slide:hover .slide-video { opacity: 1 !important; }
+
         /* ── Mobile: h-scroll section ─────────────────────────── */
         @media (max-width: 767px) {
           .h-scroll-section { height: auto !important; overflow: visible !important; }
