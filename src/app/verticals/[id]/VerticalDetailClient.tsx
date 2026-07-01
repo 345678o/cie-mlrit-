@@ -179,7 +179,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
                     loop
                     playsInline
                     preload="auto"
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                    style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
                   />
                 </div>
               </div>
