@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Calendar } from "lucide-react";
@@ -14,6 +15,7 @@ type SlideData = {
   grad: string;
   heading: string;
   body: string;
+  posterFit?: "cover" | "contain";
 };
 
 type EventData = {
@@ -38,6 +40,7 @@ const FEATURED: EventData[] = [
     bg: "#07090f",
     slides: [
       { img: "/events/poster/wc%202.0.png", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "Workshop Carnival 2.0", body: "Where learning goes beyond classrooms — into real skills, real challenges, and real innovation. Explore multiple domains in one immersive sprint." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/DSCF1090.JPG", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "", body: "" },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/DSCF1109.JPG", grad: "linear-gradient(160deg,#040a18 0%,#0a1836 50%,#1a3380 100%)", heading: "Expert-Led Tracks", body: "Learn directly from practitioners. Each workshop track delivers hands-on expertise in UI/UX, IoT, content creation, and product design." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM.jpeg", grad: "linear-gradient(130deg,#050c22 0%,#0f2650 50%,#1e40af 100%)", heading: "Build, Don't Browse", body: "Every session ends with something tangible. Teams prototype, test, and iterate — no passive learning, no slides-only talks." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM%20(1).jpeg", grad: "linear-gradient(150deg,#060d20 0%,#0d1f40 50%,#2563eb 100%)", heading: "Cross-Domain Collide", body: "Designers collaborate with developers. Strategists work alongside engineers. That friction is where the best ideas are born." },
@@ -50,33 +53,22 @@ const FEATURED: EventData[] = [
     catColor: "#DC2626", catBg: "rgba(220,38,38,0.12)",
     date: "Apr 3–4, 2025", dateTime: "2025-04-03",
     tags: ["Brand Revival", "Logo Design", "Ad-Film Making", "Masterclasses"],
-    bg: "#070a05",
+    bg: "#080808",
     slides: [
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4604.JPG", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", heading: "Business to Brand", body: "A Brand Revival Hackathon — teams of 3–5 develop full strategies to transform brands through design and storytelling." },
+      { img: "/events/poster/B2B.png", grad: "linear-gradient(145deg,#e8b000 0%,#f5c200 55%,#ffd040 100%)", heading: "Business to Brand", body: "A Brand Revival Hackathon — teams of 3–5 develop full strategies to transform brands through design and storytelling.", posterFit: "contain" },
       { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4700.JPG", grad: "linear-gradient(160deg,#060a04 0%,#14200a 50%,#3d6b0c 100%)", heading: "Visual Identity", body: "Concept sketches evolve into full brand systems — logos, palettes, and typographic language — all under a 48-hour deadline." },
       { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4866.JPG", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "The Ad-Film Track", body: "Script it. Shoot it. Edit it. Teams produce a complete ad film for their chosen brand — entirely within the hackathon window." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4945.JPG", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "Industry Masterclass", body: "Before the challenge begins, top brand strategists and creative directors share what actually works in the real market." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4948.JPG", grad: "linear-gradient(140deg,#0a0e06 0%,#1e2e0d 50%,#527f12 100%)", heading: "Pitch Day", body: "Final brand presentations evaluated live by a panel of industry jurors. High pressure, high stakes, high impact." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF5096.JPG", grad: "linear-gradient(155deg,#070a05 0%,#1b2a0b 50%,#4e7c10 100%)", heading: "Winners' Circle", body: "The best brand revivals are showcased and celebrated — recognition that extends well beyond the campus." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20Copy%20of%20IMG_8827.JPG", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20DSCF4675.JPG", grad: "linear-gradient(160deg,#060a04 0%,#14200a 50%,#3d6b0c 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20DSCF4728.JPG", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20DSCF4790.JPG", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20DSCF4896.JPG", grad: "linear-gradient(140deg,#0a0e06 0%,#1e2e0d 50%,#527f12 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20DSCF4943.JPG", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20DSCF4959.JPG", grad: "linear-gradient(160deg,#060a04 0%,#14200a 50%,#3d6b0c 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20DSCF4983.JPG", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20DSCF5172.JPG", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20DSCF5178.JPG", grad: "linear-gradient(140deg,#0a0e06 0%,#1e2e0d 50%,#527f12 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20DSCF5189.JPG", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20DSCF8716.JPG", grad: "linear-gradient(160deg,#060a04 0%,#14200a 50%,#3d6b0c 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20DSCF8719.JPG", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20IMG_8078.JPG", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20IMG_8222.JPG", grad: "linear-gradient(140deg,#0a0e06 0%,#1e2e0d 50%,#527f12 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20IMG_8227.JPG", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/Copy%20of%20IMG_8724.JPG", grad: "linear-gradient(160deg,#060a04 0%,#14200a 50%,#3d6b0c 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8036.JPG", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8229.JPG", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8229.JPG", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "Pitch Day", body: "Final brand presentations evaluated live by a panel of industry jurors. High pressure, high stakes, high impact." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4728.JPG", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4790.JPG", grad: "linear-gradient(160deg,#060a04 0%,#14200a 50%,#3d6b0c 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4943.JPG", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4959.JPG", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF5172.JPG", grad: "linear-gradient(140deg,#0a0e06 0%,#1e2e0d 50%,#527f12 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF5178.JPG", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF5189.JPG", grad: "linear-gradient(160deg,#060a04 0%,#14200a 50%,#3d6b0c 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF8719.JPG", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8078.JPG", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8827.JPG", grad: "linear-gradient(140deg,#0a0e06 0%,#1e2e0d 50%,#527f12 100%)", heading: "", body: "" },
     ],
   },
   {
@@ -106,22 +98,16 @@ const FEATURED: EventData[] = [
       { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7628.JPG", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "Investor Connect", body: "Structured one-on-one sessions between student entrepreneurs and angel investors — real conversations, real opportunities." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7638.JPG", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "Speaker Series", body: "Industry veterans share unfiltered lessons from building companies. No scripts, no PR spin — just the truth about entrepreneurship." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7731.JPG", grad: "linear-gradient(140deg,#0c0515 0%,#221040 50%,#5a1ebc 100%)", heading: "Innovation Showcase", body: "Stalls, demos, and live prototypes from the most innovative student projects across engineering, design, and business." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7753.JPG", grad: "linear-gradient(155deg,#0e0618 0%,#2b0f55 50%,#6e28da 100%)", heading: "Awards Night", body: "The summit closes with recognition across categories — best pitch, best innovation, most scalable venture, and more." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSC_7594.JPG", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSC_7597.JPG", grad: "linear-gradient(160deg,#0b0516 0%,#250d48 50%,#5e22c4 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSC_7867.JPG", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSC_8073.JPG", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSC00532.JPG", grad: "linear-gradient(140deg,#0c0515 0%,#221040 50%,#5a1ebc 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSC00563.JPG", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSC00570.JPG", grad: "linear-gradient(160deg,#0b0516 0%,#250d48 50%,#5e22c4 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSC00571.JPG", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSC00582.JPG", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSCF2944.JPG", grad: "linear-gradient(140deg,#0c0515 0%,#221040 50%,#5a1ebc 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSCF2981.JPG", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSCF3009.JPG", grad: "linear-gradient(160deg,#0b0516 0%,#250d48 50%,#5e22c4 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSCF3042.JPG", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSCF3045.JPG", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/Copy%20of%20DSCF3100.JPG", grad: "linear-gradient(140deg,#0c0515 0%,#221040 50%,#5a1ebc 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7592.JPG", grad: "linear-gradient(155deg,#0e0618 0%,#2b0f55 50%,#6e28da 100%)", heading: "Awards Night", body: "The summit closes with recognition across categories — best pitch, best innovation, most scalable venture, and more." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7594.JPG", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7597.JPG", grad: "linear-gradient(160deg,#0b0516 0%,#250d48 50%,#5e22c4 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7867.JPG", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_8073.JPG", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC00532.JPG", grad: "linear-gradient(140deg,#0c0515 0%,#221040 50%,#5a1ebc 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC00571.JPG", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSCF2981.JPG", grad: "linear-gradient(160deg,#0b0516 0%,#250d48 50%,#5e22c4 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSCF3009.JPG", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSCF3042.JPG", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "", body: "" },
     ],
   },
   {
@@ -132,6 +118,7 @@ const FEATURED: EventData[] = [
     bg: "#060810",
     slides: [
       { img: "/events/poster/wc.png", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "Workshop Carnival", body: "Six days of hands-on exploration. Participants tackled UI/UX design, IoT, and WordPress through structured challenges and expert guidance." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/WC/DSCF0788.JPG", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "", body: "" },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC/IMG-20250920-WA0010.jpg", grad: "linear-gradient(160deg,#040a18 0%,#0a1930 50%,#1a45c8 100%)", heading: "UI/UX Track", body: "Design thinking meets real products. Teams redesign existing apps and pitch their improvements to practicing UX designers." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC/IMG-20250920-WA0050.jpg", grad: "linear-gradient(130deg,#060c20 0%,#0e2040 50%,#2155d8 100%)", heading: "IoT Lab", body: "Sensors, circuits, and code. Participants build working IoT prototypes from scratch with expert guidance on hardware and firmware." },
       { grad: "linear-gradient(150deg,#050a1a 0%,#0c1d38 50%,#1c4ad0 100%)", heading: "WordPress Build", body: "From blank canvas to live website. Participants design, develop, and deploy a fully functional site — in a single session." },
@@ -147,14 +134,16 @@ const FEATURED: EventData[] = [
     bg: "#060b08",
     slides: [
       { img: "/events/poster/gi.png", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", heading: "GI Mahotsav 2024", body: "Geographical Indications Products Mela — a unique journey through India's rich cultural heritage and its most protected regional crafts." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/Copy%20of%20DSC00424.JPG", grad: "linear-gradient(160deg,#040c07 0%,#104428 50%,#128c40 100%)", heading: "Heritage in Focus", body: "Over 50 GI-tagged products on display — from Banarasi silk to Darjeeling tea. Each tells a story of place, craft, and community." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/Copy%20of%20DSC00427.JPG", grad: "linear-gradient(130deg,#060e0b 0%,#155830 50%,#18b050 100%)", heading: "Artisan Stories", body: "Meet the makers behind the products. Live demonstrations of traditional crafts that have been perfected over generations." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/Copy%20of%20DSC00552.JPG", grad: "linear-gradient(150deg,#050d08 0%,#124c2a 50%,#14943e 100%)", heading: "Policy & Protection", body: "Panel discussions on how GI tags protect India's cultural exports and what more needs to be done for artisan welfare." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/Copy%20of%20DSC00782.JPG", grad: "linear-gradient(140deg,#070f0a 0%,#165a32 50%,#1aae4a 100%)", heading: "MSME Connect", body: "Direct linkages between GI-certified producers and buyers, distributors, and e-commerce platforms — bridging craft and commerce." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/Copy%20of%20DSC00786.JPG", grad: "linear-gradient(155deg,#060d09 0%,#145030 50%,#16a048 100%)", heading: "Cultural Economy", body: "Workshops on building sustainable businesses around traditional crafts, with frameworks from IPFC and MSME specialists." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/Copy%20of%20DSC00856.JPG", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/Copy%20of%20DSC00861.JPG", grad: "linear-gradient(160deg,#040c07 0%,#104428 50%,#128c40 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/Copy%20of%20DSC09898.JPG", grad: "linear-gradient(130deg,#060e0b 0%,#155830 50%,#18b050 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00055.JPG", grad: "linear-gradient(150deg,#050d08 0%,#124c2a 50%,#14943e 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00056.jpg", grad: "linear-gradient(140deg,#070f0a 0%,#165a32 50%,#1aae4a 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00424.JPG", grad: "linear-gradient(160deg,#040c07 0%,#104428 50%,#128c40 100%)", heading: "Heritage in Focus", body: "Over 50 GI-tagged products on display — from Banarasi silk to Darjeeling tea. Each tells a story of place, craft, and community." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00427.JPG", grad: "linear-gradient(130deg,#060e0b 0%,#155830 50%,#18b050 100%)", heading: "Artisan Stories", body: "Meet the makers behind the products. Live demonstrations of traditional crafts that have been perfected over generations." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00552.JPG", grad: "linear-gradient(150deg,#050d08 0%,#124c2a 50%,#14943e 100%)", heading: "Policy & Protection", body: "Panel discussions on how GI tags protect India's cultural exports and what more needs to be done for artisan welfare." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00782.JPG", grad: "linear-gradient(140deg,#070f0a 0%,#165a32 50%,#1aae4a 100%)", heading: "MSME Connect", body: "Direct linkages between GI-certified producers and buyers, distributors, and e-commerce platforms — bridging craft and commerce." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00786.JPG", grad: "linear-gradient(155deg,#060d09 0%,#145030 50%,#16a048 100%)", heading: "Cultural Economy", body: "Workshops on building sustainable businesses around traditional crafts, with frameworks from IPFC and MSME specialists." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00856.JPG", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00861.JPG", grad: "linear-gradient(160deg,#040c07 0%,#104428 50%,#128c40 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC09898.JPG", grad: "linear-gradient(130deg,#060e0b 0%,#155830 50%,#18b050 100%)", heading: "", body: "" },
     ],
   },
   {
@@ -165,6 +154,7 @@ const FEATURED: EventData[] = [
     bg: "#0b0606",
     slides: [
       { img: "/events/poster/metaloop.png", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "MetaLoop", body: "Ideate. Immerse. Innovate. A 36-hour metaverse-themed hackathon with ₹75,000 in prizes and Deeploop as technology partner." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0094.JPG", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "", body: "" },
       { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0102.JPG", grad: "linear-gradient(160deg,#0a0505 0%,#260f0f 50%,#871618 100%)", heading: "AR/VR Track", body: "Build immersive augmented and virtual reality experiences. Teams push the boundaries of spatial computing in 36 hours." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0168.JPG", grad: "linear-gradient(130deg,#0d0707 0%,#301414 50%,#a61e1e 100%)", heading: "Blockchain Track", body: "Smart contracts, NFTs, and decentralized apps. Teams explore the infrastructure layer of the open metaverse." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0378.JPG", grad: "linear-gradient(150deg,#0b0606 0%,#2a1010 50%,#901818 100%)", heading: "Virtual Worlds", body: "Design and build navigable 3D environments — social spaces, games, and interactive experiences for the next internet." },
@@ -279,23 +269,29 @@ function EventFilmStrip({ ev }: { ev: EventData }) {
                   width: "clamp(160px, 32vh, 380px)",
                   flexShrink: 0, overflow: "hidden",
                   cursor: "zoom-in", background: "#111", position: "relative",
-                }}
-              >
-                <img src={src} alt="" loading={i < 6 ? "eager" : "lazy"} style={{
-                  width: "100%", height: "100%", objectFit: "cover", display: "block",
-                  transition: "transform 0.45s cubic-bezier(0.25,0,0,1), filter 0.45s ease",
+                  transition: "filter 0.45s ease",
                   filter: "brightness(0.88) saturate(0.95)",
                 }}
                 onMouseEnter={e => {
-                  const el = e.currentTarget as HTMLImageElement;
-                  el.style.transform = "scale(1.06)";
+                  const el = e.currentTarget as HTMLDivElement;
                   el.style.filter = "brightness(1.04) saturate(1.08)";
+                  const img = el.querySelector("img");
+                  if (img) img.style.transform = "scale(1.06)";
                 }}
                 onMouseLeave={e => {
-                  const el = e.currentTarget as HTMLImageElement;
-                  el.style.transform = "scale(1)";
+                  const el = e.currentTarget as HTMLDivElement;
                   el.style.filter = "brightness(0.88) saturate(0.95)";
-                }} />
+                  const img = el.querySelector("img");
+                  if (img) img.style.transform = "scale(1)";
+                }}
+              >
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  sizes="clamp(160px, 32vh, 380px)"
+                  style={{ objectFit: "cover", transition: "transform 0.45s cubic-bezier(0.25,0,0,1)" }}
+                />
                 <span style={{
                   position: "absolute", bottom: "6px", right: "8px",
                   fontFamily: "var(--font-body)", fontSize: "8px",
@@ -425,13 +421,16 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
   };
 
   return (
+    <>
     <div
+      id={`event-${ev.idx}`}
       ref={sectionRef}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
       onMouseEnter={() => { pausedRef.current = true; }}
       onMouseLeave={() => { pausedRef.current = false; }}
-      style={{
+      className="ev-section"
+    style={{
         display: "flex",
         flexDirection: flipped ? "row-reverse" : "row",
         height: "clamp(560px, 85vh, 1000px)",
@@ -440,8 +439,8 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
       }}
     >
       {/* ══ Left — poster column ══ */}
-      <div style={{
-        width: "clamp(360px, 42%, 760px)",
+      <div className="ev-poster" style={{
+        aspectRatio: "1080 / 1350",
         flexShrink: 0,
         position: "relative",
         overflow: "hidden",
@@ -449,15 +448,13 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
         display: "flex", alignItems: "center", justifyContent: "center",
       }}>
         {slides[0]?.img && (
-          <img
+          <Image
             src={slides[0].img}
             alt={slides[0].heading}
-            loading="eager"
-            style={{
-              position: "absolute", inset: 0,
-              width: "100%", height: "100%",
-              objectFit: "cover",
-            }}
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, 42vw"
+            style={{ objectFit: slides[0].posterFit ?? "cover" }}
           />
         )}
         <div style={{
@@ -479,7 +476,7 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
       </div>
 
       {/* ══ Right — text panels ══ */}
-      <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+      <div className="ev-text" style={{ flex: 1, position: "relative", overflow: "hidden" }}>
 
         {slides.map((slide, i) => (
           <div
@@ -487,8 +484,9 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
             ref={el => { panelRefs.current[i] = el; }}
             style={{
               position: "absolute", inset: 0,
-              display: "flex", flexDirection: "column", justifyContent: "flex-start",
-              padding: "clamp(32px, 4vw, 60px) clamp(24px, 4vw, 64px)",
+              display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: flipped ? "flex-start" : "flex-end",
+              padding: "clamp(32px, 4vw, 56px) clamp(24px, 4vw, 64px)",
+              textAlign: flipped ? "left" : "right",
               visibility: i === 0 ? "visible" : "hidden",
               zIndex: i === 0 ? 2 : 1,
             }}
@@ -523,7 +521,7 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
 
             {/* ② category badge */}
             <span data-s style={{
-              display: "inline-flex", alignSelf: "flex-start",
+              display: "inline-flex", alignSelf: flipped ? "flex-start" : "flex-end",
               fontFamily: "var(--font-body)", fontSize: "9.5px", fontWeight: 700,
               letterSpacing: "0.10em", textTransform: "uppercase",
               padding: "4px 12px", borderRadius: "999px",
@@ -544,7 +542,7 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
             </h2>
 
             {/* ④ date */}
-            <div data-s style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
+            <div data-s style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px", justifyContent: flipped ? "flex-start" : "flex-end" }}>
               <Calendar size={11} style={{ color: "rgba(255,255,255,0.28)", flexShrink: 0 }} />
               <time dateTime={ev.dateTime} style={{
                 fontFamily: "var(--font-body)", fontSize: "12px",
@@ -559,13 +557,13 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
               fontFamily: "var(--font-body)",
               fontSize: "clamp(12.5px, 1.25vw, 15px)",
               lineHeight: 1.84, color: "rgba(255,255,255,0.40)",
-              marginBottom: "22px", maxWidth: "420px",
+              marginBottom: "22px", maxWidth: "420px", alignSelf: flipped ? "flex-start" : "flex-end",
             }}>
               {slide.body}
             </p>
 
             {/* ⑥ tags */}
-            <div data-s style={{ display: "flex", flexWrap: "wrap", gap: "7px" }}>
+            <div data-s style={{ display: "flex", flexWrap: "wrap", gap: "7px", justifyContent: flipped ? "flex-start" : "flex-end" }}>
               {ev.tags.map(t => (
                 <span key={t} style={{
                   fontFamily: "var(--font-body)", fontSize: "9.5px",
@@ -582,42 +580,22 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
           </div>
         ))}
 
-        {/* ── Dots + counter ── */}
-        <div style={{
-          position: "absolute", bottom: 0, left: 0, right: 0,
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          padding: "0 clamp(24px, 4vw, 64px) 28px",
-          pointerEvents: "none",
-        }}>
-          <div style={{ display: "flex", gap: "5px", alignItems: "center", pointerEvents: "all" }}>
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => go(i)}
-                aria-label={`Slide ${i + 1}`}
-                style={{
-                  width: i === current ? "22px" : "6px",
-                  height: "6px", borderRadius: "3px",
-                  border: "none", cursor: "pointer", padding: 0,
-                  background: i === current
-                    ? "rgba(255,255,255,0.80)"
-                    : "rgba(255,255,255,0.18)",
-                  transition: "all 0.35s cubic-bezier(0.32,0,0.24,1)",
-                }}
-              />
-            ))}
-          </div>
-          <span style={{
-            fontFamily: "var(--font-body)", fontSize: "10px",
-            fontWeight: 700, letterSpacing: "0.10em",
-            color: "rgba(255,255,255,0.24)",
-          }}>
-            {String(current + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
-          </span>
-        </div>
 
       </div>
     </div>
+    <style>{`
+      @media (max-width: 639px) {
+        .ev-section { flex-direction: column !important; height: auto !important; }
+        .ev-poster { order: 2; aspect-ratio: 4/5 !important; width: 100% !important; height: auto !important; flex-shrink: unset !important; }
+        .ev-text { order: 1; min-height: 480px; }
+        .ev-text > div { text-align: left !important; align-items: flex-start !important; justify-content: flex-start !important; padding: clamp(20px,5vw,32px) !important; }
+        .ev-text > div > span,
+        .ev-text > div > h2,
+        .ev-text > div > p { align-self: flex-start !important; text-align: left !important; }
+        .ev-text > div > div { text-align: left !important; align-items: flex-start !important; justify-content: flex-start !important; }
+      }
+    `}</style>
+    </>
   );
 }
 
@@ -783,7 +761,7 @@ export default function EventsPage() {
 
       {/* ══ EVENT SECTIONS + PER-EVENT FILM STRIPS ══ */}
       {FEATURED.flatMap((ev, i) => [
-        <div key={`label-${i}`} style={{
+        <div key={`label-${i}`} className="ev-label" style={{
           background: "#0D0D0D",
           borderTop: "1px solid rgba(255,255,255,0.06)",
           borderBottom: "1px solid rgba(255,255,255,0.06)",
@@ -796,7 +774,7 @@ export default function EventsPage() {
             <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(16px,2.2vw,32px)", letterSpacing: "-0.03em", lineHeight: 1, color: "#fff", margin: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{ev.slides[0].heading}</h3>
             <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", padding: "3px 10px", borderRadius: "999px", background: ev.catBg, color: ev.catColor, flexShrink: 0 }}>{ev.category}</span>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
+          <div className="ev-label-right" style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
             <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.18)" }}>Gallery</span>
             <span style={{ color: "rgba(255,255,255,0.10)" }}>·</span>
             <span style={{ fontFamily: "var(--font-body)", fontSize: "11px", color: "rgba(255,255,255,0.28)", letterSpacing: "0.04em" }}>{ev.date}</span>

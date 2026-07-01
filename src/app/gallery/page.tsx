@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,13 +13,13 @@ import { ArrowRight, Camera } from "lucide-react";
 const GRAIN = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 
 const H_SLIDES = [
-  { label: "Workshop Carnival 2.0",   year: "APR 2026", cat: "Workshop",    n: "042", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)" },
-  { label: "Equinox E-Summit 2K24",   year: "NOV 2024", cat: "E-Summit",    n: "087", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)" },
-  { label: "GI Mahotsav 2024",         year: "MAR 2024", cat: "Cultural",    n: "031", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)" },
-  { label: "MetaLoop Hackathon",        year: "OCT 2023", cat: "Hackathon",  n: "118", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)" },
-  { label: "B2B — Business to Brand",  year: "APR 2025", cat: "Innovation", n: "063", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)" },
-  { label: "Innovation Lab",            year: "Ongoing",  cat: "Facility",   n: "155", grad: "linear-gradient(145deg,#06090e 0%,#0c1f3d 55%,#0369a1 100%)" },
-  { label: "Maker Space",               year: "Ongoing",  cat: "Facility",   n: "092", grad: "linear-gradient(145deg,#0e0606 0%,#3d0c0c 55%,#b91c1c 100%)" },
+  { label: "Workshop Carnival 2.0",   year: "APR 2026", cat: "Workshop",    n: "042", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", img: "/events/poster/wc%202.0.png",      eventIdx: "01" },
+  { label: "Equinox E-Summit 2K24",   year: "NOV 2024", cat: "E-Summit",    n: "087", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", img: "/events/poster/equniox.png",       eventIdx: "04" },
+  { label: "GI Mahotsav 2024",         year: "MAR 2024", cat: "Cultural",    n: "031", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", img: "/events/poster/gi.png",            eventIdx: "06" },
+  { label: "MetaLoop Hackathon",        year: "OCT 2023", cat: "Hackathon",  n: "118", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", img: "/events/poster/metaloop.png",      eventIdx: "07" },
+  { label: "B2B — Business to Brand",  year: "APR 2025", cat: "Innovation", n: "063", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", img: "/events/poster/B2B.png",           eventIdx: "02" },
+  { label: "Hustle Mania",              year: "APR 2023", cat: "Challenge",  n: "055", grad: "linear-gradient(145deg,#0d0803 0%,#3b1a06 55%,#c2410c 100%)", img: "/events/poster/hustle%20mania.png", eventIdx: "03" },
+  { label: "Workshop Carnival",         year: "MAR 2024", cat: "Workshop",   n: "092", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", img: "/events/poster/wc.png",            eventIdx: "05" },
   { label: "Campus Moments",            year: "2024",     cat: "Archive",    n: "076", grad: "linear-gradient(145deg,#080808 0%,#1c1c1c 55%,#374151 100%)" },
 ];
 
@@ -50,14 +51,14 @@ const FEATURES = [
 ];
 
 const GRID = [
-  { label: "Pitch Day",         grad: "linear-gradient(145deg,#0f172a,#1e3a5f,#0284c7)", cs: 2, rs: 2 },
-  { label: "Workshop",          grad: "linear-gradient(145deg,#0a0a0a,#374151)",           cs: 1, rs: 1 },
-  { label: "Hackathon Night",   grad: "linear-gradient(145deg,#1c1917,#2d1b69,#7c3aed)",  cs: 1, rs: 1 },
-  { label: "Innovation Lab",    grad: "linear-gradient(145deg,#0f0a1e,#2d1570,#4c1d95)",  cs: 1, rs: 2 },
-  { label: "Maker Space",       grad: "linear-gradient(145deg,#0a1e0a,#14532d,#16a34a)",  cs: 1, rs: 1 },
-  { label: "E-Summit 2024",     grad: "linear-gradient(145deg,#1c0a0a,#7f1d1d,#991b1b)",  cs: 2, rs: 1 },
-  { label: "Student Startups",  grad: "linear-gradient(145deg,#1c1c0a,#4d7c0f,#84cc16)", cs: 1, rs: 1 },
-  { label: "Campus",            grad: "linear-gradient(145deg,#0a0a0a,#111827,#1f2937)",  cs: 1, rs: 1 },
+  { label: "Equinox E-Summit",  img: "/events/poster/equniox.png",     grad: "linear-gradient(145deg,#0e0618,#2d1057,#6d28d9)", cs: 2, rs: 2 },
+  { label: "Workshop Carnival", img: "/events/poster/wc%202.0.png",    grad: "linear-gradient(145deg,#060c1e,#0d1f3c,#1d4ed8)", cs: 1, rs: 1 },
+  { label: "MetaLoop Hackathon",img: "/events/poster/metaloop.png",    grad: "linear-gradient(145deg,#1c1917,#2d1b69,#7c3aed)", cs: 1, rs: 1 },
+  { label: "Innovation Lab",    grad: "linear-gradient(145deg,#0f0a1e,#2d1570,#4c1d95)",                                       cs: 1, rs: 2 },
+  { label: "GI Mahotsav",       img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00424.JPG", grad: "linear-gradient(145deg,#060e0a,#14532d,#16a34a)", cs: 1, rs: 1 },
+  { label: "B2B Summit",        img: "/events/poster/B2B.png",         grad: "linear-gradient(145deg,#080c06,#1c2a0d,#4d7c0f)", cs: 2, rs: 1 },
+  { label: "Hustle Mania",      img: "/events/poster/hustle%20mania.png", grad: "linear-gradient(145deg,#0d0803,#3b1a06,#c2410c)", cs: 1, rs: 1 },
+  { label: "GI Heritage",       img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00552.JPG", grad: "linear-gradient(145deg,#060e0a,#14532d,#16a34a)", cs: 1, rs: 1 },
 ];
 
 const STATS = [
@@ -438,6 +439,7 @@ export default function GalleryPage() {
       ══════════════════════════════════════════════════════ */}
       <section
         ref={hScrollRef}
+        className="h-scroll-section"
         style={{
           position: "relative",
           overflow: "hidden",
@@ -481,14 +483,15 @@ export default function GalleryPage() {
               Explore<br />the moments
             </h3>
             <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", lineHeight: 1.65, color: "rgba(255,255,255,0.3)" }}>
-              {H_SLIDES.length} collections · Scroll to navigate
+              {H_SLIDES.length} collections · Scroll horizontally to navigate
             </p>
           </div>
 
           {/* Image slides */}
           {H_SLIDES.map((slide, i) => (
-            <div
+            <Link
               key={i}
+              href={slide.eventIdx ? `/events#event-${slide.eventIdx}` : "#"}
               className="h-slide"
               style={{
                 flexShrink: 0,
@@ -498,9 +501,12 @@ export default function GalleryPage() {
                 overflow: "hidden",
                 position: "relative",
                 willChange: "transform, opacity",
+                display: "block",
+                textDecoration: "none",
+                cursor: slide.eventIdx ? "pointer" : "default",
               }}
             >
-              {/* Photo placeholder */}
+              {/* Photo */}
               <div
                 className="h-slide-img"
                 style={{
@@ -510,6 +516,7 @@ export default function GalleryPage() {
                   willChange: "transform",
                 }}
               >
+                {slide.img && <Image src={slide.img} alt={slide.label} fill sizes="clamp(220px, 24vw, 360px)" style={{ objectFit: "cover" }} />}
                 <div style={{ position: "absolute", inset: 0, backgroundImage: GRAIN, opacity: 0.09 }} />
               </div>
 
@@ -539,7 +546,7 @@ export default function GalleryPage() {
               <div style={{ position: "absolute", top: "14px", right: "14px", fontFamily: "var(--font-body)", fontSize: "9.5px", fontWeight: 600, color: "rgba(255,255,255,0.18)", letterSpacing: "0.1em" }}>
                 {String(i + 1).padStart(2, "0")}
               </div>
-            </div>
+            </Link>
           ))}
 
           {/* End spacer */}
@@ -547,7 +554,7 @@ export default function GalleryPage() {
         </div>
 
         {/* Scroll hint */}
-        <div style={{ position: "absolute", bottom: "20px", left: "50%", transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: "6px" }}>
+        <div className="h-scroll-dots" style={{ position: "absolute", bottom: "20px", left: "50%", transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: "6px" }}>
           {H_SLIDES.map((_, i) => (
             <div key={i} style={{ width: i === 0 ? "18px" : "4px", height: "1.5px", borderRadius: "2px", background: i === 0 ? "#E8521A" : "rgba(255,255,255,0.16)", transition: "all 0.3s" }} />
           ))}
@@ -567,9 +574,10 @@ export default function GalleryPage() {
       {FEATURES.map((f, i) => (
         <section
           key={i}
+          className="feat-panel"
           style={{
             position: "relative",
-            minHeight: "100vh",
+            minHeight: "80vh",
             display: "flex",
             alignItems: "center",
             background: f.bg,
@@ -578,7 +586,7 @@ export default function GalleryPage() {
         >
           {/* Image (clip-path reveal + parallax) */}
           <div
-            className="reveal-img"
+            className="reveal-img feat-img-col"
             style={{
               position: "absolute",
               [f.side === "right" ? "right" : "left"]: 0,
@@ -611,7 +619,7 @@ export default function GalleryPage() {
 
           {/* Text */}
           <div
-            className="page-container"
+            className="page-container feat-txt-col"
             style={{
               position: "relative",
               zIndex: 2,
@@ -620,7 +628,7 @@ export default function GalleryPage() {
               justifyContent: f.side === "right" ? "flex-start" : "flex-end",
             }}
           >
-            <div style={{ maxWidth: "460px", padding: "clamp(56px, 10vh, 110px) 0" }}>
+            <div className="feat-txt-inner" style={{ maxWidth: "460px", padding: "clamp(56px, 10vh, 110px) 0" }}>
               <div className="reveal-text" style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "22px" }}>
                 <span style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#E8521A" }}>
                   {String(i + 1).padStart(2, "0")} / {String(FEATURES.length).padStart(2, "0")}
@@ -706,9 +714,18 @@ export default function GalleryPage() {
                 onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.transform = "scale(0.985)"; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.transform = "scale(1)"; }}
               >
+                {"img" in item && item.img && (
+                  <Image
+                    src={item.img as string}
+                    alt={item.label}
+                    fill
+                    sizes={item.cs === 2 ? "(max-width:640px) 100vw, 50vw" : "(max-width:640px) 100vw, 25vw"}
+                    style={{ objectFit: "cover", transition: "transform 0.5s cubic-bezier(0.16,1,0.3,1)" }}
+                  />
+                )}
                 <div style={{ position: "absolute", inset: 0, backgroundImage: GRAIN, opacity: 0.09 }} />
                 <div style={{ position: "absolute", bottom: "12px", left: "14px" }}>
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 600, color: "rgba(255,255,255,0.38)", letterSpacing: "0.06em" }}>
+                  <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 600, color: "rgba(255,255,255,0.70)", letterSpacing: "0.06em", textShadow: "0 1px 4px rgba(0,0,0,0.6)" }}>
                     {item.label}
                   </span>
                 </div>
@@ -863,6 +880,48 @@ export default function GalleryPage() {
           </div>
         </div>
       </section>
+
+      <style>{`
+        /* ── Mobile: h-scroll section ─────────────────────────── */
+        @media (max-width: 767px) {
+          .h-scroll-section { height: auto !important; overflow: visible !important; }
+          .h-scroll-track {
+            /* let track grow to fit the tallest card — no fixed height cap */
+            height: auto !important;
+            overflow-x: auto !important;
+            overflow-y: visible !important;
+            -webkit-overflow-scrolling: touch;
+            padding-top: clamp(16px,3vw,24px) !important;
+            padding-bottom: clamp(16px,3vw,24px) !important;
+          }
+          .h-scroll-dots { display: none !important; }
+          /* wider poster cards — ~75vw so one card fills most of the screen */
+          .h-scroll-section .h-slide { width: clamp(260px, 75vw, 340px) !important; }
+        }
+        /* ── Mobile: feature panels ───────────────────────────── */
+        @media (max-width: 767px) {
+          .feat-panel {
+            min-height: auto !important;
+            flex-direction: column !important;
+          }
+          .feat-img-col {
+            position: relative !important;
+            width: 100% !important;
+            height: 220px !important;
+            left: auto !important;
+            right: auto !important;
+            top: auto !important;
+            /* override GSAP's initial clip-path hide so image is always visible on mobile */
+            clip-path: inset(0 0% 0 0) !important;
+          }
+          .feat-txt-col { justify-content: flex-start !important; }
+          .feat-txt-inner {
+            max-width: 100% !important;
+            padding-top: clamp(28px,5vw,44px) !important;
+            padding-bottom: clamp(28px,5vw,44px) !important;
+          }
+        }
+      `}</style>
 
     </div>
   );

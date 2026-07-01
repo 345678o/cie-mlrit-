@@ -27,7 +27,7 @@ export default function JoinPage() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "#ff6f00", paddingTop: "calc(var(--nav-height) + 32px)", paddingBottom: "80px", marginTop: "calc(-1 * var(--nav-height))", position: "relative", overflow: "hidden" }}>
+    <div style={{ minHeight: "100vh", background: "#ff6f00", paddingTop: "calc(var(--nav-height) + 32px)", paddingBottom: "clamp(40px,8vw,80px)", marginTop: "calc(-1 * var(--nav-height))", position: "relative", overflow: "hidden" }}>
 
 {/* Circle pattern */}
       <svg aria-hidden style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0 }} preserveAspectRatio="xMidYMid slice" viewBox="0 0 1440 900">

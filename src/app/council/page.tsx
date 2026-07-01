@@ -51,12 +51,12 @@ type TeamSection = {
 
 
 const studentLeadership: Member[] = [
-  { name: "Name Placeholder",  role: "President",                  dept: "Technical",            year: "2026-27", linkedin: "#", email: "", photo: "" },
-  { name: "Name Placeholder",  role: "Vice President",             dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "" },
-  { name: "Name Placeholder",  role: "Secretary",                  dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "" },
-  { name: "Name Placeholder",  role: "Chief Technical Executive",  dept: "Technical",            year: "2026-27", linkedin: "#", email: "", photo: "" },
-  { name: "Jaikar Midithuri",  role: "Joint Secretary",            dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/jaikar-midithuri-136614369/", email: "", photo: "/council/tech/Jaikar Midithuri.png" },
-  { name: "Bhavana Inakollu",  role: "Internal Relations",         dept: "Operations & Finance", year: "2026-27", linkedin: "https://www.linkedin.com/in/bhavana-inakollu-8698a2395", email: "", photo: "/council/OPS/Bhavana .png" },
+  { name: "Ghanashyam Kodekandla", role: "President",                  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/ghanashyamkodekandla", email: "", photo: "/council/tech/Ghanashyam Kodekandla.png" },
+  { name: "Mahima Tatineni",       role: "Vice President",             dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Mahima Tatineni.png" },
+  { name: "Aarthi Reddy Balaling", role: "Secretary",                  dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Aarthi.png" },
+  { name: "Keertan Kuppili",       role: "Chief Technical Executive",  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/", email: "", photo: "/council/tech/Keertan Kuppili .png" },
+  { name: "Jaikar Midithuri",      role: "Joint Secretary",            dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/jaikar-midithuri-136614369/", email: "", photo: "/council/tech/Jaikar Midithuri.png" },
+  { name: "Bhavana Inakollu",      role: "Internal Relations",         dept: "Operations & Finance", year: "2026-27", linkedin: "https://www.linkedin.com/in/bhavana-inakollu-8698a2395", email: "", photo: "/council/OPS/Bhavana .png" },
 ];
 
 
@@ -103,7 +103,7 @@ const teams: TeamSection[] = [
       { name: "Prashansa",       role: "Member", dept: "Content", photo: "/council/content/Prashansa .png",linkedin:"https://www.linkedin.com/in/prashansa-b-92218b2b6" },
       { name: "Haritha",         role: "Member", dept: "Content", photo: "/council/content/Haritha.png",linkedin:"#" },
       { name: "Harshitha",       role: "Member", dept: "Content", photo: "/council/content/Harshitha.png",linkedin:"https://www.linkedin.com/in/harshitha-bollepalli-a5b198345" },
-      { name: "Ennawar Rithvik", role: "Content Lead", dept: "Content", photo: "/council/content/Ennawar Rithvik .png", zoom: 1.15,linkedin:"https://www.linkedin.com/in/rithvik-e-4a4936341/" },
+      { name: "Ritvik Ennavar", role: "Content Lead", dept: "Content", photo: "/council/content/Ennawar Rithvik .png", zoom: 1.15,linkedin:"https://www.linkedin.com/in/rithvik-e-4a4936341/" },
       { name: "Shiva",           role: "Member", dept: "Content", photo: "/council/content/Shiva.png",linkedin:"https://www.linkedin.com/in/jatavath-shiva-14099338a" },
       { name: "K S Sreesanth",   role: "Member", dept: "Content", photo: "/council/content/K S Sreesanth.png",linkedin:"https://www.linkedin.com/in/sreesanth-ks-29ab92344" },
     ],
@@ -119,7 +119,7 @@ const teams: TeamSection[] = [
          { name: "Durga Mahesh",      role: "Member", dept: "Creative", photo: "/council/creatives/Durga Mahesh.png",linkedin:"https://www.linkedin.com/in/durgamahesh-kolukuri" },
          { name: "Cheeda Shamilini",  role: "Member", dept: "Creative", photo: "/council/creatives/Cheeda Shamilini.png",linkedin:"https://www.linkedin.com/in/cheeda-shamilini-naidu-47419a345/" },
          { name: "D Pearl Angelina",  role: "Inventory Management", dept: "Creative", photo: "/council/creatives/D Pearl Angelina.png",linkedin:"https://www.linkedin.com/in/pearl-angelina-529705283" },
-         { name: "Sadwika Chedimala", role: "Creatives Lead", dept: "Creative", photo: "/council/creatives/Sadwika Chedimala.png",linkedin:"https://www.linkedin.com/in/sadwika-chedimala-758167387/" },
+         { name: "Sadwika Reddy Chedimala", role: "Creatives Lead", dept: "Creative", photo: "/council/creatives/Sadwika Chedimala.png",linkedin:"https://www.linkedin.com/in/sadwika-chedimala-758167387/" },
          { name: "Hansika Jella",     role: "Member", dept: "Creative", photo: "/council/creatives/Hansika Jella.png",linkedin:"https://www.linkedin.com/in/hansika-jella-01b079380" },
     ],
   },
@@ -132,7 +132,7 @@ const teams: TeamSection[] = [
       { name: "Avinash",                  role: "Member", dept: "GD", photo: "/council/GD/Avinash.png",linkedin:"https://www.linkedin.com/in/avinash-avi-b49119254" },
       { name: "Chanikya",                 role: "Member", dept: "GD", photo: "/council/GD/chanikya.png",linkedin:"https://www.linkedin.com/in/amancha-chanikya" },
        { name: "Sri Thejitha",             role: "Member", dept: "GD", photo: "/council/GD/Sri Thejitha .png" , linkedin: "http://www.linkedin.com/in/sri-thejitha-76a712374"},
-      { name: "Yeruva Indu Reddy",        role: "Graphic Design Lead", dept: "GD", photo: "/council/GD/Yeruva Indu Reddy.png",linkedin:"https://www.linkedin.com/in/yeruva-indu-972476345/" },
+      { name: "Yeruva InduSri Varshitha Reddy",        role: "GD Lead", dept: "GD", photo: "/council/GD/Yeruva Indu Reddy.png",linkedin:"https://www.linkedin.com/in/yeruva-indu-972476345/" },
       { name: "A Farhana Sultana",        role: "Member", dept: "GD", photo: "/council/GD/A Farhana Sultana.png",linkedin:"https://www.linkedin.com/in/achugatla-farhana-sultana-361b94344/" },
       { name: "Mounith Varma Akkala",     role: "Project Manager", dept: "GD", photo: "/council/GD/Mounith Varma Akkala .png",linkedin:"https://www.linkedin.com/in/mounith-varma-akkala-in/" },
       { name: "Bangari Nikitha",          role: "Member", dept: "GD", photo: "/council/GD/Bangari Nikitha.png",linkedin:"https://www.linkedin.com/in/bangari-nikitha-2b61aa345" },
@@ -151,8 +151,8 @@ const teams: TeamSection[] = [
       { name: "Anguluri Shiva",    role: "Member", dept: "Photography and Media", photo: "/council/photography/Anguluri Shiva.png",linkedin:"#" },
       { name: "Mattam Shivani",    role: "Member", dept: "Photography and Media", photo: "/council/photography/Mattam Shivani.png",linkedin:"https://www.linkedin.com/in/shivani-mattam-91602b2a5/" },
       { name: "Vavilala Sai Ganesh", role: "Member", dept: "Photography and Media", photo: "/council/photography/Vavilala Sai Ganesh.png",linkedin:"https://www.linkedin.com/in/vavilala-sai-ganesh-25028b3b5/" },
-      { name: "K.SAI VARSHITH",    role: "Studios Lead", dept: "Photography and Media", photo: "/council/photography/K.SAI VARSHITH.png",linkedin:"https://www.linkedin.com/in/k-sai-varshith-123462345/" },
-      { name: "Gorli Mahesh",      role: "Photography Lead", dept: "Photography and Media", photo: "/council/photography/Gorli Mahesh.png",linkedin:"https://www.linkedin.com/in/mahesh-gorli-314b89344" },
+      { name: "Sai Varshith Konduru", role: "Studios Lead", dept: "Photography and Media", photo: "/council/photography/K.SAI VARSHITH.png",linkedin:"https://www.linkedin.com/in/k-sai-varshith-123462345/" },
+      { name: "Mahesh Gorli",        role: "Photography Lead", dept: "Photography and Media", photo: "/council/photography/Gorli Mahesh.png",linkedin:"https://www.linkedin.com/in/mahesh-gorli-314b89344" },
       { name: "Anam Mounika",      role: "Member", dept: "Photography and Media", photo: "/council/photography/Anam Mounika .png",linkedin:"https://www.linkedin.com/in/mounika-r-20a621316/" },
       { name: "Gothuri Rishith",   role: "Member", dept: "Photography and Media", photo: "/council/photography/Gothuri Rishith.png",linkedin:"https://in.linkedin.com/in/gothuri-rishith-kumar-51390a3bb" },
       { name: "Sai Vashist",       role: "Member", dept: "Photography and Media", photo: "/council/photography/Sai Vashist.png",linkedin:"https://www.linkedin.com/in/vashist23021409" },
@@ -167,7 +167,7 @@ const teams: TeamSection[] = [
       { name: "Sai Mihir Ramaraju",    role: "Member", dept: "P&S", photo: "/council/p&s/Sai Mihir Ramaraju.png",linkedin:"#" },
       { name: "Yashashri Penikalapti", role: "Member", dept: "P&S", photo: "/council/p&s/Yashashri Penikalapti.png",linkedin:"https://www.linkedin.com/in/yashashripenikalapati" },
       { name: "Bandaru Mahith Naidu",  role: "Member", dept: "P&S", photo: "/council/p&s/Bandaru Mahith Naidu.png",linkedin:"https://www.linkedin.com/in/bandarumahithnaidu/" },
-      { name: "Sanjana Kovuru",        role: "Sponsorship Lead", dept: "P&S", photo: "/council/p&s/Sanjana Kovuru.png",linkedin:"https://www.linkedin.com/in/sanjana-kovuru-18b55b31a/" },
+      { name: "Venkata Sanjana Kovuru", role: "Sponsorship Lead", dept: "P&S", photo: "/council/p&s/Sanjana Kovuru.png",linkedin:"https://www.linkedin.com/in/sanjana-kovuru-18b55b31a/" },
       { name: "Adithya Ganesh",        role: "Studios Lead", dept: "P&S", photo: "/council/p&s/Adithya Ganesh.png",linkedin:"https://www.linkedin.com/in/adithya-ganesh-487860398/" },
       { name: "Rithish Kumar",         role: "Promotions Lead", dept: "P&S", photo: "/council/p&s/Rithish Kumar.png",linkedin:"https://www.linkedin.com/in/rithish-kumar-418242363/" },
     ],
@@ -182,8 +182,8 @@ const teams: TeamSection[] = [
       { name: "Aarthi",            role: "Member", dept: "Ops", photo: "/council/OPS/Aarthi.png",linkedin:"https://www.linkedin.com/in/aarthi-reddy-b-626241350/" },
       { name: "Vinay",             role: "Member", dept: "Ops", photo: "/council/OPS/Vinay.png",linkedin:"https://www.linkedin.com/in/dsdvinay" },
       { name: "Bhavana",           role: "Internal Relations", dept: "Ops", photo: "/council/OPS/Bhavana .png",linkedin:"https://www.linkedin.com/in/bhavana-inakollu-8698a2395" },
-      { name: "A Sai Ganesh",      role: "Operations Lead", dept: "Ops", photo: "/council/OPS/ASaiGanesh.png",linkedin:"https://www.linkedin.com/in/sai-ganesh-alleshwaram-a30832316" },
-      { name: "Manukonda Tarun",   role: "Finance and Logistics", dept: "Ops", photo: "/council/OPS/Manukonda Tarun.png",linkedin:"https://www.linkedin.com/in/tarun-manukonda-9a5b97344" },
+      { name: "Alleshwaram Sai Ganesh", role: "Operations Lead", dept: "Ops", photo: "/council/OPS/ASaiGanesh.png",linkedin:"https://www.linkedin.com/in/sai-ganesh-alleshwaram-a30832316" },
+      { name: "M.Tarun Kumar Reddy",    role: "Finance and Logistics", dept: "Ops", photo: "/council/OPS/Manukonda Tarun.png",linkedin:"https://www.linkedin.com/in/tarun-manukonda-9a5b97344" },
       { name: "Tharun",            role: "Member", dept: "Ops", photo: "/council/OPS/Tharun.png",linkedin:"https://www.linkedin.com/in/tharun-emmadisetti-590ba3344" },
       { name: "M Vasanth Vardhan", role: "Member", dept: "Ops", photo: "/council/OPS/M Vasanth vardhan.png",linkedin:"https://www.linkedin.com/in/vasanth-vardhan-maricherla-21783231a/" },
     ],
@@ -260,16 +260,16 @@ function MemberCard({ member, color = "#FF5E2C", expertise = "", index = 0 }: { 
       {/* Bottom info panel — translucent dark + blur */}
       <div style={{
         flex: "0 0 auto",
-        padding: "20px 20px 20px",
+        padding: "clamp(10px,3vw,20px)",
         background: "rgba(10,10,10,0.88)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         borderTop: "1px solid rgba(255,255,255,0.06)",
       }}>
-        <p style={{ color: "#FFFFFF", fontSize: "17px", fontWeight: 700, lineHeight: 1.25, marginBottom: "4px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+        <p style={{ color: "#FFFFFF", fontSize: "clamp(12px,1.5vw,17px)", fontWeight: 700, lineHeight: 1.25, marginBottom: "4px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
           {member.name}
         </p>
-        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", fontWeight: 500, marginBottom: "12px" }}>
+        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "clamp(11px,1vw,13px)", fontWeight: 500, marginBottom: "10px" }}>
           {member.role}
         </p>
         <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
@@ -343,7 +343,7 @@ function TeamAccordion({ section }: { section: TeamSection }) {
         </button>
         {expanded && (
           <div id={accordionId}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 px-6 pb-7 pt-2">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8 px-3 sm:px-6 pb-7 pt-2">
               {section.members.map((member, i) => (
                 <MemberCard
                   key={member.name}
@@ -455,15 +455,15 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                       <div style={{ position: "relative", zIndex: 1, flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "8px", width: "100%" }}>
                         <span style={{
                           fontFamily: "var(--font-rockstar), var(--font-heading)", fontWeight: 800,
-                          fontSize: "clamp(22px,2.6vw,32px)", lineHeight: 1.0,
+                          fontSize: "clamp(13px,2.6vw,32px)", lineHeight: 1.0,
                           textTransform: "uppercase", letterSpacing: "0.01em",
                           color: "#ffffff", overflowWrap: "anywhere",
                           background: `${m.deptColor}33`, boxShadow: `0 0 0 1px ${m.deptColor}55, 0 6px 22px ${m.deptColor}55`,
                           padding: "6px 14px", borderRadius: "8px",
                         }}>{m.name}</span>
                         <span style={{ width: "34px", height: "2px", borderRadius: "2px", background: m.deptColor }} />
-                        <span style={{ fontFamily: "var(--font-rockstar), var(--font-heading)", fontWeight: 800, fontSize: "clamp(18px,2vw,24px)", lineHeight: 1.1, textTransform: "uppercase", letterSpacing: "0.02em", color: m.deptColor }}>{deptShort[m.department] ?? m.department}</span>
-                        <span style={{ fontFamily: "var(--font-script)", fontWeight: 600, fontSize: "clamp(16px,1.5vw,20px)", lineHeight: 1.05, color: "rgba(255,255,255,0.85)" }}>{m.role}{m.year ? ` · ${m.year}` : ""}</span>
+                        <span style={{ fontFamily: "var(--font-rockstar), var(--font-heading)", fontWeight: 800, fontSize: "clamp(11px,2vw,24px)", lineHeight: 1.1, textTransform: "uppercase", letterSpacing: "0.02em", color: m.deptColor }}>{deptShort[m.department] ?? m.department}</span>
+                        <span style={{ fontFamily: "var(--font-script)", fontWeight: 600, fontSize: "clamp(10px,1.5vw,20px)", lineHeight: 1.05, color: "rgba(255,255,255,0.85)" }}>{m.role}{m.year ? ` · ${m.year}` : ""}</span>
                       </div>
                       <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: "7px", width: "100%", alignItems: "center" }}>
                         {m.linkedin && m.linkedin !== "#" && (
@@ -600,16 +600,16 @@ export default function CouncilPage() {
             <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Leadership</span>
             <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>Student Leadership 2026–27</h2>
           </FadeIn>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch" style={{ marginTop: "40px" }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 items-stretch" style={{ marginTop: "40px" }}>
             {studentLeadership.map((member, i) => (
               <FadeIn key={`${member.role}-${i}`} className="flex flex-col">
                 <div className="rounded-2xl card-light relative overflow-hidden flex flex-col items-center"
-                  style={{ flex: 1, borderColor: "rgba(255,94,44,0.20)", padding: "clamp(28px,4vw,44px) clamp(20px,3vw,36px)", textAlign: "center" }}>
+                  style={{ flex: 1, borderColor: "rgba(255,94,44,0.20)", padding: "clamp(20px,4vw,44px) clamp(16px,3vw,36px)", textAlign: "center" }}>
                   <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10"
                     style={{ background: "#FF5E2C", transform: "translate(30%, -30%)" }} />
                   {member.photo ? (
-                    <div className="w-40 h-40 rounded-full mb-8 overflow-hidden flex-shrink-0"
-                      style={{ border: "3px solid rgba(255,94,44,0.25)" }}>
+                    <div className="rounded-full mb-6 overflow-hidden flex-shrink-0"
+                      style={{ width: "clamp(96px,14vw,160px)", height: "clamp(96px,14vw,160px)", border: "3px solid rgba(255,94,44,0.25)" }}>
                       <img
                         src={member.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")}
                         draggable={false}
@@ -618,12 +618,12 @@ export default function CouncilPage() {
                       />
                     </div>
                   ) : (
-                    <div className="w-40 h-40 rounded-full flex items-center justify-center text-4xl font-black mb-8 flex-shrink-0"
-                      style={{ background: "rgba(255,94,44,0.10)", color: "#FF5E2C", border: "3px solid rgba(255,94,44,0.20)" }}>
+                    <div className="rounded-full flex items-center justify-center text-4xl font-black mb-6 flex-shrink-0"
+                      style={{ width: "clamp(96px,14vw,160px)", height: "clamp(96px,14vw,160px)", background: "rgba(255,94,44,0.10)", color: "#FF5E2C", border: "3px solid rgba(255,94,44,0.20)" }}>
                       {member.name.split(" ").map((n) => n[0]).join("").substring(0, 2)}
                     </div>
                   )}
-                  <h3 style={{ color: "#000000", fontSize: "20px", fontWeight: 800, marginBottom: "8px", lineHeight: 1.2 }}>{member.name}</h3>
+                  <h3 style={{ color: "#000000", fontSize: "clamp(16px,2vw,20px)", fontWeight: 800, marginBottom: "8px", lineHeight: 1.2 }}>{member.name}</h3>
                   <p style={{ color: "#FF5E2C", fontSize: "15px", fontWeight: 700, marginBottom: "8px" }}>{member.role}</p>
                   <p style={{ color: "#6B7280", fontSize: "14px", lineHeight: 1.6, marginBottom: "4px" }}>{member.dept}</p>
                   <p style={{ color: "#9CA3AF", fontSize: "12px", marginBottom: "24px" }}>Batch {member.year}</p>
@@ -777,7 +777,7 @@ export default function CouncilPage() {
         <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "clamp(16px,4vw,48px)" }}>
         <FadeIn className="text-center">
           <span className="section-tag" style={{ marginBottom: "32px" }}>Join the Team</span>
-          <h2 className="text-4xl font-black" style={{ color: "#000000", marginBottom: "32px" }}>Want to Be Part of CIE Council?</h2>
+          <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(22px,4vw,36px)", lineHeight: 1.15, marginBottom: "32px" }}>Want to Be Part of CIE Council?</h2>
           <p className="text-lg" style={{ color: "#374151", marginBottom: "40px" }}>
             Recruitment for the 2025–26 council opens in July. Apply to join any
             of our teams and help shape the future of innovation at MLRIT.

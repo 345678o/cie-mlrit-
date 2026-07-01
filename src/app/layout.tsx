@@ -38,10 +38,14 @@ const rockstar = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "MLRIT CIE — Centre for Innovation & Entrepreneurship",
+  metadataBase: new URL("https://cie.mlrit.ac.in"),
+  title: {
+    default: "MLRIT CIE — Centre for Innovation & Entrepreneurship",
+    template: "%s | MLRIT CIE",
+  },
   description:
     "The official innovation and entrepreneurship hub of MLRIT, empowering students to ideate, build, and launch impactful solutions.",
-  keywords: ["MLRIT", "CIE", "innovation", "entrepreneurship", "startups", "Hyderabad"],
+  keywords: ["MLRIT", "CIE", "innovation", "entrepreneurship", "startups", "Hyderabad", "MLRIT CIE"],
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -59,6 +63,15 @@ export const metadata: Metadata = {
     title: "MLRIT CIE — Centre for Innovation & Entrepreneurship",
     description: "Transforming Ideas into Innovation. Innovation into Impact.",
     type: "website",
+    url: "https://cie.mlrit.ac.in",
+    siteName: "MLRIT CIE",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "MLRIT CIE" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MLRIT CIE — Centre for Innovation & Entrepreneurship",
+    description: "Transforming Ideas into Innovation. Innovation into Impact.",
+    images: ["/og-image.png"],
   },
 };
 

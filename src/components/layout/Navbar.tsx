@@ -283,7 +283,10 @@ export default function Navbar() {
               (e.currentTarget as HTMLAnchorElement).style.background = "#E8521A";
             }}
           >
-            Join Now
+            <span style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1px" }}>
+              <span style={{ fontSize: "8px", fontWeight: 700, letterSpacing: "0.12em", opacity: 0.85, lineHeight: 1 }}>WE&apos;RE HIRING</span>
+              <span>Join Now</span>
+            </span>
           </Link>
 
           {/* ── Hamburger — phones only (< 768px) ─────────────── */}

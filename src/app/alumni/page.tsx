@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { Quote, Briefcase, GraduationCap, MapPin, ExternalLink } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
@@ -31,12 +32,13 @@ type Alumni = {
 
 const alumni: Alumni[] = [
   {
-    name: "Placeholder Name",
-    batch: "2022–23",
+    name: "Ala Tanvi Reddy",
+    batch: "2025–26",
     role: "Software Engineer",
     company: "Company Name",
     location: "Hyderabad",
-    quote: "CIE gave me the confidence to build things from scratch. The culture of experimentation here shaped the way I approach every problem at work.",
+    photo: "/alumni/Tanvi.jpeg",
+    quote: "If there is one place that truly shaped who I am today, it is CIE. It served as an incredible learning ground where I grew from an operations member to President, developing my communication, networking, organizing, and management abilities. Serving as a student mentor for micro-projects allowed me to sharpen my technical skills while helping others grow. Ultimately, CIE gave me a true understanding of what entrepreneurship means, laying the definitive foundation for my journey. Beyond the work and professional growth, CIE is a space where you do not just learn and improve. It is a place where you find an amazing community of peers and friends. We had so much fun together, and I am walking away with countless unforgettable memories.",
     tags: ["Tech", "Product"],
   },
   {
@@ -149,12 +151,12 @@ function AlumniCard({ member, index }: { member: Alumni; index: number }) {
       <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
         {/* Avatar */}
         {member.photo ? (
-          <div style={{ width: "52px", height: "52px", borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}>
-            <img src={member.photo} alt={member.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <div style={{ width: "90px", height: "90px", borderRadius: "50%", overflow: "hidden", flexShrink: 0, position: "relative" }}>
+            <Image src={member.photo!} alt={member.name} fill sizes="90px" style={{ objectFit: "cover" }} />
           </div>
         ) : (
           <div style={{
-            width: "52px", height: "52px", borderRadius: "50%", flexShrink: 0,
+            width: "90px", height: "90px", borderRadius: "50%", flexShrink: 0,
             background: `${ORANGE}15`, color: ORANGE,
             display: "flex", alignItems: "center", justifyContent: "center",
             fontSize: "18px", fontWeight: 800, fontFamily: "var(--font-heading)",
@@ -277,7 +279,7 @@ export default function AlumniPage() {
             transition={{ duration: 0.3 }}
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 360px), 1fr))",
+              gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 480px), 1fr))",
               gap: "clamp(16px,2.5vw,28px)",
               marginTop: "clamp(32px,4vw,52px)",
             }}
@@ -296,22 +298,32 @@ export default function AlumniPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ background: "#F5F5F5", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(48px,8vw,96px)" }}>
+      <section style={{ background: "#E8521A", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(48px,8vw,96px)" }}>
         <div style={{ maxWidth: "1280px", width: "100%", margin: "0 auto", paddingInline: "clamp(16px,4vw,48px)", textAlign: "center" }}>
           <FadeIn>
-            <span className="section-tag" style={{ marginBottom: "24px" }}>Share Your Story</span>
-            <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(22px,4vw,36px)", lineHeight: 1.1, marginTop: "24px", marginBottom: "16px" }}>
-              Are You a CIE Alumnus?
+            <span style={{
+              display: "inline-block", background: "rgba(255,255,255,0.2)", color: "#fff",
+              fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "11px",
+              letterSpacing: "0.14em", textTransform: "uppercase",
+              padding: "5px 16px", borderRadius: "999px", marginBottom: "20px",
+            }}>We&apos;re Hiring</span>
+            <h2 className="font-black" style={{ color: "#ffffff", fontSize: "clamp(24px,4vw,42px)", lineHeight: 1.1, marginTop: "0", marginBottom: "16px" }}>
+              Join the CIE Team
             </h2>
-            <p style={{ color: "#6B7280", fontSize: "clamp(14px,1.5vw,17px)", marginBottom: "36px", maxWidth: "500px", margin: "0 auto 36px", lineHeight: 1.7 }}>
-              We'd love to feature your journey. Write to us and inspire the next generation of CIE members.
+            <p style={{ color: "rgba(255,255,255,0.80)", fontSize: "clamp(14px,1.5vw,17px)", marginBottom: "36px", maxWidth: "500px", margin: "0 auto 36px", lineHeight: 1.7 }}>
+              We&apos;re looking for passionate students to drive innovation, build communities, and create real impact at MLRIT CIE.
             </p>
             <a
-              href="mailto:cie@mlrit.ac.in"
-              className="btn-primary"
-              style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}
+              href="/join"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "8px",
+                background: "#fff", color: "#E8521A",
+                fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "14px",
+                padding: "12px 28px", borderRadius: "8px", textDecoration: "none",
+                letterSpacing: "0.02em",
+              }}
             >
-              Share Your Story
+              Join Now →
             </a>
           </FadeIn>
         </div>

@@ -647,11 +647,11 @@ export default function HomePage() {
                 <div
                   className="card-light h-full"
                   style={{
-                    padding: "32px",
+                    padding: "clamp(20px,3vw,32px)",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "flex-start",
-                    minHeight: "360px",
+                    minHeight: "clamp(260px,40vw,360px)",
                   }}
                 >
                   {/* Icon */}
@@ -668,7 +668,7 @@ export default function HomePage() {
                   <h3 style={{
                     fontFamily: "var(--font-heading)",
                     fontWeight: 700,
-                    fontSize: "28px",
+                    fontSize: "clamp(20px,2.5vw,28px)",
                     lineHeight: 1.25,
                     letterSpacing: "-0.02em",
                     color: T_SECONDARY,
@@ -696,7 +696,7 @@ export default function HomePage() {
       {/* ────────────────────────────────────────────────────────────
           TIMELINE  —  Soft Peach Background
       ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: "#FFF5F0", paddingTop: "72px", paddingBottom: "72px", position: "relative", overflow: "hidden" }}>
+      <section style={{ background: "#FFF5F0", paddingTop: "clamp(40px,8vw,72px)", paddingBottom: "clamp(40px,8vw,72px)", position: "relative", overflow: "hidden" }}>
         {/* Blob left */}
         <div style={{ position: "absolute", left: "-140px", top: "50%", transform: "translateY(-50%)", width: "340px", height: "420px", borderRadius: "50%", background: "rgba(251,146,100,0.18)", filter: "blur(72px)", pointerEvents: "none" }} />
         {/* Blob right */}

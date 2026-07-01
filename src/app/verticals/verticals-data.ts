@@ -34,6 +34,7 @@ export type Vertical = {
   events: VerticalEvent[];
   achievements: string[];
   applyInfo?: string;
+  timeline?: { step: string; title: string; desc: string }[];
 };
 
 export const VERTICALS: Vertical[] = [
@@ -88,6 +89,14 @@ export const VERTICALS: Vertical[] = [
     ],
     applyInfo:
       "MP is open to all MLRIT students. To join, submit a project idea (solo or team of 2–3) during the next sprint window. No prior experience required — just the intent to build something.",
+    timeline: [
+      { step: "01", title: "Apply & Form Team", desc: "Submit a project idea solo or as a team of 2–3. Open to all MLRIT students — no prior experience needed." },
+      { step: "02", title: "Kickoff Session", desc: "Teams meet their assigned mentor, lock in the problem statement, and set clear sprint goals and deliverables." },
+      { step: "03", title: "Sprint (2–4 Weeks)", desc: "Build, iterate, and prototype. Weekly async check-ins with mentors keep teams on track and unblocked." },
+      { step: "04", title: "Mid-Sprint Review", desc: "Halfway checkpoint — mentors assess progress, course-correct, and give direct feedback on the build." },
+      { step: "05", title: "Demo Day", desc: "Live showcase to peers, mentors, and CIE leadership. Each team presents their completed project and answers questions." },
+      { step: "06", title: "Recognition & Next Steps", desc: "Top projects are featured in CIE's channels. Exceptional builds get fast-tracked into the Product Development vertical." },
+    ],
   },
   {
     id: "cie-studios",

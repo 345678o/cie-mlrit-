@@ -140,7 +140,7 @@ html {
 html::-webkit-scrollbar { display: none; }  /* Chrome / Safari / Edge */
 
 body {
-  background: var(--bg-white);
+  background: #000000;
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 18px;
@@ -620,6 +620,12 @@ button:focus-visible {
 /* ── Mobile: verticals page gap ─────────────────────────────────────────── */
 @media (max-width: 639px) {
   .verticals-grid { gap: 20px !important; }
+}
+
+/* ── Mobile: events page label bar ──────────────────────────────────────── */
+@media (max-width: 639px) {
+  .ev-label { padding-left: clamp(16px,5vw,24px) !important; padding-right: clamp(16px,5vw,24px) !important; }
+  .ev-label-right { display: none !important; }
 }
 
 /* ── Mobile: events/tours panels — text padding ─────────────────────────── */

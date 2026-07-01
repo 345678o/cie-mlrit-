@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useNavbarVisibility } from "@/context/NavbarContext";
 
 /* ─── Branded social SVGs ───────────────────────────────────── */
@@ -228,10 +229,18 @@ export default function Footer() {
         <div className="hidden lg:grid lg:grid-cols-4 gap-12 items-start" style={{ marginBottom: "clamp(36px,5vw,56px)" }}>
           {/* Brand */}
           <div>
-            <Link href="/" style={{ display: "inline-flex", alignItems: "baseline", gap: "1px", textDecoration: "none", marginBottom: "18px" }}>
-              <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "28px", color: "#FFFFFF", letterSpacing: "-0.02em" }}>CIE</span>
-              <span style={{ color: "var(--orange)", fontWeight: 800, fontSize: "30px" }}>.</span>
+            <Link href="/" style={{ display: "inline-block", textDecoration: "none", marginBottom: "8px" }}>
+              <Image
+                src="/image 1983.png"
+                alt="CIE Logo"
+                width={100}
+                height={52}
+                style={{ objectFit: "contain", mixBlendMode: "screen" }}
+              />
             </Link>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#5C6370", marginBottom: "18px", fontStyle: "italic", letterSpacing: "0.01em" }}>
+              Making Ideas Happen!
+            </p>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               {socials.map(({ Icon, href, label, color, bg, border, hoverColor, hoverBg, hoverBorder }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} title={label}

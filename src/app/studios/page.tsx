@@ -127,7 +127,7 @@ export default function StudiosPage() {
                         style={{ background: "rgba(255,94,44,0.1)", marginBottom: "28px" }}>
                         <studio.icon size={32} style={{ color: "#FF5E2C" }} />
                       </div>
-                      <h2 className="text-3xl font-black" style={{ color: "#000000", marginBottom: "24px" }}>{studio.name}</h2>
+                      <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(20px,3vw,30px)", marginBottom: "24px" }}>{studio.name}</h2>
                       <p style={{ color: "#374151", fontSize: "16px", lineHeight: 1.8, marginBottom: "32px" }}>{studio.desc}</p>
                       <div className="flex flex-col" style={{ gap: "16px" }}>
                         <div className="flex items-center gap-3" style={{ fontSize: "15px" }}>
@@ -179,7 +179,7 @@ export default function StudiosPage() {
       <section className="relative" style={{ background: "linear-gradient(160deg, #FFFFFF 0%, #FFFFFF 50%, #FFFFFF 100%)", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(48px,8vw,96px)" }}>
         <FadeIn className="relative z-10 page-container text-center">
           <span className="section-tag" style={{ marginBottom: "32px" }}>Book a Space</span>
-          <h2 className="text-4xl font-black" style={{ color: "#000000", marginBottom: "32px" }}>Ready to Create?</h2>
+          <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(22px,4vw,36px)", lineHeight: 1.15, marginBottom: "32px" }}>Ready to Create?</h2>
           <p style={{ color: "#374151", marginBottom: "40px" }}>
             All studios are available to MLRIT students and CIE members. Book your slot online
             or visit the CIE office to reserve your preferred space.

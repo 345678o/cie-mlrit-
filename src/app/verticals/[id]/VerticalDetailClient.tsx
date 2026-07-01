@@ -238,6 +238,39 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
         </div>
       </section>
 
+      {/* ── Timeline (MP only) ────────────────────────────────────── */}
+      {v.timeline && (
+        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF" }}>
+          <div className="page-container">
+            <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
+              <SectionLabel>How It Works</SectionLabel>
+              <SectionHeading>Sprint Timeline</SectionHeading>
+            </div></FadeIn>
+            <div style={{ position: "relative" }}>
+              {/* Vertical line */}
+              <div style={{ position: "absolute", left: "21px", top: "8px", bottom: "8px", width: "2px", background: `linear-gradient(to bottom, ${v.color}, ${v.color}44)`, borderRadius: "2px" }} />
+              <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
+                {v.timeline.map((item, i) => (
+                  <FadeIn key={item.step} delay={i * 0.07}>
+                    <div style={{ display: "flex", gap: "28px", alignItems: "flex-start", paddingBottom: i < v.timeline!.length - 1 ? "36px" : "0" }}>
+                      {/* Circle */}
+                      <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: v.lightBg, border: `2px solid ${v.color}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, zIndex: 1, backgroundColor: "#fff" }}>
+                        <span style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "11px", color: v.color, letterSpacing: "0.04em" }}>{item.step}</span>
+                      </div>
+                      {/* Content */}
+                      <div style={{ paddingTop: "8px", flex: 1 }}>
+                        <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "16px", color: "#000000", marginBottom: "6px" }}>{item.title}</h4>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "#6B7280", lineHeight: 1.7 }}>{item.desc}</p>
+                      </div>
+                    </div>
+                  </FadeIn>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── Footer nav ────────────────────────────────────────────── */}
       <section style={{ paddingTop: "40px", paddingBottom: "40px", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
         <div className="page-container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
