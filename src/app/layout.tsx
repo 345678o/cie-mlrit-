@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Inter, Caveat } from "next/font/google";
+import { Manrope, Inter, Caveat, Sora } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
@@ -7,6 +7,13 @@ import Footer from "@/components/layout/Footer";
 import BackToTop from "@/components/ui/BackToTop";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import { NavbarProvider } from "@/context/NavbarContext";
+
+const sora = Sora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-sora",
+  display: "swap",
+});
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -81,7 +88,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${inter.variable} ${caveat.variable} ${rockstar.variable} scroll-smooth`} data-scroll-behavior="smooth">
+    <html lang="en" className={`${manrope.variable} ${inter.variable} ${caveat.variable} ${rockstar.variable} ${sora.variable} scroll-smooth`} data-scroll-behavior="smooth">
       <body className="min-h-screen flex flex-col antialiased">
         <a href="#main-content" className="skip-link">
           Skip to main content

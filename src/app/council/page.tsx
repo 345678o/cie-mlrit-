@@ -77,7 +77,7 @@ const teams: TeamSection[] = [
     description: "Builds and maintains CIE's digital infrastructure — from the website and internal tools to AI experiments and mobile apps. The Tech team turns every idea into a working product.",
     members: [
       { name: "Ghanashyam Kodekandla", role: "Member", dept: "Tech", photo: "/council/tech/Ghanashyam Kodekandla.png",linkedin:"https://www.linkedin.com/in/ghanashyamkodekandla" },
-      { name: "Keertan Kuppili",       role: "Member", dept: "Tech", photo: "/council/tech/Keertan Kuppili .png", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/"},
+      { name: "Keertan Kuppili",       role: "Chief Technical Officer", dept: "Tech", photo: "/council/tech/Keertan Kuppili .png", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/"},
       { name: "T.S Siddarth",          role: "Member", dept: "Tech", photo: "/council/tech/T.S Siddarth.png",linkedin: "#"},
       { name: "Teja Jagathi",          role: "Member", dept: "Tech", photo: "/council/tech/Teja Jagathi.png" ,linkedin: "https://www.linkedin.com/in/teja-jagathi"},
       { name: "Abhiram Ganji",         role: "Product Development Lead", dept: "Tech", photo: "/council/tech/Abhiram Ganji.png" ,linkedin:"#"},
@@ -430,7 +430,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                         className="absolute inset-0 w-full h-full"
                         style={{ objectFit: m.fit ?? "cover", objectPosition: "top center", transform: m.zoom ? `scale(${m.zoom})` : undefined, transformOrigin: m.zoom && m.zoom > 1 ? "top center" : "center" }}
                       />
-                      <div className="cs-tap-hint">Tap for details</div>
+<div className="cs-tap-hint">Tap for details</div>
                     </div>
                   </div>
                   {/* BACK — details */}
@@ -447,17 +447,19 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                         background: `linear-gradient(180deg, ${m.deptColor}22 0%, transparent 40%)`,
                       }} />
                       {/* faded CIE logo watermark */}
-                      {/* faded CIE brand watermark */}
+                      {/* large ghost CIE watermark */}
                       <span aria-hidden="true" style={{
-                        position: "absolute", top: "8px", left: "50%", transform: "translateX(-50%)",
+                        position: "absolute", top: "50%", left: "50%",
+                        transform: "translate(-50%, -50%)",
                         fontFamily: "var(--font-heading)", fontWeight: 900,
-                        fontSize: "clamp(22px,4vw,32px)", letterSpacing: "-0.04em",
-                        color: "rgba(255,255,255,0.03)", whiteSpace: "nowrap",
-                        userSelect: "none", pointerEvents: "none", zIndex: 1,
-                      }}>CIE<span style={{ color: "rgba(232,82,26,0.25)" }}>.</span></span>
+                        fontSize: "clamp(60px,18vw,110px)", letterSpacing: "-0.06em",
+                        color: "rgba(255,255,255,0.07)", whiteSpace: "nowrap",
+                        userSelect: "none", pointerEvents: "none", zIndex: 0,
+                        lineHeight: 1,
+                      }}>CIE<span style={{ color: "rgba(232,82,26,0.18)" }}>.</span></span>
                       <div style={{ position: "relative", zIndex: 1, flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "8px", width: "100%" }}>
                         <span style={{
-                          fontFamily: "var(--font-rockstar), var(--font-heading)", fontWeight: 800,
+                          fontFamily: "var(--font-sora)", fontWeight: 800,
                           fontSize: "clamp(13px,2.6vw,32px)", lineHeight: 1.0,
                           textTransform: "uppercase", letterSpacing: "0.01em",
                           color: "#ffffff", overflowWrap: "anywhere",
@@ -465,8 +467,8 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                           padding: "6px 14px", borderRadius: "8px",
                         }}>{m.name}</span>
                         <span style={{ width: "34px", height: "2px", borderRadius: "2px", background: m.deptColor }} />
-                        <span style={{ fontFamily: "var(--font-rockstar), var(--font-heading)", fontWeight: 800, fontSize: "clamp(11px,2vw,24px)", lineHeight: 1.1, textTransform: "uppercase", letterSpacing: "0.02em", color: m.deptColor }}>{deptShort[m.department] ?? m.department}</span>
-                        <span style={{ fontFamily: "var(--font-script)", fontWeight: 600, fontSize: "clamp(10px,1.5vw,20px)", lineHeight: 1.05, color: "rgba(255,255,255,0.85)" }}>{m.role}{m.year ? ` · ${m.year}` : ""}</span>
+                        <span style={{ fontFamily: "var(--font-sora)", fontWeight: 600, fontSize: "clamp(11px,2vw,22px)", lineHeight: 1.1, textTransform: "uppercase", letterSpacing: "0.06em", color: m.deptColor }}>{deptShort[m.department] ?? m.department}</span>
+                        <span style={{ fontFamily: "var(--font-sora)", fontWeight: 500, fontSize: "clamp(10px,1.4vw,18px)", lineHeight: 1.2, color: "rgba(255,255,255,0.80)", letterSpacing: "0.01em" }}>{m.role}{m.year ? ` · ${m.year}` : ""}</span>
                       </div>
                       <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: "7px", width: "100%", alignItems: "center" }}>
                         {m.linkedin && m.linkedin !== "#" && (
