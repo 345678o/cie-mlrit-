@@ -18,6 +18,44 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
+function CouncilStars() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    let raf: number;
+    const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
+    resize();
+    const stars = Array.from({ length: 120 }, () => ({
+      x: Math.random(), y: Math.random(),
+      r: Math.random() * 1.1 + 0.2,
+      a: Math.random(),
+      speed: Math.random() * 0.004 + 0.001,
+      phase: Math.random() * Math.PI * 2,
+    }));
+    let t = 0;
+    const draw = () => {
+      if (!canvas || !ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      t += 0.012;
+      stars.forEach(s => {
+        const alpha = s.a * (0.4 + 0.6 * Math.sin(t * s.speed * 80 + s.phase));
+        ctx.beginPath();
+        ctx.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(180,200,255,${alpha * 0.55})`;
+        ctx.fill();
+      });
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
+    window.addEventListener("resize", resize);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize); };
+  }, []);
+  return <canvas ref={canvasRef} aria-hidden style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0 }} />;
+}
+
 type Member = {
   name: string;
   role: string;
@@ -421,7 +459,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                   {/* FRONT — photo */}
                   <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
                     <div style={{ position: "absolute", inset: 0, clipPath: CS_NOTCH, background: "rgba(255,255,255,0.16)" }} />
-                    <div style={{ position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden", background: "#0a0a0a" }}>
+                    <div style={{ position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden", background: "#05070F" }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={flat}
@@ -438,7 +476,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                     <div style={{ position: "absolute", inset: 0, clipPath: CS_NOTCH, background: m.deptColor }} />
                     <div style={{
                       position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden",
-                      background: "#0a0a0a",
+                      background: "#05070F",
                       display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "clamp(14px,6%,20px)",
                     }}>
                       {/* subtle dept color top glow */}
@@ -652,8 +690,25 @@ export default function CouncilPage() {
       </section>
 
       {/* Teams — ChromaGrid */}
-      <section style={{ background: "#000000", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(40px,6vw,72px)" }}>
-        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "clamp(16px,4vw,48px)" }}>
+      <section style={{ background: "#05070F", position: "relative", overflow: "hidden", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(40px,6vw,72px)" }}>
+
+        {/* Radial blue glow */}
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0,
+          background: "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(30,80,220,0.18) 0%, rgba(10,30,100,0.10) 45%, transparent 75%)" }} />
+
+        {/* Noise texture */}
+        <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.045, pointerEvents: "none", zIndex: 0 }} aria-hidden="true">
+          <filter id="council-noise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+            <feColorMatrix type="saturate" values="0" />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#council-noise)" />
+        </svg>
+
+        {/* Stars canvas */}
+        <CouncilStars />
+
+        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "clamp(16px,4vw,48px)", position: "relative", zIndex: 1 }}>
 
           {/* Badge */}
           <FadeIn>
