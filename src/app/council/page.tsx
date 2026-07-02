@@ -571,30 +571,16 @@ export default function CouncilPage() {
     t.members.map((m) => ({ ...m, department: t.team, deptColor: t.color }))
   );
 
-  // Shuffle order for "All" mode — client-only (null on SSR/first paint to
-  // avoid hydration mismatch). Shuffled ONCE and persisted to localStorage,
-  // so the same order is reused on later visits/clicks (no reshuffle).
-  const [order, setOrder] = useState<number[] | null>(null);
-  useEffect(() => {
-    const N = allMembers.length;
-    let idx: number[] | null = null;
-    try {
-      const saved = JSON.parse(localStorage.getItem("council-shuffle") || "null");
-      if (Array.isArray(saved) && saved.length === N) idx = saved as number[];
-    } catch { /* ignore */ }
-    if (!idx) {
-      idx = allMembers.map((_, i) => i);
-      for (let i = idx.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [idx[i], idx[j]] = [idx[j], idx[i]];
-      }
-    }
-    setOrder(idx);
-    try { localStorage.setItem("council-shuffle", JSON.stringify(idx)); } catch { /* ignore */ }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const allShuffled = order ? order.map((i) => allMembers[i]).filter(Boolean) : allMembers;
+  // FIXED "All" order — the exact sequence from the live site, hardcoded so
+  // every device/browser shows it identically (no random shuffle, no
+  // localStorage). Indices map into `allMembers` (declaration order); remapped
+  // for T.S Siddarth inserted at Tech index 3.
+  const ALL_ORDER = [44, 8, 30, 39, 56, 51, 60, 55, 38, 24, 25, 5, 6, 22, 59, 33, 19, 16, 57, 32, 61, 2, 50, 10, 49, 9, 28, 0, 53, 48, 62, 29, 54, 41, 46, 34, 7, 18, 27, 45, 36, 31, 15, 37, 40, 26, 21, 63, 1, 20, 14, 13, 4, 11, 43, 42, 58, 35, 23, 12, 47, 52, 17, 3];
+  // Any indices not listed (roster changes) are appended in declaration order.
+  const allShuffled = [
+    ...ALL_ORDER.filter((i) => i < allMembers.length).map((i) => allMembers[i]),
+    ...allMembers.filter((_, i) => !ALL_ORDER.includes(i)),
+  ];
   // Applied AFTER the year sort so the placement survives (identical order on
   // mobile & desktop — no device-dependent reshuffle). Mahima first; Aarthi
   // pinned right beside Tribhuvan.
