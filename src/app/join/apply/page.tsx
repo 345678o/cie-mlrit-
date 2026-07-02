@@ -83,16 +83,16 @@ const PREF_NAMES: Record<string, string> = {
 const BRANCHES = ["CSE","CSM","CSD","CSIT","IT","EEE","ECE","MECH","AERO"];
 const YEARS    = ["2nd Year","3rd Year","4th Year"];
 
-type FormState = { name: string; rollNo: string; phone: string; email: string; branch: string; year: string; why: string };
-const EMPTY: FormState = { name:"", rollNo:"", phone:"", email:"", branch:"", year:"", why:"" };
+type FormState = { name: string; rollNo: string; phone: string; email: string; branch: string; year: string; cgpa: string; backlogs: string; why: string };
+const EMPTY: FormState = { name:"", rollNo:"", phone:"", email:"", branch:"", year:"", cgpa:"", backlogs:"", why:"" };
 
 // Persists shared personal details + per-department "why" answers across the sequential steps.
 const STORE_KEY = "cie-apply";
 type Store = { personal: Omit<FormState, "why">; why: Record<string, string> };
 function readStore(): Store {
-  if (typeof window === "undefined") return { personal: { name:"", rollNo:"", phone:"", email:"", branch:"", year:"" }, why: {} };
+  if (typeof window === "undefined") return { personal: { name:"", rollNo:"", phone:"", email:"", branch:"", year:"", cgpa:"", backlogs:"" }, why: {} };
   try { return JSON.parse(sessionStorage.getItem(STORE_KEY) || "") as Store; }
-  catch { return { personal: { name:"", rollNo:"", phone:"", email:"", branch:"", year:"" }, why: {} }; }
+  catch { return { personal: { name:"", rollNo:"", phone:"", email:"", branch:"", year:"", cgpa:"", backlogs:"" }, why: {} }; }
 }
 
 function isLightColor(hex: string): boolean {
@@ -341,13 +341,17 @@ function ApplyForm() {
     const s = readStore();
     setForm({ ...EMPTY, ...s.personal, why: s.why[rawDept] ?? "" });
     setErrors({});
+    setEditPersonal(false);
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stepIdx, rawDept]);
 
-  // Common details (name, roll, phone, email, branch, year) are shared across every
-  // preference — lock them after the first application so they can't drift between steps.
-  const locked = stepIdx > 0 && form.name.trim() !== "";
+  // Common details (name, roll, phone, email, branch, year, cgpa, backlogs) are shared across
+  // every preference — lock them after the first application so they can't drift between steps,
+  // but let the applicant reopen them to edit (changes then apply to all preferences).
+  const [editPersonal, setEditPersonal] = useState(false);
+  const canEditToggle = stepIdx > 0 && form.name.trim() !== "";
+  const locked = canEditToggle && !editPersonal;
   const lockStyle: React.CSSProperties = locked
     ? { background: "#F3F4F6", color: "#6B7280", cursor: "not-allowed", borderColor: "#E5E7EB", boxShadow: "none" }
     : {};
@@ -365,6 +369,11 @@ function ApplyForm() {
     if (!form.email.includes("@"))                e.email  = "Enter a valid email address";
     if (!form.branch)                             e.branch = "Please select your branch";
     if (!form.year)                               e.year   = "Please select your year";
+    const cgpa = parseFloat(form.cgpa.trim());
+    if (!form.cgpa.trim())                        e.cgpa   = "CGPA is required";
+    else if (Number.isNaN(cgpa) || cgpa < 0 || cgpa > 10) e.cgpa = "Enter a CGPA between 0 and 10";
+    if (!form.backlogs.trim())                    e.backlogs = "Number of backlogs is required";
+    else if (!/^\d+$/.test(form.backlogs.trim())) e.backlogs = "Enter a valid number";
     if (form.why.trim().length < 30)              e.why    = "Please write at least 30 characters";
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -671,13 +680,29 @@ function ApplyForm() {
 
                 {/* ── Personal Information ── */}
                 <SectionDivider label="Personal Information"/>
-                {locked && (
+                {canEditToggle && (
                   <div style={{
-                    display:"flex", alignItems:"center", gap:"8px", marginTop:"-8px", marginBottom:"20px",
+                    display:"flex", alignItems:"center", gap:"10px", marginTop:"-8px", marginBottom:"20px",
                     fontFamily:"var(--font-body)", fontSize:"13px", fontWeight:500, color:"#6B7280",
                     background:"#F9FAFB", border:"1px solid #E5E7EB", borderRadius:"10px", padding:"10px 14px",
                   }}>
-                    <Check size={14} color={color}/> Locked from your first application — same for every preference. Only your reason below changes.
+                    <Check size={14} color={color} style={{ flexShrink:0 }}/>
+                    <span style={{ flex:1 }}>
+                      {locked
+                        ? "Carried over from your first application — same for every preference. Only your reason below changes."
+                        : "Editing your details — these changes apply to every preference."}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setEditPersonal(v => !v)}
+                      style={{
+                        flexShrink:0, fontFamily:"var(--font-body)", fontWeight:700, fontSize:"12.5px",
+                        color, background:`${color}12`, border:`1px solid ${color}30`,
+                        borderRadius:"8px", padding:"6px 12px", cursor:"pointer",
+                      }}
+                    >
+                      {locked ? "Edit details" : "Done"}
+                    </button>
                   </div>
                 )}
                 <div style={{ display:"grid", gap:"20px", marginBottom:"48px" }}>
@@ -758,6 +783,25 @@ function ApplyForm() {
                         ))}
                       </div>
                       {errors.year && <FieldErr msg={errors.year}/>}
+                    </div>
+                  </div>
+
+                  <div className="form-row" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px" }}>
+                    <div>
+                      <Label>CGPA</Label>
+                      <input type="text" inputMode="decimal" placeholder="8.5" value={form.cgpa}
+                        onChange={e => set("cgpa", e.target.value)}
+                        onFocus={() => setFocused("cgpa")} onBlur={() => setFocused("")}
+                        required aria-required disabled={locked} style={{ ...inputStyle(focused==="cgpa", color), ...lockStyle }}/>
+                      {errors.cgpa && <FieldErr msg={errors.cgpa}/>}
+                    </div>
+                    <div>
+                      <Label>Number of Backlogs</Label>
+                      <input type="text" inputMode="numeric" placeholder="0" value={form.backlogs}
+                        onChange={e => set("backlogs", e.target.value)}
+                        onFocus={() => setFocused("backlogs")} onBlur={() => setFocused("")}
+                        required aria-required disabled={locked} style={{ ...inputStyle(focused==="backlogs", color), ...lockStyle }}/>
+                      {errors.backlogs && <FieldErr msg={errors.backlogs}/>}
                     </div>
                   </div>
 

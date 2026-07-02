@@ -589,28 +589,33 @@ export default function CouncilPage() {
         [idx[i], idx[j]] = [idx[j], idx[i]];
       }
     }
-    // Force Aarthi to sit right beside Tribhuvan
-    const tribI = allMembers.findIndex((m) => m.name === "Katepally Tribhuvan");
-    const aarI  = allMembers.findIndex((m) => m.name === "Aarthi Reddy");
-    if (tribI !== -1 && aarI !== -1) {
-      idx = idx.filter((i) => i !== aarI);
-      idx.splice(idx.indexOf(tribI) + 1, 0, aarI);
-    }
-    // Mahima always first
-    const mahI = allMembers.findIndex((m) => m.name === "Mahima Tatineni");
-    if (mahI !== -1) {
-      idx = idx.filter((i) => i !== mahI);
-      idx.unshift(mahI);
-    }
     setOrder(idx);
     try { localStorage.setItem("council-shuffle", JSON.stringify(idx)); } catch { /* ignore */ }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const allShuffled = order ? order.map((i) => allMembers[i]).filter(Boolean) : allMembers;
+  // Applied AFTER the year sort so the placement survives (identical order on
+  // mobile & desktop — no device-dependent reshuffle). Mahima first; Aarthi
+  // pinned right beside Tribhuvan.
+  const pinAll = <T extends { name: string }>(list: T[]): T[] => {
+    let arr = [...list];
+    const trib = arr.find((m) => m.name === "Katepally Tribhuvan");
+    const aar = arr.find((m) => m.name === "Aarthi Reddy");
+    if (trib && aar) {
+      arr = arr.filter((m) => m !== aar);
+      arr.splice(arr.indexOf(trib) + 1, 0, aar);
+    }
+    const mah = arr.find((m) => m.name === "Mahima Tatineni");
+    if (mah) {
+      arr = arr.filter((m) => m !== mah);
+      arr.unshift(mah);
+    }
+    return arr;
+  };
   const visibleMembers = activeTeam === "All"
     // 4th-years (chairpersons) first, then 3rd-years — stable within each group (keeps shuffle order)
-    ? [...allShuffled].sort((a, b) => yearRank(a.year) - yearRank(b.year))
+    ? pinAll([...allShuffled].sort((a, b) => yearRank(a.year) - yearRank(b.year)))
     : allMembers
         .filter((m) => m.department === activeTeam)
         // 4th-years (chairpersons) first; within same year, dept lead(s) first; stable for the rest
