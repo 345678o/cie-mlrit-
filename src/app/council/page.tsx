@@ -139,7 +139,7 @@ const teams: TeamSection[] = [
       { name: "Katepally Tribhuvan",   role: "Technical Lead", dept: "Tech", photo: "/council/tech/Katepally Tribhuvan.png",linkedin: "https://www.linkedin.com/in/tribhuvan-katepally-30639b335/",year:"3rd"},
       { name: "Yashwanth Abhishek",    role: "Member", dept: "Tech", photo: "/council/tech/yashwanth abhishek.png",linkedin: "https://www.linkedin.com/in/yashwanth-abhishek-4626a8323/",year:"3rd"},
       { name: "Abhinav Sai",           role: "Member", dept: "Tech", photo: "/council/tech/Abhinav Sai.png",linkedin: "http://www.linkedin.com/in/abhiinavsaig",year:"3rd"},
-      { name: "Guguloth Adithya Jadhav", role: "Inventory Management", dept: "Tech", photo: "/council/tech/Guguloth Adithya Jadhav.png",linkedin:"https://www.linkedin.com/in/adithyajadhav/" ,year:"3rd"},
+      { name: "Guguloth Adithya Jadhav", role: "Inventory Lead", dept: "Tech", photo: "/council/tech/Guguloth Adithya Jadhav.png",linkedin:"https://www.linkedin.com/in/adithyajadhav/" ,year:"3rd"},
       { name: "Gannoji Vedik",         role: "Member", dept: "Tech", photo: "/council/tech/Gannoji Vedik.png" ,linkedin:"https://www.linkedin.com/in/vedik-gannoji/",year:"3rd"},
       
     ],
@@ -167,7 +167,7 @@ const teams: TeamSection[] = [
          { name: "Sushaanth",         role: "Chairperson", dept: "Creative", photo: "/council/creatives/sushaanth.png",linkedin:"https://www.linkedin.com/in/sushanth-mandumula-0496bb2b6",year:"4th" },
          { name: "Durga Mahesh",      role: "Member", dept: "Creative", photo: "/council/creatives/Durga Mahesh.png",linkedin:"https://www.linkedin.com/in/durgamahesh-kolukuri",year:"3rd" },
          { name: "Cheeda Shamilini",  role: "Member", dept: "Creative", photo: "/council/creatives/Cheeda Shamilini.png",linkedin:"https://www.linkedin.com/in/cheeda-shamilini-naidu-47419a345/",year:"3rd" },
-         { name: "D Pearl Angelina",  role: "Inventory Management", dept: "Creative", photo: "/council/creatives/D Pearl Angelina.png",linkedin:"https://www.linkedin.com/in/pearl-angelina-529705283",year:"3rd" },
+         { name: "D Pearl Angelina",  role: "Inventory Lead", dept: "Creative", photo: "/council/creatives/D Pearl Angelina.png",linkedin:"https://www.linkedin.com/in/pearl-angelina-529705283",year:"3rd" },
          { name: "Sadwika Reddy Chedimala", role: "Creatives Lead", dept: "Creative", photo: "/council/creatives/Sadwika Chedimala.png",linkedin:"https://www.linkedin.com/in/sadwika-chedimala-758167387/" ,year:"3rd"},
          { name: "Hansika Jella",     role: "Member", dept: "Creative", photo: "/council/creatives/Hansika Jella.png",linkedin:"https://www.linkedin.com/in/hansika-jella-01b079380",year:"3rd" },
     ],
