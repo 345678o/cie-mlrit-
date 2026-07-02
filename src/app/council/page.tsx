@@ -446,6 +446,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
           const flipBgByDept: Record<string, string> = {
             "Content": "/council/bg/content-flip.webp",
             "Ops — Operations & Finance": "/council/bg/ops-flip.jpg",
+            "Creative": "/council/bg/creative-flip.webp",
           };
           const flipBg = flipBgByDept[m.department];
           const isContent = Boolean(flipBg);
