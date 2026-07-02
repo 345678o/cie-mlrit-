@@ -69,6 +69,17 @@ const DEPARTMENTS: Record<string, {
   },
 };
 
+// Canonical department names used in the submission payload (match the /join picker labels).
+const PREF_NAMES: Record<string, string> = {
+  tech: "Technical & Product Development",
+  content: "Content Writing",
+  creative: "Creative",
+  gd: "Graphic Design",
+  photography: "Photography and Media",
+  ps: "Promotions & Sponsorship",
+  ops: "Operations & Finance",
+};
+
 const BRANCHES = ["CSE","CSM","CSD","CSIT","IT","EEE","ECE","MECH","AERO"];
 const YEARS    = ["1st Year","2nd Year","3rd Year","4th Year"];
 
@@ -257,9 +268,26 @@ function ApplyForm() {
   const searchParams = useSearchParams();
   const router       = useRouter();
 
-  const rawDept = searchParams.get("dept") ?? "";
+  // Preference keys in priority order. New flow passes `?depts=a,b,c`; keep `?dept=a` back-compat.
+  const deptsParam = searchParams.get("depts");
+  const legacyDept = searchParams.get("dept");
+  const prefKeys = Array.from(
+    new Set(
+      (deptsParam ? deptsParam.split(",") : legacyDept ? [legacyDept] : [])
+        .map((k) => k.trim())
+        .filter((k) => k in DEPARTMENTS)
+    )
+  ).slice(0, 3);
+
+  const rawDept = prefKeys[0] ?? "";
   const dept    = DEPARTMENTS[rawDept] ?? null;
   const color   = dept?.color ?? ORANGE;
+
+  // Priority-ordered payload — matches the backend data structure.
+  const departmentPreferences = prefKeys.map((k, i) => ({
+    department: PREF_NAMES[k] ?? DEPARTMENTS[k].name,
+    priority: i + 1,
+  }));
 
   const lightBg      = isLightColor(color);
   const onColor      = lightBg ? "rgba(0,0,0,0.88)" : "#FFFFFF";
@@ -306,6 +334,12 @@ function ApplyForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
+
+    // Submission payload — departments stored in priority order.
+    const payload = { ...form, departmentPreferences };
+    // Integration point: replace with the real API call when the backend is ready.
+    console.log("CIE application submission", payload);
+
     setLoading(true);
     setSubmitProgress(0);
     setAppId(`CIE-2026-${Math.floor(1000 + Math.random() * 9000)}`);
@@ -437,9 +471,27 @@ function ApplyForm() {
                 </motion.div>
                 <motion.span initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.15 }}
                   style={{ fontFamily:"var(--font-body)", fontWeight:700, fontSize:"10px", letterSpacing:"0.10em", textTransform:"uppercase" as const, color:onColorFaint }}>
-                  Applying for · {dept.name}
+                  {prefKeys.length > 1 ? "Applying · ranked preferences" : `Applying for · ${dept.name}`}
                 </motion.span>
               </div>
+
+              {/* Ranked preference chips */}
+              {prefKeys.length > 1 && (
+                <motion.div initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.18 }}
+                  style={{ display:"flex", flexWrap:"wrap", gap:"8px", marginBottom:"20px" }}>
+                  {departmentPreferences.map((p) => (
+                    <span key={p.priority} style={{
+                      display:"inline-flex", alignItems:"center", gap:"6px",
+                      fontFamily:"var(--font-body)", fontWeight:600, fontSize:"12px",
+                      padding:"5px 12px", borderRadius:"999px",
+                      background:tagBg, color:onColor, border:`1px solid ${tagBorder}`,
+                    }}>
+                      <span style={{ fontWeight:800, opacity:0.7 }}>{p.priority}</span>
+                      {p.department}
+                    </span>
+                  ))}
+                </motion.div>
+              )}
 
               {/* Tagline */}
               <motion.h1 initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }}
