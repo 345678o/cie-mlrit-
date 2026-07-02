@@ -242,7 +242,7 @@ const teams: TeamSection[] = [
 const deptShort: Record<string, string> = {
   "Tech": "Technical & Product Development",
   "Content": "Content Writing",
-  "Creative": "Creative",
+  "Creative": "Creatives",
   "GD — Graphic Design": "Graphic Design",
   "Photography and Media": "Photography and Media",
   "P&S — Public Speaking": "Promotions & Sponsorship",
@@ -442,8 +442,18 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
             ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=0a0a0a&color=9aa&size=400&bold=true&format=png`;
           const isActive = active === i;
           const scatter = i % 2 === 0 ? -26 : 26;
-          // Content dept gets a comic-burst flip background with white text.
-          const isContent = m.department === "Content";
+          // Some depts get a comic-burst flip background with white text.
+          const flipBgByDept: Record<string, string> = {
+            "Tech": "/council/bg/tech-flip.jpg",
+            "Content": "/council/bg/content-flip.webp",
+            "Ops — Operations & Finance": "/council/bg/ops-flip.jpg",
+            "Creative": "/council/bg/creative-flip.webp",
+            "GD — Graphic Design": "/council/bg/gd-flip.jpg",
+            "P&S — Public Speaking": "/council/bg/ps-flip.jpg",
+            "Photography and Media": "/council/bg/photography-flip.webp",
+          };
+          const flipBg = flipBgByDept[m.department];
+          const isContent = Boolean(flipBg);
           const backText = isContent ? "#ffffff" : m.deptColor;
           return (
             <div
@@ -492,29 +502,30 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                     <div style={{ position: "absolute", inset: 0, clipPath: CS_NOTCH, background: m.deptColor }} />
                     <div style={{
                       position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden",
-                      background: isContent
-                        ? "#111 url('/council/bg/content-flip.webp') center/cover no-repeat"
+                      background: flipBg
+                        ? `#111 url('${flipBg}') center/cover no-repeat`
                         : "#05070F",
                       display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "clamp(14px,6%,20px)",
                     }}>
-                      {/* subtle dept color top glow (dark scrim for Content's bright bg) */}
-                      <div style={{
-                        position: "absolute", inset: 0, zIndex: 0,
-                        background: isContent
-                          ? "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.45) 100%)"
-                          : `linear-gradient(180deg, ${m.deptColor}22 0%, transparent 40%)`,
-                      }} />
-                      {/* faded CIE logo watermark */}
-                      {/* large ghost CIE watermark */}
-                      <span aria-hidden="true" style={{
-                        position: "absolute", top: "50%", left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        fontFamily: "var(--font-heading)", fontWeight: 900,
-                        fontSize: "clamp(60px,18vw,110px)", letterSpacing: "-0.06em",
-                        color: "rgba(255,255,255,0.07)", whiteSpace: "nowrap",
-                        userSelect: "none", pointerEvents: "none", zIndex: 0,
-                        lineHeight: 1,
-                      }}>CIE<span style={{ color: "rgba(232,82,26,0.18)" }}>.</span></span>
+                      {/* subtle dept color top glow — none on comic-bg cards (show only the pic) */}
+                      {!flipBg && (
+                        <div style={{
+                          position: "absolute", inset: 0, zIndex: 0,
+                          background: `linear-gradient(180deg, ${m.deptColor}22 0%, transparent 40%)`,
+                        }} />
+                      )}
+                      {/* large ghost CIE watermark — hidden on comic-bg cards (show only the pic) */}
+                      {!flipBg && (
+                        <span aria-hidden="true" style={{
+                          position: "absolute", top: "50%", left: "50%",
+                          transform: "translate(-50%, -50%)",
+                          fontFamily: "var(--font-heading)", fontWeight: 900,
+                          fontSize: "clamp(60px,18vw,110px)", letterSpacing: "-0.06em",
+                          color: "rgba(255,255,255,0.07)", whiteSpace: "nowrap",
+                          userSelect: "none", pointerEvents: "none", zIndex: 0,
+                          lineHeight: 1,
+                        }}>CIE<span style={{ color: "rgba(232,82,26,0.18)" }}>.</span></span>
+                      )}
                       <div style={{ position: "relative", zIndex: 1, flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "8px", width: "100%" }}>
                         <span style={{
                           fontFamily: "var(--font-sora)", fontWeight: 800,
