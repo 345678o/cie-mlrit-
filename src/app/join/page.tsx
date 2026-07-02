@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Code, FileText, PenLine, Palette, Camera, Mic, BarChart2, ArrowRight } from "lucide-react";
+import { PriorityBadge, PreferenceList, type PrefItem } from "@/components/join";
 
-const ORANGE = "rgb(238, 209, 200)";
+const MAX_PREFS = 3;
 
 const DEPARTMENTS = [
   { key: "tech",        name: "Technical & Product Development", color: "#4A7CDB", icon: Code,      desc: "Build CIE's digital products — websites, tools, AI experiments.", lookingFor: "Problem-solvers who love building things." },
@@ -19,11 +20,53 @@ const DEPARTMENTS = [
 
 export default function JoinPage() {
   const router = useRouter();
-  const [selected, setSelected] = useState<string | null>(null);
+  const [order, setOrder] = useState<string[]>([]);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [warn, setWarn] = useState<string>("");
+
+  const deptMap = useMemo(
+    () => Object.fromEntries(DEPARTMENTS.map((d) => [d.key, d])) as Record<string, PrefItem>,
+    []
+  );
+
+  function toggle(key: string) {
+    setOrder((prev) => {
+      if (prev.includes(key)) {
+        setWarn("");
+        return prev.filter((k) => k !== key);
+      }
+      if (prev.length >= MAX_PREFS) {
+        setWarn(`You can select up to ${MAX_PREFS} departments. Remove one to add another.`);
+        return prev;
+      }
+      setWarn("");
+      return [...prev, key];
+    });
+  }
+
+  function move(key: string, dir: -1 | 1) {
+    setOrder((prev) => {
+      const i = prev.indexOf(key);
+      const j = i + dir;
+      if (i < 0 || j < 0 || j >= prev.length) return prev;
+      const next = [...prev];
+      [next[i], next[j]] = [next[j], next[i]];
+      return next;
+    });
+  }
+
+  function remove(key: string) {
+    setWarn("");
+    setOrder((prev) => prev.filter((k) => k !== key));
+  }
+
+  const isValid = order.length >= 1 && order.length <= MAX_PREFS;
 
   function proceed() {
-    if (selected) router.push(`/join/apply?dept=${selected}`);
+    if (!isValid) return;
+    // Stash the ranked preferences so the apply URL can stay clean (/join/apply).
+    try { sessionStorage.setItem("cie-prefs", JSON.stringify(order)); } catch {}
+    router.push("/join/apply");
   }
 
   return (
@@ -84,8 +127,8 @@ export default function JoinPage() {
           fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.5vw,16px)",
           color: "rgba(255,255,255,0.60)", lineHeight: 1.6,
         }}>
-          Choose the department that fits your skills and passion. You'll fill out
-          a short application on the next step.
+          Pick up to 3 departments and rank them by preference. Priority 1 is your
+          top choice. You'll fill out a short application on the next step.
         </p>
       </div>
 
@@ -99,12 +142,15 @@ export default function JoinPage() {
       }}>
         {DEPARTMENTS.map((dept) => {
           const Icon = dept.icon;
-          const isSelected = selected === dept.key;
+          const priority = order.indexOf(dept.key) + 1;
+          const isSelected = priority > 0;
+          const atLimit = !isSelected && order.length >= MAX_PREFS;
           const isHovered = hovered === dept.key;
           return (
             <motion.button
               key={dept.key}
-              onClick={() => setSelected(dept.key)}
+              onClick={() => toggle(dept.key)}
+              aria-pressed={isSelected}
               onMouseEnter={() => setHovered(dept.key)}
               onMouseLeave={() => setHovered(null)}
               whileHover={{ y: -4 }}
@@ -126,6 +172,8 @@ export default function JoinPage() {
                 boxShadow: isSelected ? `0 0 0 4px ${dept.color}22` : "none",
                 position: "relative",
                 overflow: "hidden",
+                opacity: atLimit ? 0.55 : 1,
+                transitionProperty: "border-color, background, box-shadow, opacity",
               }}
             >
               {/* Color top bar */}
@@ -173,46 +221,86 @@ export default function JoinPage() {
                 {dept.lookingFor}
               </p>
 
-              {/* Selected checkmark */}
-              {isSelected && (
-                <div style={{
-                  position: "absolute", top: "16px", right: "16px",
-                  width: "22px", height: "22px", borderRadius: "999px",
-                  background: dept.color,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                }}>
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 6l3 3 5-5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-              )}
+              {/* Priority badge */}
+              <div style={{ position: "absolute", top: "14px", right: "14px" }}>
+                <AnimatePresence>
+                  {isSelected && <PriorityBadge priority={priority} color={dept.color} compact />}
+                </AnimatePresence>
+              </div>
             </motion.button>
           );
         })}
       </div>
 
+      {/* Limit warning */}
+      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 clamp(16px,4vw,24px)", position: "relative", zIndex: 1, minHeight: warn ? undefined : 0 }}>
+        <AnimatePresence>
+          {warn && (
+            <motion.p
+              key="warn"
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              style={{
+                marginTop: "20px",
+                fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "13.5px",
+                color: "#FFFFFF", background: "rgba(0,0,0,0.28)",
+                border: "1px solid rgba(255,255,255,0.35)", borderRadius: "12px",
+                padding: "12px 16px", textAlign: "center",
+              }}
+            >
+              {warn}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Your Preferences */}
+      <AnimatePresence>
+        {order.length > 0 && (
+          <motion.div
+            key="prefs"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            style={{ maxWidth: "720px", margin: "40px auto 0", padding: "0 clamp(16px,4vw,24px)" }}
+          >
+            <PreferenceList
+              items={deptMap}
+              order={order}
+              onReorder={setOrder}
+              onMove={move}
+              onRemove={remove}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* CTA */}
-      <div style={{ maxWidth: "1100px", margin: "40px auto 0", padding: "0 clamp(16px,4vw,24px)", display: "flex", justifyContent: "center", position: "relative", zIndex: 1 }}>
+      <div style={{ maxWidth: "1100px", margin: "40px auto 0", padding: "0 clamp(16px,4vw,24px)", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", position: "relative", zIndex: 1 }}>
         <motion.button
           onClick={proceed}
-          disabled={!selected}
-          whileHover={selected ? { scale: 1.03 } : {}}
-          whileTap={selected ? { scale: 0.97 } : {}}
+          disabled={!isValid}
+          whileHover={isValid ? { scale: 1.03 } : {}}
+          whileTap={isValid ? { scale: 0.97 } : {}}
           style={{
             display: "inline-flex", alignItems: "center", gap: "10px",
             fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "clamp(14px,2vw,15px)",
-            color: selected ? "#FFFFFF" : "rgba(255,255,255,0.75)",
-            background: selected ? "rgba(0,0,0,0.75)" : "rgba(0,0,0,0.25)",
-            border: selected ? "none" : "1.5px solid rgba(255,255,255,0.30)",
+            color: isValid ? "#FFFFFF" : "rgba(255,255,255,0.75)",
+            background: isValid ? "rgba(0,0,0,0.75)" : "rgba(0,0,0,0.25)",
+            border: isValid ? "none" : "1.5px solid rgba(255,255,255,0.30)",
             borderRadius: "999px",
             padding: "15px clamp(24px,4vw,32px)",
-            cursor: selected ? "pointer" : "not-allowed",
-            opacity: selected ? 1 : 0.6,
+            cursor: isValid ? "pointer" : "not-allowed",
+            opacity: isValid ? 1 : 0.6,
             transition: "background 0.2s ease, opacity 0.2s ease",
             width: "100%", maxWidth: "360px", justifyContent: "center",
           }}
         >
-          Continue to Application
+          {isValid
+            ? `Continue with ${order.length} ${order.length === 1 ? "choice" : "choices"}`
+            : "Select at least 1 department"}
           <ArrowRight size={16} />
         </motion.button>
       </div>

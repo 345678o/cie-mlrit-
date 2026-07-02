@@ -69,11 +69,31 @@ const DEPARTMENTS: Record<string, {
   },
 };
 
+// Canonical department names used in the submission payload (match the /join picker labels).
+const PREF_NAMES: Record<string, string> = {
+  tech: "Technical & Product Development",
+  content: "Content Writing",
+  creative: "Creative",
+  gd: "Graphic Design",
+  photography: "Photography and Media",
+  ps: "Promotions & Sponsorship",
+  ops: "Operations & Finance",
+};
+
 const BRANCHES = ["CSE","CSM","CSD","CSIT","IT","EEE","ECE","MECH","AERO"];
-const YEARS    = ["1st Year","2nd Year","3rd Year","4th Year"];
+const YEARS    = ["2nd Year","3rd Year","4th Year"];
 
 type FormState = { name: string; rollNo: string; phone: string; email: string; branch: string; year: string; why: string };
 const EMPTY: FormState = { name:"", rollNo:"", phone:"", email:"", branch:"", year:"", why:"" };
+
+// Persists shared personal details + per-department "why" answers across the sequential steps.
+const STORE_KEY = "cie-apply";
+type Store = { personal: Omit<FormState, "why">; why: Record<string, string> };
+function readStore(): Store {
+  if (typeof window === "undefined") return { personal: { name:"", rollNo:"", phone:"", email:"", branch:"", year:"" }, why: {} };
+  try { return JSON.parse(sessionStorage.getItem(STORE_KEY) || "") as Store; }
+  catch { return { personal: { name:"", rollNo:"", phone:"", email:"", branch:"", year:"" }, why: {} }; }
+}
 
 function isLightColor(hex: string): boolean {
   const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
@@ -95,12 +115,15 @@ function inputStyle(focused: boolean, color: string): React.CSSProperties {
   };
 }
 
-function Label({ children }: { children: React.ReactNode }) {
+function Label({ children, required = true }: { children: React.ReactNode; required?: boolean }) {
   return (
     <label style={{
       display:"block", fontFamily:"var(--font-body)", fontWeight:600,
       fontSize:"14px", color:"#374151", marginBottom:"8px",
-    }}>{children}</label>
+    }}>
+      {children}
+      {required && <span aria-hidden style={{ color:"#EF4444", marginLeft:"3px" }}>*</span>}
+    </label>
   );
 }
 
@@ -257,9 +280,35 @@ function ApplyForm() {
   const searchParams = useSearchParams();
   const router       = useRouter();
 
-  const rawDept = searchParams.get("dept") ?? "";
+  // Preference keys in priority order. Primary source is sessionStorage (set on /join),
+  // so the URL stays clean. `?depts=a,b,c` / `?dept=a` are still honored for back-compat.
+  const cleanKeys = (arr: string[]) =>
+    Array.from(new Set(arr.map((k) => k.trim()).filter((k) => k in DEPARTMENTS))).slice(0, 3);
+  const [prefKeys] = useState<string[]>(() => {
+    const q = searchParams.get("depts");
+    const legacy = searchParams.get("dept");
+    if (q) return cleanKeys(q.split(","));
+    if (legacy) return cleanKeys([legacy]);
+    if (typeof window !== "undefined") {
+      try { return cleanKeys(JSON.parse(sessionStorage.getItem("cie-prefs") || "[]")); } catch {}
+    }
+    return [];
+  });
+
+  // Sequential flow — one application per preference. `?step=` is 1-based (default 1).
+  const rawStep = parseInt(searchParams.get("step") ?? "1", 10);
+  const stepIdx = Math.max(0, Math.min(prefKeys.length - 1, (Number.isNaN(rawStep) ? 1 : rawStep) - 1));
+  const isLastStep = stepIdx >= prefKeys.length - 1;
+
+  const rawDept = prefKeys[stepIdx] ?? "";
   const dept    = DEPARTMENTS[rawDept] ?? null;
   const color   = dept?.color ?? ORANGE;
+
+  // Priority-ordered payload — matches the backend data structure.
+  const departmentPreferences = prefKeys.map((k, i) => ({
+    department: PREF_NAMES[k] ?? DEPARTMENTS[k].name,
+    priority: i + 1,
+  }));
 
   const lightBg      = isLightColor(color);
   const onColor      = lightBg ? "rgba(0,0,0,0.88)" : "#FFFFFF";
@@ -281,9 +330,27 @@ function ApplyForm() {
 
   useEffect(() => {
     hide();
+    // Keep prefs in storage so clean-URL step navigation survives (covers legacy ?depts entry).
+    if (prefKeys.length) { try { sessionStorage.setItem("cie-prefs", JSON.stringify(prefKeys)); } catch {} }
     return () => show();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Re-hydrate on each step: shared personal details + this department's own "why".
+  useEffect(() => {
+    const s = readStore();
+    setForm({ ...EMPTY, ...s.personal, why: s.why[rawDept] ?? "" });
+    setErrors({});
+    if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stepIdx, rawDept]);
+
+  // Common details (name, roll, phone, email, branch, year) are shared across every
+  // preference — lock them after the first application so they can't drift between steps.
+  const locked = stepIdx > 0 && form.name.trim() !== "";
+  const lockStyle: React.CSSProperties = locked
+    ? { background: "#F3F4F6", color: "#6B7280", cursor: "not-allowed", borderColor: "#E5E7EB", boxShadow: "none" }
+    : {};
 
   function set(k: keyof FormState, v: string) {
     setForm(p => ({ ...p, [k]: v }));
@@ -306,9 +373,16 @@ function ApplyForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
+
+    // Persist shared personal details + this department's answer.
+    const { why, ...personal } = form;
+    const store = readStore();
+    store.personal = personal;
+    store.why = { ...store.why, [rawDept]: why };
+    if (typeof window !== "undefined") sessionStorage.setItem(STORE_KEY, JSON.stringify(store));
+
     setLoading(true);
     setSubmitProgress(0);
-    setAppId(`CIE-2026-${Math.floor(1000 + Math.random() * 9000)}`);
 
     // RAF-driven fill: 0→90 over 1000ms
     const startMs = performance.now();
@@ -325,6 +399,27 @@ function ApplyForm() {
     setSubmitProgress(100);
     await new Promise(r => setTimeout(r, 220));
     setLoading(false);
+
+    if (!isLastStep) {
+      // Advance to the next preferred department's application (clean URL).
+      router.push(`/join/apply?step=${stepIdx + 2}`);
+      return;
+    }
+
+    // Final step — assemble the full submission in priority order and finish.
+    const answers = readStore();
+    const payload = {
+      ...answers.personal,
+      departmentPreferences: departmentPreferences.map((d, i) => ({
+        ...d,
+        why: answers.why[prefKeys[i]] ?? "",
+      })),
+    };
+    // Integration point: replace with the real API call when the backend is ready.
+    console.log("CIE application submission", payload);
+    if (typeof window !== "undefined") sessionStorage.removeItem(STORE_KEY);
+
+    setAppId(`CIE-2026-${Math.floor(1000 + Math.random() * 9000)}`);
     setSubmitted(true);
     show();
     fireConfetti(color);
@@ -437,9 +532,36 @@ function ApplyForm() {
                 </motion.div>
                 <motion.span initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.15 }}
                   style={{ fontFamily:"var(--font-body)", fontWeight:700, fontSize:"10px", letterSpacing:"0.10em", textTransform:"uppercase" as const, color:onColorFaint }}>
-                  Applying for · {dept.name}
+                  {prefKeys.length > 1
+                    ? `Preference ${stepIdx + 1} of ${prefKeys.length} · ${dept.name}`
+                    : `Applying for · ${dept.name}`}
                 </motion.span>
               </div>
+
+              {/* Ranked preference chips — current step highlighted, earlier steps marked done */}
+              {prefKeys.length > 1 && (
+                <motion.div initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.18 }}
+                  style={{ display:"flex", flexWrap:"wrap", gap:"8px", marginBottom:"20px" }}>
+                  {departmentPreferences.map((p, i) => {
+                    const current = i === stepIdx;
+                    const done = i < stepIdx;
+                    return (
+                      <span key={p.priority} style={{
+                        display:"inline-flex", alignItems:"center", gap:"6px",
+                        fontFamily:"var(--font-body)", fontWeight:current?800:600, fontSize:"12px",
+                        padding:"5px 12px", borderRadius:"999px",
+                        background: current ? onColor : tagBg,
+                        color: current ? color : onColor,
+                        border:`1px solid ${current ? onColor : tagBorder}`,
+                        opacity: done ? 0.55 : 1,
+                      }}>
+                        <span style={{ fontWeight:800, opacity:current?1:0.7 }}>{done ? "✓" : p.priority}</span>
+                        {p.department}
+                      </span>
+                    );
+                  })}
+                </motion.div>
+              )}
 
               {/* Tagline */}
               <motion.h1 initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }}
@@ -545,10 +667,19 @@ function ApplyForm() {
               {/* Form */}
               <motion.form initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }}
                 transition={{ duration:0.6, delay:0.2, ease:[0.16,1,0.3,1] }}
-                onSubmit={handleSubmit} noValidate>
+                onSubmit={handleSubmit}>
 
                 {/* ── Personal Information ── */}
                 <SectionDivider label="Personal Information"/>
+                {locked && (
+                  <div style={{
+                    display:"flex", alignItems:"center", gap:"8px", marginTop:"-8px", marginBottom:"20px",
+                    fontFamily:"var(--font-body)", fontSize:"13px", fontWeight:500, color:"#6B7280",
+                    background:"#F9FAFB", border:"1px solid #E5E7EB", borderRadius:"10px", padding:"10px 14px",
+                  }}>
+                    <Check size={14} color={color}/> Locked from your first application — same for every preference. Only your reason below changes.
+                  </div>
+                )}
                 <div style={{ display:"grid", gap:"20px", marginBottom:"48px" }}>
 
                   <div className="form-row" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px" }}>
@@ -557,7 +688,7 @@ function ApplyForm() {
                       <input type="text" placeholder="Anamika Kumari" value={form.name}
                         onChange={e => set("name", e.target.value)}
                         onFocus={() => setFocused("name")} onBlur={() => setFocused("")}
-                        style={inputStyle(focused==="name", color)}/>
+                        required aria-required disabled={locked} style={{ ...inputStyle(focused==="name", color), ...lockStyle }}/>
                       {errors.name && <FieldErr msg={errors.name}/>}
                     </div>
                     <div>
@@ -565,7 +696,7 @@ function ApplyForm() {
                       <input type="text" placeholder="21B01A0XXX" value={form.rollNo}
                         onChange={e => set("rollNo", e.target.value)}
                         onFocus={() => setFocused("rollNo")} onBlur={() => setFocused("")}
-                        style={inputStyle(focused==="rollNo", color)}/>
+                        required aria-required disabled={locked} style={{ ...inputStyle(focused==="rollNo", color), ...lockStyle }}/>
                       {errors.rollNo && <FieldErr msg={errors.rollNo}/>}
                     </div>
                   </div>
@@ -576,15 +707,15 @@ function ApplyForm() {
                       <input type="tel" placeholder="9XXXXXXXXX" value={form.phone}
                         onChange={e => set("phone", e.target.value)}
                         onFocus={() => setFocused("phone")} onBlur={() => setFocused("")}
-                        style={inputStyle(focused==="phone", color)}/>
+                        required aria-required inputMode="numeric" disabled={locked} style={{ ...inputStyle(focused==="phone", color), ...lockStyle }}/>
                       {errors.phone && <FieldErr msg={errors.phone}/>}
                     </div>
                     <div>
-                      <Label>College Email</Label>
-                      <input type="email" placeholder="you@mlrit.ac.in" value={form.email}
+                      <Label>Email</Label>
+                      <input type="email" placeholder="you@example.com" value={form.email}
                         onChange={e => set("email", e.target.value)}
                         onFocus={() => setFocused("email")} onBlur={() => setFocused("")}
-                        style={inputStyle(focused==="email", color)}/>
+                        required aria-required disabled={locked} style={{ ...inputStyle(focused==="email", color), ...lockStyle }}/>
                       {errors.email && <FieldErr msg={errors.email}/>}
                     </div>
                   </div>
@@ -601,7 +732,7 @@ function ApplyForm() {
                       <select value={form.branch}
                         onChange={e => set("branch", e.target.value)}
                         onFocus={() => setFocused("branch")} onBlur={() => setFocused("")}
-                        style={{ ...inputStyle(focused==="branch", color), appearance:"auto" as any }}>
+                        required aria-required disabled={locked} style={{ ...inputStyle(focused==="branch", color), appearance:"auto" as any, ...lockStyle }}>
                         <option value="">Select your branch…</option>
                         {BRANCHES.map(b => <option key={b} value={b}>{b}</option>)}
                       </select>
@@ -611,16 +742,18 @@ function ApplyForm() {
                       <Label>Year of Study</Label>
                       <div style={{ display:"flex", gap:"10px", flexWrap:"wrap" }}>
                         {YEARS.map(y => (
-                          <motion.button key={y} type="button" onClick={() => set("year", y)}
-                            whileHover={{ y:-1 }} whileTap={{ scale:0.97 }}
+                          <motion.button key={y} type="button" disabled={locked} onClick={() => set("year", y)}
+                            whileHover={locked ? {} : { y:-1 }} whileTap={locked ? {} : { scale:0.97 }}
                             style={{
                               fontFamily:"var(--font-body)", fontWeight:600, fontSize:"14px",
-                              padding:"0 24px", height:"56px", borderRadius:"13px", cursor:"pointer",
+                              padding:"0 24px", height:"56px", borderRadius:"13px",
+                              cursor:locked ? "not-allowed" : "pointer",
                               border:form.year===y ? `1.5px solid ${color}` : "1px solid #E5E7EB",
                               background:form.year===y ? `${color}10` : "#FFFFFF",
                               color:form.year===y ? color : "#374151",
                               transition:"all 0.18s ease",
                               boxShadow:form.year===y ? `0 0 0 3px ${color}15` : "none",
+                              opacity:locked && form.year!==y ? 0.4 : 1,
                             }}>{y}</motion.button>
                         ))}
                       </div>
@@ -639,6 +772,7 @@ function ApplyForm() {
                     <textarea
                       placeholder={`Tell us why you want to join ${dept.name} — your passion, experience, and what you'll bring to the team.`}
                       value={form.why} rows={6}
+                      required aria-required minLength={30}
                       onChange={e => set("why", e.target.value)}
                       onFocus={() => setFocused("why")} onBlur={() => setFocused("")}
                       style={{
@@ -689,11 +823,11 @@ function ApplyForm() {
                     {loading ? (
                       <>
                         <span style={{ width:"16px", height:"16px", border:"2px solid rgba(255,255,255,0.35)", borderTopColor:"#FFF", borderRadius:"50%", display:"inline-block", animation:"spin 0.7s linear infinite" }}/>
-                        {submitProgress < 100 ? "Submitting…" : "Done!"}
+                        {submitProgress < 100 ? (isLastStep ? "Submitting…" : "Saving…") : "Done!"}
                       </>
                     ) : (
                       <>
-                        Submit Application
+                        {isLastStep ? "Submit Application" : `Continue to Preference ${stepIdx + 2}`}
                         <motion.span animate={{ x:hoverBtn ? 5 : 0 }} transition={{ duration:0.2 }}>
                           <ArrowRight size={18}/>
                         </motion.span>
@@ -702,7 +836,7 @@ function ApplyForm() {
                   </motion.button>
 
                   <p style={{ fontFamily:"var(--font-body)", fontSize:"13px", color:"#9CA3AF", lineHeight:1.6 }}>
-                    Applications reviewed within 5–7 days · Results via college email
+                    Applications reviewed within 5–7 days · Results via email
                   </p>
                 </div>
 
