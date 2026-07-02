@@ -125,13 +125,18 @@ export default function ContactPage() {
       {/* ── Cards: Info + Form ───────────────────────────────────── */}
       <section id="contact-form" style={{ background: "#FFFFFF", paddingBottom: "clamp(72px,10vw,100px)" }}>
         <div className="page-container">
-          <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "33% 1fr", gap: "clamp(18px,2.5vw,28px)", alignItems: "start" }}>
+          <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "33% 1fr", gap: "clamp(18px,2.5vw,28px)", alignItems: "stretch" }}>
 
             {/* ── LEFT: Info card ── */}
-            <FadeIn>
-              <div style={{ ...CARD, padding: "clamp(24px,3vw,36px)", position: "sticky", top: "calc(var(--nav-height) + 20px)" }}>
+            <FadeIn className="h-full">
+              <div style={{ ...CARD, padding: "clamp(24px,3vw,36px)", position: "sticky", top: "calc(var(--nav-height) + 20px)", height: "fit-content" }}>
                 {/* Orange top accent bar */}
                 <div style={{ height: "3px", background: "#E8521A", borderRadius: "2px", marginBottom: "24px" }} />
+
+                <div style={{ display: "flex", alignItems: "baseline", marginBottom: "16px" }}>
+                  <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "19px", letterSpacing: "-0.04em", color: "#000000", lineHeight: 1 }}>CIE</span>
+                  <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "21px", color: "#E8521A", lineHeight: 1 }}>.</span>
+                </div>
 
                 <span style={{ ...labelStyle, color: "#E8521A", letterSpacing: "0.14em" }}>Contact Information</span>
                 <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(17px,2vw,21px)", color: "#000000", lineHeight: 1.2, marginTop: "6px", marginBottom: "20px" }}>

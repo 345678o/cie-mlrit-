@@ -128,7 +128,7 @@ const teams: TeamSection[] = [
     members: [
       { name: "Ghanashyam Kodekandla", role: "MP Chairperson", dept: "Tech", photo: "/council/tech/Ghanashyam Kodekandla.png",linkedin:"https://www.linkedin.com/in/ghanashyamkodekandla",year:"4th" },
       { name: "Keertan Kuppili",       role: "Product Development Chairperson", dept: "Tech", photo: "/council/tech/Keertan Kuppili .png", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/",year:"4th"},
-      // { name: "T.S Siddarth",          role: "Member", dept: "Tech", photo: "/council/tech/T.S Siddarth.png",linkedin: "#",year:"4th"},
+      { name: "T.S Siddarth",          role: "Member", dept: "Tech", photo: "/council/tech/T.S Siddarth.png",linkedin: "#",year:"4th"},
       { name: "Teja Jagathi",          role: "Technical Chairperson", dept: "Tech", photo: "/council/tech/Teja Jagathi.png" ,linkedin: "https://www.linkedin.com/in/teja-jagathi",year:"4th"},
       { name: "Abhiram Ganji",         role: "Product Development Lead", dept: "Tech", photo: "/council/tech/Abhiram Ganji.png" ,linkedin:"#",year:"3rd"},
       { name: "Anuj Lomte",            role: "Member", dept: "Tech", photo: "/council/tech/Anuj Lomte.png" ,linkedin: "https://www.linkedin.com/in/anuj-lomte-918b90344/",year:"3rd"},
@@ -151,6 +151,7 @@ const teams: TeamSection[] = [
     members: [
       { name: "Jayadeep",        role: "Member", dept: "Content", photo: "/council/content/Jayadeep.png",linkedin:"https://www.linkedin.com/in/jayadeep-tadakamalla-780077374/",year:"4th" },
       { name: "Prashansa",       role: "Member", dept: "Content", photo: "/council/content/Prashansa .png",linkedin:"https://www.linkedin.com/in/prashansa-b-92218b2b6",year:"4th" },
+      { name: "Haritha",         role: "Member", dept: "Content", photo: "/council/content/Haritha.png",linkedin:"#",year:"4th" },
       { name: "Harshitha",       role: "Member", dept: "Content", photo: "/council/content/Harshitha.png",linkedin:"https://www.linkedin.com/in/harshitha-bollepalli-a5b198345",year:"3rd" },
       { name: "Ritvik Ennavar", role: "Content Lead", dept: "Content", photo: "/council/content/Ennawar Rithvik .png", zoom: 1.15,linkedin:"https://www.linkedin.com/in/rithvik-e-4a4936341/",year:"3rd" },
       { name: "Shiva",           role: "Member", dept: "Content", photo: "/council/content/Shiva.png",linkedin:"https://www.linkedin.com/in/jatavath-shiva-14099338a",year:"3rd" },
@@ -214,6 +215,7 @@ const teams: TeamSection[] = [
     color: "#E53935",
     description: "Represents CIE in every room — anchoring events, running communication workshops, handling PR, and making sure CIE's message lands clearly with every audience.",
     members: [
+      { name: "Sai Mihir Ramaraju",    role: "Member", dept: "P&S", photo: "/council/p&s/Sai Mihir Ramaraju.png",linkedin:"#",year:"4th" },
       { name: "Yashashri Penikalapti", role: "Sponsorship Chairperson", dept: "P&S", photo: "/council/p&s/Yashashri Penikalapti.png",linkedin:"https://www.linkedin.com/in/yashashripenikalapati",year:"4th" },
       { name: "Bandaru Mahith Naidu",  role: "Promotions Chairperson", dept: "P&S", photo: "/council/p&s/Bandaru Mahith Naidu.png",linkedin:"https://www.linkedin.com/in/bandarumahithnaidu/",year:"4th" },
       { name: "Venkata Sanjana Kovuru", role: "Sponsorship Lead", dept: "P&S", photo: "/council/p&s/Sanjana Kovuru.png",linkedin:"https://www.linkedin.com/in/sanjana-kovuru-18b55b31a/",year:"3rd" },

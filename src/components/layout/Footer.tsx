@@ -330,9 +330,14 @@ export default function Footer() {
             © {new Date().getFullYear()} MLRIT CIE. All rights reserved.
           </p>
           <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#3D4148" }}>Built with</span>
-            <span style={{ color: "var(--orange)", fontSize: "11px", lineHeight: 1 }}>▲</span>
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#3D4148" }}>passion at MLRIT</span>
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#3D4148" }}>Built by</span>
+            <Image
+              src="/image 1983.png"
+              alt="CIE Logo"
+              width={32}
+              height={17}
+              style={{ objectFit: "contain", mixBlendMode: "screen" }}
+            />
           </div>
         </div>
       </div>
