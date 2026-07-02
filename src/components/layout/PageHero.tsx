@@ -31,7 +31,7 @@ export default function PageHero({
 
   return (
     <section
-      className="page-hero relative overflow-hidden flex flex-col"
+      className="page-hero hero-shrink-mobile relative overflow-hidden flex flex-col"
       style={{ background: ORANGE, paddingTop: "var(--nav-height)", minHeight: hasLine3 ? "82vh" : "72vh" }}
     >
       {/* Grain texture */}

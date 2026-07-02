@@ -713,7 +713,7 @@ function ApplyForm() {
 
           <style>{`
             @keyframes spin { to { transform: rotate(360deg); } }
-            @media (max-width: 560px) {
+            @media (max-width: 640px) {
               .form-row { grid-template-columns: 1fr !important; }
               .hero-meta { flex-direction: column !important; }
             }

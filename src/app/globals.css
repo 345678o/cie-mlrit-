@@ -582,29 +582,30 @@ button:focus-visible {
 .grid-item-end    { align-self: end; }
 .grid-item-center { align-self: center; }
 
-/* ── Navbar responsive guards (bulletproof against inline-style specificity) ── */
-@media (min-width: 768px) {
+/* ── Navbar responsive guards (bulletproof against inline-style specificity) ──
+   Desktop nav needs 8 links + CTA in one pill — tablets (768-1023px) don't
+   have room for that without clipping/overlap, so they get the hamburger
+   menu too. Only true desktop widths (1024px+) get the full nav.          */
+@media (min-width: 1024px) {
   .nav-hamburger    { display: none !important; }
   .nav-mobile-space { display: none !important; }
 }
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .nav-desktop-links { display: none !important; }
   .nav-desktop-sep   { display: none !important; }
   .nav-desktop-cta   { display: none !important; }
 }
 
-/* ── Mobile: feature panels (events + tours) ────────────────────────────────
+/* ── Mobile: feature panels (events) ─────────────────────────────────────────
    On phones the absolutely-positioned image column overlaps the text.
    Below 768 px: hide the decorative image, let text fill full width,
-   and shrink the panel min-height so it doesn't waste phone screen.        */
+   and shrink the panel min-height so it doesn't waste phone screen.
+   (Gallery's .reveal-img panels have real photo content + their own
+   mobile layout in gallery/page.tsx — not hidden here.)                   */
 @media (max-width: 767px) {
   /* Events featured panels */
   .ep-img-reveal   { display: none !important; }
-  /* Tours feature panels */
-  .reveal-img      { display: none !important; }
-  /* Both: smaller panel height on phones */
-  .ep-img-reveal ~ .page-container,
-  .reveal-img ~ .page-container { justify-content: flex-start !important; }
+  .ep-img-reveal ~ .page-container { justify-content: flex-start !important; }
 }
 
 /* ── Mobile: gallery horizontal scroll ─────────────────────────────────── */
@@ -646,6 +647,18 @@ button:focus-visible {
   }
   /* About page section gaps */
   .lg\:py-24 { padding-top: 3rem; padding-bottom: 3rem; }
+}
+
+/* ── Mobile/tablet: page hero sections ──────────────────────────────────────
+   Heroes are sized (68-100vh) for wide desktop layouts; on narrow tall
+   screens the short heading + description float in a huge empty block.
+   Shared, side-effect-free height override — apply "hero-shrink-mobile"
+   alongside any hero's own classes/styles.                                */
+@media (max-width: 1023px) {
+  .hero-shrink-mobile { min-height: 56vh !important; }
+}
+@media (max-width: 639px) {
+  .hero-shrink-mobile { min-height: 50vh !important; }
 }
 
 /* ── Join Now CTA — black light traveling around the button border ─ */

@@ -3,8 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import {
-  Monitor, Users, Layers, Mic, Calendar, Wifi,
-  Coffee, Printer, Handshake, Lightbulb, TrendingUp, Rocket,
+  Users, Printer, Lightbulb, Presentation, Cpu, Building2, Wrench,
 } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
@@ -36,63 +35,38 @@ function FadeIn({
 const facilities = [
   {
     icon: Lightbulb,
-    title: "Innovation Labs",
-    desc: "State-of-the-art workstations with high-performance hardware for development, design, and rapid prototyping.",
-  },
-  {
-    icon: Handshake,
-    title: "Mentorship",
-    desc: "Industry experts, alumni, and operators guiding startups through product, business strategy, and fundraising.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Investor Network",
-    desc: "Curated introductions to angel investors and VCs, access to pitch events and demo days across Hyderabad.",
-  },
-  {
-    icon: Layers,
-    title: "Co-Working Space",
-    desc: "Dedicated startup bays and flexible desks with 24/7 member access, lockers, and a professional environment.",
-  },
-  {
-    icon: Rocket,
-    title: "Incubation Programs",
-    desc: "Stage-specific programs from ideation to scale — domain tracks in AI/ML, HealthTech, FinTech, and more.",
-  },
-  {
-    icon: Calendar,
-    title: "Event Auditorium",
-    desc: "A 300-seat fully equipped auditorium with AV, live-streaming setup, and breakout rooms for every event size.",
+    title: "Innovation Hub / EPICS Lab",
+    desc: "Loaded with computer systems and emerging-tech software to train aspirants and help them develop innovative solutions for societal and community needs.",
   },
   {
     icon: Printer,
-    title: "Maker Space",
-    desc: "Hands-on fabrication with 3D printers, laser cutters, CNC routers, soldering benches, and electronics tools.",
+    title: "Makerspace",
+    desc: "A technical prototyping platform loaded with Multimedia Workstations, 3D Printers, CNC Machines, and Laser Cutters — open to incubators, student innovators, and startup entrepreneurs to ideate, validate, and prototype new products.",
   },
   {
-    icon: Wifi,
-    title: "High-Speed Internet",
-    desc: "1Gbps enterprise fibre with dedicated Wi-Fi 6 network, secure guest access, and 99.9% uptime across CIE.",
-  },
-  {
-    icon: Mic,
-    title: "Recording Studio",
-    desc: "Professional audio/video gear for content creators — 4K cameras, broadcast mics, green screen, and lighting.",
+    icon: Presentation,
+    title: "Social Square",
+    desc: "Equipped with audio-visual facilities for conducting ideation programs and identifying solutions for societal and community needs.",
   },
   {
     icon: Users,
-    title: "Meeting Rooms",
-    desc: "Three soundproofed meeting rooms seating 6–12, equipped with video conferencing and interactive whiteboards.",
+    title: "Meeting Room",
+    desc: "Dedicated space for interaction and mentoring with innovators, incubators, and bankers.",
   },
   {
-    icon: Coffee,
-    title: "Collaboration Zones",
-    desc: "Informal lounge areas, writable walls, and casual nooks designed to spark spontaneous creative collaboration.",
+    icon: Cpu,
+    title: "Internet of Things Lab",
+    desc: "An open, evolving ecosystem of edge devices, communication protocols, and cloud platforms — giving students hands-on exposure to build cost-effective IoT solutions for precision agriculture, smart cities, and social good.",
   },
   {
-    icon: Monitor,
-    title: "Digital Resources",
-    desc: "Access to premium SaaS tools, cloud credits, software licences, and learning platforms for every CIE member.",
+    icon: Building2,
+    title: "World-Class Office Spaces",
+    desc: "Modern workspace with conference and meeting rooms, open office layouts, a coffee shop, and dedicated work-table spaces.",
+  },
+  {
+    icon: Wrench,
+    title: "Prototype Lab",
+    desc: "Comprehensive rapid-prototyping capability for students, employees, and research projects — converting prototypes into marketable products. Equipped with 3D Scanners & Printers, Rapid Prototyping Machines, Laser Cutters & Engravers, CNC Milling & Turning Centres, Vacuum Plastic Forming Machines, TIG/MIG/SMAG Welding Machines, Centreless Grinders, Computer-Controlled UTM, MMC Stir Casting, and Autoclave.",
   },
 ];
 
@@ -108,7 +82,7 @@ export default function FacilitiesPage() {
         scriptText="— world-class innovation infrastructure"
         description="Every workspace, every tool, every room at CIE is designed with one purpose: to remove friction between your ideas and their execution."
         stats={[
-          { value: "12+", label: "Unique Spaces" },
+          { value: "7+", label: "Unique Spaces" },
           { value: "60+", label: "Workstations" },
           { value: "300", label: "Event Seats" },
           { value: "24/7", label: "Member Access" },

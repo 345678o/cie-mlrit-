@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -28,6 +28,14 @@ const FEATURES = [
     tag: "Innovation",
     h: "Where ideas become reality",
     body: "NVIDIA-powered workstations, CNC routers, 3D printers, and laser cutters — a space that turns any concept into a physical prototype. The Innovation Lab is where CIE students build the future.",
+    imgs: [
+      "/gallery/maker%20space%202.jpg",
+      "/gallery/3d%20printing.jpg",
+      "/gallery/laser%20engraver.jpg",
+      "/gallery/wooden%20graver.jpg",
+      "/gallery/markers%20space.jpg",
+      "/gallery/u%20table.jpg",
+    ],
     imgGrad: "linear-gradient(135deg,#0369a1 0%,#0c4a6e 45%,#082f49 100%)",
     side: "right" as const,
     bg: "#07090f",
@@ -36,17 +44,10 @@ const FEATURES = [
     tag: "Community",
     h: "500+ founders in the making",
     body: "From idea-stage to pitch-ready — students collaborate with mentors, refine MVPs, and connect with the broader Hyderabad startup ecosystem. CIE is where ambition finds its home.",
+    imgs: ["/gallery/cie.jpg", "/gallery/project1.jpg"],
     imgGrad: "linear-gradient(135deg,#7c3aed 0%,#4c1d95 45%,#1e1b4b 100%)",
     side: "left" as const,
     bg: "#090709",
-  },
-  {
-    tag: "Events",
-    h: "100+ events, one community",
-    body: "Hackathons, workshops, e-summits, and guest lectures — each event is a chapter in a story of growth. Explore the visual archive of CIE's most memorable moments.",
-    imgGrad: "linear-gradient(135deg,#059669 0%,#047857 45%,#064e3b 100%)",
-    side: "right" as const,
-    bg: "#060b08",
   },
 ];
 
@@ -67,6 +68,38 @@ const STATS = [
   { n: "500+",  label: "Archival Moments" },
   { n: "5 yrs", label: "Of Storytelling" },
 ];
+
+function FeatureSlideshow({ imgs, alt }: { imgs: string[]; alt: string }) {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (imgs.length < 2) return;
+    const id = setInterval(() => setActive((p) => (p + 1) % imgs.length), 4000);
+    return () => clearInterval(id);
+  }, [imgs.length]);
+
+  return (
+    <>
+      {imgs.map((src, idx) => (
+        <motion.div
+          key={src}
+          style={{ position: "absolute", inset: 0 }}
+          initial={false}
+          animate={{ opacity: idx === active ? 1 : 0 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+        >
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes="(max-width: 900px) 100vw, 46vw"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+          />
+        </motion.div>
+      ))}
+    </>
+  );
+}
 
 /* ═══════════════════════════════════════════════════════════════
    Gallery Page
@@ -108,7 +141,7 @@ export default function GalleryPage() {
       /* ── 3. Horizontal gallery (desktop only) ──────────────── */
       const track   = trackRef.current;
       const section = hScrollRef.current;
-      if (track && section && window.innerWidth >= 768) {
+      if (track && section && window.innerWidth >= 1024) {
         const getTotal = () => track.scrollWidth - window.innerWidth;
 
         const hAnim = gsap.to(track, {
@@ -252,7 +285,7 @@ export default function GalleryPage() {
       ══════════════════════════════════════════════════════ */}
       <section
         ref={heroRef}
-        className="page-hero relative overflow-hidden flex flex-col"
+        className="page-hero gallery-hero relative overflow-hidden flex flex-col"
         style={{
           background: "#E8521A",
           paddingTop: "var(--nav-height)",
@@ -385,6 +418,15 @@ export default function GalleryPage() {
       </section>
 
       <style>{`
+        /* Hero's 68vh assumes a wide/short desktop viewport — on tall narrow
+           phones/tablets the short amount of text ends up floating in a
+           huge empty block. Shrink the target height on those screens. */
+        @media (max-width: 1023px) {
+          .gallery-hero { min-height: 56vh !important; }
+        }
+        @media (max-width: 639px) {
+          .gallery-hero { min-height: 50vh !important; }
+        }
         @keyframes floatArc {
           0%, 100% { transform: translateY(0px) rotate(0deg); }
           50%       { transform: translateY(-10px) rotate(1deg); }
@@ -476,16 +518,16 @@ export default function GalleryPage() {
               paddingRight: "clamp(16px, 2.5vw, 40px)",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
-              <div style={{ width: "22px", height: "1px", background: "#E8521A" }} />
-              <span style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#E8521A" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "18px" }}>
+              <div style={{ width: "26px", height: "2px", background: "#E8521A" }} />
+              <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(9.5px,1.4vw,12px)", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#E8521A" }}>
                 Gallery
               </span>
             </div>
-            <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(24px, 3vw, 40px)", letterSpacing: "-0.03em", color: "#FFFFFF", lineHeight: 1.1, marginBottom: "14px" }}>
+            <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(30px, 5vw, 40px)", letterSpacing: "-0.03em", color: "#FFFFFF", lineHeight: 1.1, marginBottom: "18px" }}>
               Explore<br />the moments
             </h3>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", lineHeight: 1.65, color: "rgba(255,255,255,0.3)" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(13px,1.8vw,15px)", lineHeight: 1.65, color: "rgba(255,255,255,0.3)" }}>
               {H_SLIDES.length} collections · 7 reels · Scroll to explore
             </p>
           </div>
@@ -605,9 +647,9 @@ export default function GalleryPage() {
           ))}
         </div>
 
-        {/* Mobile fallback: horizontal scroll natively */}
+        {/* Mobile/tablet fallback: horizontal scroll natively */}
         <style>{`
-          @media (max-width: 767px) {
+          @media (max-width: 1023px) {
             .h-scroll-track { overflow-x: auto; -webkit-overflow-scrolling: touch; }
           }
         `}</style>
@@ -636,7 +678,7 @@ export default function GalleryPage() {
               position: "absolute",
               [f.side === "right" ? "right" : "left"]: 0,
               top: 0,
-              width: "clamp(280px, 46%, 640px)",
+              width: f.side === "right" ? "clamp(520px, 82%, 1240px)" : "clamp(400px, 62%, 920px)",
               height: "100%",
               overflow: "hidden",
             }}
@@ -648,18 +690,37 @@ export default function GalleryPage() {
                 height: "132%",
                 position: "absolute",
                 top: "-16%",
-                background: f.imgGrad,
+                background: f.bg,
                 willChange: "transform",
               }}
             >
               <div style={{ position: "absolute", inset: 0, backgroundImage: GRAIN, opacity: 0.11 }} />
               {/* Corner label */}
-              <div style={{ position: "absolute", bottom: "24px", left: "24px" }}>
-                <span style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)" }}>
+              <div style={{ position: "absolute", bottom: "24px", left: "24px", zIndex: 2 }}>
+                <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(10.5px,1.4vw,12px)", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)" }}>
                   CIE · {f.tag}
                 </span>
               </div>
             </div>
+
+            {/* Photo (aspect-matched, no crop/letterbox) */}
+            {"imgs" in f && f.imgs && f.imgs.length > 0 && (
+              <div
+                className="feat-photo-box"
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: 0,
+                  width: "100%",
+                  aspectRatio: "4 / 3",
+                  transform: "translateY(-50%)",
+                  overflow: "hidden",
+                  zIndex: 1,
+                }}
+              >
+                <FeatureSlideshow imgs={f.imgs} alt={f.h} />
+              </div>
+            )}
           </div>
 
           {/* Text */}
@@ -669,17 +730,19 @@ export default function GalleryPage() {
               position: "relative",
               zIndex: 2,
               width: "100%",
+              height: "100%",
               display: "flex",
+              alignItems: "center",
               justifyContent: f.side === "right" ? "flex-start" : "flex-end",
             }}
           >
             <div className="feat-txt-inner" style={{ maxWidth: "460px", padding: "clamp(56px, 10vh, 110px) 0" }}>
-              <div className="reveal-text" style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "22px" }}>
-                <span style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#E8521A" }}>
+              <div className="reveal-text" style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "24px" }}>
+                <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(10.5px,1.4vw,12px)", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#E8521A" }}>
                   {String(i + 1).padStart(2, "0")} / {String(FEATURES.length).padStart(2, "0")}
                 </span>
-                <div style={{ width: "22px", height: "1px", background: "rgba(255,255,255,0.14)" }} />
-                <span style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                <div style={{ width: "24px", height: "1px", background: "rgba(255,255,255,0.14)" }} />
+                <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(10.5px,1.4vw,12px)", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                   {f.tag}
                 </span>
               </div>
@@ -688,11 +751,11 @@ export default function GalleryPage() {
                 style={{
                   fontFamily: "var(--font-heading)",
                   fontWeight: 900,
-                  fontSize: "clamp(28px, 4.5vw, 52px)",
+                  fontSize: "clamp(34px, 4.8vw, 56px)",
                   letterSpacing: "-0.03em",
                   lineHeight: 1.07,
                   color: "#FFFFFF",
-                  marginBottom: "22px",
+                  marginBottom: "24px",
                 }}
               >
                 {f.h}
@@ -701,7 +764,7 @@ export default function GalleryPage() {
                 className="reveal-text"
                 style={{
                   fontFamily: "var(--font-body)",
-                  fontSize: "clamp(14px, 1.5vw, 16px)",
+                  fontSize: "clamp(15px, 1.6vw, 17px)",
                   lineHeight: 1.8,
                   color: "rgba(255,255,255,0.46)",
                 }}
@@ -930,8 +993,8 @@ export default function GalleryPage() {
         /* ── Video hover reveal ───────────────────────────────── */
         .h-slide:hover .slide-video { opacity: 1 !important; }
 
-        /* ── Mobile: h-scroll section ─────────────────────────── */
-        @media (max-width: 767px) {
+        /* ── Mobile/tablet: h-scroll section ──────────────────── */
+        @media (max-width: 1023px) {
           .h-scroll-section { height: auto !important; overflow: visible !important; }
           .h-scroll-track {
             /* let track grow to fit the tallest card — no fixed height cap */
@@ -946,8 +1009,8 @@ export default function GalleryPage() {
           /* wider poster cards — ~75vw so one card fills most of the screen */
           .h-scroll-section .h-slide { width: clamp(260px, 75vw, 340px) !important; }
         }
-        /* ── Mobile: feature panels ───────────────────────────── */
-        @media (max-width: 767px) {
+        /* ── Mobile/tablet: feature panels ────────────────────── */
+        @media (max-width: 1023px) {
           .feat-panel {
             min-height: auto !important;
             flex-direction: column !important;
@@ -955,12 +1018,22 @@ export default function GalleryPage() {
           .feat-img-col {
             position: relative !important;
             width: 100% !important;
-            height: 220px !important;
+            height: 300px !important;
             left: auto !important;
             right: auto !important;
             top: auto !important;
             /* override GSAP's initial clip-path hide so image is always visible on mobile */
             clip-path: inset(0 0% 0 0) !important;
+          }
+          /* Aspect-ratio box assumes full desktop column width — at mobile/tablet
+             width that computes way taller than the 220px strip, so only a thin
+             center sliver of the photo survives. Fill the strip directly instead. */
+          .feat-photo-box {
+            top: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            aspect-ratio: auto !important;
+            transform: none !important;
           }
           .feat-txt-col { justify-content: flex-start !important; }
           .feat-txt-inner {

@@ -223,7 +223,7 @@ export default function HomePage() {
           HERO  —  Bold Editorial Collage
       ──────────────────────────────────────────────────────────── */}
       <section
-        className="page-hero relative overflow-hidden flex flex-col"
+        className="page-hero hero-shrink-mobile relative overflow-hidden flex flex-col"
         style={{ background: ORANGE, paddingTop: "var(--nav-height)", minHeight: "100vh" }}
       >
         {/* ── Grain texture (matches Image 1 paper grain) ── */}

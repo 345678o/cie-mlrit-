@@ -213,7 +213,7 @@ export default function VerticalsPage() {
 
       {/* ══ HERO ═══════════════════════════════════════════════════ */}
       <section
-        className="page-hero relative overflow-hidden flex flex-col"
+        className="page-hero hero-shrink-mobile relative overflow-hidden flex flex-col"
         style={{
           background: "#E8521A",
           paddingTop: "var(--nav-height)",

@@ -49,7 +49,7 @@ export const VERTICALS: Vertical[] = [
     lightBg: "rgba(8,145,178,0.07)",
     border: "rgba(8,145,178,0.22)",
     shortDesc:
-      "Microprojects empowers students to build focused, real-world solutions in short sprints. Small in scope, big in learning.",
+      "Provides students with opportunities to work on short-term, hands-on projects that strengthen technical skills, and encourage collaborative problem-solving.",
     overview: [
       "Provides students with opportunities to work on short-term, hands-on projects that strengthen technical skills, and encourage collaborative problem-solving.",
       "MP (Microprojects) is CIE's flagship hands-on learning vertical. It gives students a low-barrier entry point into building real things — no big teams, no long timelines, just a focused idea and 2–4 weeks to execute it.",
@@ -109,7 +109,7 @@ export const VERTICALS: Vertical[] = [
     lightBg: "rgba(124,58,237,0.07)",
     border: "rgba(124,58,237,0.22)",
     shortDesc:
-      "Six purpose-built creative workspaces for design, film, audio, and more. A creative infrastructure for students who make things.",
+      "Produces high-quality digital content, including podcasts, interviews, promotional videos, and media coverage, to showcase CIE's initiatives, events, and success stories.",
     overview: [
       "Produces high-quality digital content, including podcasts, interviews, promotional videos, and media coverage, to showcase CIE's initiatives, events, and success stories.",
       "CIE Studios is the creative infrastructure of the Centre — six purpose-built workspaces that give MLRIT students access to professional-grade tools, equipment, and environments they wouldn't otherwise have.",
@@ -160,7 +160,7 @@ export const VERTICALS: Vertical[] = [
     lightBg: "rgba(5,150,105,0.07)",
     border: "rgba(5,150,105,0.22)",
     shortDesc:
-      "From napkin sketch to deployed product. The methodology, mentorship, and infrastructure to build software, hardware, and everything in between.",
+      "Focuses on transforming innovative ideas into functional products through design, development, testing, and continuous improvement in a collaborative environment.",
     overview: [
       "Focuses on transforming innovative ideas into functional products through design, development, testing, and continuous improvement in a collaborative environment.",
       "Product Development is where ideas become real, scalable products. Unlike Microprojects' sprint format, PD takes a longer view — guiding teams through full product lifecycles from initial discovery to market-ready deployment.",
@@ -212,7 +212,7 @@ export const VERTICALS: Vertical[] = [
     lightBg: "rgba(225,29,72,0.07)",
     border: "rgba(225,29,72,0.22)",
     shortDesc:
-      "A structured 12-week program taking founding teams from raw idea to fundable startup through mentorship, pitch training, and milestone reviews.",
+      "Supports aspiring entrepreneurs by offering mentorship, resources, and guidance to develop innovative ideas into scalable startups and viable business ventures.",
     overview: [
       "Supports aspiring entrepreneurs by offering mentorship, resources, and guidance to develop innovative ideas into scalable startups and viable business ventures.",
       "The Startup Cohort is CIE's most intensive program — a 12-week journey designed for students who are serious about building a company, not just a project.",
@@ -255,8 +255,8 @@ export const VERTICALS: Vertical[] = [
   },
   {
     id: "events",
-    abbr: "EV",
-    name: "Events",
+    abbr: "CUE",
+    name: "Core Unit for Events",
     tagline: "Make It Happen",
     color: "#D97706",
     textColor: "#78350f",
@@ -264,7 +264,7 @@ export const VERTICALS: Vertical[] = [
     lightBg: "rgba(217,119,6,0.07)",
     border: "rgba(217,119,6,0.22)",
     shortDesc:
-      "Designing and executing transformative events — from 200-person hackathons to intimate mentorship circles and industry speaker series.",
+      "Plans, coordinates, and executes CIE events by managing logistics, operations, promotions, content, design, and technical support to ensure successful event delivery.",
     overview: [
       "Plans, coordinates, and executes CIE events by managing logistics, operations, promotions, content, design, and technical support to ensure successful event delivery.",
       "The Events vertical is responsible for the full lifecycle of every CIE event — from concept and design to logistics, production, and post-event documentation. With 50+ events per year, it is the most visible vertical at CIE.",

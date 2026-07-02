@@ -178,7 +178,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
                     loop
                     playsInline
                     preload="auto"
-                    style={{ height: "clamp(400px, 70vh, 760px)", width: "auto", borderRadius: "18px", display: "block", cursor: "pointer" }}
+                    style={{ height: "clamp(400px, 70vh, 760px)", width: "auto", maxWidth: "100%", borderRadius: "18px", display: "block", cursor: "pointer" }}
                   />
                 </div>
               </FadeIn>

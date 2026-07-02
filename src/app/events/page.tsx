@@ -372,7 +372,7 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
       duration: 0.48,
       stagger: { each: 0.055, from: "start" },
       ease: "power3.out",
-    }, outEls.length ? "-=0.36" : "0");
+    });
 
   }, [slides.length]);
 
@@ -584,7 +584,7 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
       </div>
     </div>
     <style>{`
-      @media (max-width: 639px) {
+      @media (max-width: 1023px) {
         .ev-section { flex-direction: column !important; height: auto !important; }
         .ev-poster { order: 2; aspect-ratio: 4/5 !important; width: 100% !important; height: auto !important; flex-shrink: unset !important; }
         .ev-text { order: 1; min-height: 480px; }
@@ -655,6 +655,7 @@ export default function EventsPage() {
       {/* ══ HERO ══ */}
       <section
         ref={heroRef}
+        className="hero-shrink-mobile"
         style={{
           position: "relative", overflow: "hidden",
           minHeight: "72vh", display: "flex", flexDirection: "column",

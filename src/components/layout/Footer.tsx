@@ -172,7 +172,7 @@ export default function Footer() {
       >
 
         {/* ── Mobile: Explore + Programs side by side ─────────────── */}
-        <div className="grid grid-cols-2 gap-8 lg:hidden" style={{ marginBottom: "clamp(28px,5vw,40px)" }}>
+        <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:hidden" style={{ marginBottom: "clamp(28px,5vw,40px)" }}>
           {/* Explore */}
           <div>
             <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "16px" }}>Explore</h3>

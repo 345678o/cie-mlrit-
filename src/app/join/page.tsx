@@ -57,6 +57,12 @@ export default function JoinPage() {
 
       {/* Header */}
       <div style={{ maxWidth: "720px", margin: "0 auto", padding: "0 clamp(16px,4vw,24px) clamp(32px,5vw,56px)", textAlign: "center", position: "relative", zIndex: 1 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", marginBottom: "14px" }}>
+          <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#22C55E", boxShadow: "0 0 0 3px rgba(34,197,94,0.25)", flexShrink: 0 }} />
+          <span style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "10.5px", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.85)" }}>
+            We&apos;re Hiring
+          </span>
+        </div>
 <span style={{
           display: "inline-block", fontFamily: "var(--font-body)", fontWeight: 700,
           fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase",
