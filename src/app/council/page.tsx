@@ -447,6 +447,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
             "Content": "/council/bg/content-flip.webp",
             "Ops — Operations & Finance": "/council/bg/ops-flip.jpg",
             "Creative": "/council/bg/creative-flip.webp",
+            "GD — Graphic Design": "/council/bg/gd-flip.jpg",
           };
           const flipBg = flipBgByDept[m.department];
           const isContent = Boolean(flipBg);
