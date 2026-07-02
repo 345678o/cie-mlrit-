@@ -442,9 +442,6 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
             ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=0a0a0a&color=9aa&size=400&bold=true&format=png`;
           const isActive = active === i;
           const scatter = i % 2 === 0 ? -26 : 26;
-          // Aarthi opens a fresh row so the cluster (Aarthi, Trib, Pavan,
-          // Hansika) sits together on one line (four cards = one desktop row).
-          const startNewRow = m.name === "Aarthi Reddy" && members[i + 1]?.name === "Katepally Tribhuvan";
           return (
             <div
               key={`${m.department}-${m.name}-${i}`}
@@ -460,7 +457,6 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                 background: "transparent", border: "none", padding: 0, cursor: "pointer", textAlign: "left",
                 transform: `translateY(${isActive ? 0 : scatter}px)`,
                 transition: "transform .55s cubic-bezier(.16,1,.3,1)",
-                ...(startNewRow ? { gridColumnStart: 1 } : {}),
               }}
             >
               <div style={{
@@ -600,11 +596,17 @@ export default function CouncilPage() {
   const allShuffled = [...allMembers].sort(
     (a, b) => (orderRank.get(a.name) ?? Infinity) - (orderRank.get(b.name) ?? Infinity)
   );
-  // Keep a fixed cluster contiguous in this exact order, placed at the first
-  // member's original spot. No forced grid-column (so no empty cells), no year
-  // sort — the rest keeps the shuffle order from ALL_ORDER.
+  // Mahima first, then a fixed cluster (Aarthi, Trib, Pavan, Hansika) kept
+  // contiguous AND aligned to a 4-col row boundary — so on desktop the four
+  // fill one full row with NO empty cells before them (other cards flow in).
   const pinAll = <T extends { name: string }>(list: T[]): T[] => {
     let arr = [...list];
+    // Mahima always first.
+    const mah = arr.find((m) => m.name === "Mahima Tatineni");
+    if (mah) {
+      arr = arr.filter((m) => m !== mah);
+      arr.unshift(mah);
+    }
     const clusterOrder = ["Aarthi Reddy", "Katepally Tribhuvan", "Athava Sri Pavan", "Hansika Jella"];
     const cluster = clusterOrder
       .map((n) => arr.find((m) => m.name === n))
@@ -612,14 +614,11 @@ export default function CouncilPage() {
     if (cluster.length) {
       const at = arr.findIndex((m) => m.name === clusterOrder[0]);
       arr = arr.filter((m) => !cluster.includes(m));
-      const insertAt = at < 0 ? arr.length : Math.min(at, arr.length);
+      // Snap the block start to a multiple of 4 (desktop columns) so it begins
+      // at column 1 of a row — one clean line, no gap. Never before Mahima.
+      let insertAt = at < 0 ? arr.length : Math.round(at / 4) * 4;
+      insertAt = Math.max(4, Math.min(insertAt, arr.length));
       arr.splice(insertAt, 0, ...cluster);
-    }
-    // Mahima always first.
-    const mah = arr.find((m) => m.name === "Mahima Tatineni");
-    if (mah) {
-      arr = arr.filter((m) => m !== mah);
-      arr.unshift(mah);
     }
     return arr;
   };
