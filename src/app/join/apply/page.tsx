@@ -345,6 +345,13 @@ function ApplyForm() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stepIdx, rawDept]);
 
+  // Common details (name, roll, phone, email, branch, year) are shared across every
+  // preference — lock them after the first application so they can't drift between steps.
+  const locked = stepIdx > 0 && form.name.trim() !== "";
+  const lockStyle: React.CSSProperties = locked
+    ? { background: "#F3F4F6", color: "#6B7280", cursor: "not-allowed", borderColor: "#E5E7EB", boxShadow: "none" }
+    : {};
+
   function set(k: keyof FormState, v: string) {
     setForm(p => ({ ...p, [k]: v }));
     if (errors[k]) setErrors(p => ({ ...p, [k]: "" }));
@@ -664,6 +671,15 @@ function ApplyForm() {
 
                 {/* ── Personal Information ── */}
                 <SectionDivider label="Personal Information"/>
+                {locked && (
+                  <div style={{
+                    display:"flex", alignItems:"center", gap:"8px", marginTop:"-8px", marginBottom:"20px",
+                    fontFamily:"var(--font-body)", fontSize:"13px", fontWeight:500, color:"#6B7280",
+                    background:"#F9FAFB", border:"1px solid #E5E7EB", borderRadius:"10px", padding:"10px 14px",
+                  }}>
+                    <Check size={14} color={color}/> Locked from your first application — same for every preference. Only your reason below changes.
+                  </div>
+                )}
                 <div style={{ display:"grid", gap:"20px", marginBottom:"48px" }}>
 
                   <div className="form-row" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px" }}>
@@ -672,7 +688,7 @@ function ApplyForm() {
                       <input type="text" placeholder="Anamika Kumari" value={form.name}
                         onChange={e => set("name", e.target.value)}
                         onFocus={() => setFocused("name")} onBlur={() => setFocused("")}
-                        required aria-required style={inputStyle(focused==="name", color)}/>
+                        required aria-required disabled={locked} style={{ ...inputStyle(focused==="name", color), ...lockStyle }}/>
                       {errors.name && <FieldErr msg={errors.name}/>}
                     </div>
                     <div>
@@ -680,7 +696,7 @@ function ApplyForm() {
                       <input type="text" placeholder="21B01A0XXX" value={form.rollNo}
                         onChange={e => set("rollNo", e.target.value)}
                         onFocus={() => setFocused("rollNo")} onBlur={() => setFocused("")}
-                        required aria-required style={inputStyle(focused==="rollNo", color)}/>
+                        required aria-required disabled={locked} style={{ ...inputStyle(focused==="rollNo", color), ...lockStyle }}/>
                       {errors.rollNo && <FieldErr msg={errors.rollNo}/>}
                     </div>
                   </div>
@@ -691,7 +707,7 @@ function ApplyForm() {
                       <input type="tel" placeholder="9XXXXXXXXX" value={form.phone}
                         onChange={e => set("phone", e.target.value)}
                         onFocus={() => setFocused("phone")} onBlur={() => setFocused("")}
-                        required aria-required inputMode="numeric" style={inputStyle(focused==="phone", color)}/>
+                        required aria-required inputMode="numeric" disabled={locked} style={{ ...inputStyle(focused==="phone", color), ...lockStyle }}/>
                       {errors.phone && <FieldErr msg={errors.phone}/>}
                     </div>
                     <div>
@@ -699,7 +715,7 @@ function ApplyForm() {
                       <input type="email" placeholder="you@example.com" value={form.email}
                         onChange={e => set("email", e.target.value)}
                         onFocus={() => setFocused("email")} onBlur={() => setFocused("")}
-                        required aria-required style={inputStyle(focused==="email", color)}/>
+                        required aria-required disabled={locked} style={{ ...inputStyle(focused==="email", color), ...lockStyle }}/>
                       {errors.email && <FieldErr msg={errors.email}/>}
                     </div>
                   </div>
@@ -716,7 +732,7 @@ function ApplyForm() {
                       <select value={form.branch}
                         onChange={e => set("branch", e.target.value)}
                         onFocus={() => setFocused("branch")} onBlur={() => setFocused("")}
-                        required aria-required style={{ ...inputStyle(focused==="branch", color), appearance:"auto" as any }}>
+                        required aria-required disabled={locked} style={{ ...inputStyle(focused==="branch", color), appearance:"auto" as any, ...lockStyle }}>
                         <option value="">Select your branch…</option>
                         {BRANCHES.map(b => <option key={b} value={b}>{b}</option>)}
                       </select>
@@ -726,16 +742,18 @@ function ApplyForm() {
                       <Label>Year of Study</Label>
                       <div style={{ display:"flex", gap:"10px", flexWrap:"wrap" }}>
                         {YEARS.map(y => (
-                          <motion.button key={y} type="button" onClick={() => set("year", y)}
-                            whileHover={{ y:-1 }} whileTap={{ scale:0.97 }}
+                          <motion.button key={y} type="button" disabled={locked} onClick={() => set("year", y)}
+                            whileHover={locked ? {} : { y:-1 }} whileTap={locked ? {} : { scale:0.97 }}
                             style={{
                               fontFamily:"var(--font-body)", fontWeight:600, fontSize:"14px",
-                              padding:"0 24px", height:"56px", borderRadius:"13px", cursor:"pointer",
+                              padding:"0 24px", height:"56px", borderRadius:"13px",
+                              cursor:locked ? "not-allowed" : "pointer",
                               border:form.year===y ? `1.5px solid ${color}` : "1px solid #E5E7EB",
                               background:form.year===y ? `${color}10` : "#FFFFFF",
                               color:form.year===y ? color : "#374151",
                               transition:"all 0.18s ease",
                               boxShadow:form.year===y ? `0 0 0 3px ${color}15` : "none",
+                              opacity:locked && form.year!==y ? 0.4 : 1,
                             }}>{y}</motion.button>
                         ))}
                       </div>
