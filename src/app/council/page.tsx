@@ -442,8 +442,13 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
             ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=0a0a0a&color=9aa&size=400&bold=true&format=png`;
           const isActive = active === i;
           const scatter = i % 2 === 0 ? -26 : 26;
-          // Content dept gets a comic-burst flip background with white text.
-          const isContent = m.department === "Content";
+          // Some depts get a comic-burst flip background with white text.
+          const flipBgByDept: Record<string, string> = {
+            "Content": "/council/bg/content-flip.webp",
+            "Ops — Operations & Finance": "/council/bg/ops-flip.jpg",
+          };
+          const flipBg = flipBgByDept[m.department];
+          const isContent = Boolean(flipBg);
           const backText = isContent ? "#ffffff" : m.deptColor;
           return (
             <div
@@ -492,8 +497,8 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                     <div style={{ position: "absolute", inset: 0, clipPath: CS_NOTCH, background: m.deptColor }} />
                     <div style={{
                       position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden",
-                      background: isContent
-                        ? "#111 url('/council/bg/content-flip.webp') center/cover no-repeat"
+                      background: flipBg
+                        ? `#111 url('${flipBg}') center/cover no-repeat`
                         : "#05070F",
                       display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "clamp(14px,6%,20px)",
                     }}>
