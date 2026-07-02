@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Boxes, Palette, Cpu, CalendarDays, Rocket, ArrowRight } from "lucide-react";
+import { Boxes, Palette, Cpu, CalendarDays, Rocket, ArrowRight, Package } from "lucide-react";
 import Link from "next/link";
 import PageGeometric from "@/components/ui/PageGeometric";
 import { VERTICALS } from "./verticals-data";
@@ -14,6 +14,7 @@ const ICONS: Record<string, React.ElementType> = {
   "product-development": Cpu,
   "startup-cohort": Rocket,
   events: CalendarDays,
+  inventory: Package,
 };
 
 /* ─── FadeIn ─────────────────────────────────────────────────────── */

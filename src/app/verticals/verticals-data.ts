@@ -305,6 +305,53 @@ export const VERTICALS: Vertical[] = [
     applyInfo:
       "The Events team recruits each semester. Roles span creative, technical, logistics, and marketing. If you enjoy bringing ideas to life and working under pressure, apply during the next recruitment cycle.",
   },
+  {
+    id: "inventory",
+    abbr: "INV",
+    name: "Inventory",
+    tagline: "Keep Every Build Stocked",
+    color: "#65A30D",
+    textColor: "#365314",
+    gradient: "linear-gradient(145deg, #365314 0%, #4d7c0f 55%, #65a30d 100%)",
+    lightBg: "rgba(101,163,13,0.07)",
+    border: "rgba(101,163,13,0.22)",
+    shortDesc:
+      "Manages CIE's equipment, tools, and materials — tracking bookings, maintenance, and stock across every studio, lab, and event.",
+    overview: [
+      "Manages CIE's equipment, tools, and materials — tracking bookings, maintenance, and stock across every studio, lab, and event.",
+      "Inventory is the backbone vertical that keeps every other team building. From camera gear and mics in the Studios to components in the Hardware Lab and supplies for events, this team tracks what CIE owns, where it is, and who has it.",
+      "The team runs a check-in/check-out system for equipment, audits stock levels regularly, and flags maintenance or replacement needs before they become blockers for other verticals.",
+      "Beyond tracking, Inventory works closely with Ops on procurement — sourcing new equipment, negotiating with vendors, and managing budgets for tools that every other vertical depends on.",
+    ],
+    quote: "No one notices inventory until it's missing. We make sure that never happens.",
+    stats: [
+      { value: "300+", label: "Items Tracked" },
+      { value: "6", label: "Studios & Labs Covered" },
+      { value: "0", label: "Lost-Equipment Incidents" },
+    ],
+    roles: [
+      { title: "Inventory Manager", desc: "Owns the full equipment catalog — stock counts, check-in/check-out logs, and audit schedules." },
+      { title: "Procurement Coordinator", desc: "Sources new equipment and supplies, manages vendor relationships, and tracks purchase budgets." },
+      { title: "Maintenance Lead", desc: "Inspects and services equipment, flags damage or wear, and coordinates repairs or replacements." },
+      { title: "Studio Liaison", desc: "Coordinates with each studio/lab team to reconcile equipment usage and resolve discrepancies." },
+    ],
+    projects: [
+      { name: "Inventory Management System", desc: "Internal tool managing CIE's equipment inventory, bookings, and maintenance logs.", status: "Active" },
+      { name: "Equipment Audit Sprint", desc: "Full physical audit reconciling every studio and lab's stock against the digital catalog.", status: "Completed" },
+      { name: "QR Asset Tagging", desc: "QR-code tagging system for fast equipment check-in/check-out scanning.", status: "Upcoming" },
+    ],
+    events: [
+      { name: "Stock Audit Day", type: "Quarterly", desc: "Full physical count and reconciliation of equipment across all studios and labs." },
+      { name: "Equipment Onboarding", type: "Each Semester", desc: "Training session for new members on check-out procedures and equipment handling." },
+    ],
+    achievements: [
+      "300+ items cataloged across 6 studios and labs",
+      "Zero lost-equipment incidents since digital tracking began",
+      "Streamlined check-out turnaround to under 5 minutes",
+    ],
+    applyInfo:
+      "Inventory recruits members each semester who are detail-oriented and reliable. No prior experience needed — training is provided on the tracking system and equipment handling procedures.",
+  },
 ];
 
 export function getVertical(id: string): Vertical | undefined {
