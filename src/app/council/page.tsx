@@ -573,16 +573,31 @@ export default function CouncilPage() {
     t.members.map((m) => ({ ...m, department: t.team, deptColor: t.color }))
   );
 
-  // FIXED "All" order — the exact sequence from the live site, hardcoded so
-  // every device/browser shows it identically (no random shuffle, no
-  // localStorage). Indices map into `allMembers` (declaration order); remapped
-  // for T.S Siddarth inserted at Tech index 3.
-  const ALL_ORDER = [44, 8, 30, 39, 56, 51, 60, 55, 38, 24, 25, 5, 6, 22, 59, 33, 19, 16, 57, 32, 61, 2, 50, 10, 49, 9, 28, 0, 53, 48, 62, 29, 54, 41, 46, 34, 7, 18, 27, 45, 36, 31, 15, 37, 40, 26, 21, 63, 1, 20, 14, 13, 4, 11, 43, 42, 58, 35, 23, 12, 47, 52, 17, 3];
-  // Any indices not listed (roster changes) are appended in declaration order.
-  const allShuffled = [
-    ...ALL_ORDER.filter((i) => i < allMembers.length).map((i) => allMembers[i]),
-    ...allMembers.filter((_, i) => !ALL_ORDER.includes(i)),
+  // FIXED "All" order — the exact sequence from the live site, hardcoded by
+  // NAME so it's stable across devices AND survives roster changes (no random
+  // shuffle, no localStorage, no fragile indices). Any member not listed here
+  // (newly added) is appended in declaration order.
+  const ALL_ORDER_NAMES = [
+    "Sai Varshith Konduru", "Jaikar Midithuri", "Avinash", "Kodali Pranav Chandra",
+    "Mahima Tatineni", "Bandaru Mahith Naidu", "Alleshwaram Sai Ganesh", "Dheeraj Kumar",
+    "Tannidi Durga Karthikeya", "Durga Mahesh", "Cheeda Shamilini", "Anuj Lomte",
+    "Anamika", "Sai Krishna", "Bhavana", "Yeruva InduSri Varshitha Reddy",
+    "Shiva", "Prashansa", "Aarthi Reddy", "Sri Thejitha", "M.Tarun Kumar Reddy",
+    "Teja Jagathi", "Yashashri Penikalapti", "Katepally Tribhuvan", "Konthum Bhruhathi",
+    "Athava Sri Pavan", "Hansika Jella", "Ghanashyam Kodekandla", "Adithya Ganesh",
+    "Sai Vashist", "Tharun", "Vivek Vardhan", "Rithish Kumar", "Anguluri Shiva",
+    "Anam Mounika", "A Farhana Sultana", "Guna Sai Marni", "Ritvik Ennavar",
+    "Sadwika Reddy Chedimala", "Mahesh Gorli", "Bangari Nikitha", "Chanikya",
+    "Jayadeep", "Poloju RajaVivek", "Priyanshu Roy", "D Pearl Angelina", "Harika Y",
+    "M Vasanth Vardhan", "Keertan Kuppili", "K S Sreesanth", "Gannoji Vedik",
+    "Guguloth Adithya Jadhav", "Abhiram Ganji", "Yashwanth Abhishek", "Vavilala Sai Ganesh",
+    "Mattam Shivani", "Vinay", "Mounith Varma Akkala", "Sushaanth", "Abhinav Sai",
+    "Gothuri Rishith", "Venkata Sanjana Kovuru", "Harshitha", "T.S Siddarth",
   ];
+  const orderRank = new Map(ALL_ORDER_NAMES.map((n, i) => [n, i]));
+  const allShuffled = [...allMembers].sort(
+    (a, b) => (orderRank.get(a.name) ?? Infinity) - (orderRank.get(b.name) ?? Infinity)
+  );
   // Keep a fixed cluster contiguous in this exact order, placed at the first
   // member's original spot. No forced grid-column (so no empty cells), no year
   // sort — the rest keeps the shuffle order from ALL_ORDER.
