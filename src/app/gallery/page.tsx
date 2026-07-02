@@ -62,13 +62,6 @@ const GRID = [
   { label: "GI Heritage",       img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00552.JPG", grad: "linear-gradient(145deg,#060e0a,#14532d,#16a34a)", cs: 1, rs: 1 },
 ];
 
-const STATS = [
-  { n: "100+",  label: "Events Documented" },
-  { n: "3000+", label: "Participants Captured" },
-  { n: "500+",  label: "Archival Moments" },
-  { n: "5 yrs", label: "Of Storytelling" },
-];
-
 function FeatureSlideshow({ imgs, alt }: { imgs: string[]; alt: string }) {
   const [active, setActive] = useState(0);
 
@@ -253,22 +246,6 @@ export default function GalleryPage() {
         }
       );
 
-      /* ── 8. Stats entrance ──────────────────────────────────── */
-      gsap.fromTo(".stat-item",
-        { opacity: 0, y: 22 },
-        {
-          opacity: 1, y: 0,
-          duration: 0.7,
-          stagger: 0.09,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".stats-row",
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-
     }, containerRef);
 
     return () => {
@@ -277,8 +254,27 @@ export default function GalleryPage() {
     };
   }, []);
 
+  /* Only decode/play the h-slide video that's actually on screen — mounting
+     all 7 as autoplay at once overloads mobile GPUs and causes scroll jank. */
+  useEffect(() => {
+    const videos = Array.from(document.querySelectorAll<HTMLVideoElement>(".slide-video"));
+    if (!videos.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const v = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) v.play().catch(() => {});
+          else v.pause();
+        });
+      },
+      { rootMargin: "200px", threshold: 0.15 }
+    );
+    videos.forEach((v) => io.observe(v));
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <div ref={containerRef} style={{ background: "#E8521A" }}>
+    <div ref={containerRef}>
 
       {/* ══════════════════════════════════════════════════════
           HERO — matches Verticals visual language
@@ -528,7 +524,7 @@ export default function GalleryPage() {
               Explore<br />the moments
             </h3>
             <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(13px,1.8vw,15px)", lineHeight: 1.65, color: "rgba(255,255,255,0.3)" }}>
-              {H_SLIDES.length} collections · 7 reels · Scroll to explore
+              {H_SLIDES.length} collections · 7 reels · Scroll horizontally to explore, hover to start watching
             </p>
           </div>
 
@@ -576,26 +572,24 @@ export default function GalleryPage() {
 
               {/* Poster cover — always visible when video hidden */}
               {slide.poster && (
-                <img
+                <Image
                   src={slide.poster}
                   alt=""
                   aria-hidden
-                  style={{
-                    position: "absolute", inset: 0, width: "100%", height: "100%",
-                    objectFit: "contain", background: "#000", zIndex: 1,
-                  }}
+                  fill
+                  sizes="(max-width: 1023px) 75vw, 42vw"
+                  style={{ objectFit: "contain", background: "#000", zIndex: 1 }}
                 />
               )}
 
-              {/* Video — autoplays muted, unmutes on hover */}
+              {/* Video — plays only when scrolled into view, unmutes on hover */}
               {slide.video && (
                 <video
                   src={slide.video}
                   muted
-                  autoPlay
                   loop
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                   className="slide-video"
                   style={{
                     position: "absolute", inset: 0, width: "100%", height: "100%",
@@ -678,7 +672,7 @@ export default function GalleryPage() {
               position: "absolute",
               [f.side === "right" ? "right" : "left"]: 0,
               top: 0,
-              width: f.side === "right" ? "clamp(520px, 82%, 1240px)" : "clamp(400px, 62%, 920px)",
+              width: f.side === "right" ? "clamp(460px, calc(100% - 600px), 1200px)" : "clamp(380px, calc(100% - 600px), 900px)",
               height: "100%",
               overflow: "hidden",
             }}
@@ -725,7 +719,7 @@ export default function GalleryPage() {
 
           {/* Text */}
           <div
-            className="page-container feat-txt-col"
+            className="feat-txt-col"
             style={{
               position: "relative",
               zIndex: 2,
@@ -734,6 +728,8 @@ export default function GalleryPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: f.side === "right" ? "flex-start" : "flex-end",
+              paddingLeft: f.side === "right" ? "clamp(20px, 5vw, 64px)" : 0,
+              paddingRight: f.side === "left" ? "clamp(20px, 5vw, 64px)" : 0,
             }}
           >
             <div className="feat-txt-inner" style={{ maxWidth: "460px", padding: "clamp(56px, 10vh, 110px) 0" }}>
@@ -853,34 +849,6 @@ export default function GalleryPage() {
             .masonry-grid > div { height: 150px; }
           }
         `}</style>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
-          STATS — dark, minimal
-      ══════════════════════════════════════════════════════ */}
-      <section style={{ background: "#111111", padding: "clamp(72px, 11vw, 110px) 0" }}>
-        <div className="page-container">
-          <div
-            className="stats-row"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "clamp(36px, 6vw, 72px)",
-            }}
-          >
-            {STATS.map((s, i) => (
-              <div key={i} className="stat-item" style={{ willChange: "transform, opacity" }}>
-                <div style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(38px, 6.5vw, 80px)", letterSpacing: "-0.045em", color: "#FFFFFF", lineHeight: 1, marginBottom: "8px" }}>
-                  {s.n}
-                </div>
-                <div style={{ fontFamily: "var(--font-body)", fontSize: "12.5px", color: "rgba(255,255,255,0.35)", letterSpacing: "0.07em" }}>
-                  {s.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <style>{`@media(min-width:640px){.stats-row{grid-template-columns:repeat(4,1fr)!important;}}`}</style>
       </section>
 
       {/* ══════════════════════════════════════════════════════
