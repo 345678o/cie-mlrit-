@@ -442,6 +442,10 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
             ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=0a0a0a&color=9aa&size=400&bold=true&format=png`;
           const isActive = active === i;
           const scatter = i % 2 === 0 ? -26 : 26;
+          // Keep Tribhuvan + Aarthi on the same grid row: force Tribhuvan to
+          // column 1 (start of a fresh row) when Aarthi is the next card, so
+          // Aarthi lands in column 2 beside him across 2/3/4-col layouts.
+          const startNewRow = m.name === "Katepally Tribhuvan" && members[i + 1]?.name === "Aarthi Reddy";
           return (
             <div
               key={`${m.department}-${m.name}-${i}`}
@@ -457,6 +461,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                 background: "transparent", border: "none", padding: 0, cursor: "pointer", textAlign: "left",
                 transform: `translateY(${isActive ? 0 : scatter}px)`,
                 transition: "transform .55s cubic-bezier(.16,1,.3,1)",
+                ...(startNewRow ? { gridColumnStart: 1 } : {}),
               }}
             >
               <div style={{
