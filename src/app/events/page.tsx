@@ -40,12 +40,13 @@ const FEATURED: EventData[] = [
     bg: "#07090f",
     slides: [
       { img: "/events/poster/wc%202.0.png", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "Workshop Carnival 2.0", body: "Where learning goes beyond classrooms — into real skills, real challenges, and real innovation. Explore multiple domains in one immersive sprint." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/DSCF1090.JPG", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "", body: "" },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/DSCF1109.JPG", grad: "linear-gradient(160deg,#040a18 0%,#0a1836 50%,#1a3380 100%)", heading: "Expert-Led Tracks", body: "Learn directly from practitioners. Each workshop track delivers hands-on expertise in UI/UX, IoT, content creation, and product design." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM.jpeg", grad: "linear-gradient(130deg,#050c22 0%,#0f2650 50%,#1e40af 100%)", heading: "Build, Don't Browse", body: "Every session ends with something tangible. Teams prototype, test, and iterate — no passive learning, no slides-only talks." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM%20(1).jpeg", grad: "linear-gradient(150deg,#060d20 0%,#0d1f40 50%,#2563eb 100%)", heading: "Cross-Domain Collide", body: "Designers collaborate with developers. Strategists work alongside engineers. That friction is where the best ideas are born." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM%20(2).jpeg", grad: "linear-gradient(140deg,#040a1a 0%,#0b1c38 50%,#1c3fa8 100%)", heading: "Live Feedback Loop", body: "Mentors circulate every hour, giving real-time critique and direction. No waiting till the end to know if you're off track." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM%20(3).jpeg", grad: "linear-gradient(155deg,#050b1e 0%,#0c1e3e 50%,#1d42b0 100%)", heading: "Skills That Stay", body: "From prototype to portfolio. What you build during Carnival follows you well beyond the campus boundary." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/IMG_5443.png", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/IMG_5499.png", grad: "linear-gradient(160deg,#040a18 0%,#0a1836 50%,#1a3380 100%)", heading: "", body: "" },
     ],
   },
   {
@@ -118,12 +119,14 @@ const FEATURED: EventData[] = [
     bg: "#060810",
     slides: [
       { img: "/events/poster/wc.png", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "Workshop Carnival", body: "Six days of hands-on exploration. Participants tackled UI/UX design, IoT, and WordPress through structured challenges and expert guidance." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/WC/DSCF0788.JPG", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/WC/IMG-20250920-WA0010.jpg", grad: "linear-gradient(160deg,#040a18 0%,#0a1930 50%,#1a45c8 100%)", heading: "UI/UX Track", body: "Design thinking meets real products. Teams redesign existing apps and pitch their improvements to practicing UX designers." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/WC/IMG-20250920-WA0050.jpg", grad: "linear-gradient(130deg,#060c20 0%,#0e2040 50%,#2155d8 100%)", heading: "IoT Lab", body: "Sensors, circuits, and code. Participants build working IoT prototypes from scratch with expert guidance on hardware and firmware." },
-      { grad: "linear-gradient(150deg,#050a1a 0%,#0c1d38 50%,#1c4ad0 100%)", heading: "WordPress Build", body: "From blank canvas to live website. Participants design, develop, and deploy a fully functional site — in a single session." },
-      { grad: "linear-gradient(140deg,#060b1e 0%,#0d1e3a 50%,#1e4dd5 100%)", heading: "Domain Showdowns", body: "Each track ends with a domain-specific contest. The best project across design, IoT, and web earns recognition and prizes." },
-      { grad: "linear-gradient(155deg,#050a1c 0%,#0c1c38 50%,#1b48cc 100%)", heading: "Community Builders", body: "Beyond skills — students leave with a network of peers, mentors, and collaborators who share the same drive to create." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1436.JPG", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1479.png", grad: "linear-gradient(160deg,#040a18 0%,#0a1930 50%,#1a45c8 100%)", heading: "UI/UX Track", body: "Design thinking meets real products. Teams redesign existing apps and pitch their improvements to practicing UX designers." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1485.png", grad: "linear-gradient(130deg,#060c20 0%,#0e2040 50%,#2155d8 100%)", heading: "IoT Lab", body: "Sensors, circuits, and code. Participants build working IoT prototypes from scratch with expert guidance on hardware and firmware." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1492.png", grad: "linear-gradient(150deg,#050a1a 0%,#0c1d38 50%,#1c4ad0 100%)", heading: "WordPress Build", body: "From blank canvas to live website. Participants design, develop, and deploy a fully functional site — in a single session." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1503.png", grad: "linear-gradient(140deg,#060b1e 0%,#0d1e3a 50%,#1e4dd5 100%)", heading: "Domain Showdowns", body: "Each track ends with a domain-specific contest. The best project across design, IoT, and web earns recognition and prizes." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1527.png", grad: "linear-gradient(155deg,#050a1c 0%,#0c1c38 50%,#1b48cc 100%)", heading: "Community Builders", body: "Beyond skills — students leave with a network of peers, mentors, and collaborators who share the same drive to create." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_4415.png", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG20240315094843.jpg", grad: "linear-gradient(160deg,#040a18 0%,#0a1930 50%,#1a45c8 100%)", heading: "", body: "" },
     ],
   },
   {
@@ -197,21 +200,36 @@ function EventFilmStrip({ ev }: { ev: EventData }) {
     if (!strip) return;
 
     let ctx: ReturnType<typeof gsap.context> | undefined;
+    let tween: gsap.core.Tween | undefined;
+    let io: IntersectionObserver | undefined;
     const raf = requestAnimationFrame(() => {
       const halfW = strip.scrollWidth / 2;
       if (halfW <= 0) return;
       ctx = gsap.context(() => {
-        gsap.to(strip, {
+        tween = gsap.to(strip, {
           x: -halfW,
           duration: halfW / 60,
           ease: "none",
           repeat: -1,
         });
       });
+      // Off-screen strips keep animating forever otherwise — 7 concurrent
+      // infinite tweens burn CPU/battery even when nowhere near the viewport.
+      io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) tween?.play();
+            else tween?.pause();
+          });
+        },
+        { rootMargin: "200px" }
+      );
+      io.observe(strip);
     });
 
     return () => {
       cancelAnimationFrame(raf);
+      io?.disconnect();
       ctx?.revert();
     };
   }, [imgs.length]);
@@ -236,11 +254,12 @@ function EventFilmStrip({ ev }: { ev: EventData }) {
           display: "flex", alignItems: "center", justifyContent: "center",
           cursor: "zoom-out",
         }}>
-          <img src={lightbox} alt="" onClick={e => e.stopPropagation()} style={{
-            maxWidth: "90vw", maxHeight: "88vh",
-            objectFit: "contain", borderRadius: "3px",
-            boxShadow: "0 40px 120px rgba(0,0,0,0.9)", cursor: "default",
-          }} />
+          <div onClick={e => e.stopPropagation()} style={{
+            position: "relative", width: "90vw", height: "88vh",
+            borderRadius: "3px", boxShadow: "0 40px 120px rgba(0,0,0,0.9)", cursor: "default",
+          }}>
+            <Image src={lightbox} alt="" fill sizes="90vw" style={{ objectFit: "contain" }} />
+          </div>
           <button onClick={() => setLightbox(null)} aria-label="Close" style={{
             position: "absolute", top: "20px", right: "20px",
             width: "40px", height: "40px", borderRadius: "50%",
