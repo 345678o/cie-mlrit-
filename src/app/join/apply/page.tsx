@@ -83,16 +83,16 @@ const PREF_NAMES: Record<string, string> = {
 const BRANCHES = ["CSE","CSM","CSD","CSIT","IT","EEE","ECE","MECH","AERO"];
 const YEARS    = ["2nd Year","3rd Year","4th Year"];
 
-type FormState = { name: string; rollNo: string; phone: string; email: string; branch: string; year: string; why: string };
-const EMPTY: FormState = { name:"", rollNo:"", phone:"", email:"", branch:"", year:"", why:"" };
+type FormState = { name: string; rollNo: string; phone: string; email: string; branch: string; year: string; cgpa: string; backlogs: string; why: string };
+const EMPTY: FormState = { name:"", rollNo:"", phone:"", email:"", branch:"", year:"", cgpa:"", backlogs:"", why:"" };
 
 // Persists shared personal details + per-department "why" answers across the sequential steps.
 const STORE_KEY = "cie-apply";
 type Store = { personal: Omit<FormState, "why">; why: Record<string, string> };
 function readStore(): Store {
-  if (typeof window === "undefined") return { personal: { name:"", rollNo:"", phone:"", email:"", branch:"", year:"" }, why: {} };
+  if (typeof window === "undefined") return { personal: { name:"", rollNo:"", phone:"", email:"", branch:"", year:"", cgpa:"", backlogs:"" }, why: {} };
   try { return JSON.parse(sessionStorage.getItem(STORE_KEY) || "") as Store; }
-  catch { return { personal: { name:"", rollNo:"", phone:"", email:"", branch:"", year:"" }, why: {} }; }
+  catch { return { personal: { name:"", rollNo:"", phone:"", email:"", branch:"", year:"", cgpa:"", backlogs:"" }, why: {} }; }
 }
 
 function isLightColor(hex: string): boolean {
@@ -365,6 +365,11 @@ function ApplyForm() {
     if (!form.email.includes("@"))                e.email  = "Enter a valid email address";
     if (!form.branch)                             e.branch = "Please select your branch";
     if (!form.year)                               e.year   = "Please select your year";
+    const cgpa = parseFloat(form.cgpa.trim());
+    if (!form.cgpa.trim())                        e.cgpa   = "CGPA is required";
+    else if (Number.isNaN(cgpa) || cgpa < 0 || cgpa > 10) e.cgpa = "Enter a CGPA between 0 and 10";
+    if (!form.backlogs.trim())                    e.backlogs = "Number of backlogs is required";
+    else if (!/^\d+$/.test(form.backlogs.trim())) e.backlogs = "Enter a valid number";
     if (form.why.trim().length < 30)              e.why    = "Please write at least 30 characters";
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -758,6 +763,25 @@ function ApplyForm() {
                         ))}
                       </div>
                       {errors.year && <FieldErr msg={errors.year}/>}
+                    </div>
+                  </div>
+
+                  <div className="form-row" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px" }}>
+                    <div>
+                      <Label>CGPA</Label>
+                      <input type="text" inputMode="decimal" placeholder="8.5" value={form.cgpa}
+                        onChange={e => set("cgpa", e.target.value)}
+                        onFocus={() => setFocused("cgpa")} onBlur={() => setFocused("")}
+                        required aria-required disabled={locked} style={{ ...inputStyle(focused==="cgpa", color), ...lockStyle }}/>
+                      {errors.cgpa && <FieldErr msg={errors.cgpa}/>}
+                    </div>
+                    <div>
+                      <Label>Number of Backlogs</Label>
+                      <input type="text" inputMode="numeric" placeholder="0" value={form.backlogs}
+                        onChange={e => set("backlogs", e.target.value)}
+                        onFocus={() => setFocused("backlogs")} onBlur={() => setFocused("")}
+                        required aria-required disabled={locked} style={{ ...inputStyle(focused==="backlogs", color), ...lockStyle }}/>
+                      {errors.backlogs && <FieldErr msg={errors.backlogs}/>}
                     </div>
                   </div>
 
