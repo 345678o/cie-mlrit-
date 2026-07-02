@@ -86,6 +86,15 @@ const YEARS    = ["2nd Year","3rd Year","4th Year"];
 type FormState = { name: string; rollNo: string; phone: string; email: string; branch: string; year: string; why: string };
 const EMPTY: FormState = { name:"", rollNo:"", phone:"", email:"", branch:"", year:"", why:"" };
 
+// Persists shared personal details + per-department "why" answers across the sequential steps.
+const STORE_KEY = "cie-apply";
+type Store = { personal: Omit<FormState, "why">; why: Record<string, string> };
+function readStore(): Store {
+  if (typeof window === "undefined") return { personal: { name:"", rollNo:"", phone:"", email:"", branch:"", year:"" }, why: {} };
+  try { return JSON.parse(sessionStorage.getItem(STORE_KEY) || "") as Store; }
+  catch { return { personal: { name:"", rollNo:"", phone:"", email:"", branch:"", year:"" }, why: {} }; }
+}
+
 function isLightColor(hex: string): boolean {
   const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
   return (r*299 + g*587 + b*114) / 1000 > 155;
@@ -282,7 +291,12 @@ function ApplyForm() {
     )
   ).slice(0, 3);
 
-  const rawDept = prefKeys[0] ?? "";
+  // Sequential flow — one application per preference. `?i=` is the current step.
+  const rawStep = parseInt(searchParams.get("i") ?? "0", 10);
+  const stepIdx = Math.max(0, Math.min(prefKeys.length - 1, Number.isNaN(rawStep) ? 0 : rawStep));
+  const isLastStep = stepIdx >= prefKeys.length - 1;
+
+  const rawDept = prefKeys[stepIdx] ?? "";
   const dept    = DEPARTMENTS[rawDept] ?? null;
   const color   = dept?.color ?? ORANGE;
 
@@ -316,6 +330,15 @@ function ApplyForm() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Re-hydrate on each step: shared personal details + this department's own "why".
+  useEffect(() => {
+    const s = readStore();
+    setForm({ ...EMPTY, ...s.personal, why: s.why[rawDept] ?? "" });
+    setErrors({});
+    if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stepIdx, rawDept]);
+
   function set(k: keyof FormState, v: string) {
     setForm(p => ({ ...p, [k]: v }));
     if (errors[k]) setErrors(p => ({ ...p, [k]: "" }));
@@ -338,14 +361,15 @@ function ApplyForm() {
     e.preventDefault();
     if (!validate()) return;
 
-    // Submission payload — departments stored in priority order.
-    const payload = { ...form, departmentPreferences };
-    // Integration point: replace with the real API call when the backend is ready.
-    console.log("CIE application submission", payload);
+    // Persist shared personal details + this department's answer.
+    const { why, ...personal } = form;
+    const store = readStore();
+    store.personal = personal;
+    store.why = { ...store.why, [rawDept]: why };
+    if (typeof window !== "undefined") sessionStorage.setItem(STORE_KEY, JSON.stringify(store));
 
     setLoading(true);
     setSubmitProgress(0);
-    setAppId(`CIE-2026-${Math.floor(1000 + Math.random() * 9000)}`);
 
     // RAF-driven fill: 0→90 over 1000ms
     const startMs = performance.now();
@@ -362,6 +386,29 @@ function ApplyForm() {
     setSubmitProgress(100);
     await new Promise(r => setTimeout(r, 220));
     setLoading(false);
+
+    if (!isLastStep) {
+      // Advance to the next preferred department's application.
+      const p = new URLSearchParams(searchParams.toString());
+      p.set("i", String(stepIdx + 1));
+      router.push(`/join/apply?${p.toString()}`);
+      return;
+    }
+
+    // Final step — assemble the full submission in priority order and finish.
+    const answers = readStore();
+    const payload = {
+      ...answers.personal,
+      departmentPreferences: departmentPreferences.map((d, i) => ({
+        ...d,
+        why: answers.why[prefKeys[i]] ?? "",
+      })),
+    };
+    // Integration point: replace with the real API call when the backend is ready.
+    console.log("CIE application submission", payload);
+    if (typeof window !== "undefined") sessionStorage.removeItem(STORE_KEY);
+
+    setAppId(`CIE-2026-${Math.floor(1000 + Math.random() * 9000)}`);
     setSubmitted(true);
     show();
     fireConfetti(color);
@@ -474,25 +521,34 @@ function ApplyForm() {
                 </motion.div>
                 <motion.span initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.15 }}
                   style={{ fontFamily:"var(--font-body)", fontWeight:700, fontSize:"10px", letterSpacing:"0.10em", textTransform:"uppercase" as const, color:onColorFaint }}>
-                  {prefKeys.length > 1 ? "Applying · ranked preferences" : `Applying for · ${dept.name}`}
+                  {prefKeys.length > 1
+                    ? `Preference ${stepIdx + 1} of ${prefKeys.length} · ${dept.name}`
+                    : `Applying for · ${dept.name}`}
                 </motion.span>
               </div>
 
-              {/* Ranked preference chips */}
+              {/* Ranked preference chips — current step highlighted, earlier steps marked done */}
               {prefKeys.length > 1 && (
                 <motion.div initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.18 }}
                   style={{ display:"flex", flexWrap:"wrap", gap:"8px", marginBottom:"20px" }}>
-                  {departmentPreferences.map((p) => (
-                    <span key={p.priority} style={{
-                      display:"inline-flex", alignItems:"center", gap:"6px",
-                      fontFamily:"var(--font-body)", fontWeight:600, fontSize:"12px",
-                      padding:"5px 12px", borderRadius:"999px",
-                      background:tagBg, color:onColor, border:`1px solid ${tagBorder}`,
-                    }}>
-                      <span style={{ fontWeight:800, opacity:0.7 }}>{p.priority}</span>
-                      {p.department}
-                    </span>
-                  ))}
+                  {departmentPreferences.map((p, i) => {
+                    const current = i === stepIdx;
+                    const done = i < stepIdx;
+                    return (
+                      <span key={p.priority} style={{
+                        display:"inline-flex", alignItems:"center", gap:"6px",
+                        fontFamily:"var(--font-body)", fontWeight:current?800:600, fontSize:"12px",
+                        padding:"5px 12px", borderRadius:"999px",
+                        background: current ? onColor : tagBg,
+                        color: current ? color : onColor,
+                        border:`1px solid ${current ? onColor : tagBorder}`,
+                        opacity: done ? 0.55 : 1,
+                      }}>
+                        <span style={{ fontWeight:800, opacity:current?1:0.7 }}>{done ? "✓" : p.priority}</span>
+                        {p.department}
+                      </span>
+                    );
+                  })}
                 </motion.div>
               )}
 
@@ -745,11 +801,11 @@ function ApplyForm() {
                     {loading ? (
                       <>
                         <span style={{ width:"16px", height:"16px", border:"2px solid rgba(255,255,255,0.35)", borderTopColor:"#FFF", borderRadius:"50%", display:"inline-block", animation:"spin 0.7s linear infinite" }}/>
-                        {submitProgress < 100 ? "Submitting…" : "Done!"}
+                        {submitProgress < 100 ? (isLastStep ? "Submitting…" : "Saving…") : "Done!"}
                       </>
                     ) : (
                       <>
-                        Submit Application
+                        {isLastStep ? "Submit Application" : `Continue to Preference ${stepIdx + 2}`}
                         <motion.span animate={{ x:hoverBtn ? 5 : 0 }} transition={{ duration:0.2 }}>
                           <ArrowRight size={18}/>
                         </motion.span>
