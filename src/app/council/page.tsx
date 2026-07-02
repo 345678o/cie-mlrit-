@@ -442,6 +442,9 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
             ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=0a0a0a&color=9aa&size=400&bold=true&format=png`;
           const isActive = active === i;
           const scatter = i % 2 === 0 ? -26 : 26;
+          // Content dept gets a comic-burst flip background with white text.
+          const isContent = m.department === "Content";
+          const backText = isContent ? "#ffffff" : m.deptColor;
           return (
             <div
               key={`${m.department}-${m.name}-${i}`}
@@ -489,13 +492,17 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                     <div style={{ position: "absolute", inset: 0, clipPath: CS_NOTCH, background: m.deptColor }} />
                     <div style={{
                       position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden",
-                      background: "#05070F",
+                      background: isContent
+                        ? "#111 url('/council/bg/content-flip.webp') center/cover no-repeat"
+                        : "#05070F",
                       display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "clamp(14px,6%,20px)",
                     }}>
-                      {/* subtle dept color top glow */}
+                      {/* subtle dept color top glow (dark scrim for Content's bright bg) */}
                       <div style={{
                         position: "absolute", inset: 0, zIndex: 0,
-                        background: `linear-gradient(180deg, ${m.deptColor}22 0%, transparent 40%)`,
+                        background: isContent
+                          ? "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.45) 100%)"
+                          : `linear-gradient(180deg, ${m.deptColor}22 0%, transparent 40%)`,
                       }} />
                       {/* faded CIE logo watermark */}
                       {/* large ghost CIE watermark */}
@@ -514,12 +521,16 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                           fontSize: "clamp(13px,2.6vw,32px)", lineHeight: 1.0,
                           textTransform: "uppercase", letterSpacing: "0.01em",
                           color: "#ffffff", overflowWrap: "anywhere",
-                          background: `${m.deptColor}33`, boxShadow: `0 0 0 1px ${m.deptColor}55, 0 6px 22px ${m.deptColor}55`,
+                          background: isContent ? "rgba(0,0,0,0.42)" : `${m.deptColor}33`,
+                          boxShadow: isContent
+                            ? "0 0 0 1px rgba(255,255,255,0.35), 0 6px 22px rgba(0,0,0,0.45)"
+                            : `0 0 0 1px ${m.deptColor}55, 0 6px 22px ${m.deptColor}55`,
                           padding: "6px 14px", borderRadius: "8px",
+                          textShadow: isContent ? "0 1px 6px rgba(0,0,0,0.6)" : undefined,
                         }}>{m.name}</span>
-                        <span style={{ width: "34px", height: "2px", borderRadius: "2px", background: m.deptColor }} />
-                        <span style={{ fontFamily: "var(--font-sora)", fontWeight: 600, fontSize: "clamp(11px,2vw,22px)", lineHeight: 1.1, textTransform: "uppercase", letterSpacing: "0.06em", color: m.deptColor }}>{deptShort[m.department] ?? m.department}</span>
-                        <span style={{ fontFamily: "var(--font-sora)", fontWeight: 500, fontSize: "clamp(10px,1.4vw,18px)", lineHeight: 1.2, color: "rgba(255,255,255,0.80)", letterSpacing: "0.01em" }}>{displayRole(m)}{m.year ? ` · ${m.year}` : ""}</span>
+                        <span style={{ width: "34px", height: "2px", borderRadius: "2px", background: backText }} />
+                        <span style={{ fontFamily: "var(--font-sora)", fontWeight: 600, fontSize: "clamp(11px,2vw,22px)", lineHeight: 1.1, textTransform: "uppercase", letterSpacing: "0.06em", color: backText, textShadow: isContent ? "0 1px 6px rgba(0,0,0,0.6)" : undefined }}>{deptShort[m.department] ?? m.department}</span>
+                        <span style={{ fontFamily: "var(--font-sora)", fontWeight: 500, fontSize: "clamp(10px,1.4vw,18px)", lineHeight: 1.2, color: isContent ? "#ffffff" : "rgba(255,255,255,0.80)", letterSpacing: "0.01em", textShadow: isContent ? "0 1px 6px rgba(0,0,0,0.6)" : undefined }}>{displayRole(m)}{m.year ? ` · ${m.year}` : ""}</span>
                       </div>
                       <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: "7px", width: "100%", alignItems: "center" }}>
                         {m.linkedin && m.linkedin !== "#" && (
