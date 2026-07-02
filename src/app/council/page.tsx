@@ -607,6 +607,13 @@ export default function CouncilPage() {
       arr = arr.filter((m) => m !== mah);
       arr.unshift(mah);
     }
+    // Jadhav sits right beside Bhavana.
+    const bhav = arr.find((m) => m.name === "Bhavana");
+    const jadhav = arr.find((m) => m.name === "Guguloth Adithya Jadhav");
+    if (bhav && jadhav) {
+      arr = arr.filter((m) => m !== jadhav);
+      arr.splice(arr.indexOf(bhav) + 1, 0, jadhav);
+    }
     const clusterOrder = ["Aarthi Reddy", "Katepally Tribhuvan", "Athava Sri Pavan", "Hansika Jella"];
     const cluster = clusterOrder
       .map((n) => arr.find((m) => m.name === n))
