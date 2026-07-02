@@ -444,10 +444,6 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
             ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=0a0a0a&color=9aa&size=400&bold=true&format=png`;
           const isActive = active === i;
           const scatter = i % 2 === 0 ? -26 : 26;
-          // Keep Tribhuvan + Aarthi on the same grid row: force Tribhuvan to
-          // column 1 (start of a fresh row) when Aarthi is the next card, so
-          // Aarthi lands in column 2 beside him across 2/3/4-col layouts.
-          const startNewRow = m.name === "Katepally Tribhuvan" && members[i + 1]?.name === "Aarthi Reddy";
           return (
             <div
               key={`${m.department}-${m.name}-${i}`}
@@ -463,7 +459,6 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                 background: "transparent", border: "none", padding: 0, cursor: "pointer", textAlign: "left",
                 transform: `translateY(${isActive ? 0 : scatter}px)`,
                 transition: "transform .55s cubic-bezier(.16,1,.3,1)",
-                ...(startNewRow ? { gridColumnStart: 1 } : {}),
               }}
             >
               <div style={{
@@ -588,35 +583,26 @@ export default function CouncilPage() {
     ...ALL_ORDER.filter((i) => i < allMembers.length).map((i) => allMembers[i]),
     ...allMembers.filter((_, i) => !ALL_ORDER.includes(i)),
   ];
-  // Applied AFTER the year sort so the placement survives (identical order on
-  // mobile & desktop — no device-dependent reshuffle). Mahima first; Aarthi
-  // pinned right beside Tribhuvan.
+  // Keep a fixed cluster contiguous in this exact order, placed at the first
+  // member's original spot. No forced grid-column (so no empty cells), no year
+  // sort — the rest keeps the shuffle order from ALL_ORDER.
   const pinAll = <T extends { name: string }>(list: T[]): T[] => {
     let arr = [...list];
-    const trib = arr.find((m) => m.name === "Katepally Tribhuvan");
-    const aar = arr.find((m) => m.name === "Aarthi Reddy");
-    if (trib && aar) {
-      arr = arr.filter((m) => m !== aar);
-      arr.splice(arr.indexOf(trib) + 1, 0, aar);
-    }
-    // Tribhuvan is forced to column 1 (new row) so Aarthi sits beside him; that
-    // leaves the previous row's last cell empty. Fill it with Adithya Ganesh by
-    // placing him immediately before Tribhuvan.
-    const adi = arr.find((m) => m.name === "Adithya Ganesh");
-    if (trib && adi) {
-      arr = arr.filter((m) => m !== adi);
-      arr.splice(arr.indexOf(trib), 0, adi);
-    }
-    const mah = arr.find((m) => m.name === "Mahima Tatineni");
-    if (mah) {
-      arr = arr.filter((m) => m !== mah);
-      arr.unshift(mah);
+    const clusterOrder = ["Aarthi Reddy", "Katepally Tribhuvan", "Athava Sri Pavan", "Hansika Jella"];
+    const cluster = clusterOrder
+      .map((n) => arr.find((m) => m.name === n))
+      .filter((m): m is T => Boolean(m));
+    if (cluster.length) {
+      const at = arr.findIndex((m) => m.name === clusterOrder[0]);
+      arr = arr.filter((m) => !cluster.includes(m));
+      const insertAt = at < 0 ? arr.length : Math.min(at, arr.length);
+      arr.splice(insertAt, 0, ...cluster);
     }
     return arr;
   };
   const visibleMembers = activeTeam === "All"
-    // 4th-years (chairpersons) first, then 3rd-years — stable within each group (keeps shuffle order)
-    ? pinAll([...allShuffled].sort((a, b) => yearRank(a.year) - yearRank(b.year)))
+    // "All" view keeps the shuffle order (ALL_ORDER) — no 4th-first sort.
+    ? pinAll(allShuffled)
     : allMembers
         .filter((m) => m.department === activeTeam)
         // 4th-years (chairpersons) first; within same year, dept lead(s) first; stable for the rest
