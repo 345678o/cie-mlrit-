@@ -341,13 +341,17 @@ function ApplyForm() {
     const s = readStore();
     setForm({ ...EMPTY, ...s.personal, why: s.why[rawDept] ?? "" });
     setErrors({});
+    setEditPersonal(false);
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stepIdx, rawDept]);
 
-  // Common details (name, roll, phone, email, branch, year) are shared across every
-  // preference — lock them after the first application so they can't drift between steps.
-  const locked = stepIdx > 0 && form.name.trim() !== "";
+  // Common details (name, roll, phone, email, branch, year, cgpa, backlogs) are shared across
+  // every preference — lock them after the first application so they can't drift between steps,
+  // but let the applicant reopen them to edit (changes then apply to all preferences).
+  const [editPersonal, setEditPersonal] = useState(false);
+  const canEditToggle = stepIdx > 0 && form.name.trim() !== "";
+  const locked = canEditToggle && !editPersonal;
   const lockStyle: React.CSSProperties = locked
     ? { background: "#F3F4F6", color: "#6B7280", cursor: "not-allowed", borderColor: "#E5E7EB", boxShadow: "none" }
     : {};
@@ -676,13 +680,29 @@ function ApplyForm() {
 
                 {/* ── Personal Information ── */}
                 <SectionDivider label="Personal Information"/>
-                {locked && (
+                {canEditToggle && (
                   <div style={{
-                    display:"flex", alignItems:"center", gap:"8px", marginTop:"-8px", marginBottom:"20px",
+                    display:"flex", alignItems:"center", gap:"10px", marginTop:"-8px", marginBottom:"20px",
                     fontFamily:"var(--font-body)", fontSize:"13px", fontWeight:500, color:"#6B7280",
                     background:"#F9FAFB", border:"1px solid #E5E7EB", borderRadius:"10px", padding:"10px 14px",
                   }}>
-                    <Check size={14} color={color}/> Locked from your first application — same for every preference. Only your reason below changes.
+                    <Check size={14} color={color} style={{ flexShrink:0 }}/>
+                    <span style={{ flex:1 }}>
+                      {locked
+                        ? "Carried over from your first application — same for every preference. Only your reason below changes."
+                        : "Editing your details — these changes apply to every preference."}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setEditPersonal(v => !v)}
+                      style={{
+                        flexShrink:0, fontFamily:"var(--font-body)", fontWeight:700, fontSize:"12.5px",
+                        color, background:`${color}12`, border:`1px solid ${color}30`,
+                        borderRadius:"8px", padding:"6px 12px", cursor:"pointer",
+                      }}
+                    >
+                      {locked ? "Edit details" : "Done"}
+                    </button>
                   </div>
                 )}
                 <div style={{ display:"grid", gap:"20px", marginBottom:"48px" }}>
