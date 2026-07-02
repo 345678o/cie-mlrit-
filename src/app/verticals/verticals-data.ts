@@ -15,6 +15,12 @@ export type VerticalEvent = {
   type: string;
 };
 
+export type VerticalMedia = {
+  type: "image" | "video";
+  src: string;
+  caption?: string;
+};
+
 export type Vertical = {
   id: string;
   abbr: string;
@@ -35,6 +41,7 @@ export type Vertical = {
   achievements: string[];
   applyInfo?: string;
   timeline?: { step: string; title: string; desc: string }[];
+  media?: VerticalMedia[];
 };
 
 export const VERTICALS: Vertical[] = [
@@ -96,6 +103,11 @@ export const VERTICALS: Vertical[] = [
       { step: "04", title: "Mid-Sprint Review", desc: "Halfway checkpoint — mentors assess progress, course-correct, and give direct feedback on the build." },
       { step: "05", title: "Demo Day", desc: "Live showcase to peers, mentors, and CIE leadership. Each team presents their completed project and answers questions." },
       { step: "06", title: "Recognition & Next Steps", desc: "Top projects are featured in CIE's channels. Exceptional builds get fast-tracked into the Product Development vertical." },
+    ],
+    media: [
+      // Add MP photos/videos here, e.g.:
+      // { type: "image", src: "/verticals/mp/sprint-showcase.jpg", caption: "Sprint Showcase demo day" },
+      // { type: "video", src: "/verticals/mp/kickoff-recap.mp4", caption: "MP Kickoff recap" },
     ],
   },
   {
@@ -200,6 +212,11 @@ export const VERTICALS: Vertical[] = [
     ],
     applyInfo:
       "Submit a product proposal with your team (2–5 members), problem statement, and target users. Selected teams are onboarded at the start of each semester and assigned a mentor and resources.",
+    media: [
+      // Add Product Development photos/videos here, e.g.:
+      // { type: "image", src: "/verticals/product-development/demo-day.jpg", caption: "Product Demo Day" },
+      // { type: "video", src: "/verticals/product-development/hardware-lab.mp4", caption: "Inside the Hardware Lab" },
+    ],
   },
   {
     id: "startup-cohort",

@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Boxes, Palette, Cpu, CalendarDays, Rocket,
   ArrowLeft, Users, CheckCircle2,
@@ -153,6 +154,36 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
           </div>
         </div>
       </section>
+
+      {/* ── Gallery (any vertical with media entries) ───────────────── */}
+      {v.media && v.media.length > 0 && (
+        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+          <div className="page-container">
+            <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
+              <SectionLabel>In Action</SectionLabel>
+              <SectionHeading>Photos &amp; Videos</SectionHeading>
+            </div></FadeIn>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {v.media.map((item, i) => (
+                <FadeIn key={item.src} delay={i * 0.06}>
+                  <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.07)", background: "#000", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
+                    <div style={{ position: "relative", aspectRatio: "4 / 3", background: "#0a0a0a" }}>
+                      {item.type === "image" ? (
+                        <Image src={item.src} alt={item.caption ?? `${v.name} media`} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" style={{ objectFit: "cover" }} />
+                      ) : (
+                        <video src={item.src} controls playsInline preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                      )}
+                    </div>
+                    {item.caption && (
+                      <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "#374151", padding: "12px 14px", background: "#FFFFFF" }}>{item.caption}</p>
+                    )}
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── CIE Studios Reel (only for cie-studios) ───────────────── */}
       {v.id === "cie-studios" && (

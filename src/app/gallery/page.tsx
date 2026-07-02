@@ -59,8 +59,14 @@ const GRID = [
   { label: "MetaLoop Hackathon",img: "/events/poster/metaloop.png",    grad: "linear-gradient(145deg,#1c1917,#2d1b69,#7c3aed)", cs: 1, rs: 1 },
   { label: "Innovation Lab",    grad: "linear-gradient(145deg,#0f0a1e,#2d1570,#4c1d95)",                                       cs: 1, rs: 2 },
   { label: "GI Mahotsav",       img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00424.JPG", grad: "linear-gradient(145deg,#060e0a,#14532d,#16a34a)", cs: 1, rs: 1 },
-  { label: "B2B Summit",        img: "/events/poster/B2B.png",         grad: "linear-gradient(145deg,#080c06,#1c2a0d,#4d7c0f)", cs: 2, rs: 1 },
-  { label: "Hustle Mania",      img: "/events/poster/hustle%20mania.png", grad: "linear-gradient(145deg,#0d0803,#3b1a06,#c2410c)", cs: 1, rs: 1 },
+  { label: "B2B Summit",        imgs: [
+      "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4790.JPG",
+      "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8229.JPG",
+    ], grad: "linear-gradient(145deg,#080c06,#1c2a0d,#4d7c0f)", cs: 2, rs: 1 },
+  { label: "Hustle Mania",      imgs: [
+      "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0545.JPG",
+      "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/IMG_3101.JPG",
+    ], grad: "linear-gradient(145deg,#0d0803,#3b1a06,#c2410c)", cs: 1, rs: 1 },
   { label: "GI Heritage",       img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00552.JPG", grad: "linear-gradient(145deg,#060e0a,#14532d,#16a34a)", cs: 1, rs: 1 },
 ];
 
@@ -798,8 +804,8 @@ export default function GalleryPage() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(4, 1fr)",
-              gridTemplateRows: "repeat(3, 200px)",
-              gap: "10px",
+              gridTemplateRows: "repeat(3, 280px)",
+              gap: "14px",
             }}
           >
             {GRID.map((item, i) => (
@@ -820,7 +826,9 @@ export default function GalleryPage() {
                 onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.transform = "scale(0.985)"; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.transform = "scale(1)"; }}
               >
-                {"img" in item && item.img && (
+                {"imgs" in item && item.imgs ? (
+                  <FeatureSlideshow imgs={item.imgs} alt={item.label} />
+                ) : "img" in item && item.img && (
                   <Image
                     src={item.img as string}
                     alt={item.label}
@@ -843,12 +851,12 @@ export default function GalleryPage() {
         {/* Grid responsive overrides */}
         <style>{`
           @media (max-width: 900px) {
-            .masonry-grid { grid-template-columns: repeat(2,1fr) !important; grid-template-rows: repeat(5,160px) !important; }
+            .masonry-grid { grid-template-columns: repeat(2,1fr) !important; grid-template-rows: repeat(5,220px) !important; }
             .masonry-grid > div { grid-column: span 1 !important; grid-row: span 1 !important; }
           }
           @media (max-width: 560px) {
             .masonry-grid { grid-template-columns: 1fr !important; grid-template-rows: auto !important; }
-            .masonry-grid > div { height: 150px; }
+            .masonry-grid > div { height: 210px; }
           }
         `}</style>
       </section>
