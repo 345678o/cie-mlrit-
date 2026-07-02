@@ -700,11 +700,7 @@ export default function CouncilPage() {
       </section>
 
       {/* Teams — ChromaGrid */}
-      <section style={{ background: "#05070F", position: "relative", overflow: "hidden", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(40px,6vw,72px)" }}>
-
-        {/* Radial blue glow */}
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0,
-          background: "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(30,80,220,0.18) 0%, rgba(10,30,100,0.10) 45%, transparent 75%)" }} />
+      <section style={{ background: "#000000", position: "relative", overflow: "hidden", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(40px,6vw,72px)" }}>
 
         {/* Noise texture */}
         <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.045, pointerEvents: "none", zIndex: 0 }} aria-hidden="true">
