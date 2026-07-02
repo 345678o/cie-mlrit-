@@ -126,10 +126,10 @@ const teams: TeamSection[] = [
     color: "#4A7DFF",
     description: "Builds and maintains CIE's digital infrastructure — from the website and internal tools to AI experiments and mobile apps. The Tech team turns every idea into a working product.",
     members: [
-      { name: "Ghanashyam Kodekandla", role: "MP Chairperson", dept: "Tech", photo: "/council/tech/Ghanashyam Kodekandla.png",linkedin:"https://www.linkedin.com/in/ghanashyamkodekandla",year:"4th" },
-      { name: "Keertan Kuppili",       role: "Product Development Chairperson", dept: "Tech", photo: "/council/tech/Keertan Kuppili .png", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/",year:"4th"},
-      { name: "T.S Siddarth",          role: "Member", dept: "Tech", photo: "/council/tech/T.S Siddarth.png",linkedin: "#",year:"4th"},
-      { name: "Teja Jagathi",          role: "Technical Chairperson", dept: "Tech", photo: "/council/tech/Teja Jagathi.png" ,linkedin: "https://www.linkedin.com/in/teja-jagathi",year:"4th"},
+      { name: "Ghanashyam Kodekandla", role: "Chairperson", dept: "Tech", photo: "/council/tech/Ghanashyam Kodekandla.png",linkedin:"https://www.linkedin.com/in/ghanashyamkodekandla",year:"4th" },
+      { name: "Keertan Kuppili",       role: "Chairperson", dept: "Tech", photo: "/council/tech/Keertan Kuppili .png", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/",year:"4th"},
+      { name: "Teja Jagathi",          role: "Chairperson", dept: "Tech", photo: "/council/tech/Teja Jagathi.png" ,linkedin: "https://www.linkedin.com/in/teja-jagathi",year:"4th"},
+      { name: "T.S Siddarth",          role: "Chairperson", dept: "Tech", photo: "/council/tech/T.S Siddarth.png",linkedin: "#",year:"4th"},
       { name: "Abhiram Ganji",         role: "Product Development Lead", dept: "Tech", photo: "/council/tech/Abhiram Ganji.png" ,linkedin:"#",year:"3rd"},
       { name: "Anuj Lomte",            role: "Member", dept: "Tech", photo: "/council/tech/Anuj Lomte.png" ,linkedin: "https://www.linkedin.com/in/anuj-lomte-918b90344/",year:"3rd"},
       { name: "Anamika",               role: "Member", dept: "Tech", photo: "/council/tech/Anamika.jpeg" , linkedin: "https://www.linkedin.com/in/anamikak3131/",year:"3rd"},
@@ -149,8 +149,8 @@ const teams: TeamSection[] = [
     color: "#D9C500",
     description: "Produces all written and editorial output for CIE — blog posts, event write-ups, newsletters, captions, and long-form content that tell our story across every channel.",
     members: [
-      { name: "Jayadeep",        role: "Member", dept: "Content", photo: "/council/content/Jayadeep.png",linkedin:"https://www.linkedin.com/in/jayadeep-tadakamalla-780077374/",year:"4th" },
-      { name: "Prashansa",       role: "Member", dept: "Content", photo: "/council/content/Prashansa .png",linkedin:"https://www.linkedin.com/in/prashansa-b-92218b2b6",year:"4th" },
+      { name: "Jayadeep",        role: "Chairperson", dept: "Content", photo: "/council/content/Jayadeep.png",linkedin:"https://www.linkedin.com/in/jayadeep-tadakamalla-780077374/",year:"4th" },
+      { name: "Prashansa",       role: "Chairperson", dept: "Content", photo: "/council/content/Prashansa .png",linkedin:"https://www.linkedin.com/in/prashansa-b-92218b2b6",year:"4th" },
       { name: "Haritha",         role: "Member", dept: "Content", photo: "/council/content/Haritha.png",linkedin:"#",year:"4th" },
       { name: "Harshitha",       role: "Member", dept: "Content", photo: "/council/content/Harshitha.png",linkedin:"https://www.linkedin.com/in/harshitha-bollepalli-a5b198345",year:"3rd" },
       { name: "Ritvik Ennavar", role: "Content Lead", dept: "Content", photo: "/council/content/Ennawar Rithvik .png", zoom: 1.15,linkedin:"https://www.linkedin.com/in/rithvik-e-4a4936341/",year:"3rd" },
@@ -163,9 +163,9 @@ const teams: TeamSection[] = [
     color: "#B65CFF",
     description: "Drives CIE's creative direction and campaigns — ideating themes, managing brand consistency, and building the visual + conceptual identity behind every initiative.",
     members: [
-         { name: "Harika Y",          role: "Member", dept: "Creative", photo: "/council/creatives/Harika Y.png",linkedin:"https://www.linkedin.com/in/y-harika-34a391305",year:"4th" },
-         { name: "Sai Krishna",       role: "Member", dept: "Creative", photo: "/council/creatives/Sai Krishna.png",linkedin:"https://www.linkedin.com/in/varahala-sai-krishna-46a1b82a4",year:"4th" },
-         { name: "Sushaanth",         role: "Member", dept: "Creative", photo: "/council/creatives/sushaanth.png",linkedin:"https://www.linkedin.com/in/sushanth-mandumula-0496bb2b6",year:"4th" },
+         { name: "Harika Y",          role: "Chairperson", dept: "Creative", photo: "/council/creatives/Harika Y.png",linkedin:"https://www.linkedin.com/in/y-harika-34a391305",year:"4th" },
+         { name: "Sai Krishna",       role: "Chairperson", dept: "Creative", photo: "/council/creatives/Sai Krishna.png",linkedin:"https://www.linkedin.com/in/varahala-sai-krishna-46a1b82a4",year:"4th" },
+         { name: "Sushaanth",         role: "Chairperson", dept: "Creative", photo: "/council/creatives/sushaanth.png",linkedin:"https://www.linkedin.com/in/sushanth-mandumula-0496bb2b6",year:"4th" },
          { name: "Durga Mahesh",      role: "Member", dept: "Creative", photo: "/council/creatives/Durga Mahesh.png",linkedin:"https://www.linkedin.com/in/durgamahesh-kolukuri",year:"3rd" },
          { name: "Cheeda Shamilini",  role: "Member", dept: "Creative", photo: "/council/creatives/Cheeda Shamilini.png",linkedin:"https://www.linkedin.com/in/cheeda-shamilini-naidu-47419a345/",year:"3rd" },
          { name: "D Pearl Angelina",  role: "Inventory Management", dept: "Creative", photo: "/council/creatives/D Pearl Angelina.png",linkedin:"https://www.linkedin.com/in/pearl-angelina-529705283",year:"3rd" },
@@ -178,10 +178,10 @@ const teams: TeamSection[] = [
     color: "#61D4F4",
     description: "Shapes the visual identity of CIE — designing posters, decks, social assets, UI mockups, and motion content that make every event and campaign look world-class.",
     members: [
-      { name: "Vivek Vardhan",           role: "Member", dept: "GD", photo: "/council/GD/Veivek vardhan.png",linkedin:"https://www.linkedin.com/in/muchinthala-vivek-vardhan-m-0086b9404/" ,year:"4th"},
-      { name: "Avinash",                  role: "Member", dept: "GD", photo: "/council/GD/Avinash.png",linkedin:"https://www.linkedin.com/in/avinash-avi-b49119254",year:"4th" },
-      { name: "Chanikya",                 role: "Member", dept: "GD", photo: "/council/GD/chanikya.png",linkedin:"https://www.linkedin.com/in/amancha-chanikya",year:"4th" },
-       { name: "Sri Thejitha",             role: "Member", dept: "GD", photo: "/council/GD/Sri Thejitha .png" , linkedin: "http://www.linkedin.com/in/sri-thejitha-76a712374",year:"4th" },
+      { name: "Vivek Vardhan",           role: "Chairperson", dept: "GD", photo: "/council/GD/Veivek vardhan.png",linkedin:"https://www.linkedin.com/in/muchinthala-vivek-vardhan-m-0086b9404/" ,year:"4th"},
+      { name: "Avinash",                  role: "Chairperson", dept: "GD", photo: "/council/GD/Avinash.png",linkedin:"https://www.linkedin.com/in/avinash-avi-b49119254",year:"4th" },
+      { name: "Chanikya",                 role: "Chairperson", dept: "GD", photo: "/council/GD/chanikya.png",linkedin:"https://www.linkedin.com/in/amancha-chanikya",year:"4th" },
+       { name: "Sri Thejitha",             role: "Chairperson", dept: "GD", photo: "/council/GD/Sri Thejitha .png" , linkedin: "http://www.linkedin.com/in/sri-thejitha-76a712374",year:"4th" },
       { name: "Yeruva InduSri Varshitha Reddy",        role: "GD Lead", dept: "GD", photo: "/council/GD/Yeruva Indu Reddy.png",linkedin:"https://www.linkedin.com/in/yeruva-indu-972476345/",year:"3rd"
        },
       { name: "A Farhana Sultana",        role: "Member", dept: "GD", photo: "/council/GD/A Farhana Sultana.png",linkedin:"https://www.linkedin.com/in/achugatla-farhana-sultana-361b94344/",year:"3rd" },
@@ -198,10 +198,10 @@ const teams: TeamSection[] = [
     color: "#FF7A1A",
     description: "Captures every moment of the CIE journey — from hackathon late nights to summit keynotes — through photography, videography, and professional post-production.",
     members: [
-      { name: "Priyanshu Roy",     role: "Member", dept: "Photography and Media", photo: "/council/photography/Priyanshu Roy.png", zoom: 1.25,linkedin:"https://www.linkedin.com/in/priyanshu-roy-154a39246" ,year:"4th"},
-      { name: "Anguluri Shiva",    role: "Member", dept: "Photography and Media", photo: "/council/photography/Anguluri Shiva.png",linkedin:"#" ,year:"4th"},
-      { name: "Mattam Shivani",    role: "Member", dept: "Photography and Media", photo: "/council/photography/Mattam Shivani.png",linkedin:"https://www.linkedin.com/in/shivani-mattam-91602b2a5/",year:"4th"},
-      { name: "Vavilala Sai Ganesh", role: "Member", dept: "Photography and Media", photo: "/council/photography/Vavilala Sai Ganesh.png",linkedin:"https://www.linkedin.com/in/vavilala-sai-ganesh-25028b3b5/",year:"4th" },
+      { name: "Priyanshu Roy",     role: "Chairperson", dept: "Photography and Media", photo: "/council/photography/Priyanshu Roy.png", zoom: 1.25,linkedin:"https://www.linkedin.com/in/priyanshu-roy-154a39246" ,year:"4th"},
+      { name: "Anguluri Shiva",    role: "Chairperson", dept: "Photography and Media", photo: "/council/photography/Anguluri Shiva.png",linkedin:"#" ,year:"4th"},
+      { name: "Mattam Shivani",    role: "Chairperson", dept: "Photography and Media", photo: "/council/photography/Mattam Shivani.png",linkedin:"https://www.linkedin.com/in/shivani-mattam-91602b2a5/",year:"4th"},
+      { name: "Vavilala Sai Ganesh", role: "Chairperson", dept: "Photography and Media", photo: "/council/photography/Vavilala Sai Ganesh.png",linkedin:"https://www.linkedin.com/in/vavilala-sai-ganesh-25028b3b5/",year:"4th" },
       { name: "Sai Varshith Konduru", role: "Studios Lead", dept: "Photography and Media", photo: "/council/photography/K.SAI VARSHITH.png",linkedin:"https://www.linkedin.com/in/k-sai-varshith-123462345/",year:"3rd" },
       { name: "Mahesh Gorli",        role: "Photography Lead", dept: "Photography and Media", photo: "/council/photography/Gorli Mahesh.png",linkedin:"https://www.linkedin.com/in/mahesh-gorli-314b89344" ,year:"3rd" },
       { name: "Anam Mounika",      role: "Member", dept: "Photography and Media", photo: "/council/photography/Anam Mounika .png",linkedin:"https://www.linkedin.com/in/mounika-r-20a621316/" ,year:"3rd"},
@@ -228,10 +228,10 @@ const teams: TeamSection[] = [
     color: "#22C55E",
     description: "Keeps everything running — coordinating logistics for every event, managing budgets, vendor relations, and making sure no detail falls through the cracks.",
     members: [
-       { name: "Dheeraj Kumar",     role: "Member", dept: "Ops", photo: "/council/OPS/Dheeraj Kumar.png",linkedin:"#" ,year:"4th"},
-      { name: "Mahima Tatineni",   role: "Vice President", dept: "Ops", photo: "/council/OPS/Mahima Tatineni.png",linkedin:"https://www.linkedin.com/in/mahima-tatineni" ,year:"4th"},
-      { name: "Aarthi Reddy", role: "Secretary", dept: "Ops", photo: "/council/OPS/Aarthi.png",linkedin:"https://www.linkedin.com/in/aarthi-reddy-b-626241350/" ,year:"4th"},
-      { name: "Vinay",             role: "Member", dept: "Ops", photo: "/council/OPS/Vinay.png",linkedin:"https://www.linkedin.com/in/dsdvinay" ,year:"4th"},
+       { name: "Dheeraj Kumar",     role: "Chairperson", dept: "Ops", photo: "/council/OPS/Dheeraj Kumar.png",linkedin:"#" ,year:"4th"},
+      { name: "Mahima Tatineni",   role: "Chairperson", dept: "Ops", photo: "/council/OPS/Mahima Tatineni.png",linkedin:"https://www.linkedin.com/in/mahima-tatineni" ,year:"4th"},
+      { name: "Aarthi Reddy", role: "Chairperson", dept: "Ops", photo: "/council/OPS/Aarthi.png",linkedin:"https://www.linkedin.com/in/aarthi-reddy-b-626241350/" ,year:"4th"},
+      { name: "Vinay",             role: "Chairperson", dept: "Ops", photo: "/council/OPS/Vinay.png",linkedin:"https://www.linkedin.com/in/dsdvinay" ,year:"4th"},
       { name: "Bhavana",           role: "Internal Relations", dept: "Ops", photo: "/council/OPS/Bhavana .png",linkedin:"https://www.linkedin.com/in/bhavana-inakollu-8698a2395" ,year:"3rd"},
       { name: "Alleshwaram Sai Ganesh", role: "Operations Lead", dept: "Ops", photo: "/council/OPS/ASaiGanesh.png",linkedin:"https://www.linkedin.com/in/sai-ganesh-alleshwaram-a30832316" ,year:"3rd"},
       { name: "M.Tarun Kumar Reddy",    role: "Finance and Logistics", dept: "Ops", photo: "/council/OPS/Manukonda Tarun.png",linkedin:"https://www.linkedin.com/in/tarun-manukonda-9a5b97344" ,year:"3rd"},
@@ -444,6 +444,10 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
             ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=0a0a0a&color=9aa&size=400&bold=true&format=png`;
           const isActive = active === i;
           const scatter = i % 2 === 0 ? -26 : 26;
+          // Keep Tribhuvan + Aarthi on the same grid row: force Tribhuvan to
+          // column 1 (start of a fresh row) when Aarthi is the next card, so
+          // Aarthi lands in column 2 beside him across 2/3/4-col layouts.
+          const startNewRow = m.name === "Katepally Tribhuvan" && members[i + 1]?.name === "Aarthi Reddy";
           return (
             <div
               key={`${m.department}-${m.name}-${i}`}
@@ -459,6 +463,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                 background: "transparent", border: "none", padding: 0, cursor: "pointer", textAlign: "left",
                 transform: `translateY(${isActive ? 0 : scatter}px)`,
                 transition: "transform .55s cubic-bezier(.16,1,.3,1)",
+                ...(startNewRow ? { gridColumnStart: 1 } : {}),
               }}
             >
               <div style={{
@@ -573,30 +578,16 @@ export default function CouncilPage() {
     t.members.map((m) => ({ ...m, department: t.team, deptColor: t.color }))
   );
 
-  // Shuffle order for "All" mode — client-only (null on SSR/first paint to
-  // avoid hydration mismatch). Shuffled ONCE and persisted to localStorage,
-  // so the same order is reused on later visits/clicks (no reshuffle).
-  const [order, setOrder] = useState<number[] | null>(null);
-  useEffect(() => {
-    const N = allMembers.length;
-    let idx: number[] | null = null;
-    try {
-      const saved = JSON.parse(localStorage.getItem("council-shuffle") || "null");
-      if (Array.isArray(saved) && saved.length === N) idx = saved as number[];
-    } catch { /* ignore */ }
-    if (!idx) {
-      idx = allMembers.map((_, i) => i);
-      for (let i = idx.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [idx[i], idx[j]] = [idx[j], idx[i]];
-      }
-    }
-    setOrder(idx);
-    try { localStorage.setItem("council-shuffle", JSON.stringify(idx)); } catch { /* ignore */ }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const allShuffled = order ? order.map((i) => allMembers[i]).filter(Boolean) : allMembers;
+  // FIXED "All" order — the exact sequence from the live site, hardcoded so
+  // every device/browser shows it identically (no random shuffle, no
+  // localStorage). Indices map into `allMembers` (declaration order); remapped
+  // for T.S Siddarth inserted at Tech index 3.
+  const ALL_ORDER = [44, 8, 30, 39, 56, 51, 60, 55, 38, 24, 25, 5, 6, 22, 59, 33, 19, 16, 57, 32, 61, 2, 50, 10, 49, 9, 28, 0, 53, 48, 62, 29, 54, 41, 46, 34, 7, 18, 27, 45, 36, 31, 15, 37, 40, 26, 21, 63, 1, 20, 14, 13, 4, 11, 43, 42, 58, 35, 23, 12, 47, 52, 17, 3];
+  // Any indices not listed (roster changes) are appended in declaration order.
+  const allShuffled = [
+    ...ALL_ORDER.filter((i) => i < allMembers.length).map((i) => allMembers[i]),
+    ...allMembers.filter((_, i) => !ALL_ORDER.includes(i)),
+  ];
   // Applied AFTER the year sort so the placement survives (identical order on
   // mobile & desktop — no device-dependent reshuffle). Mahima first; Aarthi
   // pinned right beside Tribhuvan.
@@ -607,6 +598,14 @@ export default function CouncilPage() {
     if (trib && aar) {
       arr = arr.filter((m) => m !== aar);
       arr.splice(arr.indexOf(trib) + 1, 0, aar);
+    }
+    // Tribhuvan is forced to column 1 (new row) so Aarthi sits beside him; that
+    // leaves the previous row's last cell empty. Fill it with Adithya Ganesh by
+    // placing him immediately before Tribhuvan.
+    const adi = arr.find((m) => m.name === "Adithya Ganesh");
+    if (trib && adi) {
+      arr = arr.filter((m) => m !== adi);
+      arr.splice(arr.indexOf(trib), 0, adi);
     }
     const mah = arr.find((m) => m.name === "Mahima Tatineni");
     if (mah) {
@@ -716,11 +715,7 @@ export default function CouncilPage() {
       </section>
 
       {/* Teams — ChromaGrid */}
-      <section style={{ background: "#05070F", position: "relative", overflow: "hidden", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(40px,6vw,72px)" }}>
-
-        {/* Radial blue glow */}
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0,
-          background: "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(30,80,220,0.18) 0%, rgba(10,30,100,0.10) 45%, transparent 75%)" }} />
+      <section style={{ background: "#000000", position: "relative", overflow: "hidden", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(40px,6vw,72px)" }}>
 
         {/* Noise texture */}
         <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.045, pointerEvents: "none", zIndex: 0 }} aria-hidden="true">

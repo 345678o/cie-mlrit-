@@ -118,7 +118,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       </section>
 
       {/* ── Overview ──────────────────────────────────────────────── */}
-      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF" }}>
+      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
         <div className="page-container">
           <div className="grid lg:grid-cols-2 gap-14 items-start">
             <FadeIn>
@@ -218,7 +218,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       )}
 
       {/* ── Roles ─────────────────────────────────────────────────── */}
-      {v.id !== "cie-studios" && <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB" }}>
+      {v.id !== "cie-studios" && <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
         <div className="page-container">
           <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
             <SectionLabel>Team Structure</SectionLabel>
@@ -241,7 +241,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       </section>}
 
       {/* ── Projects ──────────────────────────────────────────────── */}
-      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF" }}>
+      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
         <div className="page-container">
           <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
             <SectionLabel>Work</SectionLabel>
@@ -274,7 +274,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       </section>
 
       {/* ── Events ────────────────────────────────────────────────── */}
-      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB" }}>
+      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
         <div className="page-container">
           <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
             <SectionLabel>Programming</SectionLabel>
@@ -303,7 +303,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
 
       {/* ── Timeline (MP only) ────────────────────────────────────── */}
       {v.timeline && (
-        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF" }}>
+        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
           <div className="page-container">
             <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
               <SectionLabel>How It Works</SectionLabel>
