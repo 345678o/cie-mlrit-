@@ -139,7 +139,7 @@ const teams: TeamSection[] = [
       { name: "Katepally Tribhuvan",   role: "Technical Lead", dept: "Tech", photo: "/council/tech/Katepally Tribhuvan.png",linkedin: "https://www.linkedin.com/in/tribhuvan-katepally-30639b335/",year:"3rd"},
       { name: "Yashwanth Abhishek",    role: "Member", dept: "Tech", photo: "/council/tech/yashwanth abhishek.png",linkedin: "https://www.linkedin.com/in/yashwanth-abhishek-4626a8323/",year:"3rd"},
       { name: "Abhinav Sai",           role: "Member", dept: "Tech", photo: "/council/tech/Abhinav Sai.png",linkedin: "http://www.linkedin.com/in/abhiinavsaig",year:"3rd"},
-      { name: "Guguloth Adithya Jadhav", role: "Inventory Management", dept: "Tech", photo: "/council/tech/Guguloth Adithya Jadhav.png",linkedin:"https://www.linkedin.com/in/adithyajadhav/" ,year:"3rd"},
+      { name: "Guguloth Adithya Jadhav", role: "Inventory Lead", dept: "Tech", photo: "/council/tech/Guguloth Adithya Jadhav.png",linkedin:"https://www.linkedin.com/in/adithyajadhav/" ,year:"3rd"},
       { name: "Gannoji Vedik",         role: "Member", dept: "Tech", photo: "/council/tech/Gannoji Vedik.png" ,linkedin:"https://www.linkedin.com/in/vedik-gannoji/",year:"3rd"},
       
     ],
@@ -151,7 +151,6 @@ const teams: TeamSection[] = [
     members: [
       { name: "Jayadeep",        role: "Chairperson", dept: "Content", photo: "/council/content/Jayadeep.png",linkedin:"https://www.linkedin.com/in/jayadeep-tadakamalla-780077374/",year:"4th" },
       { name: "Prashansa",       role: "Chairperson", dept: "Content", photo: "/council/content/Prashansa .png",linkedin:"https://www.linkedin.com/in/prashansa-b-92218b2b6",year:"4th" },
-      { name: "Haritha",         role: "Member", dept: "Content", photo: "/council/content/Haritha.png",linkedin:"#",year:"4th" },
       { name: "Harshitha",       role: "Member", dept: "Content", photo: "/council/content/Harshitha.png",linkedin:"https://www.linkedin.com/in/harshitha-bollepalli-a5b198345",year:"3rd" },
       { name: "Ritvik Ennavar", role: "Content Lead", dept: "Content", photo: "/council/content/Ennawar Rithvik .png", zoom: 1.15,linkedin:"https://www.linkedin.com/in/rithvik-e-4a4936341/",year:"3rd" },
       { name: "Shiva",           role: "Member", dept: "Content", photo: "/council/content/Shiva.png",linkedin:"https://www.linkedin.com/in/jatavath-shiva-14099338a",year:"3rd" },
@@ -168,7 +167,7 @@ const teams: TeamSection[] = [
          { name: "Sushaanth",         role: "Chairperson", dept: "Creative", photo: "/council/creatives/sushaanth.png",linkedin:"https://www.linkedin.com/in/sushanth-mandumula-0496bb2b6",year:"4th" },
          { name: "Durga Mahesh",      role: "Member", dept: "Creative", photo: "/council/creatives/Durga Mahesh.png",linkedin:"https://www.linkedin.com/in/durgamahesh-kolukuri",year:"3rd" },
          { name: "Cheeda Shamilini",  role: "Member", dept: "Creative", photo: "/council/creatives/Cheeda Shamilini.png",linkedin:"https://www.linkedin.com/in/cheeda-shamilini-naidu-47419a345/",year:"3rd" },
-         { name: "D Pearl Angelina",  role: "Inventory Management", dept: "Creative", photo: "/council/creatives/D Pearl Angelina.png",linkedin:"https://www.linkedin.com/in/pearl-angelina-529705283",year:"3rd" },
+         { name: "D Pearl Angelina",  role: "Inventory Lead", dept: "Creative", photo: "/council/creatives/D Pearl Angelina.png",linkedin:"https://www.linkedin.com/in/pearl-angelina-529705283",year:"3rd" },
          { name: "Sadwika Reddy Chedimala", role: "Creatives Lead", dept: "Creative", photo: "/council/creatives/Sadwika Chedimala.png",linkedin:"https://www.linkedin.com/in/sadwika-chedimala-758167387/" ,year:"3rd"},
          { name: "Hansika Jella",     role: "Member", dept: "Creative", photo: "/council/creatives/Hansika Jella.png",linkedin:"https://www.linkedin.com/in/hansika-jella-01b079380",year:"3rd" },
     ],
@@ -215,7 +214,6 @@ const teams: TeamSection[] = [
     color: "#E53935",
     description: "Represents CIE in every room — anchoring events, running communication workshops, handling PR, and making sure CIE's message lands clearly with every audience.",
     members: [
-      { name: "Sai Mihir Ramaraju",    role: "Member", dept: "P&S", photo: "/council/p&s/Sai Mihir Ramaraju.png",linkedin:"#",year:"4th" },
       { name: "Yashashri Penikalapti", role: "Sponsorship Chairperson", dept: "P&S", photo: "/council/p&s/Yashashri Penikalapti.png",linkedin:"https://www.linkedin.com/in/yashashripenikalapati",year:"4th" },
       { name: "Bandaru Mahith Naidu",  role: "Promotions Chairperson", dept: "P&S", photo: "/council/p&s/Bandaru Mahith Naidu.png",linkedin:"https://www.linkedin.com/in/bandarumahithnaidu/",year:"4th" },
       { name: "Venkata Sanjana Kovuru", role: "Sponsorship Lead", dept: "P&S", photo: "/council/p&s/Sanjana Kovuru.png",linkedin:"https://www.linkedin.com/in/sanjana-kovuru-18b55b31a/",year:"3rd" },
@@ -444,10 +442,9 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
             ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=0a0a0a&color=9aa&size=400&bold=true&format=png`;
           const isActive = active === i;
           const scatter = i % 2 === 0 ? -26 : 26;
-          // Keep Tribhuvan + Aarthi on the same grid row: force Tribhuvan to
-          // column 1 (start of a fresh row) when Aarthi is the next card, so
-          // Aarthi lands in column 2 beside him across 2/3/4-col layouts.
-          const startNewRow = m.name === "Katepally Tribhuvan" && members[i + 1]?.name === "Aarthi Reddy";
+          // Content dept gets a comic-burst flip background with white text.
+          const isContent = m.department === "Content";
+          const backText = isContent ? "#ffffff" : m.deptColor;
           return (
             <div
               key={`${m.department}-${m.name}-${i}`}
@@ -463,7 +460,6 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                 background: "transparent", border: "none", padding: 0, cursor: "pointer", textAlign: "left",
                 transform: `translateY(${isActive ? 0 : scatter}px)`,
                 transition: "transform .55s cubic-bezier(.16,1,.3,1)",
-                ...(startNewRow ? { gridColumnStart: 1 } : {}),
               }}
             >
               <div style={{
@@ -496,13 +492,17 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                     <div style={{ position: "absolute", inset: 0, clipPath: CS_NOTCH, background: m.deptColor }} />
                     <div style={{
                       position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden",
-                      background: "#05070F",
+                      background: isContent
+                        ? "#111 url('/council/bg/content-flip.webp') center/cover no-repeat"
+                        : "#05070F",
                       display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "clamp(14px,6%,20px)",
                     }}>
-                      {/* subtle dept color top glow */}
+                      {/* subtle dept color top glow (dark scrim for Content's bright bg) */}
                       <div style={{
                         position: "absolute", inset: 0, zIndex: 0,
-                        background: `linear-gradient(180deg, ${m.deptColor}22 0%, transparent 40%)`,
+                        background: isContent
+                          ? "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.45) 100%)"
+                          : `linear-gradient(180deg, ${m.deptColor}22 0%, transparent 40%)`,
                       }} />
                       {/* faded CIE logo watermark */}
                       {/* large ghost CIE watermark */}
@@ -521,12 +521,16 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                           fontSize: "clamp(13px,2.6vw,32px)", lineHeight: 1.0,
                           textTransform: "uppercase", letterSpacing: "0.01em",
                           color: "#ffffff", overflowWrap: "anywhere",
-                          background: `${m.deptColor}33`, boxShadow: `0 0 0 1px ${m.deptColor}55, 0 6px 22px ${m.deptColor}55`,
+                          background: isContent ? "rgba(0,0,0,0.42)" : `${m.deptColor}33`,
+                          boxShadow: isContent
+                            ? "0 0 0 1px rgba(255,255,255,0.35), 0 6px 22px rgba(0,0,0,0.45)"
+                            : `0 0 0 1px ${m.deptColor}55, 0 6px 22px ${m.deptColor}55`,
                           padding: "6px 14px", borderRadius: "8px",
+                          textShadow: isContent ? "0 1px 6px rgba(0,0,0,0.6)" : undefined,
                         }}>{m.name}</span>
-                        <span style={{ width: "34px", height: "2px", borderRadius: "2px", background: m.deptColor }} />
-                        <span style={{ fontFamily: "var(--font-sora)", fontWeight: 600, fontSize: "clamp(11px,2vw,22px)", lineHeight: 1.1, textTransform: "uppercase", letterSpacing: "0.06em", color: m.deptColor }}>{deptShort[m.department] ?? m.department}</span>
-                        <span style={{ fontFamily: "var(--font-sora)", fontWeight: 500, fontSize: "clamp(10px,1.4vw,18px)", lineHeight: 1.2, color: "rgba(255,255,255,0.80)", letterSpacing: "0.01em" }}>{displayRole(m)}{m.year ? ` · ${m.year}` : ""}</span>
+                        <span style={{ width: "34px", height: "2px", borderRadius: "2px", background: backText }} />
+                        <span style={{ fontFamily: "var(--font-sora)", fontWeight: 600, fontSize: "clamp(11px,2vw,22px)", lineHeight: 1.1, textTransform: "uppercase", letterSpacing: "0.06em", color: backText, textShadow: isContent ? "0 1px 6px rgba(0,0,0,0.6)" : undefined }}>{deptShort[m.department] ?? m.department}</span>
+                        <span style={{ fontFamily: "var(--font-sora)", fontWeight: 500, fontSize: "clamp(10px,1.4vw,18px)", lineHeight: 1.2, color: isContent ? "#ffffff" : "rgba(255,255,255,0.80)", letterSpacing: "0.01em", textShadow: isContent ? "0 1px 6px rgba(0,0,0,0.6)" : undefined }}>{displayRole(m)}{m.year ? ` · ${m.year}` : ""}</span>
                       </div>
                       <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: "7px", width: "100%", alignItems: "center" }}>
                         {m.linkedin && m.linkedin !== "#" && (
@@ -578,45 +582,67 @@ export default function CouncilPage() {
     t.members.map((m) => ({ ...m, department: t.team, deptColor: t.color }))
   );
 
-  // FIXED "All" order — the exact sequence from the live site, hardcoded so
-  // every device/browser shows it identically (no random shuffle, no
-  // localStorage). Indices map into `allMembers` (declaration order); remapped
-  // for T.S Siddarth inserted at Tech index 3.
-  const ALL_ORDER = [44, 8, 30, 39, 56, 51, 60, 55, 38, 24, 25, 5, 6, 22, 59, 33, 19, 16, 57, 32, 61, 2, 50, 10, 49, 9, 28, 0, 53, 48, 62, 29, 54, 41, 46, 34, 7, 18, 27, 45, 36, 31, 15, 37, 40, 26, 21, 63, 1, 20, 14, 13, 4, 11, 43, 42, 58, 35, 23, 12, 47, 52, 17, 3];
-  // Any indices not listed (roster changes) are appended in declaration order.
-  const allShuffled = [
-    ...ALL_ORDER.filter((i) => i < allMembers.length).map((i) => allMembers[i]),
-    ...allMembers.filter((_, i) => !ALL_ORDER.includes(i)),
+  // FIXED "All" order — the exact sequence from the live site, hardcoded by
+  // NAME so it's stable across devices AND survives roster changes (no random
+  // shuffle, no localStorage, no fragile indices). Any member not listed here
+  // (newly added) is appended in declaration order.
+  const ALL_ORDER_NAMES = [
+    "Sai Varshith Konduru", "Jaikar Midithuri", "Avinash", "Kodali Pranav Chandra",
+    "Mahima Tatineni", "Bandaru Mahith Naidu", "Alleshwaram Sai Ganesh", "Dheeraj Kumar",
+    "Tannidi Durga Karthikeya", "Durga Mahesh", "Cheeda Shamilini", "Anuj Lomte",
+    "Anamika", "Sai Krishna", "Bhavana", "Yeruva InduSri Varshitha Reddy",
+    "Shiva", "Prashansa", "Aarthi Reddy", "Sri Thejitha", "M.Tarun Kumar Reddy",
+    "Teja Jagathi", "Yashashri Penikalapti", "Katepally Tribhuvan", "Konthum Bhruhathi",
+    "Athava Sri Pavan", "Hansika Jella", "Ghanashyam Kodekandla", "Adithya Ganesh",
+    "Sai Vashist", "Tharun", "Vivek Vardhan", "Rithish Kumar", "Anguluri Shiva",
+    "Anam Mounika", "A Farhana Sultana", "Guna Sai Marni", "Ritvik Ennavar",
+    "Sadwika Reddy Chedimala", "Mahesh Gorli", "Bangari Nikitha", "Chanikya",
+    "Jayadeep", "Poloju RajaVivek", "Priyanshu Roy", "D Pearl Angelina", "Harika Y",
+    "M Vasanth Vardhan", "Keertan Kuppili", "K S Sreesanth", "Gannoji Vedik",
+    "Guguloth Adithya Jadhav", "Abhiram Ganji", "Yashwanth Abhishek", "Vavilala Sai Ganesh",
+    "Mattam Shivani", "Vinay", "Mounith Varma Akkala", "Sushaanth", "Abhinav Sai",
+    "Gothuri Rishith", "Venkata Sanjana Kovuru", "Harshitha", "T.S Siddarth",
   ];
-  // Applied AFTER the year sort so the placement survives (identical order on
-  // mobile & desktop — no device-dependent reshuffle). Mahima first; Aarthi
-  // pinned right beside Tribhuvan.
+  const orderRank = new Map(ALL_ORDER_NAMES.map((n, i) => [n, i]));
+  const allShuffled = [...allMembers].sort(
+    (a, b) => (orderRank.get(a.name) ?? Infinity) - (orderRank.get(b.name) ?? Infinity)
+  );
+  // Mahima first, then a fixed cluster (Aarthi, Trib, Pavan, Hansika) kept
+  // contiguous AND aligned to a 4-col row boundary — so on desktop the four
+  // fill one full row with NO empty cells before them (other cards flow in).
   const pinAll = <T extends { name: string }>(list: T[]): T[] => {
     let arr = [...list];
-    const trib = arr.find((m) => m.name === "Katepally Tribhuvan");
-    const aar = arr.find((m) => m.name === "Aarthi Reddy");
-    if (trib && aar) {
-      arr = arr.filter((m) => m !== aar);
-      arr.splice(arr.indexOf(trib) + 1, 0, aar);
-    }
-    // Tribhuvan is forced to column 1 (new row) so Aarthi sits beside him; that
-    // leaves the previous row's last cell empty. Fill it with Adithya Ganesh by
-    // placing him immediately before Tribhuvan.
-    const adi = arr.find((m) => m.name === "Adithya Ganesh");
-    if (trib && adi) {
-      arr = arr.filter((m) => m !== adi);
-      arr.splice(arr.indexOf(trib), 0, adi);
-    }
+    // Mahima always first.
     const mah = arr.find((m) => m.name === "Mahima Tatineni");
     if (mah) {
       arr = arr.filter((m) => m !== mah);
       arr.unshift(mah);
     }
+    // Jadhav sits right beside Bhavana.
+    const bhav = arr.find((m) => m.name === "Bhavana");
+    const jadhav = arr.find((m) => m.name === "Guguloth Adithya Jadhav");
+    if (bhav && jadhav) {
+      arr = arr.filter((m) => m !== jadhav);
+      arr.splice(arr.indexOf(bhav) + 1, 0, jadhav);
+    }
+    const clusterOrder = ["Aarthi Reddy", "Katepally Tribhuvan", "Athava Sri Pavan", "Hansika Jella"];
+    const cluster = clusterOrder
+      .map((n) => arr.find((m) => m.name === n))
+      .filter((m): m is T => Boolean(m));
+    if (cluster.length) {
+      const at = arr.findIndex((m) => m.name === clusterOrder[0]);
+      arr = arr.filter((m) => !cluster.includes(m));
+      // Snap the block start to a multiple of 4 (desktop columns) so it begins
+      // at column 1 of a row — one clean line, no gap. Never before Mahima.
+      let insertAt = at < 0 ? arr.length : Math.round(at / 4) * 4;
+      insertAt = Math.max(4, Math.min(insertAt, arr.length));
+      arr.splice(insertAt, 0, ...cluster);
+    }
     return arr;
   };
   const visibleMembers = activeTeam === "All"
-    // 4th-years (chairpersons) first, then 3rd-years — stable within each group (keeps shuffle order)
-    ? pinAll([...allShuffled].sort((a, b) => yearRank(a.year) - yearRank(b.year)))
+    // "All" view keeps the shuffle order (ALL_ORDER) — no 4th-first sort.
+    ? pinAll(allShuffled)
     : allMembers
         .filter((m) => m.department === activeTeam)
         // 4th-years (chairpersons) first; within same year, dept lead(s) first; stable for the rest
