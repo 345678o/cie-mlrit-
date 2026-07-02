@@ -81,7 +81,7 @@ const PREF_NAMES: Record<string, string> = {
 };
 
 const BRANCHES = ["CSE","CSM","CSD","CSIT","IT","EEE","ECE","MECH","AERO"];
-const YEARS    = ["1st Year","2nd Year","3rd Year","4th Year"];
+const YEARS    = ["2nd Year","3rd Year","4th Year"];
 
 type FormState = { name: string; rollNo: string; phone: string; email: string; branch: string; year: string; why: string };
 const EMPTY: FormState = { name:"", rollNo:"", phone:"", email:"", branch:"", year:"", why:"" };
@@ -632,8 +632,8 @@ function ApplyForm() {
                       {errors.phone && <FieldErr msg={errors.phone}/>}
                     </div>
                     <div>
-                      <Label>College Email</Label>
-                      <input type="email" placeholder="you@mlrit.ac.in" value={form.email}
+                      <Label>Email</Label>
+                      <input type="email" placeholder="you@example.com" value={form.email}
                         onChange={e => set("email", e.target.value)}
                         onFocus={() => setFocused("email")} onBlur={() => setFocused("")}
                         style={inputStyle(focused==="email", color)}/>
@@ -754,7 +754,7 @@ function ApplyForm() {
                   </motion.button>
 
                   <p style={{ fontFamily:"var(--font-body)", fontSize:"13px", color:"#9CA3AF", lineHeight:1.6 }}>
-                    Applications reviewed within 5–7 days · Results via college email
+                    Applications reviewed within 5–7 days · Results via email
                   </p>
                 </div>
 
