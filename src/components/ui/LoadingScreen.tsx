@@ -25,7 +25,10 @@ function Ring({ delay, size }: { delay: number; size: number }) {
 }
 
 export default function LoadingScreen() {
-  const [visible, setVisible] = useState(true);
+  // Deep links (e.g. gallery → /events#event-01) jump straight to an anchor
+  // on load — playing the full intro over it blacks out the very content the
+  // user just clicked through to. Skip the intro entirely when a hash is present.
+  const [visible, setVisible] = useState(() => typeof window === "undefined" || !window.location.hash);
   const [burst,   setBurst]   = useState(false);
   const [runId,   setRunId]   = useState(0);
 
@@ -44,7 +47,7 @@ export default function LoadingScreen() {
       t2 = setTimeout(() => setVisible(false), 1500);
     };
 
-    run();
+    if (!window.location.hash) run();
     window.addEventListener("cie:intro", run);
     return () => {
       window.removeEventListener("cie:intro", run);
