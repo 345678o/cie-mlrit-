@@ -444,6 +444,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
           const scatter = i % 2 === 0 ? -26 : 26;
           // Some depts get a comic-burst flip background with white text.
           const flipBgByDept: Record<string, string> = {
+            "Tech": "/council/bg/tech-flip.jpg",
             "Content": "/council/bg/content-flip.webp",
             "Ops — Operations & Finance": "/council/bg/ops-flip.jpg",
             "Creative": "/council/bg/creative-flip.webp",
