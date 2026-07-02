@@ -598,6 +598,12 @@ export default function CouncilPage() {
       const insertAt = at < 0 ? arr.length : Math.min(at, arr.length);
       arr.splice(insertAt, 0, ...cluster);
     }
+    // Mahima always first.
+    const mah = arr.find((m) => m.name === "Mahima Tatineni");
+    if (mah) {
+      arr = arr.filter((m) => m !== mah);
+      arr.unshift(mah);
+    }
     return arr;
   };
   const visibleMembers = activeTeam === "All"
