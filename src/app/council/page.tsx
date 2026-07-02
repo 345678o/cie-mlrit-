@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Link2, Mail, Users, ChevronDown, ChevronUp, Code, Palette, Camera, PenLine, Mic, BarChart2, FileText } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
 
@@ -102,7 +103,7 @@ type TeamSection = {
 const studentLeadership: Member[] = [
   { name: "Ghanashyam Kodekandla", role: "President",                  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/ghanashyamkodekandla", email: "", photo: "/council/tech/Ghanashyam Kodekandla.png" },
   { name: "Mahima Tatineni",       role: "Vice President",             dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Mahima Tatineni.png" },
-  { name: "Aarthi Reddy Balaling", role: "Secretary",                  dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Aarthi.png" },
+  { name: "Aarthi Reddy", role: "Secretary",                  dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Aarthi.png" },
   { name: "Keertan Kuppili",       role: "Chief Technical Executive",  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/", email: "", photo: "/council/tech/Keertan Kuppili .png" },
   { name: "Jaikar Midithuri",      role: "Joint Secretary",            dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/jaikar-midithuri-136614369/", email: "", photo: "/council/tech/Jaikar Midithuri.png" },
   { name: "Bhavana Inakollu",      role: "Internal Relations",         dept: "Operations & Finance", year: "2026-27", linkedin: "https://www.linkedin.com/in/bhavana-inakollu-8698a2395", email: "", photo: "/council/OPS/Bhavana .png" },
@@ -125,8 +126,8 @@ const teams: TeamSection[] = [
     color: "#4A7DFF",
     description: "Builds and maintains CIE's digital infrastructure — from the website and internal tools to AI experiments and mobile apps. The Tech team turns every idea into a working product.",
     members: [
-      { name: "Ghanashyam Kodekandla", role: "President", dept: "Tech", photo: "/council/tech/Ghanashyam Kodekandla.png",linkedin:"https://www.linkedin.com/in/ghanashyamkodekandla",year:"4th" },
-      { name: "Keertan Kuppili",       role: "Chief Technical Executive", dept: "Tech", photo: "/council/tech/Keertan Kuppili .png", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/",year:"4th"},
+      { name: "Ghanashyam Kodekandla", role: "MP Chairperson", dept: "Tech", photo: "/council/tech/Ghanashyam Kodekandla.png",linkedin:"https://www.linkedin.com/in/ghanashyamkodekandla",year:"4th" },
+      { name: "Keertan Kuppili",       role: "Product Development Chairperson", dept: "Tech", photo: "/council/tech/Keertan Kuppili .png", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/",year:"4th"},
       // { name: "T.S Siddarth",          role: "Member", dept: "Tech", photo: "/council/tech/T.S Siddarth.png",linkedin: "#",year:"4th"},
       { name: "Teja Jagathi",          role: "Technical Chairperson", dept: "Tech", photo: "/council/tech/Teja Jagathi.png" ,linkedin: "https://www.linkedin.com/in/teja-jagathi",year:"4th"},
       { name: "Abhiram Ganji",         role: "Product Development Lead", dept: "Tech", photo: "/council/tech/Abhiram Ganji.png" ,linkedin:"#",year:"3rd"},
@@ -213,8 +214,8 @@ const teams: TeamSection[] = [
     color: "#E53935",
     description: "Represents CIE in every room — anchoring events, running communication workshops, handling PR, and making sure CIE's message lands clearly with every audience.",
     members: [
-      { name: "Yashashri Penikalapti", role: "Member", dept: "P&S", photo: "/council/p&s/Yashashri Penikalapti.png",linkedin:"https://www.linkedin.com/in/yashashripenikalapati",year:"4th" },
-      { name: "Bandaru Mahith Naidu",  role: "Member", dept: "P&S", photo: "/council/p&s/Bandaru Mahith Naidu.png",linkedin:"https://www.linkedin.com/in/bandarumahithnaidu/",year:"4th" },
+      { name: "Yashashri Penikalapti", role: "Sponsorship Chairperson", dept: "P&S", photo: "/council/p&s/Yashashri Penikalapti.png",linkedin:"https://www.linkedin.com/in/yashashripenikalapati",year:"4th" },
+      { name: "Bandaru Mahith Naidu",  role: "Promotions Chairperson", dept: "P&S", photo: "/council/p&s/Bandaru Mahith Naidu.png",linkedin:"https://www.linkedin.com/in/bandarumahithnaidu/",year:"4th" },
       { name: "Venkata Sanjana Kovuru", role: "Sponsorship Lead", dept: "P&S", photo: "/council/p&s/Sanjana Kovuru.png",linkedin:"https://www.linkedin.com/in/sanjana-kovuru-18b55b31a/",year:"3rd" },
       { name: "Adithya Ganesh",        role: "Studios Lead", dept: "P&S", photo: "/council/p&s/Adithya Ganesh.png",linkedin:"https://www.linkedin.com/in/adithya-ganesh-487860398/",year:"3rd" },
       { name: "Rithish Kumar",         role: "Promotions Lead", dept: "P&S", photo: "/council/p&s/Rithish Kumar.png",linkedin:"https://www.linkedin.com/in/rithish-kumar-418242363/",year:"3rd" },
@@ -227,7 +228,7 @@ const teams: TeamSection[] = [
     members: [
        { name: "Dheeraj Kumar",     role: "Member", dept: "Ops", photo: "/council/OPS/Dheeraj Kumar.png",linkedin:"#" ,year:"4th"},
       { name: "Mahima Tatineni",   role: "Vice President", dept: "Ops", photo: "/council/OPS/Mahima Tatineni.png",linkedin:"https://www.linkedin.com/in/mahima-tatineni" ,year:"4th"},
-      { name: "Aarthi Reddy Balaling", role: "Secretary", dept: "Ops", photo: "/council/OPS/Aarthi.png",linkedin:"https://www.linkedin.com/in/aarthi-reddy-b-626241350/" ,year:"4th"},
+      { name: "Aarthi Reddy", role: "Secretary", dept: "Ops", photo: "/council/OPS/Aarthi.png",linkedin:"https://www.linkedin.com/in/aarthi-reddy-b-626241350/" ,year:"4th"},
       { name: "Vinay",             role: "Member", dept: "Ops", photo: "/council/OPS/Vinay.png",linkedin:"https://www.linkedin.com/in/dsdvinay" ,year:"4th"},
       { name: "Bhavana",           role: "Internal Relations", dept: "Ops", photo: "/council/OPS/Bhavana .png",linkedin:"https://www.linkedin.com/in/bhavana-inakollu-8698a2395" ,year:"3rd"},
       { name: "Alleshwaram Sai Ganesh", role: "Operations Lead", dept: "Ops", photo: "/council/OPS/ASaiGanesh.png",linkedin:"https://www.linkedin.com/in/sai-ganesh-alleshwaram-a30832316" ,year:"3rd"},
@@ -284,16 +285,15 @@ function MemberCard({ member, color = "#FF5E2C", expertise = "", index = 0 }: { 
       {/* Image — 80% of card */}
       <div style={{ flex: "1 1 80%", overflow: "hidden", position: "relative", background: `${color}18` }}>
         {photoSrc ? (
-          <img
+          <Image
             src={photoSrc}
+            fill
             draggable={false}
             alt={member.name}
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             style={{
-              width: "100%",
-              height: "100%",
               objectFit: "cover",
               objectPosition: "top center",
-              display: "block",
               transition: "transform 300ms cubic-bezier(0.16,1,0.3,1)",
             }}
             className="group-hover:[transform:scale(1.05)]"
@@ -473,12 +473,12 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                   <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
                     <div style={{ position: "absolute", inset: 0, clipPath: CS_NOTCH, background: "rgba(255,255,255,0.16)" }} />
                     <div style={{ position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden", background: "#05070F" }}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         src={flat}
                         alt={m.name}
+                        fill
                         draggable={false}
-                        className="absolute inset-0 w-full h-full"
+                        sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
                         style={{ objectFit: m.fit ?? "cover", objectPosition: "top center", transform: m.zoom ? `scale(${m.zoom})` : undefined, transformOrigin: m.zoom && m.zoom > 1 ? "top center" : "center" }}
                       />
 <div className="cs-tap-hint">Tap for details</div>
@@ -591,7 +591,7 @@ export default function CouncilPage() {
     }
     // Force Aarthi to sit right beside Tribhuvan
     const tribI = allMembers.findIndex((m) => m.name === "Katepally Tribhuvan");
-    const aarI  = allMembers.findIndex((m) => m.name === "Aarthi Reddy Balaling");
+    const aarI  = allMembers.findIndex((m) => m.name === "Aarthi Reddy");
     if (tribI !== -1 && aarI !== -1) {
       idx = idx.filter((i) => i !== aarI);
       idx.splice(idx.indexOf(tribI) + 1, 0, aarI);
@@ -669,12 +669,14 @@ export default function CouncilPage() {
                     style={{ background: "#FF5E2C", transform: "translate(30%, -30%)" }} />
                   {member.photo ? (
                     <div className="rounded-full mb-6 overflow-hidden flex-shrink-0"
-                      style={{ width: "clamp(96px,14vw,160px)", height: "clamp(96px,14vw,160px)", border: "3px solid rgba(255,94,44,0.25)" }}>
-                      <img
+                      style={{ position: "relative", width: "clamp(96px,14vw,160px)", height: "clamp(96px,14vw,160px)", border: "3px solid rgba(255,94,44,0.25)" }}>
+                      <Image
                         src={member.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")}
+                        fill
                         draggable={false}
                         alt={member.name}
-                        style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }}
+                        sizes="160px"
+                        style={{ objectFit: "cover", objectPosition: "top center" }}
                       />
                     </div>
                   ) : (
