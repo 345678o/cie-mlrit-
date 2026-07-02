@@ -42,6 +42,16 @@ const alumni: Alumni[] = [
     tags: ["Tech", "Product"],
   },
   {
+    name: "Sri Nikhil C",
+    batch: "2024–25",
+    role: "Founder",
+    company: "Deezign",
+    photo: "/alumni/Nikhil.jpeg",
+    linkedin: "https://coolestdesigner.com",
+    quote: "CIE was the best playground for me to learn and apply skills during college. It gave me the right people, the right exposure, and the chance to fail early. Honestly, much of what I excel at today stems directly from what I tinkered with during my time there.",
+    tags: ["Design", "Entrepreneurship"],
+  },
+  {
     name: "Placeholder Name",
     batch: "2022–23",
     role: "Product Manager",
@@ -92,10 +102,14 @@ const BATCHES = ["All", ...Array.from(new Set(alumni.map((a) => a.batch))).sort(
 
 const ORANGE = "#FF5E2C";
 
+const QUOTE_CLAMP_THRESHOLD = 220;
+
 function AlumniCard({ member, index }: { member: Alumni; index: number }) {
   const initials = member.name === "Placeholder Name"
     ? "?"
     : member.name.split(" ").map((n) => n[0]).join("").substring(0, 2).toUpperCase();
+  const isLong = member.quote.length > QUOTE_CLAMP_THRESHOLD;
+  const [expanded, setExpanded] = useState(false);
 
   return (
     <motion.div
@@ -139,9 +153,27 @@ function AlumniCard({ member, index }: { member: Alumni; index: number }) {
         <p style={{
           color: "#1A1A1A", fontSize: "clamp(14px,1.5vw,16px)", lineHeight: 1.7,
           fontStyle: "italic", fontFamily: "var(--font-body)",
+          ...(isLong && !expanded ? {
+            display: "-webkit-box",
+            WebkitLineClamp: 6,
+            WebkitBoxOrient: "vertical" as const,
+            overflow: "hidden",
+          } : {}),
         }}>
           {member.quote}
         </p>
+        {isLong && (
+          <button
+            onClick={() => setExpanded((e) => !e)}
+            style={{
+              display: "block", marginTop: "10px", padding: 0, border: "none",
+              background: "none", color: ORANGE, fontSize: "13px", fontWeight: 700,
+              fontFamily: "var(--font-body)", cursor: "pointer",
+            }}
+          >
+            {expanded ? "Read less" : "Read more"}
+          </button>
+        )}
       </div>
 
       {/* Divider */}
@@ -282,6 +314,7 @@ export default function AlumniPage() {
               gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 480px), 1fr))",
               gap: "clamp(16px,2.5vw,28px)",
               marginTop: "clamp(32px,4vw,52px)",
+              alignItems: "start",
             }}
           >
             {visible.map((member, i) => (
