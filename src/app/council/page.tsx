@@ -597,6 +597,14 @@ export default function CouncilPage() {
       arr = arr.filter((m) => m !== aar);
       arr.splice(arr.indexOf(trib) + 1, 0, aar);
     }
+    // Tribhuvan is forced to column 1 (new row) so Aarthi sits beside him; that
+    // leaves the previous row's last cell empty. Fill it with Adithya Ganesh by
+    // placing him immediately before Tribhuvan.
+    const adi = arr.find((m) => m.name === "Adithya Ganesh");
+    if (trib && adi) {
+      arr = arr.filter((m) => m !== adi);
+      arr.splice(arr.indexOf(trib), 0, adi);
+    }
     const mah = arr.find((m) => m.name === "Mahima Tatineni");
     if (mah) {
       arr = arr.filter((m) => m !== mah);
