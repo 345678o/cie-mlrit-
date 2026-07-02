@@ -106,12 +106,15 @@ function inputStyle(focused: boolean, color: string): React.CSSProperties {
   };
 }
 
-function Label({ children }: { children: React.ReactNode }) {
+function Label({ children, required = true }: { children: React.ReactNode; required?: boolean }) {
   return (
     <label style={{
       display:"block", fontFamily:"var(--font-body)", fontWeight:600,
       fontSize:"14px", color:"#374151", marginBottom:"8px",
-    }}>{children}</label>
+    }}>
+      {children}
+      {required && <span aria-hidden style={{ color:"#EF4444", marginLeft:"3px" }}>*</span>}
+    </label>
   );
 }
 
@@ -597,7 +600,7 @@ function ApplyForm() {
               {/* Form */}
               <motion.form initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }}
                 transition={{ duration:0.6, delay:0.2, ease:[0.16,1,0.3,1] }}
-                onSubmit={handleSubmit} noValidate>
+                onSubmit={handleSubmit}>
 
                 {/* ── Personal Information ── */}
                 <SectionDivider label="Personal Information"/>
@@ -609,7 +612,7 @@ function ApplyForm() {
                       <input type="text" placeholder="Anamika Kumari" value={form.name}
                         onChange={e => set("name", e.target.value)}
                         onFocus={() => setFocused("name")} onBlur={() => setFocused("")}
-                        style={inputStyle(focused==="name", color)}/>
+                        required aria-required style={inputStyle(focused==="name", color)}/>
                       {errors.name && <FieldErr msg={errors.name}/>}
                     </div>
                     <div>
@@ -617,7 +620,7 @@ function ApplyForm() {
                       <input type="text" placeholder="21B01A0XXX" value={form.rollNo}
                         onChange={e => set("rollNo", e.target.value)}
                         onFocus={() => setFocused("rollNo")} onBlur={() => setFocused("")}
-                        style={inputStyle(focused==="rollNo", color)}/>
+                        required aria-required style={inputStyle(focused==="rollNo", color)}/>
                       {errors.rollNo && <FieldErr msg={errors.rollNo}/>}
                     </div>
                   </div>
@@ -628,7 +631,7 @@ function ApplyForm() {
                       <input type="tel" placeholder="9XXXXXXXXX" value={form.phone}
                         onChange={e => set("phone", e.target.value)}
                         onFocus={() => setFocused("phone")} onBlur={() => setFocused("")}
-                        style={inputStyle(focused==="phone", color)}/>
+                        required aria-required inputMode="numeric" style={inputStyle(focused==="phone", color)}/>
                       {errors.phone && <FieldErr msg={errors.phone}/>}
                     </div>
                     <div>
@@ -636,7 +639,7 @@ function ApplyForm() {
                       <input type="email" placeholder="you@example.com" value={form.email}
                         onChange={e => set("email", e.target.value)}
                         onFocus={() => setFocused("email")} onBlur={() => setFocused("")}
-                        style={inputStyle(focused==="email", color)}/>
+                        required aria-required style={inputStyle(focused==="email", color)}/>
                       {errors.email && <FieldErr msg={errors.email}/>}
                     </div>
                   </div>
@@ -653,7 +656,7 @@ function ApplyForm() {
                       <select value={form.branch}
                         onChange={e => set("branch", e.target.value)}
                         onFocus={() => setFocused("branch")} onBlur={() => setFocused("")}
-                        style={{ ...inputStyle(focused==="branch", color), appearance:"auto" as any }}>
+                        required aria-required style={{ ...inputStyle(focused==="branch", color), appearance:"auto" as any }}>
                         <option value="">Select your branch…</option>
                         {BRANCHES.map(b => <option key={b} value={b}>{b}</option>)}
                       </select>
@@ -691,6 +694,7 @@ function ApplyForm() {
                     <textarea
                       placeholder={`Tell us why you want to join ${dept.name} — your passion, experience, and what you'll bring to the team.`}
                       value={form.why} rows={6}
+                      required aria-required minLength={30}
                       onChange={e => set("why", e.target.value)}
                       onFocus={() => setFocused("why")} onBlur={() => setFocused("")}
                       style={{
