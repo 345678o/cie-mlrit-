@@ -280,20 +280,24 @@ function ApplyForm() {
   const searchParams = useSearchParams();
   const router       = useRouter();
 
-  // Preference keys in priority order. New flow passes `?depts=a,b,c`; keep `?dept=a` back-compat.
-  const deptsParam = searchParams.get("depts");
-  const legacyDept = searchParams.get("dept");
-  const prefKeys = Array.from(
-    new Set(
-      (deptsParam ? deptsParam.split(",") : legacyDept ? [legacyDept] : [])
-        .map((k) => k.trim())
-        .filter((k) => k in DEPARTMENTS)
-    )
-  ).slice(0, 3);
+  // Preference keys in priority order. Primary source is sessionStorage (set on /join),
+  // so the URL stays clean. `?depts=a,b,c` / `?dept=a` are still honored for back-compat.
+  const cleanKeys = (arr: string[]) =>
+    Array.from(new Set(arr.map((k) => k.trim()).filter((k) => k in DEPARTMENTS))).slice(0, 3);
+  const [prefKeys] = useState<string[]>(() => {
+    const q = searchParams.get("depts");
+    const legacy = searchParams.get("dept");
+    if (q) return cleanKeys(q.split(","));
+    if (legacy) return cleanKeys([legacy]);
+    if (typeof window !== "undefined") {
+      try { return cleanKeys(JSON.parse(sessionStorage.getItem("cie-prefs") || "[]")); } catch {}
+    }
+    return [];
+  });
 
-  // Sequential flow — one application per preference. `?i=` is the current step.
-  const rawStep = parseInt(searchParams.get("i") ?? "0", 10);
-  const stepIdx = Math.max(0, Math.min(prefKeys.length - 1, Number.isNaN(rawStep) ? 0 : rawStep));
+  // Sequential flow — one application per preference. `?step=` is 1-based (default 1).
+  const rawStep = parseInt(searchParams.get("step") ?? "1", 10);
+  const stepIdx = Math.max(0, Math.min(prefKeys.length - 1, (Number.isNaN(rawStep) ? 1 : rawStep) - 1));
   const isLastStep = stepIdx >= prefKeys.length - 1;
 
   const rawDept = prefKeys[stepIdx] ?? "";
@@ -326,6 +330,8 @@ function ApplyForm() {
 
   useEffect(() => {
     hide();
+    // Keep prefs in storage so clean-URL step navigation survives (covers legacy ?depts entry).
+    if (prefKeys.length) { try { sessionStorage.setItem("cie-prefs", JSON.stringify(prefKeys)); } catch {} }
     return () => show();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -388,10 +394,8 @@ function ApplyForm() {
     setLoading(false);
 
     if (!isLastStep) {
-      // Advance to the next preferred department's application.
-      const p = new URLSearchParams(searchParams.toString());
-      p.set("i", String(stepIdx + 1));
-      router.push(`/join/apply?${p.toString()}`);
+      // Advance to the next preferred department's application (clean URL).
+      router.push(`/join/apply?step=${stepIdx + 2}`);
       return;
     }
 

@@ -63,7 +63,10 @@ export default function JoinPage() {
   const isValid = order.length >= 1 && order.length <= MAX_PREFS;
 
   function proceed() {
-    if (isValid) router.push(`/join/apply?depts=${order.join(",")}`);
+    if (!isValid) return;
+    // Stash the ranked preferences so the apply URL can stay clean (/join/apply).
+    try { sessionStorage.setItem("cie-prefs", JSON.stringify(order)); } catch {}
+    router.push("/join/apply");
   }
 
   return (
