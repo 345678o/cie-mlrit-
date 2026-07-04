@@ -39,7 +39,7 @@ const FEATURED: EventData[] = [
     tags: ["Hands-on", "Expert Guidance", "Domain Challenges", "Practical Skills"],
     bg: "#07090f",
     slides: [
-      { img: "/events/poster/wc%202.0.png", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "Workshop Carnival 2.0", body: "Where learning goes beyond classrooms — into real skills, real challenges, and real innovation. Explore multiple domains in one immersive sprint." },
+      { img: "/events/poster/wc%202.0.png", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "Workshop Carnival 2.0", body: "Learn something by actually trying it. Practical learning across domains through activities and hands-on work, not just someone explaining a concept — come curious, leave knowing something new." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/DSCF1109.JPG", grad: "linear-gradient(160deg,#040a18 0%,#0a1836 50%,#1a3380 100%)", heading: "Expert-Led Tracks", body: "Learn directly from practitioners. Each workshop track delivers hands-on expertise in UI/UX, IoT, content creation, and product design." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM.jpeg", grad: "linear-gradient(130deg,#050c22 0%,#0f2650 50%,#1e40af 100%)", heading: "Build, Don't Browse", body: "Every session ends with something tangible. Teams prototype, test, and iterate — no passive learning, no slides-only talks." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM%20(1).jpeg", grad: "linear-gradient(150deg,#060d20 0%,#0d1f40 50%,#2563eb 100%)", heading: "Cross-Domain Collide", body: "Designers collaborate with developers. Strategists work alongside engineers. That friction is where the best ideas are born." },
@@ -56,7 +56,7 @@ const FEATURED: EventData[] = [
     tags: ["Brand Revival", "Logo Design", "Ad-Film Making", "Masterclasses"],
     bg: "#080808",
     slides: [
-      { img: "/events/poster/B2B.png", grad: "linear-gradient(145deg,#e8b000 0%,#f5c200 55%,#ffd040 100%)", heading: "Business to Brand", body: "A Brand Revival Hackathon — teams of 3–5 develop full strategies to transform brands through design and storytelling.", posterFit: "contain" },
+      { img: "/events/poster/B2B.png", grad: "linear-gradient(145deg,#e8b000 0%,#f5c200 55%,#ffd040 100%)", heading: "Business to Brand", body: "A good idea also needs a good story. Teams work on branding, communication, and visual identity — thinking creatively about how ideas get presented to the world.", posterFit: "contain" },
       { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4700.JPG", grad: "linear-gradient(160deg,#060a04 0%,#14200a 50%,#3d6b0c 100%)", heading: "Visual Identity", body: "Concept sketches evolve into full brand systems — logos, palettes, and typographic language — all under a 48-hour deadline." },
       { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4866.JPG", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "The Ad-Film Track", body: "Script it. Shoot it. Edit it. Teams produce a complete ad film for their chosen brand — entirely within the hackathon window." },
       { img: "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8229.JPG", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "Pitch Day", body: "Final brand presentations evaluated live by a panel of industry jurors. High pressure, high stakes, high impact." },
@@ -79,7 +79,7 @@ const FEATURED: EventData[] = [
     tags: ["Business", "Negotiation", "Sales", "Strategy"],
     bg: "#0c0804",
     slides: [
-      { img: "/events/poster/hustle%20mania.png", grad: "linear-gradient(145deg,#0d0803 0%,#3b1a06 55%,#c2410c 100%)", heading: "Hustle Mania", body: "A high-energy entrepreneurship challenge where teams push limits across negotiation, sales, advertising, and business strategy." },
+      { img: "/events/poster/hustle%20mania.png", grad: "linear-gradient(145deg,#0d0803 0%,#3b1a06 55%,#c2410c 100%)", heading: "Hustle Mania", body: "Think fast. Adapt faster. Entrepreneurship rarely goes according to plan — teams think quickly, communicate clearly, and adapt when things change under real pressure." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0541.JPG", grad: "linear-gradient(160deg,#0b0703 0%,#2e1604 50%,#b03a0a 100%)", heading: "The Sales Sprint", body: "Teams hit the floor with a product and a pitch. Real customers, real pressure — close the deal or go home." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0545.JPG", grad: "linear-gradient(130deg,#0e0904 0%,#3f1c07 50%,#c74c10 100%)", heading: "Negotiation Duel", body: "Head-to-head rounds of business negotiation. Whoever walks away with the better deal — and the logic to prove it — advances." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0548.JPG", grad: "linear-gradient(150deg,#0c0804 0%,#351806 50%,#ba3f0b 100%)", heading: "Ad Blitz", body: "30 minutes to conceptualize and present a full advertising campaign for a surprise brand brief. Speed and clarity win." },
@@ -94,7 +94,7 @@ const FEATURED: EventData[] = [
     tags: ["E-Summit", "Entrepreneurship", "CIE × IIC"],
     bg: "#090709",
     slides: [
-      { img: "/events/poster/equniox.png", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "Equinox E-Summit 2K24", body: "#WherePassionMeetsPerseverance — a 3-day summit bringing student innovators, industry leaders, and investors together at MLRIT." },
+      { img: "/events/poster/equniox.png", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "Equinox E-Summit 2K24", body: "Conversations that can change the way you think. Students hear different journeys, interact with people who've built things of their own, and explore ideas beyond their usual environment." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7602.JPG", grad: "linear-gradient(160deg,#0b0516 0%,#250d48 50%,#5e22c4 100%)", heading: "Startup Pitches", body: "Founders take the stage. Investors in the front row. The most promising student ventures compete for funding and mentorship." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7628.JPG", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "Investor Connect", body: "Structured one-on-one sessions between student entrepreneurs and angel investors — real conversations, real opportunities." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7638.JPG", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "Speaker Series", body: "Industry veterans share unfiltered lessons from building companies. No scripts, no PR spin — just the truth about entrepreneurship." },
@@ -156,7 +156,7 @@ const FEATURED: EventData[] = [
     tags: ["Metaverse", "36-Hour Hackathon", "₹75K Prize", "CIE × Deeploop"],
     bg: "#0b0606",
     slides: [
-      { img: "/events/poster/metaloop.png", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "MetaLoop", body: "Ideate. Immerse. Innovate. A 36-hour metaverse-themed hackathon with ₹75,000 in prizes and Deeploop as technology partner.", posterFit: "contain" },
+      { img: "/events/poster/metaloop.png", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "MetaLoop", body: "Build something. Break something. Fix it. Repeat. A 36-hour hackathon where teams find out how they work when the clock is running — bugs, disagreements, and all.", posterFit: "contain" },
       { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0094.JPG", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "", body: "" },
       { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0102.JPG", grad: "linear-gradient(160deg,#0a0505 0%,#260f0f 50%,#871618 100%)", heading: "AR/VR Track", body: "Build immersive augmented and virtual reality experiences. Teams push the boundaries of spatial computing in 36 hours." },
       { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0168.JPG", grad: "linear-gradient(130deg,#0d0707 0%,#301414 50%,#a61e1e 100%)", heading: "Blockchain Track", body: "Smart contracts, NFTs, and decentralized apps. Teams explore the infrastructure layer of the open metaverse." },
@@ -744,7 +744,9 @@ export default function EventsPage() {
             lineHeight: 1.78, color: "rgba(255,255,255,0.72)",
             maxWidth: "min(440px,100%)", marginBottom: 0, display: "block",
           }}>
-            Over 100 events, workshops, hackathons, and summits — each one shaping the next generation of innovators and entrepreneurs.
+            At CIE, events aren&apos;t organised just to fill a calendar. Every event gives
+            students something to experience — a skill, a challenge, a pitch, or a
+            conversation worth having.
           </p>
 
         </div>

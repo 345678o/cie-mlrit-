@@ -102,7 +102,7 @@ export default function ContactPage() {
         line1="LET'S"
         line2="TALK"
         scriptText="— we'd love to hear from you"
-        description="Have a question, an idea, or want to collaborate? We'd love to hear from you. The CIE team typically responds within 24 hours."
+        description="Maybe you have an idea, want to collaborate, or want to participate in an event. Maybe you just want to know where to start. Send us a message — our team will help connect you with the right department or vertical."
         cta={{ label: "Send a Message", href: "#contact-form" }}
         watermark="HELLO"
       />
@@ -116,7 +116,9 @@ export default function ContactPage() {
               Get in Touch
             </h2>
             <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.4vw,17px)", color: "#6B7280", lineHeight: 1.72, maxWidth: "520px" }}>
-              Whether you have a question, collaboration idea, or partnership inquiry, our team is here to help.
+              CIE is always open to conversations with students, alumni, mentors,
+              entrepreneurs, and organisations. Some great things begin with a detailed
+              plan. Others begin with a simple conversation — let&apos;s start with one.
             </p>
           </FadeIn>
         </div>

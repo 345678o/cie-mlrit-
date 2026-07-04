@@ -224,8 +224,15 @@ export default function Footer() {
                 style={{ objectFit: "contain", mixBlendMode: "screen" }}
               />
             </Link>
+            <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "13px", color: "#FFFFFF", letterSpacing: "-0.01em", marginBottom: "8px" }}>
+              Centre for Innovation &amp; Entrepreneurship
+            </h3>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "12.5px", color: "#5C6370", lineHeight: 1.65, marginBottom: "10px", maxWidth: "260px" }}>
+              A student-driven community at MLRIT where students explore ideas, learn new
+              skills, build projects, and grow through experience.
+            </p>
             <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#5C6370", marginBottom: "18px", fontStyle: "italic", letterSpacing: "0.01em" }}>
-              Making Ideas Happen!
+              Making Ideas Happen.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               {socials.map(({ Icon, href, label, color, bg, border, hoverColor, hoverBg, hoverBorder }) => (

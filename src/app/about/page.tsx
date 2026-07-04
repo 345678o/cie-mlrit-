@@ -2,7 +2,8 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Target, Eye, Heart, Award, Users, BookOpen } from "lucide-react";
+import Link from "next/link";
+import { Target, Eye, Heart, Award, Users, BookOpen, Lightbulb, Sparkles, ShieldCheck, Globe } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
 
@@ -83,6 +84,23 @@ function SectionHeader({
 }
 
 /* ─── Data ───────────────────────────────────────────────────────── */
+const whoWeAre = [
+  "We are students who like to build things, organise things, experiment with ideas, and learn from experience.",
+  "CIE is made up of people with different interests. Developers, designers, photographers, writers, organisers, creators, and students interested in entrepreneurship all work together as part of the same community.",
+  "What connects us is simple: we want to learn by doing.",
+  "At CIE, students are encouraged to take ideas seriously, try new things, work with different teams, and take responsibility for the work they choose to do.",
+];
+
+const ourStory = [
+  "CIE was built around a simple idea: students need a space where they can do more than learn concepts.",
+  "They need a place to experiment.",
+  "A place where an unfinished idea can be discussed without being dismissed.",
+  "A place where students from different branches and skill sets can work together.",
+  "A place where failure is treated as part of learning.",
+  "Over time, CIE has grown through the students who contributed to it. Every batch brings new people, new ideas, new projects, and a different way of looking at problems.",
+  "The people change. The ideas evolve. But the purpose remains the same — to help students learn, build, and grow together.",
+];
+
 const achievements = [
   { number: "50+",   label: "Active Projects"   },
   { number: "20+",   label: "Startup Launches"  },
@@ -97,14 +115,14 @@ const visionMission = [
     title: "Our Vision",
     accent: `${ORANGE}10`,
     content:
-      "To be a leading hub for innovation and entrepreneurship, inspiring every student to transform ideas into impactful solutions that create lasting value for society.",
+      "To create a student culture where innovation is not limited to competitions or special occasions. We want students to explore ideas regularly, work on meaningful projects, learn practical skills, and develop the confidence to create something of their own — becoming better problem-solvers, builders, collaborators, and leaders through the experiences they gain at CIE.",
   },
   {
     icon: Target,
     title: "Our Mission",
     accent: `${ORANGE}10`,
     content:
-      "To empower students through innovation programs, workshops, hackathons, mentorship, and incubation by providing the skills, resources, guidance, and industry connections needed to develop ideas, solve real-world challenges, and build successful ventures.",
+      "Our mission is to make learning more practical, collaborative, and student-driven. We create opportunities for students to work on projects, explore technology, develop products, participate in workshops, organise events, understand entrepreneurship, and learn how teams work in real situations. Most importantly, we want students to feel comfortable starting before they feel completely ready — because that is often where real learning begins.",
   },
 ];
 
@@ -118,12 +136,14 @@ const objectives = [
 ];
 
 const values = [
-  { icon: Target,   title: "Innovation First",      desc: "We prioritize creative problem-solving and disruptive thinking in everything we do." },
-  { icon: Users,    title: "Collaboration",          desc: "Great ideas emerge when diverse minds work together toward a shared vision." },
-  { icon: Heart,    title: "Student-Centric",        desc: "Every decision, every resource, and every program is designed with our students in mind." },
-  { icon: Award,    title: "Excellence",             desc: "We hold ourselves to the highest standards in programs, facilities, and outcomes." },
-  { icon: BookOpen, title: "Continuous Learning",    desc: "We embrace failure as a learning opportunity and growth as a constant pursuit." },
-  { icon: Eye,      title: "Transparency",           desc: "Open communication and honest feedback form the foundation of our community." },
+  { icon: Lightbulb,    title: "Innovation",          desc: "We challenge the ordinary and imagine what's possible." },
+  { icon: Award,        title: "Leadership",          desc: "We empower students to inspire, influence, and create meaningful change." },
+  { icon: Users,        title: "Collaboration",       desc: "The greatest ideas are always built together." },
+  { icon: Sparkles,     title: "Creativity",          desc: "We think differently and transform imagination into reality." },
+  { icon: ShieldCheck,  title: "Integrity",           desc: "Trust, honesty, and responsibility ground every decision we make." },
+  { icon: Heart,        title: "Impact",              desc: "We create solutions that make a real difference in people's lives." },
+  { icon: BookOpen,     title: "Continuous Learning", desc: "We stay curious, embrace challenges, and evolve every day." },
+  { icon: Globe,        title: "Inclusivity",         desc: "Every voice matters, every perspective is valued, every dream has a place to grow." },
 ];
 
 /* ─── Faculty data ───────────────────────────────────────────────────
@@ -249,102 +269,6 @@ const faculty: FacultyMember[] = [
   },
 ];
 
-/* ─── Faculty card ───────────────────────────────────────────────── */
-function FacultyCard({ member }: { member: FacultyMember }) {
-  const initials = member.name
-    .split(" ")
-    .filter((n) => /^[A-Za-z]/.test(n))
-    .map((n) => n[0])
-    .join("")
-    .substring(0, 2)
-    .toUpperCase();
-
-  return (
-    <div
-      className="card-light"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-        padding: "32px 20px 24px",
-        position: "relative",
-        height: "100%",
-      }}
-    >
-      {/* Orange top accent */}
-      <div
-        style={{
-          position: "absolute", top: 0, left: 0, right: 0, height: "3px",
-          background: `linear-gradient(90deg, ${ORANGE}, ${ORANGE}60)`,
-          borderRadius: "16px 16px 0 0",
-        }}
-      />
-
-      {/* Avatar */}
-      <div
-        style={{
-          width: "68px", height: "68px", borderRadius: "50%",
-          background: `${ORANGE}10`,
-          border: `2px solid ${ORANGE}28`,
-          display: "flex", alignItems: "center", justifyContent: "center",
-          fontFamily: "var(--font-heading)", fontWeight: 900,
-          fontSize: "22px", color: ORANGE,
-          marginBottom: "18px", flexShrink: 0,
-        }}
-      >
-        {initials}
-      </div>
-
-      {/* Name */}
-      <h3
-        style={{
-          fontFamily: "var(--font-heading)", fontWeight: 800,
-          fontSize: "clamp(15px, 1.4vw, 18px)", color: T_HEAD,
-          letterSpacing: "-0.02em", lineHeight: 1.2,
-          marginBottom: "6px",
-        }}
-      >
-        {member.name}
-      </h3>
-
-      {/* Designation */}
-      <p
-        style={{
-          fontSize: "clamp(12px, 1.1vw, 14px)", fontWeight: 600,
-          color: ORANGE, lineHeight: 1.3, marginBottom: "6px",
-        }}
-      >
-        {member.designation}
-      </p>
-
-      {/* Department */}
-      <p
-        style={{
-          fontSize: "13px", color: T_MUTED,
-          lineHeight: 1.4, marginBottom: "auto", paddingBottom: "20px",
-        }}
-      >
-        {member.dept}
-      </p>
-
-      {/* Expertise badge */}
-      <span
-        style={{
-          display: "inline-block",
-          fontSize: "11.5px", fontWeight: 700, letterSpacing: "0.03em",
-          padding: "5px 13px", borderRadius: "999px",
-          background: `${ORANGE}0e`, color: ORANGE,
-          border: `1px solid ${ORANGE}28`,
-          lineHeight: 1.4,
-        }}
-      >
-        {member.expertise}
-      </span>
-    </div>
-  );
-}
-
 /* ─── Page ───────────────────────────────────────────────────────── */
 export default function AboutPage() {
   return (
@@ -366,6 +290,22 @@ export default function AboutPage() {
         watermark="ABOUT"
       />
 
+      {/* ── Who We Are ────────────────────────────────────────────── */}
+      <section style={{ background: BG_GRAY, ...SECTION_PY }}>
+        <div className="page-container">
+          <FadeIn className="text-center">
+            <SectionHeader tag="Community" heading="Who We Are" center />
+            <div style={{ maxWidth: "700px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "18px" }}>
+              {whoWeAre.map((line, i) => (
+                <p key={i} style={{ fontSize: "clamp(15px,1.4vw,17px)", lineHeight: 1.8, color: T_BODY }}>
+                  {line}
+                </p>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
       {/* ── Our Story ─────────────────────────────────────────────── */}
       <section style={{ background: BG_WHITE, ...SECTION_PY }}>
         <div className="page-container">
@@ -374,20 +314,16 @@ export default function AboutPage() {
             {/* Left — text */}
             <FadeIn>
               <SectionHeader
-                tag="Our Story"
-                heading="Built to Empower, Designed to Inspire"
+                tag="How It Started"
+                heading="Our Story"
               />
-              <p style={{ fontSize: "clamp(15px,1.4vw,17px)", lineHeight: 1.8, color: T_BODY, marginBottom: "20px" }}>
-                CIE was established with a singular vision: to create an environment where student
-                innovators could thrive. We recognised that the next great startup could emerge from
-                any classroom, any lab, or any dormitory — and we set out to provide the scaffolding
-                for that potential.
-              </p>
-              <p style={{ fontSize: "clamp(15px,1.4vw,17px)", lineHeight: 1.8, color: T_BODY }}>
-                Today, CIE serves as the innovation nerve centre of MLRIT, offering world-class
-                facilities, mentorship from industry veterans, and a community of like-minded peers
-                who push each other to think bigger and build better.
-              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                {ourStory.map((line, i) => (
+                  <p key={i} style={{ fontSize: "clamp(15px,1.4vw,17px)", lineHeight: 1.8, color: T_BODY }}>
+                    {line}
+                  </p>
+                ))}
+              </div>
             </FadeIn>
 
             {/* Right — achievement grid */}
@@ -526,7 +462,7 @@ export default function AboutPage() {
             />
           </FadeIn>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
             {values.map((val, i) => (
               <FadeIn key={val.title} delay={i * 0.08}>
                 <div
@@ -630,16 +566,84 @@ export default function AboutPage() {
             />
           </FadeIn>
 
-          <div
-            className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
-            style={{ alignItems: "stretch" }}
-          >
-            {faculty.map((member, i) => (
-              <FadeIn key={member.name} delay={Math.min(i * 0.05, 0.4)} className="flex flex-col">
-                <FacultyCard member={member} />
-              </FadeIn>
-            ))}
-          </div>
+          <FadeIn delay={0.1}>
+            <div style={{ overflowX: "auto", borderRadius: "16px", border: "1px solid #E5E7EB", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "var(--font-body)", fontSize: "14px" }}>
+                <thead>
+                  <tr style={{ background: "#F9FAFB", borderBottom: "1px solid #E5E7EB" }}>
+                    {["S.No", "Name", "Designation", "Department", "Expertise"].map((h) => (
+                      <th key={h} style={{ padding: "14px 20px", textAlign: "left", fontWeight: 700, fontSize: "12px", letterSpacing: "0.06em", textTransform: "uppercase", color: T_MUTED, whiteSpace: "nowrap" }}>
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {faculty.map((member, i) => (
+                    <tr key={member.name}
+                      style={{ borderBottom: i < faculty.length - 1 ? "1px solid #F3F4F6" : "none", transition: "background 0.15s ease" }}
+                      onMouseEnter={e => (e.currentTarget.style.background = "#FFF7F5")}
+                      onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
+                      <td style={{ padding: "16px 20px", color: T_MUTED, fontWeight: 600, fontSize: "13px", width: "60px" }}>{i + 1}</td>
+                      <td style={{ padding: "16px 20px", color: T_HEAD, fontWeight: 600, lineHeight: 1.4, whiteSpace: "nowrap" }}>{member.name}</td>
+                      <td style={{ padding: "16px 20px", color: T_BODY, lineHeight: 1.5, whiteSpace: "nowrap" }}>{member.designation}</td>
+                      <td style={{ padding: "16px 20px", color: T_BODY, lineHeight: 1.5 }}>{member.dept}</td>
+                      <td style={{ padding: "16px 20px", whiteSpace: "nowrap" }}>
+                        <span style={{ display: "inline-block", background: `${ORANGE}12`, color: ORANGE, border: `1px solid ${ORANGE}30`, borderRadius: "8px", padding: "3px 10px", fontSize: "12px", fontWeight: 700, letterSpacing: "0.02em" }}>
+                          {member.expertise}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ── Closing CTA ───────────────────────────────────────────── */}
+      <section style={{ background: "#0A0A0A", ...SECTION_PY }}>
+        <div className="page-container text-center">
+          <FadeIn>
+            <span className="section-tag" style={{ background: `${ORANGE}18`, color: ORANGE, border: "none" }}>
+              Why Join CIE?
+            </span>
+            <h2
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontWeight: 800,
+                fontSize: "clamp(28px, 4.5vw, 52px)",
+                letterSpacing: "-0.03em",
+                lineHeight: 1.12,
+                color: "#FFFFFF",
+                marginTop: "14px",
+                maxWidth: "760px",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            >
+              Think Bold. Build Fearlessly. Lead with Purpose.
+            </h2>
+            <p
+              style={{
+                fontSize: "clamp(15px,1.4vw,17px)",
+                lineHeight: 1.8,
+                color: "#9CA3AF",
+                maxWidth: "620px",
+                margin: "20px auto 0",
+              }}
+            >
+              This is more than a community. This is where innovators are discovered, entrepreneurs
+              are built, and the future begins. Your journey starts with one decision — your next
+              big idea starts here.
+            </p>
+            <div style={{ marginTop: "36px" }}>
+              <Link href="/join" className="btn-primary">
+                Join CIE
+              </Link>
+            </div>
+          </FadeIn>
         </div>
       </section>
     </div>

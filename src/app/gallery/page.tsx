@@ -386,7 +386,9 @@ export default function GalleryPage() {
                 marginBottom: 0,
               }}
             >
-              Explore the journey of CIE through photographs capturing hackathons, workshops, startup events, guest lectures, celebrations, competitions, and behind-the-scenes moments. Every image reflects creativity, collaboration, and innovation.
+              Some parts of the CIE experience are difficult to explain with words — the
+              late-night event prep, the moment a prototype finally works, the chaos
+              before an event begins. The Gallery is a collection of those moments.
             </motion.p>
 
             {/* Stats row */}
@@ -796,6 +798,14 @@ export default function GalleryPage() {
             <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(26px, 4vw, 42px)", letterSpacing: "-0.03em", color: "#111111", lineHeight: 1.1 }}>
               Moments from the archive
             </h2>
+            <p style={{
+              fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.3vw,16px)",
+              lineHeight: 1.72, color: "#6B7280", maxWidth: "560px", marginTop: "12px",
+            }}>
+              These aren&apos;t just event photographs — they&apos;re memories of students
+              learning, building, organising, and creating together. Behind every picture
+              is a story worth remembering. This is CIE as it actually happens.
+            </p>
           </div>
 
           {/* Grid */}

@@ -695,6 +695,21 @@ button:focus-visible {
   .nav-desktop-cta::after { animation: none; }
 }
 
+/* ── Logo marquee (Partners strip) ─────────────────────────────── */
+.logo-marquee-track {
+  animation: logo-marquee 28s linear infinite;
+}
+.logo-marquee-track:hover {
+  animation-play-state: paused;
+}
+@keyframes logo-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee-track { animation: none; }
+}
+
 /* ── Privacy: block dragging / saving images (esp. people photos) ── */
 img {
   -webkit-user-drag: none;

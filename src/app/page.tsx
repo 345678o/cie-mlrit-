@@ -171,6 +171,17 @@ const homeFacilities = [
   { icon: CalendarDays, title: "Event Auditorium",desc: "300-seat venue with full AV, live-streaming setup, and breakout rooms for every event format." },
 ];
 
+const partners = [
+  { name: "Entrepreneurship Development Institute of India", logo: "/partners/edii.png" },
+  { name: "Department of Science & Technology",               logo: "/partners/dst.png" },
+  { name: "Startup India",                                     logo: "/partners/startup-india.png" },
+  { name: "TASK",                                              logo: "/partners/task.png" },
+  { name: "MSME",                                              logo: "/partners/msme.png" },
+  { name: "ISB",                                               logo: "/partners/isb.png" },
+  { name: "T-Hub",                                             logo: "/partners/t-hub.png" },
+  { name: "Wadhwani Foundation",                                logo: "/partners/wadhwani.png" },
+];
+
 const recentEvents = [
   {
     category: "Workshop",
@@ -303,7 +314,7 @@ export default function HomePage() {
                     display: "block", color: "transparent",
                     WebkitTextStroke: "3px rgba(255,255,255,0.82)",
                   }}>BUILD</span>
-                  <span style={{ display: "block", color: "#FFFFFF" }}>LAUNCH</span>
+                  <span style={{ display: "block", color: "#FFFFFF" }}>INNOVATE</span>
                 </motion.h1>
 
                 {/* Handwritten script accent */}
@@ -328,12 +339,24 @@ export default function HomePage() {
                   style={{
                     fontFamily: "var(--font-body)", fontSize: "clamp(14px, 1.5vw, 16px)",
                     lineHeight: 1.78, color: "rgba(255,255,255,0.68)",
+                    maxWidth: "min(400px, 100%)", marginBottom: "14px",
+                  }}
+                >
+                  A place where students come together to explore ideas, build projects,
+                  learn new skills, and turn their curiosity into something real.
+                </motion.p>
+
+                <motion.p
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.70 }}
+                  style={{
+                    fontFamily: "var(--font-body)", fontSize: "clamp(14px, 1.5vw, 16px)",
+                    lineHeight: 1.78, color: "rgba(255,255,255,0.68)",
                     maxWidth: "min(400px, 100%)", marginBottom: "36px",
                   }}
                 >
-                  MLRIT&apos;s Centre for Innovation &amp; Entrepreneurship — where students
-                  turn ideas into real ventures through workshops, hackathons, summits,
-                  and hands-on incubation across five active verticals.
+                  At CIE, you don&apos;t need to have everything figured out before you
+                  begin. You just need an idea, an interest, or the willingness to learn.
                 </motion.p>
 
                 {/* CTAs */}
@@ -582,12 +605,22 @@ export default function HomePage() {
                 fontSize: "clamp(34px, 4vw, 50px)",
                 letterSpacing: "-0.03em",
                 color: T_PRIMARY,
-                maxWidth: "460px",
-                marginBottom: "clamp(28px,5vw,52px)",
+                maxWidth: "620px",
+                marginBottom: "20px",
               }}
             >
               Built on Vision, Driven by Mission
             </h2>
+            <p style={{
+              fontFamily: "var(--font-body)", fontSize: "16px", lineHeight: 1.8,
+              color: T_MED, maxWidth: "680px", marginBottom: "clamp(28px,5vw,52px)",
+            }}>
+              Every idea starts somewhere — a problem you notice, a conversation with
+              friends, or simply the thought: <em>&ldquo;What if we tried this?&rdquo;</em> CIE
+              is a student-driven community of builders, designers, writers, and
+              first-time founders who learn by doing. You don&apos;t have to be an
+              expert to be part of it — you just have to be willing to start.
+            </p>
           </FadeIn>
 
           <div className="grid md:grid-cols-2 gap-6 items-stretch">
@@ -595,12 +628,12 @@ export default function HomePage() {
               {
                 title: "Our Vision",
                 content:
-                  "To be a leading hub for innovation and entrepreneurship, inspiring every student to transform ideas into impactful solutions that create lasting value for society.",
+                  "We want to build a culture where students are comfortable asking questions, exploring ideas, and taking the first step towards building something of their own. We want students to leave CIE with more than certificates or event memories — with experiences, skills, friendships, confidence, and the belief that they can build something meaningful.",
               },
               {
                 title: "Our Mission",
                 content:
-                  "To empower students through innovation programs, workshops, hackathons, mentorship, and incubation by providing the skills, resources, guidance, and industry connections needed to develop ideas, solve real-world challenges, and build successful ventures.",
+                  "Our mission is to create opportunities for students to learn through experience — working on projects, workshops, products, events, and real responsibility across different teams. CIE is a place to try things. Some ideas will work, some will not, but every attempt should teach us something. That is the kind of learning environment we want to build.",
               },
             ].map((item, i) => (
               <FadeIn key={item.title} delay={i * 0.12}>
@@ -664,6 +697,16 @@ export default function HomePage() {
             >
               The Innovation Ecosystem
             </h2>
+            <p style={{
+              fontFamily: "var(--font-body)", fontSize: "16px", lineHeight: 1.8,
+              color: T_MUTED, maxWidth: "620px", margin: "16px auto 0",
+            }}>
+              Good ideas rarely grow alone — they grow through conversations, feedback,
+              teamwork, and people willing to help. At CIE, most of the learning happens
+              through doing: microprojects, product development, workshops, hackathons,
+              entrepreneurship, and media, across five active verticals that bring
+              different skills together.
+            </p>
           </FadeIn>
 
           <div className="grid sm:grid-cols-2 gap-6 items-stretch">
@@ -676,7 +719,6 @@ export default function HomePage() {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "flex-start",
-                    minHeight: "clamp(260px,40vw,360px)",
                   }}
                 >
                   {/* Icon */}
@@ -753,10 +795,12 @@ export default function HomePage() {
             <p style={{
               fontFamily: "var(--font-body)", fontSize: "16px",
               color: T_MUTED, marginTop: "16px", lineHeight: 1.7,
-              maxWidth: "520px", marginLeft: "auto", marginRight: "auto",
+              maxWidth: "560px", marginLeft: "auto", marginRight: "auto",
             }}>
-              A proven 4-step pathway that helps ideas turn into impactful ventures.<br />
-              From ideation to launch, we&apos;re with you at every step.
+              There&apos;s no fixed journey at CIE. Most start with curiosity — you
+              explore, find people to work with, try building something, make mistakes,
+              and improve. Over time, that curiosity turns into bigger responsibilities
+              and real ventures.
             </p>
           </FadeIn>
 
@@ -859,6 +903,14 @@ export default function HomePage() {
                 >
                   Featured Programs
                 </h2>
+                <p style={{
+                  fontFamily: "var(--font-body)", fontSize: "16px", color: T_MUTED,
+                  marginTop: "10px", maxWidth: "480px", lineHeight: 1.7,
+                }}>
+                  Ideas matter, but what we do with them matters more. A simple idea can
+                  become a microproject, a project can grow into a product, and not
+                  everything works on the first attempt — that&apos;s part of the process.
+                </p>
               </div>
               <Link href="/studios" className="btn-secondary-light whitespace-nowrap flex-shrink-0">
                 All Programs <ArrowRight size={16} />
@@ -999,6 +1051,65 @@ export default function HomePage() {
         @media (max-width: 560px) { .home-facilities-grid { grid-template-columns: 1fr !important; } }
       `}</style>
 
+      <SectionDivider topBg="#F5F5F5" btmBg="#F5F5F5" />
+
+      {/* ────────────────────────────────────────────────────────────
+          PARTNERS  —  #F5F5F5
+      ──────────────────────────────────────────────────────────── */}
+      <section style={{ background: "#F5F5F5", paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
+        <div className={CONTAINER}>
+          <FadeIn className="text-center mb-8 lg:mb-16">
+            <span className="section-tag">Backed By</span>
+            <h2
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontWeight: 800,
+                fontSize: "clamp(34px, 4vw, 50px)",
+                letterSpacing: "-0.03em",
+                color: T_PRIMARY,
+                marginTop: "4px",
+              }}
+            >
+              Our Partners
+            </h2>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "16px", color: T_MUTED, marginTop: "10px", maxWidth: "560px", marginLeft: "auto", marginRight: "auto", lineHeight: 1.7 }}>
+              Institutions and organisations that support CIE&apos;s mission — through programs, funding, and mentorship.
+            </p>
+          </FadeIn>
+        </div>
+
+        <FadeIn delay={0.1}>
+          <div
+            style={{
+              overflow: "hidden",
+              width: "100vw",
+              marginLeft: "calc(50% - 50vw)",
+              background: "#F5F5F5",
+              maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+              WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+            }}
+          >
+            <div className="logo-marquee-track" style={{ display: "flex", width: "max-content", gap: "48px", alignItems: "center", background: "#F5F5F5" }}>
+              {[...partners, ...partners].map((p, i) => (
+                <div
+                  key={`${p.name}-${i}`}
+                  style={{
+                    width: "160px", height: "80px", flexShrink: 0,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                  }}
+                >
+                  <img
+                    src={p.logo}
+                    alt={p.name}
+                    style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", mixBlendMode: "multiply" }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+
       <SectionDivider topBg="#F5F5F5" btmBg="#FFFFFF" />
 
       {/* ────────────────────────────────────────────────────────────
@@ -1105,6 +1216,15 @@ export default function HomePage() {
               <span style={{ color: ORANGE }}>the Future?</span>
             </h2>
 
+            {/* Tagline */}
+            <p style={{
+              fontFamily: "var(--font-heading)", fontWeight: 700,
+              fontSize: "clamp(15px, 1.6vw, 18px)", letterSpacing: "-0.01em",
+              color: ORANGE, marginBottom: "20px",
+            }}>
+              Think Bold. Build Fearlessly. Lead with Purpose.
+            </p>
+
             {/* Subtext */}
             <p
               style={{
@@ -1112,11 +1232,15 @@ export default function HomePage() {
                 fontSize: "18px",
                 lineHeight: 1.72,
                 color: T_MED,
-                maxWidth: "560px",
+                maxWidth: "600px",
                 marginBottom: "40px",
               }}
             >
-              500+ MLRIT students building products, running startups, and driving innovation across five active verticals.
+              Every project you see today once started as an unfinished idea, and every
+              skilled founder was once a beginner. Whether you want to build your first
+              project, learn how events are organised, or you simply haven&apos;t found
+              your thing yet — CIE gives you a space to start, learn, and build alongside
+              500+ students figuring it out together.
             </p>
 
             {/* Buttons */}

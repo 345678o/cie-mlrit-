@@ -270,7 +270,7 @@ export default function AlumniPage() {
         line2="FROM THE"
         line3="FIELD"
         scriptText="— stories that inspire"
-        description="Hear from CIE alumni who've gone on to build products, lead teams, and launch startups — and how their time at MLRIT CIE shaped their journey."
+        description="Students may leave campus, but the experiences, projects, and friendships they built here stay with them. CIE continues to grow with every batch — the people graduate, but the community continues."
         stats={[]}
         watermark="ALUMNI"
       />
@@ -284,7 +284,9 @@ export default function AlumniPage() {
               What Our Alumni Say
             </h2>
             <p style={{ color: "#6B7280", fontSize: "clamp(14px,1.5vw,17px)", marginTop: "12px", maxWidth: "560px", lineHeight: 1.7 }}>
-              Real stories from people who started where you are — and built something remarkable.
+              Everyone&apos;s experience at CIE is different — for some it was their first
+              project, for others it was learning to lead a team or organise an event.
+              Real stories, real people, real memories from the journey.
             </p>
           </FadeIn>
 

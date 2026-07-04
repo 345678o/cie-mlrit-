@@ -332,13 +332,13 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
         </div>
       </section>
 
-      {/* ── Timeline (MP only) ────────────────────────────────────── */}
+      {/* ── Timeline ─────────────────────────────────────────────── */}
       {v.timeline && (
         <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
           <div className="page-container">
             <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
-              <SectionLabel>How It Works</SectionLabel>
-              <SectionHeading>Sprint Timeline</SectionHeading>
+              <SectionLabel>{v.timelineLabel ?? "How It Works"}</SectionLabel>
+              <SectionHeading>{v.timelineHeading ?? "Sprint Timeline"}</SectionHeading>
             </div></FadeIn>
             <div style={{ position: "relative" }}>
               {/* Vertical line */}

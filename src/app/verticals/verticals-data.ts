@@ -41,6 +41,8 @@ export type Vertical = {
   achievements: string[];
   applyInfo?: string;
   timeline?: { step: string; title: string; desc: string }[];
+  timelineLabel?: string;
+  timelineHeading?: string;
   media?: VerticalMedia[];
 };
 
@@ -49,19 +51,19 @@ export const VERTICALS: Vertical[] = [
     id: "mp",
     abbr: "MP",
     name: "MP",
-    tagline: "Build Small. Think Big.",
+    tagline: "Build Your First Idea",
     color: "#0891B2",
     textColor: "#0c4a6e",
     gradient: "linear-gradient(145deg, #0c4a6e 0%, #0369a1 55%, #0891B2 100%)",
     lightBg: "rgba(8,145,178,0.07)",
     border: "rgba(8,145,178,0.22)",
     shortDesc:
-      "Provides students with opportunities to work on short-term, hands-on projects that strengthen technical skills, and encourage collaborative problem-solving.",
+      "Microprojects are where many students take their first step into hands-on work — small teams exploring a problem and trying to build a solution.",
     overview: [
-      "Provides students with opportunities to work on short-term, hands-on projects that strengthen technical skills, and encourage collaborative problem-solving.",
-      "MP (Microprojects) is CIE's flagship hands-on learning vertical. It gives students a low-barrier entry point into building real things — no big teams, no long timelines, just a focused idea and 2–4 weeks to execute it.",
-      "Each sprint begins with a defined problem statement and ends with a live demo to peers and mentors. Projects span web apps, IoT prototypes, data tools, design systems, and more.",
-      "MP is designed to build the habit of shipping. Whether it's a first project or a fiftieth, every microproject adds to a student's portfolio and sharpens their ability to execute under constraints.",
+      "Microprojects are where many students take their first step into hands-on work. Students work in small teams to explore a problem, understand the basics, and try building a solution.",
+      "The project doesn't have to be groundbreaking. The goal is to learn how to start.",
+      "Students learn how to divide work, research a problem, use tools, build prototypes, fix mistakes, and work together.",
+      "For many students, a microproject is the first time an idea moves from paper to something they can actually see and test.",
     ],
     quote: "The best way to learn to build is to just start building — no matter how small.",
     stats: [
@@ -114,19 +116,19 @@ export const VERTICALS: Vertical[] = [
     id: "cie-studios",
     abbr: "CS",
     name: "CIE Studios",
-    tagline: "Build Without Limits",
+    tagline: "Stories Worth Sharing",
     color: "#7C3AED",
     textColor: "#3b0764",
     gradient: "linear-gradient(145deg, #3b0764 0%, #6d28d9 55%, #7c3aed 100%)",
     lightBg: "rgba(124,58,237,0.07)",
     border: "rgba(124,58,237,0.22)",
     shortDesc:
-      "Produces high-quality digital content, including podcasts, interviews, promotional videos, and media coverage, to showcase CIE's initiatives, events, and success stories.",
+      "CIE Studios helps capture and share the stories behind the projects, events, and people that make up CIE — through photography, video, and digital content.",
     overview: [
-      "Produces high-quality digital content, including podcasts, interviews, promotional videos, and media coverage, to showcase CIE's initiatives, events, and success stories.",
-      "CIE Studios is the creative infrastructure of the Centre — six purpose-built workspaces that give MLRIT students access to professional-grade tools, equipment, and environments they wouldn't otherwise have.",
-      "Each studio is designed for a specific discipline: product design, content creation, photography, podcast recording, video production, and open fabrication. Studios are managed by a dedicated team and open 24/7 to active CIE members.",
-      "Beyond providing space, Studios runs workshops, masterclasses, and collaborative projects that connect students across disciplines — turning isolated creators into a cohesive creative community.",
+      "A lot happens behind the scenes at CIE. Projects are built. Events are organised. People share their experiences. Teams spend weeks preparing for something that the audience sees for only a few hours.",
+      "CIE Studios helps capture and share those stories.",
+      "Through photography, video, interviews, podcasts, event coverage, and digital content, the team documents the people, ideas, and experiences that make up CIE.",
+      "Because good work deserves to be seen, and good stories deserve to be told.",
     ],
     quote: "Every great product started with the right tools and the right space.",
     stats: [
@@ -165,19 +167,19 @@ export const VERTICALS: Vertical[] = [
     id: "product-development",
     abbr: "PD",
     name: "Product Development",
-    tagline: "Ship Real Things",
+    tagline: "Take an Idea Further",
     color: "#059669",
     textColor: "#064e3b",
     gradient: "linear-gradient(145deg, #064e3b 0%, #047857 55%, #059669 100%)",
     lightBg: "rgba(5,150,105,0.07)",
     border: "rgba(5,150,105,0.22)",
     shortDesc:
-      "Focuses on transforming innovative ideas into functional products through design, development, testing, and continuous improvement in a collaborative environment.",
+      "The Product Development vertical works on ideas and projects that have the potential to be developed further — from prototype to something genuinely useful.",
     overview: [
-      "Focuses on transforming innovative ideas into functional products through design, development, testing, and continuous improvement in a collaborative environment.",
-      "Product Development is where ideas become real, scalable products. Unlike Microprojects' sprint format, PD takes a longer view — guiding teams through full product lifecycles from initial discovery to market-ready deployment.",
-      "Teams work on software (web, mobile, SaaS), hardware (IoT, embedded systems, PCB), or hybrid products. Every team gets a dedicated mentor, access to the Hardware Lab, and bi-weekly sprint reviews to stay on track.",
-      "The vertical prioritizes quality and real-world impact over speed. Products that come out of PD are live, functional, and used by real people — not just demos.",
+      "Building a prototype is one thing. Making it useful is another.",
+      "The Product Development vertical works on ideas and projects that have the potential to be developed further. Teams think about the problem they are solving, who the solution is for, how it should work, what needs improvement, and how feedback can make the product better.",
+      "The process involves research, design, building, testing, feedback, and a lot of iteration.",
+      "Because good products are rarely built perfectly on the first try.",
     ],
     quote: "Idea to product in 8 weeks. That's the Product Development standard.",
     stats: [
@@ -222,19 +224,19 @@ export const VERTICALS: Vertical[] = [
     id: "startup-cohort",
     abbr: "SC",
     name: "Startup Cohort",
-    tagline: "Zero to One",
+    tagline: "Explore What It Takes to Build a Startup",
     color: "#E11D48",
     textColor: "#881337",
     gradient: "linear-gradient(145deg, #881337 0%, #be123c 55%, #E11D48 100%)",
     lightBg: "rgba(225,29,72,0.07)",
     border: "rgba(225,29,72,0.22)",
     shortDesc:
-      "Supports aspiring entrepreneurs by offering mentorship, resources, and guidance to develop innovative ideas into scalable startups and viable business ventures.",
+      "For students who want to explore entrepreneurship beyond just pitching an idea — understanding problems, users, and how to communicate what they're building.",
     overview: [
-      "Supports aspiring entrepreneurs by offering mentorship, resources, and guidance to develop innovative ideas into scalable startups and viable business ventures.",
-      "The Startup Cohort is CIE's most intensive program — a 12-week journey designed for students who are serious about building a company, not just a project.",
-      "Each cohort selects 8–12 founding teams through a competitive application process. Teams go through structured phases: idea validation, customer discovery, MVP development, business model design, pitch preparation, and investor connect.",
-      "Every team is paired with a dedicated mentor from CIE's network of founders, VCs, and domain experts. The program culminates in a Demo Day where teams pitch to a curated audience of investors and industry leaders.",
+      "Having an idea is exciting. But turning it into something people actually need requires patience, research, feedback, and a lot of learning.",
+      "The Startup Cohort is for students who want to explore entrepreneurship beyond just pitching an idea.",
+      "Students learn to understand problems, talk to potential users, question their assumptions, improve their ideas, understand basic business models, and communicate what they are building.",
+      "The goal is not to tell every student to become a founder. The goal is to help students understand how entrepreneurship actually works.",
     ],
     quote: "We don't build startups. We build founders who build startups.",
     stats: [
@@ -269,6 +271,15 @@ export const VERTICALS: Vertical[] = [
     ],
     applyInfo:
       "Applications open once per semester. Teams of 2–4 with a startup idea, at least one technical co-founder, and genuine commitment to the 12-week program are encouraged to apply. Solo founders may apply but team formation is strongly recommended.",
+    timelineLabel: "Program Roadmap",
+    timelineHeading: "Our Roadmap for Entrepreneurship",
+    timeline: [
+      { step: "I",   title: "Creative Thinking & Innovation",                  desc: "Exploring Entrepreneurial Spirit" },
+      { step: "II",  title: "Emerging Technologies & Product Development",     desc: "Fundamentals of Financial Analysis" },
+      { step: "III", title: "Understanding and Crafting Business Model",       desc: "Marketing Communication and Branding" },
+      { step: "IV",  title: "Business Plan Writing and Pitching",              desc: "Seed Fund Support" },
+      { step: "V",   title: "Start-up Mentoring & Registration",               desc: "Venture Growth Strategies" },
+    ],
   },
   /* Core Unit for Events — not counted as a vertical, kept for reference
   {
@@ -328,19 +339,19 @@ export const VERTICALS: Vertical[] = [
     id: "inventory",
     abbr: "INV",
     name: "Inventory",
-    tagline: "Keep Every Build Stocked",
+    tagline: "The Team Behind the Resources",
     color: "#65A30D",
     textColor: "#365314",
     gradient: "linear-gradient(145deg, #365314 0%, #4d7c0f 55%, #65a30d 100%)",
     lightBg: "rgba(101,163,13,0.07)",
     border: "rgba(101,163,13,0.22)",
     shortDesc:
-      "Manages CIE's equipment, tools, and materials — tracking bookings, maintenance, and stock across every studio, lab, and event.",
+      "The Inventory team helps manage and organise CIE's resources — tools, components, equipment, and materials that keep projects and events running.",
     overview: [
-      "Manages CIE's equipment, tools, and materials — tracking bookings, maintenance, and stock across every studio, lab, and event.",
-      "Inventory is the backbone vertical that keeps every other team building. From camera gear and mics in the Studios to components in the Hardware Lab and supplies for events, this team tracks what CIE owns, where it is, and who has it.",
-      "The team runs a check-in/check-out system for equipment, audits stock levels regularly, and flags maintenance or replacement needs before they become blockers for other verticals.",
-      "Beyond tracking, Inventory works closely with Ops on procurement — sourcing new equipment, negotiating with vendors, and managing budgets for tools that every other vertical depends on.",
+      "Projects and events need more than ideas. They need tools, components, equipment, materials, and people who make sure everything is available when needed.",
+      "The Inventory team helps manage and organise CIE's resources.",
+      "The work may happen quietly in the background, but it plays an important role in keeping projects and activities running smoothly.",
+      "Because building something is much easier when you know where the tools are.",
     ],
     quote: "No one notices inventory until it's missing. We make sure that never happens.",
     stats: [

@@ -685,7 +685,7 @@ export default function CouncilPage() {
         line2="THE"
         line3="COUNCIL"
         scriptText="— the people behind the mission"
-        description="The passionate students and dedicated faculty who power MLRIT CIE — building programs, running events, and driving the innovation ecosystem forward."
+        description="CIE is run by students who take responsibility for different parts of the organisation — technical work, projects, events, design, content, photography, promotions, sponsorship, operations, and finance. The Council works together to plan activities, guide teams, solve problems, and help ideas move from discussion to execution."
         stats={[
           { value: "2024–25", label: "Current Batch" },
         ]}
@@ -700,6 +700,13 @@ export default function CouncilPage() {
           <FadeIn>
             <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Leadership</span>
             <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>Student Leadership 2026–27</h2>
+            <p style={{ color: "#6B7280", fontSize: "16px", lineHeight: 1.75, marginTop: "16px", maxWidth: "640px" }}>
+              Leadership at CIE is not about having your name at the top of a page. It is
+              about showing up when work needs to be done — taking responsibility when
+              something goes wrong, helping your team when they are stuck, making
+              decisions when necessary, and making sure the people working with you also
+              get opportunities to grow.
+            </p>
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 items-stretch" style={{ marginTop: "40px" }}>
             {studentLeadership.map((member, i) => (
@@ -778,6 +785,13 @@ export default function CouncilPage() {
             <h2 className="font-black" style={{ color: "#FFFFFF", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>
               Department Members
             </h2>
+            <p style={{ color: "rgba(255,255,255,0.62)", fontSize: "16px", lineHeight: 1.75, marginTop: "16px", maxWidth: "640px" }}>
+              CIE works because different teams handle different responsibilities — from
+              Technical and Graphic Design to Photography, Content, Creatives, Promotions
+              &amp; Sponsorship, and Operations &amp; Finance. Each department has a
+              different role, but when an event, project, or initiative comes together,
+              it&apos;s usually because several of these teams worked together.
+            </p>
           </FadeIn>
 
           {/* Filter + ChromaGrid — no extra inner wrapper, inherit 1400px container */}

@@ -353,7 +353,7 @@ export default function VerticalsPage() {
 
           {/* Section header */}
           <FadeIn>
-            <div style={{ marginBottom: "clamp(40px,5vw,64px)" }}>
+            <div className="text-center" style={{ marginBottom: "clamp(40px,5vw,64px)" }}>
               <span className="section-tag">Explore</span>
               <h2 style={{
                 fontFamily: "var(--font-heading)", fontWeight: 900,
@@ -361,14 +361,18 @@ export default function VerticalsPage() {
                 letterSpacing: "-0.03em", lineHeight: 1.1,
                 marginTop: "10px", marginBottom: "10px",
               }}>
-                The {VERTICALS.length} Verticals
+                Our Verticals
               </h2>
               <p style={{
                 fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.3vw,16px)",
-                lineHeight: 1.72, color: "#6B7280", maxWidth: "480px",
+                lineHeight: 1.72, color: "#6B7280", maxWidth: "620px",
+                marginLeft: "auto", marginRight: "auto",
               }}>
-                Each vertical is a focused domain within CIE. Click any card to explore its
-                work, team, and how to get involved.
+                CIE is made up of different verticals, each focusing on a specific part of
+                the innovation ecosystem. Some focus on building. Some focus on developing
+                ideas further. Some tell stories. Some support resources and operations.
+                Some explore entrepreneurship. Each vertical works differently, but they
+                are connected by one thing: students learning through real experience.
               </p>
             </div>
           </FadeIn>
