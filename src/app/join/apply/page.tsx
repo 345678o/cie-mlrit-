@@ -81,7 +81,7 @@ const PREF_NAMES: Record<string, string> = {
 };
 
 const BRANCHES = ["CSE","CSM","CSD","CSIT","IT","EEE","ECE","MECH","AERO"];
-const YEARS    = ["2nd Year","3rd Year","4th Year"];
+const YEARS    = ["2nd Year","3rd Year"];
 
 type FormState = { name: string; rollNo: string; phone: string; email: string; branch: string; year: string; cgpa: string; backlogs: string; why: string };
 const EMPTY: FormState = { name:"", rollNo:"", phone:"", email:"", branch:"", year:"", cgpa:"", backlogs:"", why:"" };
