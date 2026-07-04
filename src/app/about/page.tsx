@@ -84,7 +84,6 @@ function SectionHeader({
 
 /* ─── Data ───────────────────────────────────────────────────────── */
 const achievements = [
-  { number: "1000+", label: "Students Mentored" },
   { number: "50+",   label: "Active Projects"   },
   { number: "20+",   label: "Startup Launches"  },
   { number: "₹50L+", label: "Funding Raised"    },
@@ -360,7 +359,6 @@ export default function AboutPage() {
         scriptText="— the story behind MLRIT CIE"
         description="The MLRIT Centre for Innovation & Entrepreneurship is the beating heart of entrepreneurial culture at MLR Institute of Technology — nurturing the next generation of innovators since our founding."
         stats={[
-          { value: "1000+", label: "Students Mentored" },
           { value: "20+",   label: "Startup Launches"  },
           { value: "₹50L+", label: "Funding Raised"    },
           { value: "100+",  label: "Industry Partners" },

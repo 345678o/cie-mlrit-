@@ -52,6 +52,15 @@ const alumni: Alumni[] = [
     tags: ["Design", "Entrepreneurship"],
   },
   {
+    name: "Dheera Sameer Nagavarapu",
+    batch: "2024–25",
+    role: "Analog Layout Engineer",
+    company: "Moschip",
+    photo: "/alumni/Dheera.png",
+    quote: "Beautiful friendships, rivalries which never seem to die, competitive mad people whose intellect is next to none amongst each other. Learned how to live and also learned how to survive when I can't live. Skills that I could've never learnt if I had sat in between 60 sweaty people in a 4 by 4 room. Everyone who took part in the club found something or the other, a hobby to live for, friends that never detach, a passion for one particular subject (not from the text books), a commitment which engages us every single day, and most of all........the love which not all humans are capable of understanding. So if you are in the club, you'd understand the last sentence. Have a great journey.",
+    tags: ["Tech", "Hardware"],
+  },
+  {
     name: "Placeholder Name",
     batch: "2022–23",
     role: "Product Manager",
@@ -125,6 +134,7 @@ function AlumniCard({ member, index }: { member: Alumni; index: number }) {
         display: "flex",
         flexDirection: "column",
         gap: "20px",
+        height: "100%",
         boxShadow: "0 2px 16px rgba(0,0,0,0.04)",
         transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
         cursor: "default",
@@ -148,7 +158,7 @@ function AlumniCard({ member, index }: { member: Alumni; index: number }) {
       </div>
 
       {/* Quote */}
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative", flex: 1 }}>
         <Quote size={18} style={{ color: ORANGE, marginBottom: "10px", flexShrink: 0 }} />
         <p style={{
           color: "#1A1A1A", fontSize: "clamp(14px,1.5vw,16px)", lineHeight: 1.7,
@@ -314,7 +324,7 @@ export default function AlumniPage() {
               gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 480px), 1fr))",
               gap: "clamp(16px,2.5vw,28px)",
               marginTop: "clamp(32px,4vw,52px)",
-              alignItems: "start",
+              alignItems: "stretch",
             }}
           >
             {visible.map((member, i) => (

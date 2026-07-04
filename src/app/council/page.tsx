@@ -687,8 +687,6 @@ export default function CouncilPage() {
         scriptText="— the people behind the mission"
         description="The passionate students and dedicated faculty who power MLRIT CIE — building programs, running events, and driving the innovation ecosystem forward."
         stats={[
-          { value: "30+", label: "Council Members" },
-          { value: "6", label: "Active Teams" },
           { value: "2024–25", label: "Current Batch" },
         ]}
         watermark="TEAM"

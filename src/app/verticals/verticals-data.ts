@@ -270,6 +270,7 @@ export const VERTICALS: Vertical[] = [
     applyInfo:
       "Applications open once per semester. Teams of 2–4 with a startup idea, at least one technical co-founder, and genuine commitment to the 12-week program are encouraged to apply. Solo founders may apply but team formation is strongly recommended.",
   },
+  /* Core Unit for Events — not counted as a vertical, kept for reference
   {
     id: "events",
     abbr: "CUE",
@@ -322,6 +323,7 @@ export const VERTICALS: Vertical[] = [
     applyInfo:
       "The Events team recruits each semester. Roles span creative, technical, logistics, and marketing. If you enjoy bringing ideas to life and working under pressure, apply during the next recruitment cycle.",
   },
+  */
   {
     id: "inventory",
     abbr: "INV",

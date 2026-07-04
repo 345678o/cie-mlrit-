@@ -70,7 +70,7 @@ export default function PageHero({
       {/* ── Main content ── */}
       <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
         <div className="page-container w-full" style={{ paddingTop: "44px", paddingBottom: "52px" }}>
-          <div className="grid lg:grid-cols-[1fr_380px] gap-8 lg:gap-12 items-center">
+          <div className="grid items-center">
 
             {/* LEFT: text */}
             <div style={{ position: "relative" }}>
@@ -151,110 +151,6 @@ export default function PageHero({
                   </Link>
                 </motion.div>
               )}
-            </div>
-
-            {/* RIGHT: abstract decorative collage (desktop only) */}
-            <div className="hidden lg:block" style={{ position: "relative", height: "420px" }}>
-
-              {/* Large outlined circle */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.0, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                style={{
-                  position: "absolute", top: "50%", left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  width: "300px", height: "300px", borderRadius: "50%",
-                  border: "1.5px solid rgba(255,255,255,0.16)",
-                  pointerEvents: "none",
-                }}
-              />
-
-              {/* Inner smaller circle */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.0, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                style={{
-                  position: "absolute", top: "50%", left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  width: "180px", height: "180px", borderRadius: "50%",
-                  border: "1px solid rgba(255,255,255,0.10)",
-                  pointerEvents: "none",
-                }}
-              />
-
-              {/* Cream stat card */}
-              {stats && stats.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 24, scale: 0.92 }} animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.7, delay: 0.55 }}
-                  style={{
-                    position: "absolute", top: "50%", left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    background: CREAM, borderRadius: "20px",
-                    padding: "20px 24px", textAlign: "center" as const,
-                    boxShadow: "0 16px 40px rgba(0,0,0,0.20)", zIndex: 4,
-                    minWidth: "140px",
-                  }}
-                >
-                  <p style={{
-                    fontFamily: "var(--font-heading)", fontWeight: 900,
-                    fontSize: "clamp(28px, 4vw, 40px)", color: "#111111", lineHeight: 1,
-                    marginBottom: "4px",
-                  }}>{stats[0].value}</p>
-                  <p style={{
-                    fontFamily: "var(--font-body)", fontSize: "11px",
-                    color: "#6B7280", fontWeight: 600, letterSpacing: "0.04em",
-                  }}>{stats[0].label}</p>
-                </motion.div>
-              )}
-
-              {/* ✦ Star decorations */}
-              {[
-                { top: "8%",  left: "10%",  size: 24, delay: 0.80 },
-                { top: "14%", right: "8%",  size: 16, delay: 0.88 },
-                { bottom: "20%", left: "8%", size: 18, delay: 0.96 },
-                { bottom: "12%", right: "12%", size: 12, delay: 1.04 },
-                { top: "42%", left: "2%",   size: 14, delay: 1.10 },
-              ].map((s, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.45, delay: s.delay }}
-                  style={{
-                    position: "absolute",
-                    top: (s as any).top, left: (s as any).left,
-                    bottom: (s as any).bottom, right: (s as any).right,
-                    fontSize: `${s.size}px`, color: "rgba(255,255,255,0.90)",
-                    pointerEvents: "none", display: "block",
-                  }}
-                >✦</motion.span>
-              ))}
-
-              {/* 3×3 dot cluster — top right */}
-              <motion.div
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                transition={{ delay: 1.0 }}
-                style={{
-                  position: "absolute", top: "6%", right: "18%",
-                  display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "5px",
-                  pointerEvents: "none",
-                }}
-              >
-                {Array.from({ length: 9 }).map((_, i) => (
-                  <div key={i} style={{ width: "4px", height: "4px", borderRadius: "50%", background: "rgba(0,0,0,0.22)" }} />
-                ))}
-              </motion.div>
-
-              {/* Small accent dot */}
-              <motion.div
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                transition={{ delay: 1.1 }}
-                style={{
-                  position: "absolute", bottom: "28%", right: "4%",
-                  width: "10px", height: "10px", borderRadius: "50%",
-                  background: "rgba(0,0,0,0.20)", pointerEvents: "none",
-                }}
-              />
             </div>
 
           </div>
