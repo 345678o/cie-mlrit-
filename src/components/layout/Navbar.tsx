@@ -169,10 +169,10 @@ export default function Navbar() {
             alignItems: "center",
             width: "100%",
             background: scrolled
-              ? "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 45%, rgba(255,255,255,0.07) 100%), rgba(12,12,14,0.62)"
-              : "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.08) 100%), rgba(14,14,16,0.55)",
-            backdropFilter: "blur(14px) saturate(150%)",
-            WebkitBackdropFilter: "blur(14px) saturate(150%)",
+              ? "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 45%, rgba(255,255,255,0.07) 100%), rgba(10,10,12,0.90)"
+              : "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.08) 100%), rgba(12,12,14,0.86)",
+            backdropFilter: "blur(20px) saturate(150%)",
+            WebkitBackdropFilter: "blur(20px) saturate(150%)",
             border: "1px solid rgba(255,255,255,0.14)",
             borderRadius: "9999px",
             boxShadow: scrolled

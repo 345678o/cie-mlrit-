@@ -43,6 +43,9 @@ export type Vertical = {
   timeline?: { step: string; title: string; desc: string }[];
   timelineLabel?: string;
   timelineHeading?: string;
+  features?: { title: string; desc: string }[];
+  featuresLabel?: string;
+  featuresHeading?: string;
   media?: VerticalMedia[];
 };
 
@@ -346,14 +349,23 @@ export const VERTICALS: Vertical[] = [
     lightBg: "rgba(101,163,13,0.07)",
     border: "rgba(101,163,13,0.22)",
     shortDesc:
-      "The Inventory team helps manage and organise CIE's resources — tools, components, equipment, and materials that keep projects and events running.",
+      "The Inventory Initiative gives students quick, reliable, and affordable access to the electronic components and modules needed to build micro-projects and prototypes.",
     overview: [
-      "Projects and events need more than ideas. They need tools, components, equipment, materials, and people who make sure everything is available when needed.",
-      "The Inventory team helps manage and organise CIE's resources.",
-      "The work may happen quietly in the background, but it plays an important role in keeping projects and activities running smoothly.",
-      "Because building something is much easier when you know where the tools are.",
+      "At the Centre for Innovation & Entrepreneurship (CIE), we believe that great ideas should never be limited by the availability of resources. Our Inventory Initiative is designed to provide students with quick, reliable, and affordable access to the electronic components and development modules required for building micro-projects, prototypes, and innovative solutions.",
+      "Instead of spending valuable time searching across multiple vendors, students can obtain the components they need directly through the CIE Inventory. Every component is carefully verified and tested by experienced senior members to ensure quality, functionality, and reliability before it reaches the student. This allows project teams to focus on innovation rather than worrying about defective or incompatible parts.",
+      "Our goal is to create a dependable ecosystem where every student can confidently begin building ideas without delays or uncertainty. By making quality components easily accessible, we aim to encourage experimentation, accelerate project development, and foster a stronger culture of innovation within CIE.",
+      "Whether you're working on your first micro-project, preparing for a hackathon, developing an IoT prototype, or building a final-year innovation, the CIE Inventory is committed to being your trusted partner throughout your journey.",
     ],
     quote: "No one notices inventory until it's missing. We make sure that never happens.",
+    featuresLabel: "Why Choose Us",
+    featuresHeading: "Why Choose the CIE Inventory?",
+    features: [
+      { title: "Quality Assured", desc: "Components are inspected and tested by senior members before being issued." },
+      { title: "Affordable Pricing", desc: "Cost-effective components to support student innovation without unnecessary expenses." },
+      { title: "Easy Accessibility", desc: "Required parts are available within the campus ecosystem, reducing procurement time." },
+      { title: "Student-Centric Support", desc: "Guidance in selecting suitable components for your project requirements." },
+      { title: "Trusted Resource", desc: "Built by students, for students, with a focus on reliability and transparency." },
+    ],
     stats: [
       { value: "300+", label: "Items Tracked" },
       { value: "6", label: "Studios & Labs Covered" },

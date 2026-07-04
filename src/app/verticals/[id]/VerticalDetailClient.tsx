@@ -5,7 +5,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Boxes, Palette, Cpu, CalendarDays, Rocket,
+  Boxes, Palette, Cpu, CalendarDays, Rocket, Package,
   ArrowLeft, Users, CheckCircle2,
   Zap, Trophy,
 } from "lucide-react";
@@ -18,6 +18,7 @@ const ICONS: Record<string, React.ElementType> = {
   "product-development": Cpu,
   "startup-cohort": Rocket,
   events: CalendarDays,
+  inventory: Package,
 };
 
 const STATUS_COLOR: Record<string, { bg: string; text: string }> = {
@@ -154,6 +155,31 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
           </div>
         </div>
       </section>
+
+      {/* ── Features / Why Choose Us ─────────────────────────────────── */}
+      {v.features && v.features.length > 0 && (
+        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+          <div className="page-container">
+            <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
+              <SectionLabel>{v.featuresLabel ?? "Why Choose Us"}</SectionLabel>
+              <SectionHeading>{v.featuresHeading ?? `Why Choose ${v.name}?`}</SectionHeading>
+            </div></FadeIn>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" style={{ alignItems: "stretch" }}>
+              {v.features.map((f, i) => (
+                <FadeIn key={f.title} delay={i * 0.06} className="flex flex-col">
+                  <div style={{ padding: "22px", borderRadius: "14px", background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 4px rgba(0,0,0,0.04)", flex: 1 }}>
+                    <div style={{ width: "34px", height: "34px", borderRadius: "9px", background: v.lightBg, border: `1px solid ${v.border}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "14px" }}>
+                      <CheckCircle2 size={15} style={{ color: v.color }} />
+                    </div>
+                    <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "15px", color: "#000000", marginBottom: "8px" }}>{f.title}</h4>
+                    <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "#6B7280", lineHeight: 1.65 }}>{f.desc}</p>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── Gallery (any vertical with media entries) ───────────────── */}
       {v.media && v.media.length > 0 && (

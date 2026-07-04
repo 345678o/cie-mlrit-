@@ -314,7 +314,7 @@ export default function HomePage() {
                     display: "block", color: "transparent",
                     WebkitTextStroke: "3px rgba(255,255,255,0.82)",
                   }}>BUILD</span>
-                  <span style={{ display: "block", color: "#FFFFFF" }}>INNOVATE</span>
+                  <span style={{ display: "block", color: "#FFFFFF", fontSize: "0.74em" }}>INNOVATE</span>
                 </motion.h1>
 
                 {/* Handwritten script accent */}
@@ -613,7 +613,7 @@ export default function HomePage() {
             </h2>
             <p style={{
               fontFamily: "var(--font-body)", fontSize: "16px", lineHeight: 1.8,
-              color: T_MED, maxWidth: "680px", marginBottom: "clamp(28px,5vw,52px)",
+              color: T_MED, maxWidth: "980px", marginBottom: "clamp(28px,5vw,52px)",
             }}>
               Every idea starts somewhere — a problem you notice, a conversation with
               friends, or simply the thought: <em>&ldquo;What if we tried this?&rdquo;</em> CIE
@@ -699,7 +699,7 @@ export default function HomePage() {
             </h2>
             <p style={{
               fontFamily: "var(--font-body)", fontSize: "16px", lineHeight: 1.8,
-              color: T_MUTED, maxWidth: "620px", margin: "16px auto 0",
+              color: T_MUTED, maxWidth: "920px", margin: "16px auto 0",
             }}>
               Good ideas rarely grow alone — they grow through conversations, feedback,
               teamwork, and people willing to help. At CIE, most of the learning happens
@@ -795,7 +795,7 @@ export default function HomePage() {
             <p style={{
               fontFamily: "var(--font-body)", fontSize: "16px",
               color: T_MUTED, marginTop: "16px", lineHeight: 1.7,
-              maxWidth: "560px", marginLeft: "auto", marginRight: "auto",
+              maxWidth: "820px", marginLeft: "auto", marginRight: "auto",
             }}>
               There&apos;s no fixed journey at CIE. Most start with curiosity — you
               explore, find people to work with, try building something, make mistakes,
@@ -905,7 +905,7 @@ export default function HomePage() {
                 </h2>
                 <p style={{
                   fontFamily: "var(--font-body)", fontSize: "16px", color: T_MUTED,
-                  marginTop: "10px", maxWidth: "480px", lineHeight: 1.7,
+                  marginTop: "10px", maxWidth: "640px", lineHeight: 1.7,
                 }}>
                   Ideas matter, but what we do with them matters more. A simple idea can
                   become a microproject, a project can grow into a product, and not
@@ -1232,7 +1232,7 @@ export default function HomePage() {
                 fontSize: "18px",
                 lineHeight: 1.72,
                 color: T_MED,
-                maxWidth: "600px",
+                maxWidth: "820px",
                 marginBottom: "40px",
               }}
             >

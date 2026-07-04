@@ -293,9 +293,9 @@ export default function AboutPage() {
       {/* ── Who We Are ────────────────────────────────────────────── */}
       <section style={{ background: BG_GRAY, ...SECTION_PY }}>
         <div className="page-container">
-          <FadeIn className="text-center">
-            <SectionHeader tag="Community" heading="Who We Are" center />
-            <div style={{ maxWidth: "700px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "18px" }}>
+          <FadeIn>
+            <SectionHeader tag="Community" heading="Who We Are" />
+            <div style={{ maxWidth: "1040px", display: "flex", flexDirection: "column", gap: "18px" }}>
               {whoWeAre.map((line, i) => (
                 <p key={i} style={{ fontSize: "clamp(15px,1.4vw,17px)", lineHeight: 1.8, color: T_BODY }}>
                   {line}

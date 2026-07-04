@@ -800,7 +800,7 @@ export default function GalleryPage() {
             </h2>
             <p style={{
               fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.3vw,16px)",
-              lineHeight: 1.72, color: "#6B7280", maxWidth: "560px", marginTop: "12px",
+              lineHeight: 1.72, color: "#6B7280", maxWidth: "860px", marginTop: "12px",
             }}>
               These aren&apos;t just event photographs — they&apos;re memories of students
               learning, building, organising, and creating together. Behind every picture

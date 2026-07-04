@@ -283,7 +283,7 @@ export default function AlumniPage() {
             <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(24px,4vw,36px)", lineHeight: 1.1, marginTop: "24px" }}>
               What Our Alumni Say
             </h2>
-            <p style={{ color: "#6B7280", fontSize: "clamp(14px,1.5vw,17px)", marginTop: "12px", maxWidth: "560px", lineHeight: 1.7 }}>
+            <p style={{ color: "#6B7280", fontSize: "clamp(14px,1.5vw,17px)", marginTop: "12px", maxWidth: "860px", lineHeight: 1.7 }}>
               Everyone&apos;s experience at CIE is different — for some it was their first
               project, for others it was learning to lead a team or organise an event.
               Real stories, real people, real memories from the journey.

@@ -115,7 +115,7 @@ export default function ContactPage() {
             <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(28px,4.5vw,48px)", color: "#000000", lineHeight: 1.08, letterSpacing: "-0.03em", marginTop: "14px", marginBottom: "14px" }}>
               Get in Touch
             </h2>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.4vw,17px)", color: "#6B7280", lineHeight: 1.72, maxWidth: "520px" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.4vw,17px)", color: "#6B7280", lineHeight: 1.72, maxWidth: "820px" }}>
               CIE is always open to conversations with students, alumni, mentors,
               entrepreneurs, and organisations. Some great things begin with a detailed
               plan. Others begin with a simple conversation — let&apos;s start with one.

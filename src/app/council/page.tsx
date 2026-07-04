@@ -700,12 +700,8 @@ export default function CouncilPage() {
           <FadeIn>
             <span className="section-tag" style={{ fontSize: "14px", letterSpacing: "1.5px" }}>Leadership</span>
             <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>Student Leadership 2026–27</h2>
-            <p style={{ color: "#6B7280", fontSize: "16px", lineHeight: 1.75, marginTop: "16px", maxWidth: "640px" }}>
-              Leadership at CIE is not about having your name at the top of a page. It is
-              about showing up when work needs to be done — taking responsibility when
-              something goes wrong, helping your team when they are stuck, making
-              decisions when necessary, and making sure the people working with you also
-              get opportunities to grow.
+            <p style={{ color: "#6B7280", fontSize: "16px", lineHeight: 1.75, marginTop: "16px", maxWidth: "980px" }}>
+              Leadership at CIE is not about having your name at the top of a page. It is about showing up when work needs to be done — taking responsibility when something goes wrong, helping your team when they are stuck, making decisions when necessary, and making sure the people working with you also get opportunities to grow.
             </p>
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 items-stretch" style={{ marginTop: "40px" }}>
@@ -785,12 +781,8 @@ export default function CouncilPage() {
             <h2 className="font-black" style={{ color: "#FFFFFF", fontSize: "clamp(24px, 4vw, 36px)", lineHeight: 1.1, marginTop: "24px" }}>
               Department Members
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.62)", fontSize: "16px", lineHeight: 1.75, marginTop: "16px", maxWidth: "640px" }}>
-              CIE works because different teams handle different responsibilities — from
-              Technical and Graphic Design to Photography, Content, Creatives, Promotions
-              &amp; Sponsorship, and Operations &amp; Finance. Each department has a
-              different role, but when an event, project, or initiative comes together,
-              it&apos;s usually because several of these teams worked together.
+            <p style={{ color: "rgba(255,255,255,0.62)", fontSize: "16px", lineHeight: 1.75, marginTop: "16px", maxWidth: "980px" }}>
+              CIE works because different teams handle different responsibilities — from Technical and Graphic Design to Photography, Content, Creatives, Promotions &amp; Sponsorship, and Operations &amp; Finance. Each department has a different role, but when an event, project, or initiative comes together, it&apos;s usually because several of these teams worked together.
             </p>
           </FadeIn>
 
