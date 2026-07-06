@@ -317,12 +317,7 @@ export const VERTICALS: Vertical[] = [
       { value: "6", label: "Studios & Labs Covered" },
       { value: "0", label: "Lost-Equipment Incidents" },
     ],
-    roles: [
-      { title: "Inventory Manager", desc: "Owns the full equipment catalog — stock counts, check-in/check-out logs, and audit schedules." },
-      { title: "Procurement Coordinator", desc: "Sources new equipment and supplies, manages vendor relationships, and tracks purchase budgets." },
-      { title: "Maintenance Lead", desc: "Inspects and services equipment, flags damage or wear, and coordinates repairs or replacements." },
-      { title: "Studio Liaison", desc: "Coordinates with each studio/lab team to reconcile equipment usage and resolve discrepancies." },
-    ],
+    roles: [],
     projects: [
       { name: "Inventory Management System", desc: "Internal tool managing CIE's equipment inventory, bookings, and maintenance logs.", status: "Active" },
       { name: "Equipment Audit Sprint", desc: "Full physical audit reconciling every studio and lab's stock against the digital catalog.", status: "Completed" },
