@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import type { Vertical } from "../verticals-data";
 import PageGeometric from "@/components/ui/PageGeometric";
+import AutoplayVideo from "@/components/ui/AutoplayVideo";
 
 const ICONS: Record<string, React.ElementType> = {
   mp: Boxes,
@@ -58,18 +59,6 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 export default function VerticalDetailClient({ vertical: v }: { vertical: Vertical }) {
   const Icon = ICONS[v.id] ?? Boxes;
-  const reelVideoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    // The `autoPlay` attribute alone is unreliable for a client-rendered
-    // <video> — it can lose the race with hydration and silently stay
-    // paused (rendering as a solid black box). Force it explicitly, same
-    // fix already used for the gallery page's slide videos.
-    const vid = reelVideoRef.current;
-    if (!vid) return;
-    vid.muted = true;
-    vid.play().catch(() => {});
-  }, [v.id]);
 
   return (
     <div style={{ background: "#FFFFFF", position: "relative" }}>
@@ -230,29 +219,14 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
             <div style={{ display: "flex", alignItems: "center", gap: "clamp(32px,6vw,80px)", flexWrap: "wrap", justifyContent: "center" }}>
               {/* Video */}
               <FadeIn>
-                <div
-                  onMouseEnter={(e) => {
-                    const vid = (e.currentTarget as HTMLElement).querySelector<HTMLVideoElement>("video");
-                    if (vid) vid.muted = false;
-                  }}
-                  onMouseLeave={(e) => {
-                    const vid = (e.currentTarget as HTMLElement).querySelector<HTMLVideoElement>("video");
-                    if (vid) vid.muted = true;
-                  }}
-                  style={{ height: "clamp(400px, 70vh, 760px)", aspectRatio: "9 / 16", maxWidth: "100%", maxHeight: "80vh", borderRadius: "18px", overflow: "hidden" }}
-                >
+                <div style={{ height: "clamp(400px, 70vh, 760px)", aspectRatio: "9 / 16", maxWidth: "100%", maxHeight: "80vh", borderRadius: "18px", overflow: "hidden" }}>
                   {/* fixed aspect-ratio box + object-fit:cover keeps the reel from
                       distorting when the height clamp and the width cap fight on
                       narrow screens */}
-                  <video
-                    ref={reelVideoRef}
+                  <AutoplayVideo
                     src="/reels/cie%20studio%20intro.mp4"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="auto"
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", cursor: "pointer" }}
+                    unmuteOnHover
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                   />
                 </div>
               </FadeIn>

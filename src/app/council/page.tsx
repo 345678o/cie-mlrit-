@@ -119,7 +119,7 @@ const teams: TeamSection[] = [
       { name: "Ghanashyam Kodekandla", role: "Chairperson", dept: "Tech", photo: "/council/tech/Ghanashyam Kodekandla.png",linkedin:"https://www.linkedin.com/in/ghanashyamkodekandla",year:"4th" },
       { name: "Keertan Kuppili",       role: "Chairperson", dept: "Tech", photo: "/council/tech/Keertan Kuppili .png", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/",year:"4th"},
       { name: "Teja Jagathi",          role: "Chairperson", dept: "Tech", photo: "/council/tech/Teja Jagathi.png" ,linkedin: "https://www.linkedin.com/in/teja-jagathi",year:"4th"},
-      { name: "T.S Siddarth",          role: "Chairperson", dept: "Tech", photo: "/council/tech/T.S Siddarth.png",linkedin: "#",year:"4th"},
+      { name: "T.S Siddarth",          role: "Chairperson", dept: "Tech", photo: "/council/tech/T.S Siddarth.png",linkedin: "https://www.linkedin.com/in/siddharth-t-s-a76655248/",year:"4th"},
       { name: "Abhiram Ganji",         role: "Product Development Lead", dept: "Tech", photo: "/council/tech/Abhiram Ganji.png" ,linkedin:"#",year:"3rd"},
       { name: "Anuj Lomte",            role: "Member", dept: "Tech", photo: "/council/tech/Anuj Lomte.png" ,linkedin: "https://www.linkedin.com/in/anuj-lomte-918b90344/",year:"3rd"},
       { name: "Anamika",               role: "Member", dept: "Tech", photo: "/council/tech/Anamika.jpeg" , linkedin: "https://www.linkedin.com/in/anamikak3131/",year:"3rd"},

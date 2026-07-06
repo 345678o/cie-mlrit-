@@ -3,6 +3,7 @@ import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
 import ScrollStack, { ScrollStackItem } from "@/components/ui/ScrollStack";
 import FadeIn from "@/components/ui/FadeIn";
+import AutoplayVideo from "@/components/ui/AutoplayVideo";
 
 const studios = [
   {
@@ -146,6 +147,34 @@ export default function StudiosPage() {
             </ScrollStackItem>
           ))}
         </ScrollStack>
+      </section>
+
+      {/* Studio Reel */}
+      <section style={{ background: "#0a0a0a", padding: "clamp(32px,5vw,56px) 0" }}>
+        <div className="page-container">
+          <div style={{ display: "flex", alignItems: "center", gap: "clamp(32px,6vw,80px)", flexWrap: "wrap", justifyContent: "center" }}>
+            <FadeIn>
+              <div style={{ height: "clamp(400px, 70vh, 760px)", aspectRatio: "9 / 16", maxWidth: "100%", maxHeight: "80vh", borderRadius: "18px", overflow: "hidden" }}>
+                <AutoplayVideo
+                  src="/reels/cie%20studio%20intro.mp4"
+                  unmuteOnHover
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+              </div>
+            </FadeIn>
+            <FadeIn delay={0.15}>
+              <div style={{ maxWidth: "340px" }}>
+                <span className="section-tag" style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.14)", color: "rgba(255,255,255,0.7)" }}>Studio Reel</span>
+                <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(22px,3.5vw,38px)", color: "#FFFFFF", lineHeight: 1.15, marginTop: "16px", marginBottom: "20px" }}>
+                  See our studios in action
+                </h3>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "rgba(255,255,255,0.55)", lineHeight: 1.75 }}>
+                  A quick look inside CIE&apos;s six studios — where every project, podcast, and prototype comes to life.
+                </p>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
       </section>
 
       {/* Booking CTA */}

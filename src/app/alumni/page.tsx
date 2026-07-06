@@ -34,9 +34,9 @@ const alumni: Alumni[] = [
   {
     name: "Ala Tanvi Reddy",
     batch: "2025–26",
-    role: "Software Engineer",
-    company: "Company Name",
-    location: "Hyderabad",
+    role: "Master's Student",
+    company: "RMIT University",
+    location: "Australia",
     photo: "/alumni/Tanvi.jpeg",
     quote: "If there is one place that truly shaped who I am today, it is CIE. It served as an incredible learning ground where I grew from an operations member to President, developing my communication, networking, organizing, and management abilities. Serving as a student mentor for micro-projects allowed me to sharpen my technical skills while helping others grow. Ultimately, CIE gave me a true understanding of what entrepreneurship means, laying the definitive foundation for my journey. Beyond the work and professional growth, CIE is a space where you do not just learn and improve. It is a place where you find an amazing community of peers and friends. We had so much fun together, and I am walking away with countless unforgettable memories.",
     tags: ["Tech", "Product"],
