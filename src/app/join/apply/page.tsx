@@ -18,7 +18,7 @@ import type { Question, IntroForm, ApplyPayload, ApplyResponse, QuestionsRespons
 const ORANGE = "#E8521A";
 const GRAIN = getGrainDataUri(0.8);
 
-const YEARS = ["2nd Year","3rd Year","4th Year"];
+const YEARS = ["2nd Year","3rd Year"];
 
 const EMPTY_INTRO: IntroForm = { name:"", rollNo:"", phone:"", email:"", branch:"", section:"", year:"", cgpa:"", backlogs:"", aboutYourself:"" };
 
