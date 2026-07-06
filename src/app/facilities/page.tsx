@@ -1,36 +1,9 @@
-"use client";
-
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import {
   Users, Printer, Lightbulb, Presentation, Cpu, Building2, Wrench,
 } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
-
-function FadeIn({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 28 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
+import FadeIn from "@/components/ui/FadeIn";
 
 const facilities = [
   {
@@ -95,7 +68,7 @@ export default function FacilitiesPage() {
         <div className="page-container">
 
           {/* Heading */}
-          <FadeIn className="text-center">
+          <FadeIn className="text-center" margin="-60px" y={28} duration={0.65}>
             <h2
               style={{
                 fontSize: "clamp(28px, 4vw, 44px)",
@@ -120,8 +93,8 @@ export default function FacilitiesPage() {
             className="facilities-grid"
           >
             {facilities.map((facility, i) => (
-              <FadeIn key={facility.title} delay={i * 0.06}>
-                <div
+              <FadeIn key={facility.title} delay={i * 0.06} margin="-60px" y={28} duration={0.65}>
+                <div className="facility-card"
                   style={{
                     background: "#FFFFFF",
                     borderRadius: "14px",
@@ -132,19 +105,7 @@ export default function FacilitiesPage() {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    transition: "box-shadow 0.25s ease, transform 0.25s ease",
                     cursor: "default",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.boxShadow =
-                      "0 8px 32px rgba(0,0,0,0.10)";
-                    (e.currentTarget as HTMLDivElement).style.transform =
-                      "translateY(-3px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
-                    (e.currentTarget as HTMLDivElement).style.transform =
-                      "translateY(0)";
                   }}
                 >
                   {/* Icon */}
@@ -189,7 +150,7 @@ export default function FacilitiesPage() {
 
       {/* ── CTA ─────────────────────────────────────────────── */}
       <section style={{ padding: "60px 0 80px", background: "#FFFFFF" }}>
-        <FadeIn className="page-container text-center">
+        <FadeIn className="page-container text-center" margin="-60px" y={28} duration={0.65}>
           <h2
             style={{
               fontSize: "clamp(22px, 3vw, 36px)",
@@ -231,6 +192,8 @@ export default function FacilitiesPage() {
             grid-template-columns: 1fr !important;
           }
         }
+        .facility-card { transition: box-shadow 0.25s ease, transform 0.25s ease; }
+        .facility-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.10); transform: translateY(-3px); }
       `}</style>
     </div>
   );

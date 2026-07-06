@@ -6,8 +6,9 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Calendar } from "lucide-react";
+import { getGrainDataUri } from "@/lib/grain";
 
-const GRAIN = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
+const GRAIN = getGrainDataUri(0.85);
 
 /* ─── Types ─────────────────────────────────────────────────── */
 type SlideData = {
@@ -46,7 +47,7 @@ const FEATURED: EventData[] = [
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM%20(2).jpeg", grad: "linear-gradient(140deg,#040a1a 0%,#0b1c38 50%,#1c3fa8 100%)", heading: "Live Feedback Loop", body: "Mentors circulate every hour, giving real-time critique and direction. No waiting till the end to know if you're off track." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM%20(3).jpeg", grad: "linear-gradient(155deg,#050b1e 0%,#0c1e3e 50%,#1d42b0 100%)", heading: "Skills That Stay", body: "From prototype to portfolio. What you build during Carnival follows you well beyond the campus boundary." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/IMG_5443.png", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/IMG_5499.png", grad: "linear-gradient(160deg,#040a18 0%,#0a1836 50%,#1a3380 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/IMG_5499.jpg", grad: "linear-gradient(160deg,#040a18 0%,#0a1836 50%,#1a3380 100%)", heading: "", body: "" },
     ],
   },
   {
@@ -121,7 +122,7 @@ const FEATURED: EventData[] = [
       { img: "/events/poster/wc.png", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "Workshop Carnival", body: "Six days of hands-on exploration. Participants tackled UI/UX design, IoT, and WordPress through structured challenges and expert guidance." },
       { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1436.JPG", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "", body: "" },
       { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1479.png", grad: "linear-gradient(160deg,#040a18 0%,#0a1930 50%,#1a45c8 100%)", heading: "UI/UX Track", body: "Design thinking meets real products. Teams redesign existing apps and pitch their improvements to practicing UX designers." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1485.png", grad: "linear-gradient(130deg,#060c20 0%,#0e2040 50%,#2155d8 100%)", heading: "IoT Lab", body: "Sensors, circuits, and code. Participants build working IoT prototypes from scratch with expert guidance on hardware and firmware." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1485.jpg", grad: "linear-gradient(130deg,#060c20 0%,#0e2040 50%,#2155d8 100%)", heading: "IoT Lab", body: "Sensors, circuits, and code. Participants build working IoT prototypes from scratch with expert guidance on hardware and firmware." },
       { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1492.png", grad: "linear-gradient(150deg,#050a1a 0%,#0c1d38 50%,#1c4ad0 100%)", heading: "WordPress Build", body: "From blank canvas to live website. Participants design, develop, and deploy a fully functional site — in a single session." },
       { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1503.png", grad: "linear-gradient(140deg,#060b1e 0%,#0d1e3a 50%,#1e4dd5 100%)", heading: "Domain Showdowns", body: "Each track ends with a domain-specific contest. The best project across design, IoT, and web earns recognition and prizes." },
       { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1527.png", grad: "linear-gradient(155deg,#050a1c 0%,#0c1c38 50%,#1b48cc 100%)", heading: "Community Builders", body: "Beyond skills — students leave with a network of peers, mentors, and collaborators who share the same drive to create." },
@@ -168,15 +169,41 @@ const FEATURED: EventData[] = [
   },
 ];
 
-const CATS = [
-  { label: "Hackathons",            n: "12" },
-  { label: "Workshops",             n: "28" },
-  { label: "Startup Meetups",       n: "8"  },
-  { label: "Guest Lectures",        n: "35" },
-  { label: "Innovation Challenges", n: "6"  },
-  { label: "Bootcamps",             n: "5"  },
-];
-
+/* ─── Event schema JSON-LD ──────────────────────────────────── */
+function buildEventsJsonLd(events: EventData[]) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": events.map((ev) => {
+      const opener = ev.slides[0];
+      return {
+        "@type": "Event",
+        name: opener?.heading || ev.category,
+        description: opener?.body || `${ev.category} hosted by MLRIT CIE`,
+        startDate: ev.dateTime,
+        eventStatus: "https://schema.org/EventScheduled",
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        image: opener?.img ? `https://cie.mlrit.ac.in${opener.img}` : undefined,
+        location: {
+          "@type": "Place",
+          name: "MLR Institute of Technology, CIE Block",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Dundigal",
+            addressLocality: "Hyderabad",
+            postalCode: "500043",
+            addressRegion: "Telangana",
+            addressCountry: "IN",
+          },
+        },
+        organizer: {
+          "@type": "Organization",
+          name: "MLRIT CIE",
+          url: "https://cie.mlrit.ac.in",
+        },
+      };
+    }),
+  };
+}
 
 /* ═══════════════════════════════════════════════════════════════
    EventFilmStrip
@@ -247,6 +274,10 @@ function EventFilmStrip({ ev }: { ev: EventData }) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildEventsJsonLd(FEATURED)) }}
+      />
       {lightbox && (
         <div onClick={() => setLightbox(null)} style={{
           position: "fixed", inset: 0, zIndex: 9998,
@@ -338,7 +369,6 @@ function EventFilmStrip({ ev }: { ev: EventData }) {
 function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
   const slides = ev.slides.filter(s => s.heading || s.body);
   const flipped = index % 2 !== 0;
-  const [current, setCurrent] = useState(0);
   const animRef    = useRef(false);
   const curRef     = useRef(0);
   const accRef     = useRef(0);
@@ -359,7 +389,6 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
     animRef.current = true;
     curRef.current  = to;
     accRef.current  = 0;
-    setCurrent(to);
 
     const outPanel = panelRefs.current[from];
     const inPanel  = panelRefs.current[to];
@@ -752,35 +781,6 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* ══ CATEGORY STRIP ══ */}
-      <section style={{ background: "#111111", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="page-container">
-          <div className="cat-strip" style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            borderBottom: "1px solid rgba(255,255,255,0.05)",
-          }}>
-            {CATS.map((c, i) => (
-              <div key={c.label} className="cat-item" style={{
-                padding: "clamp(18px,3vw,28px) clamp(16px,2.5vw,24px)",
-                borderRight: (i + 1) % 3 !== 0 ? "1px solid rgba(255,255,255,0.05)" : "none",
-                borderBottom: i < 3 ? "1px solid rgba(255,255,255,0.05)" : "none",
-              }}>
-                <div style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(24px,4vw,40px)", letterSpacing: "-0.04em", color: "#FFFFFF", lineHeight: 1, marginBottom: "4px" }}>{c.n}</div>
-                <div style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.06em" }}>{c.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <style>{`
-          @media(min-width:640px){
-            .cat-strip{grid-template-columns:repeat(6,1fr)!important;}
-            .cat-strip>div{border-bottom:none!important;}
-            .cat-strip>div:last-child{border-right:none!important;}
-          }
-        `}</style>
-      </section>
-
       {/* ══ EVENT SECTIONS + PER-EVENT FILM STRIPS ══ */}
       {FEATURED.flatMap((ev, i) => [
         <div key={`label-${i}`} className="ev-label" style={{
@@ -793,7 +793,7 @@ export default function EventsPage() {
           <div style={{ display: "flex", alignItems: "center", gap: "14px", minWidth: 0 }}>
             <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: ev.catColor, flexShrink: 0 }}>{ev.idx}</span>
             <span style={{ color: "rgba(255,255,255,0.10)" }}>—</span>
-            <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(16px,2.2vw,32px)", letterSpacing: "-0.03em", lineHeight: 1, color: "#fff", margin: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{ev.slides[0].heading}</h3>
+            <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(16px,2.2vw,32px)", letterSpacing: "-0.03em", lineHeight: 1, color: "#fff", margin: 0, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{ev.slides[0].heading}</h3>
             <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", padding: "3px 10px", borderRadius: "999px", background: ev.catBg, color: ev.catColor, flexShrink: 0 }}>{ev.category}</span>
           </div>
           <div className="ev-label-right" style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>

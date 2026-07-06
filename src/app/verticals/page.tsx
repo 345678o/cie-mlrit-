@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { Boxes, Palette, Cpu, CalendarDays, Rocket, ArrowRight, Package } from "lucide-react";
 import Link from "next/link";
 import PageGeometric from "@/components/ui/PageGeometric";
+import ArcHero from "@/components/layout/ArcHero";
 import { VERTICALS } from "./verticals-data";
 
 /* ─── Icons map ──────────────────────────────────────────────────── */
@@ -213,135 +214,22 @@ export default function VerticalsPage() {
       <PageGeometric />
 
       {/* ══ HERO ═══════════════════════════════════════════════════ */}
-      <section
-        className="page-hero hero-shrink-mobile relative overflow-hidden flex flex-col"
-        style={{
-          background: "#E8521A",
-          paddingTop: "var(--nav-height)",
-          minHeight: "68vh",
-        }}
-      >
-        {/* Grain */}
-        <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          opacity: 0.035, mixBlendMode: "multiply" as const,
-        }} />
-
-        {/* Arc — top right */}
-        <svg aria-hidden className="absolute pointer-events-none"
-          style={{ top: "-14%", right: "-8%", width: "46vw", height: "46vw", maxWidth: 540, maxHeight: 540, opacity: 0.18 }}
-          viewBox="0 0 540 540" fill="none">
-          <circle cx="270" cy="270" r="250" stroke="rgba(255,255,255,1)" strokeWidth="70" fill="none" />
-        </svg>
-
-        {/* Arc — bottom left */}
-        <svg aria-hidden className="absolute pointer-events-none"
-          style={{ bottom: "-10%", left: "-6%", width: "26vw", height: "26vw", maxWidth: 300, maxHeight: 300, opacity: 0.13 }}
-          viewBox="0 0 300 300" fill="none">
-          <circle cx="150" cy="150" r="130" stroke="rgba(255,255,255,1)" strokeWidth="46" fill="none" />
-        </svg>
-
-        {/* Dot grid — top left */}
-        <div aria-hidden className="absolute pointer-events-none" style={{
-          top: "calc(var(--nav-height) + 16px)", left: "16px",
-          width: "72px", height: "72px",
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.30) 1.5px, transparent 1.5px)",
-          backgroundSize: "12px 12px",
-        }} />
-
-        {/* Ghost watermark */}
-        <div aria-hidden className="absolute pointer-events-none select-none" style={{
-          bottom: "20px", right: "-12px",
-          fontFamily: "var(--font-heading)", fontWeight: 900,
-          fontSize: "clamp(120px,22vw,380px)",
-          color: "rgba(0,0,0,0.06)", lineHeight: 1, letterSpacing: "-0.06em",
-        }}>VERTICALS</div>
-
-        {/* Content */}
-        <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
-          <div className="page-container w-full" style={{ paddingTop: "clamp(36px,5vw,56px)", paddingBottom: "clamp(48px,6vw,72px)" }}>
-
-            {/* Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 56 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.95, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                fontFamily: "var(--font-heading)", fontWeight: 900,
-                fontSize: "clamp(52px, 11vw, 148px)",
-                lineHeight: 0.88, letterSpacing: "-0.045em",
-                textTransform: "uppercase" as const,
-                marginBottom: 0,
-              }}
-            >
-              <span style={{ display: "block", color: "#FFFFFF" }}>OUR</span>
-              <span style={{
-                display: "block", color: "transparent",
-                WebkitTextStroke: "2.5px rgba(255,255,255,0.80)",
-              }}>VERTICALS</span>
-            </motion.h1>
-
-            {/* Script accent */}
-            <motion.p
-              initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.50 }}
-              style={{
-                fontFamily: "var(--font-script)",
-                fontSize: "clamp(18px, 2.4vw, 30px)",
-                color: "rgba(255,255,255,0.90)", lineHeight: 1.2,
-                marginTop: "18px", marginBottom: "20px",
-                display: "inline-block", transform: "rotate(-1.5deg)",
-              }}
-            >
-              — pick your path, own your impact
-            </motion.p>
-
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.62 }}
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "clamp(14px,1.4vw,16px)", lineHeight: 1.78,
-                color: "rgba(255,255,255,0.72)",
-                maxWidth: "min(440px,100%)",
-                marginBottom: 0,
-              }}
-            >
-              CIE operates through {VERTICALS.length} focused verticals — each with its own team,
-              goals, and domain of impact. Together they form the full innovation ecosystem at MLRIT.
-            </motion.p>
-
-            {/* Stats row */}
-            <motion.div
-              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.76 }}
-              style={{
-                display: "flex", flexWrap: "wrap", gap: "clamp(18px,3vw,32px)",
-                marginTop: "clamp(28px,4vw,44px)",
-              }}
-            >
-              {[
-                { v: String(VERTICALS.length), l: "Verticals" },
-                { v: "500+", l: "Active Members" },
-                { v: "80+",  l: "Projects Done" },
-                { v: "2026–27", l: "Current Cohort" },
-              ].map(({ v, l }) => (
-                <div key={l}>
-                  <div style={{
-                    fontFamily: "var(--font-heading)", fontWeight: 900,
-                    fontSize: "clamp(20px,2.8vw,28px)", color: "#FFFFFF", lineHeight: 1,
-                  }}>{v}</div>
-                  <div style={{
-                    fontFamily: "var(--font-body)", fontSize: "11px",
-                    color: "rgba(255,255,255,0.55)", marginTop: "3px", fontWeight: 600,
-                    letterSpacing: "0.04em",
-                  }}>{l}</div>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      <ArcHero
+        watermark="VERTICALS"
+        line1="OUR"
+        line2="VERTICALS"
+        headlineFontSize="clamp(52px, 11vw, 148px)"
+        headlineLineHeight={0.88}
+        scriptText="— pick your path, own your impact"
+        description={`CIE operates through ${VERTICALS.length} focused verticals — each with its own team, goals, and domain of impact. Together they form the full innovation ecosystem at MLRIT.`}
+        descriptionMaxWidth="min(440px,100%)"
+        stats={[
+          { v: String(VERTICALS.length), l: "Verticals" },
+          { v: "500+", l: "Active Members" },
+          { v: "80+",  l: "Projects Done" },
+          { v: "2026–27", l: "Current Cohort" },
+        ]}
+      />
 
       {/* ══ CARDS GRID ═════════════════════════════════════════════ */}
       <section style={{

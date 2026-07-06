@@ -6,11 +6,13 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, Camera } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { getGrainDataUri } from "@/lib/grain";
+import ArcHero from "@/components/layout/ArcHero";
 
 /* ─── Constants ─────────────────────────────────────────────── */
 
-const GRAIN = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
+const GRAIN = getGrainDataUri(0.85);
 
 const H_SLIDES = [
   { label: "Workshop Carnival 2.0",   year: "APR 2026", cat: "Workshop",    n: "042", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", eventIdx: "01", video: "/reels/WC%202.0.mp4",        poster: "/events/poster/wc%202.0.png" },
@@ -287,159 +289,25 @@ export default function GalleryPage() {
       {/* ══════════════════════════════════════════════════════
           HERO — matches Verticals visual language
       ══════════════════════════════════════════════════════ */}
-      <section
-        ref={heroRef}
-        className="page-hero gallery-hero relative overflow-hidden flex flex-col"
-        style={{
-          background: "#E8521A",
-          paddingTop: "var(--nav-height)",
-          minHeight: "68vh",
-        }}
-      >
-        {/* Grain */}
-        <div aria-hidden className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: GRAIN,
-          opacity: 0.035, mixBlendMode: "multiply" as const,
-        }} />
-
-        {/* Arc — top right (parallax float) */}
-        <svg aria-hidden className="absolute pointer-events-none gh-arc-tr"
-          style={{ top: "-14%", right: "-8%", width: "46vw", height: "46vw", maxWidth: 540, maxHeight: 540, opacity: 0.18 }}
-          viewBox="0 0 540 540" fill="none">
-          <circle cx="270" cy="270" r="250" stroke="rgba(255,255,255,1)" strokeWidth="70" fill="none" />
-        </svg>
-
-        {/* Arc — bottom left (parallax float) */}
-        <svg aria-hidden className="absolute pointer-events-none gh-arc-bl"
-          style={{ bottom: "-10%", left: "-6%", width: "26vw", height: "26vw", maxWidth: 300, maxHeight: 300, opacity: 0.13 }}
-          viewBox="0 0 300 300" fill="none">
-          <circle cx="150" cy="150" r="130" stroke="rgba(255,255,255,1)" strokeWidth="46" fill="none" />
-        </svg>
-
-        {/* Dot grid — top left */}
-        <div aria-hidden className="absolute pointer-events-none" style={{
-          top: "calc(var(--nav-height) + 16px)", left: "16px",
-          width: "72px", height: "72px",
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.30) 1.5px, transparent 1.5px)",
-          backgroundSize: "12px 12px",
-        }} />
-
-        {/* Ghost watermark */}
-        <div aria-hidden className="absolute pointer-events-none select-none" style={{
-          bottom: "20px", right: "-12px",
-          fontFamily: "var(--font-heading)", fontWeight: 900,
-          fontSize: "clamp(120px,22vw,380px)",
-          color: "rgba(0,0,0,0.06)", lineHeight: 1, letterSpacing: "-0.06em",
-          userSelect: "none" as const,
-        }}>GALLERY</div>
-
-        {/* Content */}
-        <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
-          <div className="page-container w-full" style={{ paddingTop: "clamp(36px,5vw,56px)", paddingBottom: "clamp(48px,6vw,72px)" }}>
-
-
-            {/* Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 56 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.95, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                fontFamily: "var(--font-heading)", fontWeight: 900,
-                fontSize: "clamp(48px, 11vw, 152px)",
-                lineHeight: 0.90, letterSpacing: "-0.045em",
-                textTransform: "uppercase" as const,
-                marginBottom: 0,
-              }}
-            >
-              <span style={{ display: "block", color: "#FFFFFF" }}>CAPTURED</span>
-              <span style={{
-                display: "block", color: "transparent",
-                WebkitTextStroke: "2.5px rgba(255,255,255,0.80)",
-                fontSize: "0.82em",
-                marginTop: "0.04em",
-              }}>MOMENTS</span>
-            </motion.h1>
-
-            {/* Script accent */}
-            <motion.p
-              initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.50 }}
-              style={{
-                fontFamily: "var(--font-script)",
-                fontSize: "clamp(18px, 2.4vw, 30px)",
-                color: "rgba(255,255,255,0.90)", lineHeight: 1.2,
-                marginTop: "18px", marginBottom: "20px",
-                display: "inline-block", transform: "rotate(-1.5deg)",
-              }}
-            >
-              — every innovation has a story
-            </motion.p>
-
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.62 }}
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "clamp(14px,1.4vw,16px)", lineHeight: 1.78,
-                color: "rgba(255,255,255,0.72)",
-                maxWidth: "min(480px,100%)",
-                marginBottom: 0,
-              }}
-            >
-              Some parts of the CIE experience are difficult to explain with words — the
-              late-night event prep, the moment a prototype finally works, the chaos
-              before an event begins. The Gallery is a collection of those moments.
-            </motion.p>
-
-            {/* Stats row */}
-            <motion.div
-              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.76 }}
-              style={{
-                display: "flex", flexWrap: "wrap", gap: "clamp(18px,3vw,32px)",
-                marginTop: "clamp(28px,4vw,44px)",
-              }}
-            >
-              {[
-                { v: "500+",   l: "Photos" },
-                { v: "50+",   l: "Events Covered" },
-                { v: "5 yrs", l: "of Memories" },
-                { v: "1000+", l: "Participants" },
-              ].map(({ v, l }) => (
-                <div key={l}>
-                  <div style={{
-                    fontFamily: "var(--font-heading)", fontWeight: 900,
-                    fontSize: "clamp(20px,2.8vw,28px)", color: "#FFFFFF", lineHeight: 1,
-                  }}>{v}</div>
-                  <div style={{
-                    fontFamily: "var(--font-body)", fontSize: "11px",
-                    color: "rgba(255,255,255,0.55)", marginTop: "3px", fontWeight: 600,
-                    letterSpacing: "0.04em",
-                  }}>{l}</div>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      <style>{`
-        /* Hero's 68vh assumes a wide/short desktop viewport — on tall narrow
-           phones/tablets the short amount of text ends up floating in a
-           huge empty block. Shrink the target height on those screens. */
-        @media (max-width: 1023px) {
-          .gallery-hero { min-height: 56vh !important; }
-        }
-        @media (max-width: 639px) {
-          .gallery-hero { min-height: 50vh !important; }
-        }
-        @keyframes floatArc {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50%       { transform: translateY(-10px) rotate(1deg); }
-        }
-        .gh-arc-tr { animation: floatArc 8s ease-in-out infinite; }
-        .gh-arc-bl { animation: floatArc 10s ease-in-out infinite reverse; }
-      `}</style>
+      <ArcHero
+        heroRef={heroRef}
+        floatingArcs
+        watermark="GALLERY"
+        line1="CAPTURED"
+        line2="MOMENTS"
+        line2FontScale={0.82}
+        headlineFontSize="clamp(48px, 11vw, 152px)"
+        headlineLineHeight={0.90}
+        scriptText="— every innovation has a story"
+        description="Some parts of the CIE experience are difficult to explain with words — the late-night event prep, the moment a prototype finally works, the chaos before an event begins. The Gallery is a collection of those moments."
+        descriptionMaxWidth="min(480px,100%)"
+        stats={[
+          { v: "500+",   l: "Photos" },
+          { v: "50+",   l: "Events Covered" },
+          { v: "5 yrs", l: "of Memories" },
+          { v: "1000+", l: "Participants" },
+        ]}
+      />
 
       {/* ══════════════════════════════════════════════════════
           INTRO TEXT — light section
@@ -488,6 +356,25 @@ export default function GalleryPage() {
       {/* ══════════════════════════════════════════════════════
           HORIZONTAL SCROLL GALLERY
       ══════════════════════════════════════════════════════ */}
+      {/* Mobile/tablet: static intro header shown above the card strip instead
+          of as a row item (see .h-intro-static / .h-intro-card in the style
+          block below) — it has no background fill, so sizing it to match the
+          9:16 poster/video cards left a large empty black box. */}
+      <div className="h-intro-static" style={{ background: "#0C0B09", padding: "clamp(28px,6vw,44px) clamp(20px,5vw,32px) 0" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "18px" }}>
+          <div style={{ width: "26px", height: "2px", background: "#E8521A" }} />
+          <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(9.5px,1.4vw,12px)", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#E8521A" }}>
+            Gallery
+          </span>
+        </div>
+        <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(30px, 5vw, 40px)", letterSpacing: "-0.03em", color: "#FFFFFF", lineHeight: 1.1, marginBottom: "18px" }}>
+          Explore the moments
+        </h3>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(13px,1.8vw,15px)", lineHeight: 1.65, color: "rgba(255,255,255,0.3)" }}>
+          {H_SLIDES.length} collections · 7 reels · Scroll horizontally to explore, hover to start watching
+        </p>
+      </div>
+
       <section
         ref={hScrollRef}
         className="h-scroll-section"
@@ -517,7 +404,7 @@ export default function GalleryPage() {
         >
           {/* Header card */}
           <div
-            className="h-slide"
+            className="h-slide h-intro-card"
             style={{
               flexShrink: 0,
               width: "clamp(180px, 20vw, 300px)",
@@ -996,12 +883,23 @@ export default function GalleryPage() {
           .h-scroll-dots { display: none !important; }
           /* wider poster cards — ~75vw so one card fills most of the screen */
           .h-scroll-section .h-slide { width: clamp(260px, 75vw, 340px) !important; }
+          /* The text-only intro card has no background fill like its poster/video
+             siblings, but the flex row still sizes it to match their ~570px
+             (9:16) height — leaving a huge plain-black void around the short
+             text. Move the intro out of the scrollable row on mobile (see
+             .h-intro-static below) and drop this in-row copy entirely. */
+          .h-intro-card { display: none !important; }
+        }
+        .h-intro-static { display: none; }
+        @media (max-width: 1023px) {
+          .h-intro-static { display: block; }
         }
         /* ── Mobile/tablet: feature panels ────────────────────── */
         @media (max-width: 1023px) {
           .feat-panel {
             min-height: auto !important;
             flex-direction: column !important;
+            border-top: 1px solid rgba(255,255,255,0.06);
           }
           .feat-img-col {
             position: relative !important;
@@ -1023,7 +921,16 @@ export default function GalleryPage() {
             aspect-ratio: auto !important;
             transform: none !important;
           }
-          .feat-txt-col { justify-content: flex-start !important; }
+          /* Desktop's paddingLeft/paddingRight are picked by f.side to clear
+             the absolutely-positioned image column sitting on the opposite
+             edge — on mobile the image stacks above instead, so that
+             one-sided padding just makes alternating panels indent
+             inconsistently left vs. right. Force the same inset both sides. */
+          .feat-txt-col {
+            justify-content: flex-start !important;
+            padding-left: clamp(20px, 5vw, 32px) !important;
+            padding-right: clamp(20px, 5vw, 32px) !important;
+          }
           .feat-txt-inner {
             max-width: 100% !important;
             padding-top: clamp(28px,5vw,44px) !important;

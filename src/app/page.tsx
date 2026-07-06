@@ -3,6 +3,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { getGrainDataUri } from "@/lib/grain";
 import {
   ArrowRight,
   Lightbulb,
@@ -10,7 +12,6 @@ import {
   Users,
   Trophy,
   Zap,
-  Code,
   Mic,
   ChevronRight,
   TrendingUp,
@@ -111,9 +112,9 @@ function SectionDivider({ topBg = "#FFFFFF", btmBg = "#FFFFFF" }: { topBg?: stri
 /* ── Data ─────────────────────────────────────────────────────────── */
 const stats = [
   { value: 1000, suffix: "+", label: "Students Engaged",    icon: Users,      color: "#2563EB" },
-  { value: 100,  suffix: "+", label: "Events Hosted",       icon: Trophy,     color: "#EA580C" },
+  { value: 15,   suffix: "+", label: "Events Hosted",       icon: Trophy,     color: "#EA580C" },
   { value: 50,   suffix: "+", label: "Projects Launched",   icon: Rocket,     color: "#9333EA" },
-  { value: 20,   suffix: "+", label: "Startup Initiatives", icon: TrendingUp, color: "#16A34A" },
+  { value: 10,   suffix: "+", label: "Startup Initiatives", icon: TrendingUp, color: "#16A34A" },
 ];
 
 const programs = [
@@ -182,33 +183,6 @@ const partners = [
   { name: "Wadhwani Foundation",                                logo: "/partners/wadhwani.png" },
 ];
 
-const recentEvents = [
-  {
-    category: "Workshop",
-    title: "Workshop Carnival 2.0",
-    date: "Apr 10–11, 2026",
-    desc: "Where learning goes beyond classrooms — into real skills, real challenges, and real innovation. Multiple domains, hands-on experiences, and expert guidance.",
-    tags: ["Hands-on Workshops", "Expert Guidance", "Domain Challenges"],
-    accent: "#2563EB",
-  },
-  {
-    category: "Innovation Challenge",
-    title: "B2B — Business to Brand",
-    date: "Apr 3–4, 2025",
-    desc: "A Brand Revival Hackathon — teams of 3–5 develop strategies to transform brands through Logo Redesign and Ad-Film Making, backed by industry masterclasses.",
-    tags: ["Brand Revival", "Logo Design", "Ad-Film Making"],
-    accent: "#E8521A",
-  },
-  {
-    category: "E-Summit",
-    title: "The Equinox E-Summit 2K24",
-    date: "Nov 28–30, 2024",
-    desc: "#WherePassionMeetsPerseverance — a 3-day entrepreneurship summit by MLRIT CIE × IIC bringing together student innovators, industry leaders, and investors.",
-    tags: ["E-Summit", "Entrepreneurship", "CIE × IIC"],
-    accent: "#059669",
-  },
-];
-
 /* ── Design tokens ────────────────────────────────────────────────── */
 const CONTAINER  = "page-container";
 const SECTION_PY = "clamp(48px, 5vw, 80px)";
@@ -239,7 +213,7 @@ export default function HomePage() {
       >
         {/* ── Grain texture (matches Image 1 paper grain) ── */}
         <div className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundImage: getGrainDataUri(0.75, 200),
           opacity: 0.13, mixBlendMode: "overlay" as const,
         }} />
 
@@ -495,12 +469,12 @@ export default function HomePage() {
                 </motion.div>
 
                 {/* Star ✦ decorations */}
-                {[
+                {([
                   { top: "6px",    left: "52%",  size: 26, delay: 0.86 },
                   { top: "44%",    left: "-3%",  size: 16, delay: 0.96 },
                   { bottom: "34%", right: "40%", size: 22, delay: 1.06 },
                   { top: "28%",    right: "47%", size: 12, delay: 1.15 },
-                ].map((star, i) => (
+                ] as { top?: string; left?: string; bottom?: string; right?: string; size: number; delay: number }[]).map((star, i) => (
                   <motion.span
                     key={i}
                     initial={{ opacity: 0, scale: 0, rotate: -30 }}
@@ -508,10 +482,10 @@ export default function HomePage() {
                     transition={{ duration: 0.5, delay: star.delay }}
                     style={{
                       position: "absolute",
-                      top:    (star as any).top,
-                      left:   (star as any).left,
-                      bottom: (star as any).bottom,
-                      right:  (star as any).right,
+                      top:    star.top,
+                      left:   star.left,
+                      bottom: star.bottom,
+                      right:  star.right,
                       fontSize: `${star.size}px`,
                       color: "rgba(255,255,255,0.82)",
                       pointerEvents: "none", display: "block",
@@ -1094,14 +1068,16 @@ export default function HomePage() {
                 <div
                   key={`${p.name}-${i}`}
                   style={{
+                    position: "relative",
                     width: "160px", height: "80px", flexShrink: 0,
-                    display: "flex", alignItems: "center", justifyContent: "center",
                   }}
                 >
-                  <img
+                  <Image
                     src={p.logo}
                     alt={p.name}
-                    style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", mixBlendMode: "multiply" }}
+                    fill
+                    sizes="160px"
+                    style={{ objectFit: "contain", mixBlendMode: "multiply" }}
                   />
                 </div>
               ))}
@@ -1150,18 +1126,18 @@ export default function HomePage() {
             <polygon points="300,110 490,220 490,380 300,490 110,380 110,220" fill="none" stroke={ORANGE} strokeWidth="0.8" />
           </svg>
           {/* Symmetrical floating dots */}
-          {[
+          {([
             { s: 6, t: "22%", l: "8%",  o: 0.20 },
             { s: 4, t: "65%", l: "12%", o: 0.15 },
             { s: 6, t: "22%", r: "8%",  o: 0.20 },
             { s: 4, t: "65%", r: "12%", o: 0.15 },
             { s: 5, t: "45%", l: "5%",  o: 0.12 },
             { s: 5, t: "45%", r: "5%",  o: 0.12 },
-          ].map((dot, k) => (
+          ] as { s: number; t: string; l?: string; r?: string; o: number }[]).map((dot, k) => (
             <div key={k} className="absolute rounded-full" style={{
               width: dot.s, height: dot.s,
               background: ORANGE, opacity: dot.o, top: dot.t,
-              left: (dot as any).l, right: (dot as any).r,
+              left: dot.l, right: dot.r,
             }} />
           ))}
         </div>

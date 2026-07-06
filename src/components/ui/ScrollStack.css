@@ -24,3 +24,26 @@
   box-shadow: none !important;
   height: auto;
 }
+
+/* Below this width, cards can be taller than one screen (stacked content,
+   equipment lists, galleries) — a pinned `position:fixed` card would trap
+   that content off-screen since the scroll budget is only ~1 viewport tall.
+   Fall back to a plain stacked list so everything stays reachable. */
+@media (max-width: 768px) {
+  .scroll-stack-outer {
+    height: auto !important;
+  }
+
+  .scroll-stack-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    height: auto;
+  }
+
+  .scroll-stack-card {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

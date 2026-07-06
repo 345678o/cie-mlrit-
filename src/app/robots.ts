@@ -5,6 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/api/", "/join/apply"],
     },
     sitemap: "https://cie.mlrit.ac.in/sitemap.xml",
   };

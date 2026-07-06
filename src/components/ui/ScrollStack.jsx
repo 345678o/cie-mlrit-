@@ -37,6 +37,11 @@ export default function ScrollStack({
     const last = new Map();
 
     const update = () => {
+      // Below 768px the CSS falls back to a plain stacked list (see
+      // ScrollStack.css) — skip the pin/scale math entirely so it can't
+      // fight the fallback with stale inline styles.
+      if (window.innerWidth <= 768) return;
+
       const scrollTop = window.scrollY;
       const vh = window.innerHeight;
       const stackTopPx = stackTop * vh;

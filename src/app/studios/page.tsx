@@ -1,22 +1,8 @@
-"use client";
-
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import { Palette, Camera, Mic, Monitor, Lightbulb, Building2, Calendar, CheckCircle } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
 import ScrollStack, { ScrollStackItem } from "@/components/ui/ScrollStack";
-
-function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }} className={className}>
-      {children}
-    </motion.div>
-  );
-}
+import FadeIn from "@/components/ui/FadeIn";
 
 const studios = [
   {
@@ -73,19 +59,6 @@ const studios = [
     capacity: "30+ people",
     color: "#D94E1F",
   },
-];
-
-const heroStats = [
-  { value: "6", label: "Studios" },
-  { value: "100+", label: "Equipment Items" },
-  { value: "7AM–11PM", label: "Max Access" },
-  { value: "Free", label: "For CIE Members" },
-];
-
-const heroCards = [
-  { icon: Palette, name: "Design Studio", detail: "iMac Pros · Adobe CC · Figma", hours: "Mon–Sat  9AM–8PM", accent: "rgba(255,94,44,0.15)", color: "#FF5E2C" },
-  { icon: Mic, name: "Media Studio", detail: "Podcast · Video · Soundproofed", hours: "Mon–Sun  8AM–10PM", accent: "rgba(255,133,51,0.15)", color: "#FF7A50" },
-  { icon: Lightbulb, name: "Innovation Lab", detail: "3D Print · Laser Cut · IoT Kits", hours: "Mon–Sat  9AM–9PM", accent: "rgba(229,94,0,0.15)", color: "#D94E1F" },
 ];
 
 export default function StudiosPage() {

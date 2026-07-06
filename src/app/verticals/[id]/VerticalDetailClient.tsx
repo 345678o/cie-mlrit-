@@ -227,7 +227,11 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
                     const vid = (e.currentTarget as HTMLElement).querySelector<HTMLVideoElement>("video");
                     if (vid) vid.muted = true;
                   }}
+                  style={{ height: "clamp(400px, 70vh, 760px)", aspectRatio: "9 / 16", maxWidth: "100%", maxHeight: "80vh", borderRadius: "18px", overflow: "hidden" }}
                 >
+                  {/* fixed aspect-ratio box + object-fit:cover keeps the reel from
+                      distorting when the height clamp and the width cap fight on
+                      narrow screens */}
                   <video
                     src="/reels/cie%20studio%20intro.mp4"
                     autoPlay
@@ -235,7 +239,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
                     loop
                     playsInline
                     preload="auto"
-                    style={{ height: "clamp(400px, 70vh, 760px)", width: "auto", maxWidth: "100%", borderRadius: "18px", display: "block", cursor: "pointer" }}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", cursor: "pointer" }}
                   />
                 </div>
               </FadeIn>

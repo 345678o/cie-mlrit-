@@ -329,7 +329,7 @@ export default function AboutPage() {
             {/* Right — achievement grid */}
             <FadeIn delay={0.15}>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-4">
-                {achievements.map((item, i) => (
+                {achievements.map((item) => (
                   <div
                     key={item.label}
                     className="card-light flex flex-col items-center text-center"

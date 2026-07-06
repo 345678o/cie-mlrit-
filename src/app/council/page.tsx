@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { Link2, Mail, Users, ChevronDown, ChevronUp, Code, Palette, Camera, PenLine, Mic, BarChart2, FileText } from "lucide-react";
+import { Link2, Mail } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/layout/PageHero";
@@ -109,16 +109,6 @@ const studentLeadership: Member[] = [
   { name: "Bhavana Inakollu",      role: "Internal Relations",         dept: "Operations & Finance", year: "2026-27", linkedin: "https://www.linkedin.com/in/bhavana-inakollu-8698a2395", email: "", photo: "/council/OPS/Bhavana .png" },
 ];
 
-
-const teamExpertise: Record<string, string> = {
-  "Tech": "Software Development",
-  "Content": "Writing & Editing",
-  "Creative": "Brand Strategy",
-  "GD — Graphic Design": "Visual Design",
-  "Photography and Media": "Visual Media",
-  "P&S — Public Speaking": "Public Speaking",
-  "Ops — Operations & Finance": "Event Operations",
-};
 
 const teams: TeamSection[] = [
   {
@@ -248,181 +238,6 @@ const deptShort: Record<string, string> = {
   "P&S — Public Speaking": "Promotions & Sponsorship",
   "Ops — Operations & Finance": "Operations & Finance",
 };
-
-function MemberCard({ member, color = "#FF5E2C", expertise = "", index = 0 }: { member: Member; color?: string; expertise?: string; index?: number }) {
-  const initials = member.name.split(" ").map((n) => n[0]).join("").substring(0, 2).toUpperCase();
-  const photoSrc = member.photo
-    ? member.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")
-    : null;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
-      className="group"
-      style={{
-        position: "relative",
-        borderRadius: "28px",
-        overflow: "hidden",
-        background: "#111111",
-        border: "1px solid rgba(255,255,255,0.08)",
-        boxShadow: "0 4px 24px rgba(0,0,0,0.35)",
-        transition: "transform 300ms cubic-bezier(0.16,1,0.3,1), box-shadow 300ms ease",
-        cursor: "default",
-        display: "flex",
-        flexDirection: "column",
-        borderTop: `6px solid ${color}`,
-        aspectRatio: "3 / 4",
-      }}
-      whileHover={{
-        y: -10,
-        scale: 1.02,
-        boxShadow: `0 20px 48px rgba(0,0,0,0.55), 0 0 0 1px ${color}55`,
-        transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
-      }}
-    >
-      {/* Image — 80% of card */}
-      <div style={{ flex: "1 1 80%", overflow: "hidden", position: "relative", background: `${color}18` }}>
-        {photoSrc ? (
-          <Image
-            src={photoSrc}
-            fill
-            draggable={false}
-            alt={member.name}
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            style={{
-              objectFit: "cover",
-              objectPosition: "top center",
-              transition: "transform 300ms cubic-bezier(0.16,1,0.3,1)",
-            }}
-            className="group-hover:[transform:scale(1.05)]"
-          />
-        ) : (
-          <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "48px", fontWeight: 900, color }}>
-            {initials}
-          </div>
-        )}
-      </div>
-
-      {/* Bottom info panel — translucent dark + blur */}
-      <div style={{
-        flex: "0 0 auto",
-        padding: "clamp(10px,3vw,20px)",
-        background: "rgba(10,10,10,0.88)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-      }}>
-        <p style={{ color: "#FFFFFF", fontSize: "clamp(12px,1.5vw,17px)", fontWeight: 700, lineHeight: 1.25, marginBottom: "4px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-          {member.name}
-        </p>
-        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "clamp(11px,1vw,13px)", fontWeight: 500, marginBottom: "10px" }}>
-          {displayRole(member)}
-        </p>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
-          <span style={{
-            fontSize: "11px", fontWeight: 600, padding: "5px 12px", borderRadius: "999px",
-            background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.65)",
-            letterSpacing: "0.02em", whiteSpace: "nowrap",
-          }}>
-            {member.dept}
-          </span>
-          {expertise && (
-            <span style={{
-              fontSize: "11px", fontWeight: 600, padding: "5px 12px", borderRadius: "999px",
-              background: `${color}25`, color,
-              letterSpacing: "0.02em", whiteSpace: "nowrap",
-            }}>
-              {expertise}
-            </span>
-          )}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-const deptIcon: Record<string, React.ComponentType<{ size?: number; style?: React.CSSProperties }>> = {
-  "Tech": Code,
-  "Content": FileText,
-  "Creative": PenLine,
-  "GD — Graphic Design": Palette,
-  "Photography and Media": Camera,
-  "P&S — Public Speaking": Mic,
-  "Ops — Operations & Finance": BarChart2,
-};
-
-function TeamAccordion({ section }: { section: TeamSection }) {
-  const [expanded, setExpanded] = useState(false);
-  const Icon = deptIcon[section.team] ?? Users;
-  const bg = `${section.color}12`;
-  const accordionId = `accordion-${section.team.toLowerCase().replace(/[\s/&]+/g, "-").replace(/[^a-z0-9-]/g, "")}`;
-  return (
-    <FadeIn>
-      <div className="rounded-2xl overflow-hidden card-light">
-        <button onClick={() => setExpanded(!expanded)}
-          aria-expanded={expanded}
-          aria-controls={accordionId}
-          className="w-full flex items-center justify-between p-6 text-left">
-          <div className="flex items-center gap-3 flex-1 min-w-0">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-              style={{ background: bg }}>
-              <Icon size={18} style={{ color: section.color }} />
-            </div>
-            <div className="min-w-0">
-              <div className="flex items-center gap-2 flex-wrap">
-                <h3 className="text-base font-black" style={{ color: "#000000" }}>{deptShort[section.team] ?? section.team}</h3>
-                <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full flex-shrink-0"
-                  style={{ background: bg, color: section.color }}>
-                  {section.members.length} members
-                </span>
-              </div>
-              {!expanded && (
-                <p className="text-xs mt-0.5 truncate" style={{ color: "#6B7280", maxWidth: "480px" }}>
-                  {section.description}
-                </p>
-              )}
-            </div>
-          </div>
-          {expanded
-            ? <ChevronUp size={18} className="flex-shrink-0 ml-2" style={{ color: "#9CA3AF" }} />
-            : <ChevronDown size={18} className="flex-shrink-0 ml-2" style={{ color: "#9CA3AF" }} />}
-        </button>
-        {expanded && (
-          <div id={accordionId}>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8 px-3 sm:px-6 pb-7 pt-2">
-              {[...section.members]
-                // 4th-years (chairpersons) first; within same year, dept lead(s) first; stable for the rest
-                .sort((a, b) => yearRank(a.year) - yearRank(b.year) || leadRank(a.role) - leadRank(b.role))
-                .map((member, i) => (
-                  <MemberCard
-                    key={member.name}
-                    member={member}
-                    color={section.color}
-                    expertise={teamExpertise[section.team] ?? ""}
-                    index={i}
-                  />
-                ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </FadeIn>
-  );
-}
-
-const heroStats = [
-  { value: `${teams.reduce((s, t) => s + t.members.length, 0) + studentLeadership.length}+`, label: "Total Members" },
-  { value: `${teams.length}`, label: "Active Teams" },
-  { value: "2024–25", label: "Current Batch" },
-];
-
-const heroCards = [
-  { icon: Code, label: "Tech", count: `${teams[0].members.length} members`, detail: "Frontend · Backend · AI/ML · Apps", accent: "rgba(255,94,44,0.15)", color: "#FF5E2C" },
-  { icon: Palette, label: "GD — Graphic Design", count: `${teams[2].members.length} members`, detail: "UI/UX · Illustration · Motion · Print", accent: "rgba(255,133,51,0.15)", color: "#FF7A50" },
-  { icon: Mic, label: "P&S — Public Speaking", count: `${teams[4].members.length} members`, detail: "Anchoring · PR · Workshops · Events", accent: "rgba(124,58,237,0.15)", color: "#7C3AED" },
-];
 
 // ── Council Showcase — notched triangle cards ─────────────────────
 const CS_NOTCH = "polygon(0 0, 100% 0, 100% calc(100% - 32px), calc(100% - 32px) 100%, 0 100%)";

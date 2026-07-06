@@ -1,21 +1,8 @@
-"use client";
-
-import { motion, AnimatePresence, useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import { Mail, MapPin, Clock, Send, CheckCircle } from "lucide-react";
+import { Mail, MapPin, Clock } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
-
-function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }} className={className}>
-      {children}
-    </motion.div>
-  );
-}
+import FadeIn from "@/components/ui/FadeIn";
+import ContactForm from "./ContactForm";
 
 function SvgInstagram() {
   return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" strokeWidth="2.5"/></svg>;
@@ -37,63 +24,25 @@ const socials = [
   { Svg: SvgYouTube,   label: "YouTube",    handle: "MLRIT CIE", href: "https://www.youtube.com/@mlritcie",     color: "#FF0000", bg: "rgba(255,0,0,0.10)", hoverBg: "rgba(255,0,0,0.18)" },
 ];
 
-const heroCards = [
-  { icon: Mail, label: "Email us", value: "ciemlrit@mlrit.ac.in", sub: "cie@mlrinstitutions.ac.in", accent: "rgba(255,94,44,0.15)", color: "#FF5E2C" },
-  { icon: MapPin, label: "Visit us", value: "MLRIT Campus, Dundigal", sub: "CIE Block, Hyderabad 500043", accent: "rgba(22,163,74,0.15)", color: "#16A34A" },
-  { icon: Clock, label: "Office hours", value: "Mon–Sat, 9AM–6PM", sub: "Drop in anytime during hours", accent: "rgba(59,130,246,0.15)", color: "#3B82F6" },
-];
+const CARD = {
+  background: "#FFFFFF",
+  borderRadius: "22px",
+  border: "1px solid rgba(0,0,0,0.08)",
+  boxShadow: "0 2px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)",
+} as const;
+
+const labelStyle = {
+  fontFamily: "var(--font-body)",
+  fontSize: "10px",
+  fontWeight: 700,
+  textTransform: "uppercase" as const,
+  letterSpacing: "0.12em",
+  color: "#9CA3AF",
+  marginBottom: "5px",
+  display: "block",
+};
 
 export default function ContactPage() {
-  const [formState, setFormState] = useState({ name: "", email: "", subject: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const newErrors: Record<string, string> = {};
-    if (!formState.name.trim())    newErrors.name    = "Name is required.";
-    if (!formState.email.trim())   newErrors.email   = "Email is required.";
-    if (!formState.subject)        newErrors.subject  = "Please select a subject.";
-    if (!formState.message.trim()) newErrors.message = "Message is required.";
-    if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
-    setErrors({});
-    setLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    setLoading(false);
-    setSubmitted(true);
-  };
-
-  const inputStyle = {
-    background: "#FFFFFF",
-    border: "1.5px solid rgba(0,0,0,0.10)",
-    color: "#000000",
-    borderRadius: "10px",
-    width: "100%",
-    padding: "12px 16px",
-    fontSize: "14px",
-    outline: "none",
-    transition: "border-color 0.2s ease",
-  };
-
-  const CARD = {
-    background: "#FFFFFF",
-    borderRadius: "22px",
-    border: "1px solid rgba(0,0,0,0.08)",
-    boxShadow: "0 2px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)",
-  } as const;
-
-  const labelStyle = {
-    fontFamily: "var(--font-body)",
-    fontSize: "10px",
-    fontWeight: 700,
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.12em",
-    color: "#9CA3AF",
-    marginBottom: "5px",
-    display: "block",
-  };
-
   return (
     <div style={{ background: "#FFFFFF", position: "relative" }}>
       <PageGeometric />
@@ -152,12 +101,8 @@ export default function ContactPage() {
                       icon: Mail, label: "Email",
                       content: (
                         <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                          <a href="mailto:ciemlrit@mlrit.ac.in" style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#111111", textDecoration: "none", lineHeight: 1.55, transition: "color 0.15s" }}
-                            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#E8521A"; }}
-                            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#111111"; }}>ciemlrit@mlrit.ac.in</a>
-                          <a href="mailto:cie@mlrinstitutions.ac.in" style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#111111", textDecoration: "none", lineHeight: 1.55, transition: "color 0.15s" }}
-                            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#E8521A"; }}
-                            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#111111"; }}>cie@mlrinstitutions.ac.in</a>
+                          <a href="mailto:ciemlrit@mlrit.ac.in" className="contact-info-link" style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#111111", textDecoration: "none", lineHeight: 1.55 }}>ciemlrit@mlrit.ac.in</a>
+                          <a href="mailto:cie@mlrinstitutions.ac.in" className="contact-info-link" style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#111111", textDecoration: "none", lineHeight: 1.55 }}>cie@mlrinstitutions.ac.in</a>
                         </div>
                       ),
                     },
@@ -199,9 +144,8 @@ export default function ContactPage() {
                 <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "10px" }}>
                   {socials.map((s) => (
                     <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={`${s.label} · ${s.handle}`}
-                      style={{ width: 34, height: 34, borderRadius: "9px", background: s.bg, color: s.color, display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", transition: "background 0.2s ease, transform 0.15s ease", border: "1px solid rgba(0,0,0,0.05)" }}
-                      onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = s.hoverBg; el.style.transform = "translateY(-2px)"; }}
-                      onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = s.bg; el.style.transform = "translateY(0)"; }}>
+                      className="social-icon-link"
+                      style={{ "--hover-bg": s.hoverBg, width: 34, height: 34, borderRadius: "9px", background: s.bg, color: s.color, display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", border: "1px solid rgba(0,0,0,0.05)" } as React.CSSProperties}>
                       <s.Svg />
                     </a>
                   ))}
@@ -219,115 +163,7 @@ export default function ContactPage() {
                 <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "#6B7280", lineHeight: 1.68, marginBottom: "36px" }}>
                   Fill in the form below and we&apos;ll get back to you as soon as possible.
                 </p>
-
-                {submitted ? (
-                  <div style={{ textAlign: "center", padding: "60px 0" }}>
-                    <div style={{ width: 68, height: 68, borderRadius: "50%", background: "rgba(22,163,74,0.10)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 18px" }}>
-                      <CheckCircle size={34} style={{ color: "#16A34A" }} />
-                    </div>
-                    <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "22px", color: "#000000", marginBottom: "10px" }}>Message Sent!</h3>
-                    <p style={{ fontFamily: "var(--font-body)", color: "#6B7280", fontSize: "15px" }}>Thank you for reaching out. We&apos;ll respond within 24 hours.</p>
-                    <button onClick={() => { setSubmitted(false); setFormState({ name: "", email: "", subject: "", message: "" }); }}
-                      className="btn-secondary-light" style={{ marginTop: "28px" }}>Send Another</button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "24px" }} noValidate>
-                    <div className="grid sm:grid-cols-2 gap-6 items-start">
-                      <div>
-                        <label htmlFor="contact-name" style={labelStyle}>Your Name *</label>
-                        <input id="contact-name" type="text" aria-required="true"
-                          aria-invalid={!!errors.name} aria-describedby={errors.name ? "contact-name-error" : undefined}
-                          value={formState.name} onChange={(e) => { setFormState({ ...formState, name: e.target.value }); setErrors({ ...errors, name: "" }); }}
-                          placeholder="Rahul Sharma" style={{ ...inputStyle, padding: "13px 16px" }}
-                          onFocus={(e) => e.target.style.borderColor = "#E8521A"}
-                          onBlur={(e) => e.target.style.borderColor = errors.name ? "#DC2626" : "rgba(0,0,0,0.10)"} />
-                        <AnimatePresence>
-                          {errors.name && (
-                            <motion.p id="contact-name-error" role="alert" initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-                              style={{ color: "#DC2626", fontSize: "12px", marginTop: "5px", fontFamily: "var(--font-body)" }}>{errors.name}</motion.p>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                      <div>
-                        <label htmlFor="contact-email" style={labelStyle}>Email Address *</label>
-                        <input id="contact-email" type="email" aria-required="true"
-                          aria-invalid={!!errors.email} aria-describedby={errors.email ? "contact-email-error" : undefined}
-                          value={formState.email} onChange={(e) => { setFormState({ ...formState, email: e.target.value }); setErrors({ ...errors, email: "" }); }}
-                          placeholder="rahul@mlrit.ac.in" style={{ ...inputStyle, padding: "13px 16px" }}
-                          onFocus={(e) => e.target.style.borderColor = "#E8521A"}
-                          onBlur={(e) => e.target.style.borderColor = errors.email ? "#DC2626" : "rgba(0,0,0,0.10)"} />
-                        <AnimatePresence>
-                          {errors.email && (
-                            <motion.p id="contact-email-error" role="alert" initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-                              style={{ color: "#DC2626", fontSize: "12px", marginTop: "5px", fontFamily: "var(--font-body)" }}>{errors.email}</motion.p>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="contact-subject" style={labelStyle}>Subject *</label>
-                      <select id="contact-subject" aria-required="true"
-                        aria-invalid={!!errors.subject} aria-describedby={errors.subject ? "contact-subject-error" : undefined}
-                        value={formState.subject} onChange={(e) => { setFormState({ ...formState, subject: e.target.value }); setErrors({ ...errors, subject: "" }); }}
-                        style={{ ...inputStyle, padding: "13px 16px", appearance: "none" as const }}
-                        onFocus={(e) => e.target.style.borderColor = "#E8521A"}
-                        onBlur={(e) => e.target.style.borderColor = errors.subject ? "#DC2626" : "rgba(0,0,0,0.10)"}>
-                        <option value="" disabled>Select a topic...</option>
-                        <option value="join-cie">Joining CIE</option>
-                        <option value="studio-booking">Studio Booking</option>
-                        <option value="event">Event Inquiry</option>
-                        <option value="sponsorship">Sponsorship / Partnership</option>
-                        <option value="media">Media / Press</option>
-                        <option value="general">General Inquiry</option>
-                      </select>
-                      <AnimatePresence>
-                        {errors.subject && (
-                          <motion.p id="contact-subject-error" role="alert" initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-                            style={{ color: "#DC2626", fontSize: "12px", marginTop: "5px", fontFamily: "var(--font-body)" }}>{errors.subject}</motion.p>
-                        )}
-                      </AnimatePresence>
-                    </div>
-
-                    <div>
-                      <label htmlFor="contact-message" style={labelStyle}>Message *</label>
-                      <textarea id="contact-message" rows={7} aria-required="true"
-                        aria-invalid={!!errors.message} aria-describedby={errors.message ? "contact-message-error" : undefined}
-                        value={formState.message} onChange={(e) => { setFormState({ ...formState, message: e.target.value }); setErrors({ ...errors, message: "" }); }}
-                        placeholder="Tell us about your idea, question, or how we can help..."
-                        style={{ ...inputStyle, padding: "13px 16px", resize: "none" as const }}
-                        onFocus={(e) => e.target.style.borderColor = "#E8521A"}
-                        onBlur={(e) => e.target.style.borderColor = errors.message ? "#DC2626" : "rgba(0,0,0,0.10)"} />
-                      <AnimatePresence>
-                        {errors.message && (
-                          <motion.p id="contact-message-error" role="alert" initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-                            style={{ color: "#DC2626", fontSize: "12px", marginTop: "5px", fontFamily: "var(--font-body)" }}>{errors.message}</motion.p>
-                        )}
-                      </AnimatePresence>
-                    </div>
-
-                    <motion.button
-                      type="submit" disabled={loading}
-                      whileHover={!loading ? { y: -2 } : {}} whileTap={!loading ? { scale: 0.98 } : {}}
-                      style={{
-                        display: "flex", alignItems: "center", justifyContent: "center", gap: "9px",
-                        width: "100%", padding: "16px 32px", borderRadius: "12px",
-                        background: loading ? "rgba(232,82,26,0.55)" : "#E8521A",
-                        color: "#FFFFFF", fontSize: "15px", fontWeight: 700, letterSpacing: "0.01em",
-                        border: "none", cursor: loading ? "not-allowed" : "pointer",
-                        boxShadow: loading ? "none" : "0 4px 20px rgba(232,82,26,0.32)",
-                        transition: "background 0.2s ease, box-shadow 0.2s ease",
-                        fontFamily: "var(--font-body)",
-                      }}
-                      onMouseEnter={(e) => { if (!loading) (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 28px rgba(232,82,26,0.44)"; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = loading ? "none" : "0 4px 20px rgba(232,82,26,0.32)"; }}
-                    >
-                      {loading
-                        ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Sending...</>
-                        : <><Send size={16} />Send Message</>}
-                    </motion.button>
-                  </form>
-                )}
+                <ContactForm />
               </div>
             </FadeIn>
           </div>
@@ -335,6 +171,13 @@ export default function ContactPage() {
 
         <style>{`
           @media (max-width: 1023px) { .contact-grid { grid-template-columns: 1fr !important; } }
+          .contact-info-link { transition: color 0.15s; }
+          .contact-info-link:hover { color: #E8521A; }
+          .social-icon-link { transition: background 0.2s ease, transform 0.15s ease; }
+          .social-icon-link:hover { background: var(--hover-bg); transform: translateY(-2px); }
+          .maps-cta-link { transition: transform 0.15s ease, box-shadow 0.2s ease; }
+          .maps-cta-link:hover { transform: translateY(-2px); }
+          .maps-cta-link:active { transform: scale(0.97); }
         `}</style>
       </section>
 
@@ -360,15 +203,15 @@ export default function ContactPage() {
               />
             </div>
             <div style={{ marginTop: "16px", display: "flex", justifyContent: "flex-end" }}>
-              <motion.a
+              <a
                 href="https://maps.app.goo.gl/Ls9rSe1kdWnjahzz6"
                 target="_blank" rel="noopener noreferrer"
-                whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}
+                className="maps-cta-link"
                 style={{ display: "inline-flex", alignItems: "center", gap: "7px", padding: "10px 20px", borderRadius: "10px", background: "#E8521A", color: "#FFFFFF", textDecoration: "none", fontSize: "13px", fontWeight: 700, fontFamily: "var(--font-body)", boxShadow: "0 3px 14px rgba(232,82,26,0.26)" }}>
                 <MapPin size={13} />
                 Open in Google Maps
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-              </motion.a>
+              </a>
             </div>
           </FadeIn>
         </div>

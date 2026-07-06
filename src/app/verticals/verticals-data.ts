@@ -284,60 +284,6 @@ export const VERTICALS: Vertical[] = [
       { step: "V",   title: "Start-up Mentoring & Registration",               desc: "Venture Growth Strategies" },
     ],
   },
-  /* Core Unit for Events — not counted as a vertical, kept for reference
-  {
-    id: "events",
-    abbr: "CUE",
-    name: "Core Unit for Events",
-    tagline: "Make It Happen",
-    color: "#D97706",
-    textColor: "#78350f",
-    gradient: "linear-gradient(145deg, #78350f 0%, #b45309 55%, #d97706 100%)",
-    lightBg: "rgba(217,119,6,0.07)",
-    border: "rgba(217,119,6,0.22)",
-    shortDesc:
-      "Plans, coordinates, and executes CIE events by managing logistics, operations, promotions, content, design, and technical support to ensure successful event delivery.",
-    overview: [
-      "Plans, coordinates, and executes CIE events by managing logistics, operations, promotions, content, design, and technical support to ensure successful event delivery.",
-      "The Events vertical is responsible for the full lifecycle of every CIE event — from concept and design to logistics, production, and post-event documentation. With 50+ events per year, it is the most visible vertical at CIE.",
-      "The team runs events across five formats: hackathons, Demo Days, speaker series, workshops, and large-scale summits. Each format requires distinct skills — and the Events team develops them all.",
-      "Beyond execution, the vertical drives community building at CIE. Events are where students meet mentors, where teams form, where ideas get challenged, and where CIE's culture gets defined.",
-    ],
-    quote: "An event isn't a calendar entry — it's a moment that changes trajectories.",
-    stats: [
-      { value: "50+", label: "Events Per Year" },
-      { value: "5K+", label: "Total Attendees" },
-      { value: "3", label: "National Events" },
-    ],
-    roles: [
-      { title: "Event Lead", desc: "Owns the event end-to-end — concept, planning, execution, and post-event review." },
-      { title: "Logistics Coordinator", desc: "Manages venue, equipment, catering, registrations, and day-of operations." },
-      { title: "Creative & Branding", desc: "Designs all event visuals — posters, social assets, stage design, and documentation." },
-      { title: "Tech & AV", desc: "Sets up and operates all technical infrastructure — live streaming, AV, and digital tools." },
-      { title: "Marketing & Outreach", desc: "Drives awareness and attendance — social media, email campaigns, and cross-college promotions." },
-    ],
-    projects: [
-      { name: "Hustle Mania", desc: "CIE's flagship 24-hour entrepreneurship hackathon — 200+ participants, 40+ teams, live judging.", status: "Active" },
-      { name: "B2B — Business to Brand", desc: "Brand strategy competition where teams develop a complete brand identity for a real brief.", status: "Active" },
-      { name: "CIE Speaker Series", desc: "Monthly speaker sessions bringing founders, VCs, and industry leaders to MLRIT campus.", status: "Active" },
-      { name: "Annual Innovation Summit", desc: "CIE's largest event — a full-day summit featuring keynotes, panels, demos, and awards.", status: "Upcoming" },
-    ],
-    events: [
-      { name: "Hustle Mania", type: "Annual", desc: "24-hour startup hackathon — CIE's biggest and most anticipated event of the year." },
-      { name: "Demo Day", type: "Quarterly", desc: "Student teams pitch their products and startups to a live audience of investors and alumni." },
-      { name: "Speaker Series", type: "Monthly", desc: "Curated talks from founders, investors, and practitioners — online and on-campus." },
-      { name: "Workshop Carnival", type: "Semester", desc: "Multi-day skill workshop series across tech, design, business, and communication." },
-    ],
-    achievements: [
-      "50+ events executed in the 2024–25 academic year",
-      "5,000+ total attendees across all events",
-      "3 national-level events organized",
-      "10+ industry speakers hosted on campus",
-    ],
-    applyInfo:
-      "The Events team recruits each semester. Roles span creative, technical, logistics, and marketing. If you enjoy bringing ideas to life and working under pressure, apply during the next recruitment cycle.",
-  },
-  */
   {
     id: "inventory",
     abbr: "INV",

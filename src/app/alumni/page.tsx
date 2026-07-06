@@ -60,51 +60,6 @@ const alumni: Alumni[] = [
     quote: "Beautiful friendships, rivalries which never seem to die, competitive mad people whose intellect is next to none amongst each other. Learned how to live and also learned how to survive when I can't live. Skills that I could've never learnt if I had sat in between 60 sweaty people in a 4 by 4 room. Everyone who took part in the club found something or the other, a hobby to live for, friends that never detach, a passion for one particular subject (not from the text books), a commitment which engages us every single day, and most of all........the love which not all humans are capable of understanding. So if you are in the club, you'd understand the last sentence. Have a great journey.",
     tags: ["Tech", "Hardware"],
   },
-  {
-    name: "Placeholder Name",
-    batch: "2022–23",
-    role: "Product Manager",
-    company: "Company Name",
-    location: "Bengaluru",
-    quote: "Being part of CIE wasn't just about skills — it was about mindset. I learned how to lead, fail fast, and iterate. That's priceless.",
-    tags: ["Operations", "Leadership"],
-  },
-  {
-    name: "Placeholder Name",
-    batch: "2021–22",
-    role: "Founder & CEO",
-    company: "Startup Name",
-    location: "Mumbai",
-    quote: "My startup idea was born in a CIE hackathon. The mentorship and community here turned a rough idea into a funded company.",
-    tags: ["Entrepreneurship"],
-  },
-  {
-    name: "Placeholder Name",
-    batch: "2021–22",
-    role: "UX Designer",
-    company: "Company Name",
-    location: "Pune",
-    quote: "CIE's creative team taught me that design is problem-solving with empathy. I carry that principle into every project I take on.",
-    tags: ["Design", "Creative"],
-  },
-  {
-    name: "Placeholder Name",
-    batch: "2023–24",
-    role: "Data Scientist",
-    company: "Company Name",
-    location: "Hyderabad",
-    quote: "The real-world projects and cross-team collaborations at CIE prepared me for the corporate world better than any classroom ever could.",
-    tags: ["Tech", "AI/ML"],
-  },
-  {
-    name: "Placeholder Name",
-    batch: "2023–24",
-    role: "Marketing Lead",
-    company: "Company Name",
-    location: "Delhi",
-    quote: "From anchoring events to building campaigns, CIE's Promotions team gave me the stage. I haven't stopped performing since.",
-    tags: ["Marketing", "P&S"],
-  },
 ];
 
 const BATCHES = ["All", ...Array.from(new Set(alumni.map((a) => a.batch))).sort().reverse()];
@@ -114,9 +69,7 @@ const ORANGE = "#FF5E2C";
 const QUOTE_CLAMP_THRESHOLD = 220;
 
 function AlumniCard({ member, index }: { member: Alumni; index: number }) {
-  const initials = member.name === "Placeholder Name"
-    ? "?"
-    : member.name.split(" ").map((n) => n[0]).join("").substring(0, 2).toUpperCase();
+  const initials = member.name.split(" ").map((n) => n[0]).join("").substring(0, 2).toUpperCase();
   const isLong = member.quote.length > QUOTE_CLAMP_THRESHOLD;
   const [expanded, setExpanded] = useState(false);
 

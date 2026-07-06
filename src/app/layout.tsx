@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, Inter, Caveat, Sora } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -82,6 +82,27 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0B0B0F",
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  name: "MLRIT CIE — Centre for Innovation & Entrepreneurship",
+  alternateName: "CIE MLRIT",
+  url: "https://cie.mlrit.ac.in",
+  logo: "https://cie.mlrit.ac.in/og-image.png",
+  description:
+    "The official innovation and entrepreneurship hub of MLRIT, empowering students to ideate, build, and launch impactful solutions.",
+  parentOrganization: {
+    "@type": "CollegeOrUniversity",
+    name: "Marri Laxman Reddy Institute of Technology and Management",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -90,6 +111,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${manrope.variable} ${inter.variable} ${caveat.variable} ${rockstar.variable} ${sora.variable} scroll-smooth`} data-scroll-behavior="smooth">
       <body className="min-h-screen flex flex-col antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
