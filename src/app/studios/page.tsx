@@ -1,4 +1,4 @@
-import { Palette, Camera, Mic, Monitor, Lightbulb, Building2, Calendar, CheckCircle } from "lucide-react";
+import { Palette, Camera, Mic, Monitor, Lightbulb, Building2, Calendar, CheckCircle, Rocket, HelpCircle, BookOpen } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
 import ScrollStack, { ScrollStackItem } from "@/components/ui/ScrollStack";
@@ -60,6 +60,34 @@ const studios = [
     capacity: "30+ people",
     color: "#D94E1F",
   },
+];
+
+const contentCategories = [
+  {
+    icon: Rocket,
+    title: "Micro Project Showcase",
+    frequency: "Weekly · Saturday",
+    desc: "Highlights a student micro project each week — problem statement, solution, tech stack, live demo, and the team behind it.",
+  },
+  {
+    icon: HelpCircle,
+    title: "Technical Quiz & Interaction",
+    frequency: "Twice a month",
+    desc: "Short, fun technical quizzes across programming, electronics, AI, and engineering to drive comments, shares, and engagement.",
+  },
+  {
+    icon: BookOpen,
+    title: "Information & Learning",
+    frequency: "Twice a month",
+    desc: "Quick, practical reels on learning platforms, AI tools, internships, scholarships, and career guidance for students.",
+  },
+];
+
+const monthlyDeliverables = [
+  { n: "4", label: "Micro Project Reels" },
+  { n: "2", label: "Information Reels" },
+  { n: "2", label: "Quiz Reels" },
+  { n: "8", label: "Total Reels / Month" },
 ];
 
 export default function StudiosPage() {
@@ -174,6 +202,54 @@ export default function StudiosPage() {
               </div>
             </FadeIn>
           </div>
+        </div>
+      </section>
+
+      {/* Content Strategy */}
+      <section style={{ background: "#F8F9FA", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(48px,8vw,96px)" }}>
+        <div className="page-container">
+          <FadeIn className="text-center">
+            <div style={{ marginBottom: "clamp(40px,5vw,56px)" }}>
+              <span className="section-tag">Content Strategy</span>
+              <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(24px,4vw,38px)", lineHeight: 1.15, marginTop: "16px", marginBottom: "16px" }}>
+                Two Reels a Week, All Semester
+              </h2>
+              <p style={{ color: "#6B7280", fontSize: "clamp(14px,1.3vw,16px)", lineHeight: 1.72, maxWidth: "640px", marginLeft: "auto", marginRight: "auto" }}>
+                CIE Studios runs a consistent Instagram content plan to showcase student projects, drive engagement,
+                and build the club&apos;s digital presence — eight reels a month, built around three formats.
+              </p>
+            </div>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6" style={{ marginBottom: "clamp(40px,5vw,56px)" }}>
+            {contentCategories.map((cat) => (
+              <FadeIn key={cat.title}>
+                <div className="card-light" style={{ padding: "clamp(24px,3vw,32px)", height: "100%" }}>
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: "rgba(255,94,44,0.1)", marginBottom: "20px" }}>
+                    <cat.icon size={22} style={{ color: "#FF5E2C" }} />
+                  </div>
+                  <div className="flex items-center gap-2 flex-wrap" style={{ marginBottom: "10px" }}>
+                    <h3 className="font-black" style={{ color: "#000000", fontSize: "17px" }}>{cat.title}</h3>
+                    <span style={{ fontSize: "10.5px", fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: "#FF5E2C", background: "rgba(255,94,44,0.1)", padding: "3px 10px", borderRadius: "999px" }}>
+                      {cat.frequency}
+                    </span>
+                  </div>
+                  <p style={{ color: "#6B7280", fontSize: "14px", lineHeight: 1.7 }}>{cat.desc}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+
+          <FadeIn>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {monthlyDeliverables.map((d) => (
+                <div key={d.label} className="card-light text-center" style={{ padding: "clamp(18px,2.5vw,24px)" }}>
+                  <div className="font-black" style={{ color: "#FF5E2C", fontSize: "clamp(26px,3.5vw,34px)", lineHeight: 1 }}>{d.n}</div>
+                  <div style={{ color: "#6B7280", fontSize: "12px", marginTop: "6px", fontWeight: 500 }}>{d.label}</div>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
         </div>
       </section>
 
