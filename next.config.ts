@@ -2,10 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 828, 1024, 1280, 1536],
-    imageSizes: [200, 280, 320, 400, 600],
-    minimumCacheTTL: 604800,
+    // Next's built-in optimizer needs `sharp`, which can't run on Cloudflare
+    // Workers. Serve images as-is instead of paying for Cloudflare Images.
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

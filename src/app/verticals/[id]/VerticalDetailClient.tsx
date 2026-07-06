@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -58,6 +58,18 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 export default function VerticalDetailClient({ vertical: v }: { vertical: Vertical }) {
   const Icon = ICONS[v.id] ?? Boxes;
+  const reelVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // The `autoPlay` attribute alone is unreliable for a client-rendered
+    // <video> — it can lose the race with hydration and silently stay
+    // paused (rendering as a solid black box). Force it explicitly, same
+    // fix already used for the gallery page's slide videos.
+    const vid = reelVideoRef.current;
+    if (!vid) return;
+    vid.muted = true;
+    vid.play().catch(() => {});
+  }, [v.id]);
 
   return (
     <div style={{ background: "#FFFFFF", position: "relative" }}>
@@ -233,6 +245,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
                       distorting when the height clamp and the width cap fight on
                       narrow screens */}
                   <video
+                    ref={reelVideoRef}
                     src="/reels/cie%20studio%20intro.mp4"
                     autoPlay
                     muted
