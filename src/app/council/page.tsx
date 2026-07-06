@@ -502,7 +502,7 @@ export default function CouncilPage() {
         scriptText="— the people behind the mission"
         description="CIE is run by students who take responsibility for different parts of the organisation — technical work, projects, events, design, content, photography, promotions, sponsorship, operations, and finance. The Council works together to plan activities, guide teams, solve problems, and help ideas move from discussion to execution."
         stats={[
-          { value: "2024–25", label: "Current Batch" },
+          { value: "2026–27", label: "Current Batch" },
         ]}
         watermark="TEAM"
       />

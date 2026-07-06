@@ -101,14 +101,6 @@ const ourStory = [
   "The people change. The ideas evolve. But the purpose remains the same — to help students learn, build, and grow together.",
 ];
 
-const achievements = [
-  { number: "50+",   label: "Active Projects"   },
-  { number: "20+",   label: "Startup Launches"  },
-  { number: "₹50L+", label: "Funding Raised"    },
-  { number: "100+",  label: "Industry Partners" },
-  { number: "5+",    label: "Awards Won"        },
-];
-
 const visionMission = [
   {
     icon: Eye,
@@ -309,50 +301,19 @@ export default function AboutPage() {
       {/* ── Our Story ─────────────────────────────────────────────── */}
       <section style={{ background: BG_WHITE, ...SECTION_PY }}>
         <div className="page-container">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
-
-            {/* Left — text */}
-            <FadeIn>
-              <SectionHeader
-                tag="How It Started"
-                heading="Our Story"
-              />
-              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                {ourStory.map((line, i) => (
-                  <p key={i} style={{ fontSize: "clamp(15px,1.4vw,17px)", lineHeight: 1.8, color: T_BODY }}>
-                    {line}
-                  </p>
-                ))}
-              </div>
-            </FadeIn>
-
-            {/* Right — achievement grid */}
-            <FadeIn delay={0.15}>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-4">
-                {achievements.map((item) => (
-                  <div
-                    key={item.label}
-                    className="card-light flex flex-col items-center text-center"
-                    style={{ padding: "clamp(18px,3vw,28px) clamp(14px,2vw,20px)", borderRadius: "14px" }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: "var(--font-heading)", fontWeight: 900,
-                        fontSize: "clamp(24px,3.5vw,32px)", lineHeight: 1,
-                        color: ORANGE, letterSpacing: "-0.03em",
-                      }}
-                    >
-                      {item.number}
-                    </span>
-                    <p style={{ fontSize: "12.5px", color: T_MUTED, marginTop: "6px", fontWeight: 500 }}>
-                      {item.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </FadeIn>
-
-          </div>
+          <FadeIn>
+            <SectionHeader
+              tag="How It Started"
+              heading="Our Story"
+            />
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "820px" }}>
+              {ourStory.map((line, i) => (
+                <p key={i} style={{ fontSize: "clamp(15px,1.4vw,17px)", lineHeight: 1.8, color: T_BODY }}>
+                  {line}
+                </p>
+              ))}
+            </div>
+          </FadeIn>
         </div>
       </section>
 
