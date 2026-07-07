@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Verticals | MLRIT CIE",
     description: "Explore CIE MLRIT's verticals — Media & PR, Studios, Product Development, Startup Cohort, Events, and Inventory — driving student innovation across disciplines.",
-    url: "https://cie.mlrit.ac.in/verticals",
+    url: "https://mlritcie.in/verticals",
   },
 };
 

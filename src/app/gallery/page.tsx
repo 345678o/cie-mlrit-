@@ -59,8 +59,8 @@ const GRID = [
   { label: "Equinox E-Summit",  img: "/events/poster/equniox.png",     grad: "linear-gradient(145deg,#0e0618,#2d1057,#6d28d9)", cs: 2, rs: 2 },
   { label: "Workshop Carnival", img: "/events/poster/wc%202.0.png",    grad: "linear-gradient(145deg,#060c1e,#0d1f3c,#1d4ed8)", cs: 1, rs: 1 },
   { label: "MetaLoop Hackathon",img: "/events/poster/metaloop.png",    grad: "linear-gradient(145deg,#1c1917,#2d1b69,#7c3aed)", cs: 1, rs: 1 },
-  { label: "Innovation Lab",    grad: "linear-gradient(145deg,#0f0a1e,#2d1570,#4c1d95)",                                       cs: 1, rs: 2 },
-  { label: "GI Mahotsav",       img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00424.JPG", grad: "linear-gradient(145deg,#060e0a,#14532d,#16a34a)", cs: 1, rs: 1 },
+  { label: "Innovation Lab",    img: "/gallery/inventron-signage.jpg", grad: "linear-gradient(145deg,#0f0a1e,#2d1570,#4c1d95)", cs: 1, rs: 2 },
+  { label: "GI Mahotsav",       img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00856.JPG", grad: "linear-gradient(145deg,#060e0a,#14532d,#16a34a)", cs: 1, rs: 1 },
   { label: "B2B Summit",        imgs: [
       "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4790.JPG",
       "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8229.JPG",
@@ -70,6 +70,9 @@ const GRID = [
       "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/IMG_3101.JPG",
     ], grad: "linear-gradient(145deg,#0d0803,#3b1a06,#c2410c)", cs: 1, rs: 1 },
   { label: "GI Heritage",       img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00552.JPG", grad: "linear-gradient(145deg,#060e0a,#14532d,#16a34a)", cs: 1, rs: 1 },
+  { label: "Campus Welcome",    img: "/gallery/welcome-gate.jpg", grad: "linear-gradient(145deg,#0c1a2e,#164e63,#0891b2)", cs: 1, rs: 1 },
+  { label: "Lantern Walkway",   img: "/gallery/lantern-walkway.jpg", grad: "linear-gradient(145deg,#1e0a2e,#6d28d9,#a855f7)", cs: 1, rs: 1 },
+  { label: "Innovation Challenge", img: "/gallery/innovation-challenge.jpg", grad: "linear-gradient(145deg,#1c1917,#2d1b69,#7c3aed)", cs: 1, rs: 1 },
 ];
 
 function FeatureSlideshow({ imgs, alt }: { imgs: string[]; alt: string }) {
@@ -701,7 +704,7 @@ export default function GalleryPage() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(4, 1fr)",
-              gridTemplateRows: "repeat(3, 280px)",
+              gridTemplateRows: "repeat(4, 280px)",
               gap: "14px",
             }}
           >
@@ -748,7 +751,7 @@ export default function GalleryPage() {
         {/* Grid responsive overrides */}
         <style>{`
           @media (max-width: 900px) {
-            .masonry-grid { grid-template-columns: repeat(2,1fr) !important; grid-template-rows: repeat(5,220px) !important; }
+            .masonry-grid { grid-template-columns: repeat(2,1fr) !important; grid-template-rows: repeat(6,220px) !important; }
             .masonry-grid > div { grid-column: span 1 !important; grid-row: span 1 !important; }
           }
           @media (max-width: 560px) {

@@ -45,7 +45,7 @@ const rockstar = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cie.mlrit.ac.in"),
+  metadataBase: new URL("https://mlritcie.in"),
   title: {
     default: "MLRIT CIE — Centre for Innovation & Entrepreneurship",
     template: "%s | MLRIT CIE",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     title: "MLRIT CIE — Centre for Innovation & Entrepreneurship",
     description: "Transforming Ideas into Innovation. Innovation into Impact.",
     type: "website",
-    url: "https://cie.mlrit.ac.in",
+    url: "https://mlritcie.in",
     siteName: "MLRIT CIE",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "MLRIT CIE" }],
   },
@@ -93,8 +93,8 @@ const jsonLd = {
   "@type": "EducationalOrganization",
   name: "MLRIT CIE — Centre for Innovation & Entrepreneurship",
   alternateName: "CIE MLRIT",
-  url: "https://cie.mlrit.ac.in",
-  logo: "https://cie.mlrit.ac.in/og-image.png",
+  url: "https://mlritcie.in",
+  logo: "https://mlritcie.in/og-image.png",
   description:
     "The official innovation and entrepreneurship hub of MLRIT, empowering students to ideate, build, and launch impactful solutions.",
   parentOrganization: {

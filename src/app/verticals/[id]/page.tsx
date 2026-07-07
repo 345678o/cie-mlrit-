@@ -23,7 +23,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description: vertical.shortDesc,
-      url: `https://cie.mlrit.ac.in/verticals/${vertical.id}`,
+      url: `https://mlritcie.in/verticals/${vertical.id}`,
     },
   };
 }

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/join/apply"],
     },
-    sitemap: "https://cie.mlrit.ac.in/sitemap.xml",
+    sitemap: "https://mlritcie.in/sitemap.xml",
   };
 }

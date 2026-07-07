@@ -182,7 +182,7 @@ function buildEventsJsonLd(events: EventData[]) {
         startDate: ev.dateTime,
         eventStatus: "https://schema.org/EventScheduled",
         eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-        image: opener?.img ? `https://cie.mlrit.ac.in${opener.img}` : undefined,
+        image: opener?.img ? `https://mlritcie.in${opener.img}` : undefined,
         location: {
           "@type": "Place",
           name: "MLR Institute of Technology, CIE Block",
@@ -198,7 +198,7 @@ function buildEventsJsonLd(events: EventData[]) {
         organizer: {
           "@type": "Organization",
           name: "MLRIT CIE",
-          url: "https://cie.mlrit.ac.in",
+          url: "https://mlritcie.in",
         },
       };
     }),

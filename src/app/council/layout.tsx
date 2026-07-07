@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Council | MLRIT CIE",
     description: "Meet the MLRIT CIE student council — the team of passionate innovators, designers, developers, and leaders driving CIE forward.",
-    url: "https://cie.mlrit.ac.in/council",
+    url: "https://mlritcie.in/council",
   },
 };
 

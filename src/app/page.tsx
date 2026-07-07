@@ -361,7 +361,7 @@ export default function HomePage() {
               </div>
 
               {/* ── RIGHT: Polaroid collage + CIE brand badge ── */}
-              <div className="hidden lg:block" style={{ position: "relative", height: "560px" }}>
+              <div className="hidden lg:block" style={{ position: "relative", height: "660px" }}>
 
                 {/* Polaroid 1 — large, tilted left */}
                 <motion.div
@@ -377,11 +377,19 @@ export default function HomePage() {
                 >
                   <div style={{
                     width: "100%", height: "100%", borderRadius: "2px",
-                    background: "linear-gradient(145deg, #0c0c1d, #1e3a5f 50%, #0284c7)",
+                    position: "relative", overflow: "hidden",
                     display: "flex", flexDirection: "column" as const,
                     alignItems: "center", justifyContent: "flex-end", padding: "14px",
                   }}>
-                    <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "rgba(255,255,255,0.38)" }}>
+                    <Image
+                      src="/gallery/innovation-challenge.jpg"
+                      alt="Innovation Challenge"
+                      fill
+                      sizes="212px"
+                      style={{ objectFit: "cover", zIndex: 0 }}
+                    />
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%)", zIndex: 1 }} />
+                    <span style={{ position: "relative", zIndex: 2, fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "rgba(255,255,255,0.85)" }}>
                       INNOVATION LAB
                     </span>
                   </div>
@@ -405,11 +413,19 @@ export default function HomePage() {
                 >
                   <div style={{
                     width: "100%", height: "100%", borderRadius: "2px",
-                    background: "linear-gradient(145deg, #052e16, #059669 60%, #34d399)",
+                    position: "relative", overflow: "hidden",
                     display: "flex", flexDirection: "column" as const,
                     alignItems: "center", justifyContent: "flex-end", padding: "12px",
                   }}>
-                    <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "rgba(255,255,255,0.38)" }}>
+                    <Image
+                      src="/gallery/startup-lab.jpg"
+                      alt="Startup Lab"
+                      fill
+                      sizes="178px"
+                      style={{ objectFit: "cover", zIndex: 0 }}
+                    />
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%)", zIndex: 1 }} />
+                    <span style={{ position: "relative", zIndex: 2, fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "rgba(255,255,255,0.85)" }}>
                       STARTUP LAB
                     </span>
                   </div>
@@ -424,48 +440,25 @@ export default function HomePage() {
                   initial={{ opacity: 0, rotate: 8, y: 32 }} animate={{ opacity: 1, rotate: 4, y: 0 }}
                   transition={{ duration: 0.9, delay: 0.58, ease: [0.16, 1, 0.3, 1] }}
                   style={{
-                    position: "absolute", bottom: "132px", left: "30%",
-                    width: "144px", height: "144px", background: "#FFFFFF",
-                    borderRadius: "3px", padding: "8px 8px 30px",
+                    position: "absolute", top: "310px", left: "calc(50% - 160px)",
+                    width: "320px", height: "320px", background: "#FFFFFF",
+                    borderRadius: "3px", padding: "14px 14px 44px",
                     boxShadow: "0 16px 44px rgba(0,0,0,0.22)", zIndex: 5,
                   }}
                 >
                   <div style={{
                     width: "100%", height: "100%", borderRadius: "2px",
-                    background: "linear-gradient(145deg, #1e1b4b, #7c3aed 60%, #a78bfa)",
+                    position: "relative", overflow: "hidden",
                     display: "flex", alignItems: "center", justifyContent: "center",
                   }}>
-                    <span style={{ fontSize: "28px" }}>✨</span>
+                    <Image
+                      src="/gallery/innovation-challenge-group.jpg"
+                      alt="Innovation Challenge"
+                      fill
+                      sizes="320px"
+                      style={{ objectFit: "cover" }}
+                    />
                   </div>
-                </motion.div>
-
-                {/* Stats mini card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 26, scale: 0.92 }} animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.7, delay: 0.72 }}
-                  style={{
-                    position: "absolute", bottom: "50px", right: "2%",
-                    background: BG_CREAM, borderRadius: "18px",
-                    padding: "18px 20px", width: "164px",
-                    boxShadow: "0 14px 36px rgba(0,0,0,0.18)", zIndex: 6,
-                  }}
-                >
-                  <p style={{
-                    fontFamily: "var(--font-body)", fontSize: "9.5px", fontWeight: 700,
-                    letterSpacing: "0.14em", textTransform: "uppercase" as const,
-                    color: ORANGE, marginBottom: "12px",
-                  }}>By the numbers</p>
-                  {[
-                    { n: "1000+", l: "Students" },
-                    { n: "100+",  l: "Events"   },
-                    { n: "50+",   l: "Projects" },
-                  ].map(({ n, l }) => (
-                    <div key={l} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
-                      <span style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "18px", color: T_PRIMARY, lineHeight: 1 }}>{n}</span>
-                      <span style={{ fontFamily: "var(--font-body)", fontSize: "11px", color: T_MUTED }}>{l}</span>
-                    </div>
-                  ))}
-                  <div style={{ height: "1px", background: "rgba(0,0,0,0.08)", margin: "10px 0" }} />
                 </motion.div>
 
                 {/* Star ✦ decorations */}

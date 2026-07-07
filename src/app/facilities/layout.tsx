@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Facilities | MLRIT CIE",
     description: "Explore MLRIT CIE facilities — NVIDIA-powered workstations, CNC routers, 3D printers, laser cutters, and a fully equipped innovation lab.",
-    url: "https://cie.mlrit.ac.in/facilities",
+    url: "https://mlritcie.in/facilities",
   },
 };
 

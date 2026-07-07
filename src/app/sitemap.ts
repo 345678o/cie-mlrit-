@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getAllVerticalIds } from "@/app/verticals/verticals-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://cie.mlrit.ac.in";
+  const base = "https://mlritcie.in";
   const now = new Date();
 
   const routes = [
