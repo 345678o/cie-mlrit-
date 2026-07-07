@@ -21,8 +21,8 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
 type Alumni = {
   name: string;
   batch: string;
-  role: string;
-  company: string;
+  role?: string;
+  company?: string;
   location?: string;
   photo?: string;
   linkedin?: string;
@@ -61,6 +61,31 @@ const alumni: Alumni[] = [
     linkedin: "https://www.linkedin.com/in/dheera-sameer-nagavarapu-139429256",
     quote: "Beautiful friendships, rivalries which never seem to die, competitive mad people whose intellect is next to none amongst each other. Learned how to live and also learned how to survive when I can't live. Skills that I could've never learnt if I had sat in between 60 sweaty people in a 4 by 4 room. Everyone who took part in the club found something or the other, a hobby to live for, friends that never detach, a passion for one particular subject (not from the text books), a commitment which engages us every single day, and most of all........the love which not all humans are capable of understanding. So if you are in the club, you'd understand the last sentence. Have a great journey.",
     tags: ["Tech", "Hardware"],
+  },
+  {
+    name: "Harsha Vardhan Reddy",
+    batch: "2024–25",
+    role: "Supply Chain Engineer",
+    company: "Safran Electrical & Power",
+    photo: "/alumni/Harsha.png",
+    linkedin: "https://www.linkedin.com/in/harsha-vardhan-t-14b027165/",
+    quote: "If someone had told me on my first day at CIE where this journey would take me, I probably wouldn't have believed them. I walked into CIE as a Technical Member, somehow found my way into photography, and before I knew it, I was leading the club as Chairperson. Looking back, the roles don't matter as much as the journey. From an introvert who avoided the spotlight to someone who could stand in front of a crowd with confidence — CIE had a lot to do with that. The late-night planning, decoration, roaming the campus at nights (I loved this one, the campus actually looks beautiful), friendships, random conversations, and memories... that's the real takeaway. Somewhere in between, I also found a place to share my experiences of travelling. Watching friends and juniors start exploring because of those conversations was a different kind of happiness. Maybe that's what CIE does. It doesn't just add a line to your resume. It brings out something new. ~ Sasta Traveller.",
+    tags: ["Photography", "Leadership"],
+  },
+  {
+    name: "P Neha Chandana",
+    batch: "2025–26",
+    photo: "/alumni/Neha.jpeg",
+    quote: "CIE will forever be the best journey of my college life that I'd never forget, the four walls of a classroom could never teach me what I've learnt here. This place definitely helped me on reflecting what my true potential is and see what kind of capabilities I hold. It completely shaped my thought process, pushed me out of my comfort zone, and helped me socialize at my absolute best to build the most amazing connections and cheers to few of the best people I've ever met here. Looking back, the three years I spent in this space truly changed me into a different person. It gave me the unshakeable confidence to aspire for so much more in life!",
+  },
+  {
+    name: "Pragna",
+    batch: "2025–26",
+    role: "Master's Student",
+    company: "University of Milan",
+    location: "Italy",
+    quote: "CIE is where I found my edge. I joined as the only female member on the technical and product development team, and grew into Joint Secretary — a journey that pushed me to think beyond. I started Torch, organized countless events, and mentored 100+ students across 25+ micro-projects, watching ideas turn into real, working things. Honestly, I spent more time at CIE than in my own classes, because it wasn't just a club, it was a canvas to tinker, break things, and build them better. Looking back, that's where I first saw the entrepreneurial instinct in me.",
+    tags: ["Tech", "Leadership"],
   },
 ];
 
@@ -166,10 +191,12 @@ function AlumniCard({ member, index }: { member: Alumni; index: number }) {
           <p style={{ color: "#000000", fontSize: "15px", fontWeight: 800, marginBottom: "2px", fontFamily: "var(--font-heading)", lineHeight: 1.2 }}>
             {member.name}
           </p>
-          <p style={{ color: "#6B7280", fontSize: "12px", fontWeight: 500, display: "flex", alignItems: "center", gap: "4px", flexWrap: "wrap" }}>
-            <Briefcase size={11} style={{ flexShrink: 0 }} />
-            {member.role} · {member.company}
-          </p>
+          {member.role && member.company && (
+            <p style={{ color: "#6B7280", fontSize: "12px", fontWeight: 500, display: "flex", alignItems: "center", gap: "4px", flexWrap: "wrap" }}>
+              <Briefcase size={11} style={{ flexShrink: 0 }} />
+              {member.role} · {member.company}
+            </p>
+          )}
           {member.location && (
             <p style={{ color: "#9CA3AF", fontSize: "11px", marginTop: "2px", display: "flex", alignItems: "center", gap: "4px" }}>
               <MapPin size={10} style={{ flexShrink: 0 }} />

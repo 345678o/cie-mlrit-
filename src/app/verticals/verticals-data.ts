@@ -146,17 +146,8 @@ export const VERTICALS: Vertical[] = [
       { title: "Photographer", desc: "Manages the Photo Studio and shoots events, portraits, and product photography for CIE." },
       { title: "Audio Engineer", desc: "Operates the Podcast & Audio Studio — records, mixes, and produces CIE's audio content." },
     ],
-    projects: [
-      { name: "CIE Brand Identity System", desc: "A comprehensive visual identity guide covering logo usage, color palettes, typography, and templates.", status: "Completed" },
-      { name: "Campus Stories Podcast", desc: "A fortnightly podcast featuring founders, faculty, and students from the MLRIT ecosystem.", status: "Active" },
-      { name: "Startup Photography Archive", desc: "A curated photo library documenting all CIE startups, events, and team milestones.", status: "Active" },
-      { name: "Motion Design Pack", desc: "Reusable motion design templates for CIE's social media, presentations, and event branding.", status: "Upcoming" },
-    ],
-    events: [
-      { name: "Design Sprint Workshop", type: "Monthly", desc: "Full-day workshop taking participants from brief to prototype using design thinking methodology." },
-      { name: "Reel Workshop", type: "Quarterly", desc: "Hands-on session on shooting and editing short-form video for social media and storytelling." },
-      { name: "Open Studio Day", type: "Bi-monthly", desc: "Open-door sessions where any MLRIT student can walk in, explore the studios, and use the equipment." },
-    ],
+    projects: [],
+    events: [],
     achievements: [
       "Brand identity created for 12+ CIE startups",
       "200+ monthly active studio users",
@@ -318,15 +309,8 @@ export const VERTICALS: Vertical[] = [
       { value: "0", label: "Lost-Equipment Incidents" },
     ],
     roles: [],
-    projects: [
-      { name: "Inventory Management System", desc: "Internal tool managing CIE's equipment inventory, bookings, and maintenance logs.", status: "Active" },
-      { name: "Equipment Audit Sprint", desc: "Full physical audit reconciling every studio and lab's stock against the digital catalog.", status: "Completed" },
-      { name: "QR Asset Tagging", desc: "QR-code tagging system for fast equipment check-in/check-out scanning.", status: "Upcoming" },
-    ],
-    events: [
-      { name: "Stock Audit Day", type: "Quarterly", desc: "Full physical count and reconciliation of equipment across all studios and labs." },
-      { name: "Equipment Onboarding", type: "Each Semester", desc: "Training session for new members on check-out procedures and equipment handling." },
-    ],
+    projects: [],
+    events: [],
     achievements: [
       "300+ items cataloged across 6 studios and labs",
       "Zero lost-equipment incidents since digital tracking began",

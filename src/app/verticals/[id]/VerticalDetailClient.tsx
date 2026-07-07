@@ -289,7 +289,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       </section>}
 
       {/* ── Projects ──────────────────────────────────────────────── */}
-      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+      {v.projects.length > 0 && <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
         <div className="page-container">
           <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
             <SectionLabel>Work</SectionLabel>
@@ -319,10 +319,10 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
             })}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* ── Events ────────────────────────────────────────────────── */}
-      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+      {v.events.length > 0 && <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
         <div className="page-container">
           <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
             <SectionLabel>Programming</SectionLabel>
@@ -347,7 +347,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* ── Timeline ─────────────────────────────────────────────── */}
       {v.timeline && (

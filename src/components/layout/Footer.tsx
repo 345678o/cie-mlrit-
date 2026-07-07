@@ -65,7 +65,6 @@ const footerLinks = {
   explore: [
     { href: "/about",      label: "About Us" },
     { href: "/verticals",  label: "Verticals" },
-    { href: "/studios",    label: "Studios" },
     { href: "/facilities", label: "Facilities" },
     { href: "/gallery",      label: "Gallery" },
   ],
@@ -221,7 +220,7 @@ export default function Footer() {
                 alt="CIE Logo"
                 width={100}
                 height={52}
-                style={{ objectFit: "contain", mixBlendMode: "screen", width: "auto", height: "auto" }}
+                style={{ objectFit: "contain", mixBlendMode: "screen" }}
               />
             </Link>
             <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "13px", color: "#FFFFFF", letterSpacing: "-0.01em", marginBottom: "8px" }}>
@@ -329,7 +328,7 @@ export default function Footer() {
               alt="CIE Logo"
               width={32}
               height={17}
-              style={{ objectFit: "contain", mixBlendMode: "screen", width: "auto", height: "auto" }}
+              style={{ objectFit: "contain", mixBlendMode: "screen" }}
             />
           </div>
         </div>

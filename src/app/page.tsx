@@ -886,7 +886,7 @@ export default function HomePage() {
                   everything works on the first attempt — that&apos;s part of the process.
                 </p>
               </div>
-              <Link href="/studios" className="btn-secondary-light whitespace-nowrap flex-shrink-0">
+              <Link href="/verticals" className="btn-secondary-light whitespace-nowrap flex-shrink-0">
                 All Programs <ArrowRight size={16} />
               </Link>
             </div>
