@@ -3,7 +3,7 @@ import { isDeptKey, type DeptKey } from "@/lib/departments";
 import { branchNeedsSection } from "@/lib/branches";
 import { getQuestionsForDept, getMinorQuestionsForDept } from "@/lib/questions";
 import { appendResponseAndGetCandidateId } from "@/lib/googleSheet";
-import type { ApplyPayload, IntroForm } from "@/types/apply";
+import { isQuestionActive, type ApplyPayload, type IntroForm } from "@/types/apply";
 
 export const runtime = "nodejs";
 
@@ -49,6 +49,7 @@ async function validateDeptAnswers(
   const questions = isMinor ? await getMinorQuestionsForDept(dept) : await getQuestionsForDept(dept);
   const errors: Record<string, string> = {};
   for (const q of questions) {
+    if (!isQuestionActive(q, answers ?? {})) continue;
     const val = answers?.[q.id];
     const str = Array.isArray(val) ? val.join(",") : (val ?? "").toString();
     if (q.required && !str.trim()) errors[q.id] = `${q.label} is required`;

@@ -92,11 +92,11 @@ export const QUESTIONS_DATA: Record<DeptKey, Question[]> = {
 
   ops: [
     { id: "ops_q2", label: "Why do you want to join the CIE Operations and Finance Department?", type: "textarea", options: [], required: true, order: 1 },
-    { id: "ops_q3", label: "How do you prioritize tasks when multiple urgent activities arise?", type: "textarea", options: [], required: true, order: 2 },
-    { id: "ops_q4", label: "You have only one week to organise a college technical fest. What would be your action plan?", type: "textarea", options: [], required: true, order: 3 },
-    { id: "ops_q5", label: "A supplier fails to deliver essential materials on the event day. How would you respond?", type: "textarea", options: [], required: true, order: 4 },
-    { id: "ops_q6", label: "During an event, heavy rain disrupts outdoor activities. What contingency plan would you implement?", type: "textarea", options: [], required: true, order: 5 },
-    { id: "ops_q7", label: "How do you prepare a budget for an event?", type: "textarea", options: [], required: true, order: 6 },
-    { id: "ops_q8", label: "What would you do if the event expenses exceeded the planned budget?", type: "textarea", options: [], required: true, order: 7 },
+    { id: "ops_q4", label: "You have only one week to organise a college technical fest. What would be your action plan?", type: "textarea", options: [], required: true, order: 2 },
+    { id: "ops_q7", label: "How do you prepare a budget for an event?", type: "textarea", options: [], required: true, order: 3 },
+    { id: "ops_q8", label: "What would you do if the event expenses exceeded the planned budget?", type: "textarea", options: [], required: true, order: 4 },
+    { id: "ops_q9", label: "Which of the following is the most effective way to avoid last-minute confusion during an event?", type: "radio", options: ["Conduct a briefing with all volunteers before the event.", "Prepare a checklist, assign responsibilities, and monitor progress.", "Frequently communicate with team members throughout the planning phase.", "Keep backup volunteers ready for unexpected situations."], required: true, order: 5 },
+    { id: "ops_q10", label: "Which of these reflects good financial management?", type: "radio", options: ["Spending the full budget because it's available.", "Buying extra items \"just in case.\"", "Using funds efficiently while maintaining event quality.", "Avoiding all expenses."], required: true, order: 6 },
+    { id: "ops_q11", label: "What is the main purpose of keeping bills and invoices after an event?", type: "radio", options: ["For decoration.", "To remember the event.", "To verify expenses and prepare the final financial report.", "It isn't necessary."], required: true, order: 7 },
   ],
 };

@@ -152,6 +152,7 @@ function ApplyForm() {
   const [hoverBtn, setHoverBtn]     = useState(false);
   const [submitProgress, setSubmitProgress] = useState(0);
   const [candidateId, setCandidateId] = useState("");
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     hide();
@@ -159,9 +160,18 @@ function ApplyForm() {
     setIntro(s.intro);
     setMajorAnswers(s.majorAnswers);
     setMinorAnswers(s.minorAnswers);
+    setHydrated(true);
     return () => show();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Autosave to sessionStorage on every change, so a mid-step reload doesn't lose progress.
+  // Gated on `hydrated` so this doesn't fire (with blank initial state) before readStore() runs.
+  useEffect(() => {
+    if (!hydrated) return;
+    persist({});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hydrated, intro, majorAnswers, minorAnswers]);
 
   useEffect(() => {
     setErrors({});

@@ -39,3 +39,10 @@ export type ApplyPayload = {
 export type ApplyResponse = { candidateId: string } | { error: string; fields?: Record<string, string> };
 
 export type QuestionsResponse = { dept: DeptKey; deptName: string; questions: Question[] } | { error: string };
+
+export function isQuestionActive(q: Question, answers: Record<string, string | string[]>): boolean {
+  if (!q.showIf) return true;
+  const val = answers[q.showIf.id];
+  const selected = Array.isArray(val) ? val : val ? [val] : [];
+  return selected.some((v) => q.showIf!.includesAny.includes(v));
+}

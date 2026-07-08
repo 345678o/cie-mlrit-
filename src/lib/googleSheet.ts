@@ -1,3 +1,4 @@
+import { randomBytes } from "crypto";
 import { DEPARTMENT_MAP, type DeptKey } from "@/lib/departments";
 import { QUESTIONS_DATA } from "@/lib/questions-data";
 import type { ApplyPayload, ApplyResponse } from "@/types/apply";
@@ -21,12 +22,16 @@ const MINOR_QUESTION_COLUMNS = [
   { id: "minor_q3", label: "Minor — Relevant skills for this dept" },
 ];
 
-// The Apps Script assigns the real CandidateId (it knows the sheet's current row
-// count); this marks which cell to drop it into.
-const CANDIDATE_ID_PLACEHOLDER = "__CANDIDATE_ID__";
-
 function answerToString(val: string | string[] | undefined): string {
   return Array.isArray(val) ? val.join(", ") : (val ?? "").toString();
+}
+
+// A row-count-based counter (e.g. "next number = current rows + 1") races when two
+// submissions land close together and can hand out the same id. A high-entropy
+// suffix needs no shared counter/locking, so collisions are practically impossible
+// even under concurrent submissions.
+function generateCandidateId(prefix: string): string {
+  return `${prefix}-${randomBytes(4).toString("hex").toUpperCase()}`;
 }
 
 export async function appendResponseAndGetCandidateId(payload: ApplyPayload): Promise<string> {
@@ -37,6 +42,7 @@ export async function appendResponseAndGetCandidateId(payload: ApplyPayload): Pr
   }
 
   const { intro, major, minor } = payload;
+  const candidateId = generateCandidateId(process.env.CANDIDATE_ID_PREFIX || "CIE26");
   const majorQuestions = QUESTIONS_DATA[major.dept] ?? [];
   const majorAnswerCells = majorQuestions.map((q) => answerToString(major.answers[q.id]));
   const minorAnswerCells = MINOR_QUESTION_COLUMNS.map((c) => answerToString(minor.answers[c.id]));
@@ -53,7 +59,7 @@ export async function appendResponseAndGetCandidateId(payload: ApplyPayload): Pr
 
   const row = [
     new Date().toISOString(),
-    CANDIDATE_ID_PLACEHOLDER,
+    candidateId,
     intro.name,
     DEPARTMENT_MAP[minor.dept]?.name ?? minor.dept,
     intro.rollNo,
@@ -78,7 +84,7 @@ export async function appendResponseAndGetCandidateId(payload: ApplyPayload): Pr
       secret,
       sheetName: SHEET_TAB_NAMES[major.dept],
       deptColor: DEPARTMENT_MAP[major.dept]?.color,
-      idPrefix: process.env.CANDIDATE_ID_PREFIX || "CIE26",
+      candidateId,
       header,
       row,
     }),
@@ -89,5 +95,7 @@ export async function appendResponseAndGetCandidateId(payload: ApplyPayload): Pr
     const message = "error" in data ? data.error : undefined;
     throw new Error(message || `Google Sheets webapp responded with ${res.status}`);
   }
-  return data.candidateId;
+  // The id is ours (generated above), not whatever the Apps Script echoes back —
+  // this is what guarantees uniqueness without relying on its internal counter.
+  return candidateId;
 }
