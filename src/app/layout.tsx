@@ -72,13 +72,13 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://mlritcie.in",
     siteName: "MLRIT CIE",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "MLRIT CIE" }],
+    images: [{ url: "/og-icon.png", width: 1200, height: 1200, alt: "MLRIT CIE" }],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "MLRIT CIE — Centre for Innovation & Entrepreneurship",
     description: "Transforming Ideas into Innovation. Innovation into Impact.",
-    images: ["/og-image.png"],
+    images: ["/og-icon.png"],
   },
 };
 
@@ -94,7 +94,7 @@ const jsonLd = {
   name: "MLRIT CIE — Centre for Innovation & Entrepreneurship",
   alternateName: "CIE MLRIT",
   url: "https://mlritcie.in",
-  logo: "https://mlritcie.in/og-image.png",
+  logo: "https://mlritcie.in/og-icon.png",
   description:
     "The official innovation and entrepreneurship hub of MLRIT, empowering students to ideate, build, and launch impactful solutions.",
   parentOrganization: {
