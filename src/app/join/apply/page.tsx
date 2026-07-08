@@ -223,6 +223,11 @@ function ApplyForm() {
     return q.showIf.includesAny.some((opt) => selected.includes(opt));
   }
 
+  function hasUnspecifiedOther(val: string | string[] | undefined): boolean {
+    const arr = Array.isArray(val) ? val : val ? [val] : [];
+    return arr.includes("Other");
+  }
+
   function validateAnswers(questions: Question[], answers: Answers): boolean {
     const e: Record<string, string> = {};
     for (const q of questions) {
@@ -230,6 +235,7 @@ function ApplyForm() {
       const val = answers[q.id];
       const str = Array.isArray(val) ? val.join(",") : (val ?? "");
       if (q.required && !str.trim()) e[q.id] = `${q.label} is required`;
+      else if (hasUnspecifiedOther(val)) e[q.id] = `Please specify "Other" for ${q.label}`;
       else if (q.minLength && str.trim().length < q.minLength) e[q.id] = `Please write at least ${q.minLength} characters`;
     }
     setErrors(e);

@@ -26,6 +26,11 @@ export default function DynamicQuestionField({
   const stringValue = Array.isArray(value) ? "" : value ?? "";
   const arrayValue = Array.isArray(value) ? value : [];
 
+  const OTHER_OPTION = "Other";
+  const isOtherEntry = (v: string) => v === OTHER_OPTION || v.startsWith(`${OTHER_OPTION}: `);
+  const otherTextOf = (v: string) => (v.startsWith(`${OTHER_OPTION}: `) ? v.slice(OTHER_OPTION.length + 2) : "");
+  const otherInputStyle = { ...inputStyle(false, color), marginTop: "10px" };
+
   return (
     <div>
       <Label required={question.required}>{question.label}</Label>
@@ -125,53 +130,100 @@ export default function DynamicQuestionField({
       )}
 
       {question.type === "radio" && (
-        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-          {question.options.map((opt) => (
-            <motion.button
-              key={opt}
-              type="button"
-              onClick={() => onChange(opt)}
-              whileHover={{ y: -1 }}
-              whileTap={{ scale: 0.97 }}
-              style={{
-                fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "14px",
-                padding: "0 20px", height: "48px", borderRadius: "13px", cursor: "pointer",
-                border: stringValue === opt ? `1.5px solid ${color}` : "1px solid #E5E7EB",
-                background: stringValue === opt ? `${color}10` : "#FFFFFF",
-                color: stringValue === opt ? color : "#374151",
-                boxShadow: stringValue === opt ? `0 0 0 3px ${color}15` : "none",
-              }}
-            >
-              {opt}
-            </motion.button>
-          ))}
+        <div>
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+            {question.options.map((opt) => {
+              const isOtherOpt = opt === OTHER_OPTION;
+              const selected = isOtherOpt ? isOtherEntry(stringValue) : stringValue === opt;
+              return (
+                <motion.button
+                  key={opt}
+                  type="button"
+                  onClick={() => onChange(isOtherOpt ? (isOtherEntry(stringValue) ? stringValue : OTHER_OPTION) : opt)}
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.97 }}
+                  style={{
+                    fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "14px",
+                    padding: "0 20px", height: "48px", borderRadius: "13px", cursor: "pointer",
+                    border: selected ? `1.5px solid ${color}` : "1px solid #E5E7EB",
+                    background: selected ? `${color}10` : "#FFFFFF",
+                    color: selected ? color : "#374151",
+                    boxShadow: selected ? `0 0 0 3px ${color}15` : "none",
+                  }}
+                >
+                  {opt}
+                </motion.button>
+              );
+            })}
+          </div>
+          {isOtherEntry(stringValue) && (
+            <input
+              type="text"
+              autoFocus
+              placeholder="Please specify…"
+              value={otherTextOf(stringValue)}
+              onChange={(e) => onChange(e.target.value.trim() ? `${OTHER_OPTION}: ${e.target.value}` : OTHER_OPTION)}
+              onFocus={onFocus}
+              onBlur={onBlur}
+              style={otherInputStyle}
+            />
+          )}
         </div>
       )}
 
       {question.type === "checkbox" && (
-        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-          {question.options.map((opt) => {
-            const checked = arrayValue.includes(opt);
+        <div>
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+            {question.options.map((opt) => {
+              const isOtherOpt = opt === OTHER_OPTION;
+              const otherEntry = arrayValue.find(isOtherEntry);
+              const checked = isOtherOpt ? otherEntry !== undefined : arrayValue.includes(opt);
+              return (
+                <motion.button
+                  key={opt}
+                  type="button"
+                  onClick={() => {
+                    if (isOtherOpt) {
+                      onChange(checked ? arrayValue.filter((o) => !isOtherEntry(o)) : [...arrayValue, OTHER_OPTION]);
+                    } else {
+                      onChange(checked ? arrayValue.filter((o) => o !== opt) : [...arrayValue, opt]);
+                    }
+                  }}
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.97 }}
+                  style={{
+                    fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "14px",
+                    padding: "0 20px", height: "48px", borderRadius: "13px", cursor: "pointer",
+                    border: checked ? `1.5px solid ${color}` : "1px solid #E5E7EB",
+                    background: checked ? `${color}10` : "#FFFFFF",
+                    color: checked ? color : "#374151",
+                    boxShadow: checked ? `0 0 0 3px ${color}15` : "none",
+                  }}
+                >
+                  {opt}
+                </motion.button>
+              );
+            })}
+          </div>
+          {(() => {
+            const otherEntry = arrayValue.find(isOtherEntry);
+            if (otherEntry === undefined) return null;
             return (
-              <motion.button
-                key={opt}
-                type="button"
-                onClick={() => onChange(checked ? arrayValue.filter((o) => o !== opt) : [...arrayValue, opt])}
-                whileHover={{ y: -1 }}
-                whileTap={{ scale: 0.97 }}
-                style={{
-                  fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "14px",
-                  padding: "0 20px", height: "48px", borderRadius: "13px", cursor: "pointer",
-                  border: checked ? `1.5px solid ${color}` : "1px solid #E5E7EB",
-                  background: checked ? `${color}10` : "#FFFFFF",
-                  color: checked ? color : "#374151",
-                  boxShadow: checked ? `0 0 0 3px ${color}15` : "none",
+              <input
+                type="text"
+                autoFocus
+                placeholder="Please specify…"
+                value={otherTextOf(otherEntry)}
+                onChange={(e) => {
+                  const next = e.target.value.trim() ? `${OTHER_OPTION}: ${e.target.value}` : OTHER_OPTION;
+                  onChange(arrayValue.map((o) => (isOtherEntry(o) ? next : o)));
                 }}
-              >
-                {opt}
-              </motion.button>
+                onFocus={onFocus}
+                onBlur={onBlur}
+                style={otherInputStyle}
+              />
             );
-          })}
+          })()}
         </div>
       )}
 
