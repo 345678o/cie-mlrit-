@@ -8,17 +8,34 @@ import { isQuestionActive, type ApplyPayload, type IntroForm } from "@/types/app
 export const runtime = "nodejs";
 
 // In-memory, per-instance only — a placeholder guard against accidental double-submits
-// and naive bots. Vercel serverless functions are multi-instance, so this does not
-// enforce a global limit; swap for Upstash-backed rate limiting if abuse becomes real.
+// and naive bots. On Cloudflare Workers a single isolate can stay warm across thousands
+// of requests, so this map must actively evict stale/empty entries and cap growth —
+// otherwise a spoofed x-forwarded-for header (client-controlled) or a stuck retry loop
+// grows it unbounded until the isolate hits its memory ceiling and Cloudflare kills it
+// (Error 1102) for whatever request happens to be in flight at the time.
+// Swap for Upstash-backed rate limiting if abuse becomes real.
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS = 5;
+const MAX_TRACKED_IPS = 5000;
 const hits = new Map<string, number[]>();
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
   const timestamps = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
   timestamps.push(now);
-  hits.set(ip, timestamps);
+
+  if (timestamps.length > 0) {
+    // Cap so a single IP hammering the endpoint can't grow its array forever —
+    // we only ever need to know it's over the limit, not by how much.
+    hits.set(ip, timestamps.slice(-(MAX_REQUESTS + 1)));
+  } else {
+    hits.delete(ip);
+  }
+
+  // Safety valve against unbounded distinct-key growth (e.g. spoofed IPs) —
+  // this is a best-effort rate limiter, so a full reset under memory pressure is fine.
+  if (hits.size > MAX_TRACKED_IPS) hits.clear();
+
   return timestamps.length > MAX_REQUESTS;
 }
 
