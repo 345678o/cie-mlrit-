@@ -70,7 +70,7 @@ export const DEPARTMENTS: Department[] = [
   },
   {
     key: "ops",
-    name: "Event Management",
+    name: "Operations & Finance",
     tagline: "Keep everything running, flawlessly.",
     desc: "From planning to execution, streamline permissions, budgets, logistics, and vendor coordination for successful events.",
     color: "#22C55E",
