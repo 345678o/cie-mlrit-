@@ -32,6 +32,14 @@ type Alumni = {
 
 const alumni: Alumni[] = [
   {
+    name: "Avhilash Tripathy",
+    batch: "2024–25",
+    role: "Alumnus",
+    company: "CIE",
+    photo: "/alumni/Avhilash.jpeg",
+    quote: "If someone asked me what the best part of my college life was, my answer would always be the same: CIE. I joined as a curious first year student, hoping to find a place where I could learn something beyond the classroom. What I found instead was a second home. Over the next three years, CIE became the place where I laughed the hardest, learned the most, and created memories I'll carry with me for the rest of my life. It wasn't just about organizing events or working on projects. It was about the people. People from different branches, different backgrounds, and different stories came together and somehow became a family. The endless conversations, the chai breaks, the late night planning, the music, the celebrations, the random outings, the chaos before every event, and the joy after every success — those little moments are what made CIE so special. Somewhere along the journey, without even realizing it, CIE shaped me into a better person. It taught me how to work with people, how to lead with empathy, how to trust a team, and how much can be achieved when everyone works towards a common purpose. Today, when I look back at my college life, I don't remember the titles or the responsibilities as much as I remember the smiles, the friendships, and the feeling of belonging. CIE gave me memories that time can never take away and people I'll always be grateful for. Those three years weren't just a part of my college journey, they were the heart of it, and I know I'll spend a lifetime missing them.",
+  },
+  {
     name: "Ala Tanvi Reddy",
     batch: "2025–26",
     // role/company/location hidden temporarily

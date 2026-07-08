@@ -102,11 +102,11 @@ type TeamSection = {
 
 const studentLeadership: Member[] = [
   { name: "Ghanashyam Kodekandla", role: "President",                  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/ghanashyamkodekandla", email: "", photo: "/council/tech/Ghanashyam Kodekandla.png" },
-  { name: "Mahima Tatineni",       role: "Vice President",             dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Mahima Tatineni.png" },
-  { name: "Aarthi Reddy", role: "Secretary",                  dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Aarthi.png" },
+  { name: "Mahima Tatineni",       role: "Vice President",             dept: "Event Management", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Mahima Tatineni.png" },
+  { name: "Aarthi Reddy", role: "Secretary",                  dept: "Event Management", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Aarthi.png" },
   { name: "Keertan Kuppili",       role: "Chief Technical Executive",  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/", email: "", photo: "/council/tech/Keertan Kuppili .png" },
   { name: "Jaikar Midithuri",      role: "Joint Secretary",            dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/jaikar-midithuri-136614369/", email: "", photo: "/council/tech/Jaikar Midithuri.png" },
-  { name: "Bhavana Inakollu",      role: "Internal Relations",         dept: "Operations & Finance", year: "2026-27", linkedin: "https://www.linkedin.com/in/bhavana-inakollu-8698a2395", email: "", photo: "/council/OPS/Bhavana .png" },
+  { name: "Bhavana Inakollu",      role: "Internal Relations",         dept: "Event Management", year: "2026-27", linkedin: "https://www.linkedin.com/in/bhavana-inakollu-8698a2395", email: "", photo: "/council/OPS/Bhavana .png" },
 ];
 
 
@@ -212,19 +212,19 @@ const teams: TeamSection[] = [
     ],
   },
   {
-    team: "Ops — Operations & Finance",
+    team: "Event Management",
     color: "#22C55E",
     description: "Keeps everything running — coordinating logistics for every event, managing budgets, vendor relations, and making sure no detail falls through the cracks.",
     members: [
-       { name: "Dheeraj Kumar",     role: "Chairperson", dept: "Ops", photo: "/council/OPS/Dheeraj Kumar.png",linkedin:"#" ,year:"4th"},
-      { name: "Mahima Tatineni",   role: "Chairperson", dept: "Ops", photo: "/council/OPS/Mahima Tatineni.png",linkedin:"https://www.linkedin.com/in/mahima-tatineni" ,year:"4th"},
-      { name: "Aarthi Reddy", role: "Chairperson", dept: "Ops", photo: "/council/OPS/Aarthi.png",linkedin:"https://www.linkedin.com/in/aarthi-reddy-b-626241350/" ,year:"4th"},
-      { name: "Vinay",             role: "Chairperson", dept: "Ops", photo: "/council/OPS/Vinay.png",linkedin:"https://www.linkedin.com/in/dsdvinay" ,year:"4th"},
-      { name: "Bhavana",           role: "Internal Relations", dept: "Ops", photo: "/council/OPS/Bhavana .png",linkedin:"https://www.linkedin.com/in/bhavana-inakollu-8698a2395" ,year:"3rd"},
-      { name: "Alleshwaram Sai Ganesh", role: "Operations Lead", dept: "Ops", photo: "/council/OPS/ASaiGanesh.png",linkedin:"https://www.linkedin.com/in/sai-ganesh-alleshwaram-a30832316" ,year:"3rd"},
-      { name: "M.Tarun Kumar Reddy",    role: "Finance and Logistics", dept: "Ops", photo: "/council/OPS/Manukonda Tarun.png",linkedin:"https://www.linkedin.com/in/tarun-manukonda-9a5b97344" ,year:"3rd"},
-      { name: "Tharun",            role: "Member", dept: "Ops", photo: "/council/OPS/Tharun.png",linkedin:"https://www.linkedin.com/in/tharun-emmadisetti-590ba3344" ,year:"3rd"},
-      { name: "M Vasanth Vardhan", role: "Member", dept: "Ops", photo: "/council/OPS/M Vasanth vardhan.png",linkedin:"https://www.linkedin.com/in/vasanth-vardhan-maricherla-21783231a/" ,year:"3rd"},
+       { name: "Dheeraj Kumar",     role: "Chairperson", dept: "Event Management", photo: "/council/OPS/Dheeraj Kumar.png",linkedin:"#" ,year:"4th"},
+      { name: "Mahima Tatineni",   role: "Chairperson", dept: "Event Management", photo: "/council/OPS/Mahima Tatineni.png",linkedin:"https://www.linkedin.com/in/mahima-tatineni" ,year:"4th"},
+      { name: "Aarthi Reddy", role: "Chairperson", dept: "Event Management", photo: "/council/OPS/Aarthi.png",linkedin:"https://www.linkedin.com/in/aarthi-reddy-b-626241350/" ,year:"4th"},
+      { name: "Vinay",             role: "Chairperson", dept: "Event Management", photo: "/council/OPS/Vinay.png",linkedin:"https://www.linkedin.com/in/dsdvinay" ,year:"4th"},
+      { name: "Bhavana",           role: "Internal Relations", dept: "Event Management", photo: "/council/OPS/Bhavana .png",linkedin:"https://www.linkedin.com/in/bhavana-inakollu-8698a2395" ,year:"3rd"},
+      { name: "Alleshwaram Sai Ganesh", role: "Operations Lead", dept: "Event Management", photo: "/council/OPS/ASaiGanesh.png",linkedin:"https://www.linkedin.com/in/sai-ganesh-alleshwaram-a30832316" ,year:"3rd"},
+      { name: "M.Tarun Kumar Reddy",    role: "Finance and Logistics", dept: "Event Management", photo: "/council/OPS/Manukonda Tarun.png",linkedin:"https://www.linkedin.com/in/tarun-manukonda-9a5b97344" ,year:"3rd"},
+      { name: "Tharun",            role: "Member", dept: "Event Management", photo: "/council/OPS/Tharun.png",linkedin:"https://www.linkedin.com/in/tharun-emmadisetti-590ba3344" ,year:"3rd"},
+      { name: "M Vasanth Vardhan", role: "Member", dept: "Event Management", photo: "/council/OPS/M Vasanth vardhan.png",linkedin:"https://www.linkedin.com/in/vasanth-vardhan-maricherla-21783231a/" ,year:"3rd"},
     ],
   },
 ];
@@ -236,7 +236,7 @@ const deptShort: Record<string, string> = {
   "GD — Graphic Design": "Graphic Design",
   "Photography and Media": "Photography and Media",
   "P&S — Public Speaking": "Promotions & Sponsorship",
-  "Ops — Operations & Finance": "Operations & Finance",
+  "Event Management": "Event Management",
 };
 
 // ── Council Showcase — notched triangle cards ─────────────────────
@@ -261,7 +261,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
           const flipBgByDept: Record<string, string> = {
             "Tech": "/council/bg/tech-flip.jpg",
             "Content": "/council/bg/content-flip.webp",
-            "Ops — Operations & Finance": "/council/bg/ops-flip.jpg",
+            "Event Management": "/council/bg/ops-flip.jpg",
             "Creative": "/council/bg/creative-flip.webp",
             "GD — Graphic Design": "/council/bg/gd-flip.jpg",
             "P&S — Public Speaking": "/council/bg/ps-flip.jpg",

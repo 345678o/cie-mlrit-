@@ -14,6 +14,7 @@ import {
   Zap,
   Mic,
   ChevronRight,
+  ChevronLeft,
   TrendingUp,
   CalendarDays,
   Layers,
@@ -201,6 +202,28 @@ const NAVY       = "#000000";   /* Premium dark accent      */
 
 /* ═══════════════════════════════════════════════════════════════════ */
 export default function HomePage() {
+  const timelineScrollRef = useRef<HTMLDivElement>(null);
+  const [timelineEdge, setTimelineEdge] = useState({ atStart: true, atEnd: false });
+  const updateTimelineEdge = () => {
+    const el = timelineScrollRef.current;
+    if (!el) return;
+    const cards = Array.from(el.querySelectorAll<HTMLElement>(":scope > *:not([aria-hidden])"));
+    if (!cards.length) return;
+    const first = cards[0];
+    const last = cards[cards.length - 1];
+    const firstTarget = first.offsetLeft + first.offsetWidth / 2 - el.clientWidth / 2;
+    const lastTarget = last.offsetLeft + last.offsetWidth / 2 - el.clientWidth / 2;
+    setTimelineEdge({ atStart: el.scrollLeft <= firstTarget + 4, atEnd: el.scrollLeft >= lastTarget - 4 });
+  };
+  useEffect(() => { updateTimelineEdge(); }, []);
+  const scrollTimeline = (dir: 1 | -1) => {
+    const el = timelineScrollRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>(":scope > *:not([aria-hidden])");
+    const step = (card?.offsetWidth ?? 260) + 32;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+
   return (
     <div style={{ background: BG_WHITE }}>
 
@@ -786,9 +809,15 @@ export default function HomePage() {
               }} />
             ))}
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div
+              ref={timelineScrollRef}
+              onScroll={updateTimelineEdge}
+              className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-2 lg:pb-0 lg:grid lg:grid-cols-4 lg:overflow-visible"
+              style={{ scrollbarWidth: "none", overflowAnchor: "none" }}
+            >
+              <div aria-hidden className="shrink-0 lg:hidden" style={{ width: "calc(50vw - 130px)" }} />
               {timeline.map((item, i) => (
-                <FadeIn key={item.step} delay={i * 0.12}>
+                <FadeIn key={item.step} delay={i * 0.12} className="shrink-0 w-[70vw] max-w-[260px] snap-center lg:w-auto lg:max-w-none">
                   <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "32px" }}>
                     {/* Circle */}
                     <div style={{
@@ -832,7 +861,40 @@ export default function HomePage() {
                   </div>
                 </FadeIn>
               ))}
+              <div aria-hidden className="shrink-0 lg:hidden" style={{ width: "calc(50vw - 130px)" }} />
             </div>
+
+            {/* Prev/next arrows — mobile carousel only, hidden at each end */}
+            {!timelineEdge.atStart && (
+              <button
+                type="button"
+                aria-label="Previous step"
+                onClick={() => scrollTimeline(-1)}
+                className="lg:hidden absolute z-20 flex items-center justify-center"
+                style={{
+                  left: "4px", top: "28px", width: "40px", height: "40px",
+                  borderRadius: "50%", background: "#FFFFFF",
+                  border: "1px solid rgba(0,0,0,0.10)", boxShadow: "0 4px 14px rgba(0,0,0,0.10)",
+                }}
+              >
+                <ChevronLeft size={20} style={{ color: T_SECONDARY }} />
+              </button>
+            )}
+            {!timelineEdge.atEnd && (
+              <button
+                type="button"
+                aria-label="Next step"
+                onClick={() => scrollTimeline(1)}
+                className="lg:hidden absolute z-20 flex items-center justify-center"
+                style={{
+                  right: "4px", top: "28px", width: "40px", height: "40px",
+                  borderRadius: "50%", background: "#FFFFFF",
+                  border: "1px solid rgba(0,0,0,0.10)", boxShadow: "0 4px 14px rgba(0,0,0,0.10)",
+                }}
+              >
+                <ChevronRight size={20} style={{ color: T_SECONDARY }} />
+              </button>
+            )}
           </div>
         </div>
       </section>
