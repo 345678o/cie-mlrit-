@@ -456,7 +456,7 @@ function ApplyForm() {
                       <div className="form-row" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px" }}>
                         <div>
                           <Label>Full Name</Label>
-                          <input type="text" placeholder="Anamika Kumari" value={intro.name}
+                          <input type="text" placeholder="Enter your full name" value={intro.name}
                             onChange={e => setIntroField("name", e.target.value)}
                             onFocus={() => setFocused("name")} onBlur={() => setFocused("")}
                             required style={inputStyle(focused==="name", color)}/>
@@ -464,7 +464,7 @@ function ApplyForm() {
                         </div>
                         <div>
                           <Label>Roll Number</Label>
-                          <input type="text" placeholder="21B01A0XXX" value={intro.rollNo}
+                          <input type="text" placeholder="Enter your roll number" value={intro.rollNo}
                             onChange={e => setIntroField("rollNo", e.target.value)}
                             onFocus={() => setFocused("rollNo")} onBlur={() => setFocused("")}
                             required style={inputStyle(focused==="rollNo", color)}/>
@@ -474,7 +474,7 @@ function ApplyForm() {
                       <div className="form-row" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px" }}>
                         <div>
                           <Label>Phone Number</Label>
-                          <input type="tel" placeholder="9XXXXXXXXX" value={intro.phone}
+                          <input type="tel" placeholder="Enter your phone number" value={intro.phone}
                             onChange={e => setIntroField("phone", e.target.value)}
                             onFocus={() => setFocused("phone")} onBlur={() => setFocused("")}
                             required inputMode="numeric" style={inputStyle(focused==="phone", color)}/>
@@ -482,7 +482,7 @@ function ApplyForm() {
                         </div>
                         <div>
                           <Label>Email</Label>
-                          <input type="email" placeholder="you@example.com" value={intro.email}
+                          <input type="email" placeholder="Enter your email address" value={intro.email}
                             onChange={e => setIntroField("email", e.target.value)}
                             onFocus={() => setFocused("email")} onBlur={() => setFocused("")}
                             required style={inputStyle(focused==="email", color)}/>
@@ -540,7 +540,7 @@ function ApplyForm() {
                       <div className="form-row" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px" }}>
                         <div>
                           <Label>CGPA</Label>
-                          <input type="text" inputMode="decimal" placeholder="8.5" value={intro.cgpa}
+                          <input type="text" inputMode="decimal" placeholder="Enter your CGPA" value={intro.cgpa}
                             onChange={e => setIntroField("cgpa", e.target.value)}
                             onFocus={() => setFocused("cgpa")} onBlur={() => setFocused("")}
                             required style={inputStyle(focused==="cgpa", color)}/>
@@ -548,7 +548,7 @@ function ApplyForm() {
                         </div>
                         <div>
                           <Label>Number of Backlogs</Label>
-                          <input type="text" inputMode="numeric" placeholder="0" value={intro.backlogs}
+                          <input type="text" inputMode="numeric" placeholder="Enter number of backlogs" value={intro.backlogs}
                             onChange={e => setIntroField("backlogs", e.target.value)}
                             onFocus={() => setFocused("backlogs")} onBlur={() => setFocused("")}
                             required style={inputStyle(focused==="backlogs", color)}/>
@@ -647,6 +647,13 @@ function ApplyForm() {
                     Applications reviewed within 5–7 days · Results via email
                   </p>
                 </div>
+
+                <p style={{ fontFamily:"var(--font-body)", fontSize:"12.5px", color:"#9CA3AF", lineHeight:1.6, marginTop:"16px" }}>
+                  Facing any issues? Contact{" "}
+                  <a href="mailto:24r21a67d2@mlrit.ac.in" style={{ color, fontWeight:600, textDecoration:"none" }}>
+                    24r21a67d2@mlrit.ac.in
+                  </a>
+                </p>
               </motion.form>
             </div>
           </section>
