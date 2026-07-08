@@ -12,6 +12,8 @@ export type Question = {
   order: number;
   code?: string;
   codeLang?: string;
+  // Only show this question when the referenced question's answer includes one of these values.
+  showIf?: { id: string; includesAny: string[] };
 };
 
 export type IntroForm = {

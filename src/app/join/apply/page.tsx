@@ -216,9 +216,17 @@ function ApplyForm() {
     return Object.keys(e).length === 0;
   }
 
+  function isQuestionVisible(q: Question, answers: Answers): boolean {
+    if (!q.showIf) return true;
+    const val = answers[q.showIf.id];
+    const selected = Array.isArray(val) ? val : val ? [val] : [];
+    return q.showIf.includesAny.some((opt) => selected.includes(opt));
+  }
+
   function validateAnswers(questions: Question[], answers: Answers): boolean {
     const e: Record<string, string> = {};
     for (const q of questions) {
+      if (!isQuestionVisible(q, answers)) continue;
       const val = answers[q.id];
       const str = Array.isArray(val) ? val.join(",") : (val ?? "");
       if (q.required && !str.trim()) e[q.id] = `${q.label} is required`;
@@ -564,7 +572,7 @@ function ApplyForm() {
                       <p style={{ fontFamily:"var(--font-body)", fontSize:"14px", color:"#6B7280", marginBottom:"48px" }}>Loading questions…</p>
                     ) : (
                       <div style={{ display:"grid", gap:"28px", marginBottom:"48px" }}>
-                        {stepQuestions.map((q) => (
+                        {stepQuestions.filter((q) => isQuestionVisible(q, stepAnswers)).map((q) => (
                           <DynamicQuestionField
                             key={q.id}
                             question={q}

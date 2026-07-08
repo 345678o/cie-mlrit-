@@ -42,7 +42,8 @@ const alumni: Alumni[] = [
   {
     name: "Ala Tanvi Reddy",
     batch: "2025–26",
-    // role/company/location hidden temporarily
+    role: "Alumnus",
+    company: "CIE",
     photo: "/alumni/Tanvi.jpeg",
     linkedin: "https://www.linkedin.com/in/ala-tanvi-reddy",
     quote: "If there is one place that truly shaped who I am today, it is CIE. It served as an incredible learning ground where I grew from an operations member to President, developing my communication, networking, organizing, and management abilities. Serving as a student mentor for micro-projects allowed me to sharpen my technical skills while helping others grow. Ultimately, CIE gave me a true understanding of what entrepreneurship means, laying the definitive foundation for my journey. Beyond the work and professional growth, CIE is a space where you do not just learn and improve. It is a place where you find an amazing community of peers and friends. We had so much fun together, and I am walking away with countless unforgettable memories.",
@@ -81,6 +82,8 @@ const alumni: Alumni[] = [
   {
     name: "P Neha Chandana",
     batch: "2025–26",
+    role: "Alumnus",
+    company: "CIE",
     photo: "/alumni/Neha.jpeg",
     linkedin: "https://www.linkedin.com/in/nehapyarasani11/",
     quote: "CIE will forever be the best journey of my college life that I'd never forget, the four walls of a classroom could never teach me what I've learnt here. This place definitely helped me on reflecting what my true potential is and see what kind of capabilities I hold. It completely shaped my thought process, pushed me out of my comfort zone, and helped me socialize at my absolute best to build the most amazing connections and cheers to few of the best people I've ever met here. Looking back, the three years I spent in this space truly changed me into a different person. It gave me the unshakeable confidence to aspire for so much more in life!",
