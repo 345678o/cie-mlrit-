@@ -3,7 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
-import { Target, Eye, Heart, Award, Users, BookOpen, Lightbulb, Sparkles, ShieldCheck, Globe } from "lucide-react";
+import { Target, Eye, Heart, Award, Users, BookOpen, Lightbulb, Sparkles, ShieldCheck, Globe, Printer, Presentation, Cpu, Wrench } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
 
@@ -136,6 +136,39 @@ const values = [
   { icon: Heart,        title: "Impact",              desc: "We create solutions that make a real difference in people's lives." },
   { icon: BookOpen,     title: "Continuous Learning", desc: "We stay curious, embrace challenges, and evolve every day." },
   { icon: Globe,        title: "Inclusivity",         desc: "Every voice matters, every perspective is valued, every dream has a place to grow." },
+];
+
+const facilities = [
+  {
+    icon: Lightbulb,
+    title: "Innovation Hub / EPICS Lab",
+    desc: "Loaded with computer systems and emerging-tech software to train aspirants and help them develop innovative solutions for societal and community needs.",
+  },
+  {
+    icon: Printer,
+    title: "Makerspace",
+    desc: "A technical prototyping platform loaded with Multimedia Workstations, 3D Printers, CNC Machines, and Laser Cutters — open to incubators, student innovators, and startup entrepreneurs to ideate, validate, and prototype new products.",
+  },
+  {
+    icon: Presentation,
+    title: "Social Square",
+    desc: "Equipped with audio-visual facilities for conducting ideation programs and identifying solutions for societal and community needs.",
+  },
+  {
+    icon: Users,
+    title: "Meeting Room",
+    desc: "Dedicated space for interaction and mentoring with innovators, incubators, and bankers.",
+  },
+  {
+    icon: Cpu,
+    title: "Internet of Things Lab",
+    desc: "An open, evolving ecosystem of edge devices, communication protocols, and cloud platforms — giving students hands-on exposure to build cost-effective IoT solutions for precision agriculture, smart cities, and social good.",
+  },
+  {
+    icon: Wrench,
+    title: "Prototype Lab",
+    desc: "Comprehensive rapid-prototyping capability for students, employees, and research projects — converting prototypes into marketable products. Equipped with 3D Scanners & Printers, Rapid Prototyping Machines, Laser Cutters & Engravers, CNC Milling & Turning Centres, Vacuum Plastic Forming Machines, TIG/MIG/SMAG Welding Machines, Centreless Grinders, Computer-Controlled UTM, MMC Stir Casting, and Autoclave.",
+  },
 ];
 
 /* ─── Faculty data ───────────────────────────────────────────────────
@@ -454,8 +487,56 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── Facilities ────────────────────────────────────────────── */}
+      <section id="facilities" style={{ background: BG_WHITE, ...SECTION_PY }}>
+        <div className="page-container">
+          <FadeIn>
+            <SectionHeader
+              tag="World-Class Infrastructure"
+              heading="Facilities"
+              sub="Every workspace, every tool, every room at CIE is designed with one purpose: to remove friction between your ideas and their execution."
+              center
+            />
+          </FadeIn>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+            {facilities.map((facility, i) => (
+              <FadeIn key={facility.title} delay={i * 0.06}>
+                <div
+                  className="card-light h-full"
+                  style={{ padding: "clamp(22px,3vw,34px)", borderRadius: "16px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}
+                >
+                  <div
+                    style={{
+                      width: "44px", height: "44px", borderRadius: "12px",
+                      background: `${ORANGE}0f`,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      marginBottom: "18px",
+                    }}
+                  >
+                    <facility.icon size={20} style={{ color: ORANGE }} />
+                  </div>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-heading)", fontWeight: 800,
+                      fontSize: "16px", color: T_HEAD, letterSpacing: "-0.01em",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {facility.title}
+                  </h3>
+                  <p style={{ fontSize: "14px", lineHeight: 1.72, color: T_MUTED }}>
+                    {facility.desc}
+                  </p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── DPIIT Registered Startups ────────────────────────────── */}
-      <section style={{ background: BG_WHITE, ...SECTION_PY }}>
+      <section style={{ background: BG_GRAY, ...SECTION_PY }}>
         <div className="page-container">
           <FadeIn>
             <SectionHeader
@@ -512,7 +593,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Faculty & Mentors ─────────────────────────────────────── */}
-      <section style={{ background: BG_GRAY, ...SECTION_PY }}>
+      <section style={{ background: BG_WHITE, ...SECTION_PY }}>
         <div className="page-container">
           <FadeIn>
             <SectionHeader

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><title>Video Test</title></head>
+<body style="margin:0;background:#000;">
+  <p style="color:white;font-family:sans-serif;">Plain HTML5 video test — no React involved.</p>
+  <video src="/reels/cie%20studio%20intro.mp4" autoplay muted loop playsinline controls
+    style="width:300px;height:auto;display:block;border:2px solid red;"></video>
+  <p id="status" style="color:white;font-family:sans-serif;">Status: loading...</p>
+  <script>
+    const v = document.querySelector('video');
+    const s = document.getElementById('status');
+    v.addEventListener('loadedmetadata', () => s.textContent = 'Status: metadata loaded, size ' + v.videoWidth + 'x' + v.videoHeight);
+    v.addEventListener('playing', () => s.textContent = 'Status: PLAYING');
+    v.addEventListener('error', () => s.textContent = 'Status: ERROR - ' + (v.error ? v.error.message : 'unknown'));
+    v.play().then(() => s.textContent += ' | play() resolved').catch(e => s.textContent += ' | play() REJECTED: ' + e.message);
+  </script>
+</body>
+</html>

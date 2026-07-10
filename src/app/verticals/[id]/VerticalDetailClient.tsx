@@ -9,7 +9,7 @@ import {
   ArrowLeft, Users, CheckCircle2,
   Zap, Trophy,
 } from "lucide-react";
-import type { Vertical } from "../verticals-data";
+import type { Vertical, ProposalBlock } from "../verticals-data";
 import PageGeometric from "@/components/ui/PageGeometric";
 import AutoplayVideo from "@/components/ui/AutoplayVideo";
 
@@ -54,6 +54,104 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
     <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(22px,3.5vw,36px)", color: "#000000", lineHeight: 1.1, marginBottom: "32px" }}>
       {children}
     </h2>
+  );
+}
+
+type ProposalBodyBlock = Exclude<ProposalBlock, { type: "heading" } | { type: "subheading" }>;
+type ProposalSubsection = { subheading: string; body: ProposalBodyBlock[] };
+type ProposalSection = { heading: string; body: ProposalBodyBlock[]; subs: ProposalSubsection[] };
+
+function groupProposalBlocks(blocks: ProposalBlock[]): ProposalSection[] {
+  const sections: ProposalSection[] = [];
+  let current: ProposalSection | null = null;
+  let currentSub: ProposalSubsection | null = null;
+  for (const b of blocks) {
+    if (b.type === "heading") {
+      current = { heading: b.text, body: [], subs: [] };
+      sections.push(current);
+      currentSub = null;
+    } else if (b.type === "subheading") {
+      if (!current) continue;
+      currentSub = { subheading: b.text, body: [] };
+      current.subs.push(currentSub);
+    } else if (currentSub) {
+      currentSub.body.push(b);
+    } else if (current) {
+      current.body.push(b);
+    }
+  }
+  return sections;
+}
+
+function ProposalBlockView({ block, color }: { block: ProposalBodyBlock; color: string }) {
+  if (block.type === "paragraph") {
+    return (
+      <p style={{ fontFamily: "var(--font-body)", fontSize: "14.5px", color: "#374151", lineHeight: 1.75, marginBottom: "10px" }}>
+        {block.text}
+      </p>
+    );
+  }
+  if (block.type === "list") {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "14px" }}>
+        {block.items.map((item, i) => (
+          <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
+            <CheckCircle2 size={14} style={{ color, flexShrink: 0, marginTop: "3px" }} />
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "#374151", lineHeight: 1.6 }}>{item}</span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  // table
+  return (
+    <div style={{ overflowX: "auto", borderRadius: "14px", border: "1px solid #E5E7EB", marginBottom: "14px" }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "var(--font-body)", fontSize: "13.5px" }}>
+        <thead>
+          <tr style={{ background: "#F9FAFB", borderBottom: "1px solid #E5E7EB" }}>
+            {block.headers.map((h) => (
+              <th key={h} style={{ padding: "12px 18px", textAlign: "left", fontWeight: 700, fontSize: "11px", letterSpacing: "0.06em", textTransform: "uppercase", color: "#6B7280", whiteSpace: "nowrap" }}>
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {block.rows.map((row, i) => (
+            <tr key={i} style={{ borderBottom: i < block.rows.length - 1 ? "1px solid #F3F4F6" : "none" }}>
+              {row.map((cell, j) => (
+                <td key={j} style={{ padding: "12px 18px", color: j === 0 ? "#111111" : "#374151", fontWeight: j === 0 ? 600 : 400 }}>
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function ProposalSectionCard({ section, color, lightBg, border }: { section: ProposalSection; color: string; lightBg: string; border: string }) {
+  return (
+    <div style={{ padding: "clamp(22px,3vw,32px)", borderRadius: "18px", background: "#FAFAFA", border: "1px solid rgba(0,0,0,0.07)", marginBottom: "20px" }}>
+      <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "19px", color: "#000000", marginBottom: "14px" }}>
+        {section.heading}
+      </h3>
+      {section.body.map((block, i) => (
+        <ProposalBlockView key={i} block={block} color={color} />
+      ))}
+      {section.subs.map((sub, i) => (
+        <div key={i} style={{ padding: "18px 20px", borderRadius: "14px", background: lightBg, border: `1px solid ${border}`, marginTop: i === 0 ? "6px" : "14px" }}>
+          <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "15px", color: "#111111", marginBottom: "10px" }}>
+            {sub.subheading}
+          </h4>
+          {sub.body.map((block, j) => (
+            <ProposalBlockView key={j} block={block} color={color} />
+          ))}
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -198,7 +296,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
                       {item.type === "image" ? (
                         <Image src={item.src} alt={item.caption ?? `${v.name} media`} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" style={{ objectFit: "cover" }} />
                       ) : (
-                        <video src={item.src} controls playsInline preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        <AutoplayVideo src={item.src} unmuteOnHover style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       )}
                     </div>
                     {item.caption && (
@@ -224,7 +322,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
                       distorting when the height clamp and the width cap fight on
                       narrow screens */}
                   <AutoplayVideo
-                    src="/reels/cie%20studio%20intro.mp4"
+                    src="/verticals/cie-studios/studio-intro.mp4"
                     unmuteOnHover
                     style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                   />
@@ -320,6 +418,32 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
           </div>
         </div>
       </section>}
+
+      {/* ── Proposal ─────────────────────────────────────────────── */}
+      {v.proposal && (
+        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+          <div className="page-container">
+            <FadeIn>
+              <div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
+                <SectionLabel>Proposal</SectionLabel>
+                <SectionHeading>{v.proposal.title}</SectionHeading>
+                {v.proposal.subtitle.map((line, i) => (
+                  <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: "14.5px", color: "#6B7280", lineHeight: 1.6, marginTop: i === 0 ? "-16px" : "2px" }}>
+                    {line}
+                  </p>
+                ))}
+              </div>
+            </FadeIn>
+            <FadeIn delay={0.05}>
+              <div>
+                {groupProposalBlocks(v.proposal.blocks).map((section, i) => (
+                  <ProposalSectionCard key={i} section={section} color={v.color} lightBg={v.lightBg} border={v.border} />
+                ))}
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+      )}
 
       {/* ── Events ────────────────────────────────────────────────── */}
       {v.events.length > 0 && <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.07)" }}>

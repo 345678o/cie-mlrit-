@@ -173,17 +173,6 @@ const homeFacilities = [
   { icon: CalendarDays, title: "Event Auditorium",desc: "300-seat venue with full AV, live-streaming setup, and breakout rooms for every event format." },
 ];
 
-const partners = [
-  { name: "Entrepreneurship Development Institute of India", logo: "/partners/edii.png" },
-  { name: "Department of Science & Technology",               logo: "/partners/dst.png" },
-  { name: "Startup India",                                     logo: "/partners/startup-india.png" },
-  { name: "TASK",                                              logo: "/partners/task.png" },
-  { name: "MSME",                                              logo: "/partners/msme.png" },
-  { name: "ISB",                                               logo: "/partners/isb.png" },
-  { name: "T-Hub",                                             logo: "/partners/t-hub.png" },
-  { name: "Wadhwani Foundation",                                logo: "/partners/wadhwani.png" },
-];
-
 /* ── Design tokens ────────────────────────────────────────────────── */
 const CONTAINER  = "page-container";
 const SECTION_PY = "clamp(48px, 5vw, 80px)";
@@ -1026,7 +1015,7 @@ export default function HomePage() {
                   World-class spaces, tools, and networks — all free for MLRIT students.
                 </p>
               </div>
-              <Link href="/facilities" className="btn-secondary-light whitespace-nowrap flex-shrink-0">
+              <Link href="/about#facilities" className="btn-secondary-light whitespace-nowrap flex-shrink-0">
                 All Facilities <ArrowRight size={16} />
               </Link>
             </div>
@@ -1079,67 +1068,6 @@ export default function HomePage() {
         @media (max-width: 900px) { .home-facilities-grid { grid-template-columns: repeat(2,1fr) !important; } }
         @media (max-width: 560px) { .home-facilities-grid { grid-template-columns: 1fr !important; } }
       `}</style>
-
-      <SectionDivider topBg="#F5F5F5" btmBg="#F5F5F5" />
-
-      {/* ────────────────────────────────────────────────────────────
-          PARTNERS  —  #F5F5F5
-      ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: "#F5F5F5", paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
-        <div className={CONTAINER}>
-          <FadeIn className="text-center mb-8 lg:mb-16">
-            <span className="section-tag">Backed By</span>
-            <h2
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontWeight: 800,
-                fontSize: "clamp(34px, 4vw, 50px)",
-                letterSpacing: "-0.03em",
-                color: T_PRIMARY,
-                marginTop: "4px",
-              }}
-            >
-              Our Partners
-            </h2>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "16px", color: T_MUTED, marginTop: "10px", maxWidth: "560px", marginLeft: "auto", marginRight: "auto", lineHeight: 1.7 }}>
-              Institutions and organisations that support CIE&apos;s mission — through programs, funding, and mentorship.
-            </p>
-          </FadeIn>
-        </div>
-
-        <FadeIn delay={0.1}>
-          <div
-            style={{
-              overflow: "hidden",
-              width: "100vw",
-              marginLeft: "calc(50% - 50vw)",
-              background: "#F5F5F5",
-              maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
-              WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
-            }}
-          >
-            <div className="logo-marquee-track" style={{ display: "flex", width: "max-content", gap: "48px", alignItems: "center", background: "#F5F5F5" }}>
-              {[...partners, ...partners].map((p, i) => (
-                <div
-                  key={`${p.name}-${i}`}
-                  style={{
-                    position: "relative",
-                    width: "160px", height: "80px", flexShrink: 0,
-                  }}
-                >
-                  <Image
-                    src={p.logo}
-                    alt={p.name}
-                    fill
-                    sizes="160px"
-                    style={{ objectFit: "contain", mixBlendMode: "multiply" }}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </FadeIn>
-      </section>
 
       <SectionDivider topBg="#F5F5F5" btmBg="#FFFFFF" />
 

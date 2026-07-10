@@ -1,4 +1,4 @@
-import { Mail, MapPin, Clock } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
 import FadeIn from "@/components/ui/FadeIn";
@@ -100,24 +100,15 @@ export default function ContactPage() {
                     {
                       icon: Mail, label: "Email",
                       content: (
-                        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                          <a href="mailto:ciemlrit@mlrit.ac.in" className="contact-info-link" style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#111111", textDecoration: "none", lineHeight: 1.55 }}>ciemlrit@mlrit.ac.in</a>
-                          <a href="mailto:cie@mlrinstitutions.ac.in" className="contact-info-link" style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#111111", textDecoration: "none", lineHeight: 1.55 }}>cie@mlrinstitutions.ac.in</a>
-                        </div>
+                        <a href="mailto:cie@mlrinstitutions.ac.in" className="contact-info-link" style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#111111", textDecoration: "none", lineHeight: 1.55 }}>cie@mlrinstitutions.ac.in</a>
                       ),
                     },
                     {
-                      icon: MapPin, label: "Office Location",
+                      icon: MapPin, label: "Location",
                       content: (
                         <p style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#374151", lineHeight: 1.6, margin: 0 }}>
                           CIE Block, MLR Institute of Technology<br />Dundigal, Hyderabad 500043<br />Telangana, India
                         </p>
-                      ),
-                    },
-                    {
-                      icon: Clock, label: "Office Hours",
-                      content: (
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#374151", margin: 0 }}>Mon–Sat: 9:00 AM – 6:00 PM</p>
                       ),
                     },
                   ].map(({ icon: Icon, label, content }, i, arr) => (

@@ -21,6 +21,19 @@ export type VerticalMedia = {
   caption?: string;
 };
 
+export type ProposalBlock =
+  | { type: "heading"; text: string }
+  | { type: "subheading"; text: string }
+  | { type: "paragraph"; text: string }
+  | { type: "list"; items: string[] }
+  | { type: "table"; headers: string[]; rows: string[][] };
+
+export type VerticalProposal = {
+  title: string;
+  subtitle: string[];
+  blocks: ProposalBlock[];
+};
+
 export type Vertical = {
   id: string;
   abbr: string;
@@ -47,6 +60,7 @@ export type Vertical = {
   featuresLabel?: string;
   featuresHeading?: string;
   media?: VerticalMedia[];
+  proposal?: VerticalProposal;
 };
 
 export const VERTICALS: Vertical[] = [
@@ -148,14 +162,122 @@ export const VERTICALS: Vertical[] = [
     ],
     projects: [],
     events: [],
-    achievements: [
-      "Brand identity created for 12+ CIE startups",
-      "200+ monthly active studio users",
-      "30+ podcast episodes recorded and published",
-      "Covered 50+ CIE events with professional photography",
-    ],
+    achievements: [],
     applyInfo:
       "Active CIE members get 24/7 studio access. To join the Studios team as a creator, designer, or operator, apply through the CIE portal during open recruitment cycles.",
+    proposal: {
+      title: "Social Media Content Strategy Proposal",
+      subtitle: ["CIE Club – Instagram & YouTube Initiative", "Academic Semester Content Plan"],
+      blocks: [
+        { type: "heading", text: "1. Objective" },
+        { type: "paragraph", text: "The primary objective of this initiative is to enhance the digital presence of the CIE Club by consistently publishing informative, engaging, and student-centric content across social media platforms. This initiative aims to:" },
+        { type: "list", items: [
+          "Showcase students' innovative projects.",
+          "Increase student engagement through interactive content.",
+          "Promote awareness of emerging technologies, tools, and opportunities.",
+          "Build the club's digital identity and strengthen the college's online presence.",
+          "Inspire innovation and knowledge sharing among students.",
+        ]},
+
+        { type: "heading", text: "2. Content Strategy" },
+        { type: "paragraph", text: "To ensure consistency while maintaining a manageable workload, the club proposes publishing two Instagram Reels per week, resulting in eight reels per month." },
+        { type: "paragraph", text: "The content will be divided into the following categories." },
+
+        { type: "subheading", text: "A. Micro Project Showcase" },
+        { type: "paragraph", text: "Frequency: One Reel per Week" },
+        { type: "paragraph", text: "This series will highlight innovative micro projects developed by students across various departments." },
+        { type: "paragraph", text: "Each reel will include:" },
+        { type: "list", items: [
+          "Introduction to the project",
+          "Problem statement",
+          "Solution developed",
+          "Key technologies used",
+          "Live demonstration",
+          "Team introduction",
+          "Expected applications and impact",
+        ]},
+        { type: "paragraph", text: "Objectives" },
+        { type: "list", items: [
+          "Encourage project-based learning.",
+          "Recognize student innovation.",
+          "Motivate other students to participate in technical activities.",
+          "Create a digital archive of student projects.",
+        ]},
+
+        { type: "subheading", text: "B. Technical Quiz & Student Interaction" },
+        { type: "paragraph", text: "Frequency: Twice per Month" },
+        { type: "paragraph", text: "This content focuses on engaging students through short technical quizzes and interactive questions." },
+        { type: "paragraph", text: "Possible topics include:" },
+        { type: "list", items: [
+          "Programming",
+          "Electronics",
+          "Artificial Intelligence",
+          "General Engineering",
+          "Logical Thinking",
+          "Technical Facts",
+          "Industry Trends",
+        ]},
+        { type: "paragraph", text: "Objectives" },
+        { type: "list", items: [
+          "Improve student engagement.",
+          "Encourage learning through entertainment.",
+          "Increase audience interaction via comments and shares.",
+          "Promote technical awareness.",
+        ]},
+
+        { type: "subheading", text: "C. Information & Learning Reels" },
+        { type: "paragraph", text: "Frequency: Twice per Month" },
+        { type: "paragraph", text: "These reels will provide concise and valuable information for students." },
+        { type: "paragraph", text: "Topics may include:" },
+        { type: "list", items: [
+          "Useful websites for students",
+          "Free learning platforms",
+          "AI tools",
+          "Productivity applications",
+          "Internship resources",
+          "Certification opportunities",
+          "Scholarship updates",
+          "Emerging technologies",
+          "Career guidance",
+          "Frequently asked student questions",
+        ]},
+        { type: "paragraph", text: "Objectives" },
+        { type: "list", items: [
+          "Deliver practical knowledge in a simple format.",
+          "Help students stay updated with current technologies.",
+          "Position the club as a reliable source of educational content.",
+        ]},
+
+        { type: "heading", text: "3. Monthly Content Calendar" },
+        { type: "table", headers: ["Week", "Wednesday", "Saturday"], rows: [
+          ["Week 1", "Information Reel", "Micro Project Showcase"],
+          ["Week 2", "Technical Quiz Reel", "Micro Project Showcase"],
+          ["Week 3", "Information Reel", "Micro Project Showcase"],
+          ["Week 4", "Technical Quiz Reel", "Micro Project Showcase"],
+        ]},
+        { type: "paragraph", text: "Monthly Deliverables" },
+        { type: "list", items: [
+          "4 Micro Project Reels",
+          "2 Information Reels",
+          "2 Quiz Reels",
+        ]},
+        { type: "paragraph", text: "Total: 8 Reels per Month" },
+
+        { type: "heading", text: "4. Benefits to the Institution" },
+        { type: "paragraph", text: "This initiative will:" },
+        { type: "list", items: [
+          "Showcase student innovation to a wider audience.",
+          "Improve the college's digital presence.",
+          "Increase student participation in club activities.",
+          "Encourage collaborative learning.",
+          "Highlight the institution's focus on innovation and practical learning.",
+          "Strengthen the college's reputation among prospective students and industry partners.",
+        ]},
+
+        { type: "heading", text: "5. Conclusion" },
+        { type: "paragraph", text: "This content strategy emphasizes consistency, quality, and meaningful engagement while remaining practical for student volunteers. By publishing two well-planned reels each week and exploring a monthly podcast with institutional support, the CIE Club aims to build a sustainable digital presence that showcases student achievements, promotes learning, and en" },
+      ],
+    },
   },
   {
     id: "product-development",

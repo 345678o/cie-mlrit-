@@ -66,7 +66,7 @@ export default function ContactForm() {
           <input id="contact-name" type="text" aria-required="true"
             aria-invalid={!!errors.name} aria-describedby={errors.name ? "contact-name-error" : undefined}
             value={formState.name} onChange={(e) => { setFormState({ ...formState, name: e.target.value }); setErrors({ ...errors, name: "" }); }}
-            placeholder="Rahul Sharma" style={{ ...inputStyle, padding: "13px 16px" }}
+            style={{ ...inputStyle, padding: "13px 16px" }}
             onFocus={(e) => e.target.style.borderColor = "#E8521A"}
             onBlur={(e) => e.target.style.borderColor = errors.name ? "#DC2626" : "rgba(0,0,0,0.10)"} />
           <AnimatePresence>
@@ -81,7 +81,7 @@ export default function ContactForm() {
           <input id="contact-email" type="email" aria-required="true"
             aria-invalid={!!errors.email} aria-describedby={errors.email ? "contact-email-error" : undefined}
             value={formState.email} onChange={(e) => { setFormState({ ...formState, email: e.target.value }); setErrors({ ...errors, email: "" }); }}
-            placeholder="rahul@mlrit.ac.in" style={{ ...inputStyle, padding: "13px 16px" }}
+            style={{ ...inputStyle, padding: "13px 16px" }}
             onFocus={(e) => e.target.style.borderColor = "#E8521A"}
             onBlur={(e) => e.target.style.borderColor = errors.email ? "#DC2626" : "rgba(0,0,0,0.10)"} />
           <AnimatePresence>

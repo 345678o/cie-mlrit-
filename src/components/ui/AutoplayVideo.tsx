@@ -51,6 +51,9 @@ export default function AutoplayVideo({
         loop
         playsInline
         preload="auto"
+        disablePictureInPicture
+        disableRemotePlayback
+        x-webkit-airplay="deny"
         className={className}
         style={{ cursor: unmuteOnHover ? "pointer" : undefined, ...style }}
         onMouseEnter={unmuteOnHover ? (e) => { e.currentTarget.muted = false; } : undefined}

@@ -490,6 +490,9 @@ export default function GalleryPage() {
                   loop
                   playsInline
                   preload="metadata"
+                  disablePictureInPicture
+                  disableRemotePlayback
+                  x-webkit-airplay="deny"
                   className="slide-video"
                   style={{
                     position: "absolute", inset: 0, width: "100%", height: "100%",

@@ -65,7 +65,6 @@ const footerLinks = {
   explore: [
     { href: "/about",      label: "About Us" },
     { href: "/verticals",  label: "Verticals" },
-    { href: "/facilities", label: "Facilities" },
     { href: "/gallery",      label: "Gallery" },
   ],
   programs: [
