@@ -103,7 +103,7 @@ type TeamSection = {
 
 
 const studentLeadership: Member[] = [
-  { name: "Ghanashyam Kodekandla", role: "President",                  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/ghanashyamkodekandla", email: "", photo: "/council/tech/Ghanashyam Kodekandla.png" },
+  { name: "Ghanashyam Kodekandla", role: "President",                  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/ghanashyamkodekandla", email: "", photo: "/council/tech/Ghanashyam Kodekandla.png", zoom: 1.7 },
   { name: "Mahima Tatineni",       role: "Vice President",             dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Mahima Tatineni.png" },
   { name: "Aarthi Reddy", role: "Secretary",                  dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Aarthi.png", pos: "center 30%" },
   { name: "Keertan Kuppili",       role: "Chief Technical Executive",  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/", email: "", photo: "/council/tech/Keertan Kuppili .png" },
@@ -118,7 +118,7 @@ const teams: TeamSection[] = [
     color: "#4A7DFF",
     description: "Builds and maintains CIE's digital infrastructure — from the website and internal tools to AI experiments and mobile apps. The Tech team turns every idea into a working product.",
     members: [
-      { name: "Ghanashyam Kodekandla", role: "Chairperson", dept: "Tech", photo: "/council/tech/Ghanashyam Kodekandla.png",linkedin:"https://www.linkedin.com/in/ghanashyamkodekandla",year:"4th" },
+      { name: "Ghanashyam Kodekandla", role: "Chairperson", dept: "Tech", photo: "/council/tech/Ghanashyam Kodekandla.png",linkedin:"https://www.linkedin.com/in/ghanashyamkodekandla",year:"4th", zoom: 1.7 },
       { name: "Keertan Kuppili",       role: "Chairperson", dept: "Tech", photo: "/council/tech/Keertan Kuppili .png", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/",year:"4th"},
       { name: "Teja Jagathi",          role: "Chairperson", dept: "Tech", photo: "/council/tech/Teja Jagathi.png" ,linkedin: "https://www.linkedin.com/in/teja-jagathi",year:"4th"},
       { name: "T.S Siddarth",          role: "Chairperson", dept: "Tech", photo: "/council/tech/T.S Siddarth.png",linkedin: "https://www.linkedin.com/in/siddharth-t-s-a76655248/",year:"4th"},
@@ -422,12 +422,12 @@ export default function CouncilPage() {
     "Tannidi Durga Karthikeya", "Durga Mahesh", "Cheeda Shamilini", "Anuj Lomte",
     "Anamika", "Sai Krishna", "Bhavana", "Yeruva InduSri Varshitha Reddy",
     "Shiva", "Prashansa", "Aarthi Reddy", "Sri Thejitha", "M.Tarun Kumar Reddy",
-    "Teja Jagathi", "Yashashri Penikalapti", "Katepally Tribhuvan", "Konthum Bhruhathi",
+    "Teja Jagathi", "Yashashri Penikalapti", "Sai Mihir Ramaraju", "Katepally Tribhuvan", "Konthum Bhruhathi",
     "Athava Sri Pavan", "Hansika Jella", "Ghanashyam Kodekandla", "Adithya Ganesh",
     "Sai Vashist", "Tharun", "Vivek Vardhan", "Rithish Kumar", "Anguluri Shiva",
     "Anam Mounika", "A Farhana Sultana", "Guna Sai Marni", "Ritvik Ennavar",
     "Sadwika Reddy Chedimala", "Mahesh Gorli", "Bangari Nikitha", "Chanikya",
-    "Jayadeep", "Poloju RajaVivek", "Priyanshu Roy", "D Pearl Angelina", "Harika Y",
+    "Jayadeep", "Haritha", "Poloju RajaVivek", "Priyanshu Roy", "D Pearl Angelina", "Harika Y",
     "M Vasanth Vardhan", "Keertan Kuppili", "K S Sreesanth", "Gannoji Vedik",
     "Guguloth Adithya Jadhav", "Abhiram Ganji", "Yashwanth Abhishek", "Vavilala Sai Ganesh",
     "Mattam Shivani", "Vinay", "Mounith Varma Akkala", "Sushaanth", "Abhinav Sai",
