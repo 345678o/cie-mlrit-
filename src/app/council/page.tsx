@@ -70,6 +70,8 @@ type Member = {
   fit?: "cover" | "contain";
   // Photo scale in card. <1 zooms out (even margin), >1 zooms in. Default 1.
   zoom?: number;
+  // object-position for the photo. Default "top center".
+  pos?: string;
 };
 
 // Ordering priority within a selected dept: leads first.
@@ -103,7 +105,7 @@ type TeamSection = {
 const studentLeadership: Member[] = [
   { name: "Ghanashyam Kodekandla", role: "President",                  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/ghanashyamkodekandla", email: "", photo: "/council/tech/Ghanashyam Kodekandla.png" },
   { name: "Mahima Tatineni",       role: "Vice President",             dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Mahima Tatineni.png" },
-  { name: "Aarthi Reddy", role: "Secretary",                  dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Aarthi.png" },
+  { name: "Aarthi Reddy", role: "Secretary",                  dept: "Operations & Finance", year: "2026-27", linkedin: "#", email: "", photo: "/council/OPS/Aarthi.png", pos: "center 30%" },
   { name: "Keertan Kuppili",       role: "Chief Technical Executive",  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/", email: "", photo: "/council/tech/Keertan Kuppili .png" },
   { name: "Jaikar Midithuri",      role: "Joint Secretary",            dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/jaikar-midithuri-136614369/", email: "", photo: "/council/tech/Jaikar Midithuri.png" },
   { name: "Bhavana Inakollu",      role: "Internal Relations",         dept: "Operations & Finance", year: "2026-27", linkedin: "https://www.linkedin.com/in/bhavana-inakollu-8698a2395", email: "", photo: "/council/OPS/Bhavana .png" },
@@ -220,7 +222,7 @@ const teams: TeamSection[] = [
     members: [
        { name: "Dheeraj Kumar",     role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Dheeraj Kumar.png",linkedin:"#" ,year:"4th"},
       { name: "Mahima Tatineni",   role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Mahima Tatineni.png",linkedin:"https://www.linkedin.com/in/mahima-tatineni" ,year:"4th"},
-      { name: "Aarthi Reddy", role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Aarthi.png",linkedin:"https://www.linkedin.com/in/aarthi-reddy-b-626241350/" ,year:"4th"},
+      { name: "Aarthi Reddy", role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Aarthi.png",linkedin:"https://www.linkedin.com/in/aarthi-reddy-b-626241350/" ,year:"4th", pos: "center 30%"},
       { name: "Vinay",             role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Vinay.png",linkedin:"https://www.linkedin.com/in/dsdvinay" ,year:"4th"},
       { name: "Bhavana",           role: "Internal Relations", dept: "Operations & Finance", photo: "/council/OPS/Bhavana .png",linkedin:"https://www.linkedin.com/in/bhavana-inakollu-8698a2395" ,year:"3rd"},
       { name: "Alleshwaram Sai Ganesh", role: "Operations Lead", dept: "Operations & Finance", photo: "/council/OPS/ASaiGanesh.png",linkedin:"https://www.linkedin.com/in/sai-ganesh-alleshwaram-a30832316" ,year:"3rd"},
@@ -309,7 +311,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                         fill
                         draggable={false}
                         sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
-                        style={{ objectFit: m.fit ?? "cover", objectPosition: "top center", transform: m.zoom ? `scale(${m.zoom})` : undefined, transformOrigin: m.zoom && m.zoom > 1 ? "top center" : "center" }}
+                        style={{ objectFit: m.fit ?? "cover", objectPosition: m.pos ?? "top center", transform: m.zoom ? `scale(${m.zoom})` : undefined, transformOrigin: m.zoom && m.zoom > 1 ? "top center" : "center" }}
                       />
 <div className="cs-tap-hint">Tap for details</div>
                     </div>
@@ -537,7 +539,7 @@ export default function CouncilPage() {
                         draggable={false}
                         alt={member.name}
                         sizes="160px"
-                        style={{ objectFit: "cover", objectPosition: "top center" }}
+                        style={{ objectFit: "cover", objectPosition: member.pos ?? "top center" }}
                       />
                     </div>
                   ) : (
