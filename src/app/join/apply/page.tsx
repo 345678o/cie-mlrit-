@@ -313,6 +313,20 @@ function ApplyForm() {
         });
         const data: ApplyResponse = await res.json();
         if (!res.ok || "error" in data) {
+          // Surface the server's per-field reasons instead of a bare "Validation failed".
+          // Fields on the current step light up red; step-1 (intro) fields aren't on
+          // screen here, so also name them in the banner and point back to Step 1.
+          const fields = "error" in data ? data.fields : undefined;
+          if (fields && Object.keys(fields).length > 0) {
+            setErrors((prev) => ({ ...prev, ...fields }));
+            const summary = Object.values(fields).join(" · ");
+            const introBad = Object.keys(fields).some((k) => k in EMPTY_INTRO);
+            throw new Error(
+              introBad
+                ? `Some of your details need fixing — go back to Step 1. (${summary})`
+                : `Please fix: ${summary}`
+            );
+          }
           throw new Error(("error" in data && data.error) || "Submission failed. Please try again.");
         }
         return data.candidateId;

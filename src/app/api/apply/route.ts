@@ -15,7 +15,12 @@ export const runtime = "nodejs";
 // (Error 1102) for whatever request happens to be in flight at the time.
 // Swap for Upstash-backed rate limiting if abuse becomes real.
 const WINDOW_MS = 10 * 60 * 1000;
-const MAX_REQUESTS = 5;
+// Applicants apply from campus WiFi, where the whole college shares one NAT IP
+// (all requests carry the same x-forwarded-for). A tight per-IP cap therefore
+// blocks legitimate students, not just a single double-submitter — keep this high
+// enough to cover a burst of real applicants. For true abuse protection, move to
+// Upstash-backed limiting keyed on something better than the shared IP.
+const MAX_REQUESTS = 10;
 const MAX_TRACKED_IPS = 5000;
 const hits = new Map<string, number[]>();
 
