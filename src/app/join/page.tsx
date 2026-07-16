@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Clock, Bell } from "lucide-react";
 import { DEPARTMENTS, type DeptKey } from "@/lib/departments";
+import { APPLICATIONS_OPEN } from "@/lib/recruitment";
 
 function DeptGrid({
   excludeKey,
