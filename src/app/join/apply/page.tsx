@@ -859,6 +859,9 @@ function SuccessScreen({ deptName, color, firstName, candidateId }: { deptName: 
 // ── Page root ─────────────────────────────────────────────────────────────────
 
 export default function ApplyPage() {
+  const router = useRouter();
+  useEffect(() => { if (!APPLICATIONS_OPEN) router.replace("/join"); }, [router]);
+  if (!APPLICATIONS_OPEN) return null;
   return (
     <div style={{ background:"#F2F2F0", minHeight:"100vh" }}>
       <Suspense fallback={<div style={{ minHeight:"100vh", background:"#F2F2F0" }}/>}>
