@@ -13,6 +13,7 @@ import { BRANCHES, SECTIONS_BY_BRANCH, branchNeedsSection } from "@/lib/branches
 import DynamicQuestionField from "@/components/join/DynamicQuestionField";
 import { inputStyle, Label, FieldErr } from "@/components/join/form-primitives";
 import { getGrainDataUri } from "@/lib/grain";
+import { APPLICATIONS_OPEN } from "@/lib/recruitment";
 import type { Question, IntroForm, ApplyPayload, ApplyResponse, QuestionsResponse } from "@/types/apply";
 
 const ORANGE = "#E8521A";
