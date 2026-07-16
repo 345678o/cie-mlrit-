@@ -94,10 +94,97 @@ function DeptGrid({
   );
 }
 
+function ClosedNotice() {
+  return (
+    <div style={{ minHeight: "100vh", background: "#ff6f00", display: "flex", alignItems: "center", justifyContent: "center", padding: "clamp(24px,6vw,64px)", marginTop: "calc(-1 * var(--nav-height))", paddingTop: "calc(var(--nav-height) + 32px)", position: "relative", overflow: "hidden" }}>
+
+      {/* Circle pattern (matches Pick Your Team) */}
+      <svg aria-hidden style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0 }} preserveAspectRatio="xMidYMid slice" viewBox="0 0 1440 900">
+        <circle cx="1200" cy="-80" r="340" fill="none" stroke="rgba(255,255,255,0.50)" strokeWidth="1.5"/>
+        <circle cx="1200" cy="-80" r="260" fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth="1"/>
+        <circle cx="1200" cy="-80" r="180" fill="none" stroke="rgba(255,255,255,0.40)" strokeWidth="1"/>
+        <circle cx="160"  cy="860" r="380" fill="none" stroke="rgba(255,255,255,0.48)" strokeWidth="1.5"/>
+        <circle cx="160"  cy="860" r="280" fill="none" stroke="rgba(255,255,255,0.43)" strokeWidth="1"/>
+        <circle cx="720"  cy="450" r="420" fill="none" stroke="rgba(255,255,255,0.32)" strokeWidth="1"/>
+        <circle cx="80"   cy="200" r="120" fill="none" stroke="rgba(255,255,255,0.48)" strokeWidth="1"/>
+        <circle cx="1360" cy="700" r="160" fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth="1"/>
+        <circle cx="400"  cy="140" r="3.5" fill="rgba(255,255,255,0.50)"/>
+        <circle cx="1100" cy="320" r="3"   fill="rgba(255,255,255,0.50)"/>
+        <circle cx="260"  cy="600" r="2.5" fill="rgba(255,255,255,0.50)"/>
+        <circle cx="1280" cy="480" r="3"   fill="rgba(255,255,255,0.50)"/>
+      </svg>
+
+      <motion.div
+        initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          maxWidth: "520px", width: "100%", textAlign: "center", position: "relative", zIndex: 1,
+          background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.30)",
+          borderRadius: "24px", padding: "clamp(32px,6vw,52px) clamp(24px,5vw,44px)",
+          backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)",
+          boxShadow: "0 24px 60px rgba(0,0,0,0.18)",
+        }}
+      >
+        {/* Icon medallion */}
+        <motion.div
+          initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            width: "76px", height: "76px", borderRadius: "50%", margin: "0 auto 24px",
+            background: "rgba(255,255,255,0.16)", border: "1px solid rgba(255,255,255,0.4)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            boxShadow: "0 0 0 8px rgba(255,255,255,0.06)",
+          }}
+        >
+          <Clock size={34} color="#FFFFFF" strokeWidth={2} />
+        </motion.div>
+
+        <span style={{
+          display: "inline-flex", alignItems: "center", gap: "6px",
+          fontFamily: "var(--font-body)", fontWeight: 700,
+          fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase",
+          color: "#FFFFFF", background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.35)",
+          borderRadius: "999px", padding: "5px 14px", marginBottom: "20px",
+        }}>
+          <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#FFD9B0", flexShrink: 0 }} />
+          Applications Closed
+        </span>
+
+        <h1 style={{
+          fontFamily: "var(--font-heading)", fontWeight: 900,
+          fontSize: "clamp(34px, 6vw, 60px)", lineHeight: 0.95,
+          letterSpacing: "-0.04em", color: "#FFFFFF", textTransform: "uppercase",
+          marginBottom: "18px",
+        }}>
+          Temporarily<br />Closed
+        </h1>
+
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.5vw,16px)", color: "rgba(255,255,255,0.9)", lineHeight: 1.65, marginBottom: "28px" }}>
+          Recruitment for the CIE Council is paused right now. We&apos;ll reopen applications soon — check back shortly.
+        </p>
+
+        <a
+          href="https://instagram.com/mlritcie" target="_blank" rel="noopener noreferrer"
+          style={{
+            display: "inline-flex", alignItems: "center", gap: "9px",
+            fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "13px",
+            color: "#FFFFFF", background: "rgba(0,0,0,0.28)", textDecoration: "none",
+            borderRadius: "999px", padding: "11px 20px",
+          }}
+        >
+          <Bell size={15} strokeWidth={2.2} />
+          Follow @mlritcie for the reopening
+        </a>
+      </motion.div>
+    </div>
+  );
+}
+
 export default function JoinPage() {
   const router = useRouter();
   const [major, setMajor] = useState<DeptKey | null>(null);
   const [minor, setMinor] = useState<DeptKey | null>(null);
+  if (!APPLICATIONS_OPEN) return <ClosedNotice />;
 
   function selectMajor(key: DeptKey) {
     setMajor((prev) => (prev === key ? null : key));
