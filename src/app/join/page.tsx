@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Check, Clock, Bell } from "lucide-react";
+import { ArrowRight, Check, Lock, Bell } from "lucide-react";
 import { DEPARTMENTS, type DeptKey } from "@/lib/departments";
 import { APPLICATIONS_OPEN } from "@/lib/recruitment";
 
@@ -136,7 +136,7 @@ function ClosedNotice() {
             boxShadow: "0 0 0 8px rgba(255,255,255,0.06)",
           }}
         >
-          <Clock size={34} color="#FFFFFF" strokeWidth={2} />
+          <Lock size={34} color="#FFFFFF" strokeWidth={2} />
         </motion.div>
 
         <span style={{
@@ -156,11 +156,11 @@ function ClosedNotice() {
           letterSpacing: "-0.04em", color: "#FFFFFF", textTransform: "uppercase",
           marginBottom: "18px",
         }}>
-          Temporarily<br />Closed
+          Applications<br />Closed
         </h1>
 
         <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.5vw,16px)", color: "rgba(255,255,255,0.9)", lineHeight: 1.65, marginBottom: "28px" }}>
-          Recruitment for the CIE Council is paused right now. We&apos;ll reopen applications soon — check back shortly.
+          Recruitment for the CIE Council is now closed. Thank you to everyone who applied — follow us to stay in the loop on what&apos;s next.
         </p>
 
         <a
@@ -173,7 +173,7 @@ function ClosedNotice() {
           }}
         >
           <Bell size={15} strokeWidth={2.2} />
-          Follow @mlritcie for the reopening
+          Follow @mlritcie
         </a>
       </motion.div>
     </div>
