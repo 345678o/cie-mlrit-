@@ -118,7 +118,6 @@ const teams: TeamSection[] = [
     color: "#4A7DFF",
     description: "Builds and maintains CIE's digital infrastructure — from the website and internal tools to AI experiments and mobile apps. The Tech team turns every idea into a working product.",
     members: [
-      { name: "Ghanashyam Kodekandla", role: "Chairperson", dept: "Tech", photo: "/council/tech/Ghanashyam Kodekandla.png",linkedin:"https://www.linkedin.com/in/ghanashyamkodekandla",year:"4th", zoom: 1.7 },
       { name: "Keertan Kuppili",       role: "Chairperson", dept: "Tech", photo: "/council/tech/Keertan Kuppili .png", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/",year:"4th"},
       { name: "Teja Jagathi",          role: "Chairperson", dept: "Tech", photo: "/council/tech/Teja Jagathi.png" ,linkedin: "https://www.linkedin.com/in/teja-jagathi",year:"4th"},
       { name: "T.S Siddarth",          role: "Chairperson", dept: "Tech", photo: "/council/tech/T.S Siddarth.png",linkedin: "https://www.linkedin.com/in/siddharth-t-s-a76655248/",year:"4th"},
