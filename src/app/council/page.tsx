@@ -219,7 +219,7 @@ const teams: TeamSection[] = [
     color: "#22C55E",
     description: "Keeps everything running — coordinating logistics for every event, managing budgets, vendor relations, and making sure no detail falls through the cracks.",
     members: [
-      { name: "Mahima Tatineni",   role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Mahima Tatineni.png",linkedin:"https://www.linkedin.com/in/mahima-tatineni" ,year:"4th"},
+      { name: "Mahima Tatineni",   role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Mahima Tatineni.png",linkedin:"https://www.linkedin.com/in/mahima-tatineni/" ,year:"4th"},
       { name: "Aarthi Reddy", role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Aarthi.png",linkedin:"https://www.linkedin.com/in/aarthi-reddy-b-626241350/" ,year:"4th", pos: "center 30%", zoom: 1.2},
       { name: "Vinay",             role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Vinay.png",linkedin:"https://www.linkedin.com/in/dsdvinay" ,year:"4th"},
        { name: "Dheeraj Kumar",     role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Dheeraj Kumar.png",linkedin:"#" ,year:"4th"},
