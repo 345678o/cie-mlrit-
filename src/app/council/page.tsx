@@ -122,7 +122,6 @@ const teams: TeamSection[] = [
       { name: "Teja Jagathi",          role: "Chairperson", dept: "Tech", photo: "/council/tech/Teja Jagathi.png" ,linkedin: "https://www.linkedin.com/in/teja-jagathi",year:"4th"},
       { name: "T.S Siddarth",          role: "Chairperson", dept: "Tech", photo: "/council/tech/T.S Siddarth.png",linkedin: "https://www.linkedin.com/in/siddharth-t-s-a76655248/",year:"4th"},
       { name: "Abhiram Ganji",         role: "Product Development Lead", dept: "Tech", photo: "/council/tech/Abhiram Ganji.png" ,linkedin:"#",year:"3rd"},
-      { name: "Anuj Lomte",            role: "Member", dept: "Tech", photo: "/council/tech/Anuj Lomte.png" ,linkedin: "https://www.linkedin.com/in/anuj-lomte-918b90344/",year:"3rd"},
       { name: "Anamika",               role: "Member", dept: "Tech", photo: "/council/tech/Anamika.jpeg" , linkedin: "https://www.linkedin.com/in/anamikak3131/",year:"3rd"},
       { name: "Guna Sai Marni",        role: "Member", dept: "Tech", photo: "/council/tech/Guna Sai Marni.png" ,linkedin: "#",year:"3rd"},
       { name: "Jaikar Midithuri",      role: "Joint Secretary", dept: "Tech", photo: "/council/tech/Jaikar Midithuri.png",linkedin: "https://www.linkedin.com/in/jaikar-midithuri-136614369/",year:"3rd"},
@@ -132,7 +131,8 @@ const teams: TeamSection[] = [
       { name: "Abhinav Sai",           role: "Member", dept: "Tech", photo: "/council/tech/Abhinav Sai.png",linkedin: "http://www.linkedin.com/in/abhiinavsaig",year:"3rd"},
       { name: "Guguloth Adithya Jadhav", role: "Inventory Lead", dept: "Tech", photo: "/council/tech/Guguloth Adithya Jadhav.png",linkedin:"https://www.linkedin.com/in/adithyajadhav/" ,year:"3rd"},
       { name: "Gannoji Vedik",         role: "Member", dept: "Tech", photo: "/council/tech/Gannoji Vedik.png" ,linkedin:"https://www.linkedin.com/in/vedik-gannoji/",year:"3rd"},
-      
+      { name: "Anuj Lomte",            role: "Member", dept: "Tech", photo: "/council/tech/Anuj Lomte.png" ,linkedin: "https://www.linkedin.com/in/anuj-lomte-918b90344/",year:"3rd"},
+
     ],
   },
   {
