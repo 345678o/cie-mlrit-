@@ -214,6 +214,22 @@ const teams: TeamSection[] = [
       { name: "Rithish Kumar",         role: "Promotions Lead", dept: "P&S", photo: "/council/p&s/Rithish Kumar.png",linkedin:"https://www.linkedin.com/in/rithish-kumar-418242363/",year:"3rd" },
     ],
   },
+  {
+    team: "Operations & Finance",
+    color: "#22C55E",
+    description: "Keeps everything running — coordinating logistics for every event, managing budgets, vendor relations, and making sure no detail falls through the cracks.",
+    members: [
+       { name: "Dheeraj Kumar",     role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Dheeraj Kumar.png",linkedin:"#" ,year:"4th"},
+      { name: "Mahima Tatineni",   role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Mahima Tatineni.png",linkedin:"https://www.linkedin.com/in/mahima-tatineni" ,year:"4th"},
+      { name: "Aarthi Reddy", role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Aarthi.png",linkedin:"https://www.linkedin.com/in/aarthi-reddy-b-626241350/" ,year:"4th", pos: "center 30%", zoom: 1.2},
+      { name: "Vinay",             role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Vinay.png",linkedin:"https://www.linkedin.com/in/dsdvinay" ,year:"4th"},
+      { name: "Bhavana",           role: "Internal Relations", dept: "Operations & Finance", photo: "/council/OPS/Bhavana .png",linkedin:"https://www.linkedin.com/in/bhavana-inakollu-8698a2395" ,year:"3rd"},
+      { name: "Alleshwaram Sai Ganesh", role: "Operations Lead", dept: "Operations & Finance", photo: "/council/OPS/ASaiGanesh.png",linkedin:"https://www.linkedin.com/in/sai-ganesh-alleshwaram-a30832316" ,year:"3rd"},
+      { name: "M.Tarun Kumar Reddy",    role: "Finance and Logistics", dept: "Operations & Finance", photo: "/council/OPS/Manukonda Tarun.png",linkedin:"https://www.linkedin.com/in/tarun-manukonda-9a5b97344" ,year:"3rd"},
+      { name: "Tharun",            role: "Member", dept: "Operations & Finance", photo: "/council/OPS/Tharun.png",linkedin:"https://www.linkedin.com/in/tharun-emmadisetti-590ba3344" ,year:"3rd"},
+      { name: "M Vasanth Vardhan", role: "Member", dept: "Operations & Finance", photo: "/council/OPS/M Vasanth vardhan.png",linkedin:"https://www.linkedin.com/in/vasanth-vardhan-maricherla-21783231a/" ,year:"3rd"},
+    ],
+  },
 ];
 
 const deptShort: Record<string, string> = {
@@ -223,6 +239,7 @@ const deptShort: Record<string, string> = {
   "GD — Graphic Design": "Graphic Design",
   "Photography and Media": "Photography and Media",
   "P&S — Public Speaking": "Promotions & Sponsorship",
+  "Operations & Finance": "Operations & Finance",
 };
 
 // ── Council Showcase — notched triangle cards ─────────────────────
@@ -247,6 +264,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
           const flipBgByDept: Record<string, string> = {
             "Tech": "/council/bg/tech-flip.jpg",
             "Content": "/council/bg/content-flip.webp",
+            "Operations & Finance": "/council/bg/ops-flip.jpg",
             "Creative": "/council/bg/creative-flip.webp",
             "GD — Graphic Design": "/council/bg/gd-flip.jpg",
             "P&S — Public Speaking": "/council/bg/ps-flip.jpg",
