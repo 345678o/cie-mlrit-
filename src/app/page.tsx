@@ -756,7 +756,7 @@ export default function HomePage() {
         <div style={{ position: "absolute", top: 0, right: 0, width: "180px", height: "180px", backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.12) 1px, transparent 1px)", backgroundSize: "18px 18px", pointerEvents: "none" }} />
 
         <div className={CONTAINER} style={{ position: "relative", zIndex: 1 }}>
-          <FadeIn className="text-center mb-14">
+          <FadeIn className="text-center mb-20 lg:mb-24">
             <span style={{
               display: "inline-flex", alignItems: "center",
               background: "rgba(234,88,12,0.10)", border: "none",
@@ -784,7 +784,7 @@ export default function HomePage() {
             </p>
           </FadeIn>
 
-          <div className="relative">
+          <div className="relative" style={{ marginTop: "56px" }}>
             {/* Horizontal connector line */}
             <div className="absolute hidden lg:block" style={{
               top: "32px", left: "10%", right: "10%", height: "1px",
@@ -802,7 +802,7 @@ export default function HomePage() {
             <div
               ref={timelineScrollRef}
               onScroll={updateTimelineEdge}
-              className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-2 lg:pb-0 lg:grid lg:grid-cols-5 lg:gap-8 lg:overflow-visible"
+              className="flex overflow-x-auto snap-x snap-mandatory gap-12 pb-2 lg:pb-0 lg:grid lg:grid-cols-5 lg:gap-8 lg:overflow-visible"
               style={{ scrollbarWidth: "none", overflowAnchor: "none" }}
             >
               <div aria-hidden className="shrink-0 lg:hidden" style={{ width: "calc(50vw - 130px)" }} />
