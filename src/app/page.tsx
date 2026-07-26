@@ -157,10 +157,11 @@ const studios = [
 ];
 
 const timeline = [
-  { step: "01", title: "Ideate",  desc: "Brainstorm and validate your idea",    icon: Lightbulb,     color: "#CA8A04" },
-  { step: "02", title: "Build",   desc: "Prototype with expert guidance",        icon: PenLine,       color: "#2563EB" },
-  { step: "03", title: "Test",    desc: "Iterate through user feedback",         icon: MessageSquare, color: "#9333EA" },
-  { step: "04", title: "Launch",  desc: "Go to market with full support",        icon: Rocket,        color: "#EA580C" },
+  { step: "01", title: "Ideate",          desc: "Explore problems, brainstorm solutions, and validate your idea",              icon: Lightbulb,     color: "#CA8A04" },
+  { step: "02", title: "Build",           desc: "Turn your idea into a prototype or MVP with expert guidance",                icon: PenLine,       color: "#2563EB" },
+  { step: "03", title: "Test & Validate", desc: "Gather user feedback, iterate, and refine your solution",                    icon: MessageSquare, color: "#9333EA" },
+  { step: "04", title: "Launch",          desc: "Take your product to market with the support, resources, and network to grow", icon: Rocket,        color: "#EA580C" },
+  { step: "05", title: "Scale",           desc: "Build traction, access opportunities, and grow your venture sustainably",     icon: TrendingUp,    color: "#0891B2" },
 ];
 
 
