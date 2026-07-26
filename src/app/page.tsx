@@ -787,11 +787,11 @@ export default function HomePage() {
           <div className="relative">
             {/* Horizontal connector line */}
             <div className="absolute hidden lg:block" style={{
-              top: "32px", left: "12.5%", right: "12.5%", height: "1px",
+              top: "32px", left: "10%", right: "10%", height: "1px",
               background: "rgba(0,0,0,0.15)", zIndex: 0,
             }} />
             {/* Orange midpoint dots */}
-            {[25, 50, 75].map((pct) => (
+            {[20, 40, 60, 80].map((pct) => (
               <div key={pct} className="absolute hidden lg:block" style={{
                 top: "28px", left: `${pct}%`, transform: "translateX(-50%)",
                 width: "8px", height: "8px", borderRadius: "50%",
@@ -802,7 +802,7 @@ export default function HomePage() {
             <div
               ref={timelineScrollRef}
               onScroll={updateTimelineEdge}
-              className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-2 lg:pb-0 lg:grid lg:grid-cols-4 lg:overflow-visible"
+              className="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-2 lg:pb-0 lg:grid lg:grid-cols-5 lg:gap-8 lg:overflow-visible"
               style={{ scrollbarWidth: "none", overflowAnchor: "none" }}
             >
               <div aria-hidden className="shrink-0 lg:hidden" style={{ width: "calc(50vw - 130px)" }} />
