@@ -11,13 +11,13 @@
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
   },
   "dependencies": {
-    "@opennextjs/cloudflare": "^1.20.1",
+    "@opennextjs/cloudflare": "^1.20.2",
     "@types/canvas-confetti": "^1.9.0",
     "canvas-confetti": "^1.9.4",
-    "framer-motion": "^12.40.0",
+    "framer-motion": "^12.43.0",
     "gsap": "^3.15.0",
-    "lucide-react": "^1.21.0",
-    "next": "16.2.9",
+    "lucide-react": "^1.28.0",
+    "next": "^16.2.12",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -26,11 +26,19 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.9",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.2.12",
     "playwright": "^1.61.1",
     "tailwindcss": "^4",
     "typescript": "^5",
     "wrangler": "^4.107.0"
+  },
+  "allowScripts": {
+    "sharp@0.35.2": true,
+    "sharp@0.34.5": true,
+    "esbuild@0.25.4": true,
+    "esbuild@0.28.1": true,
+    "workerd@1.20260730.1": true,
+    "unrs-resolver@1.12.2": true
   }
 }
