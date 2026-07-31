@@ -248,6 +248,13 @@ type ShowcaseMember = Member & { department: string; deptColor: string };
 
 function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
   const [active, setActive] = useState<number | null>(null);
+  const [transitioning, setTransitioning] = useState<number | null>(null);
+
+  const toggleCard = (index: number) => {
+    if (transitioning !== null) return;
+    setTransitioning(index);
+    setActive((current) => (current === index ? null : index));
+  };
 
   return (
     <>
@@ -278,30 +285,45 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
               key={`${m.department}-${m.name}-${i}`}
               role="button"
               tabIndex={0}
-              onClick={() => setActive(isActive ? null : i)}
+              onClick={() => toggleCard(i)}
               onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActive(isActive ? null : i); }
+                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleCard(i); }
               }}
               aria-pressed={isActive}
               className="cs-card"
               style={{
                 background: "transparent", border: "none", padding: 0, cursor: "pointer", textAlign: "left",
                 transform: `translateY(${isActive ? 0 : scatter}px)`,
-                transition: "transform .55s cubic-bezier(.16,1,.3,1)",
+                transition: "transform .55s cubic-bezier(0.22, 1, 0.36, 1)",
+                willChange: "transform",
               }}
             >
               <div style={{
-                position: "relative", aspectRatio: "4 / 5", perspective: "1200px",
-                filter: isActive ? `drop-shadow(0 22px 50px ${m.deptColor}66)` : "none",
-                transition: "filter .45s ease",
+                position: "relative", aspectRatio: "4 / 5", perspective: "1600px",
+                transformStyle: "preserve-3d",
+                backfaceVisibility: "hidden",
+                WebkitBackfaceVisibility: "hidden",
+                transform: "translateZ(0)",
+                willChange: "transform",
               }}>
-                <div style={{
-                  position: "absolute", inset: 0, transformStyle: "preserve-3d",
-                  transform: isActive ? "rotateY(180deg)" : "rotateY(0deg)",
-                  transition: "transform .7s cubic-bezier(.16,1,.3,1)",
-                }}>
+                <motion.div
+                  initial={false}
+                  animate={{ rotateY: isActive ? 180 : 0 }}
+                  transition={{ type: "spring", stiffness: 320, damping: 26, mass: 0.95 }}
+                  style={{
+                    position: "absolute", inset: 0, transformStyle: "preserve-3d",
+                    transformOrigin: "center center",
+                    transformPerspective: 1600,
+                    willChange: "transform",
+                  }}
+                  onAnimationComplete={() => {
+                    if (transitioning === i) {
+                      setTransitioning(null);
+                    }
+                  }}
+                >
                   {/* FRONT — photo */}
-                  <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
+                  <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "translateZ(0.1px)" }}>
                     <div style={{ position: "absolute", inset: 0, clipPath: CS_NOTCH, background: "rgba(255,255,255,0.16)" }} />
                     <div style={{ position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden", background: "#05070F" }}>
                       <Image
@@ -316,7 +338,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                     </div>
                   </div>
                   {/* BACK — details */}
-                  <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
+                  <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateY(180deg) translateZ(0.1px)" }}>
                     <div style={{ position: "absolute", inset: 0, clipPath: CS_NOTCH, background: m.deptColor }} />
                     <div style={{
                       position: "absolute", inset: "1.5px", clipPath: CS_NOTCH, overflow: "hidden",
@@ -377,7 +399,7 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
               <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "3px", paddingTop: "12px", paddingInline: "4px" }}>
                 <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: isActive ? "15px" : "13px", lineHeight: 1.2, color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.82)", transition: "all .3s ease", overflowWrap: "anywhere" }}>{m.name}</span>
@@ -530,7 +552,7 @@ export default function CouncilPage() {
                   <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10"
                     style={{ background: "#FF5E2C", transform: "translate(30%, -30%)" }} />
                   {member.photo ? (
-                    <div className="rounded-full mb-6 overflow-hidden flex-shrink-0"
+                    <div className="rounded-full mb-6 overflow-hidden shrink-0"
                       style={{ position: "relative", width: "clamp(96px,14vw,160px)", height: "clamp(96px,14vw,160px)", border: "3px solid rgba(255,94,44,0.25)" }}>
                       <Image
                         src={member.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")}
@@ -542,7 +564,7 @@ export default function CouncilPage() {
                       />
                     </div>
                   ) : (
-                    <div className="rounded-full flex items-center justify-center text-4xl font-black mb-6 flex-shrink-0"
+                    <div className="rounded-full flex items-center justify-center text-4xl font-black mb-6 shrink-0"
                       style={{ width: "clamp(96px,14vw,160px)", height: "clamp(96px,14vw,160px)", background: "rgba(255,94,44,0.10)", color: "#FF5E2C", border: "3px solid rgba(255,94,44,0.20)" }}>
                       {member.name.split(" ").map((n) => n[0]).join("").substring(0, 2)}
                     </div>
