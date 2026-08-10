@@ -133,7 +133,6 @@ const teams: TeamSection[] = [
       { name: "Abhinav Sai",           role: "Member", dept: "Tech", photo: "/council/tech/Abhinav Sai.jpeg",linkedin: "http://www.linkedin.com/in/abhiinavsaig",year:"3rd"},
       { name: "Guguloth Adithya Jadhav", role: "Inventory Lead", dept: "Tech", photo: "/council/tech/Guguloth Adithya Jadhav.jpeg",linkedin:"https://www.linkedin.com/in/adithyajadhav/" ,year:"3rd"},
       { name: "Gannoji Vedik",         role: "Member", dept: "Tech", photo: "/council/tech/Gannoji Vedik.jpeg" ,linkedin:"https://www.linkedin.com/in/vedik-gannoji/",year:"3rd"},
-      { name: "Anuj Lomte",            role: "Member", dept: "Tech", photo: "/council/tech/Anuj Lomte.png" ,linkedin: "https://www.linkedin.com/in/anuj-lomte-918b90344/",year:"3rd"},
       { name: "Agasthya",              role: "Member", dept: "Tech", photo: "/council/tech/Agasthya.jpg" ,linkedin:"#",year:"2nd"},
       { name: "Anshu",                 role: "Member", dept: "Tech", photo: "/council/tech/Anshu.jpg" ,linkedin:"#",year:"2nd"},
       { name: "Faizaan",               role: "Member", dept: "Tech", photo: "/council/tech/Faizaan.jpg" ,linkedin:"#",year:"2nd"},
@@ -453,7 +452,7 @@ export default function CouncilPage() {
   const ALL_ORDER_NAMES = [
     "Sai Varshith Konduru", "Jaikar Midithuri", "Avinash", "Kodali Pranav Chandra",
     "Mahima Tatineni", "Bandaru Mahith Naidu", "Alleshwaram Sai Ganesh", "Dheeraj Kumar",
-    "Tannidi Durga Karthikeya", "Durga Mahesh", "Cheeda Shamilini", "Anuj Lomte",
+    "Tannidi Durga Karthikeya", "Durga Mahesh", "Cheeda Shamilini",
     "Anamika", "Sai Krishna", "Bhavana", "Yeruva InduSri Varshitha Reddy",
     "Shiva", "Prashansa", "Aarthi Reddy", "Sri Thejitha", "M.Tarun Kumar Reddy",
     "Teja Jagathi", "Yashashri Penikalapti", "Sai Mihir Ramaraju", "Katepally Tribhuvan", "Konthum Bhruhathi",
