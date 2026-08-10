@@ -1,0 +1,4 @@
+#!/bin/sh
+# Strip any Claude/Anthropic Co-Authored-By trailer before the commit lands.
+# Enable with: git config core.hooksPath .githooks
+sed -i -E '/^[[:space:]]*Co-authored-by:.*(claude|anthropic)/Id' "$1"
