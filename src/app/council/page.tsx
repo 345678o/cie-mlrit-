@@ -110,7 +110,7 @@ const studentLeadership: Member[] = [
   { name: "Aarthi Reddy", role: "Secretary",                  dept: "Operations & Finance", year: "2026-27", linkedin: "https://www.linkedin.com/in/aarthi-reddy-b-626241350/", email: "", photo: "/council/OPS/Aarthi.png", pos: "center 30%", zoom: 1.2 },
   { name: "Keertan Kuppili",       role: "Chief Technical Executive",  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/", email: "", photo: "/council/tech/Keertan Kuppili .png" },
   { name: "Jaikar Midithuri",      role: "Joint Secretary",            dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/jaikar-midithuri-136614369/", email: "", photo: "/council/tech/Jaikar Midithuri.png" },
-  { name: "Bhavana Inakollu",      role: "Internal Relations",         dept: "Operations & Finance", year: "2026-27", linkedin: "https://www.linkedin.com/in/bhavana-inakollu-8698a2395", email: "", photo: "/council/OPS/ljh.png" },
+  { name: "Bhavana Inakollu",      role: "Internal Relations",         dept: "Operations & Finance", year: "2026-27", linkedin: "https://www.linkedin.com/in/bhavana-inakollu-8698a2395", email: "", photo: "/council/OPS/Bhavana .png" },
 ];
 
 
@@ -221,8 +221,8 @@ const teams: TeamSection[] = [
       { name: "Yashashri Penikalapti", role: "Sponsorship Chairperson", dept: "P&S", photo: "/council/p&s/Yashashri Penikalapti.png",linkedin:"https://www.linkedin.com/in/yashashripenikalapati",year:"4th" },
       { name: "Bandaru Mahith Naidu",  role: "Promotions Chairperson", dept: "P&S", photo: "/council/p&s/Bandaru Mahith Naidu.png",linkedin:"https://www.linkedin.com/in/bandarumahithnaidu/",year:"4th" },
       { name: "Venkata Sanjana Kovuru", role: "Sponsorship Lead", dept: "P&S", photo: "/council/p&s/Sanjana Kovuru.png",linkedin:"https://www.linkedin.com/in/sanjana-kovuru-18b55b31a/",year:"3rd" },
-      { name: "Adithya Ganesh",        role: "Studios Lead", dept: "P&S", photo: "/council/p&s/lkjhg.png",linkedin:"https://www.linkedin.com/in/adithya-ganesh-487860398/",year:"3rd" },
-      { name: "Rithish Kumar",         role: "Promotions Lead", dept: "P&S", photo: "/council/p&s/lkjhg.png",linkedin:"https://www.linkedin.com/in/rithish-kumar-418242363/",year:"3rd" },
+      { name: "Adithya Ganesh",        role: "Studios Lead", dept: "P&S", photo: "/council/p&s/Adithya Ganesh.png",linkedin:"https://www.linkedin.com/in/adithya-ganesh-487860398/",year:"3rd" },
+      { name: "Rithish Kumar",         role: "Promotions Lead", dept: "P&S", photo: "/council/p&s/Rithish Kumar.png",linkedin:"https://www.linkedin.com/in/rithish-kumar-418242363/",year:"3rd" },
     ],
   },
   {
@@ -235,7 +235,7 @@ const teams: TeamSection[] = [
       { name: "Aarthi Reddy", role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Aarthi.png",linkedin:"https://www.linkedin.com/in/aarthi-reddy-b-626241350/" ,year:"4th", pos: "center 30%", zoom: 1.2},
       { name: "Vinay",             role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Vinay.png",linkedin:"https://www.linkedin.com/in/dsdvinay" ,year:"4th"},
        { name: "Dheeraj Kumar",     role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Dheeraj Kumar.png",linkedin:"#" ,year:"4th"},
-      { name: "Bhavana",           role: "Internal Relations", dept: "Operations & Finance", photo: "/council/OPS/ljh.png",linkedin:"https://www.linkedin.com/in/bhavana-inakollu-8698a2395" ,year:"3rd"},
+      { name: "Bhavana",           role: "Internal Relations", dept: "Operations & Finance", photo: "/council/OPS/Bhavana .png",linkedin:"https://www.linkedin.com/in/bhavana-inakollu-8698a2395" ,year:"3rd"},
       { name: "Alleshwaram Sai Ganesh", role: "Operations Lead", dept: "Operations & Finance", photo: "/council/OPS/ASaiGanesh.png",linkedin:"https://www.linkedin.com/in/sai-ganesh-alleshwaram-a30832316" ,year:"3rd"},
       { name: "M.Tarun Kumar Reddy",    role: "Finance and Logistics", dept: "Operations & Finance", photo: "/council/OPS/Manukonda Tarun.png",linkedin:"https://www.linkedin.com/in/tarun-manukonda-9a5b97344" ,year:"3rd"},
       { name: "Tharun",            role: "Member", dept: "Operations & Finance", photo: "/council/OPS/Tharun.png",linkedin:"https://www.linkedin.com/in/tharun-emmadisetti-590ba3344" ,year:"3rd"},
