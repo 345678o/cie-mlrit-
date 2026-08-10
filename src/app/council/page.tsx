@@ -166,10 +166,10 @@ const teams: TeamSection[] = [
     description: "Drives CIE's creative direction and campaigns — ideating themes, managing brand consistency, and building the visual + conceptual identity behind every initiative.",
     members: [
          { name: "Harika Y",          role: "Chairperson", dept: "Creative", photo: "/council/creatives/Harika Y.png",linkedin:"https://www.linkedin.com/in/y-harika-34a391305",year:"4th" },
-         { name: "Sai Krishna",       role: "Chairperson", dept: "Creative", photo: "/council/creatives/lkjhg.png",linkedin:"https://www.linkedin.com/in/varahala-sai-krishna-46a1b82a4",year:"4th" },
+         { name: "Sai Krishna",       role: "Chairperson", dept: "Creative", photo: "/council/creatives/Sai Krishna.png",linkedin:"https://www.linkedin.com/in/varahala-sai-krishna-46a1b82a4",year:"4th" },
          { name: "Sushaanth",         role: "Chairperson", dept: "Creative", photo: "/council/creatives/sushaanth.png",linkedin:"https://www.linkedin.com/in/sushanth-mandumula-0496bb2b6",year:"4th" },
          { name: "Durga Mahesh",      role: "Member", dept: "Creative", photo: "/council/creatives/Durga Mahesh.png",linkedin:"https://www.linkedin.com/in/durgamahesh-kolukuri",year:"3rd" },
-         { name: "Cheeda Shamilini",  role: "Member", dept: "Creative", photo: "/council/creatives/ljh.png",linkedin:"https://www.linkedin.com/in/cheeda-shamilini-naidu-47419a345/",year:"3rd" },
+         { name: "Cheeda Shamilini",  role: "Member", dept: "Creative", photo: "/council/creatives/Cheeda Shamilini.png",linkedin:"https://www.linkedin.com/in/cheeda-shamilini-naidu-47419a345/",year:"3rd" },
          { name: "D Pearl Angelina",  role: "Inventory Lead", dept: "Creative", photo: "/council/creatives/D Pearl Angelina.png",linkedin:"https://www.linkedin.com/in/pearl-angelina-529705283",year:"3rd" },
          { name: "Sadwika Reddy Chedimala", role: "Creatives Lead", dept: "Creative", photo: "/council/creatives/Sadwika Chedimala.png",linkedin:"https://www.linkedin.com/in/sadwika-chedimala-758167387/" ,year:"3rd"},
          { name: "Hansika Jella",     role: "Member", dept: "Creative", photo: "/council/creatives/Hansika Jella.png",linkedin:"https://www.linkedin.com/in/hansika-jella-01b079380",year:"3rd" },
@@ -182,12 +182,12 @@ const teams: TeamSection[] = [
     members: [
       { name: "Vivek Vardhan",           role: "Chairperson", dept: "GD", photo: "/council/GD/Veivek vardhan.png",linkedin:"https://www.linkedin.com/in/muchinthala-vivek-vardhan-m-0086b9404/" ,year:"4th"},
       { name: "Avinash",                  role: "Chairperson", dept: "GD", photo: "/council/GD/Avinash.png",linkedin:"https://www.linkedin.com/in/avinash-avi-b49119254",year:"4th" },
-      { name: "Chanikya",                 role: "Chairperson", dept: "GD", photo: "/council/GD/lkjhg.png",linkedin:"https://www.linkedin.com/in/amancha-chanikya",year:"4th" },
+      { name: "Chanikya",                 role: "Chairperson", dept: "GD", photo: "/council/GD/chanikya.png",linkedin:"https://www.linkedin.com/in/amancha-chanikya",year:"4th" },
        { name: "Sri Thejitha",             role: "Chairperson", dept: "GD", photo: "/council/GD/Sri Thejitha .png" , linkedin: "http://www.linkedin.com/in/sri-thejitha-76a712374",year:"4th" },
       { name: "Yeruva InduSri Varshitha Reddy",        role: "GD Lead", dept: "GD", photo: "/council/GD/Yeruva Indu Reddy.png",linkedin:"https://www.linkedin.com/in/yeruva-indu-972476345/",year:"3rd"
        },
       { name: "A Farhana Sultana",        role: "Member", dept: "GD", photo: "/council/GD/A Farhana Sultana.png",linkedin:"https://www.linkedin.com/in/achugatla-farhana-sultana-361b94344/",year:"3rd" },
-      { name: "Mounith Varma Akkala",     role: "Project Manager", dept: "GD", photo: "/council/GD/lkjhg.png",linkedin:"https://www.linkedin.com/in/mounith-varma-akkala-in/",year:"3rd" },
+      { name: "Mounith Varma Akkala",     role: "Project Manager", dept: "GD", photo: "/council/GD/Mounith Varma Akkala .png",linkedin:"https://www.linkedin.com/in/mounith-varma-akkala-in/",year:"3rd" },
       { name: "Bangari Nikitha",          role: "Member", dept: "GD", photo: "/council/GD/Bangari Nikitha.png",linkedin:"https://www.linkedin.com/in/bangari-nikitha-2b61aa345",year:"3rd" },
       { name: "Poloju RajaVivek",         role: "Member", dept: "GD", photo: "/council/GD/Poloju RajaVivek.png",linkedin:"https://www.linkedin.com/in/rajavivek-poloju-5a0ba3344/",year:"3rd" },
       { name: "Tannidi Durga Karthikeya", role: "Member", dept: "GD", photo: "/council/GD/Tannidi Durga Karthikeya .png",linkedin:"http://www.linkedin.com/in/karthik-undefined-1a972a314",year:"3rd" },
