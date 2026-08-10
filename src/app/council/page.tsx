@@ -83,9 +83,11 @@ function leadRank(role: string): number {
   return 3;
 }
 
-// 4th-years always sort ahead of 3rd-years (both in "All" and per-dept views).
+// Seniority order in both "All" and per-dept views: 4th, then 3rd, then the rest (2nd-year intake).
 function yearRank(year?: string): number {
-  return year === "4th" ? 0 : 1;
+  if (year === "4th") return 0;
+  if (year === "3rd") return 1;
+  return 2;
 }
 
 // Role text is whatever is set on the member — e.g. "Chairperson" for the
@@ -132,7 +134,17 @@ const teams: TeamSection[] = [
       { name: "Guguloth Adithya Jadhav", role: "Inventory Lead", dept: "Tech", photo: "/council/tech/Guguloth Adithya Jadhav.jpeg",linkedin:"https://www.linkedin.com/in/adithyajadhav/" ,year:"3rd"},
       { name: "Gannoji Vedik",         role: "Member", dept: "Tech", photo: "/council/tech/Gannoji Vedik.jpeg" ,linkedin:"https://www.linkedin.com/in/vedik-gannoji/",year:"3rd"},
       { name: "Anuj Lomte",            role: "Member", dept: "Tech", photo: "/council/tech/Anuj Lomte.png" ,linkedin: "https://www.linkedin.com/in/anuj-lomte-918b90344/",year:"3rd"},
-
+      { name: "Agasthya",              role: "Member", dept: "Tech", photo: "/council/tech/Agasthya.jpg" ,linkedin:"#",year:"2nd"},
+      { name: "Anshu",                 role: "Member", dept: "Tech", photo: "/council/tech/Anshu.jpg" ,linkedin:"#",year:"2nd"},
+      { name: "Faizaan",               role: "Member", dept: "Tech", photo: "/council/tech/Faizaan.jpg" ,linkedin:"#",year:"2nd"},
+      { name: "Himasri",               role: "Member", dept: "Tech", photo: "/council/tech/Himasri.jpg" ,linkedin:"#",year:"2nd"},
+      { name: "K Abhiram Chandra",     role: "Member", dept: "Tech", photo: "/council/tech/K Abhiram Chandra.png" ,linkedin:"#",year:"2nd"},
+      { name: "K Sai Ruthvik Reddy",   role: "Member", dept: "Tech", photo: "/council/tech/K Sai Ruthvik Reddy.jpg" ,linkedin:"#",year:"2nd"},
+      { name: "Manas",                 role: "Member", dept: "Tech", photo: "/council/tech/Manas.jpg" ,linkedin:"#",year:"2nd"},
+      { name: "Ramya Harini",          role: "Member", dept: "Tech", photo: "/council/tech/Ramya Harini.jpg" ,linkedin:"#",year:"2nd"},
+      { name: "Rithwik T",             role: "Member", dept: "Tech", photo: "/council/tech/Rithwik T.jpg" ,linkedin:"#",year:"2nd"},
+      { name: "Shanmukha",             role: "Member", dept: "Tech", photo: "/council/tech/Shanmukha.jpg" ,linkedin:"#",year:"2nd"},
+      { name: "Sreecharan Guntru",     role: "Member", dept: "Tech", photo: "/council/tech/Sreecharan Guntru.jpeg" ,linkedin:"#",year:"2nd"},
     ],
   },
   {
