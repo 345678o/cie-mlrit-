@@ -204,7 +204,7 @@ const teams: TeamSection[] = [
       { name: "Anguluri Shiva",    role: "Chairperson", dept: "Photography and Media", photo: "/council/photography/Anguluri Shiva.png",linkedin:"#" ,year:"4th"},
       { name: "Mattam Shivani",    role: "Chairperson", dept: "Photography and Media", photo: "/council/photography/Mattam Shivani.png",linkedin:"https://www.linkedin.com/in/shivani-mattam-91602b2a5/",year:"4th"},
       { name: "Vavilala Sai Ganesh", role: "Chairperson", dept: "Photography and Media", photo: "/council/photography/Vavilala Sai Ganesh.png",linkedin:"https://www.linkedin.com/in/vavilala-sai-ganesh-25028b3b5/",year:"4th" },
-      { name: "Sai Varshith Konduru", role: "Studios Lead", dept: "Photography and Media", photo: "/council/photography/K.SAI VARSHITH.png",linkedin:"https://www.linkedin.com/in/k-sai-varshith-123462345/",year:"3rd" },
+      { name: "Sai Varshith K", role: "Studios Lead", dept: "Photography and Media", photo: "/council/photography/K.SAI VARSHITH.png",linkedin:"https://www.linkedin.com/in/k-sai-varshith-123462345/",year:"3rd" },
       { name: "Mahesh Gorli",        role: "Photography Lead", dept: "Photography and Media", photo: "/council/photography/Gorli Mahesh.png",linkedin:"https://www.linkedin.com/in/mahesh-gorli-314b89344" ,year:"3rd" },
       { name: "Anam Mounika",      role: "Member", dept: "Photography and Media", photo: "/council/photography/Anam Mounika .png",linkedin:"https://www.linkedin.com/in/mounika-r-20a621316/" ,year:"3rd"},
       { name: "Gothuri Rishith",   role: "Member", dept: "Photography and Media", photo: "/council/photography/Gothuri Rishith.png",linkedin:"https://in.linkedin.com/in/gothuri-rishith-kumar-51390a3bb" ,year:"3rd"},
@@ -450,7 +450,7 @@ export default function CouncilPage() {
   // shuffle, no localStorage, no fragile indices). Any member not listed here
   // (newly added) is appended in declaration order.
   const ALL_ORDER_NAMES = [
-    "Sai Varshith Konduru", "Jaikar Midithuri", "Avinash", "Kodali Pranav Chandra",
+    "Sai Varshith K", "Jaikar Midithuri", "Avinash", "Kodali Pranav Chandra",
     "Mahima Tatineni", "Bandaru Mahith Naidu", "Alleshwaram Sai Ganesh", "Dheeraj Kumar",
     "Tannidi Durga Karthikeya", "Durga Mahesh", "Cheeda Shamilini",
     "Anamika", "Sai Krishna", "Bhavana", "Yeruva InduSri Varshitha Reddy",
