@@ -487,7 +487,9 @@ export default function CouncilPage() {
       arr = arr.filter((m) => m !== jadhav);
       arr.splice(arr.indexOf(bhav) + 1, 0, jadhav);
     }
-    const clusterOrder = ["Aarthi Reddy", "Katepally Tribhuvan", "Athava Sri Pavan", "Hansika Jella"];
+    // Aarthi is a 4th-year and now sorts into the top block on her own; the
+    // rest are 3rd-years, so the cluster only holds together within one year.
+    const clusterOrder = ["Katepally Tribhuvan", "Athava Sri Pavan", "Hansika Jella"];
     const cluster = clusterOrder
       .map((n) => arr.find((m) => m.name === n))
       .filter((m): m is T => Boolean(m));
