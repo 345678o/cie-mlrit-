@@ -460,7 +460,7 @@ export default function CouncilPage() {
     "Teja Jagathi", "Yashashri Penikalapti", "Sai Mihir Ramaraju", "Katepally Tribhuvan", "Konthum Bhruhathi",
     "Athava Sri Pavan", "Hansika Jella", "Ghanashyam Kodekandla", "Adithya Ganesh",
     "Sai Vashist", "Tharun", "Vivek Vardhan", "Rithish Kumar", "Anguluri Shiva",
-    "Anam Mounika", "A Farhana Sultana", "Guna Sai Marni", "Ritvik Ennavar",
+    "Anam Mounika", "A Farhana Sultana", "Guna Sai Marni", "Rithvik Ennawar",
     "Sadwika Reddy Chedimala", "Mahesh Gorli", "Bangari Nikitha", "Chanikya",
     "Jayadeep", "Haritha", "Poloju RajaVivek", "Priyanshu Roy", "D Pearl Angelina", "Harika Y",
     "M Vasanth Vardhan", "Keertan Kuppili", "K S Sreesanth", "Gannoji Vedik",
