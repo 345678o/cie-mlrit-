@@ -470,9 +470,8 @@ export default function CouncilPage() {
   const allShuffled = [...allMembers].sort(
     (a, b) => (orderRank.get(a.name) ?? Infinity) - (orderRank.get(b.name) ?? Infinity)
   );
-  // Mahima first, then a fixed cluster (Aarthi, Trib, Pavan, Hansika) kept
-  // contiguous AND aligned to a 4-col row boundary — so on desktop the four
-  // fill one full row with NO empty cells before them (other cards flow in).
+  // Mahima first, then a fixed cluster kept contiguous. (Row-boundary
+  // alignment is gone: the year sort re-indexes everything afterwards.)
   const pinAll = <T extends { name: string }>(list: T[]): T[] => {
     let arr = [...list];
     // Mahima always first.
@@ -495,11 +494,7 @@ export default function CouncilPage() {
     if (cluster.length) {
       const at = arr.findIndex((m) => m.name === clusterOrder[0]);
       arr = arr.filter((m) => !cluster.includes(m));
-      // Snap the block start to a multiple of 4 (desktop columns) so it begins
-      // at column 1 of a row — one clean line, no gap. Never before Mahima.
-      let insertAt = at < 0 ? arr.length : Math.round(at / 4) * 4;
-      insertAt = Math.max(4, Math.min(insertAt, arr.length));
-      arr.splice(insertAt, 0, ...cluster);
+      arr.splice(at < 0 ? arr.length : Math.min(at, arr.length), 0, ...cluster);
     }
     return arr;
   };
