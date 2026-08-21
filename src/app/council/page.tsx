@@ -504,8 +504,9 @@ export default function CouncilPage() {
     return arr;
   };
   const visibleMembers = activeTeam === "All"
-    // "All" view keeps the shuffle order (ALL_ORDER) — no 4th-first sort.
-    ? pinAll(allShuffled)
+    // "All" view: 4th-years first, then 3rd, then 2nd. Within a year the
+    // ALL_ORDER sequence (and the pins above) is preserved — Array.sort is stable.
+    ? [...pinAll(allShuffled)].sort((a, b) => yearRank(a.year) - yearRank(b.year))
     : allMembers
         .filter((m) => m.department === activeTeam)
         // 4th-years (chairpersons) first; within same year, dept lead(s) first; stable for the rest
