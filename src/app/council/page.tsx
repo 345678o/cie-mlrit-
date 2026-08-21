@@ -83,11 +83,13 @@ function leadRank(role: string): number {
   return 3;
 }
 
-// Seniority order in both "All" and per-dept views: 4th, then 3rd, then the rest (2nd-year intake).
+// Seniority order in both "All" and per-dept views: 4th, then 3rd, then 2nd.
+// Anyone added without a year sorts last rather than silently joining the 2nd-years.
 function yearRank(year?: string): number {
   if (year === "4th") return 0;
   if (year === "3rd") return 1;
-  return 2;
+  if (year === "2nd") return 2;
+  return 3;
 }
 
 // Role text is whatever is set on the member — e.g. "Chairperson" for the
