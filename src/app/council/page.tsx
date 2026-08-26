@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback, memo } from "react";
 import { Link2, Mail } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -291,26 +291,17 @@ const deptShort: Record<string, string> = {
 const CS_NOTCH = "polygon(0 0, 100% 0, 100% calc(100% - 32px), calc(100% - 32px) 100%, 0 100%)";
 type ShowcaseMember = Member & { department: string; deptColor: string };
 
-function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
-  const [active, setActive] = useState<number | null>(null);
-  const [transitioning, setTransitioning] = useState<number | null>(null);
+type CSCardProps = { m: ShowcaseMember; i: number; isActive: boolean;
+  onToggle: (i: number) => void; onFlipDone: () => void };
 
-  const toggleCard = (index: number) => {
-    if (transitioning !== null) return;
-    setTransitioning(index);
-    setActive((current) => (current === index ? null : index));
-  };
-
-  return (
-    <>
-      <div className="cs-grid">
-        {members.map((m, i) => {
+// memo: without it one click re-renders every card in the grid (100+ flip
+// subtrees) instead of only the two whose isActive changed.
+const CSCard = memo(function CSCard({ m, i, isActive, onToggle, onFlipDone }: CSCardProps) {
           const encoded = m.photo
             ? m.photo.split("/").map((seg) => encodeURIComponent(seg)).join("/")
             : null;
           const flat = encoded
             ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=0a0a0a&color=9aa&size=400&bold=true&format=png`;
-          const isActive = active === i;
           const scatter = i % 2 === 0 ? -26 : 26;
           // Some depts get a comic-burst flip background with white text.
           const flipBgByDept: Record<string, string> = {
@@ -327,12 +318,11 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
           const backText = isContent ? "#ffffff" : m.deptColor;
           return (
             <div
-              key={`${m.department}-${m.name}-${i}`}
               role="button"
               tabIndex={0}
-              onClick={() => toggleCard(i)}
+              onClick={() => onToggle(i)}
               onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleCard(i); }
+                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onToggle(i); }
               }}
               aria-pressed={isActive}
               className="cs-card"
@@ -340,7 +330,6 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                 background: "transparent", border: "none", padding: 0, cursor: "pointer", textAlign: "left",
                 transform: `translateY(${isActive ? 0 : scatter}px)`,
                 transition: "transform .55s cubic-bezier(0.22, 1, 0.36, 1)",
-                willChange: "transform",
               }}
             >
               <div style={{
@@ -349,7 +338,6 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                 backfaceVisibility: "hidden",
                 WebkitBackfaceVisibility: "hidden",
                 transform: "translateZ(0)",
-                willChange: "transform",
               }}>
                 <motion.div
                   initial={false}
@@ -359,13 +347,8 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                     position: "absolute", inset: 0, transformStyle: "preserve-3d",
                     transformOrigin: "center center",
                     transformPerspective: 1600,
-                    willChange: "transform",
                   }}
-                  onAnimationComplete={() => {
-                    if (transitioning === i) {
-                      setTransitioning(null);
-                    }
-                  }}
+                  onAnimationComplete={onFlipDone}
                 >
                   {/* FRONT — photo */}
                   <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "translateZ(0.1px)" }}>
@@ -447,12 +430,35 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
                 </motion.div>
               </div>
               <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "3px", paddingTop: "12px", paddingInline: "4px" }}>
-                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: isActive ? "15px" : "13px", lineHeight: 1.2, color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.82)", transition: "all .3s ease", overflowWrap: "anywhere" }}>{m.name}</span>
-                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "11px", letterSpacing: "0.3px", color: isActive ? m.deptColor : "rgba(255,255,255,0.45)", transition: "all .3s ease" }}>{deptShort[m.department] ?? m.department}</span>
+                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "13px", lineHeight: 1.2, color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.82)", transition: "color .3s ease", overflowWrap: "anywhere" }}>{m.name}</span>
+                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "11px", letterSpacing: "0.3px", color: isActive ? m.deptColor : "rgba(255,255,255,0.45)", transition: "color .3s ease" }}>{deptShort[m.department] ?? m.department}</span>
               </div>
             </div>
           );
-        })}
+});
+
+function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
+  const [active, setActive] = useState<number | null>(null);
+  // ref, not state: the flip guard must not re-render the grid.
+  const flipping = useRef(false);
+
+  const toggleCard = useCallback((index: number) => {
+    if (flipping.current) return;
+    flipping.current = true;
+    setActive((current) => (current === index ? null : index));
+  }, []);
+  const flipDone = useCallback(() => { flipping.current = false; }, []);
+
+  return (
+    <>
+      <div className="cs-grid">
+        {members.map((m, i) => (
+          <CSCard
+            key={`${m.department}-${m.name}-${i}`}
+            m={m} i={i} isActive={active === i}
+            onToggle={toggleCard} onFlipDone={flipDone}
+          />
+        ))}
       </div>
       <style>{`
         .cs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px,2.5vw,32px) clamp(14px,2vw,28px); padding-top: 30px; padding-bottom: 30px; align-items: start; width: 100%; }
