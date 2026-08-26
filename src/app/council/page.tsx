@@ -107,7 +107,7 @@ type TeamSection = {
 
 
 const studentLeadership: Member[] = [
-  { name: "Ghanashyam Kodekandla", role: "President",                  dept: "Operations & Finance", year: "2026-27", linkedin: "https://www.linkedin.com/in/ghanashyamkodekandla", email: "", photo: "/council/OPS/Ghanashyam Kodekandla.jpeg" },
+  { name: "Ghanashyam Kodekandla", role: "President",                  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/ghanashyamkodekandla", email: "", photo: "/council/OPS/Ghanashyam Kodekandla.jpeg" },
   { name: "Mahima Tatineni",       role: "Vice President",             dept: "Operations & Finance", year: "2026-27", linkedin: "https://www.linkedin.com/in/mahima-tatineni/", email: "", photo: "/council/OPS/Mahima Tatineni.png" },
   { name: "Aarthi Reddy", role: "Secretary",                  dept: "Operations & Finance", year: "2026-27", linkedin: "https://www.linkedin.com/in/aarthi-reddy-b-626241350/", email: "", photo: "/council/OPS/Aarthi.png", pos: "center 30%", zoom: 1.2 },
   { name: "Keertan Kuppili",       role: "Chief Technical Executive",  dept: "Technical",            year: "2026-27", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/", email: "", photo: "/council/tech/Keertan Kuppili .png" },
@@ -122,6 +122,7 @@ const teams: TeamSection[] = [
     color: "#4A7DFF",
     description: "Builds and maintains CIE's digital infrastructure — from the website and internal tools to AI experiments and mobile apps. The Tech team turns every idea into a working product.",
     members: [
+      { name: "Ghanashyam Kodekandla", role: "President", dept: "Tech", photo: "/council/OPS/Ghanashyam Kodekandla.jpeg",linkedin:"https://www.linkedin.com/in/ghanashyamkodekandla" ,year:"4th"},
       { name: "Keertan Kuppili",       role: "Chairperson", dept: "Tech", photo: "/council/tech/Keertan Kuppili .png", linkedin: "https://www.linkedin.com/in/keertan-kuppili-b652b2290/",year:"4th"},
       { name: "Teja Jagathi",          role: "Chairperson", dept: "Tech", photo: "/council/tech/Teja Jagathi.jpg" ,linkedin: "https://www.linkedin.com/in/teja-jagathi",year:"4th"},
       { name: "T.S Siddarth",          role: "Chairperson", dept: "Tech", photo: "/council/tech/T.S Siddarth.png",linkedin: "https://www.linkedin.com/in/siddharth-t-s-a76655248/",year:"4th"},
@@ -232,7 +233,6 @@ const teams: TeamSection[] = [
     color: "#22C55E",
     description: "Keeps everything running — coordinating logistics for every event, managing budgets, vendor relations, and making sure no detail falls through the cracks.",
     members: [
-      { name: "Ghanashyam Kodekandla", role: "President", dept: "Operations & Finance", photo: "/council/OPS/Ghanashyam Kodekandla.jpeg",linkedin:"https://www.linkedin.com/in/ghanashyamkodekandla" ,year:"4th"},
       { name: "Mahima Tatineni",   role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Mahima Tatineni.png",linkedin:"https://www.linkedin.com/in/mahima-tatineni/" ,year:"4th"},
       { name: "Aarthi Reddy", role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Aarthi.png",linkedin:"https://www.linkedin.com/in/aarthi-reddy-b-626241350/" ,year:"4th", pos: "center 30%", zoom: 1.2},
       { name: "Vinay",             role: "Chairperson", dept: "Operations & Finance", photo: "/council/OPS/Vinay.png",linkedin:"https://www.linkedin.com/in/dsdvinay" ,year:"4th"},
