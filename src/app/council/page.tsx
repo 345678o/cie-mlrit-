@@ -490,13 +490,13 @@ export default function CouncilPage() {
   // (newly added) is appended in declaration order.
   const ALL_ORDER_NAMES = [
     "Sai Varshith K", "Jaikar Midithuri", "Avinash", "Kodali Pranav Chandra",
-    "Mahima Tatineni", "Bandaru Mahith Naidu", "Alleshwaram Sai Ganesh", "Dheeraj Kumar",
+    "Mahima Tatineni", "Bandaru Mahith Naidu", "Alleshwaram Sai Ganesh",
     "Tannidi Durga Karthikeya", "Durga Mahesh", "Cheeda Shamilini",
     "Anamika", "Sai Krishna", "Bhavana", "Yeruva InduSri Varshitha Reddy",
     "Shiva", "Prashansa", "Aarthi Reddy", "Sri Thejitha", "M.Tarun Kumar Reddy",
     "Teja Jagathi", "Yashashri Penikalapti", "Sai Mihir Ramaraju", "Katepally Tribhuvan", "Konthum Bhruhathi",
     "Athava Sri Pavan", "Hansika Jella", "Ghanashyam Kodekandla", "Adithya Ganesh",
-    "Sai Vashist", "Tharun", "Vivek Vardhan", "Rithish Kumar", "Anguluri Shiva",
+    "Sai Vashist", "Tharun", "Vivek Vardhan", "Dheeraj Kumar", "Rithish Kumar", "Anguluri Shiva",
     "Anam Mounika", "A Farhana Sultana", "Guna Sai Marni", "Rithvik Ennawar",
     "Sadwika Reddy Chedimala", "Mahesh Gorli", "Bangari Nikitha", "Chanikya",
     "Jayadeep", "Haritha", "Poloju RajaVivek", "Priyanshu Roy", "D Pearl Angelina", "Harika Y",
