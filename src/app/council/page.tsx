@@ -159,7 +159,7 @@ const teams: TeamSection[] = [
       { name: "Prashansa",       role: "Chairperson", dept: "Content", photo: "/council/content/Prashansa .png",linkedin:"https://www.linkedin.com/in/prashansa-b-92218b2b6",year:"4th" },
       { name: "Haritha",         role: "Member", dept: "Content", photo: "/council/content/Haritha.png",linkedin:"#",year:"4th" },
       { name: "Harshitha",       role: "Member", dept: "Content", photo: "/council/content/Harshitha.png",linkedin:"https://www.linkedin.com/in/harshitha-bollepalli-a5b198345",year:"3rd" },
-      { name: "Rithvik Ennawar", role: "Content Lead", dept: "Content", photo: "/council/content/Ennawar Rithvik .png", zoom: 1.15,linkedin:"https://www.linkedin.com/in/rithvik-e-4a4936341/",year:"3rd" },
+      { name: "Rithvik Ennawar", role: "Content Lead", dept: "Content", photo: "/council/content/Ennawar Rithvik .png",linkedin:"https://www.linkedin.com/in/rithvik-e-4a4936341/",year:"3rd" },
       { name: "Shiva",           role: "Member", dept: "Content", photo: "/council/content/Shiva.png",linkedin:"https://www.linkedin.com/in/jatavath-shiva-14099338a",year:"3rd" },
       { name: "K S Sreesanth",   role: "Member", dept: "Content", photo: "/council/content/K S Sreesanth.png",linkedin:"https://www.linkedin.com/in/sreesanth-ks-29ab92344",year:"3rd" },
       { name: "B Sathvika", role: "Member", dept: "Content", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
