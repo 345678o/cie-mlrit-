@@ -272,7 +272,7 @@ const teams: TeamSection[] = [
       { name: "Chetty Shreyas Goud", role: "Member", dept: "Operations & Finance", photo: "/council/OPS/Chetty Shreyas Goud.png", linkedin: "#", year: "2nd" },
       { name: "Moulya Paladugu", role: "Member", dept: "Operations & Finance", photo: "/council/OPS/Moulya Paladugu.png", linkedin: "#", year: "2nd" },
       { name: "Bapatla Prajith", role: "Member", dept: "Operations & Finance", photo: "/council/OPS/Bapatla Prajith.png", linkedin: "#", year: "2nd" },
-      { name: "Manasvi Nannepamula", role: "Member", dept: "Operations & Finance", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
+      { name: "Manasvi Nannepamula", role: "Member", dept: "Operations & Finance", photo: "/council/OPS/Manasvi Nannepamula.png", linkedin: "#", year: "2nd" },
     ],
   },
 ];
