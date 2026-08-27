@@ -162,7 +162,7 @@ const teams: TeamSection[] = [
       { name: "Rithvik Ennawar", role: "Content Lead", dept: "Content", photo: "/council/content/Ennawar Rithvik .png",linkedin:"https://www.linkedin.com/in/rithvik-e-4a4936341/",year:"3rd" },
       { name: "Shiva",           role: "Member", dept: "Content", photo: "/council/content/Shiva.png",linkedin:"https://www.linkedin.com/in/jatavath-shiva-14099338a",year:"3rd" },
       { name: "K S Sreesanth",   role: "Member", dept: "Content", photo: "/council/content/K S Sreesanth.png",linkedin:"https://www.linkedin.com/in/sreesanth-ks-29ab92344",year:"3rd" },
-      { name: "B Sathvika", role: "Member", dept: "Content", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
+      { name: "B Sathvika", role: "Member", dept: "Content", photo: "/council/content/B Sathvika.png", linkedin: "#", year: "2nd" },
       { name: "Bandi Kumar Swamy", role: "Member", dept: "Content", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
       { name: "Supritha Reddy", role: "Member", dept: "Content", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
       { name: "Sai Charan", role: "Member", dept: "Content", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
