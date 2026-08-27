@@ -166,7 +166,7 @@ const teams: TeamSection[] = [
       { name: "Bandi Kumar Swamy", role: "Member", dept: "Content", photo: "/council/content/Bandi Kumar Swamy.png", linkedin: "#", year: "2nd" },
       { name: "Supritha Reddy", role: "Member", dept: "Content", photo: "/council/content/Supritha Reddy.png", linkedin: "#", year: "2nd" },
       { name: "Sai Charan", role: "Member", dept: "Content", photo: "/council/content/Sai Charan.png", linkedin: "#", year: "2nd" },
-      { name: "Tanushree", role: "Member", dept: "Content", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
+      { name: "Tanushree", role: "Member", dept: "Content", photo: "/council/content/Tanushree.png", linkedin: "#", year: "2nd" },
     ],
   },
   {
