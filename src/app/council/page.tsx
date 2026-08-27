@@ -270,7 +270,7 @@ const teams: TeamSection[] = [
       { name: "M Vasanth Vardhan", role: "Member", dept: "Operations & Finance", photo: "/council/OPS/M Vasanth vardhan.png",linkedin:"https://www.linkedin.com/in/vasanth-vardhan-maricherla-21783231a/" ,year:"3rd"},
       { name: "Anurag Yadav Yenugonda", role: "Member", dept: "Operations & Finance", photo: "/council/OPS/Anurag Yadav Yenugonda.png", linkedin: "#", year: "2nd" },
       { name: "Chetty Shreyas Goud", role: "Member", dept: "Operations & Finance", photo: "/council/OPS/Chetty Shreyas Goud.png", linkedin: "#", year: "2nd" },
-      { name: "Moulya Paladugu", role: "Member", dept: "Operations & Finance", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
+      { name: "Moulya Paladugu", role: "Member", dept: "Operations & Finance", photo: "/council/OPS/Moulya Paladugu.png", linkedin: "#", year: "2nd" },
       { name: "Bapatla Prajith", role: "Member", dept: "Operations & Finance", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
       { name: "Manasvi Nannepamula", role: "Member", dept: "Operations & Finance", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
     ],
