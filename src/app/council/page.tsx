@@ -232,7 +232,7 @@ const teams: TeamSection[] = [
       { name: "Yashwanth Sai Pathi", role: "Member", dept: "Photography and Media", photo: "/council/photography/Yashwanth Sai Pathi.png", linkedin: "#", year: "2nd" },
       { name: "Chakrala Sahasra", role: "Member", dept: "Photography and Media", photo: "/council/photography/Chakrala Sahasra.png", linkedin: "#", year: "2nd" },
       { name: "Angala Mahesh", role: "Member", dept: "Photography and Media", photo: "/council/photography/Angala Mahesh.png", linkedin: "#", year: "2nd" },
-      { name: "Vadla Vardhan", role: "Member", dept: "Photography and Media", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
+      { name: "Vadla Vardhan", role: "Member", dept: "Photography and Media", photo: "/council/photography/Vadla Vardhan.png", linkedin: "#", year: "2nd" },
       { name: "Nacharam Praneeth", role: "Member", dept: "Photography and Media", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
     ],
   },
