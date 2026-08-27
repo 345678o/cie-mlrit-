@@ -268,7 +268,7 @@ const teams: TeamSection[] = [
       { name: "M.Tarun Kumar Reddy",    role: "Finance and Logistics", dept: "Operations & Finance", photo: "/council/OPS/Manukonda Tarun.png",linkedin:"https://www.linkedin.com/in/tarun-manukonda-9a5b97344" ,year:"3rd"},
       { name: "Tharun",            role: "Member", dept: "Operations & Finance", photo: "/council/OPS/Tharun.png",linkedin:"https://www.linkedin.com/in/tharun-emmadisetti-590ba3344" ,year:"3rd"},
       { name: "M Vasanth Vardhan", role: "Member", dept: "Operations & Finance", photo: "/council/OPS/M Vasanth vardhan.png",linkedin:"https://www.linkedin.com/in/vasanth-vardhan-maricherla-21783231a/" ,year:"3rd"},
-      { name: "Anurag Yadav Yenugonda", role: "Member", dept: "Operations & Finance", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
+      { name: "Anurag Yadav Yenugonda", role: "Member", dept: "Operations & Finance", photo: "/council/OPS/Anurag Yadav Yenugonda.png", linkedin: "#", year: "2nd" },
       { name: "Chetty Shreyas Goud", role: "Member", dept: "Operations & Finance", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
       { name: "Moulya Paladugu", role: "Member", dept: "Operations & Finance", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
       { name: "Bapatla Prajith", role: "Member", dept: "Operations & Finance", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
