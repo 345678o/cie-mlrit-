@@ -131,7 +131,7 @@ const teams: TeamSection[] = [
       { name: "Guna Sai Marni",        role: "Member", dept: "Tech", photo: "/council/tech/Guna Sai Marni.png" ,linkedin: "#",year:"3rd"},
       { name: "Jaikar Midithuri",      role: "Joint Secretary", dept: "Tech", photo: "/council/tech/Jaikar Midithuri.png",linkedin: "https://www.linkedin.com/in/jaikar-midithuri-136614369/",year:"3rd"},
       { name: "Athava Sri Pavan",      role: "Project Manager", dept: "Tech", photo: "/council/tech/Athava Sri Pavan.jpeg",linkedin: "https://www.linkedin.com/in/a-sri-pavan-772b8b344/",year:"3rd"},
-      { name: "Katepally Tribhuvan",   role: "Technical Lead", dept: "Tech", photo: "/council/tech/Katepally Tribhuvan.jpg",linkedin: "https://www.linkedin.com/in/tribhuvan-katepally-30639b335/",year:"3rd"},
+      { name: "Tribhuvan",   role: "Technical Lead", dept: "Tech", photo: "/council/tech/Katepally Tribhuvan.jpg",linkedin: "https://www.linkedin.com/in/tribhuvan-katepally-30639b335/",year:"3rd"},
       { name: "Yashwanth Abhishek",    role: "Member", dept: "Tech", photo: "/council/tech/yashwanth abhishek.jpg",linkedin: "https://www.linkedin.com/in/yashwanth-abhishek-4626a8323/",year:"3rd"},
       { name: "Abhinav Sai",           role: "Member", dept: "Tech", photo: "/council/tech/Abhinav Sai.jpeg",linkedin: "http://www.linkedin.com/in/abhiinavsaig",year:"3rd"},
       { name: "Guguloth Adithya Jadhav", role: "Inventory Lead", dept: "Tech", photo: "/council/tech/Guguloth Adithya Jadhav.jpeg",linkedin:"https://www.linkedin.com/in/adithyajadhav/" ,year:"3rd"},
@@ -241,17 +241,17 @@ const teams: TeamSection[] = [
     color: "#E53935",
     description: "Represents CIE in every room — anchoring events, running communication workshops, handling PR, and making sure CIE's message lands clearly with every audience.",
     members: [
-      { name: "Sai Mihir Ramaraju",    role: "Member", dept: "P&S", photo: "/council/p&s/Sai Mihir Ramaraju.png",linkedin:"#",year:"4th" },
       { name: "Yashashri Penikalapti", role: "Sponsorship Chairperson", dept: "P&S", photo: "/council/p&s/Yashashri Penikalapti.png",linkedin:"https://www.linkedin.com/in/yashashripenikalapati",year:"4th" },
       { name: "Bandaru Mahith Naidu",  role: "Promotions Chairperson", dept: "P&S", photo: "/council/p&s/Bandaru Mahith Naidu.png",linkedin:"https://www.linkedin.com/in/bandarumahithnaidu/",year:"4th" },
+      { name: "Sai Mihir Ramaraju",    role: "Chairperson", dept: "P&S", photo: "/council/p&s/Sai Mihir Ramaraju.png",linkedin:"#",year:"4th" },
       { name: "Venkata Sanjana Kovuru", role: "Sponsorship Lead", dept: "P&S", photo: "/council/p&s/Sanjana Kovuru.png",linkedin:"https://www.linkedin.com/in/sanjana-kovuru-18b55b31a/",year:"3rd" },
       { name: "Adithya Ganesh",        role: "Studios Lead", dept: "P&S", photo: "/council/p&s/Adithya Ganesh.png",linkedin:"https://www.linkedin.com/in/adithya-ganesh-487860398/",year:"3rd" },
-      { name: "Rithish Kumar",         role: "Promotions Lead", dept: "P&S", photo: "/council/p&s/Rithish Kumar.png",linkedin:"https://www.linkedin.com/in/rithish-kumar-418242363/",year:"3rd" },
-      { name: "Gogula Vinay Reddy", role: "Member", dept: "P&S", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
-      { name: "Peddahothur Saniya", role: "Member", dept: "P&S", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
-      { name: "Talluri Laxmi Prasanna", role: "Member", dept: "P&S", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
-      { name: "Kojagori Biswas", role: "Member", dept: "P&S", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
-      { name: "Karlapudi Goutham Kumar", role: "Member", dept: "P&S", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
+      { name: "Rithish Kumar",         role: "Promotions Lead", dept: "P&S", photo: "/council/placeholder.png",linkedin:"https://www.linkedin.com/in/rithish-kumar-418242363/",year:"3rd" },
+      { name: "Gogula Vinay Reddy", role: "Member", dept: "P&S", photo: "/council/p&s/Gogula Vinay Reddy.png", linkedin: "#", year: "2nd" },
+      { name: "Peddahothur Saniya", role: "Member", dept: "P&S", photo: "/council/p&s/Peddahothur Saniya.png", linkedin: "#", year: "2nd" },
+      { name: "Talluri Laxmi Prasanna", role: "Member", dept: "P&S", photo: "/council/p&s/Talluri Laxmi Prasanna.png", linkedin: "#", year: "2nd" },
+      { name: "Kojagori Biswas", role: "Member", dept: "P&S", photo: "/council/p&s/Kojagori Biswas.png", linkedin: "#", year: "2nd" },
+      { name: "Karlapudi Goutham Kumar", role: "Member", dept: "P&S", photo: "/council/p&s/Karlapudi Goutham Kumar.png", linkedin: "#", year: "2nd" },
     ],
   },
   {
@@ -480,6 +480,14 @@ function CouncilShowcase({ members }: { members: ShowcaseMember[] }) {
 
 export default function CouncilPage() {
   const [activeTeam, setActiveTeam] = useState("All");
+
+  // Remember the open tab across reloads. sessionStorage, so a fresh visit
+  // still starts on "All" but F5 keeps you where you were.
+  useEffect(() => {
+    const saved = sessionStorage.getItem("cie-council-team");
+    if (saved && (saved === "All" || teams.some((t) => t.team === saved))) setActiveTeam(saved);
+  }, []);
+  useEffect(() => { sessionStorage.setItem("cie-council-team", activeTeam); }, [activeTeam]);
   const allMembers = teams.flatMap((t) =>
     t.members.map((m) => ({ ...m, department: t.team, deptColor: t.color }))
   );
@@ -494,7 +502,7 @@ export default function CouncilPage() {
     "Tannidi Durga Karthikeya", "Durga Mahesh", "Cheeda Shamilini",
     "Anamika", "Sai Krishna", "Bhavana", "Yeruva InduSri Varshitha Reddy",
     "Shiva", "Prashansa", "Aarthi Reddy", "Sri Thejitha", "M.Tarun Kumar Reddy",
-    "Teja Jagathi", "Yashashri Penikalapti", "Sai Mihir Ramaraju", "Katepally Tribhuvan", "Konthum Bhruhathi",
+    "Teja Jagathi", "Yashashri Penikalapti", "Sai Mihir Ramaraju", "Tribhuvan", "Konthum Bhruhathi",
     "Athava Sri Pavan", "Hansika Jella", "Ghanashyam Kodekandla", "Adithya Ganesh",
     "Sai Vashist", "Tharun", "Vivek Vardhan", "Dheeraj Kumar", "Rithish Kumar", "Anguluri Shiva",
     "Anam Mounika", "A Farhana Sultana", "Guna Sai Marni", "Rithvik Ennawar",
@@ -528,7 +536,7 @@ export default function CouncilPage() {
     }
     // Aarthi is a 4th-year and now sorts into the top block on her own; the
     // rest are 3rd-years, so the cluster only holds together within one year.
-    const clusterOrder = ["Katepally Tribhuvan", "Athava Sri Pavan", "Hansika Jella"];
+    const clusterOrder = ["Tribhuvan", "Athava Sri Pavan", "Hansika Jella"];
     const cluster = clusterOrder
       .map((n) => arr.find((m) => m.name === n))
       .filter((m): m is T => Boolean(m));
