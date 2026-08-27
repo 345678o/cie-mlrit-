@@ -182,10 +182,10 @@ const teams: TeamSection[] = [
          { name: "D Pearl Angelina",  role: "Inventory Lead", dept: "Creative", photo: "/council/creatives/D Pearl Angelina.png",linkedin:"https://www.linkedin.com/in/pearl-angelina-529705283",year:"3rd" },
          { name: "Sadwika Reddy Chedimala", role: "Creatives Lead", dept: "Creative", photo: "/council/creatives/Sadwika Chedimala.png",linkedin:"https://www.linkedin.com/in/sadwika-chedimala-758167387/" ,year:"3rd"},
          { name: "Hansika Jella",     role: "Member", dept: "Creative", photo: "/council/creatives/Hansika Jella.png",linkedin:"https://www.linkedin.com/in/hansika-jella-01b079380",year:"3rd" },
-         { name: "Ratnavath Sandhya", role: "Member", dept: "Creative", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
-         { name: "Saanvi Mancholla", role: "Member", dept: "Creative", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
+         { name: "Ratnavath Sandhya", role: "Member", dept: "Creative", photo: "/council/creatives/Ratnavath Sandhya.png", linkedin: "#", year: "2nd" },
+         { name: "Saanvi Mancholla", role: "Member", dept: "Creative", photo: "/council/creatives/Saanvi Mancholla.png", linkedin: "#", year: "2nd" },
          { name: "Lokesh Sharma", role: "Member", dept: "Creative", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
-         { name: "Sai Susmita Nanduri", role: "Member", dept: "Creative", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
+         { name: "Sai Susmita Nanduri", role: "Member", dept: "Creative", photo: "/council/creatives/Sai Susmita Nanduri.png", linkedin: "#", year: "2nd" },
     ],
   },
   {
