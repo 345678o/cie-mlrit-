@@ -205,7 +205,7 @@ const teams: TeamSection[] = [
       { name: "Poloju RajaVivek",         role: "Member", dept: "GD", photo: "/council/GD/Poloju RajaVivek.png",linkedin:"https://www.linkedin.com/in/rajavivek-poloju-5a0ba3344/",year:"3rd" },
       { name: "Tannidi Durga Karthikeya", role: "Member", dept: "GD", photo: "/council/GD/Tannidi Durga Karthikeya .png",linkedin:"http://www.linkedin.com/in/karthik-undefined-1a972a314",year:"3rd" },
       { name: "Kodali Pranav Chandra",    role: "Member", dept: "GD", photo: "/council/GD/Kodali Pranav Chandra.png",linkedin:"https://www.linkedin.com/in/pranav-chandra-kodali-3566b033b/",year:"3rd" },
-      { name: "Veera Sai Akhil", role: "Member", dept: "GD", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
+      { name: "Veera Sai Akhil", role: "Member", dept: "GD", photo: "/council/GD/Veera Sai Akhil.png", linkedin: "https://www.linkedin.com/in/akhil-abbireddi-020069432", year: "2nd" },
       { name: "N Chaitanya", role: "Member", dept: "GD", photo: "/council/GD/N Chaitanya.png", linkedin: "https://www.linkedin.com/in/chaitanya-nimmoji-968b15428", year: "2nd" },
       { name: "Sivaneni Venkata Veera Sri Gangadhar", role: "Member", dept: "GD", photo: "/council/GD/Sivaneni Venkata Veera Sri Gangadhar.png", linkedin: "https://www.linkedin.com/in/gangadharsivaneni/", year: "2nd" },
       { name: "Kamal Panda", role: "Member", dept: "GD", photo: "/council/GD/Kamal Panda.png", linkedin: "https://www.linkedin.com/in/kamal-panda-95584a396", year: "2nd" },
