@@ -207,7 +207,7 @@ const teams: TeamSection[] = [
       { name: "Kodali Pranav Chandra",    role: "Member", dept: "GD", photo: "/council/GD/Kodali Pranav Chandra.png",linkedin:"https://www.linkedin.com/in/pranav-chandra-kodali-3566b033b/",year:"3rd" },
       { name: "Veera Sai Akhil", role: "Member", dept: "GD", photo: "/council/GD/Veera Sai Akhil.png", linkedin: "https://www.linkedin.com/in/akhil-abbireddi-020069432", year: "2nd" },
       { name: "N Chaitanya", role: "Member", dept: "GD", photo: "/council/GD/N Chaitanya.png", linkedin: "https://www.linkedin.com/in/chaitanya-nimmoji-968b15428", year: "2nd" },
-      { name: "Sivaneni Venkata Veera Sri Gangadhar", role: "Member", dept: "GD", photo: "/council/GD/Sivaneni Venkata Veera Sri Gangadhar.png", linkedin: "https://www.linkedin.com/in/gangadharsivaneni/", year: "2nd" },
+      { name: "Gangadhar", role: "Member", dept: "GD", photo: "/council/GD/Sivaneni Venkata Veera Sri Gangadhar.png", linkedin: "https://www.linkedin.com/in/gangadharsivaneni/", year: "2nd" },
       { name: "Kamal Panda", role: "Member", dept: "GD", photo: "/council/GD/Kamal Panda.png", linkedin: "https://www.linkedin.com/in/kamal-panda-95584a396", year: "2nd" },
       { name: "Vatrapu Jyoshnika Reddy", role: "Member", dept: "GD", photo: "/council/GD/Vatrapu Jyoshnika Reddy.png", linkedin: "#", year: "2nd" },
       { name: "Sri Tejaswi Abbu", role: "Member", dept: "GD", photo: "/council/GD/Sri Tejaswi Abbu.png", linkedin: "https://www.linkedin.com/in/sri-tejaswi-abbu-04175537a", year: "2nd" },
