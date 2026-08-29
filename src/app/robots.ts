@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/join/apply"],
+      disallow: ["/api/"],
     },
     sitemap: "https://mlritcie.in/sitemap.xml",
   };

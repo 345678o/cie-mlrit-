@@ -388,37 +388,6 @@ export default function AlumniPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section style={{ background: "#E8521A", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(48px,8vw,96px)" }}>
-        <div style={{ maxWidth: "1280px", width: "100%", margin: "0 auto", paddingInline: "clamp(16px,4vw,48px)", textAlign: "center" }}>
-          <FadeIn>
-            <span style={{
-              display: "inline-block", background: "rgba(255,255,255,0.2)", color: "#fff",
-              fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "11px",
-              letterSpacing: "0.14em", textTransform: "uppercase",
-              padding: "5px 16px", borderRadius: "999px", marginBottom: "20px",
-            }}>We&apos;re Hiring</span>
-            <h2 className="font-black" style={{ color: "#ffffff", fontSize: "clamp(24px,4vw,42px)", lineHeight: 1.1, marginTop: "0", marginBottom: "16px" }}>
-              Join the CIE Team
-            </h2>
-            <p style={{ color: "rgba(255,255,255,0.80)", fontSize: "clamp(14px,1.5vw,17px)", marginBottom: "36px", maxWidth: "500px", margin: "0 auto 36px", lineHeight: 1.7 }}>
-              We&apos;re looking for passionate students to drive innovation, build communities, and create real impact at MLRIT CIE.
-            </p>
-            <a
-              href="/join"
-              style={{
-                display: "inline-flex", alignItems: "center", gap: "8px",
-                background: "#fff", color: "#E8521A",
-                fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "14px",
-                padding: "12px 28px", borderRadius: "8px", textDecoration: "none",
-                letterSpacing: "0.02em",
-              }}
-            >
-              Join Now →
-            </a>
-          </FadeIn>
-        </div>
-      </section>
     </div>
   );
 }

@@ -33,7 +33,7 @@ export default function LoadingScreen() {
   const [runId,   setRunId]   = useState(0);
 
   // Plays once per full page load, and on demand when something dispatches the
-  // "cie:intro" window event (e.g. the "Join Now" CTA) — NOT on every route nav.
+  // "cie:intro" window event — NOT on every route nav.
   useEffect(() => {
     let t1: ReturnType<typeof setTimeout>;
     let t2: ReturnType<typeof setTimeout>;

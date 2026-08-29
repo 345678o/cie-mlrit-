@@ -791,23 +791,6 @@ export default function CouncilPage() {
         </div>
       </section>
 
-      {/* Join CTA */}
-      <section style={{ background: "#FFFFFF", paddingTop: "clamp(48px,8vw,96px)", paddingBottom: "clamp(48px,8vw,96px)" }}>
-        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", paddingInline: "clamp(16px,4vw,48px)" }}>
-        <FadeIn className="text-center">
-          <span className="section-tag" style={{ marginBottom: "32px" }}>Join the Team</span>
-          <h2 className="font-black" style={{ color: "#000000", fontSize: "clamp(22px,4vw,36px)", lineHeight: 1.15, marginBottom: "32px" }}>Want to Be Part of CIE Council?</h2>
-          <p className="text-lg" style={{ color: "#374151", marginBottom: "40px" }}>
-            Recruitment for the 2025–26 council opens in July. Apply to join any
-            of our teams and help shape the future of innovation at MLRIT.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/join" className="btn-primary">Apply for Council</Link>
-            <button className="btn-secondary-light">Learn More</button>
-          </div>
-        </FadeIn>
-        </div>
-      </section>
     </div>
   );
 }

@@ -255,40 +255,6 @@ export default function Navbar() {
             }}
           />
 
-          {/* ── CTA — desktop ────────────────────────────────── */}
-          <Link
-            href="/join"
-            className="nav-desktop-cta"
-            onClick={() => window.dispatchEvent(new Event("cie:intro"))}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              fontFamily: "var(--font-body)",
-              fontWeight: 600,
-              fontSize: "12.5px",
-              letterSpacing: "0.015em",
-              color: "#FFFFFF",
-              background: "#E8521A",
-              borderRadius: "9999px",
-              padding: scrolled ? "8px 17px" : "10px 20px",
-              textDecoration: "none",
-              whiteSpace: "nowrap",
-              flexShrink: 0,
-              transition: "background 0.2s ease, padding 0.4s cubic-bezier(0.16,1,0.3,1)",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.background = "#C04218";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.background = "#E8521A";
-            }}
-          >
-            <span style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1px" }}>
-              <span style={{ fontSize: "8px", fontWeight: 700, letterSpacing: "0.12em", opacity: 0.85, lineHeight: 1 }}>WE&apos;RE HIRING</span>
-              <span>Join Now</span>
-            </span>
-          </Link>
-
           {/* ── Hamburger — phones only (< 768px) ─────────────── */}
           <div className="nav-hamburger" style={{ display: "flex", flexShrink: 0 }}>
             <motion.button
@@ -396,7 +362,6 @@ export default function Navbar() {
               }
               @media (max-width: 360px) {
                 .ov-link { font-size: 19px !important; }
-                .ov-join { padding: 7px 13px !important; font-size: 11px !important; }
               }
             `}</style>
 
@@ -495,44 +460,6 @@ export default function Navbar() {
                 </motion.div>
               ))}
             </div>
-
-            {/* Join Now CTA — full width, prominent */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.40, duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                padding: "0 clamp(20px, 5vw, 56px) 16px",
-                flexShrink: 0,
-              }}
-            >
-              <Link
-                href="/join"
-                onClick={() => { setOpen(false); window.dispatchEvent(new Event("cie:intro")); }}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "8px",
-                  width: "100%",
-                  padding: "15px 24px",
-                  borderRadius: "14px",
-                  background: "#E8521A",
-                  color: "#FFFFFF",
-                  fontFamily: "var(--font-body)",
-                  fontWeight: 700,
-                  fontSize: "15px",
-                  letterSpacing: "0.01em",
-                  textDecoration: "none",
-                  boxShadow: "0 4px 20px rgba(232,82,26,0.35)",
-                }}
-              >
-                Join Now
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </Link>
-            </motion.div>
 
             {/* Bottom — socials */}
             <motion.div

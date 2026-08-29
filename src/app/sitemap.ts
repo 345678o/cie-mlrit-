@@ -13,7 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/council",    priority: 0.7,  changeFrequency: "monthly" as const },
     { url: "/alumni",     priority: 0.7,  changeFrequency: "monthly" as const },
     { url: "/contact",    priority: 0.6,  changeFrequency: "yearly"  as const },
-    { url: "/join",       priority: 0.8,  changeFrequency: "monthly" as const },
     { url: "/verticals",  priority: 0.7,  changeFrequency: "monthly" as const },
     ...getAllVerticalIds().map((id) => ({
       url: `/verticals/${id}`,

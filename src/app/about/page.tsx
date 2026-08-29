@@ -2,7 +2,6 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import Link from "next/link";
 import { Target, Eye, Heart, Award, Users, BookOpen, Lightbulb, Sparkles, ShieldCheck, Globe, Printer, Presentation, Cpu, Wrench } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
@@ -675,11 +674,6 @@ export default function AboutPage() {
               are built, and the future begins. Your journey starts with one decision — your next
               big idea starts here.
             </p>
-            <div style={{ marginTop: "36px" }}>
-              <Link href="/join" className="btn-primary">
-                Join CIE
-              </Link>
-            </div>
           </FadeIn>
         </div>
       </section>

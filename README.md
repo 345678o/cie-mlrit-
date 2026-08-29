@@ -45,7 +45,6 @@ A fast, animated, content-rich marketing site for the MLRIT CIE. Built on the Ne
 | `/alumni` | Alumni spotlights |
 | `/tours` | Virtual campus tour — horizontal scroll gallery |
 | `/facilities` · `/studios` | Spaces & labs |
-| `/join` · `/join/apply` | Recruitment + application form |
 | `/contact` | Contact + map |
 
 ## ✦ Getting Started
