@@ -208,7 +208,7 @@ const teams: TeamSection[] = [
       { name: "Veera Sai Akhil", role: "Member", dept: "GD", photo: "/council/placeholder.png", linkedin: "#", year: "2nd" },
       { name: "N Chaitanya", role: "Member", dept: "GD", photo: "/council/GD/N Chaitanya.png", linkedin: "https://www.linkedin.com/in/chaitanya-nimmoji-968b15428", year: "2nd" },
       { name: "Sivaneni Venkata Veera Sri Gangadhar", role: "Member", dept: "GD", photo: "/council/GD/Sivaneni Venkata Veera Sri Gangadhar.png", linkedin: "https://www.linkedin.com/in/gangadharsivaneni/", year: "2nd" },
-      { name: "Kamal Panda", role: "Member", dept: "GD", photo: "/council/placeholder.png", linkedin: "https://www.linkedin.com/in/kamal-panda-95584a396", year: "2nd" },
+      { name: "Kamal Panda", role: "Member", dept: "GD", photo: "/council/GD/Kamal Panda.png", linkedin: "https://www.linkedin.com/in/kamal-panda-95584a396", year: "2nd" },
       { name: "Vatrapu Jyoshnika Reddy", role: "Member", dept: "GD", photo: "/council/GD/Vatrapu Jyoshnika Reddy.png", linkedin: "#", year: "2nd" },
       { name: "Sri Tejaswi Abbu", role: "Member", dept: "GD", photo: "/council/GD/Sri Tejaswi Abbu.png", linkedin: "https://www.linkedin.com/in/sri-tejaswi-abbu-04175537a", year: "2nd" },
      
