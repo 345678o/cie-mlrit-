@@ -159,7 +159,7 @@ export default function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.72, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         style={{
-          width: "min(1120px, 100%)",
+          width: "min(1240px, 100%)",
           pointerEvents: "auto",
         }}
       >
