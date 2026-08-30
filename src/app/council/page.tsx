@@ -246,7 +246,7 @@ const teams: TeamSection[] = [
       { name: "Sai Mihir Ramaraju",    role: "Chairperson", dept: "P&S", photo: "/council/p&s/Sai Mihir Ramaraju.png",linkedin:"#",year:"4th" },
       { name: "Venkata Sanjana Kovuru", role: "Sponsorship Lead", dept: "P&S", photo: "/council/p&s/Sanjana Kovuru.png",linkedin:"https://www.linkedin.com/in/sanjana-kovuru-18b55b31a/",year:"3rd" },
       { name: "Adithya Ganesh",        role: "Studios Lead", dept: "P&S", photo: "/council/p&s/Adithya Ganesh.png",linkedin:"https://www.linkedin.com/in/adithya-ganesh-487860398/",year:"3rd" },
-      { name: "Rithish Kumar",         role: "Promotions Lead", dept: "P&S", photo: "/council/placeholder.png",linkedin:"https://www.linkedin.com/in/rithish-kumar-418242363/",year:"3rd" },
+      { name: "Rithish Kumar",         role: "Promotions Lead", dept: "P&S", photo: "/council/p&s/Rithish Kumar.png",linkedin:"https://www.linkedin.com/in/rithish-kumar-418242363/",year:"3rd" },
       { name: "Gogula Vinay Reddy", role: "Member", dept: "P&S", photo: "/council/p&s/Gogula Vinay Reddy.png", linkedin: "https://www.linkedin.com/in/vinay-reddy-gogula-502056402/", year: "2nd" },
       { name: "Peddahothur Saniya", role: "Member", dept: "P&S", photo: "/council/p&s/Peddahothur Saniya.png", linkedin: "https://www.linkedin.com/in/saniyaa-undefined-93b070432", year: "2nd" },
       { name: "Talluri Laxmi Prasanna", role: "Member", dept: "P&S", photo: "/council/p&s/Talluri Laxmi Prasanna.png", linkedin: "https://www.linkedin.com/in/talluri-laxmi-prasanna-b29551428/", year: "2nd" },
