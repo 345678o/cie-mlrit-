@@ -184,7 +184,7 @@ const teams: TeamSection[] = [
          { name: "Hansika Jella",     role: "Member", dept: "Creative", photo: "/council/creatives/Hansika Jella.png",linkedin:"https://www.linkedin.com/in/hansika-jella-01b079380",year:"3rd" },
          { name: "Ratnavath Sandhya", role: "Member", dept: "Creative", photo: "/council/creatives/Ratnavath Sandhya.png", linkedin: "https://www.linkedin.com/in/sandhya-ratnavath-6a0323413", year: "2nd" },
          { name: "Saanvi Mancholla", role: "Member", dept: "Creative", photo: "/council/creatives/Saanvi Mancholla.png", linkedin: "https://www.linkedin.com/in/saanvi-mancholla-0713b3403", year: "2nd" },
-         { name: "Lokesh Sharma", role: "Member", dept: "Creative", photo: "/council/placeholder.png", linkedin: "https://www.linkedin.com/in/lokesh-sharma-37196b429", year: "2nd" },
+         { name: "Lokesh Sharma", role: "Member", dept: "Creative", photo: "/council/creatives/Lokesh Sharma.png", linkedin: "https://www.linkedin.com/in/lokesh-sharma-37196b429", year: "2nd" },
          { name: "Sai Susmita Nanduri", role: "Member", dept: "Creative", photo: "/council/creatives/Sai Susmita Nanduri.png", linkedin: "https://www.linkedin.com/in/sai-susmita-nanduri-111364429/", year: "2nd" },
     ],
   },
