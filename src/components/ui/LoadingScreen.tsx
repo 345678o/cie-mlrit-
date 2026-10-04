@@ -5,6 +5,28 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const LETTERS = ["C", "I", "E"];
 
+/* Theme tokens — dark (Equinox) by default, light = original orange intro. */
+const LOADER_THEME_CSS = `
+:root {
+  --loader-ring: rgba(116,132,254,0.55);
+  --loader-bg: radial-gradient(ellipse 70% 55% at 50% 40%, rgba(116,132,254,0.22) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 100% 100%, rgba(51,255,103,0.08) 0%, transparent 70%), #0F1016;
+  --loader-bloom: radial-gradient(circle, rgba(165,175,254,0.90) 0%, rgba(116,132,254,0.40) 35%, transparent 70%);
+  --loader-ghost: #7484FE;
+  --loader-letter: #F4F5FA;
+  --loader-dot: #33FF67;
+  --loader-tagline: #7484FE;
+}
+:root[data-theme="light"] {
+  --loader-ring: rgba(255,255,255,0.55);
+  --loader-bg: #000000;
+  --loader-bloom: radial-gradient(circle, rgba(255,255,255,0.92) 0%, rgba(255,94,44,0.35) 35%, transparent 70%);
+  --loader-ghost: #FF5E2C;
+  --loader-letter: #FFFFFF;
+  --loader-dot: #FF5E2C;
+  --loader-tagline: #FF5E2C;
+}
+`;
+
 /* Expanding ring — pure CSS div */
 function Ring({ delay, size }: { delay: number; size: number }) {
   return (
@@ -17,7 +39,7 @@ function Ring({ delay, size }: { delay: number; size: number }) {
         width:  size,
         height: size,
         borderRadius: "50%",
-        border: "1.5px solid rgba(255,255,255,0.55)",
+        border: "1.5px solid var(--loader-ring)",
         pointerEvents: "none",
       }}
     />
@@ -73,8 +95,9 @@ export default function LoadingScreen() {
           <motion.div
             animate={burst ? { opacity: 0 } : { opacity: 1 }}
             transition={{ duration: 0.65, ease: "easeIn", delay: 0.1 }}
-            style={{ position: "absolute", inset: 0, background: "#000000" }}
+            style={{ position: "absolute", inset: 0, background: "var(--loader-bg)" }}
           />
+          <style>{LOADER_THEME_CSS}</style>
 
           {/* ── Radial bloom — white glow expands from centre ── */}
           {burst && (
@@ -86,7 +109,7 @@ export default function LoadingScreen() {
                 position: "absolute",
                 width: "40vw", height: "40vw",
                 borderRadius: "50%",
-                background: "radial-gradient(circle, rgba(255,255,255,0.92) 0%, rgba(255,94,44,0.35) 35%, transparent 70%)",
+                background: "var(--loader-bloom)",
                 pointerEvents: "none",
               }}
             />
@@ -115,7 +138,7 @@ export default function LoadingScreen() {
                 fontFamily: "var(--font-heading)", fontWeight: 900,
                 fontSize: "clamp(96px, 20vw, 200px)",
                 lineHeight: 1, letterSpacing: "-0.06em",
-                color: "#FF5E2C",
+                color: "var(--loader-ghost)",
                 pointerEvents: "none", userSelect: "none",
               }}
             >
@@ -148,7 +171,7 @@ export default function LoadingScreen() {
                     fontFamily: "var(--font-heading)", fontWeight: 900,
                     fontSize: "clamp(96px, 20vw, 200px)",
                     lineHeight: 1, letterSpacing: "-0.06em",
-                    color: "#FFFFFF",
+                    color: "var(--loader-letter)",
                   }}
                 >
                   {letter}
@@ -164,7 +187,7 @@ export default function LoadingScreen() {
                   display: "block",
                   fontFamily: "var(--font-heading)", fontWeight: 900,
                   fontSize: "clamp(96px, 20vw, 200px)",
-                  lineHeight: 1, color: "#FF5E2C",
+                  lineHeight: 1, color: "var(--loader-dot)",
                 }}
               >
                 .
@@ -186,7 +209,7 @@ export default function LoadingScreen() {
                 fontFamily: "var(--font-body)",
                 fontSize: "clamp(10px, 1.2vw, 13px)",
                 fontWeight: 600, letterSpacing: "0.22em",
-                textTransform: "uppercase", color: "#FF5E2C", margin: 0,
+                textTransform: "uppercase", color: "var(--loader-tagline)", margin: 0,
               }}
             >
               Centre for Innovation &amp; Entrepreneurship

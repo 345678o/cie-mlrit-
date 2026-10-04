@@ -10,6 +10,76 @@ import { getGrainDataUri } from "@/lib/grain";
 
 const GRAIN = getGrainDataUri(0.85);
 
+/* ─── Theme tokens (page chrome only) ───────────────────────────
+   Dark (default) = Equinox look; light = the original orange page.
+   Per-event colours (catColor / bg / accent) are theme-independent. */
+const EV_THEME_CSS = `
+:root {
+  --ev-page-bg: #16171D;
+  --ev-hero-bg: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(116,132,254,0.38) 0%, rgba(116,132,254,0.10) 45%, transparent 75%), radial-gradient(ellipse 40% 45% at 100% 100%, rgba(51,255,103,0.10) 0%, transparent 70%), radial-gradient(ellipse 35% 40% at 0% 100%, rgba(51,255,103,0.06) 0%, transparent 70%), #16171D;
+  --ev-hero-grain-opacity: 0.05;
+  --ev-hero-grain-blend: overlay;
+  --ev-hero-ring-a: #7484FE;
+  --ev-hero-ring-b: #33FF67;
+  --ev-hero-ring-a-opacity: 0.14;
+  --ev-hero-ring-b-opacity: 0.10;
+  --ev-hero-watermark: rgba(255,255,255,0.03);
+  --ev-hero-fg: #F4F5FA;
+  --ev-hero-outline: rgba(165,175,254,0.85);
+  --ev-hero-script: #A5AFFE;
+  --ev-hero-desc: rgba(244,245,250,0.72);
+  --ev-label-bg: #1C1D26;
+  --ev-label-line: rgba(255,255,255,0.08);
+  --ev-label-gallery: rgba(244,245,250,0.38);
+  --ev-label-date: rgba(244,245,250,0.58);
+  --ev-strip-bg: #0F1016;
+  --ev-strip-holes-bg: #0F1016;
+  --ev-cta-bg: radial-gradient(ellipse 60% 55% at 50% 100%, rgba(116,132,254,0.16) 0%, transparent 70%), #1C1D26;
+  --ev-cta-border: 1px solid rgba(255,255,255,0.08);
+  --ev-cta-title: #F4F5FA;
+  --ev-cta-text: rgba(244,245,250,0.72);
+  --ev-cta-btn-weight: 700;
+  --ev-cta-btn-shadow: 0 8px 28px rgba(116,132,254,0.30);
+  --ev-cta-ghost-fg: rgba(244,245,250,0.72);
+  --ev-cta-ghost-border: rgba(116,132,254,0.22);
+}
+:root[data-theme="light"] {
+  --ev-page-bg: #0A0A0A;
+  --ev-hero-bg: #E8521A;
+  --ev-hero-grain-opacity: 0.06;
+  --ev-hero-grain-blend: normal;
+  --ev-hero-ring-a: rgba(255,255,255,1);
+  --ev-hero-ring-b: rgba(255,255,255,1);
+  --ev-hero-ring-a-opacity: 0.10;
+  --ev-hero-ring-b-opacity: 0.08;
+  --ev-hero-watermark: rgba(0,0,0,0.06);
+  --ev-hero-fg: #FFFFFF;
+  --ev-hero-outline: rgba(255,255,255,0.80);
+  --ev-hero-script: rgba(255,255,255,0.90);
+  --ev-hero-desc: rgba(255,255,255,0.72);
+  --ev-label-bg: #0D0D0D;
+  --ev-label-line: rgba(255,255,255,0.06);
+  --ev-label-gallery: rgba(255,255,255,0.18);
+  --ev-label-date: rgba(255,255,255,0.28);
+  --ev-strip-bg: #060606;
+  --ev-strip-holes-bg: #050505;
+  --ev-cta-bg: #0A0A0A;
+  --ev-cta-border: none;
+  --ev-cta-title: #FFFFFF;
+  --ev-cta-text: rgba(255,255,255,0.36);
+  --ev-cta-btn-weight: 600;
+  --ev-cta-btn-shadow: none;
+  --ev-cta-ghost-fg: rgba(255,255,255,0.5);
+  --ev-cta-ghost-border: rgba(255,255,255,0.10);
+}
+/* "HAPPEN" is gradient text in dark; plain white in light (as originally). */
+:root[data-theme="light"] .ev-happen {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: #FFFFFF;
+}
+`;
+
 /* ─── Types ─────────────────────────────────────────────────── */
 type SlideData = {
   img?: string;
@@ -29,142 +99,165 @@ type EventData = {
   tags: string[];
   bg: string;
   slides: SlideData[];
+  upcoming?: boolean;
+  /* 10% accent — paired with catColor (30%) over bg (60%) */
+  accent?: string;
+  ctaHref?: string;
+  ctaLabel?: string;
 };
 
-/* ─── Event data — 7 events × 6 slides ─────────────────────── */
+/* ─── Event data ────────────────────────────────────────────── */
 const FEATURED: EventData[] = [
   {
-    idx: "01", category: "Workshop",
+    idx: "01", category: "E-Summit",
+    catColor: "#7484FE", catBg: "rgba(116,132,254,0.14)",
+    date: "Oct 30–31, 2026", dateTime: "2026-10-30",
+    tags: ["2nd Edition", "Startup Expo", "Pitch Deck", "Team Size 4–5", "Passes ₹769"],
+    bg: "#16171D",
+    upcoming: true,
+    accent: "#33FF67",
+    ctaHref: "https://equinox-2.0.mlritcie.in",
+    ctaLabel: "Grab Your Pass — ₹769",
+    slides: [
+      { img: "/events/poster/equinox-2.0.webp", grad: "linear-gradient(145deg,#0a0b12 0%,#1e2147 55%,#7484FE 100%)", heading: "The Equinox 2.0", body: "E-Summit 2K26 — the second edition is here. Two days of founders, investors, competitions, and ideas worth chasing. Bring your team of 4–5 and come build something real." },
+      { grad: "linear-gradient(160deg,#0a0b12 0%,#1a1d40 50%,#5a66d8 100%)", heading: "Startup Expo & Pitch Deck", body: "Student ventures take the floor. Show your product at the Startup Expo, then pitch it to a panel of investors and founders in Pitch Deck." },
+      { grad: "linear-gradient(130deg,#0a0b12 0%,#16302a 50%,#22b04f 100%)", heading: "Compete Across Tracks", body: "Hustle Mania, IPL Auction, Startup-Poly, Brand Battles, Crossroads, and Spotlight — rapid-fire challenges in sales, strategy, branding, and quick thinking." },
+      { grad: "linear-gradient(150deg,#0a0b12 0%,#1e2147 50%,#6d78f0 100%)", heading: "Internship Drive & E-Cell Meet", body: "Meet startups that are hiring and connect with E-Cells from other campuses. The summit is also where careers and collaborations start." },
+      { grad: "linear-gradient(140deg,#0a0b12 0%,#153028 50%,#2bd860 100%)", heading: "Standup & Musical Night", body: "When the competitions wrap up, the evenings belong to standup comedy and a musical night. Passes at ₹769 — register at equinox-2.0.mlritcie.in." },
+    ],
+  },
+  {
+    idx: "02", category: "Workshop",
     catColor: "#2563EB", catBg: "rgba(59,130,246,0.12)",
     date: "Apr 10–11, 2026", dateTime: "2026-04-10",
     tags: ["Hands-on", "Expert Guidance", "Domain Challenges", "Practical Skills"],
     bg: "#07090f",
     slides: [
-      { img: "/events/poster/wc%202.0.png", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "Workshop Carnival 2.0", body: "Learn something by actually trying it. Practical learning across domains through activities and hands-on work, not just someone explaining a concept — come curious, leave knowing something new." },
+      { img: "/events/poster/wc%202.0.webp", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "Workshop Carnival 2.0", body: "Learn something by actually trying it. Practical learning across domains through activities and hands-on work, not just someone explaining a concept — come curious, leave knowing something new." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/DSCF1109.JPG", grad: "linear-gradient(160deg,#040a18 0%,#0a1836 50%,#1a3380 100%)", heading: "Expert-Led Tracks", body: "Learn directly from practitioners. Each workshop track delivers hands-on expertise in UI/UX, IoT, content creation, and product design." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM.jpeg", grad: "linear-gradient(130deg,#050c22 0%,#0f2650 50%,#1e40af 100%)", heading: "Build, Don't Browse", body: "Every session ends with something tangible. Teams prototype, test, and iterate — no passive learning, no slides-only talks." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM%20(1).jpeg", grad: "linear-gradient(150deg,#060d20 0%,#0d1f40 50%,#2563eb 100%)", heading: "Cross-Domain Collide", body: "Designers collaborate with developers. Strategists work alongside engineers. That friction is where the best ideas are born." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM.webp", grad: "linear-gradient(130deg,#050c22 0%,#0f2650 50%,#1e40af 100%)", heading: "Build, Don't Browse", body: "Every session ends with something tangible. Teams prototype, test, and iterate — no passive learning, no slides-only talks." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM%20(1).webp", grad: "linear-gradient(150deg,#060d20 0%,#0d1f40 50%,#2563eb 100%)", heading: "Cross-Domain Collide", body: "Designers collaborate with developers. Strategists work alongside engineers. That friction is where the best ideas are born." },
       { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM%20(2).jpeg", grad: "linear-gradient(140deg,#040a1a 0%,#0b1c38 50%,#1c3fa8 100%)", heading: "Live Feedback Loop", body: "Mentors circulate every hour, giving real-time critique and direction. No waiting till the end to know if you're off track." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM%20(3).jpeg", grad: "linear-gradient(155deg,#050b1e 0%,#0c1e3e 50%,#1d42b0 100%)", heading: "Skills That Stay", body: "From prototype to portfolio. What you build during Carnival follows you well beyond the campus boundary." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/IMG_5443.png", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/IMG_5499.jpg", grad: "linear-gradient(160deg,#040a18 0%,#0a1836 50%,#1a3380 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/WhatsApp%20Image%202026-06-26%20at%203.50.13%20PM%20(3).webp", grad: "linear-gradient(155deg,#050b1e 0%,#0c1e3e 50%,#1d42b0 100%)", heading: "Skills That Stay", body: "From prototype to portfolio. What you build during Carnival follows you well beyond the campus boundary." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/IMG_5443.webp", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/WC%202.0/IMG_5499.webp", grad: "linear-gradient(160deg,#040a18 0%,#0a1836 50%,#1a3380 100%)", heading: "", body: "" },
     ],
   },
   {
-    idx: "02", category: "Innovation Challenge",
+    idx: "03", category: "Innovation Challenge",
     catColor: "#DC2626", catBg: "rgba(220,38,38,0.12)",
     date: "Apr 3–4, 2025", dateTime: "2025-04-03",
     tags: ["Brand Revival", "Logo Design", "Ad-Film Making", "Masterclasses"],
     bg: "#080808",
     slides: [
-      { img: "/events/poster/B2B.png", grad: "linear-gradient(145deg,#e8b000 0%,#f5c200 55%,#ffd040 100%)", heading: "Business to Brand", body: "A good idea also needs a good story. Teams work on branding, communication, and visual identity — thinking creatively about how ideas get presented to the world.", posterFit: "contain" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4700.JPG", grad: "linear-gradient(160deg,#060a04 0%,#14200a 50%,#3d6b0c 100%)", heading: "Visual Identity", body: "Concept sketches evolve into full brand systems — logos, palettes, and typographic language — all under a 48-hour deadline." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4866.JPG", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "The Ad-Film Track", body: "Script it. Shoot it. Edit it. Teams produce a complete ad film for their chosen brand — entirely within the hackathon window." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8229.JPG", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "Pitch Day", body: "Final brand presentations evaluated live by a panel of industry jurors. High pressure, high stakes, high impact." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4728.JPG", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", heading: "", body: "" },
+      { img: "/events/poster/B2B.webp", grad: "linear-gradient(145deg,#e8b000 0%,#f5c200 55%,#ffd040 100%)", heading: "Business to Brand", body: "A good idea also needs a good story. Teams work on branding, communication, and visual identity — thinking creatively about how ideas get presented to the world.", posterFit: "contain" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4700.webp", grad: "linear-gradient(160deg,#060a04 0%,#14200a 50%,#3d6b0c 100%)", heading: "Visual Identity", body: "Concept sketches evolve into full brand systems — logos, palettes, and typographic language — all under a 48-hour deadline." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4866.webp", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "The Ad-Film Track", body: "Script it. Shoot it. Edit it. Teams produce a complete ad film for their chosen brand — entirely within the hackathon window." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8229.webp", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "Pitch Day", body: "Final brand presentations evaluated live by a panel of industry jurors. High pressure, high stakes, high impact." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4728.webp", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", heading: "", body: "" },
       { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4790.JPG", grad: "linear-gradient(160deg,#060a04 0%,#14200a 50%,#3d6b0c 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4943.JPG", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4959.JPG", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4943.webp", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4959.webp", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "", body: "" },
       { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF5172.JPG", grad: "linear-gradient(140deg,#0a0e06 0%,#1e2e0d 50%,#527f12 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF5178.JPG", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF5189.JPG", grad: "linear-gradient(160deg,#060a04 0%,#14200a 50%,#3d6b0c 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF8719.JPG", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF5178.webp", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF5189.webp", grad: "linear-gradient(160deg,#060a04 0%,#14200a 50%,#3d6b0c 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF8719.webp", grad: "linear-gradient(130deg,#080c05 0%,#1a2a0b 50%,#4a7c0e 100%)", heading: "", body: "" },
       { img: "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8078.JPG", grad: "linear-gradient(150deg,#060905 0%,#182310 50%,#3f6b0a 100%)", heading: "", body: "" },
       { img: "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8827.JPG", grad: "linear-gradient(140deg,#0a0e06 0%,#1e2e0d 50%,#527f12 100%)", heading: "", body: "" },
     ],
   },
   {
-    idx: "03", category: "Innovation Challenge",
+    idx: "04", category: "Innovation Challenge",
     catColor: "#EA580C", catBg: "rgba(234,88,12,0.12)",
     date: "Apr 24, 2023", dateTime: "2023-04-24",
     tags: ["Business", "Negotiation", "Sales", "Strategy"],
     bg: "#0c0804",
     slides: [
-      { img: "/events/poster/hustle%20mania.png", grad: "linear-gradient(145deg,#0d0803 0%,#3b1a06 55%,#c2410c 100%)", heading: "Hustle Mania", body: "Think fast. Adapt faster. Entrepreneurship rarely goes according to plan — teams think quickly, communicate clearly, and adapt when things change under real pressure." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0541.JPG", grad: "linear-gradient(160deg,#0b0703 0%,#2e1604 50%,#b03a0a 100%)", heading: "The Sales Sprint", body: "Teams hit the floor with a product and a pitch. Real customers, real pressure — close the deal or go home." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0545.JPG", grad: "linear-gradient(130deg,#0e0904 0%,#3f1c07 50%,#c74c10 100%)", heading: "Negotiation Duel", body: "Head-to-head rounds of business negotiation. Whoever walks away with the better deal — and the logic to prove it — advances." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0548.JPG", grad: "linear-gradient(150deg,#0c0804 0%,#351806 50%,#ba3f0b 100%)", heading: "Ad Blitz", body: "30 minutes to conceptualize and present a full advertising campaign for a surprise brand brief. Speed and clarity win." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/IMG_3101.JPG", grad: "linear-gradient(140deg,#0d0904 0%,#3a1c06 50%,#c04010 100%)", heading: "Strategy Board", body: "Evaluate a failing business, diagnose the root cause, and present a turnaround plan in under an hour." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/IMG_3125.JPG", grad: "linear-gradient(155deg,#0c0803 0%,#381a06 50%,#bc3d0b 100%)", heading: "Hustle Champions", body: "The team that scores highest across all five domains earns the Hustle Mania trophy — and the bragging rights that come with it." },
+      { img: "/events/poster/hustle%20mania.webp", grad: "linear-gradient(145deg,#0d0803 0%,#3b1a06 55%,#c2410c 100%)", heading: "Hustle Mania", body: "Think fast. Adapt faster. Entrepreneurship rarely goes according to plan — teams think quickly, communicate clearly, and adapt when things change under real pressure." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0541.webp", grad: "linear-gradient(160deg,#0b0703 0%,#2e1604 50%,#b03a0a 100%)", heading: "The Sales Sprint", body: "Teams hit the floor with a product and a pitch. Real customers, real pressure — close the deal or go home." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0545.webp", grad: "linear-gradient(130deg,#0e0904 0%,#3f1c07 50%,#c74c10 100%)", heading: "Negotiation Duel", body: "Head-to-head rounds of business negotiation. Whoever walks away with the better deal — and the logic to prove it — advances." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0548.webp", grad: "linear-gradient(150deg,#0c0804 0%,#351806 50%,#ba3f0b 100%)", heading: "Ad Blitz", body: "30 minutes to conceptualize and present a full advertising campaign for a surprise brand brief. Speed and clarity win." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/IMG_3101.webp", grad: "linear-gradient(140deg,#0d0904 0%,#3a1c06 50%,#c04010 100%)", heading: "Strategy Board", body: "Evaluate a failing business, diagnose the root cause, and present a turnaround plan in under an hour." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/IMG_3125.webp", grad: "linear-gradient(155deg,#0c0803 0%,#381a06 50%,#bc3d0b 100%)", heading: "Hustle Champions", body: "The team that scores highest across all five domains earns the Hustle Mania trophy — and the bragging rights that come with it." },
     ],
   },
   {
-    idx: "04", category: "Startup Meetup",
+    idx: "05", category: "Startup Meetup",
     catColor: "#7C3AED", catBg: "rgba(124,58,237,0.12)",
     date: "Nov 28–30, 2024", dateTime: "2024-11-28",
     tags: ["E-Summit", "Entrepreneurship", "CIE × IIC"],
     bg: "#090709",
     slides: [
-      { img: "/events/poster/equniox.png", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "Equinox E-Summit 2K24", body: "Conversations that can change the way you think. Students hear different journeys, interact with people who've built things of their own, and explore ideas beyond their usual environment." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7602.JPG", grad: "linear-gradient(160deg,#0b0516 0%,#250d48 50%,#5e22c4 100%)", heading: "Startup Pitches", body: "Founders take the stage. Investors in the front row. The most promising student ventures compete for funding and mentorship." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7628.JPG", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "Investor Connect", body: "Structured one-on-one sessions between student entrepreneurs and angel investors — real conversations, real opportunities." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7638.JPG", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "Speaker Series", body: "Industry veterans share unfiltered lessons from building companies. No scripts, no PR spin — just the truth about entrepreneurship." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7731.JPG", grad: "linear-gradient(140deg,#0c0515 0%,#221040 50%,#5a1ebc 100%)", heading: "Innovation Showcase", body: "Stalls, demos, and live prototypes from the most innovative student projects across engineering, design, and business." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7592.JPG", grad: "linear-gradient(155deg,#0e0618 0%,#2b0f55 50%,#6e28da 100%)", heading: "Awards Night", body: "The summit closes with recognition across categories — best pitch, best innovation, most scalable venture, and more." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7594.JPG", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "", body: "" },
+      { img: "/events/poster/equniox.webp", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "Equinox E-Summit 2K24", body: "Conversations that can change the way you think. Students hear different journeys, interact with people who've built things of their own, and explore ideas beyond their usual environment." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7602.webp", grad: "linear-gradient(160deg,#0b0516 0%,#250d48 50%,#5e22c4 100%)", heading: "Startup Pitches", body: "Founders take the stage. Investors in the front row. The most promising student ventures compete for funding and mentorship." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7628.webp", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "Investor Connect", body: "Structured one-on-one sessions between student entrepreneurs and angel investors — real conversations, real opportunities." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7638.webp", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "Speaker Series", body: "Industry veterans share unfiltered lessons from building companies. No scripts, no PR spin — just the truth about entrepreneurship." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7731.webp", grad: "linear-gradient(140deg,#0c0515 0%,#221040 50%,#5a1ebc 100%)", heading: "Innovation Showcase", body: "Stalls, demos, and live prototypes from the most innovative student projects across engineering, design, and business." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7592.webp", grad: "linear-gradient(155deg,#0e0618 0%,#2b0f55 50%,#6e28da 100%)", heading: "Awards Night", body: "The summit closes with recognition across categories — best pitch, best innovation, most scalable venture, and more." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7594.webp", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "", body: "" },
       { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7597.JPG", grad: "linear-gradient(160deg,#0b0516 0%,#250d48 50%,#5e22c4 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7867.JPG", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_8073.JPG", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC00532.JPG", grad: "linear-gradient(140deg,#0c0515 0%,#221040 50%,#5a1ebc 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC00571.JPG", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSCF2981.JPG", grad: "linear-gradient(160deg,#0b0516 0%,#250d48 50%,#5e22c4 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSCF3009.JPG", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSCF3042.JPG", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_7867.webp", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC_8073.webp", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC00532.webp", grad: "linear-gradient(140deg,#0c0515 0%,#221040 50%,#5a1ebc 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSC00571.webp", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSCF2981.webp", grad: "linear-gradient(160deg,#0b0516 0%,#250d48 50%,#5e22c4 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSCF3009.webp", grad: "linear-gradient(130deg,#0f0619 0%,#301260 50%,#7c32e8 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Equinox/DSCF3042.webp", grad: "linear-gradient(150deg,#0d0617 0%,#280e52 50%,#6628d0 100%)", heading: "", body: "" },
     ],
   },
   {
-    idx: "05", category: "Workshop",
+    idx: "06", category: "Workshop",
     catColor: "#2563EB", catBg: "rgba(59,130,246,0.12)",
     date: "Mar 11–16, 2024", dateTime: "2024-03-11",
     tags: ["IoT", "UI/UX", "WordPress", "6-Day Sprint"],
     bg: "#060810",
     slides: [
-      { img: "/events/poster/wc.png", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "Workshop Carnival", body: "Six days of hands-on exploration. Participants tackled UI/UX design, IoT, and WordPress through structured challenges and expert guidance." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1436.JPG", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1479.png", grad: "linear-gradient(160deg,#040a18 0%,#0a1930 50%,#1a45c8 100%)", heading: "UI/UX Track", body: "Design thinking meets real products. Teams redesign existing apps and pitch their improvements to practicing UX designers." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1485.jpg", grad: "linear-gradient(130deg,#060c20 0%,#0e2040 50%,#2155d8 100%)", heading: "IoT Lab", body: "Sensors, circuits, and code. Participants build working IoT prototypes from scratch with expert guidance on hardware and firmware." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1492.png", grad: "linear-gradient(150deg,#050a1a 0%,#0c1d38 50%,#1c4ad0 100%)", heading: "WordPress Build", body: "From blank canvas to live website. Participants design, develop, and deploy a fully functional site — in a single session." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1503.png", grad: "linear-gradient(140deg,#060b1e 0%,#0d1e3a 50%,#1e4dd5 100%)", heading: "Domain Showdowns", body: "Each track ends with a domain-specific contest. The best project across design, IoT, and web earns recognition and prizes." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1527.png", grad: "linear-gradient(155deg,#050a1c 0%,#0c1c38 50%,#1b48cc 100%)", heading: "Community Builders", body: "Beyond skills — students leave with a network of peers, mentors, and collaborators who share the same drive to create." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_4415.png", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG20240315094843.jpg", grad: "linear-gradient(160deg,#040a18 0%,#0a1930 50%,#1a45c8 100%)", heading: "", body: "" },
+      { img: "/events/poster/wc.webp", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "Workshop Carnival", body: "Six days of hands-on exploration. Participants tackled UI/UX design, IoT, and WordPress through structured challenges and expert guidance." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1436.webp", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1479.webp", grad: "linear-gradient(160deg,#040a18 0%,#0a1930 50%,#1a45c8 100%)", heading: "UI/UX Track", body: "Design thinking meets real products. Teams redesign existing apps and pitch their improvements to practicing UX designers." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1485.webp", grad: "linear-gradient(130deg,#060c20 0%,#0e2040 50%,#2155d8 100%)", heading: "IoT Lab", body: "Sensors, circuits, and code. Participants build working IoT prototypes from scratch with expert guidance on hardware and firmware." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1492.webp", grad: "linear-gradient(150deg,#050a1a 0%,#0c1d38 50%,#1c4ad0 100%)", heading: "WordPress Build", body: "From blank canvas to live website. Participants design, develop, and deploy a fully functional site — in a single session." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1503.webp", grad: "linear-gradient(140deg,#060b1e 0%,#0d1e3a 50%,#1e4dd5 100%)", heading: "Domain Showdowns", body: "Each track ends with a domain-specific contest. The best project across design, IoT, and web earns recognition and prizes." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_1527.webp", grad: "linear-gradient(155deg,#050a1c 0%,#0c1c38 50%,#1b48cc 100%)", heading: "Community Builders", body: "Beyond skills — students leave with a network of peers, mentors, and collaborators who share the same drive to create." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG_4415.webp", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/wc/IMG20240315094843.webp", grad: "linear-gradient(160deg,#040a18 0%,#0a1930 50%,#1a45c8 100%)", heading: "", body: "" },
     ],
   },
   {
-    idx: "06", category: "Innovation Challenge",
+    idx: "07", category: "Innovation Challenge",
     catColor: "#16A34A", catBg: "rgba(22,163,74,0.12)",
     date: "Mar 26–28, 2024", dateTime: "2024-03-26",
     tags: ["GI Products", "Cultural Heritage", "IPFC × MLRIT", "MSME"],
     bg: "#060b08",
     slides: [
-      { img: "/events/poster/gi.png", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", heading: "GI Mahotsav 2024", body: "Geographical Indications Products Mela — a unique journey through India's rich cultural heritage and its most protected regional crafts." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00055.JPG", grad: "linear-gradient(150deg,#050d08 0%,#124c2a 50%,#14943e 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00056.jpg", grad: "linear-gradient(140deg,#070f0a 0%,#165a32 50%,#1aae4a 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00424.JPG", grad: "linear-gradient(160deg,#040c07 0%,#104428 50%,#128c40 100%)", heading: "Heritage in Focus", body: "Over 50 GI-tagged products on display — from Banarasi silk to Darjeeling tea. Each tells a story of place, craft, and community." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00427.JPG", grad: "linear-gradient(130deg,#060e0b 0%,#155830 50%,#18b050 100%)", heading: "Artisan Stories", body: "Meet the makers behind the products. Live demonstrations of traditional crafts that have been perfected over generations." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00552.JPG", grad: "linear-gradient(150deg,#050d08 0%,#124c2a 50%,#14943e 100%)", heading: "Policy & Protection", body: "Panel discussions on how GI tags protect India's cultural exports and what more needs to be done for artisan welfare." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00782.JPG", grad: "linear-gradient(140deg,#070f0a 0%,#165a32 50%,#1aae4a 100%)", heading: "MSME Connect", body: "Direct linkages between GI-certified producers and buyers, distributors, and e-commerce platforms — bridging craft and commerce." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00786.JPG", grad: "linear-gradient(155deg,#060d09 0%,#145030 50%,#16a048 100%)", heading: "Cultural Economy", body: "Workshops on building sustainable businesses around traditional crafts, with frameworks from IPFC and MSME specialists." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00856.JPG", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00861.JPG", grad: "linear-gradient(160deg,#040c07 0%,#104428 50%,#128c40 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC09898.JPG", grad: "linear-gradient(130deg,#060e0b 0%,#155830 50%,#18b050 100%)", heading: "", body: "" },
+      { img: "/events/poster/gi.webp", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", heading: "GI Mahotsav 2024", body: "Geographical Indications Products Mela — a unique journey through India's rich cultural heritage and its most protected regional crafts." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00055.webp", grad: "linear-gradient(150deg,#050d08 0%,#124c2a 50%,#14943e 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00056.webp", grad: "linear-gradient(140deg,#070f0a 0%,#165a32 50%,#1aae4a 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00424.webp", grad: "linear-gradient(160deg,#040c07 0%,#104428 50%,#128c40 100%)", heading: "Heritage in Focus", body: "Over 50 GI-tagged products on display — from Banarasi silk to Darjeeling tea. Each tells a story of place, craft, and community." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00427.webp", grad: "linear-gradient(130deg,#060e0b 0%,#155830 50%,#18b050 100%)", heading: "Artisan Stories", body: "Meet the makers behind the products. Live demonstrations of traditional crafts that have been perfected over generations." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00552.webp", grad: "linear-gradient(150deg,#050d08 0%,#124c2a 50%,#14943e 100%)", heading: "Policy & Protection", body: "Panel discussions on how GI tags protect India's cultural exports and what more needs to be done for artisan welfare." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00782.webp", grad: "linear-gradient(140deg,#070f0a 0%,#165a32 50%,#1aae4a 100%)", heading: "MSME Connect", body: "Direct linkages between GI-certified producers and buyers, distributors, and e-commerce platforms — bridging craft and commerce." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00786.webp", grad: "linear-gradient(155deg,#060d09 0%,#145030 50%,#16a048 100%)", heading: "Cultural Economy", body: "Workshops on building sustainable businesses around traditional crafts, with frameworks from IPFC and MSME specialists." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00856.webp", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00861.webp", grad: "linear-gradient(160deg,#040c07 0%,#104428 50%,#128c40 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC09898.webp", grad: "linear-gradient(130deg,#060e0b 0%,#155830 50%,#18b050 100%)", heading: "", body: "" },
     ],
   },
   {
-    idx: "07", category: "Hackathon",
-    catColor: "#C04218", catBg: "rgba(255,94,44,0.12)",
+    idx: "08", category: "Hackathon",
+    catColor: "#5763BF", catBg: "rgba(116,132,254,0.12)",
     date: "Oct 6–7, 2023", dateTime: "2023-10-06",
     tags: ["Metaverse", "36-Hour Hackathon", "₹75K Prize", "CIE × Deeploop"],
     bg: "#0b0606",
     slides: [
-      { img: "/events/poster/metaloop.png", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "MetaLoop", body: "Build something. Break something. Fix it. Repeat. A 36-hour hackathon where teams find out how they work when the clock is running — bugs, disagreements, and all.", posterFit: "contain" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0094.JPG", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "", body: "" },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0102.JPG", grad: "linear-gradient(160deg,#0a0505 0%,#260f0f 50%,#871618 100%)", heading: "AR/VR Track", body: "Build immersive augmented and virtual reality experiences. Teams push the boundaries of spatial computing in 36 hours." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0168.JPG", grad: "linear-gradient(130deg,#0d0707 0%,#301414 50%,#a61e1e 100%)", heading: "Blockchain Track", body: "Smart contracts, NFTs, and decentralized apps. Teams explore the infrastructure layer of the open metaverse." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0378.JPG", grad: "linear-gradient(150deg,#0b0606 0%,#2a1010 50%,#901818 100%)", heading: "Virtual Worlds", body: "Design and build navigable 3D environments — social spaces, games, and interactive experiences for the next internet." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0388.JPG", grad: "linear-gradient(140deg,#0c0606 0%,#2c1212 50%,#961a1a 100%)", heading: "Deeploop Mentorship", body: "Deeploop engineers embed directly with teams throughout the hackathon — real mentorship, not just scheduled office hours." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0574.JPG", grad: "linear-gradient(155deg,#0b0505 0%,#2b1010 50%,#921818 100%)", heading: "Final Showcase", body: "36 hours of building. 10 minutes to present. A panel of Web3 investors and metaverse builders judges the final showcase." },
-      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0577.JPG", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "", body: "" },
+      { img: "/events/poster/metaloop.webp", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "MetaLoop", body: "Build something. Break something. Fix it. Repeat. A 36-hour hackathon where teams find out how they work when the clock is running — bugs, disagreements, and all.", posterFit: "contain" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0094.webp", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "", body: "" },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0102.webp", grad: "linear-gradient(160deg,#0a0505 0%,#260f0f 50%,#871618 100%)", heading: "AR/VR Track", body: "Build immersive augmented and virtual reality experiences. Teams push the boundaries of spatial computing in 36 hours." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0168.webp", grad: "linear-gradient(130deg,#0d0707 0%,#301414 50%,#a61e1e 100%)", heading: "Blockchain Track", body: "Smart contracts, NFTs, and decentralized apps. Teams explore the infrastructure layer of the open metaverse." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0378.webp", grad: "linear-gradient(150deg,#0b0606 0%,#2a1010 50%,#901818 100%)", heading: "Virtual Worlds", body: "Design and build navigable 3D environments — social spaces, games, and interactive experiences for the next internet." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0388.webp", grad: "linear-gradient(140deg,#0c0606 0%,#2c1212 50%,#961a1a 100%)", heading: "Deeploop Mentorship", body: "Deeploop engineers embed directly with teams throughout the hackathon — real mentorship, not just scheduled office hours." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0574.webp", grad: "linear-gradient(155deg,#0b0505 0%,#2b1010 50%,#921818 100%)", heading: "Final Showcase", body: "36 hours of building. 10 minutes to present. A panel of Web3 investors and metaverse builders judges the final showcase." },
+      { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0577.webp", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "", body: "" },
     ],
   },
 ];
@@ -269,7 +362,7 @@ function EventFilmStrip({ ev }: { ev: EventData }) {
     height: "22px",
     backgroundImage: "repeating-linear-gradient(90deg, transparent 0, transparent 8px, rgba(255,255,255,0.09) 8px, rgba(255,255,255,0.09) 22px, transparent 22px, transparent 32px)",
     backgroundSize: "32px 22px",
-    backgroundColor: "#050505",
+    backgroundColor: "var(--ev-strip-holes-bg)",
   };
 
   return (
@@ -302,7 +395,7 @@ function EventFilmStrip({ ev }: { ev: EventData }) {
         </div>
       )}
 
-      <div style={{ background: "#060606", overflow: "hidden" }}>
+      <div style={{ background: ev.accent ? ev.bg : "var(--ev-strip-bg)", overflow: "hidden" }}>
         <div style={holeStyle} />
         <div style={{ overflow: "hidden" }}>
           <div ref={stripRef} style={{
@@ -482,7 +575,9 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
         display: "flex",
         flexDirection: flipped ? "row-reverse" : "row",
         height: "clamp(560px, 85vh, 1000px)",
-        background: ev.bg,
+        background: ev.accent
+          ? `radial-gradient(ellipse at 85% 0%, ${ev.catBg} 0%, transparent 55%), radial-gradient(ellipse at 100% 100%, rgba(51,255,103,0.06) 0%, transparent 45%), ${ev.bg}`
+          : ev.bg,
         overflow: "hidden",
       }}
     >
@@ -562,7 +657,7 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
               display: "block",
               fontFamily: "var(--font-body)", fontWeight: 700,
               fontSize: "9.5px", letterSpacing: "0.18em", textTransform: "uppercase",
-              color: "#E8521A", marginBottom: "8px",
+              color: ev.accent ?? "var(--orange)", marginBottom: "8px",
             }}>
               {ev.idx}
             </span>
@@ -591,10 +686,10 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
 
             {/* ④ date */}
             <div data-s style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px", justifyContent: flipped ? "flex-start" : "flex-end" }}>
-              <Calendar size={11} style={{ color: "rgba(255,255,255,0.28)", flexShrink: 0 }} />
+              <Calendar size={11} style={{ color: ev.accent ? ev.catColor : "rgba(255,255,255,0.28)", flexShrink: 0 }} />
               <time dateTime={ev.dateTime} style={{
                 fontFamily: "var(--font-body)", fontSize: "12px",
-                color: "rgba(255,255,255,0.28)", letterSpacing: "0.04em",
+                color: ev.accent ? "rgba(255,255,255,0.70)" : "rgba(255,255,255,0.28)", letterSpacing: "0.04em",
               }}>
                 {ev.date}
               </time>
@@ -604,7 +699,7 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
             <p data-s style={{
               fontFamily: "var(--font-body)",
               fontSize: "clamp(12.5px, 1.25vw, 15px)",
-              lineHeight: 1.84, color: "rgba(255,255,255,0.40)",
+              lineHeight: 1.84, color: ev.accent ? "rgba(255,255,255,0.62)" : "rgba(255,255,255,0.40)",
               marginBottom: "22px", maxWidth: "420px", alignSelf: flipped ? "flex-start" : "flex-end",
             }}>
               {slide.body}
@@ -617,14 +712,28 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
                   fontFamily: "var(--font-body)", fontSize: "9.5px",
                   fontWeight: 600, letterSpacing: "0.04em",
                   padding: "4px 11px", borderRadius: "999px",
-                  background: "rgba(255,255,255,0.07)",
-                  border: "1px solid rgba(255,255,255,0.10)",
-                  color: "rgba(255,255,255,0.38)",
+                  background: ev.accent ? ev.catBg : "rgba(255,255,255,0.07)",
+                  border: ev.accent ? `1px solid ${ev.catColor}55` : "1px solid rgba(255,255,255,0.10)",
+                  color: ev.accent ? "#C9CFFF" : "rgba(255,255,255,0.38)",
                 }}>
                   {t}
                 </span>
               ))}
             </div>
+
+            {/* ⑦ register CTA (upcoming events) */}
+            {ev.ctaHref && (
+              <a data-s href={ev.ctaHref} target="_blank" rel="noopener noreferrer" style={{
+                display: "inline-flex", alignItems: "center", gap: "8px", marginTop: "22px",
+                alignSelf: flipped ? "flex-start" : "flex-end",
+                fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "13px",
+                color: "#0a0b12",
+                background: ev.accent ? `linear-gradient(90deg, ${ev.catColor} 0%, ${ev.accent} 100%)` : ev.catColor,
+                borderRadius: "999px", padding: "11px 24px", textDecoration: "none",
+              }}>
+                {ev.ctaLabel ?? "Register"} <ArrowRight size={13} />
+              </a>
+            )}
           </div>
         ))}
 
@@ -639,7 +748,8 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
         .ev-text > div { text-align: left !important; align-items: flex-start !important; justify-content: flex-start !important; padding: clamp(20px,5vw,32px) !important; }
         .ev-text > div > span,
         .ev-text > div > h2,
-        .ev-text > div > p { align-self: flex-start !important; text-align: left !important; }
+        .ev-text > div > p,
+        .ev-text > div > a { align-self: flex-start !important; text-align: left !important; }
         .ev-text > div > div { text-align: left !important; align-items: flex-start !important; justify-content: flex-start !important; }
       }
     `}</style>
@@ -698,7 +808,8 @@ export default function EventsPage() {
   }, []);
 
   return (
-    <div ref={containerRef} style={{ background: "#0A0A0A", marginTop: "calc(-1 * var(--nav-height))" }}>
+    <div ref={containerRef} style={{ background: "var(--ev-page-bg)", marginTop: "calc(-1 * var(--nav-height))" }}>
+      <style>{EV_THEME_CSS}</style>
 
       {/* ══ HERO ══ */}
       <section
@@ -712,21 +823,21 @@ export default function EventsPage() {
       >
         <div className="eh-bg" style={{
           position: "absolute", inset: "-14%",
-          background: "#E8521A", willChange: "transform",
+          background: "var(--ev-hero-bg)", willChange: "transform",
         }}>
-          <div style={{ position: "absolute", inset: 0, backgroundImage: GRAIN, opacity: 0.06 }} />
+          <div style={{ position: "absolute", inset: 0, backgroundImage: GRAIN, opacity: "var(--ev-hero-grain-opacity)", mixBlendMode: "var(--ev-hero-grain-blend)" as unknown as React.CSSProperties["mixBlendMode"] }} />
         </div>
 
-        <svg aria-hidden style={{ position: "absolute", top: "-18%", right: "-10%", width: "52vw", height: "52vw", maxWidth: 580, maxHeight: 580, opacity: 0.10, pointerEvents: "none" }} viewBox="0 0 580 580" fill="none">
-          <circle cx="290" cy="290" r="265" stroke="rgba(255,255,255,1)" strokeWidth="80" fill="none" />
+        <svg aria-hidden style={{ position: "absolute", top: "-18%", right: "-10%", width: "52vw", height: "52vw", maxWidth: 580, maxHeight: 580, opacity: "var(--ev-hero-ring-a-opacity)", pointerEvents: "none" }} viewBox="0 0 580 580" fill="none">
+          <circle cx="290" cy="290" r="265" strokeWidth="80" fill="none" style={{ stroke: "var(--ev-hero-ring-a)" }} />
         </svg>
-        <svg aria-hidden style={{ position: "absolute", bottom: "-12%", left: "-8%", width: "30vw", height: "30vw", maxWidth: 340, maxHeight: 340, opacity: 0.08, pointerEvents: "none" }} viewBox="0 0 340 340" fill="none">
-          <circle cx="170" cy="170" r="150" stroke="rgba(255,255,255,1)" strokeWidth="50" fill="none" />
+        <svg aria-hidden style={{ position: "absolute", bottom: "-12%", left: "-8%", width: "30vw", height: "30vw", maxWidth: 340, maxHeight: 340, opacity: "var(--ev-hero-ring-b-opacity)", pointerEvents: "none" }} viewBox="0 0 340 340" fill="none">
+          <circle cx="170" cy="170" r="150" strokeWidth="50" fill="none" style={{ stroke: "var(--ev-hero-ring-b)" }} />
         </svg>
         <div aria-hidden style={{
           position: "absolute", bottom: "20px", right: "-14px",
           fontFamily: "var(--font-heading)", fontWeight: 900,
-          fontSize: "clamp(100px, 20vw, 340px)", color: "rgba(0,0,0,0.06)",
+          fontSize: "clamp(100px, 20vw, 340px)", color: "var(--ev-hero-watermark)",
           lineHeight: 1, letterSpacing: "-0.06em",
           userSelect: "none", pointerEvents: "none",
         }}>
@@ -745,8 +856,8 @@ export default function EventsPage() {
               lineHeight: 0.90, letterSpacing: "-0.045em", textTransform: "uppercase",
               display: "flex", alignItems: "baseline", gap: "0.22em",
             }}>
-              <span style={{ color: "#FFFFFF" }}>MAKE</span>
-              <span style={{ color: "transparent", WebkitTextStroke: "2.5px rgba(255,255,255,0.80)", fontSize: "0.82em" }}>IT</span>
+              <span style={{ color: "var(--ev-hero-fg)" }}>MAKE</span>
+              <span style={{ color: "transparent", WebkitTextStroke: "2.5px var(--ev-hero-outline)", fontSize: "0.82em" }}>IT</span>
             </div>
           </div>
           <div style={{ overflow: "hidden" }}>
@@ -754,15 +865,15 @@ export default function EventsPage() {
               fontFamily: "var(--font-heading)", fontWeight: 900,
               fontSize: "clamp(48px, 11vw, 152px)",
               lineHeight: 0.90, letterSpacing: "-0.045em", textTransform: "uppercase",
-              color: "#FFFFFF", marginTop: "0.04em",
+              marginTop: "0.04em",
             }}>
-              HAPPEN
+              <span className="text-gradient ev-happen">HAPPEN</span>
             </div>
           </div>
 
           <div className="eh-meta" style={{
             fontFamily: "var(--font-script)", fontSize: "clamp(18px, 2.4vw, 30px)",
-            color: "rgba(255,255,255,0.90)", lineHeight: 1.2,
+            color: "var(--ev-hero-script)", lineHeight: 1.2,
             marginTop: "18px", marginBottom: "20px",
             display: "inline-block", transform: "rotate(-1.5deg)",
           }}>
@@ -770,7 +881,7 @@ export default function EventsPage() {
           </div>
           <p className="eh-meta" style={{
             fontFamily: "var(--font-body)", fontSize: "clamp(14px, 1.4vw, 16px)",
-            lineHeight: 1.78, color: "rgba(255,255,255,0.72)",
+            lineHeight: 1.78, color: "var(--ev-hero-desc)",
             maxWidth: "min(440px,100%)", marginBottom: 0, display: "block",
           }}>
             At CIE, events aren&apos;t organised just to fill a calendar. Every event gives
@@ -783,49 +894,68 @@ export default function EventsPage() {
 
       {/* ══ EVENT SECTIONS + PER-EVENT FILM STRIPS ══ */}
       {FEATURED.flatMap((ev, i) => [
-        <div key={`label-${i}`} className="ev-label" style={{
-          background: "#0D0D0D",
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
+        <div key={`label-${i}`} className={`ev-label${ev.upcoming ? " ev-label-upcoming" : ""}`} style={{
+          background: ev.upcoming ? `linear-gradient(90deg, ${ev.catBg} 0%, ${ev.bg} 70%)` : "var(--ev-label-bg)",
+          borderTop: ev.upcoming ? `2px solid ${ev.catColor}` : "1px solid var(--ev-label-line)",
+          borderBottom: ev.upcoming ? `1px solid ${ev.catBg}` : "1px solid var(--ev-label-line)",
+          boxShadow: ev.upcoming ? `0 -12px 40px -14px ${ev.catColor}` : undefined,
+          position: "relative", zIndex: ev.upcoming ? 1 : undefined,
           padding: "clamp(18px,2.5vw,28px) clamp(24px,4vw,64px)",
           display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px",
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "14px", minWidth: 0 }}>
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: ev.catColor, flexShrink: 0 }}>{ev.idx}</span>
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: ev.accent ?? ev.catColor, flexShrink: 0 }}>{ev.idx}</span>
             <span style={{ color: "rgba(255,255,255,0.10)" }}>—</span>
             <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(16px,2.2vw,32px)", letterSpacing: "-0.03em", lineHeight: 1, color: "#fff", margin: 0, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{ev.slides[0].heading}</h3>
             <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", padding: "3px 10px", borderRadius: "999px", background: ev.catBg, color: ev.catColor, flexShrink: 0 }}>{ev.category}</span>
           </div>
           <div className="ev-label-right" style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.18)" }}>Gallery</span>
+            {ev.upcoming ? (
+              <span style={{ display: "inline-flex", alignItems: "center", gap: "7px", fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase", color: "#0a0b12", background: ev.accent ? `linear-gradient(90deg, ${ev.catColor} 0%, ${ev.accent} 100%)` : ev.catColor, padding: "5px 12px", borderRadius: "999px" }}>
+                <span className="ev-live-dot" style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#0a0b12" }} />
+                Upcoming · Main Event
+              </span>
+            ) : (
+              <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--ev-label-gallery)" }}>Gallery</span>
+            )}
             <span style={{ color: "rgba(255,255,255,0.10)" }}>·</span>
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "11px", color: "rgba(255,255,255,0.28)", letterSpacing: "0.04em" }}>{ev.date}</span>
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "11px", color: ev.upcoming ? "#fff" : "var(--ev-label-date)", fontWeight: ev.upcoming ? 600 : undefined, letterSpacing: "0.04em" }}>{ev.date}</span>
           </div>
         </div>,
         <EventSection key={`ev-${i}`} ev={ev} index={i} />,
         <EventFilmStrip key={`fs-${i}`} ev={ev} />,
       ])}
 
+      <style>{`
+        @keyframes ev-live-pulse {
+          0%   { box-shadow: 0 0 0 0 rgba(10,11,18,0.7); }
+          70%  { box-shadow: 0 0 0 6px rgba(10,11,18,0); }
+          100% { box-shadow: 0 0 0 0 rgba(10,11,18,0); }
+        }
+        .ev-live-dot { animation: ev-live-pulse 1.6s ease-out infinite; }
+        @media (prefers-reduced-motion: reduce) { .ev-live-dot { animation: none; } }
+      `}</style>
+
       {/* ══ CTA ══ */}
-      <section style={{ background: "#0A0A0A", padding: "clamp(88px,14vw,160px) 0", textAlign: "center" }}>
+      <section style={{ background: "var(--ev-cta-bg)", borderTop: "var(--ev-cta-border)", padding: "clamp(88px,14vw,160px) 0", textAlign: "center" }}>
         <div className="page-container">
           <div className="ep-reveal" style={{ display: "inline-flex", alignItems: "center", gap: "8px", marginBottom: "22px" }}>
-            <div style={{ width: "22px", height: "1px", background: "#E8521A" }} />
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#E8521A" }}>What&apos;s Next</span>
-            <div style={{ width: "22px", height: "1px", background: "#E8521A" }} />
+            <div style={{ width: "22px", height: "1px", background: "var(--orange)" }} />
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--orange)" }}>What&apos;s Next</span>
+            <div style={{ width: "22px", height: "1px", background: "var(--orange)" }} />
           </div>
-          <h2 className="ep-reveal" style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(36px,7vw,88px)", letterSpacing: "-0.045em", color: "#FFFFFF", lineHeight: 1.04, marginBottom: "20px" }}>
+          <h2 className="ep-reveal" style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(36px,7vw,88px)", letterSpacing: "-0.045em", color: "var(--ev-cta-title)", lineHeight: 1.04, marginBottom: "20px" }}>
             Don&apos;t miss<br />the next one.
           </h2>
-          <p className="ep-reveal" style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.5vw,17px)", lineHeight: 1.72, color: "rgba(255,255,255,0.36)", maxWidth: "420px", margin: "0 auto 40px" }}>
+          <p className="ep-reveal" style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.5vw,17px)", lineHeight: 1.72, color: "var(--ev-cta-text)", maxWidth: "420px", margin: "0 auto 40px" }}>
             Stay updated with all upcoming hackathons, workshops, and events at MLRIT CIE.
           </p>
           <div className="ep-reveal" style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "14px", color: "#FFFFFF", background: "#E8521A", borderRadius: "999px", padding: "13px 30px", textDecoration: "none", letterSpacing: "-0.01em" }}>
+            <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontFamily: "var(--font-body)", fontWeight: "var(--ev-cta-btn-weight)" as unknown as React.CSSProperties["fontWeight"], fontSize: "14px", color: "var(--on-accent)", background: "var(--grad-accent)", borderRadius: "999px", padding: "13px 30px", textDecoration: "none", letterSpacing: "-0.01em", boxShadow: "var(--ev-cta-btn-shadow)" }}>
               Get Involved <ArrowRight size={14} />
             </Link>
             <a href="https://www.instagram.com/mlritcie/" target="_blank" rel="noopener noreferrer"
-              style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontFamily: "var(--font-body)", fontWeight: 500, fontSize: "14px", color: "rgba(255,255,255,0.5)", border: "1px solid rgba(255,255,255,0.10)", borderRadius: "999px", padding: "13px 30px", textDecoration: "none" }}>
+              style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontFamily: "var(--font-body)", fontWeight: 500, fontSize: "14px", color: "var(--ev-cta-ghost-fg)", border: "1px solid var(--ev-cta-ghost-border)", borderRadius: "999px", padding: "13px 30px", textDecoration: "none" }}>
               Follow on Instagram
             </a>
           </div>

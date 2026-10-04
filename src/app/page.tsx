@@ -5,6 +5,7 @@ import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { getGrainDataUri } from "@/lib/grain";
+import TextLoop from "@/components/ui/TextLoop";
 import {
   ArrowRight,
   Lightbulb,
@@ -90,7 +91,7 @@ function FadeIn({
 }
 
 /* ── Section divider ──────────────────────────────────────────────── */
-function SectionDivider({ topBg = "#FFFFFF", btmBg = "#FFFFFF" }: { topBg?: string; btmBg?: string }) {
+function SectionDivider({ topBg = "var(--bg-white)", btmBg = "var(--bg-white)" }: { topBg?: string; btmBg?: string }) {
   return (
     <div style={{ background: `linear-gradient(to bottom, ${topBg} 50%, ${btmBg} 50%)` }}>
       <div style={{
@@ -98,13 +99,13 @@ function SectionDivider({ topBg = "#FFFFFF", btmBg = "#FFFFFF" }: { topBg?: stri
         maxWidth: "1200px", margin: "0 auto",
         padding: "0 clamp(16px, 5vw, 48px)",
       }}>
-        <div style={{ flex: 1, height: "1px", background: "rgba(0,0,0,0.08)" }} />
+        <div style={{ flex: 1, height: "1px", background: "rgba(var(--line-rgb),0.08)" }} />
         <div style={{ display: "flex", gap: "6px", padding: "0 14px", alignItems: "center" }}>
-          <div style={{ width: "3px", height: "3px", borderRadius: "50%", background: "rgba(0,0,0,0.18)" }} />
-          <div style={{ width: "5px", height: "5px", transform: "rotate(45deg)", background: "#E8521A", opacity: 0.45 }} />
-          <div style={{ width: "3px", height: "3px", borderRadius: "50%", background: "rgba(0,0,0,0.18)" }} />
+          <div style={{ width: "3px", height: "3px", borderRadius: "50%", background: "rgba(var(--line-rgb),0.18)" }} />
+          <div style={{ width: "5px", height: "5px", transform: "rotate(45deg)", background: "var(--orange)", opacity: "var(--home-divider-dot-op)" }} />
+          <div style={{ width: "3px", height: "3px", borderRadius: "50%", background: "rgba(var(--line-rgb),0.18)" }} />
         </div>
-        <div style={{ flex: 1, height: "1px", background: "rgba(0,0,0,0.08)" }} />
+        <div style={{ flex: 1, height: "1px", background: "rgba(var(--line-rgb),0.08)" }} />
       </div>
     </div>
   );
@@ -112,10 +113,10 @@ function SectionDivider({ topBg = "#FFFFFF", btmBg = "#FFFFFF" }: { topBg?: stri
 
 /* ── Data ─────────────────────────────────────────────────────────── */
 const stats = [
-  { value: 1000, suffix: "+", label: "Students Engaged",    icon: Users,      color: "#2563EB" },
-  { value: 15,   suffix: "+", label: "Events Hosted",       icon: Trophy,     color: "#EA580C" },
-  { value: 50,   suffix: "+", label: "Projects Launched",   icon: Rocket,     color: "#9333EA" },
-  { value: 10,   suffix: "+", label: "Startup Initiatives", icon: TrendingUp, color: "#16A34A" },
+  { value: 1000, suffix: "+", label: "Students Engaged",    icon: Users,      color: "#60A5FA" },
+  { value: 15,   suffix: "+", label: "Events Hosted",       icon: Trophy,     color: "#FB923C" },
+  { value: 50,   suffix: "+", label: "Projects Launched",   icon: Rocket,     color: "#C084FC" },
+  { value: 10,   suffix: "+", label: "Startup Initiatives", icon: TrendingUp, color: "#4ADE80" },
 ];
 
 const programs = [
@@ -124,46 +125,60 @@ const programs = [
     title: "Workshop Carnivals",
     desc: "Multi-day, multi-domain skill workshops covering UI/UX, IoT, WordPress, and more — hands-on learning that goes far beyond the classroom.",
     tag: "Workshops",
-    color: "#CA8A04",
+    color: "#FACC15",
   },
   {
     icon: Trophy,
     title: "Innovation Challenges",
     desc: "Events like B2B — Business to Brand and Hustle Mania push students to ideate, pitch, and execute under real-world constraints.",
     tag: "Challenges",
-    color: "#DC2626",
+    color: "#F87171",
   },
   {
     icon: Zap,
     title: "Hackathons",
     desc: "Intensive 24–36 hour sprints like MetaLoop — tackling cutting-edge themes with industry mentors and prize pools up to ₹75,000.",
     tag: "Hackathons",
-    color: "#2563EB",
+    color: "#60A5FA",
   },
   {
     icon: Mic,
     title: "E-Summits",
     desc: "The Equinox E-Summit brings together student innovators, startup founders, and investors for 3 days of talks, pitches, and networking.",
     tag: "Summits",
-    color: "#0891B2",
+    color: "#22D3EE",
   },
 ];
 
 const studios = [
-  { icon: Lightbulb, name: "Skill Workshops",        color: "#CA8A04", desc: "Domain-specific, hands-on workshops in tech, design, and business — run by industry experts and CIE teams across five active verticals." },
-  { icon: Trophy,    name: "Competitive Events",      color: "#DC2626", desc: "Brand challenges, business competitions, and hackathons that reward real problem-solving, creativity, and execution under pressure." },
-  { icon: Mic,       name: "Summits & Networking",    color: "#0891B2", desc: "Multi-day entrepreneurship summits with guest speakers, investor panels, and startup showcases — open to all MLRIT students." },
-  { icon: Handshake, name: "Mentorship & Incubation", color: "#9333EA", desc: "One-on-one guidance from alumni, industry experts, and faculty — from idea-stage to launch-ready, backed by IIC and CIE." },
+  { icon: Lightbulb, name: "Skill Workshops",        color: "#FACC15", desc: "Domain-specific, hands-on workshops in tech, design, and business — run by industry experts and CIE teams across five active verticals." },
+  { icon: Trophy,    name: "Competitive Events",      color: "#F87171", desc: "Brand challenges, business competitions, and hackathons that reward real problem-solving, creativity, and execution under pressure." },
+  { icon: Mic,       name: "Summits & Networking",    color: "#22D3EE", desc: "Multi-day entrepreneurship summits with guest speakers, investor panels, and startup showcases — open to all MLRIT students." },
+  { icon: Handshake, name: "Mentorship & Incubation", color: "#C084FC", desc: "One-on-one guidance from alumni, industry experts, and faculty — from idea-stage to launch-ready, backed by IIC and CIE." },
 ];
 
 const timeline = [
-  { step: "01", title: "Ideate",          desc: "Explore problems, brainstorm solutions, and validate your idea",              icon: Lightbulb,     color: "#CA8A04" },
-  { step: "02", title: "Build",           desc: "Turn your idea into a prototype or MVP with expert guidance",                icon: PenLine,       color: "#2563EB" },
-  { step: "03", title: "Test & Validate", desc: "Gather user feedback, iterate, and refine your solution",                    icon: MessageSquare, color: "#9333EA" },
-  { step: "04", title: "Launch",          desc: "Take your product to market with the support, resources, and network to grow", icon: Rocket,        color: "#EA580C" },
-  { step: "05", title: "Scale",           desc: "Build traction, access opportunities, and grow your venture sustainably",     icon: TrendingUp,    color: "#0891B2" },
+  { step: "01", title: "Ideate",          desc: "Explore problems, brainstorm solutions, and validate your idea",              icon: Lightbulb,     color: "#FACC15" },
+  { step: "02", title: "Build",           desc: "Turn your idea into a prototype or MVP with expert guidance",                icon: PenLine,       color: "#60A5FA" },
+  { step: "03", title: "Test & Validate", desc: "Gather user feedback, iterate, and refine your solution",                    icon: MessageSquare, color: "#C084FC" },
+  { step: "04", title: "Launch",          desc: "Take your product to market with the support, resources, and network to grow", icon: Rocket,        color: "#FB923C" },
+  { step: "05", title: "Scale",           desc: "Build traction, access opportunities, and grow your venture sustainably",     icon: TrendingUp,    color: "#22D3EE" },
 ];
 
+
+/* Light-theme (original) category colours, keyed by the dark-theme colour */
+const CAT_LIGHT: Record<string, string> = {
+  "#FACC15": "#CA8A04",
+  "#F87171": "#DC2626",
+  "#60A5FA": "#2563EB",
+  "#22D3EE": "#0891B2",
+  "#C084FC": "#9333EA",
+  "#FB923C": "#EA580C",
+  "#4ADE80": "#16A34A",
+};
+/* Per-element vars consumed by the .home-cat / .home-stat rules in the theme <style> */
+const catVars = (c: string) =>
+  ({ "--home-cat-d": c, "--home-cat-l": CAT_LIGHT[c] ?? c }) as React.CSSProperties;
 
 const homeFacilities = [
   { icon: Lightbulb, title: "Innovation Labs",    desc: "High-performance workstations with NVIDIA GPUs for development, design, and rapid prototyping." },
@@ -177,18 +192,19 @@ const homeFacilities = [
 /* ── Design tokens ────────────────────────────────────────────────── */
 const CONTAINER  = "page-container";
 const SECTION_PY = "clamp(48px, 5vw, 80px)";
-const T_PRIMARY   = "#000000";
-const T_SECONDARY = "#000000";
-const T_MED       = "#374151";
-const T_MUTED     = "#6B7280";
-const ORANGE      = "#E8521A";
+const T_PRIMARY   = "var(--text-primary)";
+const T_SECONDARY = "var(--text-primary)";
+const T_MED       = "var(--home-t-med)";
+const T_MUTED     = "var(--text-muted)";
+const ORANGE      = "var(--orange)";
 
 /* Exact brand palette */
-const BG_WHITE   = "#FFFFFF";
-const BG_CREAM   = "#FFFFFF";   /* Light Orange Background  */
-const BG_SURFACE = "#FFFFFF";   /* Soft Orange Surface      */
-const BG_WARM    = "#FFFFFF";   /* Warm Neutral             */
-const NAVY       = "#000000";   /* Premium dark accent      */
+const BG_WHITE   = "var(--bg-white)";         /* 60% base                 */
+const BG_CREAM   = "var(--bg-soft-surface)";  /* Soft surface (alternate) */
+const BG_SURFACE = "var(--bg-soft-surface)";  /* Soft surface             */
+const BG_WARM    = "var(--bg-warm-neutral)";  /* Soft surface (alternate) */
+const NAVY       = "var(--text-primary)";     /* Primary text             */
+const NAVY_30    = "color-mix(in srgb, var(--text-primary) 18.8%, transparent)"; /* = NAVY + "30" */
 
 /* ═══════════════════════════════════════════════════════════════════ */
 export default function HomePage() {
@@ -217,12 +233,163 @@ export default function HomePage() {
   return (
     <div style={{ background: BG_WHITE }}>
 
+      {/* ── Theme tokens (dark default / light = original orange site) ── */}
+      <style>{`
+        :root {
+          --home-t-med: rgba(244,245,250,0.72);
+          --home-divider-dot-op: 0.7;
+          --home-hero-bg: radial-gradient(ellipse 70% 60% at 78% 30%, rgba(116,132,254,0.22) 0%, transparent 65%), radial-gradient(ellipse 55% 50% at 10% 85%, rgba(116,132,254,0.14) 0%, transparent 70%), #16171D;
+          --home-hero-deco-rgb: 116,132,254;
+          --home-hero-arc1: rgba(116,132,254,0.16);
+          --home-hero-arc2: rgba(116,132,254,0.12);
+          --home-hero-dot: rgba(165,175,254,0.35);
+          --home-hero-watermark: rgba(255,255,255,0.03);
+          --home-hero-fg: #F4F5FA;
+          --home-hero-stroke: #A5AFFE;
+          --home-hero-script: #A5AFFE;
+          --home-hero-body: rgba(244,245,250,0.72);
+          --home-hero-cta-bg: var(--grad-accent);
+          --home-hero-cta-fg: var(--on-accent);
+          --home-hero-cta-bc: transparent;
+          --home-hero-cta-shadow: 0 8px 28px rgba(51,255,103,0.18);
+          --home-hero-cta2: rgba(244,245,250,0.72);
+          --home-hero-star: rgba(165,175,254,0.75);
+          --home-hero-cluster: rgba(116,132,254,0.45);
+          --home-polaroid-border: 1px solid rgba(255,255,255,0.08);
+          --home-polaroid-shadow-1: 0 24px 64px rgba(0,0,0,0.5), 0 6px 16px rgba(0,0,0,0.4);
+          --home-polaroid-shadow-2: 0 20px 52px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.4);
+          --home-polaroid-shadow-3: 0 16px 44px rgba(0,0,0,0.5);
+          --home-polaroid-caption: rgba(244,245,250,0.58);
+          --home-ribbon: #7484FE;
+          --home-ribbon-text: #0A0B12;
+          --home-ribbon-shadow: drop-shadow(0 8px 24px rgba(116,132,254,0.30));
+          --home-ribbon-shadow-hover: drop-shadow(0 12px 36px rgba(51,255,103,0.40));
+          --home-accent-text: #A5AFFE;
+          --home-pill-fg: #A5AFFE;
+          --home-pill1-bg: rgba(116,132,254,0.12);
+          --home-pill1-border: 1px solid rgba(116,132,254,0.22);
+          --home-pill2-bg: rgba(116,132,254,0.12);
+          --home-pill2-border: 1px solid rgba(116,132,254,0.22);
+          --home-pill3-bg: rgba(116,132,254,0.12);
+          --home-pill3-border: 1px solid rgba(116,132,254,0.22);
+          --home-timeline-bg: #16171D;
+          --home-timeline-blob: rgba(116,132,254,0.14);
+          --home-timeline-dots: rgba(255,255,255,0.08);
+          --home-timeline-line: rgba(255,255,255,0.12);
+          --home-timeline-node: #7484FE;
+          --home-arrow-border: 1px solid rgba(255,255,255,0.08);
+          --home-arrow-shadow: 0 4px 14px rgba(0,0,0,0.4);
+          --home-facilities-bg: #16171D;
+          --home-fac-hover-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(116,132,254,0.22);
+          --home-fac-icon: #A5AFFE;
+          --home-fac-title: #F4F5FA;
+          --home-fac-desc: rgba(244,245,250,0.72);
+          --home-cta-glow: rgba(116,132,254,0.14);
+          --home-cta1-bg: var(--grad-accent);
+          --home-cta1-fg: var(--on-accent);
+          --home-cta1-bc: transparent;
+          --home-cta1-shadow: 0 8px 28px rgba(51,255,103,0.18);
+          --home-cta1-hover-bg: var(--grad-accent);
+          --home-cta1-hover-fg: var(--on-accent);
+          --home-cta1-hover-bc: transparent;
+          --home-cta1-hover-filter: brightness(1.08);
+          --home-cta1-hover-shadow: 0 10px 34px rgba(51,255,103,0.28);
+          --home-cta2-hover-bg: rgba(116,132,254,0.08);
+          --home-cat-a1: 12.2%;
+          --home-cat-a2: 25.1%;
+          --home-cat-a3: 10.2%;
+        }
+        :root[data-theme="light"] {
+          --home-t-med: #374151;
+          --home-divider-dot-op: 0.45;
+          --home-hero-bg: #E8521A;
+          --home-hero-deco-rgb: 255,255,255;
+          --home-hero-arc1: rgba(255,255,255,0.18);
+          --home-hero-arc2: rgba(255,255,255,0.14);
+          --home-hero-dot: rgba(255,255,255,0.35);
+          --home-hero-watermark: rgba(0,0,0,0.06);
+          --home-hero-fg: #FFFFFF;
+          --home-hero-stroke: rgba(255,255,255,0.82);
+          --home-hero-script: rgba(255,255,255,0.88);
+          --home-hero-body: rgba(255,255,255,0.68);
+          --home-hero-cta-bg: transparent;
+          --home-hero-cta-fg: #FFFFFF;
+          --home-hero-cta-bc: rgba(255,255,255,0.38);
+          --home-hero-cta-shadow: none;
+          --home-hero-cta2: rgba(255,255,255,0.55);
+          --home-hero-star: rgba(255,255,255,0.82);
+          --home-hero-cluster: rgba(0,0,0,0.22);
+          --home-polaroid-border: none;
+          --home-polaroid-shadow-1: 0 24px 64px rgba(0,0,0,0.30), 0 6px 16px rgba(0,0,0,0.14);
+          --home-polaroid-shadow-2: 0 20px 52px rgba(0,0,0,0.26), 0 4px 12px rgba(0,0,0,0.12);
+          --home-polaroid-shadow-3: 0 16px 44px rgba(0,0,0,0.22);
+          --home-polaroid-caption: #94A3B8;
+          --home-ribbon: #FFFFFF;
+          --home-ribbon-text: #E8521A;
+          --home-ribbon-shadow: drop-shadow(0 8px 24px rgba(0,0,0,0.18));
+          --home-ribbon-shadow-hover: drop-shadow(0 12px 36px rgba(0,0,0,0.28));
+          --home-accent-text: #E8521A;
+          --home-pill-fg: #EA580C;
+          --home-pill1-bg: rgba(234,88,12,0.10);
+          --home-pill1-border: none;
+          --home-pill2-bg: rgba(234,88,12,0.08);
+          --home-pill2-border: 1px solid rgba(234,88,12,0.20);
+          --home-pill3-bg: rgba(255,94,44,0.10);
+          --home-pill3-border: 1px solid rgba(255,94,44,0.22);
+          --home-timeline-bg: #FFF5F0;
+          --home-timeline-blob: rgba(251,146,100,0.18);
+          --home-timeline-dots: rgba(0,0,0,0.12);
+          --home-timeline-line: rgba(0,0,0,0.15);
+          --home-timeline-node: #EA580C;
+          --home-arrow-border: 1px solid rgba(0,0,0,0.10);
+          --home-arrow-shadow: 0 4px 14px rgba(0,0,0,0.10);
+          --home-facilities-bg: #F5F5F5;
+          --home-fac-hover-shadow: 0 8px 32px rgba(0,0,0,0.10);
+          --home-fac-icon: #111111;
+          --home-fac-title: #111111;
+          --home-fac-desc: #555555;
+          --home-cta-glow: transparent;
+          --home-cta1-bg: transparent;
+          --home-cta1-fg: #000000;
+          --home-cta1-bc: rgba(0,0,0,0.188);
+          --home-cta1-shadow: none;
+          --home-cta1-hover-bg: rgba(255,94,44,0.04);
+          --home-cta1-hover-fg: #E8521A;
+          --home-cta1-hover-bc: #E8521A;
+          --home-cta1-hover-filter: none;
+          --home-cta1-hover-shadow: none;
+          --home-cta2-hover-bg: rgba(255,94,44,0.04);
+          --home-cat-a1: 7.1%;
+          --home-cat-a2: 15.7%;
+          --home-cat-a3: 6.3%;
+        }
+        /* Category colours: dark = brighter variant, light = original */
+        .home-cat { --home-cat: var(--home-cat-d); }
+        :root[data-theme="light"] .home-cat { --home-cat: var(--home-cat-l); }
+        /* Stats: dark = uniform indigo/green, light = original per-stat colour */
+        .home-stat {
+          --home-stat-fg: #A5AFFE;
+          --home-stat-num: var(--accent-green);
+          --home-stat-bg: rgba(116,132,254,0.12);
+          --home-stat-bd: rgba(116,132,254,0.22);
+        }
+        :root[data-theme="light"] .home-stat {
+          --home-stat-fg: var(--home-cat-l);
+          --home-stat-num: var(--home-cat-l);
+          --home-stat-bg: color-mix(in srgb, var(--home-cat-l) 7.8%, transparent);
+          --home-stat-bd: color-mix(in srgb, var(--home-cat-l) 15.7%, transparent);
+        }
+        /* TextLoop ribbon renders SVG presentation attributes — override via CSS */
+        .equinox-ribbon .text-loop-svg path { stroke: var(--home-ribbon); }
+        .equinox-ribbon .text-loop-text { fill: var(--home-ribbon-text); }
+      `}</style>
+
       {/* ────────────────────────────────────────────────────────────
           HERO  —  Bold Editorial Collage
       ──────────────────────────────────────────────────────────── */}
       <section
         className="page-hero hero-shrink-mobile relative overflow-hidden flex flex-col"
-        style={{ background: ORANGE, paddingTop: "var(--nav-height)", minHeight: "100vh" }}
+        style={{ background: "var(--home-hero-bg)", paddingTop: "var(--nav-height)", minHeight: "100vh" }}
       >
         {/* ── Grain texture (matches Image 1 paper grain) ── */}
         <div className="absolute inset-0 pointer-events-none" style={{
@@ -234,36 +401,36 @@ export default function HomePage() {
         <svg aria-hidden className="absolute pointer-events-none"
           style={{ top: "-18%", right: "-10%", width: "52vw", height: "52vw", maxWidth: 620, maxHeight: 620 }}
           viewBox="0 0 620 620" fill="none">
-          <circle cx="310" cy="310" r="290" stroke="rgba(255,255,255,0.18)" strokeWidth="80" fill="none" />
+          <circle cx="310" cy="310" r="290" style={{ stroke: "var(--home-hero-arc1)" }} strokeWidth="80" fill="none" />
         </svg>
 
         {/* ── Medium arc — bottom right ── */}
         <svg aria-hidden className="absolute pointer-events-none"
           style={{ bottom: "-14%", right: "-6%", width: "28vw", height: "28vw", maxWidth: 340, maxHeight: 340 }}
           viewBox="0 0 340 340" fill="none">
-          <circle cx="170" cy="170" r="150" stroke="rgba(255,255,255,0.14)" strokeWidth="50" fill="none" />
+          <circle cx="170" cy="170" r="150" style={{ stroke: "var(--home-hero-arc2)" }} strokeWidth="50" fill="none" />
         </svg>
 
         {/* ── Diagonal cut — bottom left (Image 1 reference) ── */}
         <svg aria-hidden className="absolute pointer-events-none"
           style={{ bottom: 0, left: 0, width: "36vw", height: "36vw", maxWidth: 420, maxHeight: 420 }}
           viewBox="0 0 420 420" fill="none">
-          <path d="M0,420 L280,420 L0,140 Z" fill="rgba(255,255,255,0.10)" />
-          <path d="M0,420 L180,420 L0,260 Z" fill="rgba(255,255,255,0.07)" />
+          <path d="M0,420 L280,420 L0,140 Z" style={{ fill: "rgba(var(--home-hero-deco-rgb),0.10)" }} />
+          <path d="M0,420 L180,420 L0,260 Z" style={{ fill: "rgba(var(--home-hero-deco-rgb),0.07)" }} />
         </svg>
 
         {/* ── Small arc — top left ── */}
         <svg aria-hidden className="absolute pointer-events-none"
           style={{ top: "-8%", left: "-8%", width: "20vw", height: "20vw", maxWidth: 220, maxHeight: 220 }}
           viewBox="0 0 220 220" fill="none">
-          <circle cx="110" cy="110" r="95" stroke="rgba(255,255,255,0.11)" strokeWidth="38" fill="none" />
+          <circle cx="110" cy="110" r="95" style={{ stroke: "rgba(var(--home-hero-deco-rgb),0.11)" }} strokeWidth="38" fill="none" />
         </svg>
 
         {/* ── Dot grid accent ── */}
         <div className="absolute pointer-events-none" style={{
           top: "calc(var(--nav-height) + 24px)", left: "28px",
           width: "80px", height: "80px",
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.35) 1.5px, transparent 1.5px)",
+          backgroundImage: "radial-gradient(circle, var(--home-hero-dot) 1.5px, transparent 1.5px)",
           backgroundSize: "14px 14px",
         }} />
 
@@ -272,9 +439,49 @@ export default function HomePage() {
           bottom: "30px", right: "-8px",
           fontFamily: "var(--font-heading)", fontWeight: 900,
           fontSize: "clamp(160px, 28vw, 440px)",
-          color: "rgba(0,0,0,0.06)", lineHeight: 1, letterSpacing: "-0.06em",
+          color: "var(--home-hero-watermark)", lineHeight: 1, letterSpacing: "-0.06em",
           userSelect: "none" as const,
         }}>CIE</div>
+
+        {/* ── Equinox 2.0 headline ribbon — main upcoming event ── */}
+        <a
+          href="https://equinox-2.0.mlritcie.in"
+          target="_blank" rel="noopener noreferrer"
+          aria-label="The Equinox 2.0 — E-Summit 2K26, Oct 30 and 31. Grab your pass for ₹769"
+          className="equinox-ribbon"
+          style={{
+            position: "relative", zIndex: 2, display: "block",
+            width: "106%", marginLeft: "-3%",
+            marginTop: "clamp(18px,2.4vw,28px)",
+            transform: "rotate(-1.2deg)",
+            filter: "var(--home-ribbon-shadow)",
+          }}
+        >
+          <TextLoop
+            text="The Equinox 2.0 ✦ E-Summit 2K26 ✦ Oct 30 & 31 ✦ Grab your pass ₹769"
+            shape="line"
+            viewWidth={3000}
+            viewHeight={120}
+            preserveAspectRatio="xMidYMid slice"
+            speed={110}
+            separator="✦"
+            fontSize={42}
+            fontWeight={900}
+            letterSpacing={2}
+            uppercase
+            color="#0A0B12"
+            ribbon
+            ribbonColor="#7484FE"
+            ribbonWidth={84}
+            pauseOnHover
+            style={{ fontFamily: "var(--font-heading)" }}
+          />
+        </a>
+        <style>{`
+          .equinox-ribbon { transition: filter 0.3s ease; }
+          .equinox-ribbon .text-loop-svg { height: clamp(44px, 4vw, 60px); }
+          .equinox-ribbon:hover { filter: var(--home-ribbon-shadow-hover) !important; }
+        `}</style>
 
         {/* ── Main content ── */}
         <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
@@ -283,7 +490,6 @@ export default function HomePage() {
 
               {/* ── LEFT: Text ── */}
               <div style={{ position: "relative" }}>
-
 
                 {/* HUGE stacked display headline */}
                 <motion.h1
@@ -296,12 +502,12 @@ export default function HomePage() {
                     textTransform: "uppercase" as const, marginBottom: 0,
                   }}
                 >
-                  <span style={{ display: "block", color: "#FFFFFF" }}>IDEATE</span>
+                  <span style={{ display: "block", color: "var(--home-hero-fg)" }}>IDEATE</span>
                   <span style={{
                     display: "block", color: "transparent",
-                    WebkitTextStroke: "3px rgba(255,255,255,0.82)",
+                    WebkitTextStroke: "3px var(--home-hero-stroke)",
                   }}>BUILD</span>
-                  <span style={{ display: "block", color: "#FFFFFF", fontSize: "0.74em" }}>INNOVATE</span>
+                  <span style={{ display: "block", color: "var(--home-hero-fg)", fontSize: "0.74em" }}>INNOVATE</span>
                 </motion.h1>
 
                 {/* Handwritten script accent */}
@@ -311,7 +517,7 @@ export default function HomePage() {
                   style={{
                     fontFamily: "var(--font-script)",
                     fontSize: "clamp(20px, 2.8vw, 34px)",
-                    color: "rgba(255,255,255,0.88)", lineHeight: 1.2,
+                    color: "var(--home-hero-script)", lineHeight: 1.2,
                     marginTop: "20px", marginBottom: "22px",
                     display: "inline-block", transform: "rotate(-1.8deg)",
                   }}
@@ -325,7 +531,7 @@ export default function HomePage() {
                   transition={{ duration: 0.6, delay: 0.65 }}
                   style={{
                     fontFamily: "var(--font-body)", fontSize: "clamp(14px, 1.5vw, 16px)",
-                    lineHeight: 1.78, color: "rgba(255,255,255,0.68)",
+                    lineHeight: 1.78, color: "var(--home-hero-body)",
                     maxWidth: "min(400px, 100%)", marginBottom: "14px",
                   }}
                 >
@@ -338,7 +544,7 @@ export default function HomePage() {
                   transition={{ duration: 0.6, delay: 0.70 }}
                   style={{
                     fontFamily: "var(--font-body)", fontSize: "clamp(14px, 1.5vw, 16px)",
-                    lineHeight: 1.78, color: "rgba(255,255,255,0.68)",
+                    lineHeight: 1.78, color: "var(--home-hero-body)",
                     maxWidth: "min(400px, 100%)", marginBottom: "36px",
                   }}
                 >
@@ -354,16 +560,17 @@ export default function HomePage() {
                 >
                   <Link href="/verticals" style={{
                     display: "inline-flex", alignItems: "center", gap: "6px",
-                    background: "transparent", color: "#FFFFFF",
+                    background: "var(--home-hero-cta-bg)", color: "var(--home-hero-cta-fg)",
                     fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "14.5px",
                     padding: "13px 22px", borderRadius: "999px", textDecoration: "none",
-                    border: "1.5px solid rgba(255,255,255,0.38)",
+                    border: "1.5px solid var(--home-hero-cta-bc)",
+                    boxShadow: "var(--home-hero-cta-shadow)",
                   }}>
                     Our Verticals <ChevronRight size={15} />
                   </Link>
                   <Link href="/about" style={{
                     display: "inline-flex", alignItems: "center", gap: "6px",
-                    background: "transparent", color: "rgba(255,255,255,0.55)",
+                    background: "transparent", color: "var(--home-hero-cta2)",
                     fontFamily: "var(--font-body)", fontWeight: 500, fontSize: "14.5px",
                     padding: "13px 22px", borderRadius: "999px", textDecoration: "none",
                   }}>
@@ -382,9 +589,9 @@ export default function HomePage() {
                   transition={{ duration: 1.05, delay: 0.30, ease: [0.16, 1, 0.3, 1] }}
                   style={{
                     position: "absolute", top: "10px", left: "4%",
-                    width: "212px", height: "270px", background: "#FFFFFF",
+                    width: "212px", height: "270px", background: "var(--bg-card)", border: "var(--home-polaroid-border)",
                     borderRadius: "3px", padding: "10px 10px 44px",
-                    boxShadow: "0 24px 64px rgba(0,0,0,0.30), 0 6px 16px rgba(0,0,0,0.14)",
+                    boxShadow: "var(--home-polaroid-shadow-1)",
                     zIndex: 3,
                   }}
                 >
@@ -395,7 +602,7 @@ export default function HomePage() {
                     alignItems: "center", justifyContent: "flex-end", padding: "14px",
                   }}>
                     <Image
-                      src="/gallery/innovation-challenge.jpg"
+                      src="/gallery/innovation-challenge.webp"
                       alt="Innovation Challenge"
                       fill
                       sizes="212px"
@@ -408,7 +615,7 @@ export default function HomePage() {
                   </div>
                   <p style={{
                     fontFamily: "var(--font-script)", fontSize: "14px",
-                    color: "#94A3B8", textAlign: "center" as const, marginTop: "9px", lineHeight: 1.2,
+                    color: "var(--home-polaroid-caption)", textAlign: "center" as const, marginTop: "9px", lineHeight: 1.2,
                   }}>build &amp; create ✦</p>
                 </motion.div>
 
@@ -418,9 +625,9 @@ export default function HomePage() {
                   transition={{ duration: 1.05, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
                   style={{
                     position: "absolute", top: "48px", right: "3%",
-                    width: "178px", height: "228px", background: "#FFFFFF",
+                    width: "178px", height: "228px", background: "var(--bg-card)", border: "var(--home-polaroid-border)",
                     borderRadius: "3px", padding: "9px 9px 36px",
-                    boxShadow: "0 20px 52px rgba(0,0,0,0.26), 0 4px 12px rgba(0,0,0,0.12)",
+                    boxShadow: "var(--home-polaroid-shadow-2)",
                     zIndex: 4,
                   }}
                 >
@@ -444,7 +651,7 @@ export default function HomePage() {
                   </div>
                   <p style={{
                     fontFamily: "var(--font-script)", fontSize: "14px",
-                    color: "#94A3B8", textAlign: "center" as const, marginTop: "9px",
+                    color: "var(--home-polaroid-caption)", textAlign: "center" as const, marginTop: "9px",
                   }}>hackathon ★</p>
                 </motion.div>
 
@@ -454,9 +661,9 @@ export default function HomePage() {
                   transition={{ duration: 0.9, delay: 0.58, ease: [0.16, 1, 0.3, 1] }}
                   style={{
                     position: "absolute", top: "310px", left: "calc(50% - 160px)",
-                    width: "320px", height: "320px", background: "#FFFFFF",
+                    width: "320px", height: "320px", background: "var(--bg-card)", border: "var(--home-polaroid-border)",
                     borderRadius: "3px", padding: "14px 14px 44px",
-                    boxShadow: "0 16px 44px rgba(0,0,0,0.22)", zIndex: 5,
+                    boxShadow: "var(--home-polaroid-shadow-3)", zIndex: 5,
                   }}
                 >
                   <div style={{
@@ -493,7 +700,7 @@ export default function HomePage() {
                       bottom: star.bottom,
                       right:  star.right,
                       fontSize: `${star.size}px`,
-                      color: "rgba(255,255,255,0.82)",
+                      color: "var(--home-hero-star)",
                       pointerEvents: "none", display: "block",
                     }}
                   >✦</motion.span>
@@ -510,7 +717,7 @@ export default function HomePage() {
                   }}
                 >
                   {Array.from({ length: 9 }).map((_, i) => (
-                    <div key={i} style={{ width: "4px", height: "4px", borderRadius: "50%", background: "rgba(0,0,0,0.22)" }} />
+                    <div key={i} style={{ width: "4px", height: "4px", borderRadius: "50%", background: "var(--home-hero-cluster)" }} />
                   ))}
                 </motion.div>
 
@@ -522,23 +729,23 @@ export default function HomePage() {
       </section>
 
       {/* ────────────────────────────────────────────────────────────
-          STATS  —  #FFFFFF (Light Orange Background)
+          STATS  —  #1C1D26 (soft surface)
       ──────────────────────────────────────────────────────────── */}
       <section style={{ background: BG_CREAM, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 items-stretch justify-items-stretch">
             {stats.map((stat, i) => (
               <FadeIn key={stat.label} delay={i * 0.08}>
-                <div className="card-light flex flex-col items-center text-center" style={{ gap: "14px", padding: "clamp(16px,4vw,32px)" }}>
+                <div className="card-light home-stat flex flex-col items-center text-center" style={{ gap: "14px", padding: "clamp(16px,4vw,32px)", ...catVars(stat.color) }}>
                   <div
                     style={{
                       width: "48px", height: "48px", borderRadius: "12px",
-                      background: `${stat.color}14`,
-                      border: `1px solid ${stat.color}28`,
+                      background: "var(--home-stat-bg)",
+                      border: "1px solid var(--home-stat-bd)",
                       display: "flex", alignItems: "center", justifyContent: "center",
                     }}
                   >
-                    <stat.icon size={21} style={{ color: stat.color }} />
+                    <stat.icon size={21} style={{ color: "var(--home-stat-fg)" }} />
                   </div>
                   <div
                     style={{
@@ -546,7 +753,7 @@ export default function HomePage() {
                       fontWeight: 800,
                       fontSize: "clamp(30px, 4vw, 42px)",
                       lineHeight: 1,
-                      color: stat.color,
+                      color: "var(--home-stat-num)",
                       letterSpacing: "-0.03em",
                     }}
                   >
@@ -569,10 +776,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <SectionDivider topBg="#FFFFFF" btmBg="#FFFFFF" />
+      <SectionDivider topBg="var(--bg-soft-surface)" btmBg="var(--bg-white)" />
 
       {/* ────────────────────────────────────────────────────────────
-          VISION & MISSION  —  #FFFFFF (White)
+          VISION & MISSION  —  #16171D (base)
       ──────────────────────────────────────────────────────────── */}
       <section style={{ background: BG_WHITE, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
@@ -656,10 +863,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <SectionDivider topBg="#FFFFFF" btmBg="#FFFFFF" />
+      <SectionDivider topBg="var(--bg-white)" btmBg="var(--bg-warm-neutral)" />
 
       {/* ────────────────────────────────────────────────────────────
-          WHAT WE DO  —  #FFFFFF (Warm Neutral)
+          WHAT WE DO  —  #1C1D26 (soft surface)
       ──────────────────────────────────────────────────────────── */}
       <section style={{ background: BG_WARM, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
@@ -693,8 +900,9 @@ export default function HomePage() {
             {studios.map((studio, i) => (
               <FadeIn key={studio.name} delay={i * 0.08}>
                 <div
-                  className="card-light h-full"
+                  className="card-light home-cat h-full"
                   style={{
+                    ...catVars(studio.color),
                     padding: "clamp(20px,3vw,32px)",
                     display: "flex",
                     flexDirection: "column",
@@ -704,12 +912,12 @@ export default function HomePage() {
                   {/* Icon */}
                   <div style={{
                     width: "64px", height: "64px", borderRadius: "18px",
-                    background: `${studio.color}12`,
-                    border: `1px solid ${studio.color}28`,
+                    background: "color-mix(in srgb, var(--home-cat) var(--home-cat-a1), transparent)",
+                    border: "1px solid color-mix(in srgb, var(--home-cat) var(--home-cat-a2), transparent)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     flexShrink: 0, marginBottom: "24px",
                   }}>
-                    <studio.icon size={24} style={{ color: studio.color }} />
+                    <studio.icon size={24} style={{ color: "var(--home-cat)" }} />
                   </div>
                   {/* Title */}
                   <h3 style={{
@@ -740,27 +948,27 @@ export default function HomePage() {
         </div>
       </section>
 
-      <SectionDivider topBg="#FFFFFF" btmBg="#FFF5F0" />
+      <SectionDivider topBg="var(--bg-warm-neutral)" btmBg="var(--home-timeline-bg)" />
 
       {/* ────────────────────────────────────────────────────────────
-          TIMELINE  —  Soft Peach Background
+          TIMELINE  —  #16171D (base) + indigo glows
       ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: "#FFF5F0", paddingTop: SECTION_PY, paddingBottom: SECTION_PY, position: "relative", overflow: "hidden" }}>
+      <section style={{ background: "var(--home-timeline-bg)", paddingTop: SECTION_PY, paddingBottom: SECTION_PY, position: "relative", overflow: "hidden" }}>
         {/* Blob left */}
-        <div style={{ position: "absolute", left: "-140px", top: "50%", transform: "translateY(-50%)", width: "340px", height: "420px", borderRadius: "50%", background: "rgba(251,146,100,0.18)", filter: "blur(72px)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", left: "-140px", top: "50%", transform: "translateY(-50%)", width: "340px", height: "420px", borderRadius: "50%", background: "var(--home-timeline-blob)", filter: "blur(72px)", pointerEvents: "none" }} />
         {/* Blob right */}
-        <div style={{ position: "absolute", right: "-140px", top: "50%", transform: "translateY(-50%)", width: "340px", height: "420px", borderRadius: "50%", background: "rgba(251,146,100,0.18)", filter: "blur(72px)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", right: "-140px", top: "50%", transform: "translateY(-50%)", width: "340px", height: "420px", borderRadius: "50%", background: "var(--home-timeline-blob)", filter: "blur(72px)", pointerEvents: "none" }} />
         {/* Dot grid top-left */}
-        <div style={{ position: "absolute", top: 0, left: 0, width: "180px", height: "180px", backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.12) 1px, transparent 1px)", backgroundSize: "18px 18px", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: 0, left: 0, width: "180px", height: "180px", backgroundImage: "radial-gradient(circle, var(--home-timeline-dots) 1px, transparent 1px)", backgroundSize: "18px 18px", pointerEvents: "none" }} />
         {/* Dot grid top-right */}
-        <div style={{ position: "absolute", top: 0, right: 0, width: "180px", height: "180px", backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.12) 1px, transparent 1px)", backgroundSize: "18px 18px", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: 0, right: 0, width: "180px", height: "180px", backgroundImage: "radial-gradient(circle, var(--home-timeline-dots) 1px, transparent 1px)", backgroundSize: "18px 18px", pointerEvents: "none" }} />
 
         <div className={CONTAINER} style={{ position: "relative", zIndex: 1 }}>
           <FadeIn className="text-center mb-20 lg:mb-24">
             <span style={{
               display: "inline-flex", alignItems: "center",
-              background: "rgba(234,88,12,0.10)", border: "none",
-              color: "#EA580C", padding: "0.32rem 0.9rem", borderRadius: "999px",
+              background: "var(--home-pill1-bg)", border: "var(--home-pill1-border)",
+              color: "var(--home-pill-fg)", padding: "0.32rem 0.9rem", borderRadius: "999px",
               fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.07em",
               textTransform: "uppercase", marginBottom: "1.25rem",
               fontFamily: "var(--font-body)",
@@ -788,14 +996,14 @@ export default function HomePage() {
             {/* Horizontal connector line */}
             <div className="absolute hidden lg:block" style={{
               top: "32px", left: "10%", right: "10%", height: "1px",
-              background: "rgba(0,0,0,0.15)", zIndex: 0,
+              background: "var(--home-timeline-line)", zIndex: 0,
             }} />
             {/* Orange midpoint dots */}
             {[20, 40, 60, 80].map((pct) => (
               <div key={pct} className="absolute hidden lg:block" style={{
                 top: "28px", left: `${pct}%`, transform: "translateX(-50%)",
                 width: "8px", height: "8px", borderRadius: "50%",
-                background: "#EA580C", zIndex: 2,
+                background: "var(--home-timeline-node)", zIndex: 2,
               }} />
             ))}
 
@@ -808,15 +1016,15 @@ export default function HomePage() {
               <div aria-hidden className="shrink-0 lg:hidden" style={{ width: "calc(50vw - 130px)" }} />
               {timeline.map((item, i) => (
                 <FadeIn key={item.step} delay={i * 0.12} className="shrink-0 w-[70vw] max-w-[260px] snap-center lg:w-auto lg:max-w-none">
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "32px" }}>
+                  <div className="home-cat" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "32px", ...catVars(item.color) }}>
                     {/* Circle */}
                     <div style={{
                       width: "64px", height: "64px", borderRadius: "50%",
-                      background: item.color, flexShrink: 0,
+                      background: "var(--home-cat)", flexShrink: 0,
                       display: "flex", alignItems: "center", justifyContent: "center",
                       position: "relative", zIndex: 10,
                       fontFamily: "var(--font-heading)", fontWeight: 800,
-                      fontSize: "17px", color: "#FFFFFF",
+                      fontSize: "17px", color: "var(--on-accent)",
                     }}>
                       {item.step}
                     </div>
@@ -825,11 +1033,11 @@ export default function HomePage() {
                       {/* Icon */}
                       <div style={{
                         width: "64px", height: "64px", borderRadius: "18px",
-                        background: `${item.color}12`,
-                        border: `1px solid ${item.color}28`,
+                        background: "color-mix(in srgb, var(--home-cat) var(--home-cat-a1), transparent)",
+                        border: "1px solid color-mix(in srgb, var(--home-cat) var(--home-cat-a2), transparent)",
                         display: "flex", alignItems: "center", justifyContent: "center",
                       }}>
-                        <item.icon size={28} style={{ color: item.color }} />
+                        <item.icon size={28} style={{ color: "var(--home-cat)" }} />
                       </div>
                       {/* Title */}
                       <h3 style={{
@@ -863,8 +1071,8 @@ export default function HomePage() {
                 className="lg:hidden absolute z-20 flex items-center justify-center"
                 style={{
                   left: "4px", top: "28px", width: "40px", height: "40px",
-                  borderRadius: "50%", background: "#FFFFFF",
-                  border: "1px solid rgba(0,0,0,0.10)", boxShadow: "0 4px 14px rgba(0,0,0,0.10)",
+                  borderRadius: "50%", background: "var(--bg-card)",
+                  border: "var(--home-arrow-border)", boxShadow: "var(--home-arrow-shadow)",
                 }}
               >
                 <ChevronLeft size={20} style={{ color: T_SECONDARY }} />
@@ -878,8 +1086,8 @@ export default function HomePage() {
                 className="lg:hidden absolute z-20 flex items-center justify-center"
                 style={{
                   right: "4px", top: "28px", width: "40px", height: "40px",
-                  borderRadius: "50%", background: "#FFFFFF",
-                  border: "1px solid rgba(0,0,0,0.10)", boxShadow: "0 4px 14px rgba(0,0,0,0.10)",
+                  borderRadius: "50%", background: "var(--bg-card)",
+                  border: "var(--home-arrow-border)", boxShadow: "var(--home-arrow-shadow)",
                 }}
               >
                 <ChevronRight size={20} style={{ color: T_SECONDARY }} />
@@ -889,10 +1097,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <SectionDivider topBg="#FFF5F0" btmBg="#FFFFFF" />
+      <SectionDivider topBg="var(--home-timeline-bg)" btmBg="var(--bg-soft-surface)" />
 
       {/* ────────────────────────────────────────────────────────────
-          FEATURED PROGRAMS  —  #FFFFFF (Light Orange Background)
+          FEATURED PROGRAMS  —  #1C1D26 (soft surface)
       ──────────────────────────────────────────────────────────── */}
       <section style={{ background: BG_CREAM, paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
@@ -904,8 +1112,8 @@ export default function HomePage() {
               <div>
                 <span style={{
                   display: "inline-flex", alignItems: "center",
-                  background: "rgba(234,88,12,0.08)", border: "1px solid rgba(234,88,12,0.20)",
-                  color: "#EA580C", padding: "0.32rem 0.9rem", borderRadius: "999px",
+                  background: "var(--home-pill2-bg)", border: "var(--home-pill2-border)",
+                  color: "var(--home-pill-fg)", padding: "0.32rem 0.9rem", borderRadius: "999px",
                   fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.07em",
                   textTransform: "uppercase", marginBottom: "1rem",
                   fontFamily: "var(--font-body)",
@@ -940,17 +1148,17 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-2 gap-6 items-stretch">
             {programs.map((prog, i) => (
               <FadeIn key={prog.title} delay={i * 0.08}>
-                <div className="card-light h-full" style={{ padding: "clamp(20px,3vw,32px)" }}>
+                <div className="card-light home-cat h-full" style={{ padding: "clamp(20px,3vw,32px)", ...catVars(prog.color) }}>
                   <div className="flex items-start gap-4">
                     {/* Icon — left */}
                     <div style={{
                       width: "68px", height: "68px", borderRadius: "16px",
-                      background: `${prog.color}12`,
-                      border: `1px solid ${prog.color}28`,
+                      background: "color-mix(in srgb, var(--home-cat) var(--home-cat-a1), transparent)",
+                      border: "1px solid color-mix(in srgb, var(--home-cat) var(--home-cat-a2), transparent)",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       flexShrink: 0,
                     }}>
-                      <prog.icon size={28} style={{ color: prog.color }} />
+                      <prog.icon size={28} style={{ color: "var(--home-cat)" }} />
                     </div>
                     {/* Text — right */}
                     <div className="flex-1 min-w-0">
@@ -970,9 +1178,9 @@ export default function HomePage() {
                           fontWeight: 700,
                           letterSpacing: "0.08em",
                           textTransform: "uppercase" as const,
-                          color: prog.color,
-                          background: `${prog.color}10`,
-                          border: `1px solid ${prog.color}28`,
+                          color: "var(--home-cat)",
+                          background: "color-mix(in srgb, var(--home-cat) var(--home-cat-a3), transparent)",
+                          border: "1px solid color-mix(in srgb, var(--home-cat) var(--home-cat-a2), transparent)",
                           padding: "3px 10px",
                           borderRadius: "999px",
                           whiteSpace: "nowrap" as const,
@@ -998,12 +1206,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      <SectionDivider topBg="#FFFFFF" btmBg="#F5F5F5" />
+      <SectionDivider topBg="var(--bg-soft-surface)" btmBg="var(--home-facilities-bg)" />
 
       {/* ────────────────────────────────────────────────────────────
-          FACILITIES  —  #F5F5F5
+          FACILITIES  —  #16171D (base)
       ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: "#F5F5F5", paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
+      <section style={{ background: "var(--home-facilities-bg)", paddingTop: SECTION_PY, paddingBottom: SECTION_PY }}>
         <div className={CONTAINER}>
           <FadeIn>
             <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6" style={{ marginBottom: "clamp(28px,5vw,52px)" }}>
@@ -1030,9 +1238,9 @@ export default function HomePage() {
               <FadeIn key={f.title} delay={i * 0.07}>
                 <div
                   style={{
-                    background: "#FFFFFF",
+                    background: "var(--bg-card)",
                     borderRadius: "14px",
-                    border: "1px solid rgba(0,0,0,0.08)",
+                    border: "1px solid rgba(var(--line-rgb),0.08)",
                     padding: "36px 28px 32px",
                     textAlign: "center",
                     height: "100%",
@@ -1042,7 +1250,7 @@ export default function HomePage() {
                     transition: "box-shadow 0.25s ease, transform 0.25s ease",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 32px rgba(0,0,0,0.10)";
+                    (e.currentTarget as HTMLDivElement).style.boxShadow = "var(--home-fac-hover-shadow)";
                     (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)";
                   }}
                   onMouseLeave={(e) => {
@@ -1051,12 +1259,12 @@ export default function HomePage() {
                   }}
                 >
                   <div style={{ marginBottom: "18px" }}>
-                    <f.icon size={42} strokeWidth={1.6} style={{ color: "#111111" }} />
+                    <f.icon size={42} strokeWidth={1.6} style={{ color: "var(--home-fac-icon)" }} />
                   </div>
-                  <h3 style={{ fontSize: "17px", fontWeight: 700, color: "#111111", marginBottom: "12px", letterSpacing: "-0.01em" }}>
+                  <h3 style={{ fontSize: "17px", fontWeight: 700, color: "var(--home-fac-title)", marginBottom: "12px", letterSpacing: "-0.01em" }}>
                     {f.title}
                   </h3>
-                  <p style={{ fontSize: "13.5px", lineHeight: 1.72, color: "#555555" }}>
+                  <p style={{ fontSize: "13.5px", lineHeight: 1.72, color: "var(--home-fac-desc)" }}>
                     {f.desc}
                   </p>
                 </div>
@@ -1070,16 +1278,16 @@ export default function HomePage() {
         @media (max-width: 560px) { .home-facilities-grid { grid-template-columns: 1fr !important; } }
       `}</style>
 
-      <SectionDivider topBg="#F5F5F5" btmBg="#FFFFFF" />
+      <SectionDivider topBg="var(--home-facilities-bg)" btmBg="var(--bg-soft-surface)" />
 
       {/* ────────────────────────────────────────────────────────────
-          CTA  —  warm light gradient (#FFFFFF → #FFFFFF)
-          Orange used only on heading accent + primary button
+          CTA  —  #1C1D26 soft surface with indigo glow
+          Indigo on heading accent, gradient on primary button
       ──────────────────────────────────────────────────────────── */}
       <section
         className="relative overflow-hidden"
         style={{
-          background: `linear-gradient(160deg, ${BG_CREAM} 0%, ${BG_SURFACE} 50%, ${BG_WARM} 100%)`,
+          background: `radial-gradient(ellipse 60% 55% at 50% 45%, var(--home-cta-glow) 0%, transparent 70%), linear-gradient(160deg, ${BG_CREAM} 0%, ${BG_SURFACE} 50%, ${BG_WARM} 100%)`,
           paddingTop: SECTION_PY,
           paddingBottom: SECTION_PY,
           display: "flex",
@@ -1091,23 +1299,23 @@ export default function HomePage() {
         {/* Decorative layer — symmetrical left + right, z-0 */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
           {/* Concentric rings — bottom-right */}
-          <svg className="absolute -bottom-20 -right-20 opacity-[0.25]" width="480" height="480" viewBox="0 0 480 480">
-            <circle cx="240" cy="240" r="220" fill="none" stroke={ORANGE} strokeWidth="1.2" />
-            <circle cx="240" cy="240" r="160" fill="none" stroke={ORANGE} strokeWidth="0.8" />
-            <circle cx="240" cy="240" r="100" fill="none" stroke={ORANGE} strokeWidth="0.7" />
-            <circle cx="240" cy="240" r="50"  fill="none" stroke={ORANGE} strokeWidth="0.6" />
+          <svg className="absolute -bottom-20 -right-20 opacity-[0.25]" style={{ color: ORANGE }} width="480" height="480" viewBox="0 0 480 480">
+            <circle cx="240" cy="240" r="220" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <circle cx="240" cy="240" r="160" fill="none" stroke="currentColor" strokeWidth="0.8" />
+            <circle cx="240" cy="240" r="100" fill="none" stroke="currentColor" strokeWidth="0.7" />
+            <circle cx="240" cy="240" r="50"  fill="none" stroke="currentColor" strokeWidth="0.6" />
           </svg>
           {/* Concentric rings — top-left (mirror) */}
-          <svg className="absolute -top-20 -left-20 opacity-[0.25]" width="480" height="480" viewBox="0 0 480 480">
-            <circle cx="240" cy="240" r="220" fill="none" stroke={ORANGE} strokeWidth="1.2" />
-            <circle cx="240" cy="240" r="160" fill="none" stroke={ORANGE} strokeWidth="0.8" />
-            <circle cx="240" cy="240" r="100" fill="none" stroke={ORANGE} strokeWidth="0.7" />
-            <circle cx="240" cy="240" r="50"  fill="none" stroke={ORANGE} strokeWidth="0.6" />
+          <svg className="absolute -top-20 -left-20 opacity-[0.25]" style={{ color: ORANGE }} width="480" height="480" viewBox="0 0 480 480">
+            <circle cx="240" cy="240" r="220" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <circle cx="240" cy="240" r="160" fill="none" stroke="currentColor" strokeWidth="0.8" />
+            <circle cx="240" cy="240" r="100" fill="none" stroke="currentColor" strokeWidth="0.7" />
+            <circle cx="240" cy="240" r="50"  fill="none" stroke="currentColor" strokeWidth="0.6" />
           </svg>
           {/* Centre hexagon */}
-          <svg className="absolute opacity-[0.10]" style={{ top: "50%", left: "50%", transform: "translate(-50%,-50%)" }} width="600" height="600" viewBox="0 0 600 600">
-            <polygon points="300,20 565,165 565,435 300,580 35,435 35,165" fill="none" stroke={ORANGE} strokeWidth="1.2" />
-            <polygon points="300,110 490,220 490,380 300,490 110,380 110,220" fill="none" stroke={ORANGE} strokeWidth="0.8" />
+          <svg className="absolute opacity-[0.10]" style={{ top: "50%", left: "50%", transform: "translate(-50%,-50%)", color: ORANGE }} width="600" height="600" viewBox="0 0 600 600">
+            <polygon points="300,20 565,165 565,435 300,580 35,435 35,165" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <polygon points="300,110 490,220 490,380 300,490 110,380 110,220" fill="none" stroke="currentColor" strokeWidth="0.8" />
           </svg>
           {/* Symmetrical floating dots */}
           {([
@@ -1143,9 +1351,9 @@ export default function HomePage() {
             <span
               className="inline-flex items-center gap-2"
               style={{
-                background: "rgba(255,94,44,0.10)",
-                border: "1px solid rgba(255,94,44,0.22)",
-                color: ORANGE,
+                background: "var(--home-pill3-bg)",
+                border: "var(--home-pill3-border)",
+                color: "var(--home-accent-text)",
                 padding: "0.32rem 0.9rem",
                 borderRadius: "999px",
                 fontSize: "0.72rem",
@@ -1156,7 +1364,7 @@ export default function HomePage() {
                 marginBottom: "32px",
               }}
             >
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: ORANGE }} />
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "var(--accent-green)" }} />
               CIE · MLRIT
             </span>
 
@@ -1173,14 +1381,14 @@ export default function HomePage() {
               }}
             >
               Ready to Build{" "}
-              <span style={{ color: ORANGE }}>the Future?</span>
+              <span style={{ color: "var(--home-accent-text)" }}>the Future?</span>
             </h2>
 
             {/* Tagline */}
             <p style={{
               fontFamily: "var(--font-heading)", fontWeight: 700,
               fontSize: "clamp(15px, 1.6vw, 18px)", letterSpacing: "-0.01em",
-              color: ORANGE, marginBottom: "20px",
+              color: "var(--home-accent-text)", marginBottom: "20px",
             }}>
               Think Bold. Build Fearlessly. Lead with Purpose.
             </p>
@@ -1210,12 +1418,13 @@ export default function HomePage() {
                 className="inline-flex items-center gap-2 rounded-[10px] transition-all duration-200"
                 style={{
                   fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "1rem",
-                  padding: "0.9rem 2.25rem", background: "transparent",
-                  color: NAVY, border: `1.5px solid ${NAVY}30`,
+                  padding: "0.9rem 2.25rem", background: "var(--home-cta1-bg)",
+                  color: "var(--home-cta1-fg)", border: "1.5px solid var(--home-cta1-bc)",
                   letterSpacing: "-0.01em", textDecoration: "none",
+                  boxShadow: "var(--home-cta1-shadow)",
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = ORANGE; e.currentTarget.style.color = ORANGE; e.currentTarget.style.background = "rgba(255,94,44,0.04)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${NAVY}30`; e.currentTarget.style.color = NAVY; e.currentTarget.style.background = "transparent"; }}
+                onMouseEnter={(e) => { const s = e.currentTarget.style; s.filter = "var(--home-cta1-hover-filter)"; s.boxShadow = "var(--home-cta1-hover-shadow)"; s.borderColor = "var(--home-cta1-hover-bc)"; s.color = "var(--home-cta1-hover-fg)"; s.background = "var(--home-cta1-hover-bg)"; }}
+                onMouseLeave={(e) => { const s = e.currentTarget.style; s.filter = "none"; s.boxShadow = "var(--home-cta1-shadow)"; s.borderColor = "var(--home-cta1-bc)"; s.color = "var(--home-cta1-fg)"; s.background = "var(--home-cta1-bg)"; }}
               >
                 Explore Verticals <ChevronRight size={18} />
               </Link>
@@ -1225,11 +1434,11 @@ export default function HomePage() {
                 style={{
                   fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "1rem",
                   padding: "0.9rem 2.25rem", background: "transparent",
-                  color: NAVY, border: `1.5px solid ${NAVY}30`,
+                  color: NAVY, border: `1.5px solid ${NAVY_30}`,
                   letterSpacing: "-0.01em", textDecoration: "none",
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = ORANGE; e.currentTarget.style.color = ORANGE; e.currentTarget.style.background = "rgba(255,94,44,0.04)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${NAVY}30`; e.currentTarget.style.color = NAVY; e.currentTarget.style.background = "transparent"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = ORANGE; e.currentTarget.style.color = "var(--home-accent-text)"; e.currentTarget.style.background = "var(--home-cta2-hover-bg)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = NAVY_30; e.currentTarget.style.color = NAVY; e.currentTarget.style.background = "transparent"; }}
               >
                 Get in Touch <ChevronRight size={18} />
               </Link>

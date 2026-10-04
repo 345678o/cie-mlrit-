@@ -7,6 +7,7 @@ import Link from "next/link";
 import PageGeometric from "@/components/ui/PageGeometric";
 import ArcHero from "@/components/layout/ArcHero";
 import { VERTICALS } from "./verticals-data";
+import "./vertical-theme.css";
 
 /* ─── Icons map ──────────────────────────────────────────────────── */
 const ICONS: Record<string, React.ElementType> = {
@@ -55,19 +56,19 @@ function VerticalCard({ v, index }: { v: typeof VERTICALS[0]; index: number }) {
             flex: 1,
             borderRadius: "18px",
             overflow: "hidden",
-            border: "1px solid rgba(0,0,0,0.07)",
-            background: "#FFFFFF",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03)",
+            border: "1px solid var(--vert-card-border)",
+            background: "var(--bg-card)",
+            boxShadow: "var(--vert-card-shadow)",
             cursor: "pointer",
             transition: "box-shadow 0.32s ease",
           }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLDivElement).style.boxShadow =
-              "0 16px 48px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06)";
+              "var(--vert-card-shadow-hover)";
           }}
           onMouseLeave={(e) => {
             (e.currentTarget as HTMLDivElement).style.boxShadow =
-              "0 2px 8px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03)";
+              "var(--vert-card-shadow)";
           }}
         >
           {/* ── Gradient header ── */}
@@ -113,13 +114,13 @@ function VerticalCard({ v, index }: { v: typeof VERTICALS[0]; index: number }) {
               <div>
                 <span style={{
                   fontFamily: "var(--font-heading)", fontWeight: 900,
-                  fontSize: "10.5px", color: "rgba(255,255,255,0.50)",
+                  fontSize: "10.5px", color: "var(--vert-abbr)",
                   letterSpacing: "0.16em", textTransform: "uppercase",
                   display: "block",
                 }}>{v.abbr}</span>
                 <span style={{
                   fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 600,
-                  color: "rgba(255,255,255,0.40)", letterSpacing: "0.04em",
+                  color: "var(--vert-abbr-sub)", letterSpacing: "0.04em",
                 }}>CIE Vertical</span>
               </div>
             </div>
@@ -135,7 +136,7 @@ function VerticalCard({ v, index }: { v: typeof VERTICALS[0]; index: number }) {
             {/* Name */}
             <h3 style={{
               fontFamily: "var(--font-heading)", fontWeight: 800,
-              fontSize: "18px", color: "#000000",
+              fontSize: "18px", color: "var(--text-primary)",
               letterSpacing: "-0.02em", marginBottom: "5px",
             }}>
               {v.name}
@@ -153,7 +154,7 @@ function VerticalCard({ v, index }: { v: typeof VERTICALS[0]; index: number }) {
             {/* Description — 3-line clamp */}
             <p style={{
               fontFamily: "var(--font-body)", fontSize: "13.5px",
-              lineHeight: 1.72, color: "#6B7280",
+              lineHeight: 1.72, color: "var(--vert-desc)",
               marginBottom: "22px",
               overflow: "hidden",
               display: "-webkit-box",
@@ -169,20 +170,20 @@ function VerticalCard({ v, index }: { v: typeof VERTICALS[0]; index: number }) {
               <div style={{
                 display: "flex", gap: "16px",
                 paddingTop: "14px",
-                borderTop: "1px solid rgba(0,0,0,0.06)",
+                borderTop: "1px solid var(--vert-stat-line)",
                 marginBottom: "18px",
               }}>
                 {v.stats.slice(0, 2).map((s) => (
                   <div key={s.label}>
                     <div style={{
                       fontFamily: "var(--font-heading)", fontWeight: 900,
-                      fontSize: "15px", color: "#000000", lineHeight: 1,
+                      fontSize: "15px", color: "var(--text-primary)", lineHeight: 1,
                     }}>
                       {s.value}
                     </div>
                     <div style={{
                       fontFamily: "var(--font-body)", fontSize: "10.5px",
-                      color: "#9CA3AF", marginTop: "2px",
+                      color: "var(--vert-stat-label)", marginTop: "2px",
                     }}>
                       {s.label}
                     </div>
@@ -210,7 +211,7 @@ function VerticalCard({ v, index }: { v: typeof VERTICALS[0]; index: number }) {
 /* ─── Page ───────────────────────────────────────────────────────── */
 export default function VerticalsPage() {
   return (
-    <div style={{ background: "#FFFFFF", position: "relative" }}>
+    <div style={{ background: "var(--bg-base)", position: "relative" }}>
       <PageGeometric />
 
       {/* ══ HERO ═══════════════════════════════════════════════════ */}
@@ -233,7 +234,7 @@ export default function VerticalsPage() {
 
       {/* ══ CARDS GRID ═════════════════════════════════════════════ */}
       <section style={{
-        background: "#FFFFFF",
+        background: "var(--vert-grid-bg)",
         paddingTop: "clamp(64px,8vw,96px)",
         paddingBottom: "clamp(80px,10vw,120px)",
       }}>
@@ -245,7 +246,7 @@ export default function VerticalsPage() {
               <span className="section-tag">Explore</span>
               <h2 style={{
                 fontFamily: "var(--font-heading)", fontWeight: 900,
-                fontSize: "clamp(26px,4vw,42px)", color: "#000000",
+                fontSize: "clamp(26px,4vw,42px)", color: "var(--text-primary)",
                 letterSpacing: "-0.03em", lineHeight: 1.1,
                 marginTop: "10px", marginBottom: "10px",
               }}>
@@ -253,7 +254,7 @@ export default function VerticalsPage() {
               </h2>
               <p style={{
                 fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.3vw,16px)",
-                lineHeight: 1.72, color: "#6B7280", maxWidth: "620px",
+                lineHeight: 1.72, color: "var(--text-muted)", maxWidth: "620px",
                 marginLeft: "auto", marginRight: "auto",
               }}>
                 CIE is made up of different verticals, each focusing on a specific part of

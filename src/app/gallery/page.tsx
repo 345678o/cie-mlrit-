@@ -15,13 +15,13 @@ import ArcHero from "@/components/layout/ArcHero";
 const GRAIN = getGrainDataUri(0.85);
 
 const H_SLIDES = [
-  { label: "Workshop Carnival 2.0",   year: "APR 2026", cat: "Workshop",    n: "042", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", eventIdx: "01", video: "/reels/WC%202.0.mp4",        poster: "/events/poster/wc%202.0.png" },
-  { label: "Equinox E-Summit 2K24",   year: "NOV 2024", cat: "E-Summit",    n: "087", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", eventIdx: "04", video: "/reels/EQUNIOX.mp4",          poster: "/events/poster/equniox.png" },
-  { label: "GI Mahotsav 2024",        year: "MAR 2024", cat: "Cultural",    n: "031", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", eventIdx: "06", video: "/reels/GI.mp4",               poster: "/events/poster/gi.png" },
-  { label: "MetaLoop Hackathon",       year: "OCT 2023", cat: "Hackathon",  n: "118", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", eventIdx: "07", video: "/reels/METaloop.mp4",         poster: "/events/poster/metaloop.png" },
-  { label: "B2B — Business to Brand", year: "APR 2025", cat: "Innovation",  n: "063", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", eventIdx: "02", video: "/reels/B2B.mp4",              poster: "/events/poster/B2B.png" },
-  { label: "Hustle Mania",             year: "APR 2023", cat: "Challenge",  n: "055", grad: "linear-gradient(145deg,#0d0803 0%,#3b1a06 55%,#c2410c 100%)", eventIdx: "03", video: "/reels/HUSTLE%20MANIA.mp4",  poster: "/events/poster/hustle%20mania.png" },
-  { label: "Workshop Carnival",        year: "MAR 2024", cat: "Workshop",   n: "092", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", eventIdx: "05", video: "/reels/WC.mp4",               poster: "/events/poster/wc.png" },
+  { label: "Workshop Carnival 2.0",   year: "APR 2026", cat: "Workshop",    n: "042", grad: "linear-gradient(145deg,#060d20 0%,#0f2044 55%,#1e40af 100%)", eventIdx: "02", video: "/reels/WC%202.0.mp4",        poster: "/events/poster/wc%202.0.webp" },
+  { label: "Equinox E-Summit 2K24",   year: "NOV 2024", cat: "E-Summit",    n: "087", grad: "linear-gradient(145deg,#0e0618 0%,#2d1057 55%,#6d28d9 100%)", eventIdx: "05", video: "/reels/EQUNIOX.mp4",          poster: "/events/poster/equniox.webp" },
+  { label: "GI Mahotsav 2024",        year: "MAR 2024", cat: "Cultural",    n: "031", grad: "linear-gradient(145deg,#060e0a 0%,#14532d 55%,#16a34a 100%)", eventIdx: "07", video: "/reels/GI.mp4",               poster: "/events/poster/gi.webp" },
+  { label: "MetaLoop Hackathon",       year: "OCT 2023", cat: "Hackathon",  n: "118", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", eventIdx: "08", video: "/reels/METaloop.mp4",         poster: "/events/poster/metaloop.webp" },
+  { label: "B2B — Business to Brand", year: "APR 2025", cat: "Innovation",  n: "063", grad: "linear-gradient(145deg,#080c06 0%,#1c2a0d 55%,#4d7c0f 100%)", eventIdx: "03", video: "/reels/B2B.mp4",              poster: "/events/poster/B2B.webp" },
+  { label: "Hustle Mania",             year: "APR 2023", cat: "Challenge",  n: "055", grad: "linear-gradient(145deg,#0d0803 0%,#3b1a06 55%,#c2410c 100%)", eventIdx: "04", video: "/reels/HUSTLE%20MANIA.mp4",  poster: "/events/poster/hustle%20mania.webp" },
+  { label: "Workshop Carnival",        year: "MAR 2024", cat: "Workshop",   n: "092", grad: "linear-gradient(145deg,#060c1e 0%,#0d1f3c 55%,#1d4ed8 100%)", eventIdx: "06", video: "/reels/WC.mp4",               poster: "/events/poster/wc.webp" },
   { label: "Campus Moments",           year: "2024",     cat: "Archive",    n: "076", grad: "linear-gradient(145deg,#080808 0%,#1c1c1c 55%,#374151 100%)", video: "/reels/cie.mp4", poster: "/image 1983.png" },
 ];
 
@@ -33,46 +33,46 @@ const FEATURES = [
     imgs: [
       "/gallery/maker%20space%202.jpg",
       "/gallery/3d%20printing.jpg",
-      "/gallery/laser%20engraver.jpg",
+      "/gallery/laser%20engraver.webp",
       "/gallery/wooden%20graver.jpg",
       "/gallery/markers%20space.jpg",
       "/gallery/u%20table.jpg",
-      "/gallery/makerspace.jpg",
-      "/gallery/epicslab.jpg",
+      "/gallery/makerspace.webp",
+      "/gallery/epicslab.webp",
     ],
     imgGrad: "linear-gradient(135deg,#0369a1 0%,#0c4a6e 45%,#082f49 100%)",
     side: "right" as const,
-    bg: "#07090f",
+    bg: "var(--gallery-feat-bg-1)",
   },
   {
     tag: "Community",
     h: "500+ founders in the making",
     body: "From idea-stage to pitch-ready — students collaborate with mentors, refine MVPs, and connect with the broader Hyderabad startup ecosystem. CIE is where ambition finds its home.",
-    imgs: ["/gallery/cie.jpg", "/gallery/project1.jpg", "/gallery/efest-auditorium.jpg"],
+    imgs: ["/gallery/cie.webp", "/gallery/project1.jpg", "/gallery/efest-auditorium.webp"],
     imgGrad: "linear-gradient(135deg,#7c3aed 0%,#4c1d95 45%,#1e1b4b 100%)",
     side: "left" as const,
-    bg: "#090709",
+    bg: "var(--gallery-feat-bg-2)",
   },
 ];
 
 const GRID = [
-  { label: "Equinox E-Summit",  img: "/events/poster/equniox.png",     grad: "linear-gradient(145deg,#0e0618,#2d1057,#6d28d9)", cs: 2, rs: 2 },
-  { label: "Workshop Carnival", img: "/events/poster/wc%202.0.png",    grad: "linear-gradient(145deg,#060c1e,#0d1f3c,#1d4ed8)", cs: 1, rs: 1 },
-  { label: "MetaLoop Hackathon",img: "/events/poster/metaloop.png",    grad: "linear-gradient(145deg,#1c1917,#2d1b69,#7c3aed)", cs: 1, rs: 1 },
+  { label: "Equinox E-Summit",  img: "/events/poster/equniox.webp",     grad: "linear-gradient(145deg,#0e0618,#2d1057,#6d28d9)", cs: 2, rs: 2 },
+  { label: "Workshop Carnival", img: "/events/poster/wc%202.0.webp",    grad: "linear-gradient(145deg,#060c1e,#0d1f3c,#1d4ed8)", cs: 1, rs: 1 },
+  { label: "MetaLoop Hackathon",img: "/events/poster/metaloop.webp",    grad: "linear-gradient(145deg,#1c1917,#2d1b69,#7c3aed)", cs: 1, rs: 1 },
   { label: "Innovation Lab",    img: "/gallery/inventron-signage.jpg", grad: "linear-gradient(145deg,#0f0a1e,#2d1570,#4c1d95)", cs: 1, rs: 2 },
-  { label: "GI Mahotsav",       img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00856.JPG", grad: "linear-gradient(145deg,#060e0a,#14532d,#16a34a)", cs: 1, rs: 1 },
+  { label: "GI Mahotsav",       img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00856.webp", grad: "linear-gradient(145deg,#060e0a,#14532d,#16a34a)", cs: 1, rs: 1 },
   { label: "B2B Summit",        imgs: [
       "/events/drive-download-20260628T203409Z-3-001/B2B/DSCF4790.JPG",
-      "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8229.JPG",
+      "/events/drive-download-20260628T203409Z-3-001/B2B/IMG_8229.webp",
     ], grad: "linear-gradient(145deg,#080c06,#1c2a0d,#4d7c0f)", cs: 2, rs: 1 },
   { label: "Hustle Mania",      imgs: [
-      "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0545.JPG",
-      "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/IMG_3101.JPG",
+      "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/DSC_0545.webp",
+      "/events/drive-download-20260628T203409Z-3-001/Hustle%20mania/IMG_3101.webp",
     ], grad: "linear-gradient(145deg,#0d0803,#3b1a06,#c2410c)", cs: 1, rs: 1 },
-  { label: "GI Heritage",       img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00552.JPG", grad: "linear-gradient(145deg,#060e0a,#14532d,#16a34a)", cs: 1, rs: 1 },
-  { label: "Campus Welcome",    img: "/gallery/welcome-gate.jpg", grad: "linear-gradient(145deg,#0c1a2e,#164e63,#0891b2)", cs: 1, rs: 1 },
+  { label: "GI Heritage",       img: "/events/drive-download-20260628T203409Z-3-001/GI/DSC00552.webp", grad: "linear-gradient(145deg,#060e0a,#14532d,#16a34a)", cs: 1, rs: 1 },
+  { label: "Campus Welcome",    img: "/gallery/welcome-gate.webp", grad: "linear-gradient(145deg,#0c1a2e,#164e63,#0891b2)", cs: 1, rs: 1 },
   { label: "Lantern Walkway",   img: "/gallery/lantern-walkway.jpg", grad: "linear-gradient(145deg,#1e0a2e,#6d28d9,#a855f7)", cs: 1, rs: 1 },
-  { label: "Innovation Challenge", img: "/gallery/innovation-challenge.jpg", grad: "linear-gradient(145deg,#1c1917,#2d1b69,#7c3aed)", cs: 1, rs: 1 },
+  { label: "Innovation Challenge", img: "/gallery/innovation-challenge.webp", grad: "linear-gradient(145deg,#1c1917,#2d1b69,#7c3aed)", cs: 1, rs: 1 },
 ];
 
 function FeatureSlideshow({ imgs, alt }: { imgs: string[]; alt: string }) {
@@ -110,6 +110,44 @@ function FeatureSlideshow({ imgs, alt }: { imgs: string[]; alt: string }) {
 /* ═══════════════════════════════════════════════════════════════
    Gallery Page
 ═══════════════════════════════════════════════════════════════ */
+/* Theme tokens for this page: dark (default) = Equinox, light = original orange site. */
+const GALLERY_THEME_CSS = `
+:root {
+  --gallery-feat-bg-1: #16171D;
+  --gallery-feat-bg-2: #1C1D26;
+  --gallery-light-bg: #16171D;
+  --gallery-heading-light: #F4F5FA;
+  --gallery-intro-body: rgba(244,245,250,0.72);
+  --gallery-photo-body: rgba(244,245,250,0.72);
+  --gallery-dark-bg: #1C1D26;
+  --gallery-on-dark: #F4F5FA;
+  --gallery-on-dark-faint: rgba(244,245,250,0.58);
+  --gallery-feat-body: rgba(244,245,250,0.72);
+  --gallery-tour-body: rgba(244,245,250,0.72);
+  --gallery-cta-bg: radial-gradient(ellipse 60% 55% at 50% 40%, rgba(116,132,254,0.14) 0%, transparent 70%), #16171D;
+  --gallery-cta-body: rgba(244,245,250,0.72);
+  --gallery-cta-ghost-text: rgba(244,245,250,0.72);
+  --gallery-cta-ghost-border: rgba(116,132,254,0.22);
+}
+:root[data-theme="light"] {
+  --gallery-feat-bg-1: #07090f;
+  --gallery-feat-bg-2: #090709;
+  --gallery-light-bg: #F9F8F6;
+  --gallery-heading-light: #111111;
+  --gallery-intro-body: #555555;
+  --gallery-photo-body: #6B7280;
+  --gallery-dark-bg: #0C0B09;
+  --gallery-on-dark: #FFFFFF;
+  --gallery-on-dark-faint: rgba(255,255,255,0.3);
+  --gallery-feat-body: rgba(255,255,255,0.46);
+  --gallery-tour-body: rgba(255,255,255,0.40);
+  --gallery-cta-bg: #0C0B09;
+  --gallery-cta-body: rgba(255,255,255,0.38);
+  --gallery-cta-ghost-text: rgba(255,255,255,0.5);
+  --gallery-cta-ghost-border: rgba(255,255,255,0.10);
+}
+`;
+
 export default function GalleryPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const heroRef      = useRef<HTMLDivElement>(null);
@@ -288,6 +326,7 @@ export default function GalleryPage() {
 
   return (
     <div ref={containerRef}>
+      <style>{GALLERY_THEME_CSS}</style>
 
       {/* ══════════════════════════════════════════════════════
           HERO — matches Verticals visual language
@@ -315,15 +354,15 @@ export default function GalleryPage() {
       {/* ══════════════════════════════════════════════════════
           INTRO TEXT — light section
       ══════════════════════════════════════════════════════ */}
-      <section style={{ background: "#F9F8F6", padding: "clamp(72px, 11vw, 130px) 0" }}>
+      <section style={{ background: "var(--gallery-light-bg)", padding: "clamp(72px, 11vw, 130px) 0" }}>
         <div className="page-container">
           <div style={{ maxWidth: "780px" }}>
             <div
               className="reveal-text"
               style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "26px" }}
             >
-              <div style={{ width: "28px", height: "1px", background: "#E8521A" }} />
-              <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#E8521A" }}>
+              <div style={{ width: "28px", height: "1px", background: "var(--orange)" }} />
+              <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--orange)" }}>
                 Visual Archive
               </span>
             </div>
@@ -335,7 +374,7 @@ export default function GalleryPage() {
                 fontSize: "clamp(30px, 5vw, 56px)",
                 letterSpacing: "-0.03em",
                 lineHeight: 1.08,
-                color: "#111111",
+                color: "var(--gallery-heading-light)",
                 marginBottom: "26px",
               }}
             >
@@ -347,7 +386,7 @@ export default function GalleryPage() {
                 fontFamily: "var(--font-body)",
                 fontSize: "clamp(15px, 1.6vw, 18px)",
                 lineHeight: 1.78,
-                color: "#555555",
+                color: "var(--gallery-intro-body)",
               }}
             >
               Five years. A hundred events. Three thousand students. This is not just a photo archive — it is a living document of what happens when curiosity meets opportunity inside MLRIT&apos;s Centre for Innovation &amp; Entrepreneurship.
@@ -363,17 +402,17 @@ export default function GalleryPage() {
           of as a row item (see .h-intro-static / .h-intro-card in the style
           block below) — it has no background fill, so sizing it to match the
           9:16 poster/video cards left a large empty black box. */}
-      <div className="h-intro-static" style={{ background: "#0C0B09", padding: "clamp(28px,6vw,44px) clamp(20px,5vw,32px) 0" }}>
+      <div className="h-intro-static" style={{ background: "var(--gallery-dark-bg)", padding: "clamp(28px,6vw,44px) clamp(20px,5vw,32px) 0" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "18px" }}>
-          <div style={{ width: "26px", height: "2px", background: "#E8521A" }} />
-          <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(9.5px,1.4vw,12px)", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#E8521A" }}>
+          <div style={{ width: "26px", height: "2px", background: "var(--orange)" }} />
+          <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(9.5px,1.4vw,12px)", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--orange)" }}>
             Gallery
           </span>
         </div>
-        <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(30px, 5vw, 40px)", letterSpacing: "-0.03em", color: "#FFFFFF", lineHeight: 1.1, marginBottom: "18px" }}>
+        <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(30px, 5vw, 40px)", letterSpacing: "-0.03em", color: "var(--gallery-on-dark)", lineHeight: 1.1, marginBottom: "18px" }}>
           Explore the moments
         </h3>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(13px,1.8vw,15px)", lineHeight: 1.65, color: "rgba(255,255,255,0.3)" }}>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(13px,1.8vw,15px)", lineHeight: 1.65, color: "var(--gallery-on-dark-faint)" }}>
           {H_SLIDES.length} collections · 7 reels · Scroll horizontally to explore, hover to start watching
         </p>
       </div>
@@ -384,7 +423,7 @@ export default function GalleryPage() {
         style={{
           position: "relative",
           overflow: "hidden",
-          background: "#0C0B09",
+          background: "var(--gallery-dark-bg)",
           height: "100vh",
         }}
       >
@@ -415,15 +454,15 @@ export default function GalleryPage() {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "18px" }}>
-              <div style={{ width: "26px", height: "2px", background: "#E8521A" }} />
-              <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(9.5px,1.4vw,12px)", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#E8521A" }}>
+              <div style={{ width: "26px", height: "2px", background: "var(--orange)" }} />
+              <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(9.5px,1.4vw,12px)", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--orange)" }}>
                 Gallery
               </span>
             </div>
-            <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(30px, 5vw, 40px)", letterSpacing: "-0.03em", color: "#FFFFFF", lineHeight: 1.1, marginBottom: "18px" }}>
+            <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(30px, 5vw, 40px)", letterSpacing: "-0.03em", color: "var(--gallery-on-dark)", lineHeight: 1.1, marginBottom: "18px" }}>
               Explore<br />the moments
             </h3>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(13px,1.8vw,15px)", lineHeight: 1.65, color: "rgba(255,255,255,0.3)" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(13px,1.8vw,15px)", lineHeight: 1.65, color: "var(--gallery-on-dark-faint)" }}>
               {H_SLIDES.length} collections · 7 reels · Scroll horizontally to explore, hover to start watching
             </p>
           </div>
@@ -450,7 +489,15 @@ export default function GalleryPage() {
               onMouseEnter={(e) => {
                 document.querySelectorAll<HTMLVideoElement>(".slide-video").forEach(v => { v.muted = true; });
                 const v = (e.currentTarget as HTMLElement).querySelector<HTMLVideoElement>(".slide-video");
-                if (v) v.muted = false;
+                if (!v) return;
+                /* Browsers block un-muted playback until the visitor has clicked/tapped
+                   the page (hover isn't a user gesture) and pause the video instead.
+                   Try with sound; fall back to muted so the reel always plays. */
+                v.muted = false;
+                v.play().catch(() => {
+                  v.muted = true;
+                  v.play().catch(() => {});
+                });
               }}
               onMouseLeave={(e) => {
                 const v = (e.currentTarget as HTMLElement).querySelector<HTMLVideoElement>(".slide-video");
@@ -540,7 +587,7 @@ export default function GalleryPage() {
         {/* Scroll hint */}
         <div className="h-scroll-dots" style={{ position: "absolute", bottom: "20px", left: "50%", transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: "6px" }}>
           {H_SLIDES.map((_, i) => (
-            <div key={i} style={{ width: i === 0 ? "18px" : "4px", height: "1.5px", borderRadius: "2px", background: i === 0 ? "#E8521A" : "rgba(255,255,255,0.16)", transition: "all 0.3s" }} />
+            <div key={i} style={{ width: i === 0 ? "18px" : "4px", height: "1.5px", borderRadius: "2px", background: i === 0 ? "var(--accent-green)" : "rgba(255,255,255,0.16)", transition: "all 0.3s" }} />
           ))}
         </div>
 
@@ -637,11 +684,11 @@ export default function GalleryPage() {
           >
             <div className="feat-txt-inner" style={{ maxWidth: "460px", padding: "clamp(56px, 10vh, 110px) 0" }}>
               <div className="reveal-text" style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "24px" }}>
-                <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(10.5px,1.4vw,12px)", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#E8521A" }}>
+                <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(10.5px,1.4vw,12px)", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--orange)" }}>
                   {String(i + 1).padStart(2, "0")} / {String(FEATURES.length).padStart(2, "0")}
                 </span>
                 <div style={{ width: "24px", height: "1px", background: "rgba(255,255,255,0.14)" }} />
-                <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(10.5px,1.4vw,12px)", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                <span style={{ fontFamily: "var(--font-body)", fontSize: "clamp(10.5px,1.4vw,12px)", color: "var(--gallery-on-dark-faint)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                   {f.tag}
                 </span>
               </div>
@@ -653,7 +700,7 @@ export default function GalleryPage() {
                   fontSize: "clamp(34px, 4.8vw, 56px)",
                   letterSpacing: "-0.03em",
                   lineHeight: 1.07,
-                  color: "#FFFFFF",
+                  color: "var(--gallery-on-dark)",
                   marginBottom: "24px",
                 }}
               >
@@ -665,7 +712,7 @@ export default function GalleryPage() {
                   fontFamily: "var(--font-body)",
                   fontSize: "clamp(15px, 1.6vw, 17px)",
                   lineHeight: 1.8,
-                  color: "rgba(255,255,255,0.46)",
+                  color: "var(--gallery-feat-body)",
                 }}
               >
                 {f.body}
@@ -678,22 +725,22 @@ export default function GalleryPage() {
       {/* ══════════════════════════════════════════════════════
           PHOTO GRID — masonry reveal, light bg
       ══════════════════════════════════════════════════════ */}
-      <section style={{ background: "#F9F8F6", padding: "clamp(72px, 10vw, 120px) 0" }}>
+      <section style={{ background: "var(--gallery-light-bg)", padding: "clamp(72px, 10vw, 120px) 0" }}>
         <div className="page-container">
           {/* Header */}
           <div className="reveal-text" style={{ marginBottom: "clamp(32px, 5vw, 52px)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
-              <div style={{ width: "26px", height: "1px", background: "#E8521A" }} />
-              <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#E8521A" }}>
+              <div style={{ width: "26px", height: "1px", background: "var(--orange)" }} />
+              <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--orange)" }}>
                 Photo Archive
               </span>
             </div>
-            <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(26px, 4vw, 42px)", letterSpacing: "-0.03em", color: "#111111", lineHeight: 1.1 }}>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(26px, 4vw, 42px)", letterSpacing: "-0.03em", color: "var(--gallery-heading-light)", lineHeight: 1.1 }}>
               Moments from the archive
             </h2>
             <p style={{
               fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.3vw,16px)",
-              lineHeight: 1.72, color: "#6B7280", maxWidth: "860px", marginTop: "12px",
+              lineHeight: 1.72, color: "var(--gallery-photo-body)", maxWidth: "860px", marginTop: "12px",
             }}>
               These aren&apos;t just event photographs — they&apos;re memories of students
               learning, building, organising, and creating together. Behind every picture
@@ -767,19 +814,19 @@ export default function GalleryPage() {
       {/* ══════════════════════════════════════════════════════
           VIRTUAL TOUR — Street View embed
       ══════════════════════════════════════════════════════ */}
-      <section id="virtual-tour" style={{ background: "#0C0B09", padding: "clamp(72px, 10vw, 110px) 0" }}>
+      <section id="virtual-tour" style={{ background: "var(--gallery-dark-bg)", padding: "clamp(72px, 10vw, 110px) 0" }}>
         <div className="page-container">
           <div className="reveal-text" style={{ marginBottom: "clamp(28px,4vw,44px)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-              <div style={{ width: "26px", height: "1px", background: "#E8521A" }} />
-              <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#E8521A" }}>
+              <div style={{ width: "26px", height: "1px", background: "var(--orange)" }} />
+              <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--orange)" }}>
                 Virtual Tour
               </span>
             </div>
-            <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(26px,4vw,42px)", letterSpacing: "-0.03em", color: "#FFFFFF", lineHeight: 1.1, marginBottom: "10px" }}>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(26px,4vw,42px)", letterSpacing: "-0.03em", color: "var(--gallery-on-dark)", lineHeight: 1.1, marginBottom: "10px" }}>
               Explore CIE from anywhere
             </h2>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.4vw,16px)", color: "rgba(255,255,255,0.40)", lineHeight: 1.72, maxWidth: "480px" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px,1.4vw,16px)", color: "var(--gallery-tour-body)", lineHeight: 1.72, maxWidth: "480px" }}>
               Take a 360° Street View walk through the CIE campus — no visit required.
             </p>
           </div>
@@ -798,17 +845,17 @@ export default function GalleryPage() {
       {/* ══════════════════════════════════════════════════════
           CLOSING CTA
       ══════════════════════════════════════════════════════ */}
-      <section style={{ background: "#0C0B09", padding: "clamp(88px, 14vw, 160px) 0", textAlign: "center" }}>
+      <section style={{ background: "var(--gallery-cta-bg)", padding: "clamp(88px, 14vw, 160px) 0", textAlign: "center" }}>
         <div className="page-container">
           <div
             className="reveal-text"
             style={{ display: "inline-flex", alignItems: "center", gap: "8px", marginBottom: "22px" }}
           >
-            <div style={{ width: "22px", height: "1px", background: "#E8521A" }} />
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#E8521A" }}>
+            <div style={{ width: "22px", height: "1px", background: "var(--orange)" }} />
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "9.5px", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--orange)" }}>
               Visit us
             </span>
-            <div style={{ width: "22px", height: "1px", background: "#E8521A" }} />
+            <div style={{ width: "22px", height: "1px", background: "var(--orange)" }} />
           </div>
           <h2
             className="reveal-text"
@@ -817,7 +864,7 @@ export default function GalleryPage() {
               fontWeight: 900,
               fontSize: "clamp(36px, 7vw, 88px)",
               letterSpacing: "-0.045em",
-              color: "#FFFFFF",
+              color: "var(--gallery-on-dark)",
               lineHeight: 1.04,
               marginBottom: "22px",
             }}
@@ -830,7 +877,7 @@ export default function GalleryPage() {
               fontFamily: "var(--font-body)",
               fontSize: "clamp(14px, 1.5vw, 17px)",
               lineHeight: 1.72,
-              color: "rgba(255,255,255,0.38)",
+              color: "var(--gallery-cta-body)",
               maxWidth: "400px",
               margin: "0 auto 40px",
             }}
@@ -846,7 +893,7 @@ export default function GalleryPage() {
               style={{
                 display: "inline-flex", alignItems: "center", gap: "8px",
                 fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "14px",
-                color: "#FFFFFF", background: "#E8521A",
+                color: "var(--on-accent)", background: "var(--grad-accent)",
                 borderRadius: "999px", padding: "13px 30px",
                 textDecoration: "none", letterSpacing: "-0.01em",
               }}
@@ -858,8 +905,8 @@ export default function GalleryPage() {
               style={{
                 display: "inline-flex", alignItems: "center", gap: "8px",
                 fontFamily: "var(--font-body)", fontWeight: 500, fontSize: "14px",
-                color: "rgba(255,255,255,0.5)",
-                border: "1px solid rgba(255,255,255,0.10)",
+                color: "var(--gallery-cta-ghost-text)",
+                border: "1px solid var(--gallery-cta-ghost-border)",
                 borderRadius: "999px", padding: "13px 30px",
                 textDecoration: "none",
               }}
@@ -873,6 +920,8 @@ export default function GalleryPage() {
       <style>{`
         /* ── Video hover reveal ───────────────────────────────── */
         .h-slide:hover .slide-video { opacity: 1 !important; }
+        /* Touch screens have no hover — show the (muted, autoplaying) reel */
+        @media (hover: none) { .slide-video { opacity: 1 !important; } }
 
         /* ── Mobile/tablet: h-scroll section ──────────────────── */
         @media (max-width: 1023px) {

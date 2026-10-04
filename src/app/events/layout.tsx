@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: "Events | MLRIT CIE",
     description: "Explore MLRIT CIE events — hackathons, workshops, e-summits, and innovation challenges. 100+ events, 3000+ participants.",
     url: "https://mlritcie.in/events",
-    images: [{ url: "/events/poster/wc%202.0.png", width: 1080, height: 1350, alt: "Workshop Carnival 2.0" }],
+    images: [{ url: "/events/poster/wc%202.0.webp", width: 1080, height: 1350, alt: "Workshop Carnival 2.0" }],
   },
 };
 

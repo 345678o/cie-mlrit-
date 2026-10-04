@@ -75,7 +75,8 @@ export default function AutoplayVideo({
             background: "rgba(255,255,255,0.92)", display: "flex",
             alignItems: "center", justifyContent: "center",
           }}>
-            <Play size={26} style={{ color: "#0A0A0A", marginLeft: "3px" }} fill="#0A0A0A" />
+            <Play size={26} style={{ color: "var(--av-play)", fill: "var(--av-play)", marginLeft: "3px" }} />
+            <style>{`:root{--av-play:#16171D}:root[data-theme="light"]{--av-play:#0A0A0A}`}</style>
           </span>
         </button>
       )}

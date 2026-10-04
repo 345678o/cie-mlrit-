@@ -41,10 +41,11 @@ export default function BackToTop() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            boxShadow: "0 4px 20px rgba(255,94,44,0.35)",
+            boxShadow: "var(--btt-shadow)",
           }}
         >
           <ArrowUp size={18} />
+          <style>{`:root{--btt-shadow:0 4px 20px rgba(116,132,254,0.35)}:root[data-theme="light"]{--btt-shadow:0 4px 20px rgba(255,94,44,0.35)}`}</style>
         </motion.button>
       )}
     </AnimatePresence>

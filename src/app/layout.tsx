@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import BackToTop from "@/components/ui/BackToTop";
 import LoadingScreen from "@/components/ui/LoadingScreen";
+import EventPopup from "@/components/ui/EventPopup";
 import { NavbarProvider } from "@/context/NavbarContext";
 
 const sora = Sora({
@@ -85,7 +86,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0B0B0F",
+  themeColor: "#16171D",
 };
 
 const jsonLd = {
@@ -109,7 +110,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${inter.variable} ${caveat.variable} ${rockstar.variable} ${sora.variable} scroll-smooth`} data-scroll-behavior="smooth">
+    <html lang="en" className={`${manrope.variable} ${inter.variable} ${caveat.variable} ${rockstar.variable} ${sora.variable} scroll-smooth`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="min-h-screen flex flex-col antialiased">
         <script
           type="application/ld+json"
@@ -120,6 +121,7 @@ export default function RootLayout({
         </a>
         <NavbarProvider>
           <LoadingScreen />
+          <EventPopup />
           <Navbar />
           <main id="main-content" className="flex-1">{children}</main>
           <Footer />

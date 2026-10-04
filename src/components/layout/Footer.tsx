@@ -142,6 +142,41 @@ const contactItems = [
   },
 ];
 
+/* ─── Theme tokens ──────────────────────────────────────────────
+   Dark (default) = Equinox look; light = the original black footer. */
+const FOOTER_THEME_CSS = `
+:root {
+  --footer-bg: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(116,132,254,0.08) 0%, transparent 70%), #0F1016;
+  --footer-top-border: rgba(116,132,254,0.22);
+  --footer-line: rgba(255,255,255,0.08);
+  --footer-heading: #F4F5FA;
+  --footer-text: rgba(244,245,250,0.58);
+  --footer-hover: #A5AFFE;
+  --footer-fine: rgba(244,245,250,0.38);
+  --footer-icon-bg: rgba(116,132,254,0.12);
+  --footer-icon-border: rgba(116,132,254,0.22);
+  --footer-icon-fg: #7484FE;
+  --footer-icon-bg-m: rgba(116,132,254,0.12);
+  --footer-icon-border-m: rgba(116,132,254,0.22);
+  --footer-icon-fg-m: #7484FE;
+}
+:root[data-theme="light"] {
+  --footer-bg: #000000;
+  --footer-top-border: rgba(255,255,255,0.06);
+  --footer-line: rgba(255,255,255,0.06);
+  --footer-heading: #FFFFFF;
+  --footer-text: #5C6370;
+  --footer-hover: #FFFFFF;
+  --footer-fine: #3D4148;
+  --footer-icon-bg: rgba(255,255,255,0.04);
+  --footer-icon-border: rgba(255,255,255,0.08);
+  --footer-icon-fg: rgba(255,255,255,0.38);
+  --footer-icon-bg-m: rgba(255,255,255,0.05);
+  --footer-icon-border-m: rgba(255,255,255,0.09);
+  --footer-icon-fg-m: rgba(255,255,255,0.40);
+}
+`;
+
 /* ═══════════════════════════════════════════════════════════════
    Footer
 ═══════════════════════════════════════════════════════════════ */
@@ -149,7 +184,8 @@ export default function Footer() {
   const { hidden } = useNavbarVisibility();
   if (hidden) return null;
   return (
-    <footer style={{ background: "#000000", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+    <footer style={{ background: "var(--footer-bg)", borderTop: "1px solid var(--footer-top-border)" }}>
+      <style>{FOOTER_THEME_CSS}</style>
       <div
         className="page-container"
         style={{ paddingTop: "clamp(40px,8vw,80px)", paddingBottom: "clamp(28px,5vw,48px)" }}
@@ -159,13 +195,13 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:hidden" style={{ marginBottom: "clamp(28px,5vw,40px)" }}>
           {/* Explore */}
           <div>
-            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "16px" }}>Explore</h3>
+            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, color: "var(--footer-heading)", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "16px" }}>Explore</h3>
             <ul style={{ display: "flex", flexDirection: "column", gap: "14px", listStyle: "none", padding: 0, margin: 0 }}>
               {footerLinks.explore.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "#5C6370", textDecoration: "none", display: "block", lineHeight: 1.4 }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FFFFFF"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#5C6370"; }}
+                  <Link href={link.href} style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--footer-text)", textDecoration: "none", display: "block", lineHeight: 1.4 }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--footer-hover)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--footer-text)"; }}
                   >{link.label}</Link>
                 </li>
               ))}
@@ -173,13 +209,13 @@ export default function Footer() {
           </div>
           {/* Programs */}
           <div>
-            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "16px" }}>Programs</h3>
+            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, color: "var(--footer-heading)", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "16px" }}>Programs</h3>
             <ul style={{ display: "flex", flexDirection: "column", gap: "14px", listStyle: "none", padding: 0, margin: 0 }}>
               {footerLinks.programs.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "#5C6370", textDecoration: "none", display: "block", lineHeight: 1.4 }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#FFFFFF"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#5C6370"; }}
+                  <Link href={link.href} style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--footer-text)", textDecoration: "none", display: "block", lineHeight: 1.4 }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--footer-hover)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--footer-text)"; }}
                   >{link.label}</Link>
                 </li>
               ))}
@@ -188,20 +224,20 @@ export default function Footer() {
         </div>
 
         {/* ── Mobile: Contact ──────────────────────────────────────── */}
-        <div className="lg:hidden" style={{ paddingBottom: "clamp(28px,5vw,40px)", borderBottom: "1px solid rgba(255,255,255,0.06)", marginBottom: "clamp(28px,5vw,40px)" }}>
-          <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "16px" }}>Contact</h3>
+        <div className="lg:hidden" style={{ paddingBottom: "clamp(28px,5vw,40px)", borderBottom: "1px solid var(--footer-line)", marginBottom: "clamp(28px,5vw,40px)" }}>
+          <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, color: "var(--footer-heading)", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "16px" }}>Contact</h3>
           <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0, margin: 0 }}>
             {contactItems.map((item, i) => (
               <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                <div style={{ width: "30px", height: "30px", borderRadius: "7px", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.09)", color: "rgba(255,255,255,0.40)", marginTop: "1px" }}>
+                <div style={{ width: "30px", height: "30px", borderRadius: "7px", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "var(--footer-icon-bg-m)", border: "1px solid var(--footer-icon-border-m)", color: "var(--footer-icon-fg-m)", marginTop: "1px" }}>
                   <item.Icon size={14} />
                 </div>
                 {item.type === "text" ? (
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "#5C6370", whiteSpace: "pre-line", paddingTop: "5px" }}>{item.value}</span>
+                  <span style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "var(--footer-text)", whiteSpace: "pre-line", paddingTop: "5px" }}>{item.value}</span>
                 ) : (
-                  <a href={item.href} style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "#5C6370", textDecoration: "none", paddingTop: "5px", lineHeight: 1.4, display: "block" }}
-                    onMouseEnter={(e) => { e.currentTarget.style.color = "#FFFFFF"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.color = "#5C6370"; }}
+                  <a href={item.href} style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--footer-text)", textDecoration: "none", paddingTop: "5px", lineHeight: 1.4, display: "block" }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = "var(--footer-hover)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = "var(--footer-text)"; }}
                   >{item.value}</a>
                 )}
               </li>
@@ -222,14 +258,14 @@ export default function Footer() {
                 style={{ objectFit: "contain", mixBlendMode: "screen" }}
               />
             </Link>
-            <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "13px", color: "#FFFFFF", letterSpacing: "-0.01em", marginBottom: "8px" }}>
+            <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "13px", color: "var(--footer-heading)", letterSpacing: "-0.01em", marginBottom: "8px" }}>
               Centre for Innovation &amp; Entrepreneurship
             </h3>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "12.5px", color: "#5C6370", lineHeight: 1.65, marginBottom: "10px", maxWidth: "260px" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "12.5px", color: "var(--footer-text)", lineHeight: 1.65, marginBottom: "10px", maxWidth: "260px" }}>
               A student-driven community at MLRIT where students explore ideas, learn new
               skills, build projects, and grow through experience.
             </p>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#5C6370", marginBottom: "18px", fontStyle: "italic", letterSpacing: "0.01em" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--footer-text)", marginBottom: "18px", fontStyle: "italic", letterSpacing: "0.01em" }}>
               Making Ideas Happen.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
@@ -245,14 +281,14 @@ export default function Footer() {
 
           {/* Explore */}
           <div>
-            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "20px" }}>Explore</h3>
+            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, color: "var(--footer-heading)", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "20px" }}>Explore</h3>
             <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0, margin: 0 }}>
               {footerLinks.explore.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href}
-                    style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#5C6370", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "7px", transition: "color 0.2s ease" }}
-                    onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = "#FFFFFF"; const bar = el.querySelector(".footer-bar") as HTMLElement | null; if (bar) { bar.style.width = "12px"; bar.style.opacity = "1"; } }}
-                    onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = "#5C6370"; const bar = el.querySelector(".footer-bar") as HTMLElement | null; if (bar) { bar.style.width = "0px"; bar.style.opacity = "0"; } }}
+                    style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "var(--footer-text)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "7px", transition: "color 0.2s ease" }}
+                    onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = "var(--footer-hover)"; const bar = el.querySelector(".footer-bar") as HTMLElement | null; if (bar) { bar.style.width = "12px"; bar.style.opacity = "1"; } }}
+                    onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = "var(--footer-text)"; const bar = el.querySelector(".footer-bar") as HTMLElement | null; if (bar) { bar.style.width = "0px"; bar.style.opacity = "0"; } }}
                   >
                     <span className="footer-bar" style={{ display: "inline-block", height: "1px", width: "0px", opacity: "0", background: "var(--orange)", borderRadius: "1px", flexShrink: 0, transition: "width 0.22s ease, opacity 0.22s ease" }} />
                     {link.label}
@@ -264,14 +300,14 @@ export default function Footer() {
 
           {/* Programs */}
           <div>
-            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "20px" }}>Programs</h3>
+            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, color: "var(--footer-heading)", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "20px" }}>Programs</h3>
             <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0, margin: 0 }}>
               {footerLinks.programs.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href}
-                    style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#5C6370", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "7px", transition: "color 0.2s ease" }}
-                    onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = "#FFFFFF"; const bar = el.querySelector(".footer-bar") as HTMLElement | null; if (bar) { bar.style.width = "12px"; bar.style.opacity = "1"; } }}
-                    onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = "#5C6370"; const bar = el.querySelector(".footer-bar") as HTMLElement | null; if (bar) { bar.style.width = "0px"; bar.style.opacity = "0"; } }}
+                    style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "var(--footer-text)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "7px", transition: "color 0.2s ease" }}
+                    onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = "var(--footer-hover)"; const bar = el.querySelector(".footer-bar") as HTMLElement | null; if (bar) { bar.style.width = "12px"; bar.style.opacity = "1"; } }}
+                    onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = "var(--footer-text)"; const bar = el.querySelector(".footer-bar") as HTMLElement | null; if (bar) { bar.style.width = "0px"; bar.style.opacity = "0"; } }}
                   >
                     <span className="footer-bar" style={{ display: "inline-block", height: "1px", width: "0px", opacity: "0", background: "var(--orange)", borderRadius: "1px", flexShrink: 0, transition: "width 0.22s ease, opacity 0.22s ease" }} />
                     {link.label}
@@ -283,19 +319,19 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "20px" }}>Contact</h3>
+            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "10.5px", fontWeight: 700, color: "var(--footer-heading)", letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: "20px" }}>Contact</h3>
             <ul style={{ display: "flex", flexDirection: "column", gap: "14px", listStyle: "none", padding: 0, margin: 0 }}>
               {contactItems.map((item, i) => (
                 <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "11px" }}>
-                  <div style={{ width: "28px", height: "28px", borderRadius: "6px", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.38)", marginTop: "1px" }}>
+                  <div style={{ width: "28px", height: "28px", borderRadius: "6px", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "var(--footer-icon-bg)", border: "1px solid var(--footer-icon-border)", color: "var(--footer-icon-fg)", marginTop: "1px" }}>
                     <item.Icon size={13} />
                   </div>
                   {item.type === "text" ? (
-                    <span style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "#5C6370", whiteSpace: "pre-line", paddingTop: "5px" }}>{item.value}</span>
+                    <span style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "var(--footer-text)", whiteSpace: "pre-line", paddingTop: "5px" }}>{item.value}</span>
                   ) : (
-                    <a href={item.href} style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "#5C6370", textDecoration: "none", paddingTop: "5px", lineHeight: 1.4, transition: "color 0.2s ease", display: "block" }}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = "#FFFFFF"; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = "#5C6370"; }}
+                    <a href={item.href} style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--footer-text)", textDecoration: "none", paddingTop: "5px", lineHeight: 1.4, transition: "color 0.2s ease", display: "block" }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = "var(--footer-hover)"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = "var(--footer-text)"; }}
                     >{item.value}</a>
                   )}
                 </li>
@@ -308,7 +344,7 @@ export default function Footer() {
         <div
           style={{
             paddingTop: "clamp(16px, 3vw, 24px)",
-            borderTop: "1px solid rgba(255,255,255,0.06)",
+            borderTop: "1px solid var(--footer-line)",
             display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
@@ -317,11 +353,11 @@ export default function Footer() {
             gap: "8px 16px",
           }}
         >
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#3D4148" }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--footer-fine)" }}>
             © {new Date().getFullYear()} MLRIT CIE. All rights reserved.
           </p>
           <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#3D4148" }}>Built by</span>
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--footer-fine)" }}>Built by</span>
             <Image
               src="/image 1983.png"
               alt="CIE Logo"

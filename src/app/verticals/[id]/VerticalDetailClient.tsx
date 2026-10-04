@@ -12,6 +12,7 @@ import {
 import type { Vertical, ProposalBlock } from "../verticals-data";
 import PageGeometric from "@/components/ui/PageGeometric";
 import AutoplayVideo from "@/components/ui/AutoplayVideo";
+import "../vertical-theme.css";
 
 const ICONS: Record<string, React.ElementType> = {
   mp: Boxes,
@@ -23,9 +24,9 @@ const ICONS: Record<string, React.ElementType> = {
 };
 
 const STATUS_COLOR: Record<string, { bg: string; text: string }> = {
-  Active:    { bg: "rgba(5,150,105,0.08)",  text: "#059669" },
-  Completed: { bg: "rgba(8,145,178,0.08)",  text: "#0891B2" },
-  Upcoming:  { bg: "rgba(217,119,6,0.08)",  text: "#D97706" },
+  Active:    { bg: "var(--vdetail-status-active-bg)", text: "var(--vdetail-status-active)" },
+  Completed: { bg: "var(--vdetail-status-done-bg)", text: "var(--vdetail-status-done)" },
+  Upcoming:  { bg: "var(--vdetail-status-soon-bg)", text: "var(--vdetail-status-soon)" },
 };
 
 function FadeIn({
@@ -51,7 +52,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(22px,3.5vw,36px)", color: "#000000", lineHeight: 1.1, marginBottom: "32px" }}>
+    <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(22px,3.5vw,36px)", color: "var(--text-primary)", lineHeight: 1.1, marginBottom: "32px" }}>
       {children}
     </h2>
   );
@@ -86,7 +87,7 @@ function groupProposalBlocks(blocks: ProposalBlock[]): ProposalSection[] {
 function ProposalBlockView({ block, color }: { block: ProposalBodyBlock; color: string }) {
   if (block.type === "paragraph") {
     return (
-      <p style={{ fontFamily: "var(--font-body)", fontSize: "14.5px", color: "#374151", lineHeight: 1.75, marginBottom: "10px" }}>
+      <p style={{ fontFamily: "var(--font-body)", fontSize: "14.5px", color: "var(--vdetail-body)", lineHeight: 1.75, marginBottom: "10px" }}>
         {block.text}
       </p>
     );
@@ -97,7 +98,7 @@ function ProposalBlockView({ block, color }: { block: ProposalBodyBlock; color: 
         {block.items.map((item, i) => (
           <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
             <CheckCircle2 size={14} style={{ color, flexShrink: 0, marginTop: "3px" }} />
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "#374151", lineHeight: 1.6 }}>{item}</span>
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--vdetail-body)", lineHeight: 1.6 }}>{item}</span>
           </div>
         ))}
       </div>
@@ -105,12 +106,12 @@ function ProposalBlockView({ block, color }: { block: ProposalBodyBlock; color: 
   }
   // table
   return (
-    <div style={{ overflowX: "auto", borderRadius: "14px", border: "1px solid #E5E7EB", marginBottom: "14px" }}>
+    <div style={{ overflowX: "auto", borderRadius: "14px", border: "1px solid var(--vdetail-table-line)", background: "var(--bg-card)", marginBottom: "14px" }}>
       <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "var(--font-body)", fontSize: "13.5px" }}>
         <thead>
-          <tr style={{ background: "#F9FAFB", borderBottom: "1px solid #E5E7EB" }}>
+          <tr style={{ background: "var(--vdetail-surface-alt)", borderBottom: "1px solid var(--vdetail-table-line)" }}>
             {block.headers.map((h) => (
-              <th key={h} style={{ padding: "12px 18px", textAlign: "left", fontWeight: 700, fontSize: "11px", letterSpacing: "0.06em", textTransform: "uppercase", color: "#6B7280", whiteSpace: "nowrap" }}>
+              <th key={h} style={{ padding: "12px 18px", textAlign: "left", fontWeight: 700, fontSize: "11px", letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)", whiteSpace: "nowrap" }}>
                 {h}
               </th>
             ))}
@@ -118,9 +119,9 @@ function ProposalBlockView({ block, color }: { block: ProposalBodyBlock; color: 
         </thead>
         <tbody>
           {block.rows.map((row, i) => (
-            <tr key={i} style={{ borderBottom: i < block.rows.length - 1 ? "1px solid #F3F4F6" : "none" }}>
+            <tr key={i} style={{ borderBottom: i < block.rows.length - 1 ? "1px solid var(--vdetail-row-line)" : "none" }}>
               {row.map((cell, j) => (
-                <td key={j} style={{ padding: "12px 18px", color: j === 0 ? "#111111" : "#374151", fontWeight: j === 0 ? 600 : 400 }}>
+                <td key={j} style={{ padding: "12px 18px", color: j === 0 ? "var(--vdetail-strong)" : "var(--vdetail-body)", fontWeight: j === 0 ? 600 : 400 }}>
                   {cell}
                 </td>
               ))}
@@ -134,8 +135,8 @@ function ProposalBlockView({ block, color }: { block: ProposalBodyBlock; color: 
 
 function ProposalSectionCard({ section, color, lightBg, border }: { section: ProposalSection; color: string; lightBg: string; border: string }) {
   return (
-    <div style={{ padding: "clamp(22px,3vw,32px)", borderRadius: "18px", background: "#FAFAFA", border: "1px solid rgba(0,0,0,0.07)", marginBottom: "20px" }}>
-      <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "19px", color: "#000000", marginBottom: "14px" }}>
+    <div style={{ padding: "clamp(22px,3vw,32px)", borderRadius: "18px", background: "var(--vdetail-card-alt)", border: "1px solid var(--vdetail-card-border)", marginBottom: "20px" }}>
+      <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "19px", color: "var(--text-primary)", marginBottom: "14px" }}>
         {section.heading}
       </h3>
       {section.body.map((block, i) => (
@@ -143,7 +144,7 @@ function ProposalSectionCard({ section, color, lightBg, border }: { section: Pro
       ))}
       {section.subs.map((sub, i) => (
         <div key={i} style={{ padding: "18px 20px", borderRadius: "14px", background: lightBg, border: `1px solid ${border}`, marginTop: i === 0 ? "6px" : "14px" }}>
-          <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "15px", color: "#111111", marginBottom: "10px" }}>
+          <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "15px", color: "var(--vdetail-strong)", marginBottom: "10px" }}>
             {sub.subheading}
           </h4>
           {sub.body.map((block, j) => (
@@ -159,7 +160,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
   const Icon = ICONS[v.id] ?? Boxes;
 
   return (
-    <div style={{ background: "#FFFFFF", position: "relative" }}>
+    <div style={{ background: "var(--bg-base)", position: "relative" }}>
       <PageGeometric />
 
       {/* ── Hero ──────────────────────────────────────────────────── */}
@@ -219,7 +220,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       </section>
 
       {/* ── Overview ──────────────────────────────────────────────── */}
-      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+      <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "var(--bg-base)", borderTop: "1px solid var(--vdetail-section-line)" }}>
         <div className="page-container">
           <div className="grid lg:grid-cols-2 gap-14 items-start">
             <FadeIn>
@@ -227,7 +228,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
               <SectionHeading>About {v.name}</SectionHeading>
               <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                 {v.overview.map((para, i) => (
-                  <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: "16px", lineHeight: 1.78, color: "#374151" }}>{para}</p>
+                  <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: "16px", lineHeight: 1.78, color: "var(--vdetail-body)" }}>{para}</p>
                 ))}
               </div>
             </FadeIn>
@@ -246,7 +247,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
                 {v.achievements.map((a, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
                     <CheckCircle2 size={15} style={{ color: v.color, flexShrink: 0, marginTop: "2px" }} />
-                    <span style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "#374151", lineHeight: 1.6 }}>{a}</span>
+                    <span style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--vdetail-body)", lineHeight: 1.6 }}>{a}</span>
                   </div>
                 ))}
               </div>
@@ -257,7 +258,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
 
       {/* ── Features / Why Choose Us ─────────────────────────────────── */}
       {v.features && v.features.length > 0 && (
-        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "var(--vdetail-surface-alt)", borderTop: "1px solid var(--vdetail-section-line)" }}>
           <div className="page-container">
             <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
               <SectionLabel>{v.featuresLabel ?? "Why Choose Us"}</SectionLabel>
@@ -266,12 +267,12 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" style={{ alignItems: "stretch" }}>
               {v.features.map((f, i) => (
                 <FadeIn key={f.title} delay={i * 0.06} className="flex flex-col">
-                  <div style={{ padding: "22px", borderRadius: "14px", background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 4px rgba(0,0,0,0.04)", flex: 1 }}>
+                  <div style={{ padding: "22px", borderRadius: "14px", background: "var(--bg-card)", border: "1px solid var(--vdetail-card-border)", boxShadow: "var(--vdetail-card-shadow)", flex: 1 }}>
                     <div style={{ width: "34px", height: "34px", borderRadius: "9px", background: v.lightBg, border: `1px solid ${v.border}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "14px" }}>
                       <CheckCircle2 size={15} style={{ color: v.color }} />
                     </div>
-                    <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "15px", color: "#000000", marginBottom: "8px" }}>{f.title}</h4>
-                    <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "#6B7280", lineHeight: 1.65 }}>{f.desc}</p>
+                    <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "15px", color: "var(--text-primary)", marginBottom: "8px" }}>{f.title}</h4>
+                    <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--text-muted)", lineHeight: 1.65 }}>{f.desc}</p>
                   </div>
                 </FadeIn>
               ))}
@@ -282,7 +283,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
 
       {/* ── Gallery (any vertical with media entries) ───────────────── */}
       {v.media && v.media.length > 0 && (
-        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "var(--vdetail-surface-alt)", borderTop: "1px solid var(--vdetail-section-line)" }}>
           <div className="page-container">
             <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
               <SectionLabel>In Action</SectionLabel>
@@ -291,8 +292,8 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {v.media.map((item, i) => (
                 <FadeIn key={item.src} delay={i * 0.06}>
-                  <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.07)", background: "#000", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
-                    <div style={{ position: "relative", aspectRatio: "4 / 3", background: "#0a0a0a" }}>
+                  <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid var(--vdetail-card-border)", background: "var(--bg-deep)", boxShadow: "var(--vdetail-media-shadow)" }}>
+                    <div style={{ position: "relative", aspectRatio: "4 / 3", background: "var(--vdetail-media-inner)" }}>
                       {item.type === "image" ? (
                         <Image src={item.src} alt={item.caption ?? `${v.name} media`} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" style={{ objectFit: "cover" }} />
                       ) : (
@@ -300,7 +301,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
                       )}
                     </div>
                     {item.caption && (
-                      <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "#374151", padding: "12px 14px", background: "#FFFFFF" }}>{item.caption}</p>
+                      <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--vdetail-body)", padding: "12px 14px", background: "var(--bg-card)" }}>{item.caption}</p>
                     )}
                   </div>
                 </FadeIn>
@@ -312,7 +313,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
 
       {/* ── CIE Studios Reel (only for cie-studios) ───────────────── */}
       {v.id === "cie-studios" && (
-        <section style={{ background: "#0a0a0a", padding: "clamp(32px,5vw,56px) 0" }}>
+        <section style={{ background: "var(--vdetail-reel-bg)", padding: "clamp(32px,5vw,56px) 0" }}>
           <div className="page-container">
             <div style={{ display: "flex", alignItems: "center", gap: "clamp(32px,6vw,80px)", flexWrap: "wrap", justifyContent: "center" }}>
               {/* Video */}
@@ -333,10 +334,10 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
               <FadeIn delay={0.15}>
                 <div style={{ maxWidth: "340px" }}>
                   <SectionLabel>Studio Reel</SectionLabel>
-                  <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(22px,3.5vw,38px)", color: "#FFFFFF", lineHeight: 1.15, marginTop: "16px", marginBottom: "20px" }}>
+                  <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "clamp(22px,3.5vw,38px)", color: "var(--white)", lineHeight: 1.15, marginTop: "16px", marginBottom: "20px" }}>
                     Behind the lens of CIE Studios
                   </h3>
-                  <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "rgba(255,255,255,0.55)", lineHeight: 1.75, marginBottom: "32px" }}>
+                  <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--vdetail-reel-text)", lineHeight: 1.75, marginBottom: "32px" }}>
                     Follow our Instagram channel for more updates, event highlights, and behind-the-scenes moments from CIE Studios.
                   </p>
                   <a
@@ -364,7 +365,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       )}
 
       {/* ── Roles ─────────────────────────────────────────────────── */}
-      {v.id !== "cie-studios" && v.roles.length > 0 && <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+      {v.id !== "cie-studios" && v.roles.length > 0 && <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "var(--vdetail-surface-alt)", borderTop: "1px solid var(--vdetail-section-line)" }}>
         <div className="page-container">
           <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
             <SectionLabel>Team Structure</SectionLabel>
@@ -373,12 +374,12 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" style={{ alignItems: "stretch" }}>
             {v.roles.map((role, i) => (
               <FadeIn key={role.title} delay={i * 0.06} className="flex flex-col">
-                <div style={{ padding: "22px", borderRadius: "14px", background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 4px rgba(0,0,0,0.04)", flex: 1 }}>
+                <div style={{ padding: "22px", borderRadius: "14px", background: "var(--bg-card)", border: "1px solid var(--vdetail-card-border)", boxShadow: "var(--vdetail-card-shadow)", flex: 1 }}>
                   <div style={{ width: "34px", height: "34px", borderRadius: "9px", background: v.lightBg, border: `1px solid ${v.border}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "14px" }}>
                     <Users size={15} style={{ color: v.color }} />
                   </div>
-                  <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "15px", color: "#000000", marginBottom: "8px" }}>{role.title}</h4>
-                  <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "#6B7280", lineHeight: 1.65 }}>{role.desc}</p>
+                  <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "15px", color: "var(--text-primary)", marginBottom: "8px" }}>{role.title}</h4>
+                  <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--text-muted)", lineHeight: 1.65 }}>{role.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -387,7 +388,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       </section>}
 
       {/* ── Projects ──────────────────────────────────────────────── */}
-      {v.projects.length > 0 && <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+      {v.projects.length > 0 && <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "var(--bg-base)", borderTop: "1px solid var(--vdetail-section-line)" }}>
         <div className="page-container">
           <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
             <SectionLabel>Work</SectionLabel>
@@ -398,18 +399,18 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
               const sc = STATUS_COLOR[proj.status] ?? STATUS_COLOR["Active"];
               return (
                 <FadeIn key={proj.name} delay={i * 0.05}>
-                  <div style={{ padding: "20px 24px", borderRadius: "14px", background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.07)", display: "flex", gap: "18px", alignItems: "flex-start", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+                  <div style={{ padding: "20px 24px", borderRadius: "14px", background: "var(--bg-card)", border: "1px solid var(--vdetail-card-border)", display: "flex", gap: "18px", alignItems: "flex-start", boxShadow: "var(--vdetail-proj-shadow)" }}>
                     <div style={{ width: "34px", height: "34px", borderRadius: "9px", background: v.lightBg, border: `1px solid ${v.border}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "2px" }}>
                       <Zap size={15} style={{ color: v.color }} />
                     </div>
                     <div style={{ flex: 1 }}>
                       <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px", flexWrap: "wrap" }}>
-                        <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "15px", color: "#000000" }}>{proj.name}</h4>
+                        <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "15px", color: "var(--text-primary)" }}>{proj.name}</h4>
                         <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: sc.text, background: sc.bg, padding: "2px 8px", borderRadius: "999px" }}>
                           {proj.status}
                         </span>
                       </div>
-                      <p style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "#6B7280", lineHeight: 1.6 }}>{proj.desc}</p>
+                      <p style={{ fontFamily: "var(--font-body)", fontSize: "13.5px", color: "var(--text-muted)", lineHeight: 1.6 }}>{proj.desc}</p>
                     </div>
                   </div>
                 </FadeIn>
@@ -421,14 +422,14 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
 
       {/* ── Proposal ─────────────────────────────────────────────── */}
       {v.proposal && (
-        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "var(--bg-base)", borderTop: "1px solid var(--vdetail-section-line)" }}>
           <div className="page-container">
             <FadeIn>
               <div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
                 <SectionLabel>Proposal</SectionLabel>
                 <SectionHeading>{v.proposal.title}</SectionHeading>
                 {v.proposal.subtitle.map((line, i) => (
-                  <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: "14.5px", color: "#6B7280", lineHeight: 1.6, marginTop: i === 0 ? "-16px" : "2px" }}>
+                  <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: "14.5px", color: "var(--text-muted)", lineHeight: 1.6, marginTop: i === 0 ? "-16px" : "2px" }}>
                     {line}
                   </p>
                 ))}
@@ -446,7 +447,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       )}
 
       {/* ── Events ────────────────────────────────────────────────── */}
-      {v.events.length > 0 && <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+      {v.events.length > 0 && <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "var(--vdetail-surface-alt)", borderTop: "1px solid var(--vdetail-section-line)" }}>
         <div className="page-container">
           <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
             <SectionLabel>Programming</SectionLabel>
@@ -455,17 +456,17 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
           <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-5">
             {v.events.map((ev, i) => (
               <FadeIn key={ev.name} delay={i * 0.07}>
-                <div style={{ padding: "22px", borderRadius: "14px", background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
+                <div style={{ padding: "22px", borderRadius: "14px", background: "var(--bg-card)", border: "1px solid var(--vdetail-card-border)", boxShadow: "var(--vdetail-card-shadow)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
                     <div style={{ width: "32px", height: "32px", borderRadius: "9px", background: v.lightBg, border: `1px solid ${v.border}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                       <Trophy size={14} style={{ color: v.color }} />
                     </div>
                     <div>
-                      <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "15px", color: "#000000", lineHeight: 1.2 }}>{ev.name}</h4>
+                      <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "15px", color: "var(--text-primary)", lineHeight: 1.2 }}>{ev.name}</h4>
                       <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 700, color: v.color, letterSpacing: "0.08em", textTransform: "uppercase" }}>{ev.type}</span>
                     </div>
                   </div>
-                  <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "#6B7280", lineHeight: 1.65 }}>{ev.desc}</p>
+                  <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--text-muted)", lineHeight: 1.65 }}>{ev.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -475,7 +476,7 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
 
       {/* ── Timeline ─────────────────────────────────────────────── */}
       {v.timeline && (
-        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+        <section style={{ paddingTop: "clamp(52px,8vw,96px)", paddingBottom: "clamp(52px,8vw,96px)", background: "var(--bg-base)", borderTop: "1px solid var(--vdetail-section-line)" }}>
           <div className="page-container">
             <FadeIn><div style={{ marginBottom: "clamp(32px,4vw,52px)" }}>
               <SectionLabel>{v.timelineLabel ?? "How It Works"}</SectionLabel>
@@ -483,19 +484,19 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
             </div></FadeIn>
             <div style={{ position: "relative" }}>
               {/* Vertical line */}
-              <div style={{ position: "absolute", left: "21px", top: "8px", bottom: "8px", width: "2px", background: `linear-gradient(to bottom, ${v.color}, ${v.color}44)`, borderRadius: "2px" }} />
+              <div style={{ position: "absolute", left: "21px", top: "8px", bottom: "8px", width: "2px", background: `linear-gradient(to bottom, ${v.color}, color-mix(in srgb, ${v.color} 27%, transparent))`, borderRadius: "2px" }} />
               <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
                 {v.timeline.map((item, i) => (
                   <FadeIn key={item.step} delay={i * 0.07}>
                     <div style={{ display: "flex", gap: "28px", alignItems: "flex-start", paddingBottom: i < v.timeline!.length - 1 ? "36px" : "0" }}>
                       {/* Circle */}
-                      <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: v.lightBg, border: `2px solid ${v.color}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, zIndex: 1, backgroundColor: "#fff" }}>
+                      <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: v.lightBg, border: `2px solid ${v.color}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, zIndex: 1, backgroundColor: "var(--bg-card)" }}>
                         <span style={{ fontFamily: "var(--font-heading)", fontWeight: 900, fontSize: "11px", color: v.color, letterSpacing: "0.04em" }}>{item.step}</span>
                       </div>
                       {/* Content */}
                       <div style={{ paddingTop: "8px", flex: 1 }}>
-                        <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "16px", color: "#000000", marginBottom: "6px" }}>{item.title}</h4>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "#6B7280", lineHeight: 1.7 }}>{item.desc}</p>
+                        <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "16px", color: "var(--text-primary)", marginBottom: "6px" }}>{item.title}</h4>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--text-muted)", lineHeight: 1.7 }}>{item.desc}</p>
                       </div>
                     </div>
                   </FadeIn>
@@ -507,12 +508,12 @@ export default function VerticalDetailClient({ vertical: v }: { vertical: Vertic
       )}
 
       {/* ── Footer nav ────────────────────────────────────────────── */}
-      <section style={{ paddingTop: "40px", paddingBottom: "40px", background: "#F9FAFB", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
+      <section style={{ paddingTop: "40px", paddingBottom: "40px", background: "var(--vdetail-footer-bg)", borderTop: "1px solid var(--border-light)" }}>
         <div className="page-container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
-          <Link href="/verticals" style={{ display: "inline-flex", alignItems: "center", gap: "7px", fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "13px", color: "#6B7280", textDecoration: "none" }}>
+          <Link href="/verticals" style={{ display: "inline-flex", alignItems: "center", gap: "7px", fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "13px", color: "var(--text-muted)", textDecoration: "none" }}>
             <ArrowLeft size={14} /> Back to Verticals
           </Link>
-          <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#9CA3AF" }}>
+          <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--text-faint)" }}>
             CIE · MLRIT · {v.name}
           </span>
         </div>

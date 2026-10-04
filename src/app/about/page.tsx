@@ -7,18 +7,63 @@ import PageHero from "@/components/layout/PageHero";
 import PageGeometric from "@/components/ui/PageGeometric";
 
 /* ─── Design tokens ──────────────────────────────────────────────── */
-const ORANGE   = "#E8521A";
-const T_HEAD   = "#000000";
-const T_BODY   = "#374151";
-const T_MUTED  = "#6B7280";
+const ORANGE   = "var(--orange)";
+const T_HEAD   = "var(--text-primary)";
+const T_BODY   = "var(--about-body)";
+const T_MUTED  = "var(--text-muted)";
 
 const SECTION_PY: React.CSSProperties = {
   paddingTop:    "clamp(52px, 8vw, 96px)",
   paddingBottom: "clamp(52px, 8vw, 96px)",
 };
 
-const BG_WHITE = "#FFFFFF";
-const BG_GRAY  = "#F5F5F5";
+const BG_WHITE = "var(--bg-base)";
+const BG_GRAY  = "var(--about-bg-alt)";
+
+const ABOUT_THEME_CSS = `
+:root {
+  --about-body: rgba(244,245,250,0.72);
+  --about-bg-alt: #1C1D26;
+  --about-blob-opacity: 0.10;
+  --about-icon-bg: rgba(116,132,254,0.122);
+  --about-step-bg: rgba(116,132,254,0.122);
+  --about-step-text: #A5AFFE;
+  --about-step-border: rgba(116,132,254,0.22);
+  --about-table-line: rgba(255,255,255,0.08);
+  --about-table-bg: #22232E;
+  --about-table-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --about-thead-bg: #1C1D26;
+  --about-row-line: rgba(255,255,255,0.06);
+  --about-row-hover: rgba(116,132,254,0.06);
+  --about-tag-text: #A5AFFE;
+  --about-tag-border: rgba(116,132,254,0.22);
+  --about-cta-bg: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(116,132,254,0.14) 0%, transparent 70%), #0F1016;
+  --about-cta-tag-bg: rgba(116,132,254,0.122);
+  --about-cta-tag-border: 1px solid rgba(116,132,254,0.22);
+  --about-cta-text: rgba(244,245,250,0.72);
+}
+:root[data-theme="light"] {
+  --about-body: #374151;
+  --about-bg-alt: #F5F5F5;
+  --about-blob-opacity: 0.05;
+  --about-icon-bg: rgba(232,82,26,0.071);
+  --about-step-bg: #E8521A;
+  --about-step-text: #FFFFFF;
+  --about-step-border: transparent;
+  --about-table-line: #E5E7EB;
+  --about-table-bg: transparent;
+  --about-table-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  --about-thead-bg: #F9FAFB;
+  --about-row-line: #F3F4F6;
+  --about-row-hover: #FFF7F5;
+  --about-tag-text: #E8521A;
+  --about-tag-border: rgba(232,82,26,0.188);
+  --about-cta-bg: #0A0A0A;
+  --about-cta-tag-bg: rgba(232,82,26,0.094);
+  --about-cta-tag-border: none;
+  --about-cta-text: #9CA3AF;
+}
+`;
 
 /* ─── FadeIn helper ──────────────────────────────────────────────── */
 function FadeIn({
@@ -104,14 +149,14 @@ const visionMission = [
   {
     icon: Eye,
     title: "Our Vision",
-    accent: `${ORANGE}10`,
+    accent: "rgba(var(--primary-rgb), 0.063)",
     content:
       "To create a student culture where innovation is not limited to competitions or special occasions. We want students to explore ideas regularly, work on meaningful projects, learn practical skills, and develop the confidence to create something of their own — becoming better problem-solvers, builders, collaborators, and leaders through the experiences they gain at CIE.",
   },
   {
     icon: Target,
     title: "Our Mission",
-    accent: `${ORANGE}10`,
+    accent: "rgba(var(--primary-rgb), 0.063)",
     content:
       "Our mission is to make learning more practical, collaborative, and student-driven. We create opportunities for students to work on projects, explore technology, develop products, participate in workshops, organise events, understand entrepreneurship, and learn how teams work in real situations. Most importantly, we want students to feel comfortable starting before they feel completely ready — because that is often where real learning begins.",
   },
@@ -297,6 +342,7 @@ const faculty: FacultyMember[] = [
 export default function AboutPage() {
   return (
     <div style={{ background: BG_WHITE, position: "relative" }}>
+      <style>{ABOUT_THEME_CSS}</style>
       <PageGeometric />
 
       <PageHero
@@ -363,7 +409,7 @@ export default function AboutPage() {
                     className="absolute top-0 right-0 rounded-full pointer-events-none"
                     style={{
                       width: "130px", height: "130px",
-                      background: ORANGE, opacity: 0.05,
+                      background: ORANGE, opacity: "var(--about-blob-opacity)",
                       transform: "translate(35%, -35%)",
                     }}
                   />
@@ -371,7 +417,7 @@ export default function AboutPage() {
                   <div
                     style={{
                       width: "52px", height: "52px", borderRadius: "14px",
-                      background: `${ORANGE}12`,
+                      background: "var(--about-icon-bg)",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       marginBottom: "24px",
                     }}
@@ -420,7 +466,7 @@ export default function AboutPage() {
                   <span
                     style={{
                       width: "32px", height: "32px", borderRadius: "50%",
-                      background: ORANGE, color: "#FFFFFF",
+                      background: "var(--about-step-bg)", color: "var(--about-step-text)", border: "1px solid var(--about-step-border)",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       fontFamily: "var(--font-heading)", fontWeight: 900,
                       fontSize: "12px", flexShrink: 0,
@@ -460,7 +506,7 @@ export default function AboutPage() {
                   <div
                     style={{
                       width: "44px", height: "44px", borderRadius: "12px",
-                      background: `${ORANGE}0f`,
+                      background: "rgba(var(--primary-rgb), 0.059)",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       marginBottom: "18px",
                     }}
@@ -508,7 +554,7 @@ export default function AboutPage() {
                   <div
                     style={{
                       width: "44px", height: "44px", borderRadius: "12px",
-                      background: `${ORANGE}0f`,
+                      background: "rgba(var(--primary-rgb), 0.059)",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       marginBottom: "18px",
                     }}
@@ -546,10 +592,10 @@ export default function AboutPage() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <div style={{ overflowX: "auto", borderRadius: "16px", border: "1px solid #E5E7EB", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
+            <div style={{ overflowX: "auto", borderRadius: "16px", border: "1px solid var(--about-table-line)", background: "var(--about-table-bg)", boxShadow: "var(--about-table-shadow)" }}>
               <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "var(--font-body)", fontSize: "14px" }}>
                 <thead>
-                  <tr style={{ background: "#F9FAFB", borderBottom: "1px solid #E5E7EB" }}>
+                  <tr style={{ background: "var(--about-thead-bg)", borderBottom: "1px solid var(--about-table-line)" }}>
                     {["S.No", "Startup / Venture", "Founder(s)", "DPIIT Certificate No."].map((h) => (
                       <th key={h} style={{ padding: "14px 20px", textAlign: "left", fontWeight: 700, fontSize: "12px", letterSpacing: "0.06em", textTransform: "uppercase", color: T_MUTED, whiteSpace: "nowrap" }}>
                         {h}
@@ -571,14 +617,14 @@ export default function AboutPage() {
                     { no: 10, name: "Drones Origin Private Limited",          founders: "Abrar Ahmed",                                     cert: "DIPP104449" },
                   ].map((row, i) => (
                     <tr key={row.no}
-                      style={{ borderBottom: i < 9 ? "1px solid #F3F4F6" : "none", transition: "background 0.15s ease" }}
-                      onMouseEnter={e => (e.currentTarget.style.background = "#FFF7F5")}
+                      style={{ borderBottom: i < 9 ? "1px solid var(--about-row-line)" : "none", transition: "background 0.15s ease" }}
+                      onMouseEnter={e => (e.currentTarget.style.background = "var(--about-row-hover)")}
                       onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
                       <td style={{ padding: "16px 20px", color: T_MUTED, fontWeight: 600, fontSize: "13px", width: "60px" }}>{row.no}</td>
                       <td style={{ padding: "16px 20px", color: T_HEAD, fontWeight: 600, lineHeight: 1.4 }}>{row.name}</td>
                       <td style={{ padding: "16px 20px", color: T_BODY, lineHeight: 1.5 }}>{row.founders}</td>
                       <td style={{ padding: "16px 20px", whiteSpace: "nowrap" }}>
-                        <span style={{ display: "inline-block", background: `${ORANGE}12`, color: ORANGE, border: `1px solid ${ORANGE}30`, borderRadius: "8px", padding: "3px 10px", fontSize: "12px", fontWeight: 700, letterSpacing: "0.04em" }}>
+                        <span style={{ display: "inline-block", background: "rgba(var(--primary-rgb), 0.071)", color: "var(--about-tag-text)", border: "1px solid var(--about-tag-border)", borderRadius: "8px", padding: "3px 10px", fontSize: "12px", fontWeight: 700, letterSpacing: "0.04em" }}>
                           {row.cert}
                         </span>
                       </td>
@@ -603,10 +649,10 @@ export default function AboutPage() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <div style={{ overflowX: "auto", borderRadius: "16px", border: "1px solid #E5E7EB", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
+            <div style={{ overflowX: "auto", borderRadius: "16px", border: "1px solid var(--about-table-line)", background: "var(--about-table-bg)", boxShadow: "var(--about-table-shadow)" }}>
               <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "var(--font-body)", fontSize: "14px" }}>
                 <thead>
-                  <tr style={{ background: "#F9FAFB", borderBottom: "1px solid #E5E7EB" }}>
+                  <tr style={{ background: "var(--about-thead-bg)", borderBottom: "1px solid var(--about-table-line)" }}>
                     {["S.No", "Name", "Designation", "Department", "Expertise"].map((h) => (
                       <th key={h} style={{ padding: "14px 20px", textAlign: "left", fontWeight: 700, fontSize: "12px", letterSpacing: "0.06em", textTransform: "uppercase", color: T_MUTED, whiteSpace: "nowrap" }}>
                         {h}
@@ -617,15 +663,15 @@ export default function AboutPage() {
                 <tbody>
                   {faculty.map((member, i) => (
                     <tr key={member.name}
-                      style={{ borderBottom: i < faculty.length - 1 ? "1px solid #F3F4F6" : "none", transition: "background 0.15s ease" }}
-                      onMouseEnter={e => (e.currentTarget.style.background = "#FFF7F5")}
+                      style={{ borderBottom: i < faculty.length - 1 ? "1px solid var(--about-row-line)" : "none", transition: "background 0.15s ease" }}
+                      onMouseEnter={e => (e.currentTarget.style.background = "var(--about-row-hover)")}
                       onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
                       <td style={{ padding: "16px 20px", color: T_MUTED, fontWeight: 600, fontSize: "13px", width: "60px" }}>{i + 1}</td>
                       <td style={{ padding: "16px 20px", color: T_HEAD, fontWeight: 600, lineHeight: 1.4, whiteSpace: "nowrap" }}>{member.name}</td>
                       <td style={{ padding: "16px 20px", color: T_BODY, lineHeight: 1.5, whiteSpace: "nowrap" }}>{member.designation}</td>
                       <td style={{ padding: "16px 20px", color: T_BODY, lineHeight: 1.5 }}>{member.dept}</td>
                       <td style={{ padding: "16px 20px", whiteSpace: "nowrap" }}>
-                        <span style={{ display: "inline-block", background: `${ORANGE}12`, color: ORANGE, border: `1px solid ${ORANGE}30`, borderRadius: "8px", padding: "3px 10px", fontSize: "12px", fontWeight: 700, letterSpacing: "0.02em" }}>
+                        <span style={{ display: "inline-block", background: "rgba(var(--primary-rgb), 0.071)", color: "var(--about-tag-text)", border: "1px solid var(--about-tag-border)", borderRadius: "8px", padding: "3px 10px", fontSize: "12px", fontWeight: 700, letterSpacing: "0.02em" }}>
                           {member.expertise}
                         </span>
                       </td>
@@ -639,10 +685,10 @@ export default function AboutPage() {
       </section>
 
       {/* ── Closing CTA ───────────────────────────────────────────── */}
-      <section style={{ background: "#0A0A0A", ...SECTION_PY }}>
+      <section style={{ background: "var(--about-cta-bg)", ...SECTION_PY }}>
         <div className="page-container text-center">
           <FadeIn>
-            <span className="section-tag" style={{ background: `${ORANGE}18`, color: ORANGE, border: "none" }}>
+            <span className="section-tag" style={{ background: "var(--about-cta-tag-bg)", color: "var(--about-tag-text)", border: "var(--about-cta-tag-border)" }}>
               Why Join CIE?
             </span>
             <h2
@@ -652,7 +698,7 @@ export default function AboutPage() {
                 fontSize: "clamp(28px, 4.5vw, 52px)",
                 letterSpacing: "-0.03em",
                 lineHeight: 1.12,
-                color: "#FFFFFF",
+                color: "var(--white)",
                 marginTop: "14px",
                 maxWidth: "760px",
                 marginLeft: "auto",
@@ -665,7 +711,7 @@ export default function AboutPage() {
               style={{
                 fontSize: "clamp(15px,1.4vw,17px)",
                 lineHeight: 1.8,
-                color: "#9CA3AF",
+                color: "var(--about-cta-text)",
                 maxWidth: "620px",
                 margin: "20px auto 0",
               }}

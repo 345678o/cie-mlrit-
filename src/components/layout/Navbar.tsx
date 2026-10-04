@@ -26,6 +26,68 @@ const SOCIALS = [
   { label: "Twitter",   href: "https://x.com/ciemlrit?s=20" },
 ];
 
+/* ─── Theme tokens ──────────────────────────────────────────────
+   Dark (default) = Equinox look; light = the original orange site.
+   The pill stays dark glass in both themes (as it always was).   */
+const NAV_THEME_CSS = `
+:root {
+  --nav-link: rgba(244,245,250,0.58);
+  --nav-link-hover: #A5AFFE;
+  --nav-link-active: #F4F5FA;
+  --nav-dot: #33FF67;
+  --nav-dot-glow: 0 0 6px rgba(51,255,103,0.7);
+  --nav-dot-glow-lg: 0 0 8px rgba(51,255,103,0.7);
+  --nav-underline: #7484FE;
+  --nav-pill-bg: linear-gradient(135deg, rgba(116,132,254,0.10) 0%, rgba(255,255,255,0.02) 45%, rgba(116,132,254,0.05) 100%), rgba(22,23,29,0.72);
+  --nav-pill-bg-scrolled: linear-gradient(135deg, rgba(116,132,254,0.10) 0%, rgba(255,255,255,0.02) 45%, rgba(116,132,254,0.05) 100%), rgba(22,23,29,0.86);
+  --nav-pill-border: rgba(255,255,255,0.08);
+  --nav-pill-shadow: 0 6px 30px rgba(0,0,0,0.28), 0 1px 4px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.10), inset 0 -1px 0 rgba(0,0,0,0.26);
+  --nav-pill-shadow-scrolled: 0 10px 44px rgba(0,0,0,0.42), 0 2px 8px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.10), inset 0 -1px 0 rgba(0,0,0,0.30);
+  --nav-drawer-bg: radial-gradient(ellipse 70% 45% at 50% 0%, rgba(116,132,254,0.16) 0%, transparent 70%), #16171D;
+  --nav-drawer-line: rgba(255,255,255,0.08);
+  --nav-drawer-line-item: rgba(255,255,255,0.08);
+  --nav-drawer-logo: #F4F5FA;
+  --nav-drawer-tag: rgba(244,245,250,0.38);
+  --nav-drawer-link: #F4F5FA;
+  --nav-drawer-link-active: #A5AFFE;
+  --nav-drawer-link-hover: #A5AFFE;
+  --nav-drawer-social: rgba(244,245,250,0.58);
+  --nav-drawer-social-hover: #A5AFFE;
+  --nav-drawer-foot: rgba(244,245,250,0.38);
+}
+:root[data-theme="light"] {
+  --nav-link: rgba(255,255,255,0.50);
+  --nav-link-hover: #FFFFFF;
+  --nav-link-active: #FFFFFF;
+  --nav-dot: #E8521A;
+  --nav-dot-glow: none;
+  --nav-dot-glow-lg: none;
+  --nav-underline: rgba(255,255,255,0.60);
+  --nav-pill-bg: linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.08) 100%), rgba(12,12,14,0.86);
+  --nav-pill-bg-scrolled: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 45%, rgba(255,255,255,0.07) 100%), rgba(10,10,12,0.90);
+  --nav-pill-border: rgba(255,255,255,0.14);
+  --nav-pill-shadow: 0 6px 30px rgba(0,0,0,0.28), 0 1px 4px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.24), inset 0 -1px 0 rgba(0,0,0,0.26);
+  --nav-pill-shadow-scrolled: 0 10px 44px rgba(0,0,0,0.42), 0 2px 8px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.22), inset 0 -1px 0 rgba(0,0,0,0.30);
+  --nav-drawer-bg: #FAFAF9;
+  --nav-drawer-line: rgba(0,0,0,0.06);
+  --nav-drawer-line-item: rgba(0,0,0,0.055);
+  --nav-drawer-logo: #111111;
+  --nav-drawer-tag: rgba(0,0,0,0.28);
+  --nav-drawer-link: #0A0A0A;
+  --nav-drawer-link-active: rgba(0,0,0,0.22);
+  --nav-drawer-link-hover: rgba(0,0,0,0.4);
+  --nav-drawer-social: rgba(0,0,0,0.28);
+  --nav-drawer-social-hover: #000000;
+  --nav-drawer-foot: rgba(0,0,0,0.18);
+}
+/* Theme toggle: sits after the desktop separator; on phones/tablets it
+   sits just left of the hamburger. */
+.nav-theme-toggle { display: flex; align-items: center; flex-shrink: 0; }
+@media (max-width: 1023px) {
+  .nav-theme-toggle { margin-right: 8px; }
+}
+`;
+
 /* ─── Desktop nav link ─────────────────────────────────────── */
 function NavLink({
   item,
@@ -47,7 +109,7 @@ function NavLink({
         fontWeight: isActive ? 600 : 400,
         fontSize: "13px",
         letterSpacing: "0.01em",
-        color: isActive ? "#FFFFFF" : hov ? "#FFFFFF" : "rgba(255,255,255,0.50)",
+        color: isActive ? "var(--nav-link-active)" : hov ? "var(--nav-link-hover)" : "var(--nav-link)",
         textDecoration: "none",
         paddingBottom: "6px",
         display: "inline-block",
@@ -67,7 +129,8 @@ function NavLink({
           width: "3.5px",
           height: "3.5px",
           borderRadius: "50%",
-          background: "#E8521A",
+          background: "var(--nav-dot)",
+          boxShadow: "var(--nav-dot-glow)",
           opacity: isActive ? 1 : 0,
           transition: "opacity 0.2s ease",
           pointerEvents: "none",
@@ -85,7 +148,7 @@ function NavLink({
           left: 0,
           right: 0,
           height: "1px",
-          background: "rgba(255,255,255,0.60)",
+          background: "var(--nav-underline)",
           display: "block",
           transformOrigin: "left",
           pointerEvents: "none",
@@ -135,6 +198,7 @@ export default function Navbar() {
 
   return (
     <>
+      <style>{NAV_THEME_CSS}</style>
       {/* ══════════════════════════════════════════════════════
           Floating pill
       ══════════════════════════════════════════════════════ */}
@@ -169,15 +233,15 @@ export default function Navbar() {
             alignItems: "center",
             width: "100%",
             background: scrolled
-              ? "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 45%, rgba(255,255,255,0.07) 100%), rgba(10,10,12,0.90)"
-              : "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.08) 100%), rgba(12,12,14,0.86)",
+              ? "var(--nav-pill-bg-scrolled)"
+              : "var(--nav-pill-bg)",
             backdropFilter: "blur(20px) saturate(150%)",
             WebkitBackdropFilter: "blur(20px) saturate(150%)",
-            border: "1px solid rgba(255,255,255,0.14)",
+            border: "1px solid var(--nav-pill-border)",
             borderRadius: "9999px",
             boxShadow: scrolled
-              ? "0 10px 44px rgba(0,0,0,0.42), 0 2px 8px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.22), inset 0 -1px 0 rgba(0,0,0,0.30)"
-              : "0 6px 30px rgba(0,0,0,0.28), 0 1px 4px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.24), inset 0 -1px 0 rgba(0,0,0,0.26)",
+              ? "var(--nav-pill-shadow-scrolled)"
+              : "var(--nav-pill-shadow)",
             /* Compact padding when scrolled */
             padding: scrolled ? "5px 5px 5px 18px" : "7px 7px 7px 22px",
             gap: 0,
@@ -202,7 +266,7 @@ export default function Navbar() {
                 fontWeight: 800,
                 fontSize: scrolled ? "17px" : "19px",
                 letterSpacing: "-0.04em",
-                color: "#FFFFFF",
+                color: "var(--nav-link-active)",
                 lineHeight: 1,
                 transition: "font-size 0.4s ease",
               }}
@@ -214,7 +278,7 @@ export default function Navbar() {
                 fontFamily: "var(--font-heading)",
                 fontWeight: 800,
                 fontSize: scrolled ? "19px" : "21px",
-                color: "#E8521A",
+                color: "var(--nav-dot)",
                 lineHeight: 1,
                 transition: "font-size 0.4s ease",
               }}
@@ -255,6 +319,9 @@ export default function Navbar() {
             }}
           />
 
+          {/* Theme toggle hidden for now — site stays on the Equinox (dark) theme.
+              Restore <ThemeToggle /> here and the init script in layout.tsx to bring back light mode. */}
+
           {/* ── Hamburger — phones only (< 768px) ─────────────── */}
           <div className="nav-hamburger" style={{ display: "flex", flexShrink: 0 }}>
             <motion.button
@@ -267,9 +334,9 @@ export default function Navbar() {
                 height: "42px",
                 borderRadius: "12px",
                 border: open
-                  ? "1.5px solid #E8521A"
+                  ? "1.5px solid var(--orange)"
                   : "1.5px solid rgba(255,255,255,0.14)",
-                background: open ? "#E8521A" : "rgba(255,255,255,0.08)",
+                background: open ? "var(--orange)" : "rgba(255,255,255,0.08)",
                 cursor: "pointer",
                 display: "flex",
                 flexDirection: "column",
@@ -277,7 +344,7 @@ export default function Navbar() {
                 justifyContent: "center",
                 gap: "5px",
                 boxShadow: open
-                  ? "0 0 16px rgba(232,82,26,0.40)"
+                  ? "0 0 16px rgba(var(--primary-rgb),0.40)"
                   : "none",
                 transition: "background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease",
               }}
@@ -351,7 +418,7 @@ export default function Navbar() {
               position: "fixed",
               inset: 0,
               zIndex: 99,
-              background: "#FAFAF9",
+              background: "var(--nav-drawer-bg)",
               overflow: "hidden",
             }}
           >
@@ -372,7 +439,7 @@ export default function Navbar() {
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: "16px clamp(20px, 5vw, 48px)",
-                borderBottom: "1px solid rgba(0,0,0,0.06)",
+                borderBottom: "1px solid var(--nav-drawer-line)",
                 flexShrink: 0,
               }}
             >
@@ -381,15 +448,15 @@ export default function Navbar() {
                 onClick={() => setOpen(false)}
                 style={{ display: "inline-flex", alignItems: "baseline", textDecoration: "none" }}
               >
-                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "19px", letterSpacing: "-0.04em", color: "#111111" }}>
+                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "19px", letterSpacing: "-0.04em", color: "var(--nav-drawer-logo)" }}>
                   CIE
                 </span>
-                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "21px", color: "#E8521A" }}>.</span>
+                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "21px", color: "var(--nav-dot)" }}>.</span>
               </Link>
               <span style={{
                 fontFamily: "var(--font-body)", fontSize: "11px",
                 fontWeight: 600, letterSpacing: "0.08em",
-                textTransform: "uppercase", color: "rgba(0,0,0,0.28)",
+                textTransform: "uppercase", color: "var(--nav-drawer-tag)",
               }}>
                 CIE · MLRIT
               </span>
@@ -416,7 +483,7 @@ export default function Navbar() {
                     duration: 0.38,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  style={{ borderBottom: "1px solid rgba(0,0,0,0.055)" }}
+                  style={{ borderBottom: "1px solid var(--nav-drawer-line-item)" }}
                 >
                   <Link
                     href={item.href}
@@ -430,18 +497,18 @@ export default function Navbar() {
                       fontWeight: 800,
                       fontSize: "clamp(20px, 5vw, 42px)",
                       letterSpacing: "-0.03em",
-                      color: pathname === item.href ? "rgba(0,0,0,0.22)" : "#0A0A0A",
+                      color: pathname === item.href ? "var(--nav-drawer-link-active)" : "var(--nav-drawer-link)",
                       textDecoration: "none",
                       padding: "clamp(8px, 1.4vh, 15px) 0",
                       transition: "color 0.15s ease",
                     }}
                     onMouseEnter={(e) => {
                       if (pathname !== item.href)
-                        (e.currentTarget as HTMLAnchorElement).style.color = "rgba(0,0,0,0.4)";
+                        (e.currentTarget as HTMLAnchorElement).style.color = "var(--nav-drawer-link-hover)";
                     }}
                     onMouseLeave={(e) => {
                       (e.currentTarget as HTMLAnchorElement).style.color =
-                        pathname === item.href ? "rgba(0,0,0,0.22)" : "#0A0A0A";
+                        pathname === item.href ? "var(--nav-drawer-link-active)" : "var(--nav-drawer-link)";
                     }}
                   >
                     {item.label}
@@ -451,7 +518,8 @@ export default function Navbar() {
                           width: "6px",
                           height: "6px",
                           borderRadius: "50%",
-                          background: "#E8521A",
+                          background: "var(--nav-dot)",
+                          boxShadow: "var(--nav-dot-glow-lg)",
                           flexShrink: 0,
                         }}
                       />
@@ -468,7 +536,7 @@ export default function Navbar() {
               transition={{ delay: 0.44, duration: 0.3 }}
               style={{
                 padding: "14px clamp(20px, 5vw, 56px)",
-                borderTop: "1px solid rgba(0,0,0,0.06)",
+                borderTop: "1px solid var(--nav-drawer-line)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -490,15 +558,15 @@ export default function Navbar() {
                       fontWeight: 600,
                       letterSpacing: "0.10em",
                       textTransform: "uppercase",
-                      color: "rgba(0,0,0,0.28)",
+                      color: "var(--nav-drawer-social)",
                       textDecoration: "none",
                       transition: "color 0.18s",
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLAnchorElement).style.color = "#000000";
+                      (e.currentTarget as HTMLAnchorElement).style.color = "var(--nav-drawer-social-hover)";
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLAnchorElement).style.color = "rgba(0,0,0,0.28)";
+                      (e.currentTarget as HTMLAnchorElement).style.color = "var(--nav-drawer-social)";
                     }}
                   >
                     {s.label}
@@ -511,7 +579,7 @@ export default function Navbar() {
                   fontSize: "9.5px",
                   letterSpacing: "0.10em",
                   textTransform: "uppercase",
-                  color: "rgba(0,0,0,0.18)",
+                  color: "var(--nav-drawer-foot)",
                 }}
               >
                 CIE · MLRIT
