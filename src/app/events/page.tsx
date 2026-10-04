@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Calendar } from "lucide-react";
 import { getGrainDataUri } from "@/lib/grain";
+import ArcHero from "@/components/layout/ArcHero";
 
 const GRAIN = getGrainDataUri(0.85);
 
@@ -16,18 +17,6 @@ const GRAIN = getGrainDataUri(0.85);
 const EV_THEME_CSS = `
 :root {
   --ev-page-bg: #16171D;
-  --ev-hero-bg: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(116,132,254,0.38) 0%, rgba(116,132,254,0.10) 45%, transparent 75%), radial-gradient(ellipse 40% 45% at 100% 100%, rgba(51,255,103,0.10) 0%, transparent 70%), radial-gradient(ellipse 35% 40% at 0% 100%, rgba(51,255,103,0.06) 0%, transparent 70%), #16171D;
-  --ev-hero-grain-opacity: 0.05;
-  --ev-hero-grain-blend: overlay;
-  --ev-hero-ring-a: #7484FE;
-  --ev-hero-ring-b: #33FF67;
-  --ev-hero-ring-a-opacity: 0.14;
-  --ev-hero-ring-b-opacity: 0.10;
-  --ev-hero-watermark: rgba(255,255,255,0.03);
-  --ev-hero-fg: #F4F5FA;
-  --ev-hero-outline: rgba(165,175,254,0.85);
-  --ev-hero-script: #A5AFFE;
-  --ev-hero-desc: rgba(244,245,250,0.72);
   --ev-label-bg: #1C1D26;
   --ev-label-line: rgba(255,255,255,0.08);
   --ev-label-gallery: rgba(244,245,250,0.38);
@@ -45,18 +34,6 @@ const EV_THEME_CSS = `
 }
 :root[data-theme="light"] {
   --ev-page-bg: #0A0A0A;
-  --ev-hero-bg: #E8521A;
-  --ev-hero-grain-opacity: 0.06;
-  --ev-hero-grain-blend: normal;
-  --ev-hero-ring-a: rgba(255,255,255,1);
-  --ev-hero-ring-b: rgba(255,255,255,1);
-  --ev-hero-ring-a-opacity: 0.10;
-  --ev-hero-ring-b-opacity: 0.08;
-  --ev-hero-watermark: rgba(0,0,0,0.06);
-  --ev-hero-fg: #FFFFFF;
-  --ev-hero-outline: rgba(255,255,255,0.80);
-  --ev-hero-script: rgba(255,255,255,0.90);
-  --ev-hero-desc: rgba(255,255,255,0.72);
   --ev-label-bg: #0D0D0D;
   --ev-label-line: rgba(255,255,255,0.06);
   --ev-label-gallery: rgba(255,255,255,0.18);
@@ -71,12 +48,6 @@ const EV_THEME_CSS = `
   --ev-cta-btn-shadow: none;
   --ev-cta-ghost-fg: rgba(255,255,255,0.5);
   --ev-cta-ghost-border: rgba(255,255,255,0.10);
-}
-/* "HAPPEN" is gradient text in dark; plain white in light (as originally). */
-:root[data-theme="light"] .ev-happen {
-  background: none;
-  -webkit-text-fill-color: currentColor;
-  color: #FFFFFF;
 }
 `;
 
@@ -260,6 +231,13 @@ const FEATURED: EventData[] = [
       { img: "/events/drive-download-20260628T203409Z-3-001/Metaloop/DSC_0577.webp", grad: "linear-gradient(145deg,#0c0606 0%,#2d1212 55%,#991b1b 100%)", heading: "", body: "" },
     ],
   },
+];
+
+/* Hero stats come straight from the list above, so they never drift. */
+const NEXT_EVENT = FEATURED.find((ev) => ev.upcoming);
+const HERO_STATS = [
+  { v: String(FEATURED.length), l: "Flagship Events" },
+  ...(NEXT_EVENT ? [{ v: NEXT_EVENT.date.replace(/,\s*\d{4}$/, ""), l: `Next: ${NEXT_EVENT.slides[0]?.heading || NEXT_EVENT.category}` }] : []),
 ];
 
 /* ─── Event schema JSON-LD ──────────────────────────────────── */
@@ -762,28 +740,13 @@ function EventSection({ ev, index = 0 }: { ev: EventData; index?: number }) {
 ═══════════════════════════════════════════════════════════════ */
 export default function EventsPage() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const heroRef      = useRef<HTMLDivElement>(null);
+  const heroRef      = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(".eh-line",
-        { yPercent: 116, opacity: 0 },
-        { yPercent: 0, opacity: 1, duration: 1.1, stagger: 0.1, ease: "power3.out", delay: 0.1 }
-      );
-      gsap.fromTo(".eh-meta",
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.9, delay: 0.5, ease: "power2.out" }
-      );
-      gsap.to(".eh-bg", {
-        yPercent: 28, ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top", end: "bottom top", scrub: 1,
-        },
-      });
       gsap.utils.toArray<HTMLElement>(".cat-item").forEach((el, i) => {
         gsap.fromTo(el,
           { opacity: 0, y: 16 },
@@ -811,86 +774,19 @@ export default function EventsPage() {
     <div ref={containerRef} style={{ background: "var(--ev-page-bg)", marginTop: "calc(-1 * var(--nav-height))" }}>
       <style>{EV_THEME_CSS}</style>
 
-      {/* ══ HERO ══ */}
-      <section
-        ref={heroRef}
-        className="hero-shrink-mobile"
-        style={{
-          position: "relative", overflow: "hidden",
-          minHeight: "72vh", display: "flex", flexDirection: "column",
-          justifyContent: "center", paddingTop: "var(--nav-height)",
-        }}
-      >
-        <div className="eh-bg" style={{
-          position: "absolute", inset: "-14%",
-          background: "var(--ev-hero-bg)", willChange: "transform",
-        }}>
-          <div style={{ position: "absolute", inset: 0, backgroundImage: GRAIN, opacity: "var(--ev-hero-grain-opacity)", mixBlendMode: "var(--ev-hero-grain-blend)" as unknown as React.CSSProperties["mixBlendMode"] }} />
-        </div>
-
-        <svg aria-hidden style={{ position: "absolute", top: "-18%", right: "-10%", width: "52vw", height: "52vw", maxWidth: 580, maxHeight: 580, opacity: "var(--ev-hero-ring-a-opacity)", pointerEvents: "none" }} viewBox="0 0 580 580" fill="none">
-          <circle cx="290" cy="290" r="265" strokeWidth="80" fill="none" style={{ stroke: "var(--ev-hero-ring-a)" }} />
-        </svg>
-        <svg aria-hidden style={{ position: "absolute", bottom: "-12%", left: "-8%", width: "30vw", height: "30vw", maxWidth: 340, maxHeight: 340, opacity: "var(--ev-hero-ring-b-opacity)", pointerEvents: "none" }} viewBox="0 0 340 340" fill="none">
-          <circle cx="170" cy="170" r="150" strokeWidth="50" fill="none" style={{ stroke: "var(--ev-hero-ring-b)" }} />
-        </svg>
-        <div aria-hidden style={{
-          position: "absolute", bottom: "20px", right: "-14px",
-          fontFamily: "var(--font-heading)", fontWeight: 900,
-          fontSize: "clamp(100px, 20vw, 340px)", color: "var(--ev-hero-watermark)",
-          lineHeight: 1, letterSpacing: "-0.06em",
-          userSelect: "none", pointerEvents: "none",
-        }}>
-          EVENTS
-        </div>
-
-        <div className="page-container w-full" style={{
-          position: "relative", zIndex: 1,
-          paddingTop: "clamp(36px,5vw,56px)",
-          paddingBottom: "clamp(48px,6vw,72px)",
-        }}>
-          <div style={{ overflow: "hidden" }}>
-            <div className="eh-line" style={{
-              fontFamily: "var(--font-heading)", fontWeight: 900,
-              fontSize: "clamp(48px, 11vw, 152px)",
-              lineHeight: 0.90, letterSpacing: "-0.045em", textTransform: "uppercase",
-              display: "flex", alignItems: "baseline", gap: "0.22em",
-            }}>
-              <span style={{ color: "var(--ev-hero-fg)" }}>MAKE</span>
-              <span style={{ color: "transparent", WebkitTextStroke: "2.5px var(--ev-hero-outline)", fontSize: "0.82em" }}>IT</span>
-            </div>
-          </div>
-          <div style={{ overflow: "hidden" }}>
-            <div className="eh-line" style={{
-              fontFamily: "var(--font-heading)", fontWeight: 900,
-              fontSize: "clamp(48px, 11vw, 152px)",
-              lineHeight: 0.90, letterSpacing: "-0.045em", textTransform: "uppercase",
-              marginTop: "0.04em",
-            }}>
-              <span className="text-gradient ev-happen">HAPPEN</span>
-            </div>
-          </div>
-
-          <div className="eh-meta" style={{
-            fontFamily: "var(--font-script)", fontSize: "clamp(18px, 2.4vw, 30px)",
-            color: "var(--ev-hero-script)", lineHeight: 1.2,
-            marginTop: "18px", marginBottom: "20px",
-            display: "inline-block", transform: "rotate(-1.5deg)",
-          }}>
-            — where every event shapes a future
-          </div>
-          <p className="eh-meta" style={{
-            fontFamily: "var(--font-body)", fontSize: "clamp(14px, 1.4vw, 16px)",
-            lineHeight: 1.78, color: "var(--ev-hero-desc)",
-            maxWidth: "min(440px,100%)", marginBottom: 0, display: "block",
-          }}>
-            At CIE, events aren&apos;t organised just to fill a calendar. Every event gives
-            students something to experience — a skill, a challenge, a pitch, or a
-            conversation worth having.
-          </p>
-
-        </div>
-      </section>
+      {/* ══ HERO — same ArcHero as Verticals / Gallery ══ */}
+      <ArcHero
+        heroRef={heroRef}
+        watermark="EVENTS"
+        line1="MAKE IT"
+        line2="HAPPEN"
+        headlineFontSize="clamp(48px, 11vw, 152px)"
+        headlineLineHeight={0.90}
+        scriptText="— where every event shapes a future"
+        description="At CIE, events aren't organised just to fill a calendar. Every event gives students something to experience — a skill, a challenge, a pitch, or a conversation worth having."
+        descriptionMaxWidth="min(440px,100%)"
+        stats={HERO_STATS}
+      />
 
       {/* ══ EVENT SECTIONS + PER-EVENT FILM STRIPS ══ */}
       {FEATURED.flatMap((ev, i) => [

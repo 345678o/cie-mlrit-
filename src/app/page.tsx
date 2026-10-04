@@ -5,7 +5,6 @@ import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { getGrainDataUri } from "@/lib/grain";
-import TextLoop from "@/components/ui/TextLoop";
 import {
   ArrowRight,
   Lightbulb,
@@ -26,6 +25,11 @@ import {
   MessageSquare,
 } from "lucide-react";
 
+
+const EQUINOX = {
+  href: "https://equinox-2.0.mlritcie.in",
+  items: ["The Equinox 2.0", "E-Summit 2K26", "Oct 30 & 31", "Grab your pass ₹769"],
+};
 /* ── Animated counter ─────────────────────────────────────────────── */
 function AnimatedCounter({
   end,
@@ -379,9 +383,6 @@ export default function HomePage() {
           --home-stat-bg: color-mix(in srgb, var(--home-cat-l) 7.8%, transparent);
           --home-stat-bd: color-mix(in srgb, var(--home-cat-l) 15.7%, transparent);
         }
-        /* TextLoop ribbon renders SVG presentation attributes — override via CSS */
-        .equinox-ribbon .text-loop-svg path { stroke: var(--home-ribbon); }
-        .equinox-ribbon .text-loop-text { fill: var(--home-ribbon-text); }
       `}</style>
 
       {/* ────────────────────────────────────────────────────────────
@@ -443,44 +444,52 @@ export default function HomePage() {
           userSelect: "none" as const,
         }}>CIE</div>
 
-        {/* ── Equinox 2.0 headline ribbon — main upcoming event ── */}
+        {/* ── Equinox 2.0 announcement bar — top of the hero, under the navbar ── */}
         <a
-          href="https://equinox-2.0.mlritcie.in"
+          href={EQUINOX.href}
           target="_blank" rel="noopener noreferrer"
           aria-label="The Equinox 2.0 — E-Summit 2K26, Oct 30 and 31. Grab your pass for ₹769"
-          className="equinox-ribbon"
-          style={{
-            position: "relative", zIndex: 2, display: "block",
-            width: "106%", marginLeft: "-3%",
-            marginTop: "clamp(18px,2.4vw,28px)",
-            transform: "rotate(-1.2deg)",
-            filter: "var(--home-ribbon-shadow)",
-          }}
+          className="eq-bar"
         >
-          <TextLoop
-            text="The Equinox 2.0 ✦ E-Summit 2K26 ✦ Oct 30 & 31 ✦ Grab your pass ₹769"
-            shape="line"
-            viewWidth={3000}
-            viewHeight={120}
-            preserveAspectRatio="xMidYMid slice"
-            speed={110}
-            separator="✦"
-            fontSize={42}
-            fontWeight={900}
-            letterSpacing={2}
-            uppercase
-            color="#0A0B12"
-            ribbon
-            ribbonColor="#7484FE"
-            ribbonWidth={84}
-            pauseOnHover
-            style={{ fontFamily: "var(--font-heading)" }}
-          />
+          <div className="eq-bar-track" aria-hidden="true">
+            {[0, 1].map((copy) => (
+              <div key={copy} className="eq-bar-group">
+                {Array.from({ length: 4 }, (_, i) => (
+                  <span key={i} className="eq-bar-item">
+                    {EQUINOX.items.map((t) => (
+                      <span key={t}>{t}<span className="eq-bar-sep">✦</span></span>
+                    ))}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
         </a>
         <style>{`
-          .equinox-ribbon { transition: filter 0.3s ease; }
-          .equinox-ribbon .text-loop-svg { height: clamp(44px, 4vw, 60px); }
-          .equinox-ribbon:hover { filter: var(--home-ribbon-shadow-hover) !important; }
+          .eq-bar {
+            position: relative; z-index: 2; display: block; overflow: hidden;
+            margin-top: clamp(8px, 1.2vw, 14px);
+            background: var(--grad-accent);
+            color: var(--on-accent);
+            text-decoration: none;
+            box-shadow: 0 8px 28px rgba(116,132,254,0.28);
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+                    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+            transition: box-shadow 0.3s ease;
+          }
+          .eq-bar:hover { box-shadow: 0 10px 34px rgba(51,255,103,0.38); }
+          .eq-bar-track { display: flex; width: max-content; animation: eq-bar-scroll 38s linear infinite; }
+          .eq-bar:hover .eq-bar-track { animation-play-state: paused; }
+          .eq-bar-group, .eq-bar-item { display: flex; flex-shrink: 0; }
+          .eq-bar-item > span {
+            display: inline-flex; align-items: center; white-space: nowrap;
+            padding: clamp(9px, 1vw, 12px) 0;
+            font-family: var(--font-heading); font-weight: 800;
+            font-size: clamp(12px, 1.1vw, 14px); letter-spacing: 0.14em; text-transform: uppercase;
+          }
+          .eq-bar-sep { margin: 0 clamp(14px, 1.8vw, 24px); opacity: 0.55; }
+          @keyframes eq-bar-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+          @media (prefers-reduced-motion: reduce) { .eq-bar-track { animation: none; } }
         `}</style>
 
         {/* ── Main content ── */}

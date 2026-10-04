@@ -12,7 +12,7 @@ const ARC_THEME_CSS = `
   --arc-grain-blend: overlay;
   --arc-ring: #7484FE;
   --arc-dots: rgba(116,132,254,0.40);
-  --arc-watermark: rgba(255,255,255,0.03);
+  --arc-watermark: rgba(165,175,254,0.10);
   --arc-fg: #F4F5FA;
   --arc-outline: rgba(165,175,254,0.85);
   --arc-script: #A5AFFE;
@@ -112,7 +112,9 @@ export default function ArcHero({
       <div aria-hidden className="absolute pointer-events-none select-none" style={{
         bottom: "20px", right: "-12px",
         fontFamily: "var(--font-heading)", fontWeight: 900,
-        fontSize: "clamp(120px,22vw,380px)",
+        // Long words (e.g. VERTICALS) shrink so the whole word stays on screen.
+        fontSize: `clamp(120px, min(22vw, ${(94 / (watermark.length * 0.68)).toFixed(2)}vw), 380px)`,
+        whiteSpace: "nowrap",
         color: "var(--arc-watermark)", lineHeight: 1, letterSpacing: "-0.06em",
         userSelect: "none" as const,
       }}>{watermark}</div>

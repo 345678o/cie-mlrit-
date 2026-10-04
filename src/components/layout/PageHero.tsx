@@ -28,9 +28,9 @@ const PHERO_THEME_CSS = `
   --phero-bg: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(116,132,254,0.38) 0%, rgba(116,132,254,0.10) 45%, transparent 75%), radial-gradient(ellipse 40% 45% at 100% 100%, rgba(51,255,103,0.10) 0%, transparent 70%), radial-gradient(ellipse 35% 40% at 0% 100%, rgba(51,255,103,0.06) 0%, transparent 70%), #16171D;
   --phero-grain-opacity: 0.05;
   --phero-grain-blend: overlay;
-  --phero-watermark: rgba(255,255,255,0.03);
+  --phero-watermark: rgba(165,175,254,0.10);
   --phero-dots: rgba(116,132,254,0.40);
-  --phero-checks: rgba(116,132,254,0.30);
+  --phero-ring: #7484FE;
   --phero-crumb: rgba(244,245,250,0.58);
   --phero-fg: #F4F5FA;
   --phero-outline: rgba(165,175,254,0.85);
@@ -51,7 +51,7 @@ const PHERO_THEME_CSS = `
   --phero-grain-blend: multiply;
   --phero-watermark: rgba(0,0,0,0.065);
   --phero-dots: rgba(255,255,255,0.30);
-  --phero-checks: rgba(255,255,255,0.26);
+  --phero-ring: rgba(255,255,255,1);
   --phero-crumb: rgba(255,255,255,0.50);
   --phero-fg: #FFFFFF;
   --phero-outline: rgba(255,255,255,0.80);
@@ -91,7 +91,9 @@ export default function PageHero({
         <div aria-hidden="true" className="absolute pointer-events-none select-none" style={{
           bottom: "30px", right: "-10px",
           fontFamily: "var(--font-heading)", fontWeight: 900,
-          fontSize: "clamp(120px, 22vw, 360px)",
+          // Long words (e.g. VERTICALS) shrink so the whole word stays on screen.
+          fontSize: `clamp(120px, min(22vw, ${(94 / (watermark.length * 0.68)).toFixed(2)}vw), 360px)`,
+          whiteSpace: "nowrap",
           color: "var(--phero-watermark)", lineHeight: 1, letterSpacing: "-0.06em",
           userSelect: "none" as const,
         }}>{watermark}</div>
@@ -105,13 +107,17 @@ export default function PageHero({
         backgroundSize: "12px 12px",
       }} />
 
-      {/* Checkered — top right */}
-      <div aria-hidden="true" className="absolute pointer-events-none hidden lg:block" style={{
-        top: "calc(var(--nav-height) + 20px)", right: "clamp(52px, 8vw, 128px)",
-        width: "52px", height: "52px",
-        backgroundImage: "repeating-conic-gradient(var(--phero-checks) 0% 25%, transparent 0% 50%)",
-        backgroundSize: "13px 13px", borderRadius: "4px",
-      }} />
+      {/* Arcs — same as ArcHero so every page hero matches */}
+      <svg aria-hidden="true" className="absolute pointer-events-none"
+        style={{ top: "-14%", right: "-8%", width: "46vw", height: "46vw", maxWidth: 540, maxHeight: 540, opacity: 0.18 }}
+        viewBox="0 0 540 540" fill="none">
+        <circle cx="270" cy="270" r="250" strokeWidth="70" fill="none" style={{ stroke: "var(--phero-ring)" }} />
+      </svg>
+      <svg aria-hidden="true" className="absolute pointer-events-none"
+        style={{ bottom: "-10%", left: "-6%", width: "26vw", height: "26vw", maxWidth: 300, maxHeight: 300, opacity: 0.13 }}
+        viewBox="0 0 300 300" fill="none">
+        <circle cx="150" cy="150" r="130" strokeWidth="46" fill="none" style={{ stroke: "var(--phero-ring)" }} />
+      </svg>
 
       {/* ── Main content ── */}
       <div style={{ flex: 1, display: "flex", alignItems: "center" }}>

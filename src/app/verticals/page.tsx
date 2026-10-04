@@ -226,7 +226,6 @@ export default function VerticalsPage() {
         descriptionMaxWidth="min(440px,100%)"
         stats={[
           { v: String(VERTICALS.length), l: "Verticals" },
-          { v: "500+", l: "Active Members" },
           { v: "80+",  l: "Projects Done" },
           { v: "2026–27", l: "Current Cohort" },
         ]}

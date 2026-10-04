@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useNavbarVisibility } from "@/context/NavbarContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -37,6 +38,7 @@ const NAV_THEME_CSS = `
   --nav-dot: #33FF67;
   --nav-dot-glow: 0 0 6px rgba(51,255,103,0.7);
   --nav-dot-glow-lg: 0 0 8px rgba(51,255,103,0.7);
+  --nav-logo-dot: #33FF67;
   --nav-underline: #7484FE;
   --nav-pill-bg: linear-gradient(135deg, rgba(116,132,254,0.10) 0%, rgba(255,255,255,0.02) 45%, rgba(116,132,254,0.05) 100%), rgba(22,23,29,0.72);
   --nav-pill-bg-scrolled: linear-gradient(135deg, rgba(116,132,254,0.10) 0%, rgba(255,255,255,0.02) 45%, rgba(116,132,254,0.05) 100%), rgba(22,23,29,0.86);
@@ -80,11 +82,15 @@ const NAV_THEME_CSS = `
   --nav-drawer-social-hover: #000000;
   --nav-drawer-foot: rgba(0,0,0,0.18);
 }
-/* Theme toggle: sits after the desktop separator; on phones/tablets it
-   sits just left of the hamburger. */
-.nav-theme-toggle { display: flex; align-items: center; flex-shrink: 0; }
-@media (max-width: 1023px) {
-  .nav-theme-toggle { margin-right: 8px; }
+`;
+
+/* Desktop: the pill hugs logo + links with even padding on both ends.
+   Phones/tablets keep a full-width pill with the hamburger on the right. */
+const NAV_LAYOUT_CSS = `
+@media (min-width: 1024px) {
+  .nav-shell { width: auto !important; max-width: 100%; }
+  .nav-pill { padding-left: var(--nav-pad) !important; padding-right: var(--nav-pad) !important; }
+  .nav-logo-col { flex: 0 0 auto !important; }
 }
 `;
 
@@ -198,7 +204,7 @@ export default function Navbar() {
 
   return (
     <>
-      <style>{NAV_THEME_CSS}</style>
+      <style>{NAV_THEME_CSS + NAV_LAYOUT_CSS}</style>
       {/* ══════════════════════════════════════════════════════
           Floating pill
       ══════════════════════════════════════════════════════ */}
@@ -222,12 +228,14 @@ export default function Navbar() {
         initial={{ y: -72, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.72, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className="nav-shell"
         style={{
-          width: "min(1240px, 100%)",
+          width: "100%",
           pointerEvents: "auto",
         }}
       >
         <div
+          className="nav-pill"
           style={{
             display: "flex",
             alignItems: "center",
@@ -244,55 +252,45 @@ export default function Navbar() {
               : "var(--nav-pill-shadow)",
             /* Compact padding when scrolled */
             padding: scrolled ? "5px 5px 5px 18px" : "7px 7px 7px 22px",
+            ["--nav-pad" as string]: scrolled ? "20px" : "26px",
             gap: 0,
             transition: "background 0.4s ease, box-shadow 0.4s ease, padding 0.4s cubic-bezier(0.16,1,0.3,1)",
           }}
         >
-          {/* ── Logo ─────────────────────────────────────────── */}
+          {/* ── Logo ── */}
+          <div className="nav-logo-col" style={{ flex: "1 1 0", display: "flex", alignItems: "center", minWidth: 0 }}>
           <Link
             href="/"
             onClick={() => setOpen(false)}
             style={{
               display: "inline-flex",
-              alignItems: "baseline",
+              alignItems: "center",
               textDecoration: "none",
               flexShrink: 0,
-              marginRight: "clamp(14px, 2vw, 26px)",
+              marginRight: "clamp(18px, 2.6vw, 36px)", // same as the gap between links
             }}
+            aria-label="CIE — home"
           >
-            <span
+            <Image
+              src="/logos/cie-white.webp"
+              alt="CIE"
+              width={226}
+              height={96}
+              priority
               style={{
-                fontFamily: "var(--font-heading)",
-                fontWeight: 800,
-                fontSize: scrolled ? "17px" : "19px",
-                letterSpacing: "-0.04em",
-                color: "var(--nav-link-active)",
-                lineHeight: 1,
-                transition: "font-size 0.4s ease",
+                height: scrolled ? 18 : 20, width: "auto", display: "block",
+                transition: "height 0.4s ease",
               }}
-            >
-              CIE
-            </span>
-            <span
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontWeight: 800,
-                fontSize: scrolled ? "19px" : "21px",
-                color: "var(--nav-dot)",
-                lineHeight: 1,
-                transition: "font-size 0.4s ease",
-              }}
-            >
-              .
-            </span>
+            />
           </Link>
+          </div>
 
           {/* ── Nav links — desktop (lg+) ─────────────────────── */}
           <nav
             aria-label="Main navigation"
             className="nav-desktop-links"
             style={{
-              flex: 1,
+              flex: "0 0 auto",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -306,21 +304,6 @@ export default function Navbar() {
 
           {/* ── Mobile spacer — pushes hamburger to right on <md ── */}
           <div className="nav-mobile-space" style={{ flex: 1 }} />
-
-          {/* ── Separator — desktop ───────────────────────────── */}
-          <div
-            className="nav-desktop-sep"
-            style={{
-              width: "1px",
-              height: "16px",
-              background: "rgba(255,255,255,0.14)",
-              flexShrink: 0,
-              margin: "0 clamp(12px, 1.6vw, 20px)",
-            }}
-          />
-
-          {/* Theme toggle hidden for now — site stays on the Equinox (dark) theme.
-              Restore <ThemeToggle /> here and the init script in layout.tsx to bring back light mode. */}
 
           {/* ── Hamburger — phones only (< 768px) ─────────────── */}
           <div className="nav-hamburger" style={{ display: "flex", flexShrink: 0 }}>
@@ -448,10 +431,8 @@ export default function Navbar() {
                 onClick={() => setOpen(false)}
                 style={{ display: "inline-flex", alignItems: "baseline", textDecoration: "none" }}
               >
-                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "19px", letterSpacing: "-0.04em", color: "var(--nav-drawer-logo)" }}>
-                  CIE
-                </span>
-                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "21px", color: "var(--nav-dot)" }}>.</span>
+                <Image src="/logos/cie-white.webp" alt="CIE" width={226} height={96}
+                  style={{ height: 20, width: "auto", display: "block" }} />
               </Link>
               <span style={{
                 fontFamily: "var(--font-body)", fontSize: "11px",

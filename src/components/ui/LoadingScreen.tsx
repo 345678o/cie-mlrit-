@@ -13,7 +13,7 @@ const LOADER_THEME_CSS = `
   --loader-bloom: radial-gradient(circle, rgba(165,175,254,0.90) 0%, rgba(116,132,254,0.40) 35%, transparent 70%);
   --loader-ghost: #7484FE;
   --loader-letter: #F4F5FA;
-  --loader-dot: #33FF67;
+  --loader-dot: #FF5E2C;
   --loader-tagline: #7484FE;
 }
 :root[data-theme="light"] {
